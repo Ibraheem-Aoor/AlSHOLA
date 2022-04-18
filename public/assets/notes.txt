@@ -1,0 +1,2 @@
+dist_1 => general template assets
+dist_2 => employer and employee dsahboard assets.
