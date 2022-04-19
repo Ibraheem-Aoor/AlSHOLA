@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AuthTypeCheck;
+use App\Http\Middleware\EmployeeCheck;
+use App\Http\Middleware\EmployerCheck;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +66,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'employerCheck' => EmployerCheck::class,
+        'employeeCheck' => EmployeeCheck::class,
+        'typeCheck' => AuthTypeCheck::class,
     ];
+
 }
