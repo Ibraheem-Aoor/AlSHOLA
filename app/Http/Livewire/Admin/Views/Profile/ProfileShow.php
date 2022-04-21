@@ -35,12 +35,14 @@ class ProfileShow extends Component
     public function rules()
     {
         return[
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,id,'.Auth::id(),
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.Auth::id(),
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png',
         ];
     }
 
+    // store the avatar if uploaded file and return the name
+    // if it's not uploaded then the default name will be "user.png"
     public function getAvatarPath()
     {
         if($this->avatar)
@@ -51,7 +53,6 @@ class ProfileShow extends Component
             $this->removeOldAvatar();
             return $avatrName;
         }
-
     }
 
     public function removeOldAvatar()
