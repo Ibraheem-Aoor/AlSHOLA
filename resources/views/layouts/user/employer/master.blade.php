@@ -26,16 +26,17 @@
         rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('assets/dist_2/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/dist_2/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    @livewireStyles
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/dist_2/css/style.css') }}" rel="stylesheet">
     @notifyCss
+    @livewireStyles
     <style>
-         .notify{
-             margin-top: 100px;
-         }
+        .notify {
+            margin-top: 100px;
+        }
+
     </style>
 </head>
 
@@ -52,7 +53,7 @@
         <!-- Spinner End -->
         @include('layouts.user.employer.sidebar')
         <div class="content">
-            @include('layouts.user.employee.header')
+            @include('layouts.user.employer.header')
             @yield('content')
         </div>
         {{-- @include('layouts.user.employee.footer') --}}
@@ -63,7 +64,7 @@
     <!-- JavaScript Libraries -->
     @livewireScripts
     @notifyJs
-    <x:notify-messages />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets/dist_2/lib/chart/chart.min.js') }}"></script>

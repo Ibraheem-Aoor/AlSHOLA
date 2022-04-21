@@ -6,7 +6,6 @@ use App\Models\Job;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-
 use function GuzzleHttp\Promise\each;
 
 class AllJobs extends Component

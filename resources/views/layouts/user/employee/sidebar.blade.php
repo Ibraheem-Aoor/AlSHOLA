@@ -12,8 +12,8 @@
                   </div>
               </div>
               <div class="ms-3">
-                  <h6 class="mb-0">Jhon Doe</h6>
-                  <span>Admin</span>
+                  <h6 class="mb-0">{{Auth::user()->name}}</h6>
+                  <span>{{Auth::user()->type}}</span>
               </div>
           </div>
           <div class="navbar-nav w-100">
@@ -24,8 +24,8 @@
                           class="fa fa-laptop me-2"></i>Jobs</a>
                   <div class="dropdown-menu bg-transparent border-0">
                       <a href="button.html" class="dropdown-item">Avilable Jobs</a>
-                      <a href="typography.html" class="dropdown-item">Completed Jobs</a>
-                      <a href="element.html" class="dropdown-item">Pending Jobs</a>
+                      <a href="" class="dropdown-item">Completed Jobs</a>
+                      <a href="" class="dropdown-item">Pending Jobs</a>
                   </div>
               </div>
               <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>

@@ -19,16 +19,22 @@
                                 @php
                                     $i = 1;
                                 @endphp
-                                @foreach ($jobs as $job)
+                                @forelse ($jobs as $job)
                                     <tr>
-                                        <th scope="row">{{$i++}}</th>
-                                        <td>{{$job->title}}</td>
-                                        <td>{{$job->location}}</td>
-                                        <td>{{$job->status}}</td>
-                                        <td><a href="#" class="btn btn-info">Details</a></td>
+                                        <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $job->title }}</td>
+                                        <td>{{ $job->location }}</td>
+                                        <td>{{ $job->status }}</td>
+                                        <td><a href="{{ route('job.details', $job->id) }}"
+                                                class="btn btn-info">Details</a></td>
                                     </tr>
-                                @endforeach
-
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="alert alert-warning text-center bg-dark" style="color:#fff">
+                                            No Records Yet
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

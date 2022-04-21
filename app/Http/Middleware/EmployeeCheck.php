@@ -17,9 +17,9 @@ class EmployeeCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->type = 'Talented')
+        if(Auth::check() && Auth::user()->type =='Talented')
             return $next($request);
-        return redirect()->back();
+        return abort(403);
 
 
     }

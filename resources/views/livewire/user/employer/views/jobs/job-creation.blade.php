@@ -2,7 +2,7 @@
     <div class="container-fluid pt-4 px-4">
         <div class="row vh-100 bg-light rounded">
             <div class="col-sm-12">
-                <form wire:submit.prevent="postNewJob()">
+                <form wire:submit.prevent="postNewJob()" enctype="multipart/form-data">
                     <div class="bg-light rounded h-100 p-4">
                         <div class="container-fluid pt-4 px-4">
                             <div class="row rounded">
@@ -11,13 +11,14 @@
                                     <input type="email" class="form-control" id="floatingInput"
                                         placeholder="name@example.com" wire:model.lazy="title">
                                     <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
+                               
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-floating mb-3 col-sm-6">
                                     <input type="text" class="form-control" id="floatingPassword"
-                                        placeholder="Password" wire:model.lazy="salary">
+                                        wire:model.lazy="salary">
                                     <label for="floatingPassword">&nbsp;&nbsp; Salary</label>
                                     @error('salary')
                                         <span class="text-danger">{{ $message }}</span>
@@ -25,7 +26,7 @@
                                 </div>
                                 <div class="form-floating mb-3 col-sm-6">
                                     <input type="text" class="form-control" id="floatingPassword"
-                                        placeholder="Password" wire:model.lazy="location">
+                                        wire:model.lazy="location">
                                     <label for="floatingPassword">&nbsp;&nbsp; Location</label>
                                     @error('location')
                                         <span class="text-danger">{{ $message }}</span>
@@ -33,9 +34,17 @@
                                 </div>
                                 <div class="form-floating mb-3 col-sm-6">
                                     <input type="text" class="form-control" id="floatingPassword"
-                                        placeholder="Password" wire:model.lazy="employerWebsite">
+                                        wire:model.lazy="employerWebsite">
                                     <label for="floatingPassword">&nbsp;&nbsp; Company Website</label>
                                     @error('employerWebsite')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-floating mb-3 col-sm-6">
+                                    <input type="file" class="form-control" id="floatingPassword" multiple
+                                        wire:model="attachments">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Company Website</label>
+                                    @error('attachments')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

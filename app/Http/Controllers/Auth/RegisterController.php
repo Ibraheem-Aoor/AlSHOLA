@@ -92,8 +92,8 @@ class RegisterController extends Controller
     public function redirectTo()
     {
         if(Auth::user()->type == 'Employer')
-            return 'employer_dashboard';
+            return 'employer/dashboard';
         elseif(Auth::user()->type == 'Talented')
-            return 'talent_dashboard';
+            return 'talent/dashboard';
     }
 }

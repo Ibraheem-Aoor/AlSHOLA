@@ -17,8 +17,12 @@
             </div>
             <a href="{{ route('register') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
-                @else
-                <a href="/dashboard" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Go To DashBoard<i class="fa fa-arrow-right ms-3"></i></a>
+        @else
+            @php
+                $type = Str::lower(Auth::user()->type);
+            @endphp
+            <a href="{{ $type . '/dashboard' }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Go To
+                DashBoard<i class="fa fa-arrow-right ms-3"></i></a>
             @endif
         </div>
     </nav>
