@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="utf-8">
     <title>@yield('tilte')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
