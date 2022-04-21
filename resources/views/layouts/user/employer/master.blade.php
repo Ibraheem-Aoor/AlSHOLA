@@ -64,6 +64,7 @@
 
     <!-- JavaScript Libraries -->
     @livewireScripts
+    <x:notify-messages />
     @notifyJs
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

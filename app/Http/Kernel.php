@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AuthenticateAdmin;
 use App\Http\Middleware\AuthTypeCheck;
 use App\Http\Middleware\EmployeeCheck;
 use App\Http\Middleware\EmployerCheck;
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'employerCheck' => EmployerCheck::class,
         'employeeCheck' => EmployeeCheck::class,
         'typeCheck' => AuthTypeCheck::class,
+        'authAdmin' => AuthenticateAdmin::class,
     ];
 
 }

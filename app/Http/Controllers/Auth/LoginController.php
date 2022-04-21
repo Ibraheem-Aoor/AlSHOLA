@@ -48,6 +48,8 @@ class LoginController extends Controller
             return 'employer/dashboard';
         elseif(Auth::user()->type == 'Talented')
             return 'talented/dashboard';
+        elseif(Auth::user()->type == 'admin' && Auth::user()->is_admin)
+            return 'admin/dashboard';
     }
 
 }
