@@ -17,6 +17,9 @@ class Job extends Model
         'employer_website',
         'salary',
         'status',
+        'vacancy',
+        'end_date',
+        'nature',
         'user_id',
     ];
 

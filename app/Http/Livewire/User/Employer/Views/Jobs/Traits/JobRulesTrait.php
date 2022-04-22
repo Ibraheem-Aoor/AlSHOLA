@@ -3,7 +3,7 @@ namespace App\Http\Livewire\User\Employer\Views\Jobs\Traits;
 
 Trait JobRulesTrait
 {
-    public function rules():array
+    public function rules()
     {
         return [
             'title' => 'required|string',

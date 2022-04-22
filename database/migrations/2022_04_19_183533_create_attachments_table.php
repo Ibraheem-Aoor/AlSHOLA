@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('job_id');
             $table->index('job_id');
+            $table->unsignedBigInteger('user_id');
+            $table->index('user_id');
             $table->foreign('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

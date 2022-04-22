@@ -17,7 +17,7 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at
                                     sed stet
                                     sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                                <a href="SignUp.html" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
+                                <a href="{{route('register')}}" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
                                     Talent</a>
                             </div>
                         </div>

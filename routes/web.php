@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Livewire\Test;
+use App\Http\Controllers\User\Employer\Jobs\EmployerJobsController;
+use App\Http\Controllers\User\Employer\Jobs\JobController;
 use App\Http\Livewire\User\Employee\Views\Dashboard;
 use App\Http\Livewire\User\Employer\Views\Dashboard as ViewsDashboard;
 use App\Http\Livewire\User\Employer\Views\Jobs\ActiveJobs;
+use App\Http\Livewire\User\Employer\Views\Jobs\AddJob;
 use App\Http\Livewire\User\Employer\Views\Jobs\AllJobs;
 use App\Http\Livewire\User\Employer\Views\Jobs\CompletedJobs;
 use App\Http\Livewire\User\Employer\Views\Jobs\JobCreation;
 use App\Http\Livewire\User\Employer\Views\Jobs\JobDetails;
 use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
+use App\Http\Livewire\User\Employer\Views\Profile\ProfileShow;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,15 +49,23 @@ Route::group(['middleware' => ['auth']], function()
     });
 
     // Employer Routes
-    Route::group(['prefix' => 'employer' , 'middleware' => ['employerCheck'] ] , function(){
+    Route::group(['prefix' => 'employer' , 'middleware' => ['employerCheck' ] ] , function(){
         Route::get('dashboard' , ViewsDashboard::class)->name('employer.dashboard');
         // Jobs Routes
-        Route::get('/jobs' , AllJobs::class)->name('jobs.show');
-        Route::get('/job/create' , JobCreation::class)->name('job.create');
-        Route::get('/job/details/{id}' , JobDetails::class)->name('job.details');
-        Route::get('/jobs/active' , ActiveJobs::class)->name('employer.jobs.active.all');
-        Route::get('/jobs/completed' , CompletedJobs::class)->name('employer.jobs.completed.all');
-        Route::get('/jobs/pending' , PendingJobs::class)->name('employer.jobs.pending.all');
+        Route::resource('/job' , JobController::class);
+        Route::get('/jobs/all' , [EmployerJobsController::class , 'allJobs'])->name('employer.jobs.all');
+        Route::get('/jobs/completed' , [EmployerJobsController::class , 'allCompletedJobs'])->name('employer.jobs.completed');
+        Route::get('/jobs/active' , [EmployerJobsController::class , 'allActiveJobs'])->name('employer.jobs.active');
+        Route::get('/jobs/pending' , [EmployerJobsController::class , 'allPendingJobs'])->name('employer.jobs.pending');;
+        Route::get('/jobs/cancelled' , [EmployerJobsController::class , 'allCanelledJobs'])->name('employer.jobs.cancelled');;
+        // Route::get('/job/details/{id}' , JobDetails::class)->name('job.details');
+        // Route::get('/jobs/active' , ActiveJobs::class)->name('employer.jobs.active.all');
+        // Route::get('/jobs/completed' , CompletedJobs::class)->name('employer.jobs.completed.all');
+        // Route::get('/jobs/pending' , PendingJobs::class)->name('employer.jobs.pending.all');
+
+        // profile
+        Route::get('/profile' , ProfileShow::class)->name('employer.profile');
+
     });
 
 });
@@ -69,4 +80,3 @@ Route::get('/home' , function()
 
 
 
-Route::get('/test' , Test::class);

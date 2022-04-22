@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Profile;
+namespace App\Http\Livewire\User\Employer\Views\Profile;
 
 use App\Models\User;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class ProfileShow extends Component
 {
     use WithFileUploads;
+
     public $name , $email , $avatar;
     public function mount()
     {
@@ -28,7 +29,7 @@ class ProfileShow extends Component
         $user->avatar = $this->avatar ?  $this->getAvatarPath() : Auth::user()->avatar;
         $user->save();
         notify()->success('Profile Updated Successfully');
-        return redirect(route('admin.dashboard'));
+        return redirect(route('employer.dashboard'));
     }
 
     public function rules()
@@ -42,6 +43,7 @@ class ProfileShow extends Component
 
     // store the avatar if uploaded file and return the name
     // if it's not uploaded then the default name will be "user.png"
+    // if there is an uploaded avatar the old one will be removed.
     public function getAvatarPath()
     {
         if($this->avatar)
@@ -63,6 +65,6 @@ class ProfileShow extends Component
     }
     public function render()
     {
-        return view('livewire.admin.views.profile.profile-show')->extends('layouts.admin.master')->section('content');;
+        return view('livewire.user.employer.views.profile.profile-show')->extends('layouts.user.employer.master')->section('content');
     }
 }
