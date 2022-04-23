@@ -28,4 +28,9 @@ class Job extends Model
         return $this->belongsTo(User::class , 'user_id');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class , 'job_id');
+    }
+
 }

@@ -62,7 +62,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-floating mb-3 col-sm-12">
+                                    <div class="form-floating mb-3 col-sm-6">
                                         <select name="nature" id="" class="form-control">
                                             <option value="full time" selected>Full Time</option>
                                             <option value="part time">Part Time</option>
@@ -71,6 +71,13 @@
                                         @error('nature')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                    </div>
+                                    <div class="form-floating mb-3 col-sm-6">
+                                        @forelse($job->attachments as $attachment)
+                                            {{$attachment->name}}
+                                        @empty
+                                        <span class="text-danger">No Attachments Yet!</span>
+                                        @endforelse
                                     </div>
 
                                     <div class="form-floating mb-3 col-sm-12">

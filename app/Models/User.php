@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Job::class , 'user_id');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class , 'user_id');
+    }
+
     public function getType()
     {
         return $this->type;

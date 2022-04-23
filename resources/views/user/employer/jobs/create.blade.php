@@ -61,7 +61,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-floating mb-3 col-sm-12">
+                                    <div class="form-floating mb-3 col-sm-6">
                                         <select name="nature" id="" class="form-control">
                                             <option value="full time" selected>Full Time</option>
                                             <option value="part time">Part Time</option>
@@ -71,14 +71,14 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- <div class="form-floating mb-3 col-sm-6">
+                                    <div class="form-floating mb-3 col-sm-6">
                                         <input required type="file" class="form-control"  name="attachments[]" multiple
                                             value="{{old('attachments')}}">
-                                        <label for="floatingPassword">&nbsp;&nbsp; Company Website</label>
+                                        <label for="floatingPassword">&nbsp;&nbsp; Attachment</label>
                                         @error('attachments')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                    </div> --}}
+                                    </div>
                                     <div class="form-floating mb-3 col-sm-12">
                                         <textarea required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
                                             style="height: 150px;"

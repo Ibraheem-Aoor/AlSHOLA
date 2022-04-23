@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Employer\Jobs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Employer\Job\CreateJobRequest;
 use App\Http\Requests\User\Employer\Job\UpdateJobRequest;
+use App\Models\Attachment;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,7 @@ class JobController extends Controller
             'user_id' => Auth::id(),
         ]);
         if($request->hasFile('attachments'))
-            $this->addAttachementsToJob($request->file('attachments')  , $job->id);
+            $this->addAttachementsToJob($request->attachments  , $job->id);
         notify()->success('Job Addeed Successfully');
         return redirect(route('employer.dashboard'));
     }
@@ -65,9 +66,14 @@ class JobController extends Controller
     {
         foreach($attachments as $attachment)
         {
-            $fileName  = time().'.'.$attachment->getClientOriginalExtension();
-            $path = 'uploads/attachments/jobs/'.$jobId.'/';
-            Storage::disk('public')->putFileAs($path , $attachment  , $fileName);
+            $fileName  = $attachment->getClientOriginalName();
+            $path = 'public/uploads/attachments/jobs/'.$jobId.'/';
+            $attachment->storeAs($path , $fileName);
+            Attachment::create([
+                'name' => $fileName ,
+                'job_id' => $jobId,
+                'user_id' => Auth::id(),
+            ]);
         }
     }
 
@@ -79,7 +85,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        $job = Job::findorFail($id);
+        $job = Job::with('attachments')->findorFail($id);
         return view('user.employer.jobs.show' , compact('job'));
     }
 

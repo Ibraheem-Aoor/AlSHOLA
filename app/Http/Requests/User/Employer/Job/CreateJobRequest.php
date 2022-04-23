@@ -36,7 +36,7 @@ class CreateJobRequest extends FormRequest
                 'end_date' => 'required|date',
                 'vacancy' => 'required|numeric',
                 'nature' => 'required|string|'.ValidationRule::in(['full time', 'part time']),
-                'attachments.*' => 'nullable|mimes:jpg,jpeg,png,bmp,gif,svg,webp,pdf,docx',
+                'attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf',
         ];
     }
 }

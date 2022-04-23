@@ -4,6 +4,7 @@ use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
 use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
 use App\Http\Livewire\Admin\Views\Jobs\CompletedJobs;
+use App\Http\Livewire\Admin\Views\Jobs\JobDetails;
 use App\Http\Livewire\Admin\Views\Jobs\NewJobs;
 use App\Http\Livewire\Admin\Views\Jobs\PendingJobs as JobsPendingJobs;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
@@ -11,6 +12,7 @@ use App\Http\Livewire\Admin\Views\Profile\ProfileShow;
 use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 //prefix => admin
 
@@ -31,6 +33,22 @@ use Illuminate\Support\Facades\Auth;
         Route::get('jobs/latest' , NewJobs::class)->name('admin.jobs.latest');
         Route::get('jobs/active' , ActiveJobs::class)->name('admin.jobs.active');
         Route::get('jobs/pending' , JobsPendingJobs::class)->name('admin.jobs.pending');
+
+
+        Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
+
+
+
+        //Attachments Rotues:
+        Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
+        {
+            return response()->file(public_path('storage/uploads/attachments/jobs/'.$jobId.'/'.$fileName));
+        })->name('file.open');
+
+        Route::get('download/{jobId}/{fileName}' , function($jobId , $fileName)
+        {
+            Storage::download('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
+        })->name('file.download');
 
 
     });

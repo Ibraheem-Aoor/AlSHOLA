@@ -14,6 +14,8 @@ use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use App\Http\Livewire\User\Employer\Views\Profile\ProfileShow;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +67,10 @@ Route::group(['middleware' => ['auth']], function()
 
         // profile
         Route::get('/profile' , ProfileShow::class)->name('employer.profile');
+        Route::get('test' , function()
+        {
+            return Storage::download('public/uploads/attachments/jobs/5/snapchat.png');
+        });
 
     });
 

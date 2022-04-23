@@ -7,7 +7,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">All Completed Job Posts</h4>
+                                <h4 class="box-title">Completed Job Posts</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -20,7 +20,9 @@
                                                 <th>Publisher</th>
                                                 <th>Location</th>
                                                 <th>Salary</th>
+                                                <th>creation date</th>
                                                 <th>Status</th>
+                                                <th>ِActions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -30,7 +32,7 @@
                                             <tr>
                                                 @forelse($jobs as $job)
                                                     <td class="serial">{{ $i }}</td>
-                                                    <td class="avatar">
+                                                    <td>
                                                         {{ $job->title }}
                                                     </td>
                                                     <td>{{ $job->user->name }}</td>
@@ -38,8 +40,13 @@
                                                     <td> <span class="product">{{ $job->location }}</span>
                                                     </td>
                                                     <td><span class="count">{{ $job->salary }}</span></td>
+                                                    <td><span class="count">{{ $job->created_at }}</span></td>
                                                     <td>
                                                         <span class="badge badge-complete">{{ $job->status }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('admin.job.details', $job->id) }}"
+                                                            class="btn btn-primary">Details</a>
                                                     </td>
                                             </tr>
                                         @empty
