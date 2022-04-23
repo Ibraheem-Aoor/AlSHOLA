@@ -72,13 +72,6 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-floating mb-3 col-sm-6">
-                                        @forelse($job->attachments as $attachment)
-                                            {{$attachment->name}}
-                                        @empty
-                                        <span class="text-danger">No Attachments Yet!</span>
-                                        @endforelse
-                                    </div>
 
                                     <div class="form-floating mb-3 col-sm-12">
                                         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;"
