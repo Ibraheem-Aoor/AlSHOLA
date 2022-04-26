@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User\Employer\Jobs;
 
 use App\Http\Controllers\Controller;
 use App\Models\Job;
+use App\Models\Note;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,4 +38,12 @@ class EmployerJobsController extends Controller
         $jobs = Job::where([['user_id' , Auth::id()] , ['status' , 'cancelled']])->paginate(15);
         return view('user.employer.jobs.all-jobs' , compact('jobs'));
     }
+
+    public function allReturnedJobs()
+    {
+        $jobs = Job::whereBelongsTo(Auth::user())->whereHas('notes')->paginate(15);
+        return view('user.employer.jobs.all-jobs' , compact('jobs'));
+    }
+
+
 }

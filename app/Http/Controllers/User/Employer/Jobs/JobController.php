@@ -10,6 +10,7 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class JobController extends Controller
 {
@@ -18,11 +19,7 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $jobs = Job::paginate(15);
-        return view('user.employer.jobs.index' , compact('jobs'));
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,6 +40,8 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
+        try
+        {
         $job = Job::create([
             'title' => $request->input('title'),
             'salary' => $request->input('salary'),
@@ -60,8 +59,14 @@ class JobController extends Controller
             $this->addAttachementsToJob($request->attachments  , $job->id);
         notify()->success('Job Addeed Successfully');
         return redirect(route('employer.dashboard'));
+        }catch(Throwable $e)
+        {
+            return redirect(route('employer.dashboard'))->with('error' , 'Attachmennts are too large');
+        }
     }
 
+
+    // Storing mutilple attachments with there original names
     public function addAttachementsToJob($attachments , $jobId)
     {
         foreach($attachments as $attachment)
@@ -134,8 +139,10 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Job $job)
     {
-        //
+        $job->delete();
+        notify()->success('Job Deleted Successfully');
+        return redirect()->back();
     }
 }

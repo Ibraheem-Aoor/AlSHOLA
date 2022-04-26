@@ -5,6 +5,7 @@ use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
 use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
 use App\Http\Livewire\Admin\Views\Jobs\CompletedJobs;
 use App\Http\Livewire\Admin\Views\Jobs\JobDetails;
+use App\Http\Livewire\Admin\Views\Jobs\JobDetailsEdit;
 use App\Http\Livewire\Admin\Views\Jobs\NewJobs;
 use App\Http\Livewire\Admin\Views\Jobs\PendingJobs as JobsPendingJobs;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
@@ -36,6 +37,8 @@ use Illuminate\Support\Facades\Storage;
 
 
         Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
+        Route::get('job/details/{id}/edit' , JobDetailsEdit::class)->name('admin.job.details.edit');
+
 
 
 

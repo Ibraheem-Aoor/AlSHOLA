@@ -30,6 +30,13 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('assets/dist_1/css/style.css')}}" rel="stylesheet">
+    @notifyCss
+    <style>
+        .notify {
+        margin-top: 80px;
+        z-index: 1;
+    }
+    </style>
 </head>
 
 
@@ -61,7 +68,8 @@
     <script src="{{asset('assets/dist_1/lib/easing/easing.min.js')}}"></script>
     <script src="{{asset('assets/dist_1/lib/waypoints/waypoints.min.js')}}"></script>
     <script src="{{(asset('assets/dist_1/lib/owlcarousel/owl.carousel.min.js'))}}"></script>
-
+    <x:notify-messages />
+    @notifyJs
     <!-- Template Javascript -->
     <script src="{{asset('assets/dist_1/js/main.js')}}"></script>
 </body>

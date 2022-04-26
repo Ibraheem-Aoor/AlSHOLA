@@ -5,6 +5,7 @@ namespace App\Http\Requests\User\Employer\Job;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule as ValidationRule;
+use Throwable;
 
 class CreateJobRequest extends FormRequest
 {
@@ -25,6 +26,9 @@ class CreateJobRequest extends FormRequest
      */
     public function rules()
     {
+        try
+        {
+
         return [
             'title' => 'required|string',
                 'salary' => 'required|numeric',
@@ -36,7 +40,13 @@ class CreateJobRequest extends FormRequest
                 'end_date' => 'required|date',
                 'vacancy' => 'required|numeric',
                 'nature' => 'required|string|'.ValidationRule::in(['full time', 'part time']),
-                'attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf',
+                'attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
         ];
+    }catch(Throwable $e)
+    {
+        return redirect()->back()->with('error' , 'Attachmennts are too large');
+
+    }
+
     }
 }

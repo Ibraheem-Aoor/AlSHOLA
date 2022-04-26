@@ -8,12 +8,15 @@ Trait JobRulesTrait
         return [
             'title' => 'required|string',
             'salary' => 'required|numeric',
+            'vacancy' => 'required|numeric',
             'location' => 'required|string',
-            'employerWebsite' => 'required|string',
-            'description' => 'required|string',
+            'website' => 'required|string|url',
+            'nature' => 'required|string',
+            'endDate' => 'required|string|date',
+            'responsebilites' => 'required|string',
+            'descreption' => 'required|string',
             'requirements' => 'required|string',
-            'responsibilities' => 'required|string',
-            'attachments.*' => 'nullable|mimes:jpg,jpeg,png,bmp,gif,svg,webp,pdf,docx',
+            // 'attachments.*' => 'nullable|mimes:jpg,jpeg,png,bmp,gif,svg,webp,pdf,docx',
         ];
     }
 }

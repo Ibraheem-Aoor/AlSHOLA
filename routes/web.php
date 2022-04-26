@@ -1,19 +1,14 @@
 <?php
 
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\User\Employer\Jobs\EmployerJobsController;
 use App\Http\Controllers\User\Employer\Jobs\JobController;
+use App\Http\Controllers\User\Employer\Jobs\Notes\NoteController;
 use App\Http\Livewire\User\Employee\Views\Dashboard;
 use App\Http\Livewire\User\Employer\Views\Dashboard as ViewsDashboard;
-use App\Http\Livewire\User\Employer\Views\Jobs\ActiveJobs;
-use App\Http\Livewire\User\Employer\Views\Jobs\AddJob;
-use App\Http\Livewire\User\Employer\Views\Jobs\AllJobs;
-use App\Http\Livewire\User\Employer\Views\Jobs\CompletedJobs;
-use App\Http\Livewire\User\Employer\Views\Jobs\JobCreation;
-use App\Http\Livewire\User\Employer\Views\Jobs\JobDetails;
-use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
-use App\Http\Livewire\User\Employer\Views\Profile\ProfileShow;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,8 +24,16 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-    return view('front.home');
+    if(Cache::has('homePage'))
+        return Cache::get('homePage');
+    else
+        {
+            $data  = view('front.home')->render();
+            Cache::put('homePage' , $data);
+        }
 })->name('home');
+
+
 Route::get('/about', function () {
     return view('front.about');
 })->name('about');
@@ -39,9 +42,7 @@ Route::get('/category', function () {
     return view('front.category');
 })->name('categories');
 
-Route::get('/contact', function () {
-    return view('front.contact');
-})->name('contact');
+Route::resource('/contact', ContactFormController::class);
 
 Route::group(['middleware' => ['auth']], function()
 {
@@ -55,18 +56,22 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('dashboard' , ViewsDashboard::class)->name('employer.dashboard');
         // Jobs Routes
         Route::resource('/job' , JobController::class);
-        Route::get('/jobs/all' , [EmployerJobsController::class , 'allJobs'])->name('employer.jobs.all');
-        Route::get('/jobs/completed' , [EmployerJobsController::class , 'allCompletedJobs'])->name('employer.jobs.completed');
-        Route::get('/jobs/active' , [EmployerJobsController::class , 'allActiveJobs'])->name('employer.jobs.active');
-        Route::get('/jobs/pending' , [EmployerJobsController::class , 'allPendingJobs'])->name('employer.jobs.pending');;
-        Route::get('/jobs/cancelled' , [EmployerJobsController::class , 'allCanelledJobs'])->name('employer.jobs.cancelled');;
-        // Route::get('/job/details/{id}' , JobDetails::class)->name('job.details');
-        // Route::get('/jobs/active' , ActiveJobs::class)->name('employer.jobs.active.all');
-        // Route::get('/jobs/completed' , CompletedJobs::class)->name('employer.jobs.completed.all');
-        // Route::get('/jobs/pending' , PendingJobs::class)->name('employer.jobs.pending.all');
+        Route::group(['controller' => EmployerJobsController::class ], function()
+        {
+            Route::get('/jobs/all' , 'allJobs')->name('employer.jobs.all');
+            Route::get('/jobs/completed' ,  'allCompletedJobs')->name('employer.jobs.completed');
+            Route::get('/jobs/active' ,  'allActiveJobs')->name('employer.jobs.active');
+            Route::get('/jobs/pending' ,  'allPendingJobs')->name('employer.jobs.pending');;
+            Route::get('/jobs/cancelled' ,  'allCanelledJobs')->name('employer.jobs.cancelled');;
+            Route::get('/jobs/returned' ,  'allReturnedJobs')->name('employer.jobs.returned');
+        });
+
+        //Job Notes Routes:
+        Route::get('/job/{id}/notes' , [NoteController::class , 'index'])->name('employer.job.notes');
+
 
         // profile
-        Route::get('/profile' , ProfileShow::class)->name('employer.profile');
+        // Route::get('/profile' , ProfileShow::class)->name('employer.profile');
         Route::get('test' , function()
         {
             return Storage::download('public/uploads/attachments/jobs/5/snapchat.png');

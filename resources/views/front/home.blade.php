@@ -17,7 +17,8 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at
                                     sed stet
                                     sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                                <a href="{{route('register')}}" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
+                                <a href="{{ route('register') }}"
+                                    class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
                                     Talent</a>
                             </div>
                         </div>
@@ -672,56 +673,102 @@
     <!-- Testimonial Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
-            <h1 class="text-center mb-5">Our Clients Say!!!</h1>
+            <h1 class="text-center mb-5">Our Major Clients</h1>
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item bg-light rounded p-4">
-                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid flex-shrink-0 rounded"
-                            src="{{ asset('assets/dist_1/img/testimonial-1.jpg') }}" style="width: 50px; height: 50px;">
-                        <div class="ps-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <small>Profession</small>
-                        </div>
+                            src="{{ asset('assets/dist_1/img/profile/image-1.jpg') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-3.jpg') }}"
+                            style="width: 400px; height: 300px;">
                     </div>
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
-                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid flex-shrink-0 rounded"
-                            src="{{ asset('assets/dist_1/img/testimonial-2.jpg') }}" style="width: 50px; height: 50px;">
-                        <div class="ps-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <small>Profession</small>
-                        </div>
+                            src="{{ asset('assets/dist_1/img/profile/image-4.png') }}"
+                            style="width: 400px; height: 300px;">
                     </div>
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
-                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid flex-shrink-0 rounded"
-                            src="{{ asset('assets/dist_1/img/testimonial-3.jpg') }}" style="width: 50px; height: 50px;">
-                        <div class="ps-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <small>Profession</small>
-                        </div>
+                            src="{{ asset('assets/dist_1/img/profile/image-5.jpg') }}"
+                            style="width: 400px; height: 300px;">
                     </div>
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
-                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                    <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid flex-shrink-0 rounded"
-                            src="{{ asset('assets/dist_1/img/testimonial-4.jpg') }}" style="width: 50px; height: 50px;">
-                        <div class="ps-3">
-                            <h5 class="mb-1">Client Name</h5>
-                            <small>Profession</small>
-                        </div>
+                            src="{{ asset('assets/dist_1/img/profile/image-6.png') }}"
+                            style="width: 400px; height: 300px;">
                     </div>
                 </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-7.png') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-8.jpg') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-9.jpg') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-10.png') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-11.jpg') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-12.png') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-13.jpg') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-4">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded"
+                            src="{{ asset('assets/dist_1/img/profile/image-14.png') }}"
+                            style="width: 400px; height: 300px;">
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

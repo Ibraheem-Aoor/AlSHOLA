@@ -11,15 +11,16 @@
                 <a href="/" class="nav-item nav-link">Home</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
                 <a href="{{ route('categories') }}" class="nav-item nav-link">Job Category</a>
-                <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="{{route('job.index')}}" class="dropdown-item">All Jobs</a>
+                        <a href="{{route('employer.jobs.all')}}" class="dropdown-item">All Jobs</a>
                         <a href="{{route('employer.jobs.active')}}" class="dropdown-item">Active Jobs</a>
                         <a href="{{route('employer.jobs.completed')}}" class="dropdown-item">Completed Jobs</a>
                         <a href="{{route('employer.jobs.pending')}}" class="dropdown-item">Pending Jobs</a>
                         <a href="{{route('employer.jobs.cancelled')}}" class="dropdown-item">Cancelled Jobs</a>
+                        <a href="{{route('employer.jobs.returned')}}" class="dropdown-item">Returned Jobs</a>
                     </div>
                 </div>
                 @if (!Auth::check())

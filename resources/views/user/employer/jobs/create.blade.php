@@ -8,6 +8,9 @@
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Post A New Job For Your Business</h1>
             <div class="row g-4">
                 <div class="col-sm-12 text-center">
+                    @if (Session::has('error'))
+                        <div class="alert alet-danger">{{$request->session()->get('error');}}</div>
+                    @endif
                     <form action="{{ route('job.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="rounded h-100 p-4">
@@ -75,7 +78,7 @@
                                         <input required type="file" class="form-control"  name="attachments[]" multiple
                                             value="{{old('attachments')}}">
                                         <label for="floatingPassword">&nbsp;&nbsp; Attachment</label>
-                                        @error('attachments')
+                                        @error('attachments.*')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
