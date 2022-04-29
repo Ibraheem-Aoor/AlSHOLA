@@ -10,13 +10,14 @@ use Livewire\Component;
 class JobDetailsEdit extends Component
 {
 
-    public $job  , $title , $salary , $vacancy , $location , $website ,
+    public $job  , $title , $salary , $vacancy , $location , $website , $status,
             $nature , $endDate , $descreption , $responsebilites , $requirements;
 
     public function mount($id = null)
     {
         $this->job = Job::with('user')->findOrFail($id);
         $this->title = $this->job->title;
+        $this->status = $this->job->status;
         $this->salary = $this->job->salary;
         $this->vacancy = $this->job->vacancy;
         $this->location = $this->job->location;
@@ -33,6 +34,7 @@ class JobDetailsEdit extends Component
     {
         $this->validate($this->rules());
         $this->job->title = $this->title;
+        $this->job->status = $this->status;
         $this->job->salary = $this->salary;
         $this->job->vacancy = $this->vacancy;
         $this->job->location = $this->location;
@@ -52,6 +54,7 @@ class JobDetailsEdit extends Component
     {
         return [
             'title' => 'required|string',
+            'status' => 'required|string|'.ValidationRule::in(['completed' , 'active' , 'cancelled' , 'pending']),
             'salary' => 'required|numeric',
             'vacancy' => 'required|numeric',
             'location' => 'required|string',

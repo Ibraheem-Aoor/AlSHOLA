@@ -53,7 +53,7 @@ class JobController extends Controller
             'vacancy' => $request->input('vacancy'),
             'nature' => $request->input('nature'),
             'end_date' => $request->input('end_date'),
-            'user_id' => Auth::id(),
+            'user_id' => Auth::id(), //The Publisher
         ]);
         if($request->hasFile('attachments'))
             $this->addAttachementsToJob($request->attachments  , $job->id);

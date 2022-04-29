@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->index('user_id');
             $table->foreign('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');//note writer
             $table->timestamps();
         });
     }

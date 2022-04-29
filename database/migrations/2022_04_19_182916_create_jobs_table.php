@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->default('active');
+            $table->enum('status' , ['completed' , 'active' , 'cancelled' , 'pending'])->default('active');
             $table->string('title');
             $table->text('description');
             $table->text('requirements');

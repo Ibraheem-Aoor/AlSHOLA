@@ -50,6 +50,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Job::class , 'job_user');
     }
 
+    // check if the current user have the given job in jobs collection (M to M realtion ship)
+    public function hasJob($job)
+    {
+        return $this->jobs->contains($job);
+    }
+
+
+
     public function attachments()
     {
         return $this->hasMany(Attachment::class , 'user_id');

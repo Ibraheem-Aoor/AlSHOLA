@@ -6,53 +6,32 @@
                   <li class="active">
                       <a href="{{ route('admin.dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                   </li>
-                  <li class="menu-title">UI elements</li><!-- /.menu-title -->
+                  <li class="menu-title">Job Posts Managment</li><!-- /.menu-title -->
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Jobs</a>
                       <ul class="sub-menu children dropdown-menu">
                           <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('admin.jobs.all') }}">All Jobs</a>
                           </li>
-                          <li><i class="fa fa-id-badge"></i><a href="{{ route('admin.jobs.latest') }}">New Jobs</a></li>
+                          <li><i class="fa fa-id-badge"></i><a href="{{ route('admin.jobs.latest') }}">New Jobs</a>
+                          </li>
                           <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.completed') }}">Completed
                                   Jobs</a></li>
                           <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.active') }}">Active Jobs</a>
                           </li>
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.pending') }}">Pending Jobs</a>
+                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.pending') }}">Pending
+                                  Jobs</a>
                           </li>
                       </ul>
                   </li>
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                          <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-                      </ul>
-                  </li>
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                          <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                      </ul>
-                  </li>
 
-                  <li class="menu-title">Icons</li><!-- /.menu-title -->
+                  <li class="menu-title">Users Management</li><!-- /.menu-title -->
 
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font
-                                  Awesome</a></li>
-                          <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a>
-                          </li>
-                      </ul>
+                  <li>
+                      <a href="{{route('employer.all')}}"> <i class="menu-icon ti-email"></i>Employers </a>
                   </li>
                   <li>
-                      <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
+                      <a href="{{route('talent.all')}}"> <i class="menu-icon ti-email"></i>Talents </a>
                   </li>
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"

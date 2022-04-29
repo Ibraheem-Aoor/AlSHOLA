@@ -232,8 +232,8 @@
                                             <a class="btn btn-primary col-sm-12 mb-2"
                                                 href="{{ route('admin.job.details.edit', $job->id) }}">Edit Some
                                                 Details</a>
-                                            <button class="btn btn-success col-sm-12 mb-2">Accept & Find
-                                                Talents</button>
+                                            <a href="{{route('talent.recommend' , $job->id)}}" class="btn btn-success col-sm-12 mb-2">Accept & Find
+                                                Talents</a>
                                         </div>
                                         </p>
                                     </div>

@@ -90,6 +90,21 @@
                                         </div>
 
                                         <div class="form-group col-sm-12">
+                                            <label class=" form-control-label">Status</label>
+                                            <div class="input-group">
+                                                <select class="form-control"  wire:model.lazy="status">
+                                                    <option value="active">Active</option>
+                                                    <option value="completed">Completed</option>
+                                                    <option value="cancelled">Cancelled</option>
+                                                    <option value="pending">Pending</option>
+                                                </select>
+                                            </div>
+                                            @error('status')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-sm-12">
                                             <label class=" form-control-label">Descreption</label>
                                             <div class="input-group">
                                                 <textarea class="form-control" wire:model.lazy="descreption">{{ $descreption }}</textarea>
@@ -127,7 +142,7 @@
                                                 </div>
                                                 <div class="col-sm-12  ml-auto p-4">
                                                     <a href="{{ route('admin.dashboard') }}" type="button"
-                                                        class="btn btn-primary ">
+                                                        class="btn btn-outline-info ">
                                                         Cancel
                                                     </a>
                                                 </div>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('job_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id'); //the user represnt the talent who is the job has been sent to.
             $table->unsignedBigInteger('job_id');
             $table->timestamps();
         });

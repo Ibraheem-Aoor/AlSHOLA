@@ -8,26 +8,38 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="/" class="nav-item nav-link">Home</a>
-                <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
-                <a href="{{ route('categories') }}" class="nav-item nav-link">Job Category</a>
-                <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
+                <a href="{{ route('employer.dashboard') }}" class="nav-item nav-link">DASHBOARD</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="{{route('employer.jobs.all')}}" class="dropdown-item">All Jobs</a>
-                        <a href="{{route('employer.jobs.active')}}" class="dropdown-item">Active Jobs</a>
-                        <a href="{{route('employer.jobs.completed')}}" class="dropdown-item">Completed Jobs</a>
-                        <a href="{{route('employer.jobs.pending')}}" class="dropdown-item">Pending Jobs</a>
-                        <a href="{{route('employer.jobs.cancelled')}}" class="dropdown-item">Cancelled Jobs</a>
-                        <a href="{{route('employer.jobs.returned')}}" class="dropdown-item">Returned Jobs</a>
+                        <a href="{{ route('employer.jobs.all') }}" class="dropdown-item">All Jobs</a>
+                        <a href="{{ route('employer.jobs.active') }}" class="dropdown-item">Active Jobs</a>
+                        <a href="{{ route('employer.jobs.completed') }}" class="dropdown-item">Completed Jobs</a>
+                        <a href="{{ route('employer.jobs.pending') }}" class="dropdown-item">Pending Jobs</a>
+                        <a href="{{ route('employer.jobs.cancelled') }}" class="dropdown-item">Cancelled Jobs</a>
+                        <a href="{{ route('employer.jobs.returned') }}" class="dropdown-item">Returned Jobs</a>
+                    </div>
+                </div>
+                <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="{{ route('employer.jobs.all') }}" class="dropdown-item">Profile</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                            <i class="fa fa-power-off"></i> {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </div>
                 @if (!Auth::check())
                     <a href="{{ route('login') }}" class="nav-item nav-link ">LogIn</a>
             </div>
         @else
-            <a href="{{ route('job.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
+            <a href="{{ route('job.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
+                A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
             @endif
         </div>

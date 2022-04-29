@@ -4,7 +4,9 @@ use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\User\Employer\Jobs\EmployerJobsController;
 use App\Http\Controllers\User\Employer\Jobs\JobController;
 use App\Http\Controllers\User\Employer\Jobs\Notes\NoteController;
+use App\Http\Livewire\User\Employee\Views\AvilabeJobs;
 use App\Http\Livewire\User\Employee\Views\Dashboard;
+use App\Http\Livewire\User\Employee\Views\JobDetails;
 use App\Http\Livewire\User\Employer\Views\Dashboard as ViewsDashboard;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +51,8 @@ Route::group(['middleware' => ['auth']], function()
     //Talented Routes
     Route::group(['prefix' => 'talented' , 'middleware' => ['employeeCheck'] ] , function(){
         Route::get('dashboard' , Dashboard::class)->name('employee.dashboard');
+        Route::get('jobs/avilable' , AvilabeJobs::class)->name('employee.jobs.avilable');
+        Route::get('job/{id}' , JobDetails::class)->name('employee.job.details');
     });
 
     // Employer Routes
@@ -70,7 +74,6 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('/job/{id}/notes' , [NoteController::class , 'index'])->name('employer.job.notes');
 
 
-        // profile
         // Route::get('/profile' , ProfileShow::class)->name('employer.profile');
         Route::get('test' , function()
         {

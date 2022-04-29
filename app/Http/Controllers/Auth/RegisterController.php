@@ -94,6 +94,6 @@ class RegisterController extends Controller
         if(Auth::user()->type == 'Employer')
             return 'employer/dashboard';
         elseif(Auth::user()->type == 'Talented')
-            return 'talent/dashboard';
+            return 'talented/dashboard';
     }
 }

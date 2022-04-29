@@ -31,7 +31,7 @@ class Job extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class , 'user_id'); //represnts the publisher Only
     }
 
     public function attachments()

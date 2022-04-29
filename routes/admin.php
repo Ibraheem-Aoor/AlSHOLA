@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
+use App\Http\Livewire\Admin\Views\Employers\AllEmployers;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
 use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
 use App\Http\Livewire\Admin\Views\Jobs\CompletedJobs;
@@ -10,6 +11,8 @@ use App\Http\Livewire\Admin\Views\Jobs\NewJobs;
 use App\Http\Livewire\Admin\Views\Jobs\PendingJobs as JobsPendingJobs;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
 use App\Http\Livewire\Admin\Views\Profile\ProfileShow;
+use App\Http\Livewire\Admin\Views\Talents\AllTalents;
+use App\Http\Livewire\Admin\Views\Talents\SendJobToTalent;
 use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -40,8 +43,6 @@ use Illuminate\Support\Facades\Storage;
         Route::get('job/details/{id}/edit' , JobDetailsEdit::class)->name('admin.job.details.edit');
 
 
-
-
         //Attachments Rotues:
         Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
         {
@@ -53,5 +54,13 @@ use Illuminate\Support\Facades\Storage;
             Storage::download('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
         })->name('file.download');
 
+
+
+        //Talents Routes:
+        Route::get('/talent/all' , AllTalents::class)->name('talent.all');
+        Route::get('/talent/find/{id}' , SendJobToTalent::class)->name('talent.recommend');
+
+        //Employer Routes
+        Route::get('/employer/all' , AllEmployers::class)->name('employer.all');
 
     });
