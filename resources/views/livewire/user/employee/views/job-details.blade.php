@@ -6,8 +6,8 @@
             <div class="row gy-5 gx-4">
                 <div class="col-lg-8">
                     <div class="d-flex align-items-center mb-5">
-                        <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt=""
-                            style="width: 80px; height: 80px;">
+                        {{-- <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt=""
+                            style="width: 80px; height: 80px;"> --}}
                         <div class="text-start ps-4">
                             <h3 class="mb-3">{{ $job->title }}</h3>
                             <span class="text-truncate me-3"><i
@@ -31,29 +31,24 @@
                     </div>
 
                     <div class="">
-                        <h4 class="mb-4">Apply For The Job</h4>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Your Name" wire:model="test">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control" placeholder="Your Email">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Portfolio Website">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="file" class="form-control bg-white">
-                                </div>
-                                <div class="col-12">
-                                    <textarea class="form-control" rows="5" placeholder="Coverletter"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100" type="submit">Apply Now</button>
-                                </div>
+                        <h4 class="mb-4">What You want to do?</h4>
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-12">
+
+                                <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Offer
+                                </button>
+                                <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal_2">
+                                    Send a comment
+                                </button>
+                                <button type="button" class="btn btn-outline-success col-sm-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Accept The Offer
+                                </button>
+
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -61,7 +56,8 @@
                     <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                         <h4 class="mb-4">Job Summery</h4>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ $job->created_at }}</p>
-                        <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{ $job->vacancy }} Position</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{ $job->vacancy }} Position
+                        </p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ $job->nature }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ $job->salary }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ $job->location }}</p>
@@ -83,5 +79,58 @@
         </div>
     </div>
     <!-- Job Detail End -->
+
+    <!-- Button trigger modal -->
+
+    <!-- Refuse Offer Modal -->
+    <div class="modal fade" id="exampleModal_1" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Refuse The Offer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tell Us the Reason? (optional)
+                    <form action="{{ route('employee.job.refuse', $job->id) }}" method="POST">
+                        @csrf
+                        <textarea class="form-control" name="note"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refuse Offer Modal -->
+    <div class="modal fade" id="exampleModal_2" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send a Comment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Help Us Improve the Quality of Job Post.Tell Us Anything that can help us:
+                    <form action="{{ route('employee.job.note.create', $job->id) }}" method="POST">
+                        @csrf
+                        <textarea class="form-control" required name="note"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
 
 </div>

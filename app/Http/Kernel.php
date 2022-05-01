@@ -6,6 +6,7 @@ use App\Http\Middleware\AuthenticateAdmin;
 use App\Http\Middleware\AuthTypeCheck;
 use App\Http\Middleware\EmployeeCheck;
 use App\Http\Middleware\EmployerCheck;
+use App\Http\Middleware\GuestOnly;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -71,6 +72,7 @@ class Kernel extends HttpKernel
         'employeeCheck' => EmployeeCheck::class,
         'typeCheck' => AuthTypeCheck::class,
         'authAdmin' => AuthenticateAdmin::class,
+        'guestOnly' => GuestOnly::class,
     ];
 
 }

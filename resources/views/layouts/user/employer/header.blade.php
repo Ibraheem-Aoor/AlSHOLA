@@ -1,7 +1,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-            <h1 class="m-0 text-primary">JobEntry</h1>
+            <img src="{{asset('assets/dist_3/assets/images/header-logo.png')}}" alt="" width="50px">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -20,11 +20,13 @@
                         <a href="{{ route('employer.jobs.returned') }}" class="dropdown-item">Returned Jobs</a>
                     </div>
                 </div>
-                <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
+                <a href="{{ route('user.contact') }}" class="nav-item nav-link">Contact</a>
+
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    <a href="#" class="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="{{ route('employer.jobs.all') }}" class="dropdown-item">Profile</a>
+                        <a href="#" class="dropdown-item">Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                             <i class="fa fa-power-off"></i> {{ __('Logout') }}
@@ -34,14 +36,10 @@
                         </form>
                     </div>
                 </div>
-                @if (!Auth::check())
-                    <a href="{{ route('login') }}" class="nav-item nav-link ">LogIn</a>
             </div>
-        @else
             <a href="{{ route('job.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
                 A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
-            @endif
         </div>
     </nav>
     <!-- Navbar End -->

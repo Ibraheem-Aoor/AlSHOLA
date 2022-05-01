@@ -5,118 +5,114 @@
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ 'WELCOME BACK ' . Auth::user()->name }}
             </h1>
             <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-sm-6 text-center mb-5">
-                    <div>
-                        <canvas id="myChart" width="50px" height="100px"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-6 text-center mb-5 mt-5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 mb-2">
-                                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Avilable Job Posts</p>
-                                        <h6 class="mb-0">$1234</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 mb-2">
-                                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Applications</p>
-                                        <h6 class="mb-0">$1234</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 mb-2">
-                                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Commited Fees</p>
-                                        <h6 class="mb-0">$1234</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 mb-2">
-                                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Returned Applications</p>
-                                        <h6 class="mb-0">$1234</h6>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Avilable Job Posts</p>
+                            <h6 class="mb-0">$1234</h6>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-
-            <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
-
-                <div iv class="col-sm-12 text-center mb-5">
-                    <h2 class="text-green">Latest Job Posts Recommend For You</h2>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Creation_date</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $i = 1;
-                                    $activeJobs = [];
-                                @endphp
-                                @forelse ($avlialbeJobs as $job)
-                                    <tr>
-                                        <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $job->title }}</td>
-                                        <td>{{ $job->created_at }}</td>
-                                        <td>{{ $job->status }}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    Actions
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a href="{{route('employee.job.details' , $job->id)}}" class="dropdown-item badge bg-primary"
-                                                            href="#">Details</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item badge bg-info" href="#"><i
-                                                                class="fa fa-eye"></i> Apply</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="alert alert-warning text-center bg-dark"
-                                            style="color:#fff">
-                                            No Records Yet
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                <div class="col-sm-4 mb-2">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Returned Jobs</p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
                     </div>
                 </div>
-
+                <div class="col-sm-4 mb-2">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Active Jobs</p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Applications</p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total  Returned Applications</p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total  Fees </p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
+
     </div>
+
+
+    <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
+
+        <div iv class="col-sm-12 text-center mb-5">
+            <h2 class="text-green">Latest Job Posts Recommend For You</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Creation_date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $i = 1;
+                            $activeJobs = [];
+                        @endphp
+                        @forelse ($avlialbeJobs as $job)
+                            <tr>
+                                <th scope="row">{{ $i++ }}</th>
+                                <td>{{ $job->title }}</td>
+                                <td>{{ $job->created_at }}</td>
+                                <td>{{ $job->status }}</td>
+                                <td>
+                                    <a href="{{ route('employee.job.details', $job->id) }}"
+                                        class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>
+                                        Details</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="alert alert-warning text-center bg-dark" style="color:#fff">
+                                    No Records Yet
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
 </div>
 @push('js')
     <script>

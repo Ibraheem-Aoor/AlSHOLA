@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
+use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
 use App\Http\Livewire\Admin\Views\Employers\AllEmployers;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
@@ -17,6 +19,8 @@ use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Livewire\Admin\Views\Contacts\GuestContacts;
+use App\Models\Attachment;
 
 //prefix => admin
 
@@ -44,15 +48,37 @@ use Illuminate\Support\Facades\Storage;
 
 
         //Attachments Rotues:
+        /*
         Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
         {
             return response()->file(public_path('storage/uploads/attachments/jobs/'.$jobId.'/'.$fileName));
         })->name('file.open');
+        */
 
         Route::get('download/{jobId}/{fileName}' , function($jobId , $fileName)
         {
-            Storage::download('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
+            try{
+                return Storage::download('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
+            }Catch(Throwable $e)
+            {
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
         })->name('file.download');
+
+        Route::get('delete/{jobId}/{fileName}' , function($jobId , $fileName)
+        {
+            try{
+                Storage::delete('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
+                Attachment::where([['job_id' , $jobId] , ['name' , $fileName]])->delete();
+                notify()->success('file deleted Succesfully');
+                return redirect()->back();
+            }Catch(Throwable $e)
+            {
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('file.delete');
 
 
 
@@ -62,5 +88,11 @@ use Illuminate\Support\Facades\Storage;
 
         //Employer Routes
         Route::get('/employer/all' , AllEmployers::class)->name('employer.all');
+
+
+        //Contacts routes
+        Route::get('/employer/queries'  , EmployerContacts::class)->name('admin.contacts.employers');
+        Route::get('/employee/queries'  , TalentContacts::class)->name('admin.contacts.talents');
+        Route::get('/guests/queries'  , GuestContacts::class)->name('admin.contacts.guests');
 
     });

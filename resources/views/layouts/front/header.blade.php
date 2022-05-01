@@ -15,6 +15,7 @@
                 <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
                 @if (!Auth::check())
                     <a href="{{ route('login') }}" class="nav-item nav-link ">LogIn</a>
+                    <a href="{{ route('register') }}" class="nav-item nav-link ">SignUp</a>
             </div>
             <a href="{{ route('register') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>

@@ -14,7 +14,7 @@
                                 <div class="stat-content">
                                     <div class="text-left dib">
                                         <div class="stat-text">$<span class="count">23569</span></div>
-                                        <div class="stat-heading">Revenue</div>
+                                        <div class="stat-heading">Existing Client Demand</div>
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +32,27 @@
                                 <div class="stat-content">
                                     <div class="text-left dib">
                                         <div class="stat-text"><span class="count">3435</span></div>
-                                        <div class="stat-heading">Sales</div>
+                                        <div class="stat-heading">Existing Candidates</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <i class="pe-7s-browser"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-heading">Waiting for Offer</div>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +70,61 @@
                                 <div class="stat-content">
                                     <div class="text-left dib">
                                         <div class="stat-text"><span class="count">349</span></div>
-                                        <div class="stat-heading">Templates</div>
+                                        <div class="stat-heading">Waiting for Medical</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <i class="pe-7s-browser"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-heading">Waiting for Arrival</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <i class="pe-7s-browser"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-heading">Waiting for Visa</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <i class="pe-7s-browser"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-heading">Waiting for Interview</div>
                                     </div>
                                 </div>
                             </div>
@@ -94,8 +168,8 @@
                             <div class="col-lg-4">
                                 <div class="card-body">
                                     <div class="progress-box progress-1">
-                                        <h4 class="por-title">Visits</h4>
-                                        <div class="por-txt">96,930 Users (40%)</div>
+                                        <h4 class="por-title">Total Demand</h4>
+                                        <div class="por-txt">96,930 (40%)</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-1" role="progressbar"
                                                 style="width: 40%;" aria-valuenow="25" aria-valuemin="0"
@@ -103,8 +177,8 @@
                                         </div>
                                     </div>
                                     <div class="progress-box progress-2">
-                                        <h4 class="por-title">Bounce Rate</h4>
-                                        <div class="por-txt">3,220 Users (24%)</div>
+                                        <h4 class="por-title">Total Under Proccess</h4>
+                                        <div class="por-txt">3,220 (24%)</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-2" role="progressbar"
                                                 style="width: 24%;" aria-valuenow="25" aria-valuemin="0"
@@ -112,7 +186,7 @@
                                         </div>
                                     </div>
                                     <div class="progress-box progress-2">
-                                        <h4 class="por-title">Unique Visitors</h4>
+                                        <h4 class="por-title">Total Arrived</h4>
                                         <div class="por-txt">29,658 Users (60%)</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-3" role="progressbar"
@@ -121,8 +195,8 @@
                                         </div>
                                     </div>
                                     <div class="progress-box progress-2">
-                                        <h4 class="por-title">Targeted Visitors</h4>
-                                        <div class="por-txt">99,658 Users (90%)</div>
+                                        <h4 class="por-title">To be Supply</h4>
+                                        <div class="por-txt">99,658 (90%)</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-4" role="progressbar"
                                                 style="width: 90%;" aria-valuenow="90" aria-valuemin="0"
@@ -152,10 +226,9 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th class="avatar">Avatar</th>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Product</th>
+                                                <th class="avatar">Stage</th>
+                                                <th>Client Name</th>
+                                                <th>Action By</th>
                                                 <th>Quantity</th>
                                                 <th>Status</th>
                                             </tr>
@@ -169,7 +242,6 @@
                                                                 src="images/avatar/1.jpg" alt=""></a>
                                                     </div>
                                                 </td>
-                                                <td> #5469 </td>
                                                 <td> <span class="name">Louis Stanley</span> </td>
                                                 <td> <span class="product">iMax</span> </td>
                                                 <td><span class="count">231</span></td>
@@ -185,7 +257,6 @@
                                                                 src="images/avatar/2.jpg" alt=""></a>
                                                     </div>
                                                 </td>
-                                                <td> #5468 </td>
                                                 <td> <span class="name">Gregory Dixon</span> </td>
                                                 <td> <span class="product">iPad</span> </td>
                                                 <td><span class="count">250</span></td>
@@ -201,7 +272,6 @@
                                                                 src="images/avatar/3.jpg" alt=""></a>
                                                     </div>
                                                 </td>
-                                                <td> #5467 </td>
                                                 <td> <span class="name">Catherine Dixon</span> </td>
                                                 <td> <span class="product">SSD</span> </td>
                                                 <td><span class="count">250</span></td>
@@ -217,7 +287,6 @@
                                                                 src="images/avatar/4.jpg" alt=""></a>
                                                     </div>
                                                 </td>
-                                                <td> #5466 </td>
                                                 <td> <span class="name">Mary Silva</span> </td>
                                                 <td> <span class="product">Magic Mouse</span> </td>
                                                 <td><span class="count">250</span></td>
@@ -233,7 +302,6 @@
                                                                 src="images/avatar/6.jpg" alt=""></a>
                                                     </div>
                                                 </td>
-                                                <td> #5465 </td>
                                                 <td> <span class="name">Johnny Stephens</span> </td>
                                                 <td> <span class="product">Monitor</span> </td>
                                                 <td><span class="count">250</span></td>
@@ -277,7 +345,7 @@
             <!-- /.orders -->
             <!-- To Do and Live Chat -->
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title box-title">To Do List</h4>
@@ -346,80 +414,13 @@
                     </div><!-- /.card -->
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title box-title">Live Chat</h4>
-                            <div class="card-content">
-                                <div class="messenger-box">
-                                    <ul>
-                                        <li>
-                                            <div class="msg-received msg-container">
-                                                <div class="avatar">
-                                                    <img src="images/avatar/64-1.jpg" alt="">
-                                                    <div class="send-time">11.11 am</div>
-                                                </div>
-                                                <div class="msg-box">
-                                                    <div class="inner-box">
-                                                        <div class="name">
-                                                            John Doe
-                                                        </div>
-                                                        <div class="meg">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Perspiciatis sunt placeat velit ad reiciendis ipsam
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.msg-received -->
-                                        </li>
-                                        <li>
-                                            <div class="msg-sent msg-container">
-                                                <div class="avatar">
-                                                    <img src="images/avatar/64-2.jpg" alt="">
-                                                    <div class="send-time">11.11 am</div>
-                                                </div>
-                                                <div class="msg-box">
-                                                    <div class="inner-box">
-                                                        <div class="name">
-                                                            John Doe
-                                                        </div>
-                                                        <div class="meg">
-                                                            Hay how are you doing?
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.msg-sent -->
-                                        </li>
-                                    </ul>
-                                    <div class="send-mgs">
-                                        <div class="yourmsg">
-                                            <input class="form-control" type="text">
-                                        </div>
-                                        <button class="btn msg-send-btn">
-                                            <i class="pe-7s-paper-plane"></i>
-                                        </button>
-                                    </div>
-                                </div><!-- /.messenger-box -->
-                            </div>
-                        </div> <!-- /.card-body -->
-                    </div><!-- /.card -->
-                </div>
             </div>
             <!-- /To Do and Live Chat -->
+
             <!-- Calender Chart Weather  -->
             <div class="row">
-                <div class="col-md-12 col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- <h4 class="box-title">Chandler</h4> -->
-                            <div class="calender-cont widget-calender">
-                                <div id="calendar"></div>
-                            </div>
-                        </div>
-                    </div><!-- /.card -->
-                </div>
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" style="visibility: hidden">
                     <div class="card ov-h">
                         <div class="card-body bg-flat-color-2">
                             <div id="flotBarChart" class="float-chart ml-4 mr-4"></div>
@@ -427,82 +428,8 @@
                         <div id="cellPaiChart" class="float-chart"></div>
                     </div><!-- /.card -->
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card weather-box">
-                        <h4 class="weather-title box-title">Weather</h4>
-                        <div class="card-body">
-                            <div class="weather-widget">
-                                <div id="weather-one" class="weather-one"></div>
-                            </div>
-                        </div>
-                    </div><!-- /.card -->
-                </div>
             </div>
             <!-- /Calender Chart Weather -->
-            <!-- Modal - Calendar - Add New Event -->
-            <div class="modal fade none-border" id="event-modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
-                            <h4 class="modal-title"><strong>Add New Event</strong></h4>
-                        </div>
-                        <div class="modal-body"></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect"
-                                data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success save-event waves-effect waves-light">Create
-                                event</button>
-                            <button type="button" class="btn btn-danger delete-event waves-effect waves-light"
-                                data-dismiss="modal">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /#event-modal -->
-            <!-- Modal - Calendar - Add Category -->
-            <div class="modal fade none-border" id="add-category">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
-                            <h4 class="modal-title"><strong>Add a category </strong></h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="control-label">Category Name</label>
-                                        <input class="form-control form-white" placeholder="Enter name" type="text"
-                                            name="category-name" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="control-label">Choose Category Color</label>
-                                        <select class="form-control form-white" data-placeholder="Choose a color..."
-                                            name="category-color">
-                                            <option value="success">Success</option>
-                                            <option value="danger">Danger</option>
-                                            <option value="info">Info</option>
-                                            <option value="pink">Pink</option>
-                                            <option value="primary">Primary</option>
-                                            <option value="warning">Warning</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default waves-effect"
-                                data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger waves-effect waves-light save-category"
-                                data-dismiss="modal">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /#add-category -->
         </div>
         <!-- .animated -->
     </div>

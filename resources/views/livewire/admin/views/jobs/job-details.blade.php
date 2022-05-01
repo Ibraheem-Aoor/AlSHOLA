@@ -132,13 +132,11 @@
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $note->user->name }}</td>
                                                                 <td>{{ $note->created_at }}</td>
-                                                                <td><button class="btn btn-outline-primary"
-                                                                        id="#noteCotnentModalButton"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#noteCotnentModal"
-                                                                        data-content="{{ $note->message }}"><i
+                                                                <td><a class="btn btn-outline-primary"
+                                                                        data-message="{{ $note->message }}"
+                                                                        data-toggle="modal" href="#exampleModal_5"><i
                                                                             class="fa fa-eye"></i> show
-                                                                        message</button></td>
+                                                                        message</a></td>
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -189,18 +187,18 @@
                                                                             type="button" id="dropdownMenuButton1"
                                                                             data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
-                                                                            QActions
+                                                                            Actions
                                                                         </button>
                                                                         <ul class="dropdown-menu"
                                                                             aria-labelledby="dropdownMenuButton1">
-                                                                            <li><a class="dropdown-item" href="#"
+                                                                            {{-- <li><a class="dropdown-item" href="#"
                                                                                     wire:click="openAttachment('{{ $attachment->name }}')">Open</a>
-                                                                            </li>
+                                                                            </li> --}}
                                                                             <li><a class="dropdown-item" href="#"
                                                                                     wire:click="downloadAttachment('{{ $attachment->name }}')">Download</a>
                                                                             </li>
-                                                                            <li><a class="dropdown-item"
-                                                                                    href="#">Delete</a>
+                                                                            <li><a class="dropdown-item" href="#"
+                                                                                    wire:click="deleteAttachment('{{ $attachment->name }}')">Delete</a>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -232,7 +230,8 @@
                                             <a class="btn btn-primary col-sm-12 mb-2"
                                                 href="{{ route('admin.job.details.edit', $job->id) }}">Edit Some
                                                 Details</a>
-                                            <a href="{{route('talent.recommend' , $job->id)}}" class="btn btn-success col-sm-12 mb-2">Accept & Find
+                                            <a href="{{ route('talent.recommend', $job->id) }}"
+                                                class="btn btn-success col-sm-12 mb-2">Accept & Find
                                                 Talents</a>
                                         </div>
                                         </p>
@@ -276,44 +275,53 @@
                         </div>
 
 
-
-                        <!--
-                            Modal_2
-                            This modal is for showing notes only
-                        -->
-                        <div class="modal fade" id="noteCotnentModal" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="">Note<span class="text-danger">* </span> :</label>
-                                            <input type="text" class="form-control" id="in">
-                                        </div>
-                                    </div>
+                                        <textarea class="form-control" id="message" cols="30" rows="10" readonly></textarea>
 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+
         <script>
-            $(document).ready(function() {
-                $('#noteCotnentModal').on('show.bs.modal', function(event) {
-                    alert('test');
-                    let bookId = $(event.relatedTarget).data('content')
-                    $(this).find('.modal-body input').val(bookId)
-                })
-            });
+            $('#exampleModal_5').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var message = button.data('message')
+                // var description = button.data('description')
+                var modal = $(this)
+                modal.find('.modal-body #message').val(message);
+            })
         </script>
     @endpush
 </div>

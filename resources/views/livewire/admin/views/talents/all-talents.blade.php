@@ -16,8 +16,9 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Name</th>
-                                                <th>join_date</th>
+                                                <th>Email</th>
                                                 <th>Status</th>
+                                                <th>join_date</th>
                                                 <th>ِActions</th>
                                             </tr>
                                         </thead>
@@ -31,11 +32,27 @@
                                                     <td>
                                                         {{ $talent->name }}
                                                     </td>
-                                                    <td>{{ $talent->created_at }}</td>
-                                                    <td><span>{{ $talent->created_at }}</span>
-                                                    </td>
+                                                    <td>{{ $talent->email }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-primary">Actions</a>
+                                                        @if ($talent->status == 'active')
+                                                            <span class="badge badge-success">Active</span>
+                                                        @else
+                                                            <span class="badge badge-danger">Blocked</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $talent->created_at }}</td>
+                                                    <td>
+                                                        @if ($talent->status == 'blocked')
+                                                            <a href="#" class="btn btn-outline-success"
+                                                                wire:click="activeUser('{{ $talent->id }}')"><i
+                                                                    class="fa fa-check" style="color:green;"></i>
+                                                                Active</a>
+                                                        @else
+                                                            <a href="#" class="btn btn-outline-danger"
+                                                                wire:click="blockUser('{{ $talent->id }}')"><i
+                                                                    class="fa fa-circle" style="color:red;"></i>
+                                                                block</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @empty
@@ -47,7 +64,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                    {{$allTalents->links()}}
+                                    {{ $allTalents->links() }}
                                 </div> <!-- /.table-stats -->
                             </div>
                         </div> <!-- /.card -->

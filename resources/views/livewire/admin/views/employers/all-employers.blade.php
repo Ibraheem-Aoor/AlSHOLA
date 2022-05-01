@@ -16,8 +16,9 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Name</th>
-                                                <th>join_date</th>
+                                                <th>Email</th>
                                                 <th>Status</th>
+                                                <th>join_date</th>
                                                 <th>ِActions</th>
                                             </tr>
                                         </thead>
@@ -25,17 +26,33 @@
                                             @php
                                                 $i = 1;
                                             @endphp
-                                            @forelse($allEmployers as $talent)
+                                            @forelse($allEmployers as $employer)
                                                 <tr>
                                                     <td class="serial">{{ $i }}</td>
                                                     <td>
-                                                        {{ $talent->name }}
+                                                        {{ $employer->name }}
                                                     </td>
-                                                    <td>{{ $talent->created_at }}</td>
-                                                    <td><span>{{ $talent->created_at }}</span>
-                                                    </td>
+                                                    <td>{{ $employer->email }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-primary">Actions</a>
+                                                        @if ($employer->status == 'active')
+                                                            <span class="badge badge-success">Active</span>
+                                                        @else
+                                                            <span class="badge badge-danger">Blocked</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $employer->created_at }}</td>
+                                                    <td>
+                                                        @if ($employer->status == 'blocked')
+                                                            <a href="#" class="btn btn-outline-success"
+                                                                wire:click="activeUser('{{ $employer->id }}')"><i
+                                                                    class="fa fa-check" style="color:green;"></i>
+                                                                Active</a>
+                                                        @else
+                                                            <a href="#" class="btn btn-outline-danger"
+                                                                wire:click="blockUser('{{ $employer->id }}')"><i
+                                                                    class="fa fa-circle" style="color:red;"></i>
+                                                                block</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @empty

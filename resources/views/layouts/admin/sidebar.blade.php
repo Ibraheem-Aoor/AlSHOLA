@@ -9,11 +9,11 @@
                   <li class="menu-title">Job Posts Managment</li><!-- /.menu-title -->
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Jobs</a>
+                          aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Jobs</a>
                       <ul class="sub-menu children dropdown-menu">
-                          <li><i class="fa fa-puzzle-piece"></i><a href="{{ route('admin.jobs.all') }}">All Jobs</a>
+                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}">All Jobs</a>
                           </li>
-                          <li><i class="fa fa-id-badge"></i><a href="{{ route('admin.jobs.latest') }}">New Jobs</a>
+                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.latest') }}">New Jobs</a>
                           </li>
                           <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.completed') }}">Completed
                                   Jobs</a></li>
@@ -28,30 +28,33 @@
                   <li class="menu-title">Users Management</li><!-- /.menu-title -->
 
                   <li>
-                      <a href="{{route('employer.all')}}"> <i class="menu-icon ti-email"></i>Employers </a>
+                      <a href="{{ route('employer.all') }}"> <i class="menu-icon ti-user"></i>Employers </a>
                   </li>
                   <li>
-                      <a href="{{route('talent.all')}}"> <i class="menu-icon ti-email"></i>Talents </a>
+                      <a href="{{ route('talent.all') }}"> <i class="menu-icon ti-user"></i>Talents </a>
                   </li>
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
+                          aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Contact Queries</a>
                       <ul class="sub-menu children dropdown-menu">
-                          <li><i class="menu-icon fa fa-line-chart"></i><a href="charts-chartjs.html">Chart JS</a></li>
-                          <li><i class="menu-icon fa fa-area-chart"></i><a href="charts-flot.html">Flot Chart</a></li>
-                          <li><i class="menu-icon fa fa-pie-chart"></i><a href="charts-peity.html">Peity Chart</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.contacts.employers') }}">Employers Queries</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.contacts.talents') }}">Talents Queries</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.contacts.guests') }}">Guests Queries</a></li>
                       </ul>
                   </li>
 
-                  <li class="menu-item-has-children dropdown">
+                  {{-- <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Maps</a>
                       <ul class="sub-menu children dropdown-menu">
                           <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
                           <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
                       </ul>
-                  </li>
-                  <li class="menu-title">Extras</li><!-- /.menu-title -->
+                  </li> --}}
+                  {{-- <li class="menu-title">Extras</li><!-- /.menu-title -->
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
@@ -61,7 +64,7 @@
                           <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a>
                           </li>
                       </ul>
-                  </li>
+                  </li> --}}
               </ul>
           </div><!-- /.navbar-collapse -->
       </nav>

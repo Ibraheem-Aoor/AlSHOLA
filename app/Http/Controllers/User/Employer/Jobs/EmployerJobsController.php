@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployerJobsController extends Controller
 {
+    /*
+        This class is respnsilbe for showing the emplyoer different type jobs.
+    */
     public function allJobs()
     {
         $jobs = Job::where('user_id' , Auth::id())->paginate(15);

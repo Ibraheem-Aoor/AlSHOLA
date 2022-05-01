@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Views\Jobs;
 
+use App\Http\Livewire\Admin\Views\GeneralModal;
 use App\Models\Job;
 use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,27 @@ class JobDetails extends Component
     public function downloadAttachment($name)
     {
         return redirect(route('file.download',[ 'jobId' => $this->job->id ,  'fileName' => $name]));
+    }
+
+    public function deleteAttachment($name)
+    {
+        return redirect(route('file.delete',[ 'jobId' => $this->job->id ,  'fileName' => $name]));
 
     }
+
+
+    public function showNote($currentNoteMessage)
+    {
+
+        session()->remove('currentNote');
+        session()->save();
+        session()->put('currentNote', $currentNoteMessage);
+        session()->save();
+
+    }
+
+
+
 
     // Return the job to the user with a note of the issue.
     public function returnJobWithNote()
@@ -49,11 +69,6 @@ class JobDetails extends Component
 
 
     //Get the current note content to show it on modal.
-    public function setCurrentNoteContent($id)
-    {
-        $note = Note::findOrFail($id);
-        $this->currentNoteContent = $note->message;
-    }
     public function render()
     {
         return view('livewire.admin.views.jobs.job-details' , ['currentNoteContent' => $this->currentNoteContent])->extends('layouts.admin.master')->section('content');
