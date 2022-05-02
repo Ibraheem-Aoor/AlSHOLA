@@ -97,11 +97,11 @@
 
                     @if (Auth::user()->avatar == 'user.png')
                         <img class="user-avatar rounded-circle mx-auto d-block"
-                            src="{{asset('storage/uploads/avatars/users/' . Auth::user()->avatar)}}"
+                            src="{{Storage::url('public/uploads/avatars/users/' . Auth::user()->avatar)}}"
                             alt="Card image cap">
                     @else
                         <img class="user-avatar rounded-circle mx-auto d-block"
-                            src="{{asset('storage/uploads/avatars/users/' . Auth::id() . '/' . Auth::user()->avatar)}}"
+                            src="{{Storage::url('public/uploads/avatars/users/' . Auth::id() . '/' . Auth::user()->avatar)}}"
                             alt="Card image cap">
                     @endif
                 </a>

@@ -164,7 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */

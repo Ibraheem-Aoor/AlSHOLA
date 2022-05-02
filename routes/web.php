@@ -37,6 +37,7 @@ Route::group(['middleware' => 'guestOnly'] , function()
             {
                 $data  = view('front.home')->render();
                 Cache::put('homePage' , $data);
+                return Cache::get('homePage');
             }
     })->name('home');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Employers;
+namespace App\Http\Livewire\Admin\Views\Users\Employers;
 
 use App\Http\Traits\Admin\User\GeneralUserTrait;
 use App\Models\User;
@@ -12,7 +12,7 @@ class AllEmployers extends Component
     public function render()
     {
         $allEmployers = User::where('type' , 'Employer')->paginate(15);
-        return view('livewire.admin.views.employers.all-employers' ,
+        return view('livewire.admin.views.users.employers.all-employers' ,
         ['allEmployers' => $allEmployers])->extends('layouts.admin.master')->section('content');
     }
 }

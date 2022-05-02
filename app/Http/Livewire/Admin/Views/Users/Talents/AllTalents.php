@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Talents;
+namespace App\Http\Livewire\Admin\Views\Users\Talents;
 
 use App\Http\Traits\Admin\User\GeneralUserTrait;
 use App\Models\User;
@@ -13,6 +13,6 @@ class AllTalents extends Component
     public function render()
     {
         $allTalents = User::where('type' , 'Talented')->paginate(15);
-        return view('livewire.admin.views.talents.all-talents'  , ['allTalents' => $allTalents])->extends('layouts.admin.master')->section('content');
+        return view('livewire.admin.views.users.talents.all-talents'  , ['allTalents' => $allTalents])->extends('layouts.admin.master')->section('content');
     }
 }

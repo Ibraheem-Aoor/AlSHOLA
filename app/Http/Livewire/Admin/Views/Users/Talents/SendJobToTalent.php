@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Talents;
+namespace App\Http\Livewire\Admin\Views\Users\Talents;
 
 use App\Models\Job;
 use App\Models\User;
@@ -54,6 +54,6 @@ class SendJobToTalent extends Component
     public function render()
     {
         $talentedEmloyees = User::where('type' ,'Talented')->paginate(15);
-        return view('livewire.admin.views.talents.send-job-to-talent' , [ 'employees' => $talentedEmloyees])->extends('layouts.admin.master')->section('content');;
+        return view('livewire.admin.views.users.talents.send-job-to-talent' , [ 'employees' => $talentedEmloyees])->extends('layouts.admin.master')->section('content');;
     }
 }

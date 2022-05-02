@@ -3,7 +3,7 @@
 use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
 use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
-use App\Http\Livewire\Admin\Views\Employers\AllEmployers;
+use App\Http\Livewire\Admin\Views\Users\Employers\AllEmployers;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
 use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
 use App\Http\Livewire\Admin\Views\Jobs\CompletedJobs;
@@ -13,14 +13,20 @@ use App\Http\Livewire\Admin\Views\Jobs\NewJobs;
 use App\Http\Livewire\Admin\Views\Jobs\PendingJobs as JobsPendingJobs;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
 use App\Http\Livewire\Admin\Views\Profile\ProfileShow;
-use App\Http\Livewire\Admin\Views\Talents\AllTalents;
-use App\Http\Livewire\Admin\Views\Talents\SendJobToTalent;
+use App\Http\Livewire\Admin\Views\Users\Talents\AllTalents;
+use App\Http\Livewire\Admin\Views\Users\Talents\SendJobToTalent;
 use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Livewire\Admin\Views\Contacts\GuestContacts;
+use App\Http\Livewire\Admin\Views\Roles\AllRoles;
+use App\Http\Livewire\Admin\Views\Roles\CreateRole;
+use App\Http\Livewire\Admin\Views\Roles\RoleEdit;
+use App\Http\Livewire\Admin\Views\Users\AddUser;
+use App\Http\Livewire\Admin\Views\Users\AllUsers;
 use App\Models\Attachment;
+use Spatie\Permission\Contracts\Role;
 
 //prefix => admin
 
@@ -81,6 +87,9 @@ use App\Models\Attachment;
         })->name('file.delete');
 
 
+        /* Users Managment */
+
+        Route::get('/users/all' , AllUsers::class)->name('users.all');
 
         //Talents Routes:
         Route::get('/talent/all' , AllTalents::class)->name('talent.all');
@@ -88,6 +97,10 @@ use App\Models\Attachment;
 
         //Employer Routes
         Route::get('/employer/all' , AllEmployers::class)->name('employer.all');
+        Route::get('/users/add' , AddUser::class)->name('users.add');
+
+        /* Users Managment */
+
 
 
         //Contacts routes
@@ -95,4 +108,13 @@ use App\Models\Attachment;
         Route::get('/employee/queries'  , TalentContacts::class)->name('admin.contacts.talents');
         Route::get('/guests/queries'  , GuestContacts::class)->name('admin.contacts.guests');
 
+        //Roles Routes:
+        Route::get('roles' , AllRoles::class)->name('roles.all');
+        Route::get('roles/add' , CreateRole::class)->name('roles.add');
+        Route::get('roles/edit/{id}' , RoleEdit::class)->name('roles.edit');
+
+
+
     });
+
+
