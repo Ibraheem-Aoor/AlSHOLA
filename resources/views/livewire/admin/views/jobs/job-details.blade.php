@@ -29,6 +29,9 @@
                                             href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-contact"
                                             aria-selected="false">Attachments</a>
                                         <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
+                                            href="#custom-nav-applications" role="tab"
+                                            aria-controls="custom-nav-contact" aria-selected="false">Applications</a>
+                                        <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
                                             href="#custom-nav-notes" role="tab" aria-controls="custom-nav-contact"
                                             aria-selected="false">Previous Notes</a>
                                         <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
@@ -49,7 +52,7 @@
                                             </div>
                                             <label for="inputPassword3" class="col-form-label">Salary:</label>
                                             <div class="col-sm-4">
-                                                <input type="text" value="{{ $job->Salary }}" class="form-control"
+                                                <input type="text" value="{{ $job->salary }}" class="form-control"
                                                     id="inputPassword3" readonly>
                                             </div>
                                         </div>
@@ -130,7 +133,8 @@
                                                         @forelse ($job->notes->sortByDesc('id') as $note)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
-                                                                <td>{{ $note->user->name }}</td>
+                                                                <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
+                                                                </td>
                                                                 <td>{{ $note->created_at }}</td>
                                                                 <td><a class="btn btn-outline-primary"
                                                                         data-message="{{ $note->message }}"
@@ -155,6 +159,7 @@
                                     </div>
 
 
+                                    {{-- Attachments --}}
                                     <div class="tab-pane fade" id="custom-nav-attachments" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
@@ -178,30 +183,16 @@
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $attachment->name }}</td>
-                                                                <td>{{ $attachment->user->name }}</td>
+                                                                <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
+                                                                </td>
                                                                 <td>{{ $attachment->created_at }}</td>
                                                                 <td>
-                                                                    <div class="dropdown">
-                                                                        <button
-                                                                            class="btn btn-secondary dropdown-toggle"
-                                                                            type="button" id="dropdownMenuButton1"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            Actions
-                                                                        </button>
-                                                                        <ul class="dropdown-menu"
-                                                                            aria-labelledby="dropdownMenuButton1">
-                                                                            {{-- <li><a class="dropdown-item" href="#"
-                                                                                    wire:click="openAttachment('{{ $attachment->name }}')">Open</a>
-                                                                            </li> --}}
-                                                                            <li><a class="dropdown-item" href="#"
-                                                                                    wire:click="downloadAttachment('{{ $attachment->name }}')">Download</a>
-                                                                            </li>
-                                                                            <li><a class="dropdown-item" href="#"
-                                                                                    wire:click="deleteAttachment('{{ $attachment->name }}')">Delete</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
+                                                                    <a class="btn btn-outline-primary" href="#"
+                                                                        wire:click="downloadAttachment('{{ $attachment->name }}')"><i
+                                                                            class="fa fa-download"></i> Download</a>
+                                                                    <a class="btn btn-outline-danger" href="#"
+                                                                        wire:click="deleteAttachment('{{ $attachment->name }}')"><i
+                                                                            class="fa fa-trash"></i> Delete</a>
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -220,13 +211,70 @@
                                         </p>
                                     </div>
 
+                                    {{-- Applications --}}
+                                    <div class="tab-pane fade" id="custom-nav-applications" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Talent Name</th>
+                                                            <th scope="col">Talent E-mail</th>
+                                                            <th scope="col">Applied At</th>
+                                                            <th scope="col">Cover Letter</th>
+                                                            <th scope="col">CV</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($job->applications as $application)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $application->user->name }}</td>
+                                                                <td>{{ $application->user->email }}</td>
+                                                                <td>{{ $application->created_at }}</td>
+                                                                <td>{{ $application->cover_letter }}</td>
+                                                                <td>{{ $application->resume }}</td>
+                                                                <td>
+                                                                    <a class="btn-sm btn-outline-primary" href="#"
+                                                                        wire:click="downloadCv('{{ $application->resume }}')"><i
+                                                                            class="fa fa-download"></i> Download CV</a>
+
+                                                                    <a class="btn-sm btn-outline-success"
+                                                                        data-message="{{ $application->cover_letter }}"
+                                                                        data-toggle="modal" href="#exampleModal_5"><i
+                                                                            class="fa fa-eye"></i> CoverLetter</a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="7"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
                                     <div class="tab-pane fade" id="custom-nav-actions" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
-                                            <button class="btn btn-warning col-sm-12 mb-2" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">Return To Employer</button>
+                                            <a class="btn btn-warning col-sm-12 mb-2" data-toggle="modal"
+                                                href="#exampleModal">Return To Employer</a>
                                             <a class="btn btn-primary col-sm-12 mb-2"
                                                 href="{{ route('admin.job.details.edit', $job->id) }}">Edit Some
                                                 Details</a>
@@ -265,7 +313,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
+                                            data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary">Send Note</button>
                                     </div>
                                     </form>
@@ -289,7 +337,6 @@
                                     </div>
                                     <div class="modal-body">
                                         <textarea class="form-control" id="message" cols="30" rows="10" readonly></textarea>
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -309,10 +356,10 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
         <script>
             $('#exampleModal_5').on('show.bs.modal', function(event) {

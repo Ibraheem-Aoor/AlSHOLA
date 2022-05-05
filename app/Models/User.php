@@ -71,4 +71,16 @@ class User extends Authenticatable
         return $this->HasManyThrough(Note::class , Job::class);
     }
 
+
+
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class , 'user_id');
+    }
+
+    public function hasAppliedToJob($jobId)
+    {
+        return $this->applications->contains('job_id' , $jobId)  ? true : false;
+    }
 }

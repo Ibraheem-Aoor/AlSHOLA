@@ -96,12 +96,19 @@
                             <h2 class="text-green">Latest Job Posts</h2>
                         </div>
                         <div class="card-body">
-
+                            @if (Session::has('error'))
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong> {{ Session::get('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">number</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Creation_date</th>
                                             <th scope="col">Status</th>
@@ -115,6 +122,7 @@
                                         @forelse ($jobs as $job)
                                             <tr>
                                                 <th scope="row">{{ $i++ }}</th>
+                                                <td>{{ $job->post_number }}</td>
                                                 <td>{{ $job->title }}</td>
                                                 <td>{{ $job->created_at }}</td>
                                                 <td>{{ $job->status }}</td>
@@ -141,19 +149,31 @@
                                                                             class="fa fa-trash"></i> Delete</button>
                                                                 </form>
                                                             </li>
-                                                            @if ($title = 'Returned')
-                                                                <li><a class="dropdown-item badge bg-info"
-                                                                        href="{{ route('employer.job.notes', $job->id) }}"><i
-                                                                            class="fa fa-eye"></i> Show Notes</a>
-                                                                </li>
-                                                            @endif
+                                                            <li><a class="dropdown-item badge bg-info"
+                                                                    href="{{ route('employer.job.notes', $job->id) }}"><i
+                                                                        class="fa fa-note"></i> Show Notes</a>
+                                                            </li>
+                                                            <li><a href="{{ route('employer.pdf.generate', $job->id) }}"
+                                                                    class="dropdown-item badge bg-success" href="#"><i
+                                                                        class="fa fa-print"></i> Print
+                                                                    Documentation</a>
+                                                            </li>
+                                                            <li><a href="#exampleModal_5"
+                                                                    class="dropdown-item badge bg-secondary"
+                                                                    data-toggle="modal"
+                                                                    data-title="{{ $job->title }}"
+                                                                    data-number="{{ $job->post_number }}"
+                                                                    data-id="{{ $job->id }}"><i
+                                                                        class="fa fa-upload"></i> upload
+                                                                    attachment</a>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="alert alert-warning text-center bg-dark"
+                                                <td colspan="6" class="alert alert-warning text-center bg-dark"
                                                     style="color:#fff">
                                                     No Records Yet
                                                 </td>
@@ -169,9 +189,76 @@
 
             </div>
 
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Attachment:</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('job.attachment.upload') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group col-sm-6">
+                                    <label for="" style="font-weight: 600">Job Title:</label>
+                                    &nbsp; &nbsp; <input type="text" readonly id="title">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="" style="font-weight: 600">number:</label>
+                                    &nbsp; &nbsp; <input type="text" readonly id="number">
+                                    <input type="text" readonly name="id" id="id" hidden>
+
+                                </div>
+                                <div class="form-group col-sm-6 mb-3">
+                                    <label for="" style="font-weight: 600">Attachment:</label>
+                                    &nbsp; &nbsp; <input type="file" name="attachments[]" multiple required>
+                                </div>
+                                <div class="form-group col-sm-6 text-center" style="width: 100%">
+                                    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-upload"></i>
+                                        UPLOAD</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
     @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+
+        <script>
+            $('#exampleModal_5').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var title = button.data('title')
+                var number = button.data('number')
+                var id = button.data('id')
+                // var description = button.data('description')
+                var modal = $(this)
+                modal.find('.modal-body #title').val(title);
+                modal.find('.modal-body #number').val(number);
+                modal.find('.modal-body #id').val(id);
+            })
+        </script>
+
+
         <script>
             const ctx = document.getElementById('myChart');
             const myChart = new Chart(ctx, {

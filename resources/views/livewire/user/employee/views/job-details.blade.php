@@ -14,7 +14,7 @@
                                     class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}
                             </span>
                             <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>
-                                {{ $job->nature }}}</span>
+                                {{ $job->nature }}</span>
                             <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>
                                 {{ $job->salary }}
                             </span>
@@ -22,34 +22,42 @@
                     </div>
 
                     <div class="mb-5">
-                        <h4 class="mb-3">Job description</h4>
-                        <p>{{ $job->descreption }}</p>
-                        <h4 class="mb-3">Responsibility</h4>
-                        <p>{{ $job->responsibilities }}</p>
-                        <h4 class="mb-3">Qualifications</h4>
-                        <p>{{ $job->requirements }}</p>
+                        <h4>Job description:</h4> <br>
+                        <p class="mb-3">{{ $job->description }}</p>
+                        <h4>Responsibility:</h4> <br>
+                        <p class="mb-3">{{ $job->responsibilities }}</p>
+                        <h4>Qualifications:</h4> <br>
+                        <p class="mb-3">{{ $job->requirements }}</p>
                     </div>
+                    @if (!Auth::user()->hasAppliedToJob($job->id))
+                        <div class="">
+                            <h4 class="mb-4">What You want to do?</h4>
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-12">
 
-                    <div class="">
-                        <h4 class="mb-4">What You want to do?</h4>
-                        <div class="row g-3">
-                            <div class="col-12 col-sm-12">
+                                    <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Offer
+                                    </button>
+                                    <button type="button" class="btn btn-outline-info col-sm-12 mb-2"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_2">
+                                        Send a comment
+                                    </button>
+                                    <a class="btn btn-outline-success col-sm-12 mb-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal_3">
+                                        Accept The Offer
+                                    </a>
 
-                                <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Offer
-                                </button>
-                                <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal_2">
-                                    Send a comment
-                                </button>
-                                <button type="button" class="btn btn-outline-success col-sm-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Accept The Offer
-                                </button>
-
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="text-center">
+                            <h4 class="mb-4 btn btn-outline-primary">
+                                <i class="fa fa-check"></i>&nbsp;
+                               YOU HAVE APPLIED TO THIS JOB
+                            </h4>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-lg-4">
@@ -120,6 +128,45 @@
                     <form action="{{ route('employee.job.note.create', $job->id) }}" method="POST">
                         @csrf
                         <textarea class="form-control" required name="note"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {{-- Accept The Offer --}}
+    <div class="modal fade" id="exampleModal_3" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Job Application:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('employee.application.create', $job->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">CV:</label>
+                            <input type="file" class="form-control" name="cv">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Cover Letter:</label>
+                            <textarea class="form-control" required name="cover_letter"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="prev_cv_checked" id="">
+                            <label>Use My Previously Uploaded CV.</label>
+                        </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

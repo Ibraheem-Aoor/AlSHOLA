@@ -8,7 +8,7 @@ trait GeneralUserTrait
     /*
         This trait contains the admin users-mangement functions.
     */
-
+    
 
     public function blockUser($id)
     {

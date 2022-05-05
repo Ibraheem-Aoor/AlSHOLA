@@ -5,15 +5,20 @@ namespace App\Http\Controllers\User\Employer\Jobs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Employer\Job\CreateJobRequest;
 use App\Http\Requests\User\Employer\Job\UpdateJobRequest;
+use App\Http\Traits\User\JobAttachmentTrait;
 use App\Models\Attachment;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 use Throwable;
 
 class JobController extends Controller
 {
+
+    use JobAttachmentTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -40,9 +45,8 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
-        try
-        {
         $job = Job::create([
+            'post_number' => $this->generatePosteNumber(),
             'title' => $request->input('title'),
             'salary' => $request->input('salary'),
             'location' => $request->input('location'),
@@ -59,28 +63,33 @@ class JobController extends Controller
             $this->addAttachementsToJob($request->attachments  , $job->id);
         notify()->success('Job Addeed Successfully');
         return redirect(route('employer.dashboard'));
-        }catch(Throwable $e)
-        {
-            return redirect(route('employer.dashboard'))->with('error' , 'Attachmennts are too large');
+    }//end method
+
+
+
+
+    function generatePosteNumber() {
+        $number = date('y').mt_rand(1000000, 9999999); // better than rand()
+
+        // call the same function if the barcode exists already
+        if ($this->postNumberExists($number)) {
+            return $this->generatePosteNumber();
         }
+
+        // otherwise, it's valid and can be used
+        return $number;
+    }
+
+    function postNumberExists($number) {
+        // query the database and return a boolean
+        // for instance, it might look like this in Laravel
+        return Job::where('post_number' , $number)->exists();
     }
 
 
-    // Storing mutilple attachments with there original names
-    public function addAttachementsToJob($attachments , $jobId)
-    {
-        foreach($attachments as $attachment)
-        {
-            $fileName  = $attachment->getClientOriginalName();
-            $path = 'public/uploads/attachments/jobs/'.$jobId.'/';
-            $attachment->storeAs($path , $fileName);
-            Attachment::create([
-                'name' => $fileName ,
-                'job_id' => $jobId,
-                'user_id' => Auth::id(),
-            ]);
-        }
-    }
+
+
+
 
     /**
      * Display the specified resource.
@@ -131,6 +140,7 @@ class JobController extends Controller
         ]);
         notify()->success('Job Updated Successfully');
         return redirect(route('employer.dashboard'));
+
     }
 
     /**

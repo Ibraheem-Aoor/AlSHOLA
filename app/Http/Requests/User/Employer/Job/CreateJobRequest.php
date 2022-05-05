@@ -26,11 +26,8 @@ class CreateJobRequest extends FormRequest
      */
     public function rules()
     {
-        try
-        {
-
         return [
-            'title' => 'required|string',
+                'title' => 'required|string',
                 'salary' => 'required|numeric',
                 'location' => 'required|string',
                 'employer_website' => 'required|string',
@@ -42,11 +39,7 @@ class CreateJobRequest extends FormRequest
                 'nature' => 'required|string|'.ValidationRule::in(['full time', 'part time']),
                 'attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
         ];
-    }catch(Throwable $e)
-    {
-        return redirect()->back()->with('error' , 'Attachmennts are too large');
-
     }
 
-    }
+
 }

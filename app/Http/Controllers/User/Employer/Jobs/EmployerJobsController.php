@@ -49,4 +49,6 @@ class EmployerJobsController extends Controller
     }
 
 
+
+
 }

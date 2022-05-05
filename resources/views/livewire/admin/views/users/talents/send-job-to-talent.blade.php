@@ -32,6 +32,7 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Name</th>
+                                                <th>E-mail</th>
                                                 <th>join_date</th>
                                                 <th>ِActions</th>
                                             </tr>
@@ -46,13 +47,22 @@
                                                     <td>
                                                         {{ $employee->name }}
                                                     </td>
+                                                    <td>
+                                                        {{ $employee->email }}
+                                                    </td>
                                                     <td>{{ $employee->created_at }}</td>
                                                     @if ($employee->hasJob($job))
-                                                        <td>
-                                                            <a href="#"
-                                                                wire:click="takeJobFromTalent('{{ $employee->id }}')"
-                                                                class="btn btn-outline-danger">Cancel</a>
-                                                        </td>
+                                                        @if ($employee->hasAppliedToJob($job->id))
+                                                            <td>
+                                                                <span class="badge badge-complete">Applied</span>
+                                                            </td>
+                                                        @else
+                                                            <td>
+                                                                <a href="#"
+                                                                    wire:click="takeJobFromTalent('{{ $employee->id }}')"
+                                                                    class="btn btn-outline-danger">Cancel</a>
+                                                            </td>
+                                                        @endif
                                                     @else
                                                         <td>
                                                             <a href="#"

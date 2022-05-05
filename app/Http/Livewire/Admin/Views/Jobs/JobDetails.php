@@ -13,7 +13,7 @@ class JobDetails extends Component
     public $job , $note , $currentNoteContent = null;
     public function mount($id = null)
     {
-        $this->job = Job::with(['user' , 'notes' , 'attachments'])->findOrFail($id);
+        $this->job = Job::with(['user' , 'notes' , 'attachments' , 'applications.user'])->findOrFail($id);
     }
 
 
@@ -32,18 +32,13 @@ class JobDetails extends Component
     public function deleteAttachment($name)
     {
         return redirect(route('file.delete',[ 'jobId' => $this->job->id ,  'fileName' => $name]));
-
     }
 
 
-    public function showNote($currentNoteMessage)
+    //download application file
+    public function downloadCv($name)
     {
-
-        session()->remove('currentNote');
-        session()->save();
-        session()->put('currentNote', $currentNoteMessage);
-        session()->save();
-
+        return redirect(route('cv.download',[ 'jobId' => $this->job->id ,  'fileName' => $name]));
     }
 
 

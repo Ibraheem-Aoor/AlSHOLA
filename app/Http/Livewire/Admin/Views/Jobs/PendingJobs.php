@@ -10,6 +10,7 @@ class PendingJobs extends Component
     public function render()
     {
         $jobs = Job::where('status' , 'pending')->orderBy('id')->paginate(15);
-        return view('livewire.admin.views.jobs.pedning-jobs' , ['jobs' => $jobs])->extends('layouts.admin.master')->section('content');
+        return view('livewire.admin.views.jobs.all-jobs' ,['jobs' => $jobs],
+        )->extends('layouts.admin.master')->section('content');
     }
 }

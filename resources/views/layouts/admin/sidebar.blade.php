@@ -19,6 +19,8 @@
                               </li>
                               <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.completed') }}">Completed
                                       Jobs</a></li>
+                              <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.completed') }}">Cancelled
+                                      Jobs</a></li>
                               <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.active') }}">Active Jobs</a>
                               </li>
                               <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.pending') }}">Pending
@@ -55,6 +57,18 @@
                           </ul>
                       </li>
                   @endcan
+
+
+
+                      <li class="menu-item-has-children dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Applications Mangament</a>
+                          <ul class="sub-menu children dropdown-menu">
+                              <li><i class="menu-icon fa fa-users"></i><a
+                                      href="{{ route('admin.applications.all') }}">All Applications</a></li>
+                          </ul>
+                      </li>
+                
 
 
                   @can('contact management')

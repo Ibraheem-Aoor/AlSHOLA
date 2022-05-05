@@ -21,6 +21,7 @@ class PermessionSeeder extends Seeder
             'users management' ,
             'contact management' ,
             'roles management',
+            'applications management',
         ];
 
         foreach($permissions as $p)

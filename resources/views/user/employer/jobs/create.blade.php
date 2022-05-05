@@ -9,7 +9,7 @@
             <div class="row g-4">
                 <div class="col-sm-12 text-center">
                     @if (Session::has('error'))
-                        <div class="alert alet-danger">{{$request->session()->get('error');}}</div>
+                        <div class="alert alet-danger">{{$request->session()->get('error')}}</div>
                     @endif
                     <form action="{{ route('job.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf

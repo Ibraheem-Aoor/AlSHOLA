@@ -30,7 +30,9 @@
                                         <td>{{ $job->location }}</td>
                                         <td>{{ $job->status }}</td>
                                         <td>
-                                            ACtion
+                                            <a href="{{ route('employee.job.details', $job->id) }}"
+                                                class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>
+                                                Details</a>
                                         </td>
                                     </tr>
                                 @empty

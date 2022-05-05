@@ -16,7 +16,6 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Role-Name</th>
-                                                <th>Numerber_Of_Users</th>
                                                 <th>Number_Of_Permessions</th>
                                                 <th>creation date</th>
                                                 <th>ِActions</th>
@@ -34,8 +33,7 @@
                                                     <td>
                                                         {{ $role->name }}
                                                     </td>
-                                                    <td>test</td>
-                                                    <td> <span class="product">test</span>
+                                                    <td> <span class="product">{{$role->permissions->count()}}</span>
                                                     </td>
                                                     <td><span>{{ $role->created_at }}</span>
                                                     </td>
@@ -44,10 +42,12 @@
                                                             data-name="{{ $role->name }}"
                                                             data-permissions="{{ $role->permissions()->pluck('name') }}"
                                                             data-toggle="modal" href="#exampleModal_5"><i
-                                                                class="fa fa-eye"></i>  Details
-                                                            </a>
+                                                                class="fa fa-eye"></i> Details
+                                                        </a>
 
-                                                            <a href="{{route('roles.edit' , $role->id)}}" class="btn btn-outline-success"><i class="fa fa-edit"></i> Edit</a>
+                                                        <a href="{{ route('roles.edit', $role->id) }}"
+                                                            class="btn btn-outline-success"><i
+                                                                class="fa fa-edit"></i> Edit</a>
                                                     </td>
                                                     </td>
                                                 </tr>

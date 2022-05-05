@@ -10,6 +10,7 @@ class NewJobs extends Component
     public function render()
     {
         $jobs = Job::latest()->paginate(15);
-        return view('livewire.admin.views.jobs.new-jobs' , ['jobs' => $jobs])->extends('layouts.admin.master')->section('content');
+        return view('livewire.admin.views.jobs.all-jobs' ,['jobs' => $jobs],
+        )->extends('layouts.admin.master')->section('content');
     }
 }

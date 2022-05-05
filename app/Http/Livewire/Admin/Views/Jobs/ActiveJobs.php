@@ -10,7 +10,7 @@ class ActiveJobs extends Component
     public function render()
     {
         $jobs = Job::where('status' , 'active')->orderBy('id')->paginate(15);
-        return view('livewire.admin.views.jobs.active-jobs' ,['jobs' => $jobs],
+        return view('livewire.admin.views.jobs.all-jobs' ,['jobs' => $jobs],
         )->extends('layouts.admin.master')->section('content');
     }
 }

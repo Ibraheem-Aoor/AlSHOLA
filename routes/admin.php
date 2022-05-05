@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Livewire\Admin\Views\Contacts\GuestContacts;
+use App\Http\Livewire\Admin\Views\Jobs\CanclledJobs;
 use App\Http\Livewire\Admin\Views\Roles\AllRoles;
 use App\Http\Livewire\Admin\Views\Roles\CreateRole;
 use App\Http\Livewire\Admin\Views\Roles\RoleEdit;
@@ -27,6 +28,10 @@ use App\Http\Livewire\Admin\Views\Users\AddUser;
 use App\Http\Livewire\Admin\Views\Users\AllUsers;
 use App\Models\Attachment;
 use Spatie\Permission\Contracts\Role;
+
+use function GuzzleHttp\Promise\all;
+use App\Http\Livewire\Admin\Views\Applications\AllAplications;
+use App\Http\Livewire\Admin\Views\Applications\Notes\ApplicationAllNotes;
 
 //prefix => admin
 
@@ -47,6 +52,7 @@ use Spatie\Permission\Contracts\Role;
         Route::get('jobs/latest' , NewJobs::class)->name('admin.jobs.latest');
         Route::get('jobs/active' , ActiveJobs::class)->name('admin.jobs.active');
         Route::get('jobs/pending' , JobsPendingJobs::class)->name('admin.jobs.pending');
+        Route::get('jobs/cancelled' , CanclledJobs::class)->name('admin.jobs.cancelled');
 
 
         Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
@@ -61,6 +67,7 @@ use Spatie\Permission\Contracts\Role;
         })->name('file.open');
         */
 
+        // Download job attachments
         Route::get('download/{jobId}/{fileName}' , function($jobId , $fileName)
         {
             try{
@@ -72,6 +79,20 @@ use Spatie\Permission\Contracts\Role;
             }
         })->name('file.download');
 
+        //Download job applications  cv
+        Route::get('downloadcv/{jobId}/{fileName}' , function($jobId , $fileName)
+        {
+            try{
+                return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/'.$fileName);
+            }Catch(Throwable $e)
+            {
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('cv.download');
+
+
+        //delete file from storage.
         Route::get('delete/{jobId}/{fileName}' , function($jobId , $fileName)
         {
             try{
@@ -100,6 +121,13 @@ use Spatie\Permission\Contracts\Role;
         Route::get('/users/add' , AddUser::class)->name('users.add');
 
         /* Users Managment */
+
+
+        //Applications Routes
+        Route::get('/applications/all' , AllAplications::class)->name('admin.applications.all');
+        Route::get('/applications/{id}/notes/all' , ApplicationAllNotes::class)->name('admin.application.notes.all');
+
+
 
 
 

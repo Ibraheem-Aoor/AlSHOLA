@@ -11,7 +11,7 @@ class Dashboard extends Component
 {
     public function render()
     {
-        $jobs = Job::with('notes')->where('user_id' , Auth::id())->orderByDesc('id')->take(10);
+        $jobs = Job::with('notes')->where('user_id' , Auth::id())->orderByDesc('id')->take(10)->get();
         $jobPostsCount = Job::whereBelongsTo(Auth::user())->count();
         return view('livewire.user.employer.views.dashboard' , [ 'jobs' => $jobs])
         ->extends('layouts.user.employer.master')->section('content');

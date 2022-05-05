@@ -10,6 +10,7 @@ class Job extends Model
     use HasFactory;
     public $preventsLazyLoading = true;
     protected $fillable = [
+        'post_number',
         'title',
         'description',
         'requirements',
@@ -42,6 +43,11 @@ class Job extends Model
     public function notes()
     {
         return $this->hasMany(Note::class , 'job_id');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class  , 'job_id');
     }
 
 }

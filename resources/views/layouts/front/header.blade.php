@@ -1,8 +1,8 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-        <a href="/" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-            <img alt="Al Shoala" data-actual-height="55" data-actual-width="224" data-height-percentage="60" id="logo"
-                src="{{asset('assets/dist_1/img/profile/Logo.svg')}}">
+        <a href="" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <img src="{{ asset('assets/dist_3/assets/images/header-logo.png') }}" alt="" width="50px">
+            ALSHOLA
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
