@@ -61,7 +61,7 @@
                             <h4 class="mb-4">
 
                                 <a href="{{ route('employee.candidacy.order.index', $job->id) }}">
-                                    Want to recommend other candidates for this job?
+                                    Want toreco mmend other candidates for this job?
                                 </a>
                             </h4>
                         </div>

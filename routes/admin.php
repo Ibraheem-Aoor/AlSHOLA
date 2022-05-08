@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrderRecommendations;
 use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
 use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
@@ -155,7 +156,8 @@ use App\Models\ApplicationAttachment;
         Route::get('/guests/queries'  , GuestContacts::class)->name('admin.contacts.guests');
 
         //candidacy orders routes
-        Route::get('/candidacy/all'  , AllCandidacyOrders::class)->name('admin.candidacy.orders.all');
+        Route::get('/candidacy/orders/all'  , AllCandidacyOrders::class)->name('admin.candidacy.orders.all');
+        Route::get('/candidacy/{id}/recommendations'  , AllCandidacyOrderRecommendations::class)->name('admin.candidacy.orders.recommendations.all');
 
 
         //Roles Routes:

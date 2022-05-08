@@ -84,4 +84,10 @@ class User extends Authenticatable
         return $this->applications->contains('job_id' , $jobId)  ? true : false;
     }
 
+
+    public function candidacyOrders()
+    {
+        return $this->hasMany(CandidacyOrder::class , 'user_id');
+    }
+
 }

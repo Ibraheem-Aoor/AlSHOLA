@@ -8,23 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class CandidacyOrder extends Model
 {
     use HasFactory;
+    public $preventsLazyLoading = true;
+
     protected $fillable = [
-        'number' , 'recommended_id' , 'job_id' , 'user_id'
+        'number', 'job_id' , 'user_id'
     ];
 
-    public function recommendedUser()
-    {
-        return $this->belongsTo(User::class , 'recommended_id');
-    }
-
-    public function user()
+    public function user()//The talent who made the request.
     {
         return $this->belongsTo(User::class , 'user_id');
     }
 
-    public function application()
+
+    public function job()
     {
-        return $this->belongsTo(Application::class , 'application_id');
+        return $this->belongsTo(Job::class , 'job_id');
+    }
+
+    public function recommendations()
+    {
+        return $this->hasMany(Recommendation::class , 'order_id');
     }
 }
 

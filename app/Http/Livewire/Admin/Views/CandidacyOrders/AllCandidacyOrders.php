@@ -9,7 +9,7 @@ class AllCandidacyOrders extends Component
 {
     public function render()
     {
-        $orders = CandidacyOrder::simplePaginate(15);
+        $orders = CandidacyOrder::with(['job:id,title,post_number' , 'user:id,name'])->withCount('recommendations')->simplePaginate(15);
         return view('livewire.admin.views.candidacy-orders.all-candidacy-orders'
         ,   [
             'orders' => $orders

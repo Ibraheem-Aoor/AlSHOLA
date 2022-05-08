@@ -30,12 +30,14 @@ class NoteController extends Controller
         {
             case 'employee.job.refuse':
                 $this->refuseJob($request->note , $job->id);
+                $message = 'Job Offer refused Successfully';
                 break;
-            case 'employee.job.note.create':
-                $this->createJobNote($request->note , $id);
+                case 'employee.job.note.create':
+                    $this->createJobNote($request->note , $id);
+                    $message = 'Note Sended Successfully';
                 break;
         }
-        notify()->success('Job Offer refused Successfully');
+        notify()->success($message);
         return redirect(route('employee.dashboard'));
     }//end method
 

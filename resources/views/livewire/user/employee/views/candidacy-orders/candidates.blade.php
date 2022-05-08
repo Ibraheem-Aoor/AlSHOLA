@@ -11,7 +11,7 @@
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive">
                         <table class="table">
-                            <form action="{{route('employee.candidacy.order.create', $applicationId) }}" method="POST">
+                            <form action="{{ route('employee.candidacy.order.create', $jobId) }}" method="POST">
                                 @csrf
                                 <thead>
                                     <tr>
@@ -20,8 +20,7 @@
                                         <th scope="col">User_Name</th>
                                         <th scope="col">Join_Date</th>
                                         <th scope="col">
-                                            <button type="submit"
-                                                class="btn btn-outline-success" >Recommend Selected</button>
+                                            <button type="submit" class="btn btn-outline-success">Recommend Selected</button>
                                         </th>
                                     </tr>
                                 </thead>
@@ -31,7 +30,11 @@
                                     @endphp
                                     @forelse ($users as $user)
                                         <tr>
-                                            <th scope="row"><input type="checkbox" name="users[]" value="{{ $user->id }}">
+                                            @if ($user->id == Auth::id())
+                                                @continue
+                                            @endif
+                                            <th scope="row"><input type="checkbox" name="users[]"
+                                                    value="{{ $user->id }}">
                                             </th>
                                             <th scope="row">{{ $i++ }}</th>
                                             <td>{{ $user->name }}</td>

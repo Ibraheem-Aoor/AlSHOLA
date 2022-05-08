@@ -38,14 +38,7 @@ Route::group(['middleware' => 'guestOnly'] , function()
 {
 
     Route::get('/', function () {
-        if(Cache::has('homePage'))
-            return Cache::get('homePage');
-        else
-            {
-                $data  = view('front.home')->render();
-                Cache::put('homePage' , $data);
-                return Cache::get('homePage');
-            }
+        return  view('front.home');
     })->name('home');
 
 

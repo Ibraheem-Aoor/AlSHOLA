@@ -24,17 +24,8 @@ class CreateJobNoteRequest extends FormRequest
      */
     public function rules()
     {
-        $noteValidation = '';
-        switch(Route::currentRouteName())
-        {
-            case 'employee.job.refuse':
-                $noteValidation = 'sometimes';break;
-            case 'employee.job.note.create':
-                $noteValidation = 'required';
-                break;
-        }
         return [
-            'note' => $noteValidation . '|string',
+            'note' =>  'sometimes|string',
         ];
     }
 }

@@ -38,53 +38,76 @@
                                     <div class="alert"></div>
                                 @endif
                                 <h4 class="box-title">
-                                    {{-- <span class="text-danger">Job_Title:</span>
-                                    {{ $jobTitle }} <br>
+                                    <span class="text-danger">Order_Number:</span>
+                                    {{ $order->number }} <br>
+                                    <span class="text-danger">Job_Title:</span>
+                                    {{ $order->job->title }} <br>
                                     <span class="text-danger">Job_number:</span>
-                                    {{ $jobNumber }} --}}
+                                    {{ $order->job->post_number }}
                                 </h4>
                             </div>
+                            @if (Session::has('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong><i class="fa fa-check"></i> Success!</strong>
+                                    {{ Session::get('success') }}.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"><i class="fa fa-close"></i></button>
+                                </div>
+                            @elseif(Session::has('warning'))
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong><i class="fa fa-warning"></i> Warning!</strong>
+                                    {{ Session::get('warning') }}.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"><i class="fa fa-close"></i></button>
+                                </div>
+                            @endif
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
                                     <table class="table ">
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>Recommended_BY</th>
-                                                <th>Email</th>
-                                                <th>Job_Number</th>
-                                                <th>Job_Title</th>
-                                                <th>Recommendations</th>
+                                                <th>Recommended_User_Name</th>
+                                                <th>Recommended_User_Email</th>
                                                 <th>Date</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php
                                                 $i = 1;
                                             @endphp
-                                            @forelse($orders as $order)
+                                            @forelse($recommendations as $recommended)
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
                                                     <td>
-                                                        {{ $order->user->name }}
+                                                        {{ $recommended->recommendedUser->name }}
                                                     </td>
                                                     <td>
-                                                        {{ $order->user->email }}
+                                                        {{ $recommended->recommendedUser->email }}
                                                     </td>
                                                     <td>
-                                                        {{ $order->job->number }}
+                                                        {{ $recommended->created_at }}
                                                     </td>
-                                                    <td>
-                                                        {{ $order->job->title }}
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{route('admin.candidacy.orders.recommendations.all' , $order->id)}}">
-                                                            {{ $order->recommendations_count }}
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        {{ $order->created_at }}
-                                                    </td>
+                                                    @if ($recommended->recommendedUser->hasJob($order->job))
+                                                        @if ($recommended->recommendedUser->hasAppliedToJob($job->id))
+                                                            <td>
+                                                                <span class="badge badge-complete">Applied</span>
+                                                            </td>
+                                                        @else
+                                                            <td>
+                                                                <a href="#"
+                                                                    wire:click="takeJobFromTalent('{{ $recommended->recommendedUser->id }}')"
+                                                                    class="btn btn-outline-danger">Cancel</a>
+                                                            </td>
+                                                        @endif
+                                                    @else
+                                                        <td>
+                                                            <a href="#"
+                                                                wire:click="snedJobToEmployer('{{ $recommended->recommendedUser->id }}')"
+                                                                class="btn btn-primary">Send Job</a>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                 </div>
                             </div>
@@ -98,7 +121,7 @@
                             @endforelse
                             </tbody>
                             </table>
-                            {{ $orders->links() }}
+                            {{ $recommendations->links() }}
                         </div> <!-- /.table-stats -->
                     </div>
                 </div> <!-- /.card -->
