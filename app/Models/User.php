@@ -83,4 +83,5 @@ class User extends Authenticatable
     {
         return $this->applications->contains('job_id' , $jobId)  ? true : false;
     }
+
 }

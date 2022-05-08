@@ -66,9 +66,22 @@
                           <ul class="sub-menu children dropdown-menu">
                               <li><i class="menu-icon fa fa-users"></i><a
                                       href="{{ route('admin.applications.all') }}">All Applications</a></li>
+                              <li><i class="menu-icon fa fa-users"></i><a
+                                      href="{{ route('admin.applications.medical') }}">Waiting For Medical</a></li>
+                              <li><i class="menu-icon fa fa-users"></i><a
+                                      href="{{ route('admin.applications.visa') }}">Waiting For Visa</a></li>
                           </ul>
                       </li>
-                
+
+                      <li class="menu-item-has-children dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Candidacy Orders</a>
+                          <ul class="sub-menu children dropdown-menu">
+                              <li><i class="menu-icon fa fa-users"></i><a
+                                      href="{{ route('admin.candidacy.orders.all') }}">All Orders</a></li>
+                          </ul>
+                      </li>
+
 
 
                   @can('contact management')

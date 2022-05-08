@@ -29,4 +29,14 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationNote::class , 'application_id');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(ApplicationAttachment::class , 'application_id');
+    }//end method
+
+    public function visa()
+    {
+        return $this->hasOne(VisaInoformation::class , 'application_id');
+    }
 }

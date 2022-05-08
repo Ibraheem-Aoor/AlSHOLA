@@ -5,23 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attachment extends Model
+class ApplicationAttachment extends Model
 {
     use HasFactory;
-    protected $fillable = ['job_id' , 'name' , 'user_id'];
-
-    public function job()
-    {
-        return $this->belongsTo(Job::class  ,'job_id');
-    }
+    protected $fillable = [
+        'application_id' , 'user_id' , 'name' , 'forwarded' , 'is_forwarded_employer' , 'is_forwarded_talent' ,
+    ];
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');//represents the publisher
+        return $this->belongsTo(User::class , 'user_id');
     }
-
     public function application()
     {
         return $this->belongsTo(Application::class , 'application_id');
     }
+
 }

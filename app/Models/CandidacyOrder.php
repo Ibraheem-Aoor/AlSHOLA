@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attachment extends Model
+class CandidacyOrder extends Model
 {
     use HasFactory;
-    protected $fillable = ['job_id' , 'name' , 'user_id'];
+    protected $fillable = [
+        'number' , 'recommended_id' , 'job_id' , 'user_id'
+    ];
 
-    public function job()
+    public function recommendedUser()
     {
-        return $this->belongsTo(Job::class  ,'job_id');
+        return $this->belongsTo(User::class , 'recommended_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');//represents the publisher
+        return $this->belongsTo(User::class , 'user_id');
     }
 
     public function application()
@@ -25,3 +27,4 @@ class Attachment extends Model
         return $this->belongsTo(Application::class , 'application_id');
     }
 }
+

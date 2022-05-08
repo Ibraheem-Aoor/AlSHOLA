@@ -368,7 +368,7 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #message').val(message);
-            })
+            });
         </script>
     @endpush
 </div>

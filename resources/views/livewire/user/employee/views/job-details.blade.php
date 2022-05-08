@@ -54,7 +54,15 @@
                         <div class="text-center">
                             <h4 class="mb-4 btn btn-outline-primary">
                                 <i class="fa fa-check"></i>&nbsp;
-                               YOU HAVE APPLIED TO THIS JOB
+                                YOU HAVE APPLIED TO THIS JOB
+                            </h4>
+                        </div>
+                        <div class="">
+                            <h4 class="mb-4">
+
+                                <a href="{{ route('employee.candidacy.order.index', $job->id) }}">
+                                    Want to recommend other candidates for this job?
+                                </a>
                             </h4>
                         </div>
                     @endif
@@ -114,7 +122,7 @@
         </div>
     </div>
 
-    <!-- Refuse Offer Modal -->
+    <!-- Send Note  Modal -->
     <div class="modal fade" id="exampleModal_2" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">

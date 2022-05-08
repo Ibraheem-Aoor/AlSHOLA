@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->text('cover_letter');
             $table->string('resume');
-            $table->enum('status' , ['waiting for medical' , 'waiting for visa' , 'waiting for arrival' ,'waiting for interview']); 
+            $table->enum('status' , [
+                                    'waiting for medical' , 'waiting for visa' , 'waiting for arrival'
+                                    ,'waiting for interview' , 'pending' , 'cancelled' , 'refused' , 'completed'
+                                ])->default('pending');
             $table->boolean('forwarded')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->index('user_id');

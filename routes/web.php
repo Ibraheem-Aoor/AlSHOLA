@@ -11,9 +11,11 @@ use App\Http\Livewire\User\Employee\Views\JobDetails;
 use App\Http\Livewire\User\Employer\Views\Dashboard as ViewsDashboard;
 use App\Http\Controllers\User\Contact\UserContact;
 use App\Http\Controllers\User\Employee\ApplicationController;
+use App\Http\Controllers\User\Employee\CandidacyController;
 use App\Http\Controllers\User\Employer\Applications\EmployerApplicationsController;
 use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfController;
 use App\Http\Controllers\User\GeneralJobController;
+use App\Models\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -63,6 +65,22 @@ Route::group(['middleware' => 'guestOnly'] , function()
 Route::group(['middleware' => ['auth']], function()
 {
     Route::post('/job/attachment/upload' , [GeneralJobController::class , 'uploadJobAttachment'] )->name('job.attachment.upload');
+    Route::post('/application/attach' , [ApplicationController::class , 'uploadApplicationAttachment'])->name('application.file.upload');
+    Route::get('/application/{id}/attachment/{fileName}/download/{userId}' , function($id , $fileName , $userId)
+    {
+        $application  = Application::with('job:id')->findOrFail($id);
+        $jobId = $application->job->id;
+        try{
+            // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+            return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.$userId.'/attachments'.'/'.$fileName);
+        }Catch(Throwable $e)
+        {
+            return dd($e->getMessage());
+            return redirect()->back();
+        }
+    })->name('application.attachment.download');
+    Route::post('application/ticket' , [ApplicationController::class , 'createApplicationVisaTicket'])->name('employee.application.ticket.create');
+
 
     //Talented Routes
     Route::group(['prefix' => 'talented' , 'middleware' => ['employeeCheck'] ] , function(){
@@ -77,7 +95,15 @@ Route::group(['middleware' => ['auth']], function()
         //talent job application routes
         Route::post('/application/{id}' , [ApplicationController::class , 'createApplication'])->name('employee.application.create');
         Route::get('application/all' , [ApplicationController::class , 'allApplications'])->name('employee.applications.all');
+        Route::get('application/medical' , [ApplicationController::class , 'medicalApplications'])->name('employee.applications.medical');
+        Route::get('application/visa' , [ApplicationController::class , 'visaApplications'])->name('employee.applications.visa');
         Route::get('application/{id}/notes' , [ApplicationController::class , 'applicationNotes'])->name('employee.application.notes');
+        Route::get('application/{id}/attachments' , [ApplicationController::class , 'applicationAttachments'])->name('employee.application.attachments');
+
+
+        //Candidacy oreders
+        Route::get('recommendation/order/{id}' , [CandidacyController::class , 'index'])->name('employee.candidacy.order.index');
+        Route::post('recommendation/order/{id}' , [CandidacyController::class , 'makeOrder'])->name('employee.candidacy.order.create');
 
     });//end Talent RouteGroup
 
@@ -103,7 +129,12 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('/job/{id}/notes' , [NoteController::class , 'index'])->name('employer.job.notes');
 
         //Applications
+        Route::get('/applications/{id}/attachments' , [EmployerApplicationsController::class , 'applicationAttachments'])->name('employer.application.attachments');
         Route::get('/applications/all' , [EmployerApplicationsController::class , 'allForwardedApplications'])->name('employer.applications.all');
+        Route::get('/applications/medical' , [EmployerApplicationsController::class , 'allMedicalApplications'])->name('employer.applications.medical');
+        Route::get('/applications/visa' , [EmployerApplicationsController::class , 'allVisaApplications'])->name('employer.applications.visa');
+        Route::post('/applications/visa/upload' , [EmployerApplicationsController::class , 'createVisa'])->name('employer.application.visa.upload');
+        Route::post('/applications/medical/accept' , [EmployerApplicationsController::class , 'UpgradeApplicationToNextStage'])->name('employer.application.upgrade');
         Route::post('/applications/send-note' , [EmployerApplicationsController::class , 'sendNoteToAdmin'])->name('employer.applications.note.send');
         Route::post('/applications/accept' , [EmployerApplicationsController::class , 'acceptApplication'])->name('employer.application.accept');
 

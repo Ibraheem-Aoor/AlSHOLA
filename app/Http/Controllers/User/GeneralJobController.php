@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\User\JobAttachmentTrait;
+use App\Models\Application;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -28,6 +29,6 @@ class GeneralJobController extends Controller
         }
             notify()->error('No File Detected');
             return redirect()->back();
-    }
+    }//end method
 
 }

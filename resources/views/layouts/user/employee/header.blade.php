@@ -10,7 +10,15 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{{ route('employee.dashboard') }}" class="nav-item nav-link">DASHBOARD</a>
-                <a href="{{ route('employee.applications.all') }}" class="nav-item nav-link">MY APPLICATIONS</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">MY APPLICATIONS</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="dropdown-item">Profile</a>
+                        <a href="{{ route('employee.applications.all') }}" class="dropdown-item">ALL APPLICATIONS</a>
+                        <a href="{{ route('employee.applications.medical') }}" class="dropdown-item">WAITING FOR MEDICAL</a>
+                        <a href="{{ route('employee.applications.visa') }}" class="dropdown-item">WAITING FOR VISA</a>
+                    </div>
+                </div>
                 <a href="{{ route('employee.jobs.avilable') }}" class="nav-item nav-link">AVILABLE JOBS</a>
                 <a href="{{ route('user.contact') }}" class="nav-item nav-link">Contact</a>
                 <div class="nav-item dropdown">

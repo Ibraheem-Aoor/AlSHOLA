@@ -52,13 +52,15 @@
                                                             class="text-info">{{ $application->job->post_number }}</a>
                                                     </td>
                                                     <td>{{ $application->created_at }}</td>
-                                                    <td ><a href="{{route('admin.application.notes.all' , $application->id)}}">{{ $application->notes_count }}</a></td>
+                                                    <td><a
+                                                            href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
+                                                    </td>
                                                     <td>{{ Str::limit($application->cover_letter, 40, '...') }}
                                                     </td>
                                                     <td>{{ $application->resume }}</td>
                                                     <td colspan="6">
                                                         <button class="btn btn-outline-primary " href="#"
-                                                            wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}')"><i
+                                                            wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{$application->user->id}}')"><i
                                                                 class="fa fa-download"></i> CV</button>
                                                         <button class="btn btn-outline-danger  "
                                                             wire:click="deleteApplication('{{ $application->id }}')"><i
@@ -73,6 +75,9 @@
                                                             wire:click="passApplicationToEmployer({{ $application->id }})"><i
                                                                 class="fa fa-note"></i>
                                                             Forward To Employer</a>
+                                                    </td>
+                                                </tr>
+
                                 </div>
                             </div>
 
@@ -91,9 +96,7 @@
 
                                                                 </li>
                                                         </div> --}}
-                            </td>
 
-                            </tr>
                         @empty
                             <tr>
                                 <td colspan="7" class="text-center alert alert-warning">No Records

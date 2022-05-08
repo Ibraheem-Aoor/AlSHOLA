@@ -21,7 +21,15 @@
                         <a href="{{ route('employer.jobs.returned') }}" class="dropdown-item">Returned Jobs</a>
                     </div>
                 </div>
-                <a href="{{ route('employer.applications.all') }}" class="nav-item nav-link">Applications</a>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Applications</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="{{ route('employer.applications.all') }}" class="dropdown-item">ALL APPLICATIONS</a>
+                        <a href="{{ route('employer.applications.medical') }}" class="dropdown-item">WAITING FOR MEDICAL</a>
+                        <a href="{{ route('employer.applications.visa') }}" class="dropdown-item">WAITING FOR VISA</a>
+                    </div>
+                </div>
                 <a href="{{ route('user.contact') }}" class="nav-item nav-link">Contact</a>
 
                 <div class="nav-item dropdown">

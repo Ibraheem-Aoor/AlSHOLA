@@ -135,7 +135,11 @@
     <x:notify-messages />
     @notifyJs
     @stack('js')
-
+    <script>
+        $(document).ready(function() {
+            $(".dropdown-toggle").dropdown();
+        })
+    </script>
     <!--Local Stuff-->
     <script>
         jQuery(document).ready(function($) {

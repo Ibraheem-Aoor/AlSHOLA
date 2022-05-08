@@ -6,53 +6,49 @@
             @php
                 $title = '';
             @endphp
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications You have submited</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Avilable Users</h1>
             <div class="row g-4">
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Job_Number</th>
-                                    <th scope="col">Job_Title</th>
-                                    <th scope="col">Number_Of_Notes</th>
-                                    <th scope="col">Applied At</th>
-                                    @if (Route::currentRouteName() == 'employee.applications.medical')
-                                        <th scope="col">Actions</th>
-                                    @endif
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $i = 1;
-                                @endphp
-                                @forelse ($applications as $application)
+                            <form action="{{route('employee.candidacy.order.create', $applicationId) }}" method="POST">
+                                @csrf
+                                <thead>
                                     <tr>
-                                        <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $application->job->post_number }}</td>
-                                        <td>{{ $application->job->title }}</td>
-                                        <td><a
-                                                href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
-                                        </td>
-                                        <td>{{ $application->created_at }}</td>
-                                        @if (Route::currentRouteName() == 'employee.applications.medical')
-                                            <td><a class="btn btn-outline-success" data-toggle="modal"
-                                                    data-id="{{ $application->id }}" href="#exampleModal_5">
-                                                    <i class="fa fa-upload"></i>
-                                                    Medical Report</a></td>
-                                        @endif
+                                        <th scope="col"></th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User_Name</th>
+                                        <th scope="col">Join_Date</th>
+                                        <th scope="col">
+                                            <button type="submit"
+                                                class="btn btn-outline-success" >Recommend Selected</button>
+                                        </th>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="alert alert-warning text-center bg-dark" style="color:#fff">
-                                            No Records Yet
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @forelse ($users as $user)
+                                        <tr>
+                                            <th scope="row"><input type="checkbox" name="users[]" value="{{ $user->id }}">
+                                            </th>
+                                            <th scope="row">{{ $i++ }}</th>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->created_at }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="alert alert-warning text-center bg-dark"
+                                                style="color:#fff">
+                                                No Records Yet
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </form>
                         </table>
-                        {{ $applications->links() }}
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
@@ -94,10 +90,10 @@
             </div>
 
             @push('js')
-                    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                                    crossorigin="anonymous">
-                    </script>
+                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                                crossorigin="anonymous">
+                </script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
                                 integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
                                 crossorigin="anonymous">

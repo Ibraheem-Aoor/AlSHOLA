@@ -31,7 +31,13 @@ use Spatie\Permission\Contracts\Role;
 
 use function GuzzleHttp\Promise\all;
 use App\Http\Livewire\Admin\Views\Applications\AllAplications;
+use App\Http\Livewire\Admin\Views\Applications\ApplicationAttachments;
 use App\Http\Livewire\Admin\Views\Applications\Notes\ApplicationAllNotes;
+use App\Http\Livewire\Admin\Views\Applications\ApplicationsWaitingForMedical;
+use App\Http\Livewire\Admin\Views\Applications\ApplicationsWaitingForVisa;
+use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrders;
+use App\Models\Application;
+use App\Models\ApplicationAttachment;
 
 //prefix => admin
 
@@ -80,10 +86,10 @@ use App\Http\Livewire\Admin\Views\Applications\Notes\ApplicationAllNotes;
         })->name('file.download');
 
         //Download job applications  cv
-        Route::get('downloadcv/{jobId}/{fileName}' , function($jobId , $fileName)
+        Route::get('downloadcv/{jobId}/{fileName}/{userId}' , function($jobId , $fileName , $userId)
         {
             try{
-                return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/'.$fileName);
+                return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.$userId.'/cv'.'/'.$fileName);
             }Catch(Throwable $e)
             {
                 notify()->error('someting went wrong');
@@ -125,16 +131,32 @@ use App\Http\Livewire\Admin\Views\Applications\Notes\ApplicationAllNotes;
 
         //Applications Routes
         Route::get('/applications/all' , AllAplications::class)->name('admin.applications.all');
+        Route::get('/applications/medical' , ApplicationsWaitingForMedical::class)->name('admin.applications.medical');
+        Route::get('/applications/visa' , ApplicationsWaitingForVisa::class)->name('admin.applications.visa');
         Route::get('/applications/{id}/notes/all' , ApplicationAllNotes::class)->name('admin.application.notes.all');
-
-
-
-
+        Route::get('/applications/{id}/attachments' , ApplicationAttachments::class)->name('admin.application.attachments.all');
+        Route::get('/application/{id}/attachment/{fileName}/download/{userId}' , function($id , $fileName , $userId)
+        {
+            $application  = Application::with('job:id')->findOrFail($id);
+            $jobId = $application->job->id;
+            try{
+                // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+                return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.$userId.'/attachments'.'/'.$fileName);
+            }Catch(Throwable $e)
+            {
+                return dd($e->getMessage());
+                return redirect()->back();
+            }
+        })->name('admin.application.attachment.download');
 
         //Contacts routes
         Route::get('/employer/queries'  , EmployerContacts::class)->name('admin.contacts.employers');
         Route::get('/employee/queries'  , TalentContacts::class)->name('admin.contacts.talents');
         Route::get('/guests/queries'  , GuestContacts::class)->name('admin.contacts.guests');
+
+        //candidacy orders routes
+        Route::get('/candidacy/all'  , AllCandidacyOrders::class)->name('admin.candidacy.orders.all');
+
 
         //Roles Routes:
         Route::get('roles' , AllRoles::class)->name('roles.all');

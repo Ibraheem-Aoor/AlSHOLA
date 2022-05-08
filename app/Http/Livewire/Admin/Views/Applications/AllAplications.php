@@ -2,26 +2,28 @@
 
 namespace App\Http\Livewire\Admin\Views\Applications;
 
+use App\Http\Traits\Admin\User\ApplicationTrait;
 use App\Models\Application;
 use App\Models\ApplicationNote;
 use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Throwable;
 
 class AllAplications extends Component
 {
+    use ApplicationTrait;
+
+    public $note , $applicationId  , $currentRouteName;
 
 
-    public $note , $applicationId;
-
-
-      //download application file
-    public function downloadCv($name , $jobId)
+    public function mount($id = null)
     {
-        return redirect(route('cv.download',[ 'jobId' => $jobId ,  'fileName' => $name]));
+        $this->currentRouteName = Route::currentRouteName();
     }
+
 
     public function deleteApplication( $id)
     {
@@ -44,11 +46,6 @@ class AllAplications extends Component
     }
 
 
-    public function setCurrentApplicationId($id)
-    {
-        $this->applicationId = $id;
-    }
-
 
 
     //Accepting the application and forward it to employer.
@@ -63,18 +60,7 @@ class AllAplications extends Component
 
 
 
-    //Send note without refuse
-    public function sendNoteToAppliedTalent()
-    {
-        $this->validate(['note' => 'required' , 'applicationId' => 'required']);
-        ApplicationNote::create([
-            'user_id' => Auth::id(),
-            'application_id' => $this->applicationId,
-            'message' => $this->note,
-        ]);
-        notify()->success('Note Sended Successfully');
-        return redirect(route('admin.applications.all'));
-    }
+
 
     public function render()
     {
