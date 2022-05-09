@@ -35,7 +35,7 @@
                   @can('users management')
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Users Managmement</a>
+                              aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users Managmement</a>
                           <ul class="sub-menu children dropdown-menu">
                               <li>
                                   <i class="menu-icon fa fa-users"></i>
@@ -62,22 +62,22 @@
 
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Applications Mangament</a>
+                              aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Applications Mangament</a>
                           <ul class="sub-menu children dropdown-menu">
-                              <li><i class="menu-icon fa fa-users"></i><a
+                              <li><i class="menu-icon fa fa-file-text"></i><a
                                       href="{{ route('admin.applications.all') }}">All Applications</a></li>
-                              <li><i class="menu-icon fa fa-users"></i><a
+                              <li><i class="menu-icon fa fa-file-text"></i><a
                                       href="{{ route('admin.applications.medical') }}">Waiting For Medical</a></li>
-                              <li><i class="menu-icon fa fa-users"></i><a
+                              <li><i class="menu-icon fa fa-file-text"></i><a
                                       href="{{ route('admin.applications.visa') }}">Waiting For Visa</a></li>
                           </ul>
                       </li>
 
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Candidacy Orders</a>
+                              aria-expanded="false"> <i class="menu-icon fa fa-folder-open"></i>Candidacy Orders</a>
                           <ul class="sub-menu children dropdown-menu">
-                              <li><i class="menu-icon fa fa-users"></i><a
+                              <li><i class="menu-icon fa fa-folder-o"></i><a
                                       href="{{ route('admin.candidacy.orders.all') }}">All Orders</a></li>
                           </ul>
                       </li>
@@ -102,7 +102,7 @@
                   @can('roles management')
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-phone"></i>Roles & Permessions</a>
+                              aria-expanded="false"> <i class="menu-icon fa  fa-minus-circle"></i>Roles & Permessions</a>
                           <ul class="sub-menu children dropdown-menu">
                               <li>
                                   <i class="fa fa-lock"></i>

@@ -61,7 +61,7 @@
                                 <input type="checkbox" name="remember"> Remember Me
                             </label>
                             <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
+                                <a href="{{ route('password.request') }}">Forgotten Password?</a>
                             </label>
 
                         </div>
