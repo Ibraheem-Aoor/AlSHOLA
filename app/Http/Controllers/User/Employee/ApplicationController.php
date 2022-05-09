@@ -13,6 +13,7 @@ use App\Models\VisaInoformation;
 use Illuminate\Http\Request;
 use GeneaLabs\LaravelCaffeine\Tests\CreatesApplication;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -26,9 +27,15 @@ class ApplicationController extends Controller
         // Checking if the there is a prev cv uploaded and taking it if exists. else he should upload a cv
         if($request->has('prev_cv_checked'))
         {
-            if(Auth::user()->cv != null)
+            if(($id = Auth::user()->cv) != null)
             {
                 $cv = Auth::user()->cv;
+                $oldFiles = Storage::allFiles('public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/cv'.'/');
+                Storage::delete($oldFiles);
+                Storage::copy('public/uploads/users/cv/'.Auth::id().'/'.$cv, 'public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/cv'.'/'.$cv);
+                $this->storeApplication($request->get('cover_letter') , $cv , $jobId);
+                notify()->success('Your Application Recevied Successfully');
+                return redirect()->back();
             }
             else
             {
@@ -44,14 +51,7 @@ class ApplicationController extends Controller
                 $fileName  = $file->getClientOriginalName();
                 $path = 'public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/cv'.'/';
                 $file->storeAs($path , $fileName);
-                Application::create(
-                    [
-                        'cover_letter' => $request->get('cover_letter'),
-                        'resume' => $fileName,
-                        'user_id' => Auth::id(),
-                        'job_id' => $jobId,
-                    ]
-                );
+                $this->storeApplication($request->get('cover_letter') , $fileName , $jobId );
                 notify()->success('Your Application Recevied Successfully');
                 return redirect()->back();
             }
@@ -64,6 +64,17 @@ class ApplicationController extends Controller
     }//end method
 
 
+    public function storeApplication( $coverLetter , $fileName , $jobId)
+    {
+        Application::create(
+            [
+                'cover_letter' => $coverLetter,
+                'resume' => $fileName,
+                'user_id' => Auth::id(),
+                'job_id' => $jobId,
+            ]
+        );
+    }
 
     // all applications of the employee
     public function allApplications()
@@ -150,7 +161,7 @@ class ApplicationController extends Controller
     }//end method
 
 
-    
+
 
 
 }

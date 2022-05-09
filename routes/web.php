@@ -15,6 +15,7 @@ use App\Http\Controllers\User\Employee\CandidacyController;
 use App\Http\Controllers\User\Employer\Applications\EmployerApplicationsController;
 use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfController;
 use App\Http\Controllers\User\GeneralJobController;
+use App\Http\Controllers\User\ProfileController;
 use App\Models\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,9 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+    // profile route regard the type of the user
+    Route::resource('profile', ProfileController::class);
+
     Route::post('/job/attachment/upload' , [GeneralJobController::class , 'uploadJobAttachment'] )->name('job.attachment.upload');
     Route::post('/application/attach' , [ApplicationController::class , 'uploadApplicationAttachment'])->name('application.file.upload');
     Route::get('/application/{id}/attachment/{fileName}/download/{userId}' , function($id , $fileName , $userId)

@@ -96,7 +96,7 @@
                                             required autocomplete="email" autofocus>
                                         <label for="email"><i class="fa fa-envelope"></i> Your Email</label>
                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="text-danger">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -109,11 +109,16 @@
                                             name="password" required autocomplete="current-password">
                                         <label for="email"><i class="fa fa-lock"></i> Password</label>
                                         @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <a class="text-danger col-sm-6 mr-auto" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">LogIn</button>

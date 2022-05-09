@@ -13,7 +13,6 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">MY APPLICATIONS</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="#" class="dropdown-item">Profile</a>
                         <a href="{{ route('employee.applications.all') }}" class="dropdown-item">ALL APPLICATIONS</a>
                         <a href="{{ route('employee.applications.medical') }}" class="dropdown-item">WAITING FOR MEDICAL</a>
                         <a href="{{ route('employee.applications.visa') }}" class="dropdown-item">WAITING FOR VISA</a>
@@ -25,7 +24,7 @@
                     <a href="#" class="nav-link dropdown-toggle"
                         data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="#" class="dropdown-item">Profile</a>
+                        <a href="{{route('profile.index')}}" class="dropdown-item">Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                             <i class="fa fa-power-off"></i> {{ __('Logout') }}
