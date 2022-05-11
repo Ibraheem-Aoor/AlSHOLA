@@ -25,6 +25,7 @@ class AdminSeeder extends Seeder
             'status'=> 'active',
             'password' => Hash::make('admin123'),
             'is_admin' => true,
+            'natoinality_id' => null,
             'type' => 'admin',
         ]);
 

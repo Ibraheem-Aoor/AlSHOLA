@@ -13,7 +13,9 @@ class JobDetails extends Component
     public $job , $note , $currentNoteContent = null;
     public function mount($id = null)
     {
-        $this->job = Job::with(['user' , 'notes' , 'attachments' , 'applications.user'])->findOrFail($id);
+        $this->job = Job::with(['user' , 'notes' , 'attachments' ,
+                                'applications.user' , 'title.sector' ,
+                                'nationality'])->findOrFail($id);
     }
 
 

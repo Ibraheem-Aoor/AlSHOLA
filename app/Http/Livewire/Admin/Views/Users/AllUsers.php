@@ -11,7 +11,7 @@ class AllUsers extends Component
     use GeneralUserTrait;
     public function render()
     {
-        $users = User::With('roles')->simplePaginate(15);
+        $users = User::With(['roles' , 'company' , 'nationality'])->simplePaginate(15);
         return view('livewire.admin.views.users.all-users' , ['users' => $users])->extends('layouts.admin.master')->section('content');
     }
 }

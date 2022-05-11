@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('brief')->nullable();
             $table->string('cv')->nullable();
+            $table->string('mobile')->nullable();
+            $table->unsignedBigInteger('company_name')->nullable();
+            $table->index('company_name');
+            $table->foreign('company_name')->references('id')->on('users')->constrained()->onDelete('cascade');
             $table->string('email')->unique();
             $table->string('avatar')->default('user.png');
             $table->string('type');

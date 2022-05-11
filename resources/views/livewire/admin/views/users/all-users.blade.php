@@ -16,11 +16,9 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
+                                                <th>Company_Name</th>
+                                                <th>User_ID</th>
                                                 <th>Status</th>
-                                                <th>join_date</th>
-                                                <th>ِActions</th>
                                                 <th><a href="{{ route('users.add') }}" class="btn btn-info"><i
                                                             class="fa fa-plus"></i> New</a></th>
                                             </tr>
@@ -35,8 +33,12 @@
                                                     <td>
                                                         {{ $user->name }}
                                                     </td>
-                                                    <td>{{ $user->email }}</td>
                                                     <td>
+                                                        {{ $user->company->name ?? ''}}
+                                                    </td>
+                                                    <td>{{ $user->id }}</td>
+
+                                                    {{-- <td>
                                                         @forelse ($user->roles as $role)
                                                             {{ $role->name . ' , ' }}
                                                         @empty
@@ -46,7 +48,7 @@
                                                                 <span class="bade badge-info" style="padding: 2px">{{$user->type}}</span>
                                                             @endif
                                                         @endforelse
-                                                    </td>
+                                                    </td> --}}
                                                     <td>
                                                         @if ($user->status == 'active')
                                                             <span class="badge badge-success">Active</span>
@@ -54,7 +56,6 @@
                                                             <span class="badge badge-danger">Blocked</span>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $user->created_at }}</td>
                                                     <td>
                                                         @if ($user->id != Auth::id())
                                                             @if ($user->status == 'blocked')

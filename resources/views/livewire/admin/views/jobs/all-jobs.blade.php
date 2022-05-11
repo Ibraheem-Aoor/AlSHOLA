@@ -58,6 +58,7 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Number</th>
+                                                <th>Sector</th>
                                                 <th>Title</th>
                                                 <th>number_of_applications</th>
                                                 <th>Publisher</th>
@@ -79,13 +80,16 @@
                                                         {{ $job->post_number }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->title }}
+                                                        {{ $job->title->sector->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $job->title->name }}
                                                     </td>
                                                     <td>
                                                         {{ $job->applications_count }}
                                                     </td>
                                                     <td>{{ $job->user->name }}</td>
-                                                    <td> <span class="product">{{ $job->location }}</span>
+                                                    <td> <span class="product">{{ $job->nationality->name }}</span>
                                                     <td> <span class="name">{{ $job->salary }}</span> </td>
                                                     </td>
                                                     <td><span>{{ $job->created_at }}</span>

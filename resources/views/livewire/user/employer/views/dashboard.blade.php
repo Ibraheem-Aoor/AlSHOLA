@@ -109,6 +109,7 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">number</th>
+                                            <th scope="col">Sector</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Creation_date</th>
                                             <th scope="col">Status</th>
@@ -123,7 +124,8 @@
                                             <tr>
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $job->post_number }}</td>
-                                                <td>{{ $job->title }}</td>
+                                                <td>{{ $job->title->sector->name }}</td>
+                                                <td>{{ $job->title->name }}</td>
                                                 <td>{{ $job->created_at }}</td>
                                                 <td>{{ $job->status }}</td>
                                                 <td>

@@ -9,7 +9,7 @@ class AllJobs extends Component
 {
     public function render()
     {
-        $jobs = Job::with('user')->withCount('applications')->paginate(15);
+        $jobs = Job::with(['user' , 'title.sector' , 'nationality'])->withCount('applications')->paginate(15);
         return view('livewire.admin.views.jobs.all-jobs' , ['jobs' => $jobs])->extends('layouts.admin.master')->section('content');
     }
 }

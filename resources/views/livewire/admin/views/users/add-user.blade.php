@@ -47,24 +47,64 @@
                                             @enderror
                                         </div>
 
+
+                                        <div class="form-group col-sm-6">
+                                            <label class=" form-control-label">Mobile:</label>
+                                            <input type="text" id="name" class="form-control"
+                                                wire:model.lazy="mobile">
+                                            @error('mobile')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+
+
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">User Type:</label>
                                             <select name="" id="" class="form-control" wire:model.lazy="type">
                                                 <option value="" selected>choose one</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="Talented">Talented</option>
-                                                <option value="Employer">Employer</option>
+                                                {{-- <option value="">Personal</option> --}}
+                                                <option value="Talented">Agent</option>
+                                                <option value="Employer">Client</option>
+                                                <option value="ALSHOLA">AlSHLOA</option>
                                             </select>
                                             @error('type')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-6"></div>
-                                        @if ($type == 'admin')
+                                        @if ($type == 'Talented')
+                                            <div class="form-group col-sm-6">
+                                                <label class=" form-control-label">Nationality:</label>
+                                                <select wire:model.lazy="nationality" class="form-control">
+                                                    <option value="" selected>-- select one --</option>
+                                                    @foreach ($nationalities as $n)
+                                                        <option value="{{ $n->id }}">
+                                                            {{ $n->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('nationality')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        @elseif($type == 'Employer')
+                                            <div class="form-group col-sm-6">
+                                                <label class=" form-control-label">Company Name:</label>
+                                                <select wire:model.lazy="companyName" class="form-control">
+                                                    <option value="" selected>-- select one --</option>
+                                                    @foreach ($registerdComapnies as $company)
+                                                        <option value="{{ $company->id }}">
+                                                            {{ $company->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('companyName')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        @endif
+                                        {{-- @if ($type == 'admin')
                                             <div class="form-group col-sm-12">
                                                 <div class="card" wire:ignore>
                                                     <label for="">Roles: </label>
-                                                    {{-- <input id="tom-select-it"   value="users management , contacts management"/> --}}
                                                     <select id="select-state" wire:model="roles" multiple
                                                         placeholder="select permession .." autocomplete="off">
                                                         @foreach ($allRoles as $role)
@@ -73,13 +113,12 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-
                                                 </div>
                                                 @error('roles')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                     <div class="col-sm-12 text-center">
                                         <button type="submit" class="btn btn-outline-primary col-sm-6">SAVE</button>

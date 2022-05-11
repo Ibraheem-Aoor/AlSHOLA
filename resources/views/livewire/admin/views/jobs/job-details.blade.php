@@ -47,7 +47,7 @@
                                             <label for="inputEmail3" class="">Job
                                                 Title:</label>
                                             <div class="col-sm-4">
-                                                <input type="text" value="{{ $job->title }}" class="form-control"
+                                                <input type="text" value="{{ $job->title->name }}" class="form-control"
                                                     id="inputEmail3" readonly>
                                             </div>
                                             <label for="inputPassword3" class="col-form-label">Salary:</label>
@@ -57,9 +57,9 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3 text-center">
-                                            <label for="inputPassword3" class="col-form-label">Location:</label>
+                                            <label for="inputPassword3" class="col-form-label">Nationality:</label>
                                             <div class="col-sm-4">
-                                                <input type="text" value="{{ $job->location }}" class="form-control"
+                                                <input type="text" value="{{ $job->nationality->name }}" class="form-control"
                                                     id="inputPassword3" readonly>
                                             </div>
                                             <label for="inputPassword3" class="col-form-label">Job
@@ -170,6 +170,7 @@
                                                         <tr>
                                                             <th scope="col">#</th>
                                                             <th scope="col">file name</th>
+                                                            <th scope="col">file type</th>
                                                             <th scope="col">Publisher</th>
                                                             <th scope="col">creation_date</th>
                                                             <th scope="col">Actions</th>
@@ -183,6 +184,7 @@
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $attachment->name }}</td>
+                                                                <td>{{ $attachment->type }}</td>
                                                                 <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
                                                                 </td>
                                                                 <td>{{ $attachment->created_at }}</td>
