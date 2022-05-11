@@ -5,12 +5,18 @@ namespace App\Http\Controllers\User\Employer\Jobs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Employer\Job\CreateJobRequest;
 use App\Http\Requests\User\Employer\Job\UpdateJobRequest;
+use App\Http\Traits\User\ApplicationAttachmentTrait;
 use App\Http\Traits\User\JobAttachmentTrait;
 use App\Models\Attachment;
+use App\Models\FileType;
 use App\Models\Job;
+use App\Models\Nationality;
+use App\Models\Sector;
+use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 use Throwable;
 
@@ -18,6 +24,7 @@ class JobController extends Controller
 {
 
     use JobAttachmentTrait;
+    use ApplicationAttachmentTrait;
 
     /**
      * Display a listing of the resource.
@@ -31,10 +38,13 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        return view('user.employer.jobs.create');
-
+        $fileTypes = FileType::all();
+        $sectors = Sector::all();
+        $nationalities = Nationality::orderBy('name')->get()->chunk(50);
+        return view('user.employer.jobs.create' , compact('fileTypes' , 'sectors' , 'nationalities'));
     }
 
     /**
@@ -45,14 +55,18 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
+        if($request->input('responsibilities') == null && $request->input('file_type') == null)
+            {
+                notify()->error('Job Responsibilities Required');
+                return redirect()->withErrors('error' , 'Job Responsibilities Required');
+            }
         $job = Job::create([
             'post_number' => $this->generatePosteNumber(),
-            'title' => $request->input('title'),
+            'title_id' => $request->input('title'),
+            'natoinality_id' => $request->input('nationality'),
             'salary' => $request->input('salary'),
-            'location' => $request->input('location'),
-            'employer_website' => $request->input('employer_website'),
             'description' => $request->input('description'),
-            'responsibilities' => $request->input('responsibilities'),
+            'responsibilities' => $request->input('responsibilities') ?? null,
             'requirements' => $request->input('requirements'),
             'vacancy' => $request->input('vacancy'),
             'nature' => $request->input('nature'),
@@ -60,11 +74,12 @@ class JobController extends Controller
             'user_id' => Auth::id(), //The Publisher
         ]);
         if($request->hasFile('attachments'))
-            $this->addAttachementsToJob($request->attachments  , $job->id);
+            $this->addAttachementsToJob($request->attachments  , $job->id , $request->file_type);
+        if($request->hasFile('responsibilites_file'))
+            $this->uploadJobFile($request->responsibilites_file  , $job->id);
         notify()->success('Job Addeed Successfully');
         return redirect(route('employer.dashboard'));
     }//end method
-
 
 
 
@@ -87,6 +102,18 @@ class JobController extends Controller
     }
 
 
+    public function uploadJobFile($file , $jobId)
+    {
+        $fileName  = $file->getClientOriginalName();
+        $path = 'public/uploads/attachments/jobs/'.$jobId.'/';
+        $file->storeAs($path , $fileName);
+        Attachment::create([
+            'name' => $fileName ,
+            'job_id' => $jobId,
+            'user_id' => Auth::id(), //The publisher
+            'type' => 'Job Specefication',
+        ]);
+    }
 
 
 
@@ -99,7 +126,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        $job = Job::with('attachments')->findorFail($id);
+        $job = Job::with(['title.sector' , 'nationality'])->findorFail($id);
         return view('user.employer.jobs.show' , compact('job'));
     }
 
@@ -111,8 +138,11 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        $job = Job::findorFail($id);
-        return view('user.employer.jobs.edit' , compact('job'));
+        $job = Job::with(['title.sector' , 'nationality'])->findorFail($id);
+        $fileTypes = FileType::all();
+        $sectors = Sector::all();
+        $nationalities = Nationality::orderBy('name')->get()->chunk(50);
+        return view('user.employer.jobs.edit' , compact('job' , 'sectors' , 'nationalities' , 'fileTypes'));
     }
 
     /**
@@ -125,19 +155,27 @@ class JobController extends Controller
     public function update(UpdateJobRequest $request, $id)
     {
         $job = Job::findOrFail($id);
+        if($request->input('responsibilities') == null && $request->input('file_type') == null)
+        {
+            notify()->error('Job Responsibilities Required');
+            return redirect()->withErrors('error' , 'Job Responsibilities Required');
+        }
         $job->update([
-            'title' => $request->input('title'),
+            'title_id' => $request->input('title'),
+            'natoinality_id' => $request->input('nationality'),
             'salary' => $request->input('salary'),
-            'location' => $request->input('location'),
-            'employer_website' => $request->input('employer_website'),
             'description' => $request->input('description'),
-            'responsibilities' => $request->input('responsibilities'),
+            'responsibilities' => $request->input('responsibilities') ?? null,
             'requirements' => $request->input('requirements'),
             'vacancy' => $request->input('vacancy'),
             'nature' => $request->input('nature'),
             'end_date' => $request->input('end_date'),
-            'user_id' => Auth::id(),
+            'user_id' => Auth::id(), //The Publisher
         ]);
+        if($request->hasFile('attachments'))
+            $this->addAttachementsToJob($request->attachments  , $id , $request->file_type);
+        if($request->hasFile('responsibilites_file'))
+            $this->uploadJobFile($request->responsibilites_file  , $id);
         notify()->success('Job Updated Successfully');
         return redirect(route('employer.dashboard'));
 
@@ -154,5 +192,14 @@ class JobController extends Controller
         $job->delete();
         notify()->success('Job Deleted Successfully');
         return redirect()->back();
+    }
+
+
+    //ajax request
+    public function setSelectedSector($id)
+    {
+        $sector = Sector::with('titles')->findOrFail($id);
+        $titles = $sector->titles;
+        return $titles;
     }
 }

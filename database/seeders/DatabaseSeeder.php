@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sector;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermessionSeeder::class,
             AdminSeeder::class,
+            FileTypeSeeder::class,
+            NationalitySeeder::class,
+            SectorSeeder::class,
+            TitleSeeder::class,
         ]);
     }
 }

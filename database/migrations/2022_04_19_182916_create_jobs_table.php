@@ -17,16 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('post_number');
             $table->enum('status' , ['completed' , 'active' , 'cancelled' , 'pending'])->default('active');
-            $table->string('title');
             $table->text('description');
             $table->text('requirements');
-            $table->text('responsibilities');
-            $table->string('location');
+            $table->text('responsibilities')->nullable();
             $table->bigInteger('vacancy');
             $table->string('salary');
             $table->date('end_date');
             $table->enum('nature' , ['full time' , 'part time']);
-            $table->string('employer_website');
             $table->unsignedBigInteger('user_id');
             $table->index('user_id');
             $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');

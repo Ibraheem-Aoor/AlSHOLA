@@ -24,14 +24,17 @@ class UpdateJobRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string',
-                'salary' => 'required|numeric',
-                'location' => 'required|string',
-                'employer_website' => 'required|string',
-                'description' => 'required|string',
-                'requirements' => 'required|string',
-                'responsibilities' => 'required|string',
-                'attachments.*' => 'nullable|mimes:jpg,jpeg,png,bmp,gif,svg,webp,pdf,docx',
+            'title' => 'required',
+            'salary' => 'required|numeric',
+            'file_type' => 'sometimes',
+            'description' => 'required|string',
+            'requirements' => 'required|string',
+            'responsibilities' => 'required_without:responsibilites_file|nullable|string',
+            'end_date' => 'required|date',
+            'vacancy' => 'required|numeric',
+            'nationality' => 'required',
+            'attachments.*' => 'sometimes|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            'responsibilites_file' => 'required_without:responsibilities|nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
         ];
     }
 }

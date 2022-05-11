@@ -12,7 +12,7 @@ trait JobAttachmentTrait
 
 
       // Storing mutilple attachments with there original names
-    public function addAttachementsToJob($attachments , $jobId)
+    public function addAttachementsToJob($attachments , $jobId  , $type)
     {
         foreach($attachments as $attachment)
         {
@@ -23,6 +23,7 @@ trait JobAttachmentTrait
                 'name' => $fileName ,
                 'job_id' => $jobId,
                 'user_id' => Auth::id(), //The publisher
+                'type' => $type ?? null,
             ]);
         }
     }//end method

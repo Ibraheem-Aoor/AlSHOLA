@@ -11,7 +11,7 @@
                       <li class="menu-title">Job Posts Managment</li><!-- /.menu-title -->
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Jobs</a>
+                              aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Posting Management</a>
                           <ul class="sub-menu children dropdown-menu">
                               <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}">All Jobs</a>
                               </li>

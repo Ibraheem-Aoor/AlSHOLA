@@ -11,12 +11,12 @@ class Job extends Model
     public $preventsLazyLoading = true;
     protected $fillable = [
         'post_number',
-        'title',
+        'title_id',
+        'natoinality_id',
         'description',
         'requirements',
         'responsibilities',
-        'location',
-        'employer_website',
+        'nationality',
         'salary',
         'status',
         'vacancy',
@@ -48,6 +48,16 @@ class Job extends Model
     public function applications()
     {
         return $this->hasMany(Application::class  , 'job_id');
+    }
+
+    public function title()
+    {
+        return $this->belongsTo(Title::class , 'title_id');
+    }
+
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class , 'natoinality_id');
     }
 
 }

@@ -110,6 +110,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('dashboard' , ViewsDashboard::class)->name('employer.dashboard');
         // Jobs Routes
         Route::resource('/job' , JobController::class);
+        Route::get('/sector/{id}' , [JobController::class , 'setSelectedSector']);
         Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('employer.pdf.generate');
 
         Route::group(['controller' => EmployerJobsController::class ], function()

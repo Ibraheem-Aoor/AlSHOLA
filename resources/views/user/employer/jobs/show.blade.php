@@ -14,9 +14,25 @@
                             <div class="row rounded">
                                 <div class="form-floating mb-3 col-sm-6">
                                     <input readonly type="email" class="form-control" name="title"
-                                        placeholder="name@example.com" value="{{ $job->title }}">
+                                        placeholder="name@example.com" value="{{ $job->title->sector->name }}">
                                     <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
                                     @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-floating mb-3 col-sm-6">
+                                    <input readonly type="email" class="form-control" name="title"
+                                        placeholder="name@example.com" value="{{ $job->title->name }}">
+                                    <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
+                                    @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-floating mb-3 col-sm-6">
+                                    <input readonly type="text" class="form-control" name="salary"
+                                        value="{{ $job->nationality->name }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Nationality</label>
+                                    @error('salary')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -30,20 +46,13 @@
                                 </div>
                                 <div class="form-floating mb-3 col-sm-6">
                                     <input readonly type="text" class="form-control" name="location"
-                                        value="{{ $job->location }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Location</label>
+                                        value="{{ $job->end_date }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; End Date</label>
                                     @error('location')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-floating mb-3 col-sm-6">
-                                    <input readonly type="text" class="form-control" id="floatingPassword"
-                                        name="employer_website" value="{{ $job->employer_website }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Company Website</label>
-                                    @error('employer_website')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
 
                                 <div class="form-floating mb-3 col-sm-12">
                                     <textarea readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
@@ -63,15 +72,17 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-floating col-sm-12 mb-3">
-                                    <textarea readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                                        style="height: 150px;"
-                                        name="responsibilities">{{ $job->responsibilities }}</textarea>
-                                    <label for="floatingTextarea">&nbsp;&nbsp; Job Responsebilites</label>
-                                    @error('responsibilities')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                @if ($job->responsibilities)
+                                    <div class="form-floating col-sm-12 mb-3">
+                                        <textarea readonly class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                                            style="height: 150px;"
+                                            name="responsibilities">{{ $job->responsibilities }}</textarea>
+                                        <label for="floatingTextarea">&nbsp;&nbsp; Job Responsebilites</label>
+                                        @error('responsibilities')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                @endif
                                 <div class="form-floating col-sm-12 mb-3 mr-auto">
                                     <a href="{{ route('job.edit', $job->id) }}"
                                         class="btn btn-primary col-sm-4 mr-auto">Edit</a>

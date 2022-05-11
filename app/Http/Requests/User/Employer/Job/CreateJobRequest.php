@@ -27,17 +27,18 @@ class CreateJobRequest extends FormRequest
     public function rules()
     {
         return [
-                'title' => 'required|string',
+                'title' => 'required',
                 'salary' => 'required|numeric',
-                'location' => 'required|string',
-                'employer_website' => 'required|string',
+                // 'location' => 'required|string',
+                'file_type' => 'sometimes',
                 'description' => 'required|string',
                 'requirements' => 'required|string',
-                'responsibilities' => 'required|string',
+                'responsibilities' => 'required_without:responsibilites_file|nullable|string',
                 'end_date' => 'required|date',
                 'vacancy' => 'required|numeric',
-                'nature' => 'required|string|'.ValidationRule::in(['full time', 'part time']),
-                'attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+                'nationality' => 'required',
+                'attachments.*' => 'sometimes|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+                'responsibilites_file' => 'required_without:responsibilities|nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
         ];
     }
 

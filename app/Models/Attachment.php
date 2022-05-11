@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     use HasFactory;
-    protected $fillable = ['job_id' , 'name' , 'user_id'];
+    protected $fillable = ['job_id' , 'name' , 'user_id' , 'type'];
 
     public function job()
     {
@@ -24,4 +24,5 @@ class Attachment extends Model
     {
         return $this->belongsTo(Application::class , 'application_id');
     }
+
 }
