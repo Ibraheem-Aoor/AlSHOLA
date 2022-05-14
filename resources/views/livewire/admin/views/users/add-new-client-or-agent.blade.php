@@ -104,28 +104,28 @@
 
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Profile Attachment:</label>
-                                            <input type="file" class="form-control" wire:model.lazy="profile">
+                                            <input type="file" class="form-control" wire:model="profile">
                                             @error('country')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">License Attachment:</label>
-                                            <input type="file" class="form-control" wire:model.lazy="license">
+                                            <input type="file" class="form-control" wire:model="license">
                                             @error('country')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">ID:</label>
-                                            <input type="file" class="form-control" wire:model.lazy="identity">
+                                            <input type="file" class="form-control" wire:model="identity">
                                             @error('country')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Agreement:</label>
-                                            <input type="file" class="form-control" wire:model.lazy="agreement">
+                                            <input type="file" class="form-control" wire:model="agreement">
                                             @error('country')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

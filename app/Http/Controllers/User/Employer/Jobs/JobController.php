@@ -55,22 +55,32 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
-        if($request->input('responsibilities') == null && $request->input('file_type') == null)
-            {
-                notify()->error('Job Responsibilities Required');
-                return redirect()->withErrors('error' , 'Job Responsibilities Required');
-            }
+        // if($request->input('responsibilities') == null && $request->input('file_type') == null)
+        //     {
+        //         notify()->error('Job Responsibilities Required');
+        //         return redirect()->withErrors('error' , 'Job Responsibilities Required');
+        //     }
         $job = Job::create([
             'post_number' => $this->generatePosteNumber(),
             'title_id' => $request->input('title'),
             'natoinality_id' => $request->input('nationality'),
             'salary' => $request->input('salary'),
+            'quantity' => $request->input('quantity'),
             'description' => $request->input('description'),
-            'responsibilities' => $request->input('responsibilities') ?? null,
-            'requirements' => $request->input('requirements'),
-            'vacancy' => $request->input('vacancy'),
-            'nature' => $request->input('nature'),
-            'end_date' => $request->input('end_date'),
+            'other_terms' => $request->input('other_terms') ?? null,
+            'covid_test' => $request->input('covid_test'),
+            'indemnity_leave_and_overtime_salary' => $request->input('indemnity_leave_and_overtime_salary'),
+            'air_ticket' => $request->input('air_ticket'),
+            'annual_leave' => $request->input('annual_leave'),
+            'food' => $request->input('food'),
+            'insurance' => $request->input('insurance'),
+            'medical' => $request->input('medical'),
+            'transport' => $request->input('transport'),
+            'accommodation' => $request->input('accommodation'),
+            'off_day' => $request->input('off_day'),
+            'working_days' => $request->input('working_days'),
+            'working_hours' => $request->input('working_hours'),
+            'contract_period' => $request->input('contract_period'),
             'user_id' => Auth::id(), //The Publisher
         ]);
         if($request->hasFile('attachments'))
@@ -84,7 +94,7 @@ class JobController extends Controller
 
 
     function generatePosteNumber() {
-        $number = date('y').mt_rand(1000000, 9999999); // better than rand()
+        $number = date('y').mt_rand(10000000, 99999999); // better than rand()
 
         // call the same function if the barcode exists already
         if ($this->postNumberExists($number)) {
@@ -155,21 +165,32 @@ class JobController extends Controller
     public function update(UpdateJobRequest $request, $id)
     {
         $job = Job::findOrFail($id);
-        if($request->input('responsibilities') == null && $request->input('file_type') == null)
-        {
-            notify()->error('Job Responsibilities Required');
-            return redirect()->withErrors('error' , 'Job Responsibilities Required');
-        }
+        // if($request->input('responsibilities') == null && $request->input('file_type') == null)
+        // {
+        //     notify()->error('Job Responsibilities Required');
+        //     return redirect()->withErrors('error' , 'Job Responsibilities Required');
+        // }
         $job->update([
+            'post_number' => $this->generatePosteNumber(),
             'title_id' => $request->input('title'),
             'natoinality_id' => $request->input('nationality'),
             'salary' => $request->input('salary'),
+            'quantity' => $request->input('quantity'),
             'description' => $request->input('description'),
-            'responsibilities' => $request->input('responsibilities') ?? null,
-            'requirements' => $request->input('requirements'),
-            'vacancy' => $request->input('vacancy'),
-            'nature' => $request->input('nature'),
-            'end_date' => $request->input('end_date'),
+            'other_terms' => $request->input('other_terms') ?? null,
+            'covid_test' => $request->input('covid_test'),
+            'indemnity_leave_and_overtime_salary' => $request->input('indemnity_leave_and_overtime_salary'),
+            'air_ticket' => $request->input('air_ticket'),
+            'annual_leave' => $request->input('annual_leave'),
+            'food' => $request->input('food'),
+            'insurance' => $request->input('insurance'),
+            'medical' => $request->input('medical'),
+            'transport' => $request->input('transport'),
+            'accommodation' => $request->input('accommodation'),
+            'off_day' => $request->input('off_day'),
+            'working_days' => $request->input('working_days'),
+            'working_hours' => $request->input('working_hours'),
+            'contract_period' => $request->input('contract_period'),
             'user_id' => Auth::id(), //The Publisher
         ]);
         if($request->hasFile('attachments'))

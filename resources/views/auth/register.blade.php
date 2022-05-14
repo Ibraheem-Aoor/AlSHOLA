@@ -219,6 +219,27 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select name="company" class="form-control">
+                                            <option value="">-- Select one --</option>
+                                            @foreach ($companies as $company)
+                                                <option value="{{ $company->id }}"
+                                                    @if (old('company') == $company->id) {{ 'selected' }} @endif>
+                                                    {{ $company->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <label for="name"><i class="fa fa-state"></i> Company</label>
+
+                                        @error('company')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
 
                                 <div class="col-md-6">
                                     <div class="form-floating">

@@ -18,7 +18,7 @@
                     <div class="rounded h-100 p-4">
                         <div class="container-fluid pt-4 px-4">
                             <div class="row rounded">
-                                <div class="form-floating mb-3 col-sm-6">
+                                <div class="form-floating mb-3 col-sm-4">
                                     <select name="sector" class="form-control">
                                         <option value="">--- select one ---</option>
                                         @foreach ($sectors as $sector)
@@ -27,12 +27,12 @@
                                                 {{ $sector->name }}</option>
                                         @endforeach
                                     </select>
-                                    <label for="floatingInput">&nbsp;&nbsp; Job Sector</label>
+                                    <label for="floatingInput">&nbsp;&nbsp; Job Category</label>
                                     @error('sector')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-floating mb-3 col-sm-6">
+                                <div class="form-floating mb-3 col-sm-4">
                                     <select name="title" class="form-control">
                                         @if ($id = old('title'))
                                             {{ $title = \App\Models\Title::where('id', $id)->first() }}
@@ -46,7 +46,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-6">
+                                <div class="form-floating mb-3 col-sm-4">
                                     <select name="nationality" class="form-control">
                                         <option value="">--- select one ---</option>
                                         @foreach ($nationalities as $nationalitiesChunk)
@@ -64,28 +64,18 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-6">
-                                    <select name="nature" id="" class="form-control">
-                                        <option value="full time" selected>Full Time</option>
-                                        <option value="part time">Part Time</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Nature</label>
-                                    @error('nature')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
 
-                                <div class="form-floating mb-3 col-sm-6">
+                                <div class="form-floating mb-3 col-sm-4">
                                     <input required type="text" class="form-control" id="floatingPassword"
-                                        name="vacancy" value="{{ old('vacancy') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; vacancy</label>
-                                    @error('vacancy')
+                                        name="quantity" value="{{ old('quantity') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Quantity</label>
+                                    @error('quantity')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
 
-                                <div class="form-floating mb-3 col-sm-6">
+                                <div class="form-floating mb-3 col-sm-4">
                                     <input required type="text" class="form-control" name="salary"
                                         value="{{ old('salary') }}">
                                     <label for="floatingPassword">&nbsp;&nbsp; Salary</label>
@@ -94,29 +84,140 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="contract_period"
+                                        value="{{ old('contract_period') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; CONTRACT PERIOD</label>
+                                    @error('contract_period')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="working_hours"
+                                        value="{{ old('working_hours') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; WORKING HOURS PER DAY</label>
+                                    @error('working_hours')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="working_days"
+                                        value="{{ old('working_days') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; WORKING DAYS</label>
+                                    @error('working_days')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="off_day"
+                                        value="{{ old('off_day') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; OFF DAY</label>
+                                    @error('off_day')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="accommodation"
+                                        value="{{ old('accommodation') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; ACCOMMODATION</label>
+                                    @error('accommodation')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="transport"
+                                        value="{{ old('transport') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; TRANSPORT</label>
+                                    @error('transport')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="medical"
+                                        value="{{ old('medical') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; MEDICAL</label>
+                                    @error('medical')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="insurance"
+                                        value="{{ old('insurance') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; INSURANCE</label>
+                                    @error('insurance')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="food"
+                                        value="{{ old('food') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; FOOD</label>
+                                    @error('food')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="annual_leave"
+                                        value="{{ old('annual_leave') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; ANNUAL LEAVE</label>
+                                    @error('annual_leave')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="air_ticket"
+                                        value="{{ old('air_ticket') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; AIR TICKET</label>
+                                    @error('air_ticket')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control"
+                                        name="indemnity_leave_and_overtime_salary"
+                                        value="{{ old('indemnity_leave_and_overtime_salary') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; indemnity and over time salary</label>
+                                    @error('indemnity_leave_and_overtime_salary')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <input required type="text" class="form-control" name="covid_test"
+                                        value="{{ old('covid_test') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; COVID-19 TEST</label>
+                                    @error('covid_test')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
 
                                 <div class="form-floating mb-3 col-sm-12">
-                                    <input required type="date" class="form-control" id="floatingPassword"
-                                        name="end_date" value="{{ old('end_date') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; End date</label>
-                                    @error('end_date')
+                                    <textarea required class="form-control" name="other_terms"
+                                        style="height: 150px;">{{ old('other_terms') }}</textarea>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Other Terms</label>
+                                    @error('other_terms')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
-
-
-
-                                <div class="form-floating mb-3 col-sm-6">
-                                    <input type="file" class="form-control" name="attachments[]" multiple
-                                        class="dropzone" value="{{ old('attachments') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Attachment</label>
-                                    @error('attachments.*')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-6" id="fileTypeDiv">
+                                {{-- <div class="form-floating mb-3 col-sm-4" id="fileTypeDiv">
                                     <select name="file_type" class="form-control">
                                         @foreach ($fileTypes as $type)
                                             <option value="{{ $type->name }}"
@@ -128,7 +229,7 @@
                                     @error('file_type')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
 
 
                                 <div class="form-floating mb-3 col-sm-12">
@@ -139,31 +240,15 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-floating col-sm-12 mb-3">
-                                    <textarea required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                                        style="height: 150px;"
-                                        name="requirements">{{ old('requirements') }}</textarea>
-                                    <label for="floatingTextarea">&nbsp;&nbsp; Job Requirements</label>
-                                    @error('requirements')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-floating col-sm-12 mb-3">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;"
-                                        name="responsibilities">{{ old('responsibilities') }}</textarea>
-                                    <label for="floatingTextarea">&nbsp;&nbsp; Job Responsibilities</label>
-                                    @error('responsibilities')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-floating mb-3 col-sm-6">
+
+                                {{-- <div class="form-floating mb-3 col-sm-4">
                                     <input type="file" name="responsibilites_file" class="form-control">
                                     <label for="floatingPassword">Responsibilities File</label>
                                     <p class="text-info">attach file instead of write the Responsebilites</p> <br>
                                     @error('responsibilites_file')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
 
                                 <div class="form-floating col-sm-12 mb-3">
                                     <button type="submit" class="btn btn-primary col-sm-12">POST NEW JOB</button>

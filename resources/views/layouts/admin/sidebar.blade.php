@@ -7,26 +7,15 @@
                   <li class="active">
                       <a href="{{ route('admin.dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                   </li>
-                  {{-- <li class="menu-title">Job Posts Managment</li><!-- /.menu-title -->
+                  {<li class="menu-title">J Managment</li><!-- /.menu-title -->
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Posting Management</a>
+                          aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Rise Demand</a>
                       <ul class="sub-menu children dropdown-menu">
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}">All Jobs</a>
-                          </li>
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.latest') }}">New Jobs</a>
-                          </li>
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.completed') }}">Completed
-                                  Jobs</a></li>
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.cancelled') }}">Cancelled
-                                  Jobs</a></li>
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.active') }}">Active Jobs</a>
-                          </li>
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.pending') }}">Pending
-                                  Jobs</a>
+                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}">Demand List</a>
                           </li>
                       </ul>
-                  </li> --}}
+                  </li>
                   <li class="menu-title"></li><!-- /.menu-title -->
 
 
@@ -44,7 +33,7 @@
                                   <a href="{{ route('agent.create') }}"> Add Agent</a>
                               </li>
                               <li>
-                                  <i class="menu-icon fa fa-plus"></i>
+                                  <i class="menu-icon fa fa-bars"></i>
                                   <a href="{{ route('agent.list') }}"> Agent Managment</a>
                               </li>
                           </ul>
@@ -64,7 +53,7 @@
                                 <a href="{{ route('client.create') }}"> Add client</a>
                             </li>
                             <li>
-                                <i class="menu-icon fa fa-plus"></i>
+                                <i class="menu-icon fa fa-bars"></i>
                                 <a href="{{ route('client.list') }}"> Client Mangament</a>
                             </li>
                         </ul>

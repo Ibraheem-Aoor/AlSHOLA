@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Country;
 use App\Models\Nationality;
 use App\Models\Title;
@@ -76,6 +77,7 @@ class RegisterController extends Controller
             'nationality_id' => $data['responsible_nationality'],
             'mobile' => $data['mobile'],
             'title_id' => $data['title_position'],
+            'company_id' => $data['company'],
             'responsible_person' => $data['responsible_person'],
         ]);
     }
@@ -112,7 +114,8 @@ class RegisterController extends Controller
         $countries = Country::all();
         $nationalities = Nationality::all();
         $titles = Title::all();
-        return view('auth.register' , compact('countries' , 'nationalities' , 'titles') );
+        $companies = Company::all();
+        return view('auth.register' , compact('countries' , 'nationalities' , 'titles' , 'companies') );
     }
 
     /*
@@ -133,6 +136,7 @@ class RegisterController extends Controller
             'responsible_nationality' =>  ['required', 'string', 'max:255'],
             'responsible_person' =>  ['required', 'string', 'max:255'],
             'title_position' =>  ['required', 'string', 'max:255'],
+            'company' => 'required',
             'mobile' => "required|numeric",
         ]);
     }

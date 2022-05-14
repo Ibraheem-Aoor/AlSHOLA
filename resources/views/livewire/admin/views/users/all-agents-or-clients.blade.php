@@ -28,7 +28,7 @@
                                             @endphp
                                             @forelse($users as $user)
                                                 <tr>
-                                                    <td class="serial">{{ $i }}</td>
+                                                    <td class="serial">{{ $i++ }}</td>
                                                     <td>
                                                         {{ $user->name }}
                                                     </td>

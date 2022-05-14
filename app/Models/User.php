@@ -31,6 +31,7 @@ class User extends Authenticatable
         'nationality_id',
         'mobile',
         'registration_No',
+        'company_id',
     ];
 
     /**
@@ -107,6 +108,16 @@ class User extends Authenticatable
     public function title()
     {
         return $this->belongsTo(Title::class);
+    }
+
+    public function personalAttachments()
+    {
+        return $this->hasMany(UserAttachment::class , 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class , 'company_id');
     }
 
 }

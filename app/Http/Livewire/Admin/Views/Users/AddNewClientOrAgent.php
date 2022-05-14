@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Nationality;
 use App\Models\Title;
 use App\Models\User;
+use App\Models\UserAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -56,10 +57,10 @@ class AddNewClientOrAgent extends Component
                 'type' => $this->type,
                 'email' => $this->email,
                 'password' => Hash::make('password'), //default password
-                'country' => $this->country,
+                'country_id' => $this->country,
                 'registration_No' => $this->registerationNo,
                 'responsible_person' => $this->resposebilePerson,
-                'title_position' => $this->titlePosition,
+                'title_id' => $this->titlePosition,
                 'mobile' => $this->mobile,
                 'nationality_id' => $this->responseibleNationality,
             ]
@@ -87,13 +88,35 @@ class AddNewClientOrAgent extends Component
         ];
     }
 
+    //upload files to folder and create db records in user attachments table
     public  function uploadAttachments($id)
     {
         $path = 'public/uploads/users/'.$id.'/attachments'.'/';
-        $this->profile->storeAs($path.'profile/' , $this->profile->getClientOriginalName());
-        $this->license->storeAs($path.'license/' , $this->license->getClientOriginalName());
-        $this->identity->storeAs($path.'/id' , $this->identity->getClientOriginalName());
-        $this->agreement->storeAs($path.'/agreement' , $this->agreement->getClientOriginalName());
+        if($this->profile)
+        {
+            $this->profile->storeAs($path.'profile/' , $this->profile->getClientOriginalName());
+            UserAttachment::create(
+                ['name'=> $this->profile->getClientOriginalName() , 'user_id' => $id , 'folder' =>'profile']
+            );
+        }
+        if($this->license)
+        {
+            $this->license->storeAs($path.'license/' , $this->license->getClientOriginalName());
+            UserAttachment::create(['name'=> $this->license->getClientOriginalName() , 'user_id' => $id , 'folder' =>'license'
+        ]);
+        }
+        if($this->identity)
+        {
+            $this->identity->storeAs($path.'id/' , $this->identity->getClientOriginalName());
+            UserAttachment::create(['name'=> $this->identity->getClientOriginalName() , 'user_id' => $id , 'folder' => 'id'
+        ]);
+        }
+        if($this->agreement)
+        {
+            $this->agreement->storeAs($path.'/agreement' , $this->agreement->getClientOriginalName());
+            UserAttachment::create(['name'=> $this->agreement->getClientOriginalName() , 'user_id' => $id , 'folder' => 'agreement'
+        ]);
+        }
         // $this->uploadAttachmentsToDB();
         /**
          * store these files in DB

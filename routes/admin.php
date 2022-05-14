@@ -6,14 +6,10 @@ use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
 use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
-use App\Http\Livewire\Admin\Views\Jobs\CompletedJobs;
 use App\Http\Livewire\Admin\Views\Jobs\JobDetails;
 use App\Http\Livewire\Admin\Views\Jobs\JobDetailsEdit;
-use App\Http\Livewire\Admin\Views\Jobs\NewJobs;
-use App\Http\Livewire\Admin\Views\Jobs\PendingJobs as JobsPendingJobs;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
 use App\Http\Livewire\Admin\Views\Profile\ProfileShow;
-use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -54,15 +50,10 @@ use App\Models\ApplicationAttachment;
 
         //jobs
         Route::get('jobs/all' , AllJobs::class)->name('admin.jobs.all');
-        Route::get('jobs/completed' , CompletedJobs::class)->name('admin.jobs.completed');
-        Route::get('jobs/latest' , NewJobs::class)->name('admin.jobs.latest');
-        Route::get('jobs/active' , ActiveJobs::class)->name('admin.jobs.active');
-        Route::get('jobs/pending' , JobsPendingJobs::class)->name('admin.jobs.pending');
-        Route::get('jobs/cancelled' , CanclledJobs::class)->name('admin.jobs.cancelled');
 
 
-        Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
-        Route::get('job/details/{id}/edit' , JobDetailsEdit::class)->name('admin.job.details.edit');
+        // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
+        // Route::get('job/details/{id}/edit' , JobDetailsEdit::class)->name('admin.job.details.edit');
 
 
         //Attachments Rotues:
