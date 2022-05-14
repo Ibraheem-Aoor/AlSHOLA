@@ -46,9 +46,9 @@ class LoginController extends Controller
     //Override
     public function redirectTo()
     {
-        if(Auth::user()->type == 'Employer')
+        if(Auth::user()->type == 'Client')
             return 'employer/dashboard';
-        elseif(Auth::user()->type == 'Talented')
+        elseif(Auth::user()->type == 'Agent')
             return 'talented/dashboard';
         elseif(Auth::user()->type == 'admin' && Auth::user()->is_admin)
             return 'admin/dashboard';

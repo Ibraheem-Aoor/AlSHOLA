@@ -25,8 +25,12 @@ class User extends Authenticatable
         'password',
         'type',
         'is_admin',
-        'brief',
-        'cv',
+        'title_id',
+        'responsible_person',
+        'country_id',
+        'nationality_id',
+        'mobile',
+        'registration_No',
     ];
 
     /**
@@ -95,8 +99,14 @@ class User extends Authenticatable
         return $this->belongsTo(Nationality::class);
     }
 
-    public function company()
+    public function country()
     {
-        return $this->belongsTo(User::class , 'company_name');
+        return $this->belongsTo(Country::class);
     }
+
+    public function title()
+    {
+        return $this->belongsTo(Title::class);
+    }
+
 }

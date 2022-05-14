@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Nationality;
+use App\Models\Title;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -10,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -62,12 +66,53 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'registration_No' => $data['type'][0].' - '.$this->generateRegisterationNo(), //the first letter of his type with the new number
             'name' => $data['name'],
             'email' => $data['email'],
             'status' => 'active',
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
+            'country_id' => $data['country'],
+            'nationality_id' => $data['responsible_nationality'],
+            'mobile' => $data['mobile'],
+            'title_id' => $data['title_position'],
+            'responsible_person' => $data['responsible_person'],
         ]);
+    }
+
+
+    //Generating a registeration Number for the new
+    function generateRegisterationNo() {
+        $number = date('y').mt_rand(1000000, 9999999); // better than rand()
+
+        // call the same function if the barcode exists already
+        if ($this->registerationNoExists($number)) {
+            return $this->generateRegisterationNo();
+        }
+
+        // otherwise, it's valid and can be used
+        return $number;
+    }
+
+    function registerationNoExists($number) {
+        // query the database and return a boolean
+        // for instance, it might look like this in Laravel
+        return User::where('registration_No' , $number)->exists();
+    }
+
+
+
+
+
+    /*
+        @override
+    */
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+        $nationalities = Nationality::all();
+        $titles = Title::all();
+        return view('auth.register' , compact('countries' , 'nationalities' , 'titles') );
     }
 
     /*
@@ -82,8 +127,13 @@ class RegisterController extends Controller
             'type' => [
                 'required' ,
                 'string' ,
-                Rule::in(['Talented', 'Employer'])
+                Rule::in(['Agent', 'Client' , 'Broker'])
                 ] ,
+            'country' => ['required', 'string', 'max:255'],
+            'responsible_nationality' =>  ['required', 'string', 'max:255'],
+            'responsible_person' =>  ['required', 'string', 'max:255'],
+            'title_position' =>  ['required', 'string', 'max:255'],
+            'mobile' => "required|numeric",
         ]);
     }
 
@@ -92,9 +142,9 @@ class RegisterController extends Controller
     */
     public function redirectTo()
     {
-        if(Auth::user()->type == 'Employer')
+        if(Auth::user()->type == 'Client')
             return 'employer/dashboard';
-        elseif(Auth::user()->type == 'Talented')
+        elseif(Auth::user()->type == 'Agent')
             return 'talented/dashboard';
     }
 }

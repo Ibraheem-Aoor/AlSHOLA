@@ -37,6 +37,7 @@
         z-index: 1;
     }
     </style>
+    @stack('css')
 </head>
 
 
@@ -72,6 +73,7 @@
     @notifyJs
     <!-- Template Javascript -->
     <script src="{{asset('assets/dist_1/js/main.js')}}"></script>
+    @stack('js')
 </body>
 
 </html>

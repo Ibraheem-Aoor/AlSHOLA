@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('natoinality_id')->nullable();
-            $table->index('natoinality_id');
-            $table->foreign('natoinality_id')->references('id')->on('nationalities')->constrained()->onDelete('cascade');
+            // $table->bigInteger('natoinality_id')->nullable()->unsigned();
+            // $table->index('natoinality_id')->nullable();
+            $table->foreignId('nationality_id')->nullable()->references('id')->on('nationalities')->nullable()->constrained()->onDelete('cascade');
         });
     }
 
@@ -28,7 +28,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('natoinality_id');
+            $table->dropColumn('nationality_id');
         });
     }
 };

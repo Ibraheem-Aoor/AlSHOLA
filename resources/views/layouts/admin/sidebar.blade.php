@@ -30,22 +30,46 @@
                   <li class="menu-title"></li><!-- /.menu-title -->
 
 
-                  @can('users management')
+
+
+                  {{--
+                        * Agent
+                    --}}
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users Authorities </a>
+                              aria-expanded="false"> <i class="menu-icon fa fa-users"></i> Agent</a>
                           <ul class="sub-menu children dropdown-menu">
                               <li>
                                   <i class="menu-icon fa fa-plus"></i>
-                                  <a href="{{ route('users.add') }}"> Add User </a>
+                                  <a href="{{ route('agent.create') }}"> Add Agent</a>
                               </li>
                               <li>
                                   <i class="menu-icon fa fa-plus"></i>
-                                  <a href="{{ route('users.all') }}">  Users Management</a>
+                                  <a href="{{ route('agent.list') }}"> Agent Managment</a>
                               </li>
                           </ul>
                       </li>
-                  @endcan
+
+
+
+                  {{--
+                        * Client
+                    --}}
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-users"></i> Client</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li>
+                                <i class="menu-icon fa fa-plus"></i>
+                                <a href="{{ route('client.create') }}"> Add client</a>
+                            </li>
+                            <li>
+                                <i class="menu-icon fa fa-plus"></i>
+                                <a href="{{ route('client.list') }}"> Client Mangament</a>
+                            </li>
+                        </ul>
+                    </li>
+
 
 
 

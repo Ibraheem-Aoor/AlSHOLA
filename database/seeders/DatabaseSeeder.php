@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            PermessionSeeder::class,
-            AdminSeeder::class,
+            // PermessionSeeder::class,
             FileTypeSeeder::class,
             NationalitySeeder::class,
             SectorSeeder::class,
             TitleSeeder::class,
+            CountriesSeeder::class,
+            CompanySeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

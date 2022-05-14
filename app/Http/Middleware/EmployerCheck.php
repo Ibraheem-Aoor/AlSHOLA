@@ -17,7 +17,7 @@ class EmployerCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->type == 'Employer')
+        if(Auth::check() && Auth::user()->type == 'Client')
             return $next($request);
         return abort(403);
     }

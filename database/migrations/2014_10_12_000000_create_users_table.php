@@ -15,16 +15,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('brief')->nullable();
-            $table->string('cv')->nullable();
-            $table->string('mobile')->nullable();
-            $table->unsignedBigInteger('company_name')->nullable();
-            $table->index('company_name');
-            $table->foreign('company_name')->references('id')->on('users')->constrained()->onDelete('cascade');
-            $table->string('email')->unique();
             $table->string('avatar')->default('user.png');
-            $table->string('type');
+            $table->string('name');
+            $table->string('registration_No')->nullable(); //auto generate
+            $table->string('responsible_person')->nullable();  //represnts the predefined company that the user belongs to.
+            $table->string('profile')->nullable(); //attachment
+            $table->string('license')->nullable(); //attachment
+            $table->string('identity_number')->nullable(); //attachment
+            $table->string('agreement')->nullable(); //attachment
+            $table->string('mobile')->nullable();
+            $table->string('email')->unique();
+            $table->enum('type' , ['Agent' , 'Client' , 'Broker' , 'Personal' , 'Admin']);
             $table->enum('status' , ['blocked' , 'active'])->default('active');
             $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();

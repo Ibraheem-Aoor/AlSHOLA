@@ -4,7 +4,6 @@ use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrderRecommendatio
 use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
 use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
-use App\Http\Livewire\Admin\Views\Users\Employers\AllEmployers;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
 use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
 use App\Http\Livewire\Admin\Views\Jobs\CompletedJobs;
@@ -14,8 +13,6 @@ use App\Http\Livewire\Admin\Views\Jobs\NewJobs;
 use App\Http\Livewire\Admin\Views\Jobs\PendingJobs as JobsPendingJobs;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
 use App\Http\Livewire\Admin\Views\Profile\ProfileShow;
-use App\Http\Livewire\Admin\Views\Users\Talents\AllTalents;
-use App\Http\Livewire\Admin\Views\Users\Talents\SendJobToTalent;
 use App\Http\Livewire\User\Employer\Views\Jobs\PendingJobs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +34,8 @@ use App\Http\Livewire\Admin\Views\Applications\Notes\ApplicationAllNotes;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationsWaitingForMedical;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationsWaitingForVisa;
 use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrders;
+use App\Http\Livewire\Admin\Views\Users\AddNewClientOrAgent;
+use App\Http\Livewire\Admin\Views\Users\AllAgentsOrClients;
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
 
@@ -116,15 +115,13 @@ use App\Models\ApplicationAttachment;
 
 
         /* Users Managment */
-
-        Route::get('/users/all' , AllUsers::class)->name('users.all');
-
+        Route::get('agent/create' , AddNewClientOrAgent::class)->name('agent.create');
+        Route::get('client/create' , AddNewClientOrAgent::class)->name('client.create');
+        Route::get('/agent/all' , AllAgentsOrClients::class)->name('agent.list');
+        Route::get('/client/all' , AllAgentsOrClients::class)->name('client.list');
         //Talents Routes:
-        Route::get('/talent/all' , AllTalents::class)->name('talent.all');
-        Route::get('/talent/find/{id}' , SendJobToTalent::class)->name('talent.recommend');
 
         //Employer Routes
-        Route::get('/employer/all' , AllEmployers::class)->name('employer.all');
         Route::get('/users/add' , AddUser::class)->name('users.add');
 
         /* Users Managment */

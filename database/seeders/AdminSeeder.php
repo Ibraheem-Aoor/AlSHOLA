@@ -25,8 +25,7 @@ class AdminSeeder extends Seeder
             'status'=> 'active',
             'password' => Hash::make('admin123'),
             'is_admin' => true,
-            'natoinality_id' => null,
-            'type' => 'admin',
+            'type' => 'Admin',
         ]);
 
         $adminRole = Role::create(['name' => 'Owner']);
