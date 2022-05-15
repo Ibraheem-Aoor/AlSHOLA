@@ -36,7 +36,7 @@
                                                         {{ $job->post_number }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->user->company->name }}
+                                                        {{ $job->user->company->name ?? ''}}
                                                     </td>
                                                     <td>
                                                         {{ $job->quantity }}

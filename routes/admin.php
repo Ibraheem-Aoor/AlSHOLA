@@ -5,7 +5,7 @@ use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
 use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
 use App\Http\Livewire\Admin\Views\Dashboard as AdminViewsDashboard;
 use App\Http\Livewire\Admin\Views\Jobs\ActiveJobs;
-use App\Http\Livewire\Admin\Views\Jobs\AllJobs;
+use App\Http\Livewire\Admin\Views\Demands\AllJobs;
 use App\Http\Livewire\Admin\Views\Jobs\JobDetails;
 use App\Http\Livewire\Admin\Views\Jobs\JobDetailsEdit;
 use App\Http\Livewire\Admin\Views\Profile\PasswordUpdate;
@@ -30,6 +30,7 @@ use App\Http\Livewire\Admin\Views\Applications\Notes\ApplicationAllNotes;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationsWaitingForMedical;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationsWaitingForVisa;
 use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrders;
+use App\Http\Livewire\Admin\Views\Demands\NewDemand;
 use App\Http\Livewire\Admin\Views\Users\AddNewClientOrAgent;
 use App\Http\Livewire\Admin\Views\Users\AllAgentsOrClients;
 use App\Models\Application;
@@ -50,6 +51,7 @@ use App\Models\ApplicationAttachment;
 
         //jobs
         Route::get('jobs/all' , AllJobs::class)->name('admin.jobs.all');
+        Route::get('/demand/new' , NewDemand::class)->name('admin.demand.new');
 
 
         // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');

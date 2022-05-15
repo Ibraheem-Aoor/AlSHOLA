@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\Company;
 
 class AdminSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class AdminSeeder extends Seeder
             'status'=> 'active',
             'password' => Hash::make('admin123'),
             'is_admin' => true,
+
             'type' => 'Admin',
         ]);
 

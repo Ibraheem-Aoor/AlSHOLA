@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Jobs;
+namespace App\Http\Livewire\Admin\Views\Demands;
 
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;

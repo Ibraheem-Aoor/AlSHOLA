@@ -7,11 +7,13 @@
                   <li class="active">
                       <a href="{{ route('admin.dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                   </li>
-                  {<li class="menu-title">J Managment</li><!-- /.menu-title -->
+                  <li class="menu-title">J Managment</li><!-- /.menu-title -->
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Rise Demand</a>
                       <ul class="sub-menu children dropdown-menu">
+                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.demand.new') }}"> New Demand</a>
+                          </li>
                           <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}">Demand List</a>
                           </li>
                       </ul>
