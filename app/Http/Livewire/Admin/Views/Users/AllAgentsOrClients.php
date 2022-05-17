@@ -10,6 +10,8 @@ class AllAgentsOrClients extends Component
 {
     /**
      * This Class is to show the agent/client list
+     * Agent Managment List
+     * Client Managmnet List
      */
     public $currentRoute , $intendedUserType;
     public function mount($id =  null)

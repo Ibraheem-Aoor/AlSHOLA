@@ -9,9 +9,17 @@ use App\Models\Title;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
+use App\Http\Traits\General\JobSerialGenerationTrait;
 
 class NewDemand extends Component
 {
+
+    /**
+     * Create New Demand for AL-Shloa company => Employer is Al-Shloa Company
+     *
+     */
+
+    use JobSerialGenerationTrait;
 
     public $currentRoute;
 
@@ -23,10 +31,8 @@ class NewDemand extends Component
             $contactPeriod , $workingPerHours , $workingPerDays , $offDay,
             $accommodation , $transport , $medical , $insurance , $food , $annualLeave,
             $airTicket , $overTimeSalary , $covid_19 , $otherTerms , $descreption;
-    public function mount()
-    {
-        $this->currentRoute = Route::currentRouteName();
-    }
+
+
 
     public function createNewDemand()
     {
@@ -87,23 +93,7 @@ class NewDemand extends Component
 
 
 
-    function generatePosteNumber() {
-        $number = date('y').mt_rand(10000000, 99999999); // better than rand()
 
-        // call the same function if the barcode exists already
-        if ($this->postNumberExists($number)) {
-            return $this->generatePosteNumber();
-        }
-
-        // otherwise, it's valid and can be used
-        return $number;
-    }
-
-    function postNumberExists($number) {
-        // query the database and return a boolean
-        // for instance, it might look like this in Laravel
-        return Job::where('post_number' , $number)->exists();
-    }
 
     public function render()
     {

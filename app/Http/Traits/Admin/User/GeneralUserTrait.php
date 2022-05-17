@@ -8,8 +8,11 @@ trait GeneralUserTrait
     /*
         This trait contains the admin users-mangement functions.
     */
-    
 
+    
+    /**
+     * Block The given user
+     */
     public function blockUser($id)
     {
         $user = User::findOrFail($id);
@@ -19,6 +22,10 @@ trait GeneralUserTrait
         return redirect()->back();
     }
 
+
+    /**
+     * Active The Given User
+     */
     public function activeUser($id)
     {
         $user = User::findOrFail($id);

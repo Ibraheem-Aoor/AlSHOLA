@@ -35,6 +35,7 @@ use App\Http\Livewire\Admin\Views\Users\AddNewClientOrAgent;
 use App\Http\Livewire\Admin\Views\Users\AllAgentsOrClients;
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
+use App\Http\Livewire\Admin\Views\Demands\NewRequestJob;
 
 //prefix => admin
 
@@ -52,6 +53,7 @@ use App\Models\ApplicationAttachment;
         //jobs
         Route::get('jobs/all' , AllJobs::class)->name('admin.jobs.all');
         Route::get('/demand/new' , NewDemand::class)->name('admin.demand.new');
+        Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
 
 
         // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
@@ -115,7 +117,8 @@ use App\Models\ApplicationAttachment;
         //Talents Routes:
 
         //Employer Routes
-        Route::get('/users/add' , AddUser::class)->name('users.add');
+        Route::get('/users/add' , AddUser::class)->name('admin.users.add');
+        Route::get('/users/all' , AllUsers::class)->name('admin.users.all');
 
         /* Users Managment */
 

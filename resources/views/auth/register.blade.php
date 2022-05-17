@@ -162,7 +162,7 @@
                                                 <option value="" selected>Who Are You?</option>
                                                 <option value="Client">Client</option>
                                                 <option value="Agent">Agent</option>
-                                                <option value="Broker">AlSHOLA - Broker</option>
+                                                {{-- <option value="Broker">AlSHOLA - Broker</option> --}}
                                             @endif
                                         </select>
                                         <label><i class="fa fa-category"></i> </label>
@@ -173,7 +173,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
 
 
                                 <div class="col-md-6">

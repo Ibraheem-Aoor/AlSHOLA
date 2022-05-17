@@ -31,6 +31,9 @@ class Job extends Model
         'indemnity_leave_and_overtime_salary',
         'covid_test',
         'other_terms',
+        'age',
+        'sex',
+        'requested_by',
         'user_id',
     ];
 

@@ -19,8 +19,7 @@
                                                 <th>Company_Name</th>
                                                 <th>User_ID</th>
                                                 <th>Status</th>
-                                                <th><a href="{{ route('users.add') }}" class="btn btn-info"><i
-                                                            class="fa fa-plus"></i> New</a></th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -34,21 +33,9 @@
                                                         {{ $user->name }}
                                                     </td>
                                                     <td>
-                                                        {{ $user->company->name ?? ''}}
+                                                        {{ $user->company->name ?? '' }}
                                                     </td>
                                                     <td>{{ $user->id }}</td>
-
-                                                    {{-- <td>
-                                                        @forelse ($user->roles as $role)
-                                                            {{ $role->name . ' , ' }}
-                                                        @empty
-                                                            @if ($user->type == 'admin')
-                                                                <span class="bade badge-warning">No Role</span>
-                                                            @else
-                                                                <span class="bade badge-info" style="padding: 2px">{{$user->type}}</span>
-                                                            @endif
-                                                        @endforelse
-                                                    </td> --}}
                                                     <td>
                                                         @if ($user->status == 'active')
                                                             <span class="badge badge-success">Active</span>

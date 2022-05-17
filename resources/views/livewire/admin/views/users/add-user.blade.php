@@ -64,61 +64,54 @@
                                             <select name="" id="" class="form-control" wire:model.lazy="type">
                                                 <option value="" selected>choose one</option>
                                                 {{-- <option value="">Personal</option> --}}
-                                                <option value="Talented">Agent</option>
-                                                <option value="Employer">Client</option>
-                                                <option value="ALSHOLA">AlSHLOA</option>
+                                                <option value="Agent">Agent</option>
+                                                <option value="Client">Client</option>
+                                                <option value="Broker">AlSHLOA - Broker</option>
+                                                <option value="Personal">Personal</option>
                                             </select>
                                             @error('type')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        @if ($type == 'Talented')
-                                            <div class="form-group col-sm-6">
-                                                <label class=" form-control-label">Nationality:</label>
-                                                <select wire:model.lazy="nationality" class="form-control">
-                                                    <option value="" selected>-- select one --</option>
-                                                    @foreach ($nationalities as $n)
-                                                        <option value="{{ $n->id }}">
-                                                            {{ $n->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('nationality')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        @elseif($type == 'Employer')
-                                            <div class="form-group col-sm-6">
-                                                <label class=" form-control-label">Company Name:</label>
-                                                <select wire:model.lazy="companyName" class="form-control">
-                                                    <option value="" selected>-- select one --</option>
-                                                    @foreach ($registerdComapnies as $company)
-                                                        <option value="{{ $company->id }}">
-                                                            {{ $company->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('companyName')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        @endif
-                                        {{-- @if ($type == 'admin')
-                                            <div class="form-group col-sm-12">
-                                                <div class="card" wire:ignore>
-                                                    <label for="">Roles: </label>
-                                                    <select id="select-state" wire:model="roles" multiple
-                                                        placeholder="select permession .." autocomplete="off">
-                                                        @foreach ($allRoles as $role)
-                                                            <option value="{{ $role->id }}">
-                                                                {{ $role->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                @error('roles')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        @endif --}}
+                                        <div class="form-group col-sm-6">
+                                            <label class=" form-control-label">Nationality:</label>
+                                            <select wire:model.lazy="nationality" class="form-control">
+                                                <option value="" selected>-- select one --</option>
+                                                @foreach ($nationalities as $n)
+                                                    <option value="{{ $n->id }}">
+                                                        {{ $n->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('nationality')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label class=" form-control-label">Company Name:</label>
+                                            <select wire:model.lazy="company" class="form-control">
+                                                <option value="" selected>-- select one --</option>
+                                                @foreach ($companies as $company)
+                                                    <option value="{{ $company->id }}">
+                                                        {{ $company->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('company')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label class=" form-control-label">Country:</label>
+                                            <select wire:model.lazy="country" class="form-control">
+                                                <option value="" selected>-- select one --</option>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}">
+                                                        {{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('country')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
                                         <button type="submit" class="btn btn-outline-primary col-sm-6">SAVE</button>

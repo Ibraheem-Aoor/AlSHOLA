@@ -194,8 +194,7 @@
 
                                         <div class="form-group col-sm-12">
                                             <label class=" form-control-label">Other Terms:</label>
-                                            <textarea type="text" id="name" class="form-control" style="height: 150px"
-                                                wire:model.lazy="otherTerms"></textarea>
+                                            <textarea type="text" id="name" class="form-control" style="height: 150px" wire:model.lazy="otherTerms"></textarea>
                                             @error('otherTerms')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
