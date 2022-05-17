@@ -14,6 +14,7 @@ class AllAgentsOrClients extends Component
      * Client Managmnet List
      */
     public $currentRoute , $intendedUserType;
+    public $nameFilter;
     public function mount($id =  null)
     {
         $this->currentRoute = Route::currentRouteName();
@@ -29,9 +30,25 @@ class AllAgentsOrClients extends Component
         }
     }
 
+    /**
+     * Filtering Names
+     */
+
+    public function getUsers()
+    {
+        if($this->nameFilter)
+            return User::where([
+                            ['name' , 'LIKE' , '%'.$this->nameFilter.'%'] ,
+                            ['type' , $this->intendedUserType] ,
+                    ])->with('country')->simplePaginate(15);
+        return  User::where([
+                ['type' , $this->intendedUserType] ,
+                ])->with('country')->simplePaginate(15);
+    }
+
     public function render()
     {
-        $users = User::where('type' , $this->intendedUserType)->with('country')->simplePaginate(15);
+        $users = $this->getUsers();
         return view('livewire.admin.views.users.all-agents-or-clients' ,
     [
         'users' => $users,

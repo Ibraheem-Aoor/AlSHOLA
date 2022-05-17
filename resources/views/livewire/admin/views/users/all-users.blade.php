@@ -10,6 +10,29 @@
                                 <h4 class="box-title">All Registerd Users</h4>
                             </div>
                             <div class="card-body--">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Type:</label>
+                                            <select class="form-control  mb-2 p-2" wire:model.lazy="intendedUsersType">
+                                                <option value="">All</option>
+                                                <option value="Client">Clinets</option>
+                                                <option value="Agent">Agents</option>
+                                                <option value="Broker">Brokers</option>
+                                                <option value="Admin">Admins</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Order by:</label>
+                                            <select class="form-control  mb-2 p-2" wire:model.lazy="orderBy">
+                                                <option value="id">Default</option>
+                                                <option value="name">Name</option>
+                                                <option value="company_id">Company</option>
+                                                <option value="created_at">Date</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="table-stats order-table ov-h">
                                     <table class="table ">
                                         <thead>
@@ -28,7 +51,7 @@
                                             @endphp
                                             @forelse($users as $user)
                                                 <tr>
-                                                    <td class="serial">{{ $i }}</td>
+                                                    <td class="serial">{{ $i++ }}</td>
                                                     <td>
                                                         {{ $user->name }}
                                                     </td>
