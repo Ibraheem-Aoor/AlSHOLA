@@ -41,6 +41,8 @@
                           </li>
                           {{-- <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}"> Downlaod List</a> --}}
                   </li>
+
+
               </ul>
               </li>
               <li class="menu-title"></li><!-- /.menu-title -->
@@ -60,6 +62,26 @@
                       <li>
                           <i class="menu-icon fa fa-bars"></i>
                           <a href="{{ route('agent.list') }}"> Agent Managment</a>
+                      </li>
+                  </ul>
+              </li>
+
+              {{-- * Settings --}}
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-cog"></i> Settings</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.sector.new') }}"> Add Category</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.title.new') }}"> Add Title</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.nationality.new') }}"> Add Nationality</a>
                       </li>
                   </ul>
               </li>

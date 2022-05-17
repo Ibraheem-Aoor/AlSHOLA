@@ -5,43 +5,23 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Create New Role</strong><small></small>
+                            <strong>ADD New Nationality</strong><small></small>
                         </div>
                         <div class="card-body card-block">
-                            <form wire:submit.prevent="addNewSector()">
+                            <form wire:submit.prevent="addNewNationality()">
                                 <div class="container">
                                     <div class="row text-center">
-
                                         <div class="form-group col-sm-6">
-
-                                            <label for="name" class=" form-control-label">Role Name</label>
-                                            <input type="text" id="name" class="form-control" wire:model.lazy="name">
-                                            @error('name')
+                                            <label for="name" class=" form-control-label">Nationality Name:</label>
+                                            <input type="text" id="name" class="form-control"
+                                                wire:model.lazy="newNationality">
+                                            @error('newNationality')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-6"></div>
-                                        <div class="form-group col-sm-6">
-                                            <div class="card" wire:ignore>
-
-                                                {{-- <input id="tom-select-it"   value="users management , contacts management"/> --}}
-                                                <select id="select-state" wire:model="permissions" multiple
-                                                    placeholder="select permession .." autocomplete="off">
-                                                    @foreach ($allPermissions as $permession)
-                                                        <option value="{{ $permession->id }}">{{ $permession->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
-
-                                            @error('permissions')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
-
                                         <button type="submit" class="btn btn-outline-primary col-sm-6">SAVE</button>
                                     </div>
                             </form>

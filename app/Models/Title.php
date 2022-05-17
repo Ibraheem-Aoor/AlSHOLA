@@ -10,7 +10,7 @@ class Title extends Model
     public $preventsLazyLoading = true;
 
     use HasFactory;
-    protected $fillabe = [
+    protected $fillable = [
         'name' , 'sector_id',
     ];
 

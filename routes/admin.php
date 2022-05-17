@@ -37,7 +37,12 @@ use App\Http\Livewire\Admin\Views\Users\AllAgentsOrClients;
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Http\Livewire\Admin\Views\Demands\NewRequestJob;
+use App\Http\Livewire\Admin\Views\Settings\Nationalities\AddNewNationality;
+use App\Http\Livewire\Admin\Views\Settings\Sectors\AddNewSector;
+use App\Http\Livewire\Admin\Views\Settings\Titles\AddNewTitle;
 use App\Http\Livewire\Admin\Views\Users\Profile\ShowUserProfile as ProfileShowUserProfile;
+use App\Models\Nationality;
+use App\Models\Sector;
 use App\Models\UserAttachment;
 
 //prefix => admin
@@ -57,6 +62,11 @@ use App\Models\UserAttachment;
         Route::get('jobs/all' , AllJobs::class)->name('admin.jobs.all');
         Route::get('/demand/new' , NewDemand::class)->name('admin.demand.new');
         Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
+
+        //Settings
+        Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');
+        Route::get('nationality/new' , AddNewNationality::class)->name('admin.nationality.new');
+        Route::get('title/new' , AddNewTitle::class)->name('admin.title.new');
 
 
         // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
@@ -189,7 +199,7 @@ use App\Models\UserAttachment;
                 Storage::delete('public/uploads/users/'.$userId.'/'.'attachments/'.$folderName.'/'.$fileName);
                 UserAttachment::where([ ['user_id' , $userId] , ['name' , $fileName] , ['folder' , $folderName]])->first()->delete();
                 notify()->success('file deleted successfully');
-                return redirect()->back(); 
+                return redirect()->back();
             }Catch(Throwable $e)
             {
                 return dd($e->getMessage());
