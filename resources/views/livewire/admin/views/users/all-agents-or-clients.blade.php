@@ -37,7 +37,9 @@
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
                                                     <td>
-                                                        {{ $user->name }}
+                                                        <a href="{{route('admin.user.profile.show' , $user->id)}}">
+                                                            {{ $user->name }}
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         {{ $user->registration_No }}

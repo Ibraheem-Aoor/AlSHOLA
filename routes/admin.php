@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\View\Users\Profile\ShowUserProfile;
 use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrderRecommendations;
 use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
 use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
@@ -36,6 +37,7 @@ use App\Http\Livewire\Admin\Views\Users\AllAgentsOrClients;
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Http\Livewire\Admin\Views\Demands\NewRequestJob;
+use App\Http\Livewire\Admin\Views\Users\Profile\ShowUserProfile as ProfileShowUserProfile;
 
 //prefix => admin
 
@@ -119,6 +121,7 @@ use App\Http\Livewire\Admin\Views\Demands\NewRequestJob;
         //Employer Routes
         Route::get('/users/add' , AddUser::class)->name('admin.users.add');
         Route::get('/users/all' , AllUsers::class)->name('admin.users.all');
+        Route::get('profile/{id}' , ProfileShowUserProfile::class)->name('admin.user.profile.show');
 
         /* Users Managment */
 

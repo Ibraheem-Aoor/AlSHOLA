@@ -25,8 +25,15 @@ class AllUsers extends Component
     {
         switch($this->intendedUsersType)
         {
-            case Null: return  User::With('company')->orderBy($this->orderBy)->simplePaginate(15);
-            default :  return  User::with('company')->where('type' , $this->intendedUsersType)->orderBy($this->orderBy)->simplePaginate(15);
+            case Null: return $this->orderBy == 'created_at' ?
+            User::With('company')->orderByDesc($this->orderBy)->simplePaginate(15)
+            :
+            User::With('company')->orderBy($this->orderBy)->simplePaginate(15);
+
+            default :  return $this->orderBy == 'created_at' ?
+            User::with('company')->where('type' , $this->intendedUsersType)->orderByDesc($this->orderBy)->simplePaginate(15)
+            :
+            User::with('company')->where('type' , $this->intendedUsersType)->orderBy($this->orderBy)->simplePaginate(15);
         }
     }
     public function render()

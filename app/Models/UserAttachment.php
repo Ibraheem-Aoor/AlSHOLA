@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserAttachment extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name' , 'folder' , 'user_id'
     ];

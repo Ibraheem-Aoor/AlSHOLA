@@ -27,7 +27,6 @@
                                             <select class="form-control  mb-2 p-2" wire:model.lazy="orderBy">
                                                 <option value="id">Default</option>
                                                 <option value="name">Name</option>
-                                                <option value="company_id">Company</option>
                                                 <option value="created_at">Date</option>
                                             </select>
                                         </div>

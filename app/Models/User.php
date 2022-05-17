@@ -110,6 +110,10 @@ class User extends Authenticatable
         return $this->belongsTo(Title::class);
     }
 
+    /**
+     * Each User has many personal attachments like agreement and etc..
+     * each attachment type can be recognized from it's 'folder' attribute
+     */
     public function personalAttachments()
     {
         return $this->hasMany(UserAttachment::class , 'user_id');
