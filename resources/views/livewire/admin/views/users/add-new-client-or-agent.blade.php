@@ -105,30 +105,30 @@
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Profile Attachment:</label>
                                             <input type="file" class="form-control" wire:model="profile">
-                                            @error('country')
+                                            @error('profile')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">License Attachment:</label>
                                             <input type="file" class="form-control" wire:model="license">
-                                            @error('country')
+                                            @error('license')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">ID:</label>
                                             <input type="file" class="form-control" wire:model="identity">
-                                            @error('country')
+                                            @error('identity')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Agreement:</label>
                                             <input type="file" class="form-control" wire:model="agreement">
-                                            @error('country')
+                                            @error('agreement')
                                                 <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @enderror   
                                         </div>
 
                                     </div>

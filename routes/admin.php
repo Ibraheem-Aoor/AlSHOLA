@@ -38,6 +38,7 @@ use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Http\Livewire\Admin\Views\Demands\NewRequestJob;
 use App\Http\Livewire\Admin\Views\Users\Profile\ShowUserProfile as ProfileShowUserProfile;
+use App\Models\UserAttachment;
 
 //prefix => admin
 
@@ -162,6 +163,39 @@ use App\Http\Livewire\Admin\Views\Users\Profile\ShowUserProfile as ProfileShowUs
         Route::get('roles/edit/{id}' , RoleEdit::class)->name('roles.edit');
 
 
+
+        /**
+         *
+         * Download User Attachments
+         * Like: agreement , license , etc..
+         */
+
+        Route::get('/user/{userId}/attachment/{folderName}/download/{fileName}' , function($userId , $folderName , $fileName)
+        {
+            try{
+                // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+                return Storage::download('public/uploads/users/'.$userId.'/'.'attachments/'.$folderName.'/'.$fileName);
+            }Catch(Throwable $e)
+            {
+                return dd($e->getMessage());
+                return redirect()->back();
+            }
+        })->name('admin.user.attachment.download');
+
+        Route::get('/user/{userId}/attachment/{folderName}/delete/{fileName}' , function($userId , $folderName , $fileName)
+        {
+            try{
+                // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+                Storage::delete('public/uploads/users/'.$userId.'/'.'attachments/'.$folderName.'/'.$fileName);
+                UserAttachment::where([ ['user_id' , $userId] , ['name' , $fileName] , ['folder' , $folderName]])->first()->delete();
+                notify()->success('file deleted successfully');
+                return redirect()->back(); 
+            }Catch(Throwable $e)
+            {
+                return dd($e->getMessage());
+                return redirect()->back();
+            }
+        })->name('admin.user.attachment.delete');
 
     });
 

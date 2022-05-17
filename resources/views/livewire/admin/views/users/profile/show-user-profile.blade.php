@@ -46,7 +46,7 @@
                                         @endif
                                     </div>
 
-                                    @if ($user->personalAttachments != null)
+                                    @if ( $user->personalAttachments() != [])
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -56,8 +56,9 @@
                                                                 <tr>
                                                                     <th class="serial">#</th>
                                                                     <th>File Name</th>
-                                                                    <th>file type</th>
-                                                                    <th>uploaded_at</th>
+                                                                    <th>File type</th>
+                                                                    <th>Uploaded_at</th>
+                                                                    <th>Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -77,7 +78,17 @@
                                                                             {{ $file->folder }}
                                                                         </td>
                                                                         <td>
-                                                                            {{ $file->creatd_at }}
+                                                                            {{ $file->created_at }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="
+                                                                            {{route('admin.user.attachment.download' , ['userId' => $user->id , 'folderName' => $file->folder , 'fileName' => $file->name])}}
+                                                                            " class="text-primary"><i class="fa fa-download"></i></a>
+                                                                            <a href="" class="text-info"><i class="fa fa-eye"></i></a>
+                                                                            <a href="
+                                                                            #
+                                                                            " class="text-danger"><i class="fa fa-teash"></i></a>
+                                                                            <a href="" class="text-danger"><i class="fa fa-trash"></i></a>
                                                                         </td>
                                                                     </tr>
                                                                 @empty
@@ -96,9 +107,6 @@
                                             </div>
                                         </div>
                                     @endif
-                                </div>
-                                <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-outline-primary col-sm-6">CREATE</button>
                                 </div>
                             </form>
 
