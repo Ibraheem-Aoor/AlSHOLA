@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Livewire\Admin\Veiws\Settings\Sectors\AllSectors;
 use App\Http\Livewire\Admin\View\Users\Profile\ShowUserProfile;
+use App\Http\Livewire\Admin\Views\Admin\Sectors\AllSectors as SectorsAllSectors;
 use App\Http\Livewire\Admin\Views\CandidacyOrders\AllCandidacyOrderRecommendations;
 use App\Http\Livewire\Admin\Views\Contacts\EmployerContacts;
 use App\Http\Livewire\Admin\Views\Contacts\TalentContacts;
@@ -38,8 +40,10 @@ use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Http\Livewire\Admin\Views\Demands\NewRequestJob;
 use App\Http\Livewire\Admin\Views\Settings\Nationalities\AddNewNationality;
+use App\Http\Livewire\Admin\Views\Settings\Nationalities\AllNationalities;
 use App\Http\Livewire\Admin\Views\Settings\Sectors\AddNewSector;
 use App\Http\Livewire\Admin\Views\Settings\Titles\AddNewTitle;
+use App\Http\Livewire\Admin\Views\Settings\Titles\AllTitles;
 use App\Http\Livewire\Admin\Views\Users\Profile\ShowUserProfile as ProfileShowUserProfile;
 use App\Models\Nationality;
 use App\Models\Sector;
@@ -65,8 +69,12 @@ use App\Models\UserAttachment;
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');
+        Route::get('sector/all' , \App\Http\Livewire\Admin\Views\Settings\Sectors\AllSectors::class)->name('admin.sector.all');
+
+        Route::get('nationality/all' , AllNationalities::class)->name('admin.nationality.all');
         Route::get('nationality/new' , AddNewNationality::class)->name('admin.nationality.new');
         Route::get('title/new' , AddNewTitle::class)->name('admin.title.new');
+        Route::get('title/all' , AllTitles::class)->name('admin.title.all');
 
 
         // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
