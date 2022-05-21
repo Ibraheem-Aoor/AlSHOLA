@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('duration');
-            $table->foreignId('country_id')->references('id')->on('countries')->constrained()->onDelete('cascade');
+            $table->string('country');
             $table->string('designation');
             $table->foreignId('application_id')->references('id')->on('applications')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -31,7 +31,7 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $application->job->post_number }}</td>
-                                        <td>{{ $application->job->title }}</td>
+                                        <td>{{ $application->job->title->name }}</td>
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>

@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\User\Employee\Note\CreateJobNoteRequest;
+use App\Models\User;
 
 class NoteController extends Controller
 {
     public function index($id)
     {
-        $job = Job::select(['id' , 'title' , 'status'])->with('notes')->findOrFail($id);
+        $job = Job::with('notes')->select(['id' , 'status'])->findOrFail($id);
+        $user = User::findOrFail(Auth::id());
         return view('user.employer.jobs.notes.all-job-notes' , compact('job'));
     }
 

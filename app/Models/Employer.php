@@ -12,15 +12,12 @@ class Employer extends Model
      */
     use HasFactory;
     protected $fillable = [
-        'name' , 'duration' , 'country_id' , 'designation' , 'application_id'
+        'name' , 'duration' , 'country' , 'designation' , 'application_id'
     ];
 
     public function application()
     {
         return $this->belongsTo(Application::class);
     }
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
+   
 }

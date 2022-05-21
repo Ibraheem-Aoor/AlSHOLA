@@ -105,14 +105,14 @@
                                 YOU HAVE APPLIED TO THIS JOB
                             </h4>
                         </div>
-                        <div class="">
+                        {{-- <div class="">
                             <h4 class="mb-4">
 
                                 <a href="{{ route('employee.candidacy.order.index', $job->id) }}">
                                     Want toreco mmend other candidates for this job?
                                 </a>
                             </h4>
-                        </div>
+                        </div> --}}
                     @endif
                 </div>
 

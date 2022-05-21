@@ -9,6 +9,7 @@ use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Models\ApplicationNote;
 use App\Models\Attachment;
+use App\Models\Employer;
 use App\Models\Job;
 use App\Models\Nationality;
 use App\Models\Title;
@@ -33,29 +34,38 @@ class ApplicationController extends Controller
         $nationalities = DB::table('nationalities')->get();
         return view('livewire.user.employee.views.applications.application-form' , compact('job' , 'titles' , 'nationalities'));
     }
+
+    /**
+     * Create the application with it's employer recoreds
+     */
     public function createApplication(CreateApplicationRequest $request , $jobId)
     {
-        return dd($request);
+        $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId , 'title_id' => $request->get('title')]));
+        $this->createEmoployersRecords($request->addMoreInputFields  ,  $application->id);
+        notify()->success('Application Send Successfully');
+        return redirect(route('employee.dashboard'));
     }
 
+    /**
+     * Create Employers Experince  records for this application
+     */
 
-    public function storeApplication( $coverLetter , $fileName , $jobId)
+    public function createEmoployersRecords($records , $applicationId)
     {
-        Application::create(
-            [
-                'cover_letter' => $coverLetter,
-                'resume' => $fileName,
-                'user_id' => Auth::id(),
-                'job_id' => $jobId,
-            ]
-        );
+        foreach($records as $record)
+        {
+            Employer::create(array_merge($record , ['application_id' => $applicationId]));
+        }
     }
+
+
+
 
     // all applications of the employee
     public function allApplications()
     {
         $applications = Application::where('user_id' , Auth::id())
-                        ->with(['user:id,email,name' , 'job:id,post_number,title'])
+                        ->with(['job.title'])
                         ->withCount('notes')
                         ->orderByDesc('id')
                         ->simplePaginate(15);
@@ -81,7 +91,7 @@ class ApplicationController extends Controller
     {
         $applications = Application::whereBelongsTo(Auth::user())
                         ->where('status' , 'waiting for medical')
-                        ->with('job:id,title,post_number')
+                        ->with(['job.title'])
                         ->withCount('notes')
                         ->orderByDesc('id')
                         ->simplePaginate();
@@ -93,7 +103,7 @@ class ApplicationController extends Controller
     {
         $applications = Application::whereBelongsTo(Auth::user())
                         ->where('status' , 'waiting for visa')
-                        ->with('job:id,title,post_number')
+                        ->with(['job.title'])
                         ->withCount('attachments')
                         ->orderByDesc('id')
                         ->simplePaginate();

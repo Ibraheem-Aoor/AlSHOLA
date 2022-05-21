@@ -35,24 +35,28 @@
                                         {{-- Basic Info --}}
                                         <div class="col-sm-4 mb-3">
                                             <h4>Reference:</h4>
-                                            <input type="text" name="ref" class="form-control">
+                                            <input required type="text" name="ref" class="form-control"
+                                                value="{{ old('ref') }}">
                                             @error('ref')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Date:</h4>
-                                            <input type="date" name="date" class="form-control">
+                                            <input required type="date" name="date" class="form-control"
+                                                value="{{ old('date') }}">
                                             @error('date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Position Applied For:</h4>
-                                            <select name="title" class="form-control">
+                                            <select required name="title" class="form-control">
                                                 <option value="">-- select one -- </option>
                                                 @foreach ($titles as $title)
-                                                    <option value="{{ $title->id }}">{{ $title->name }}</option>
+                                                    <option value="{{ $title->id }}"
+                                                        @if (old('title') == $title->id) {{ 'selected' }} @endif>
+                                                        {{ $title->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('title')
@@ -61,38 +65,44 @@
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Full Name:</h4>
-                                            <input type="text" name="full_name" class="form-control">
+                                            <input required type="text" name="full_name" class="form-control"
+                                                value="{{ old('full_name') }}">
                                             @error('full_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>address:</h4>
-                                            <input type="text" name="address" class="form-control">
+                                            <input required type="text" name="address" class="form-control"
+                                                value="{{ old('address') }}">
                                             @error('address')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Contact No:</h4>
-                                            <input type="text" name="contact_no" class="form-control">
+                                            <input required type="number" name="contact_no" class="form-control"
+                                                value="{{ old('contact_no') }}">
                                             @error('contact_no')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Passport No:</h4>
-                                            <input type="text" name="passport_no" class="form-control">
+                                            <input required type="text" name="passport_no" class="form-control"
+                                                value="{{ old('passport_no') }}">
                                             @error('passport_no')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Nationality:</h4>
-                                            <select name="nationality" class="form-control">
+                                            <select required name="nationality" class="form-control">
                                                 <option value="">-- select one -- </option>
                                                 @foreach ($nationalities as $nationality)
-                                                    <option value="{{ $nationality->id }}">{{ $nationality->name }}
+                                                    <option value="{{ $nationality->id }}"
+                                                        @if (old('nationality') == $nationality) {{ 'selected' }} @endif>
+                                                        {{ $nationality->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -102,59 +112,70 @@
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Place Issued:</h4>
-                                            <input type="text" name="place_issued" class="form-control">
+                                            <input required type="text" name="place_issued" class="form-control"
+                                                value="{{ old('place_issued') }}">
                                             @error('place_issued')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>place Of Birth:</h4>
-                                            <input type="text" name="place_of_birth" class="form-control">
+                                            <input required type="text" name="place_of_birth" class="form-control"
+                                                value="{{ old('place_of_birth') }}">
                                             @error('place_of_birth')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>date_issued:</h4>
-                                            <input type="date" name="date_issued" class="form-control">
+                                            <input required type="date" name="date_issued" class="form-control"
+                                                value="{{ old('date_issued') }}">
                                             @error('date_issued')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Date Of Birth:</h4>
-                                            <input type="date" name="date_of_birth" class="form-control">
+                                            <input required type="date" name="date_of_birth" class="form-control"
+                                                value="{{ old('date_of_birth') }}">
                                             @error('date_of_birth')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
-                                            <h4>Expiry Date:</h4>
-                                            <input type="date" name="expiry_date" class="form-control">
-                                            @error('expiry_date')
+                                            <h4>Expiry Issued:</h4>
+                                            <input required type="date" name="expiry_issued" class="form-control"
+                                                value="{{ old('expiry_issued') }}">
+                                            @error('expiry_issued')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Age:</h4>
-                                            <input type="text" name="age" class="form-control">
+                                            <input required type="number" name="age" class="form-control"
+                                                value="{{ old('age') }}">
                                             @error('age')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Relegion:</h4>
-                                            <input type="date" name="relegion" class="form-control">
+                                            <input required type="date" name="relegion" class="form-control"
+                                                value="{{ old('relegion') }}">
                                             @error('relegion')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>sex:</h4>
-                                            <select name="sex" class="form-control">
+                                            <select required name="sex" class="form-control">
                                                 <option value="">-- select one --</option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
+                                                <option value="male"
+                                                    @if (old('sex') == 'male') {{ 'selected' }} @endif>Male
+                                                </option>
+                                                <option value="female"
+                                                    @if (old('sex') == 'female') {{ 'selected' }} @endif>Female
+                                                </option>
                                             </select>
                                             @error('sex')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -162,22 +183,22 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>children:</h4>
-                                            <input type="text" name="children" class="form-control">
+                                            <input required type="text" name="children" class="form-control" value="{{old('children')}}">
                                             @error('children')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Height:</h4>
-                                            <input type="text" name="height" class="form-control">
+                                            <input required type="text" name="height" class="form-control" value="{{old('height')}}">
                                             @error('height')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>weight:</h4>
-                                            <input type="text" name="weight" class="form-control">
-                                            @error('height')
+                                            <input required type="text" name="weihgt" class="form-control" value="{{old('weihgt')}}">
+                                            @error('weihgt')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -185,11 +206,11 @@
                                         {{-- Arabic Language --}}
                                         <div class="col-sm-2 mb-3">
                                             <h4>Language:</h4>
-                                            <input type="text" value="Arabic" readonly class="form-control">
+                                            <input required type="text" value="Arabic" readonly class="form-control">
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Speak:</h4>
-                                            <select name="arabic_speak" class="form-control">
+                                            <select required name="arabic_speak" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -202,7 +223,7 @@
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Understand:</h4>
-                                            <select name="arabic_understand" class="form-control">
+                                            <select required name="arabic_understand" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -215,7 +236,7 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Read:</h4>
-                                            <select name="arabic_read" class="form-control">
+                                            <select required name="arabic_read" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -228,7 +249,7 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Write:</h4>
-                                            <select name="arabic_write" class="form-control">
+                                            <select required name="arabic_write" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -243,11 +264,11 @@
                                         {{-- English Language --}}
                                         <div class="col-sm-2 mb-3">
                                             <h4>Language:</h4>
-                                            <input type="text" value="English" readonly class="form-control">
+                                            <input required type="text" value="English" readonly class="form-control">
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Speak:</h4>
-                                            <select name="english_speak" class="form-control">
+                                            <select required name="english_speak" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -260,7 +281,7 @@
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Understand:</h4>
-                                            <select name="english_understand" class="form-control">
+                                            <select required name="english_understand" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -273,7 +294,7 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Read:</h4>
-                                            <select name="english_read" class="form-control">
+                                            <select required name="english_read" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -286,7 +307,7 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Write:</h4>
-                                            <select name="english_write" class="form-control">
+                                            <select required name="english_write" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -301,11 +322,11 @@
                                         {{-- Hindi Langauge --}}
                                         <div class="col-sm-2 mb-3">
                                             <h4>Language:</h4>
-                                            <input type="text" value="Hindi" readonly class="form-control">
+                                            <input required type="text" value="Hindi" readonly class="form-control">
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Speak:</h4>
-                                            <select name="hindi_speak" class="form-control">
+                                            <select required name="hindi_speak" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -318,7 +339,7 @@
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Understand:</h4>
-                                            <select name="hindi_understand" class="form-control">
+                                            <select required name="hindi_understand" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -331,7 +352,7 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Read:</h4>
-                                            <select name="hindi_read" class="form-control">
+                                            <select required name="hindi_read" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -344,7 +365,7 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Write:</h4>
-                                            <select name="hindi_write" class="form-control">
+                                            <select required name="hindi_write" class="form-control">
                                                 <option value="">-level-</option>
                                                 <option value="excellent">Excellent</option>
                                                 <option value="good">Good</option>
@@ -366,7 +387,7 @@
                                                     <th>Action</th>
                                                 </tr>
                                                 <tr>
-                                                    <td><input type="text" required name="addMoreInputFields[0][employer]"
+                                                    <td><input type="text" required name="addMoreInputFields[0][name]"
                                                             placeholder="Enter Empoloyer" class="form-control" />
                                                     </td>
                                                     <td><input type="text" required name="addMoreInputFields[0][duration]"
@@ -386,7 +407,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-3">
                                             <h4>Applicant Interviewed By: </h4>
-                                            <input type="text" required class="form-control"
+                                            <input required type="text" required class="form-control"
                                                 name="applicant_interviewd_by">
                                             @error('applicant_interviewd_by')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -394,7 +415,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-3">
                                             <h4>Minumum Expected Salary: </h4>
-                                            <input type="text" required class="form-control" name="min_salary">
+                                            <input required type="number" required class="form-control" name="min_salary">
                                             @error('min_salary')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -409,7 +430,7 @@
                                     </div>
                                     <div class="col-sm-6 mt-3">
                                         <h4>Signutare:</h4>
-                                        <input type="text" required class="form-control" name="signature">
+                                        <input required type="text" required class="form-control" name="signature">
                                         @error('signature')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -476,7 +497,7 @@
             ++i;
             $("#dynamicAddRemove").append(
                 '<tr><td><input type="text" name="addMoreInputFields[' + i +
-                '][employer]" placeholder="Enter Employer"  required class="form-control" /></td><td><input type="text" name="addMoreInputFields[' +
+                '][name]" placeholder="Enter name"  required class="form-control" /></td><td><input type="text" name="addMoreInputFields[' +
                 i +
                 '][duration]" placeholder="Enter Duration" required class="form-control" /></td><td><input type="text" name="addMoreInputFields[' +
                 i +

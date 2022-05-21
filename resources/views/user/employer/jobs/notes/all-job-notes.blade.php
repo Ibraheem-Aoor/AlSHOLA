@@ -7,8 +7,6 @@
         <div class="container">
 
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Notes</h1>
-            <h2 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Title: {{ $job->title }}</h1>
-                <h2 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Status: {{ $job->status }}</h1>
                     <div class="row g-4">
                         <div class="col-sm-12 text-center">
                             <div class="table-responsive">

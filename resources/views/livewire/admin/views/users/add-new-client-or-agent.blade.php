@@ -41,17 +41,14 @@
                                         </div>
 
                                         <div class="form-group col-sm-6">
-                                            <label class=" form-control-label">Title Position:</label>
-                                            <select class="form-control" wire:model.lazy="titlePosition">
-                                                <option value="">-- select one --</option>
-                                                @foreach ($titles as $title)
-                                                    <option value="{{ $title->id }}">{{ $title->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('titlePosition')
+                                            <label class=" form-control-label">Resposible Person:</label>
+                                            <input type="text" id="name" class="form-control"
+                                                wire:model.lazy="resposebilePerson">
+                                            @error('resposebilePerson')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+
 
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Mobile:</label>
@@ -62,11 +59,17 @@
                                             @enderror
                                         </div>
 
+
+
                                         <div class="form-group col-sm-6">
-                                            <label class=" form-control-label">Resposible Person:</label>
-                                            <input type="text" id="name" class="form-control"
-                                                wire:model.lazy="resposebilePerson">
-                                            @error('resposebilePerson')
+                                            <label class=" form-control-label">Title Position:</label>
+                                            <select class="form-control" wire:model.lazy="titlePosition">
+                                                <option value="">-- select one --</option>
+                                                @foreach ($titles as $title)
+                                                    <option value="{{ $title->id }}">{{ $title->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('titlePosition')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -128,7 +131,7 @@
                                             <input type="file" class="form-control" wire:model="agreement">
                                             @error('agreement')
                                                 <span class="text-danger">{{ $message }}</span>
-                                            @enderror   
+                                            @enderror
                                         </div>
 
                                     </div>

@@ -13,8 +13,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Job_Number</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col">Location</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -26,8 +26,8 @@
                                 @forelse ($avlialbeJobs as $job)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $job->title }}</td>
-                                        <td>{{ $job->location }}</td>
+                                        <td>{{ $job->post_number }}</td>
+                                        <td>{{ $job->title->name }}</td>
                                         <td>{{ $job->status }}</td>
                                         <td>
                                             <a href="{{ route('employee.job.details', $job->id) }}"
