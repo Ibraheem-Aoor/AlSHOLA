@@ -88,7 +88,7 @@
                         @forelse ($avlialbeJobs as $job)
                             <tr>
                                 <th scope="row">{{ $i++ }}</th>
-                                <td>{{ $job->title }}</td>
+                                <td>{{ $job->title->name }}</td>
                                 <td>{{ $job->created_at }}</td>
                                 <td>{{ $job->status }}</td>
                                 <td>
@@ -139,6 +139,7 @@
                     borderWidth: 1
                 }]
             },
+            
             options: {
                 // scales: {
                 //     y: {

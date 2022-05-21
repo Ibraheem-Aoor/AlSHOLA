@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->text('ref');
             $table->date('date');
-            $table->foreignId('title_id'); //position applied for.
             $table->string('address');
+            $table->string('full_name');
             $table->string('passport_no');
             $table->string('contact_no');
             $table->string('place_of_birth');
-            $table->string('date_of_birth');
+            $table->date('date_of_birth');
             $table->string('age');
             $table->string('relegion');
             $table->string('place_issued');
@@ -34,7 +34,26 @@ return new class extends Migration
             $table->string('weihgt');
 
             //Language:
-            $table->string('arabic');
+            $table->string('arabic_speak');
+            $table->string('arabic_understand');
+            $table->string('arabic_read');
+            $table->string('arabic_write');
+
+            $table->string('english_speak');
+            $table->string('english_understand');
+            $table->string('english_read');
+            $table->string('english_write');
+
+            $table->string('hindi_speak');
+            $table->string('hindi_understand');
+            $table->string('hindi_read');
+            $table->string('hindi_write');
+
+            $table->text('recommendations');
+            $table->string('applicant_interviewd_by');
+            $table->string('min_salary');
+            $table->string('signature');
+
 
             $table->enum('status' , [
                                     'waiting for medical' , 'waiting for visa' , 'waiting for arrival'

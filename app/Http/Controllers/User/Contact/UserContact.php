@@ -29,8 +29,15 @@ class UserContact extends Controller
             'user_type' => Auth::user()->type,
             'user_id' => Auth::id(),
         ]);
+        $type = '';
+        switch(Auth::user()->type)
+        {
+            case 'Client' : $type = "employer"; break;
+            case 'Agent' : $type = "talented"; break;
+        }
+
         notify()->success('We will reach you soon!');
-        return redirect(Str::lower(Auth::user()->type).'/dashboard');
+        return redirect($type.'/dashboard');
     }
 
 

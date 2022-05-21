@@ -77,6 +77,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/dist_1/js/main.js') }}"></script>
+
 </body>
 
 </html>

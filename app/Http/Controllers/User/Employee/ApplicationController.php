@@ -9,10 +9,14 @@ use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Models\ApplicationNote;
 use App\Models\Attachment;
+use App\Models\Job;
+use App\Models\Nationality;
+use App\Models\Title;
 use App\Models\VisaInoformation;
 use Illuminate\Http\Request;
 use GeneaLabs\LaravelCaffeine\Tests\CreatesApplication;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,47 +25,18 @@ class ApplicationController extends Controller
 {
 
     use ApplicationAttachmentTrait;
+
+    public function showApplicationForm($id)
+    {
+        $job = Job::with(['title.sector'])->findOrFail($id);
+        $titles = Title::all();
+        $nationalities = DB::table('nationalities')->get();
+        return view('livewire.user.employee.views.applications.application-form' , compact('job' , 'titles' , 'nationalities'));
+    }
     public function createApplication(CreateApplicationRequest $request , $jobId)
     {
-        $cv = '';
-        // Checking if the there is a prev cv uploaded and taking it if exists. else he should upload a cv
-        if($request->has('prev_cv_checked'))
-        {
-            if(($id = Auth::user()->cv) != null)
-            {
-                $cv = Auth::user()->cv;
-                $oldFiles = Storage::allFiles('public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/cv'.'/');
-                Storage::delete($oldFiles);
-                Storage::copy('public/uploads/users/cv/'.Auth::id().'/'.$cv, 'public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/cv'.'/'.$cv);
-                $this->storeApplication($request->get('cover_letter') , $cv , $jobId);
-                notify()->success('Your Application Recevied Successfully');
-                return redirect()->back();
-            }
-            else
-            {
-                notify()->error('There is no previous CV');
-                return redirect()->back();
-            }
-        }
-        else
-        {
-            if($request->hasFile('cv'))
-            {
-                $file = $request->file('cv');
-                $fileName  = $file->getClientOriginalName();
-                $path = 'public/uploads/applications/jobs/'.$jobId.'/'.Auth::id().'/cv'.'/';
-                $file->storeAs($path , $fileName);
-                $this->storeApplication($request->get('cover_letter') , $fileName , $jobId );
-                notify()->success('Your Application Recevied Successfully');
-                return redirect()->back();
-            }
-            else
-            {
-                notify()->error('Please Upload The CV');
-                return redirect()->back();
-            }
-        }
-    }//end method
+        return dd($request);
+    }
 
 
     public function storeApplication( $coverLetter , $fileName , $jobId)

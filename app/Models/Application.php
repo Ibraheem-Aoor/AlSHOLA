@@ -12,7 +12,14 @@ class Application extends Model
 
 
     protected $fillable = [
-        'cover_letter' , 'resume' , 'user_id', 'job_id' , 'forwarded'
+        'ref' , 'date' , 'title_id' , 'address' , 'full_name' , 'passport_no' ,
+        'contact_no' , 'place_of_birth' , 'date_of_birth' , 'age' , 'relegion' ,
+        'place_issued' , 'date_issued' , 'expiry_issued' , 'sex' , 'children' ,
+        'height' , 'weihgt' , 'arabic_speak' , 'arabic_understand' , 'arabic_read',
+        'arabic_write' , 'english_speak' , 'english_understand' , 'english_read' , 'english_write',
+        'hindi_speak' , 'hindi_understand' , 'hindi_read' , 'hindi_write', 'recommendations',
+        'applicant_interviewd_by' , 'min_salary' , 'signature' , 'status' , 'forwarded',
+        'user_id' , 'job_id'
     ];
 
     public function user()
@@ -34,6 +41,12 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationAttachment::class , 'application_id');
     }//end method
+
+
+    public function emplyoers()
+    {
+        return $this->hasMany(Employer::class);
+    }
 
     public function visa()
     {

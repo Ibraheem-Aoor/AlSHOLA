@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::post('/job/sendnote/{id}' , [NoteController::class , 'store'])->name('employee.job.note.create');
 
         //talent job application routes
+        Route::get('/application-form/{id}' , [ApplicationController::class , 'showApplicationForm'])->name('employee.application.form');
         Route::post('/application/{id}' , [ApplicationController::class , 'createApplication'])->name('employee.application.create');
         Route::get('application/all' , [ApplicationController::class , 'allApplications'])->name('employee.applications.all');
         Route::get('application/medical' , [ApplicationController::class , 'medicalApplications'])->name('employee.applications.medical');

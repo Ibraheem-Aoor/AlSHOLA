@@ -25,9 +25,48 @@ class CreateApplicationRequest extends FormRequest
     public function rules()
     {
         return [
-            'cv' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
-            'cover_letter' => 'required|string',
-            'prev_cv_checked' => 'nullable',
+            "ref" => "required|string",
+            "date" => "required|date",
+            "title" => "required|string",
+            "full_name" => "required|string",
+            "address" => "required|string",
+            "contact_no" => "required|numeric",
+            "passport_no" => "required|numeric",
+            "nationality" => "required|string",
+            "place_issued" => "required|string",
+            "place_of_birth" => "required|string",
+            "date_issued" => "required|date",
+            "date_of_birth" => "required|date",
+            "expiry_date" => "required|date",
+            "age" => "required|numeric",
+            "relegion" => "required|string",
+            "sex" => "required|string",
+            "children" => "required|string",
+            "height" => "required|string",
+            "weight" => "required|string",
+            "arabic_speak" => "required|string",
+            "arabic_understand" => "required|string",
+            "arabic_read" => "required|string",
+            "arabic_write" => "required|string",
+            "english_speak" => "required|string",
+            "english_understand" => "required|string",
+            "english_read" => "required|string",
+            "english_write" => "required|string",
+            "hindi_speak" => "required|string",
+            "hindi_understand" => "required|string",
+            "hindi_read" => "required|string",
+            "hindi_write" => "required|string",
+            "addMoreInputFields.*.employer" => "required|string",
+            "addMoreInputFields.*.duration" => "required|string",
+            "addMoreInputFields.*.country" => "required|string",
+            "addMoreInputFields.*.designation" => "required|string",
+            "applicant_interviewd_by" => "required|string",
+            "min_salary" => "required|numeric",
+            "recommendations" => "required|string",
+            "signature" => "required|string",
         ];
     }
 }
+
+
+

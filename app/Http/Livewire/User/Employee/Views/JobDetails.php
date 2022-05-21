@@ -16,7 +16,7 @@ class JobDetails extends Component
     public $job;
     public function mount($id)
     {
-        $this->job = Job::findOrFail($id);
+        $this->job = Job::with(['title.sector' , 'nationality'])->findOrFail($id);
         if(!Auth::user()->hasJob($this->job))
             abort(403);
     }

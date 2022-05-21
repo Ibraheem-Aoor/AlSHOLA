@@ -129,53 +129,35 @@
                                                 <td>{{ $job->created_at }}</td>
                                                 <td>{{ $job->status }}</td>
                                                 <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                            aria-expanded="false">
-                                                            Actions
-                                                        </button>
-                                                        <ul class="dropdown-menu"
-                                                            aria-labelledby="dropdownMenuButton1">
-                                                            <li><a href="{{ route('job.show', $job->id) }}"
-                                                                    class="dropdown-item badge bg-primary"
-                                                                    href="#">Details</a>
-                                                            </li>
-                                                            <li>
-                                                                <form action="{{ route('job.destroy', $job) }}"
-                                                                    method="POST">
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="submit"
-                                                                        class="dropdown-item badge bg-danger"><i
-                                                                            class="fa fa-trash"></i> Delete</button>
-                                                                </form>
-                                                            </li>
-                                                            <li><a class="dropdown-item badge bg-info"
-                                                                    href="{{ route('employer.job.notes', $job->id) }}"><i
-                                                                        class="fa fa-note"></i> Show Notes</a>
-                                                            </li>
-                                                            <li><a href="{{ route('employer.pdf.generate', $job->id) }}"
-                                                                    class="dropdown-item badge bg-success" href="#"><i
-                                                                        class="fa fa-print"></i> Print
-                                                                    Documentation</a>
-                                                            </li>
-                                                            <li><a href="#exampleModal_5"
-                                                                    class="dropdown-item badge bg-secondary"
-                                                                    data-toggle="modal"
-                                                                    data-title="{{ $job->title }}"
-                                                                    data-number="{{ $job->post_number }}"
-                                                                    data-id="{{ $job->id }}"><i
-                                                                        class="fa fa-upload"></i> upload
-                                                                    attachment</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    <a href="{{ route('job.show', $job->id) }}" title="details"
+                                                        class="badge bg-primary" href="#"><i class="fa fa-eye"></i></a>
+
+                                                    <a href="#" title="delete" onclick="event.preventDefault();document.getElementById('delete-form').submit();" class=" badge bg-danger"><i
+                                                            class="fa fa-trash"></i></a>
+                                                            <form id="delete-form"  style="display: none;" action="{{ route('job.destroy', $job) }}" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                            </form>
+
+                                                    <a class=" badge bg-info" title="notes"
+                                                        href="{{ route('employer.job.notes', $job->id) }}"><i
+                                                            class="fa fa-file"></i></a>
+
+                                                    <a href="{{ route('employer.pdf.generate', $job->id) }}" title="print document"
+                                                        class=" badge bg-success" href="#"><i
+                                                            class="fa fa-print"></i>
+                                                        </a>
+
+                                                    <a href="#exampleModal_5" class=" badge bg-secondary" title="upload attachment to managment"
+                                                        data-toggle="modal" data-title="{{ $job->title }}"
+                                                        data-number="{{ $job->post_number }}"
+                                                        data-id="{{ $job->id }}"><i class="fa fa-upload"></i></a>
+
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="6" class="alert alert-warning text-center bg-dark"
+                                                <td colspan="7" class="alert alert-warning text-center bg-dark"
                                                     style="color:#fff">
                                                     No Records Yet
                                                 </td>

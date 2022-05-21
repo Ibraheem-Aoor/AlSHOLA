@@ -7,13 +7,14 @@
                   <li class="active">
                       <a href="{{ route('admin.dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                   </li>
+
                   {{-- <li class="menu-title">J Managment</li><!-- /.menu-title --> --}}
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Rise Demand</a>
                       <ul class="sub-menu children dropdown-menu">
-                          <li><i class="fa fa-bars"></i><a href="{{ route('admin.demand.new') }}"> New Demand</a>
-                          </li>
+                          {{-- <li><i class="fa fa-bars"></i><a href="{{ route('admin.demand.new') }}"> New Demand</a>
+                          </li> --}}
                           <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}">Demand List</a>
                           </li>
                       </ul>
@@ -50,21 +51,7 @@
 
 
 
-              {{-- * Agent --}}
-              <li class="menu-item-has-children dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="menu-icon fa fa-users"></i> Agent</a>
-                  <ul class="sub-menu children dropdown-menu">
-                      <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('agent.create') }}"> Add Agent</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('agent.list') }}"> Agent Managment</a>
-                      </li>
-                  </ul>
-              </li>
+
 
               {{-- * Settings --}}
               <li class="menu-item-has-children dropdown">
@@ -88,7 +75,7 @@
                           <a href="{{ route('admin.title.new') }}"> Add Title</a>
                       </li>
                       <li>
-                          <i class="menu-icon fa fa-plus"></i>
+                          <i class="menu-icon fa fa-bars"></i>
                           <a href="{{ route('admin.nationality.all') }}">  Nationality List</a>
                       </li>
                       <li>
@@ -97,6 +84,23 @@
                       </li>
                   </ul>
               </li>
+
+
+                     {{-- * Agent --}}
+                     <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="menu-icon fa fa-users"></i> Agent</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li>
+                                <i class="menu-icon fa fa-plus"></i>
+                                <a href="{{ route('agent.create') }}"> Add Agent</a>
+                            </li>
+                            <li>
+                                <i class="menu-icon fa fa-bars"></i>
+                                <a href="{{ route('agent.list') }}"> Agent Managment</a>
+                            </li>
+                        </ul>
+                    </li>
 
               {{-- * Client --}}
               <li class="menu-item-has-children dropdown">
