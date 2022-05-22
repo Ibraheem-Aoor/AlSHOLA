@@ -1,4 +1,5 @@
 <div>
+    @section('title' , 'AlSHLOA - Admin | Employers Contacts')
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -7,7 +8,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">All Employers Queries</h4>
+                                <h4 class="box-title">All Client Queries</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">

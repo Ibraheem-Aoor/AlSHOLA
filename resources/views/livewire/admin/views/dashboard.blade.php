@@ -1,4 +1,5 @@
 <div>
+    @section('title' , 'AlSHLOA - Admin | DASHBOARD')
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">

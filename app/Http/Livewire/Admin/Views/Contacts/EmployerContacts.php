@@ -14,7 +14,7 @@ class EmployerContacts extends Component
     public $recoredId;
     public function render()
     {
-        $contacts = UserCotnact::with('user')->where('user_type' , 'Employer')->simplePaginate(15);
+        $contacts = UserCotnact::with('user')->where('user_type' , 'Client')->simplePaginate(15);
         return view('livewire.admin.views.contacts.employer-contacts' , [
             'contacts' => $contacts
         ])->extends('layouts.admin.master')->section('content');;

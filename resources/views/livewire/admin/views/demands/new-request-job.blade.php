@@ -1,11 +1,12 @@
 <div>
+    @section('title' , 'ALSHOLA - Admin | NEW JOB POST')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>New Demand</strong><small></small>
+                            <strong>New Job Post</strong><small></small>
                         </div>
                         <div class="card-body card-block">
                             <form wire:submit.prevent="createNewDemand()">

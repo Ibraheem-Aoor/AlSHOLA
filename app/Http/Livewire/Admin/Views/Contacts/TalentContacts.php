@@ -9,7 +9,7 @@ class TalentContacts extends Component
 {
     public function render()
     {
-        $contacts = UserCotnact::with('user')->where('user_type' , 'Talented')->simplePaginate(15);
+        $contacts = UserCotnact::with('user')->where('user_type' , 'Agent')->simplePaginate(15);
         return view('livewire.admin.views.contacts.talent-contacts' , [
             'contacts' => $contacts
         ])->extends('layouts.admin.master')->section('content');;

@@ -1,4 +1,5 @@
 <div>
+    @section('title' , 'AlSHLOA - Admin | USERS LIST')
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">

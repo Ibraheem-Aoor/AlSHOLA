@@ -1,4 +1,5 @@
 <div>
+    @section('title' , 'AlSHLOA - Admin | NEW NATIONALITY')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">

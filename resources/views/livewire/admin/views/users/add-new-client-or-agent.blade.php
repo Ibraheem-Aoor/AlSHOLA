@@ -1,4 +1,5 @@
 <div>
+    @section('title' , 'AlSHLOA - Admin | NEW ' . $intendedUserType )
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">

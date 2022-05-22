@@ -67,16 +67,16 @@
                           <a href="{{ route('admin.sector.new') }}"> Add Category</a>
                       </li>
                       <li>
-                        <i class="menu-icon fa fa-bars"></i>
-                        <a href="{{ route('admin.title.all') }}"> Titles List</a>
-                    </li>
+                          <i class="menu-icon fa fa-bars"></i>
+                          <a href="{{ route('admin.title.all') }}"> Titles List</a>
+                      </li>
                       <li>
                           <i class="menu-icon fa fa-plus"></i>
                           <a href="{{ route('admin.title.new') }}"> Add Title</a>
                       </li>
                       <li>
                           <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('admin.nationality.all') }}">  Nationality List</a>
+                          <a href="{{ route('admin.nationality.all') }}"> Nationality List</a>
                       </li>
                       <li>
                           <i class="menu-icon fa fa-plus"></i>
@@ -86,21 +86,21 @@
               </li>
 
 
-                     {{-- * Agent --}}
-                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-users"></i> Agent</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li>
-                                <i class="menu-icon fa fa-plus"></i>
-                                <a href="{{ route('agent.create') }}"> Add Agent</a>
-                            </li>
-                            <li>
-                                <i class="menu-icon fa fa-bars"></i>
-                                <a href="{{ route('agent.list') }}"> Agent Managment</a>
-                            </li>
-                        </ul>
-                    </li>
+              {{-- * Agent --}}
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-users"></i> Agent</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('agent.create') }}"> Add Agent</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-bars"></i>
+                          <a href="{{ route('agent.list') }}"> Agent Managment</a>
+                      </li>
+                  </ul>
+              </li>
 
               {{-- * Client --}}
               <li class="menu-item-has-children dropdown">
@@ -115,6 +115,19 @@
                           <i class="menu-icon fa fa-bars"></i>
                           <a href="{{ route('client.list') }}"> Client Mangament</a>
                       </li>
+                  </ul>
+              </li>
+
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-phone"></i>Contact Queries</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li><i class="menu-icon fa fa-users"></i><a
+                              href="{{ route('admin.contacts.employers') }}">Clients Queries</a></li>
+                      <li><i class="menu-icon fa fa-users"></i><a
+                              href="{{ route('admin.contacts.talents') }}">Agents Queries</a></li>
+                      <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.contacts.guests') }}">Guests
+                              Queries</a></li>
                   </ul>
               </li>
 

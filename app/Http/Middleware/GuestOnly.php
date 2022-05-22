@@ -20,7 +20,14 @@ class GuestOnly
     {
         if(Auth::check())
         {
-            $type = Str::lower(Auth::user()->type);
+            $type = Auth::user()->type;
+
+            switch($type)
+            {
+                case 'Agent': $type = "talented";break;
+                case 'Client': $type = "employer";break;
+
+            }
             return redirect($type.'/dashboard');
         }
         return $next($request);

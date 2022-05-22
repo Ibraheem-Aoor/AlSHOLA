@@ -1,5 +1,5 @@
 @extends('layouts.front.master')
-@section('title', 'JobEntry')
+@section('title', 'ALSHOLA | Recruitment Services')
 @section('content')
     <!-- Carousel Start -->
     <div class="container-fluid p-0">
