@@ -26,6 +26,7 @@ class GuestOnly
             {
                 case 'Agent': $type = "talented";break;
                 case 'Client': $type = "employer";break;
+                case 'Admin': $type = 'admin'; break;
 
             }
             return redirect($type.'/dashboard');
