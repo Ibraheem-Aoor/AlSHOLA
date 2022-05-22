@@ -7,10 +7,11 @@ use Livewire\Component;
 
 class ShowUserProfile extends Component
 {
-    public $user;
+    public $user , $intendedUSerType;
     public function mount($id)
     {
         $this->user = User::with(['title' , 'nationality' , 'country' , 'personalAttachments' , 'company'])->findOrFail($id);
+        $this->intendedUSerType = $this->user->type;
     }
     public function render()
     {

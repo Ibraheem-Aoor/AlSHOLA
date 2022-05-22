@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Create New</strong><small></small>
+                            <strong>Profile {{$intendedUSerType}} : {{$user->name}}</strong><small></small>
                         </div>
                         <div class="card-body card-block">
                             <form wire:submit.prevent="addNewUser()">
