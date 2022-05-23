@@ -57,7 +57,7 @@ return new class extends Migration
 
             $table->enum('status' , [
                                     'waiting for medical' , 'waiting for visa'  , 'CV Submitted' , 'For Selection'
-                                    ,'waiting for interview' , 'active' , 'cancelled' , 'hold' , 'completed' , 'Waiting For Offer ' , 'LMRA Process',
+                                    ,'waiting for interview' , 'active' , 'cancelled' , 'hold' , 'completed'  , 'LMRA Process',
                                     'Ready for Payment' , 'Embassy' , 'Emigrate Process' , 'To Be Arrived' , 'Arrival Scheduled' , 'Arrived' , 'For Exited' ,
                                     'Exited ' , 'Worker Refuse to Work' , 'UNFIT' , 'Runaway' , 'For Local Transfer' , 'Canceled Application'
                                 ])->default('hold');

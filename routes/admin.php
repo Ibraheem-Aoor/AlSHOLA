@@ -49,6 +49,7 @@ use App\Models\Nationality;
 use App\Models\Sector;
 use App\Models\UserAttachment;
 use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
+use App\Http\Livewire\Admin\Views\Applications\ApplicationDetails;
 
 //prefix => admin
 
@@ -148,6 +149,8 @@ use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
 
 
         //Applications Routes
+
+        Route::get('/application/{id}/details' , ApplicationDetails::class)->name('admin.application.details');
         Route::get('/applications/all' , AllAplications::class)->name('admin.applications.all');
         Route::get('/applications/medical' , ApplicationsWaitingForMedical::class)->name('admin.applications.medical');
         Route::get('/applications/visa' , ApplicationsWaitingForVisa::class)->name('admin.applications.visa');

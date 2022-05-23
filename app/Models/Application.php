@@ -43,7 +43,7 @@ class Application extends Model
     }//end method
 
 
-    public function emplyoers()
+    public function employers()
     {
         return $this->hasMany(Employer::class);
     }
@@ -51,5 +51,10 @@ class Application extends Model
     public function visa()
     {
         return $this->hasOne(VisaInoformation::class , 'application_id');
+    }
+
+    public function statusHistory()
+    {
+        return $this->hasMany(ApplicationStatusHistory::class  , 'application_id');
     }
 }

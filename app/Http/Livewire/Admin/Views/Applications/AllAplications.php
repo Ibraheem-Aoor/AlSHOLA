@@ -59,10 +59,6 @@ class AllAplications extends Component
         return redirect(route('admin.applications.all'));
     }
 
-
-
-
-
     public function render()
     {
         $applications = Application::with(['user:id,name,email' , 'job:id,post_number'] )->withCount('notes')->simplePaginate(15);

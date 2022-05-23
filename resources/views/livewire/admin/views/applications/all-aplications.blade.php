@@ -47,20 +47,27 @@
                                                         {{-- <button class="btn btn-outline-primary " href="#"
                                                             wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{ $application->user->id }}')"><i
                                                                 class="fa fa-download"></i> CV</button> --}}
-                                                        <a class="btn btn-outline-danger  "
-                                                            wire:click="deleteApplication('{{ $application->id }}')"><i
-                                                                class="fa fa-trash"></i></a>
+
+                                                        <a href="{{ route('admin.application.details', $application->id) }}"
+                                                            class="btn btn-outline-primary" title="show details">
+                                                            <i
+                                                                class="fa fa-eye"></i>
+                                                        </a>
+
                                                         <a class="btn btn-outline-info" title="send note to agent"
                                                             wire:click="setCurrentApplicationId({{ $application->id }})"
                                                             data-application="{{ $application->id }}"
                                                             data-toggle="modal" href="#exampleModal_5"><i
                                                                 class="fa fa-envelope"></i>
-                                                            </a>
-                                                        <a class="btn btn-outline-info" title="Forward this application to Client"
+                                                        </a>
+                                                        <a class="btn btn-outline-info"
+                                                            title="Forward this application to Client"
                                                             wire:click="passApplicationToEmployer({{ $application->id }})"><i
                                                                 class="fa fa-location-arrow"></i>
-                                                            </a>
-
+                                                        </a>
+                                                        <a class="btn btn-outline-danger  "
+                                                            wire:click="deleteApplication('{{ $application->id }}')"><i
+                                                                class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
 
@@ -125,6 +132,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
 

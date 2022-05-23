@@ -19,5 +19,5 @@ class Employer extends Model
     {
         return $this->belongsTo(Application::class);
     }
-   
+
 }
