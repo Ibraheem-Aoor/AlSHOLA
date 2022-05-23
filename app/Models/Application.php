@@ -24,7 +24,7 @@ class Application extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id'); //Talent
+        return $this->belongsTo(User::class , 'user_id'); //Agent
     }
 
     public function job()

@@ -77,7 +77,7 @@ class ApplicationController extends Controller
     public function applicationNotes($id)
     {
         $notes = ApplicationNote::where('application_id' , $id)
-                    ->with('application.job:id,title,post_number')
+                    ->with(['application.job:id,post_number' , 'application.job.title'])
                         ->orderByDesc('id')
                         ->simplePaginate(15);
         return view('livewire.user.employee.views.applications.notes.application-notes' , compact('notes'));

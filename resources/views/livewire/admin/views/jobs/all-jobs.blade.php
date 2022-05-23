@@ -24,6 +24,9 @@
                                                 <th>Balance</th>
                                                 <th>Status</th>
                                                 <th>Open Date</th>
+                                                <th>
+                                                    Actions
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -79,6 +82,9 @@
                                                         @break
                                                     @endswitch
                                                     <td><span>{{ $job->created_at }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{route('admin.send-job-to-agent' , $job->id)}}" title="send to agent"><i class="fa fa-location-arrow"></i></a>
                                                     </td>
                                                     {{-- <td>
                                                         <span

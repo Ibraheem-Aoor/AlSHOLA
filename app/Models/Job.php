@@ -59,17 +59,17 @@ class Job extends Model
 
     public function applications()
     {
-        return $this->hasMany(Application::class  , 'job_id');
+        return $this->hasMany(Application::class  , 'job_id' , 'id');
     }
 
     public function title()
     {
-        return $this->belongsTo(Title::class , 'title_id');
+        return $this->belongsTo(Title::class , 'title_id' , 'id');
     }
 
     public function nationality()
     {
-        return $this->belongsTo(Nationality::class , 'natoinality_id');
+        return $this->belongsTo(Nationality::class , 'natoinality_id' , 'id');
     }
 
 }

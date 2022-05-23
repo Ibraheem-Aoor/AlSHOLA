@@ -56,9 +56,11 @@ return new class extends Migration
 
 
             $table->enum('status' , [
-                                    'waiting for medical' , 'waiting for visa' , 'waiting for arrival'
-                                    ,'waiting for interview' , 'pending' , 'cancelled' , 'refused' , 'completed'
-                                ])->default('pending');
+                                    'waiting for medical' , 'waiting for visa'  , 'CV Submitted' , 'For Selection'
+                                    ,'waiting for interview' , 'active' , 'cancelled' , 'hold' , 'completed' , 'Waiting For Offer ' , 'LMRA Process',
+                                    'Ready for Payment' , 'Embassy' , 'Emigrate Process' , 'To Be Arrived' , 'Arrival Scheduled' , 'Arrived' , 'For Exited' ,
+                                    'Exited ' , 'Worker Refuse to Work' , 'UNFIT' , 'Runaway' , 'For Local Transfer' , 'Canceled Application'
+                                ])->default('hold');
             $table->boolean('forwarded')->default(false); //forwarded to employer
             $table->unsignedBigInteger('user_id'); //agent who submited this form
             $table->index('user_id');

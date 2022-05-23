@@ -1,5 +1,6 @@
 @extends('layouts.user.employer.master')
-@section('title', 'Dashboard | Add New Jobs')
+@section('title', 'ALSHOLA | ADD NEW JOB')
+
 @section('content')
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />

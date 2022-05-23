@@ -84,6 +84,11 @@ class User extends Authenticatable
         return $this->hasMany(Application::class , 'user_id');
     }
 
+
+    /**
+     * Check if the user have the given jobId in his applications.,
+     */
+
     public function hasAppliedToJob($jobId)
     {
         return $this->applications->contains('job_id' , $jobId)  ? true : false;

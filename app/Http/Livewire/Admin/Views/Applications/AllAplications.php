@@ -28,13 +28,14 @@ class AllAplications extends Component
     public function deleteApplication( $id)
     {
         $application = Application::findOrFail($id);
+        /*
         try
         {
             $this->deleteResumeFromStorage($id , $application->resume);
         }catch(Throwable $e)
         {
             return dd($e->getMessage());
-        }
+        }*/
         $application->delete();
         notify()->success('Application Deleted Successfully');
         return redirect()->back();

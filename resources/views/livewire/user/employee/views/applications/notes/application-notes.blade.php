@@ -15,7 +15,6 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Job_Number</th>
-                                    <th scope="col">Job_Title</th>
                                     <th scope="col">Message</th>
                                     <th scope="col">date</th>
                                     <th scope="col">Actions</th>
@@ -29,7 +28,6 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $note->application->job->post_number }}</td>
-                                        <td>{{ $note->application->job->title }}</td>
                                         <td>{{ Str::limit($note->message, 40, '...') }}</td>
                                         <td>{{ $note->created_at }}</td>
                                         <td><a data-message="{{$note->message}}" data-toggle="modal" href="#exampleModal_5"><i class="fa fa-eye"></i> Show

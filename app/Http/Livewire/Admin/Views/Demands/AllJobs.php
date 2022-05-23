@@ -15,7 +15,6 @@ class AllJobs extends Component
     }
 
 
-
     public function render()
     {
         $jobs = Job::with(['user.company' , 'title.sector'])->paginate(15);

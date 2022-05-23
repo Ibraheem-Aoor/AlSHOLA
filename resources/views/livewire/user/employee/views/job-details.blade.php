@@ -77,58 +77,46 @@
                             </div>
                         </div>
                     </div>
-                    @if (!Auth::user()->hasAppliedToJob($job->id))
-                        <div class="">
-                            <h4 class="mb-4">What You want to do?</h4>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-12">
+                    <div class="">
+                        <h4 class="mb-4">What You want to do?</h4>
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-12">
 
-                                    <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Offer
-                                    </button>
-                                    <button type="button" class="btn btn-outline-info col-sm-12 mb-2"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_2">
-                                        Send a comment
-                                    </button>
-                                    <a class="btn btn-outline-success col-sm-12 mb-2"
-                                        href="{{route('employee.application.form' , $job->id)}}">
-                                        Accept The Offer
-                                    </a>
+                                <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Offer
+                                </button>
+                                <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal_2">
+                                    Send a comment
+                                </button>
+                                <a class="btn btn-outline-success col-sm-12 mb-2"
+                                    href="{{ route('employee.application.form', $job->id) }}">
+                                    Accept The Offer
+                                </a>
 
-                                </div>
                             </div>
                         </div>
-                    @else
-                        <div class="text-center">
-                            <h4 class="mb-4 btn btn-outline-primary">
-                                <i class="fa fa-check"></i>&nbsp;
-                                YOU HAVE APPLIED TO THIS JOB
-                            </h4>
-                        </div>
-                        {{-- <div class="">
-                            <h4 class="mb-4">
-
-                                <a href="{{ route('employee.candidacy.order.index', $job->id) }}">
-                                    Want toreco mmend other candidates for this job?
-                                </a>
-                            </h4>
-                        </div> --}}
-                    @endif
+                    </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                         <h4 class="mb-4">Job Summery</h4>
-                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Published On: {{ $job->created_at }}
+                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Published On:
+                            {{ $job->created_at }}
                         </p>
                         <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Hours:
                             {{ $job->working_hours }}
                         </p>
-                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Days: {{ $job->working_days }}
+                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Days:
+                            {{ $job->working_days }}
                         </p>
-                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary: {{ $job->salary }}$</p>
-                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>OFF Day: {{ $job->off_day }}</p>
-                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Quantiy: {{ $job->quantity }}</p>
+                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary: {{ $job->salary }}$
+                        </p>
+                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>OFF Day:
+                            {{ $job->off_day }}</p>
+                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Quantiy:
+                            {{ $job->quantity }}</p>
                         </p>
                     </div>
                     {{-- <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">

@@ -48,6 +48,7 @@ use App\Http\Livewire\Admin\Views\Users\Profile\ShowUserProfile as ProfileShowUs
 use App\Models\Nationality;
 use App\Models\Sector;
 use App\Models\UserAttachment;
+use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
 
 //prefix => admin
 
@@ -66,6 +67,7 @@ use App\Models\UserAttachment;
         Route::get('jobs/all' , AllJobs::class)->name('admin.jobs.all');
         Route::get('/demand/new' , NewDemand::class)->name('admin.demand.new');
         Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
+        Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');

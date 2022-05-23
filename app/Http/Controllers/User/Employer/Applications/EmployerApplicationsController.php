@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Validator;
 class EmployerApplicationsController extends Controller
 {
 
+    /**
+     * This Class handles the applications for the client side.
+     */
+
     use ApplicationAttachmentTrait;
 
 
@@ -25,7 +29,7 @@ class EmployerApplicationsController extends Controller
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $applications = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded' , true)
-                        ->with(['job:id,post_number,title' , 'user:id,name,type'])
+                        ->with(['job:id,post_number' , 'user:id,name,type' , 'Job'])->with('job.title')
                         ->simplePaginate(15);
         return view('user.employer.applications.all-applications' , compact('applications'));
     }//end mthod

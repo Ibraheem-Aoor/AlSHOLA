@@ -10,7 +10,7 @@
                                 @if (Session::has('success'))
                                     <div class="alert"></div>
                                 @endif
-                                <h4 class="box-title">All Employers Queries</h4>
+                                <h4 class="box-title">All Agents Submited Applications</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -18,20 +18,11 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>Talent_Name</th>
-                                                <th>Talent_Email</th>
-                                                <th>Job_Serial_Number</th>
+                                                <th>Agent_Name</th>
+                                                <th>Demand_Serial_Number</th>
                                                 <th>Applied At</th>
                                                 <th>Number_Of_Notes</th>
-                                                <th>cover_letter</th>
-                                                <th>CV</th>
                                                 <th>Actions</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -45,36 +36,31 @@
                                                         {{ $application->user->name }}
                                                     </td>
                                                     <td>
-                                                        {{ $application->user->email }}
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('admin.job.details', $application->job->id) }}"
+                                                        <a href="#"
                                                             class="text-info">{{ $application->job->post_number }}</a>
                                                     </td>
                                                     <td>{{ $application->created_at }}</td>
                                                     <td><a
                                                             href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
                                                     </td>
-                                                    <td>{{ Str::limit($application->cover_letter, 40, '...') }}
-                                                    </td>
-                                                    <td>{{ $application->resume }}</td>
                                                     <td colspan="6">
-                                                        <button class="btn btn-outline-primary " href="#"
-                                                            wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{$application->user->id}}')"><i
-                                                                class="fa fa-download"></i> CV</button>
-                                                        <button class="btn btn-outline-danger  "
+                                                        {{-- <button class="btn btn-outline-primary " href="#"
+                                                            wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{ $application->user->id }}')"><i
+                                                                class="fa fa-download"></i> CV</button> --}}
+                                                        <a class="btn btn-outline-danger  "
                                                             wire:click="deleteApplication('{{ $application->id }}')"><i
-                                                                class="fa fa-trash"></i></button>
-                                                        <a class="btn btn-outline-info"
+                                                                class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-outline-info" title="send note to agent"
                                                             wire:click="setCurrentApplicationId({{ $application->id }})"
                                                             data-application="{{ $application->id }}"
                                                             data-toggle="modal" href="#exampleModal_5"><i
-                                                                class="fa fa-note"></i>
-                                                            Send Note</a>
-                                                        <a class="btn btn-outline-info"
+                                                                class="fa fa-envelope"></i>
+                                                            </a>
+                                                        <a class="btn btn-outline-info" title="Forward this application to Client"
                                                             wire:click="passApplicationToEmployer({{ $application->id }})"><i
-                                                                class="fa fa-note"></i>
-                                                            Forward To Employer</a>
+                                                                class="fa fa-location-arrow"></i>
+                                                            </a>
+
                                                     </td>
                                                 </tr>
 

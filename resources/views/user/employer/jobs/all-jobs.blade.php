@@ -1,5 +1,6 @@
 @extends('layouts.user.employer.master')
-@section('title', 'Dashboard | Add New Jobs')
+@section('title', 'ALSHOLA | ALL JOB POSTS')
+
 @section('content')
     <div>
     @section('title', 'Dashboard | Create Job Post')
