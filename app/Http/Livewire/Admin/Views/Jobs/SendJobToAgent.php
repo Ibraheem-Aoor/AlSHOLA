@@ -38,7 +38,7 @@ class SendJobToAgent extends Component
         $agent = User::findOrFail($id);
         if($agent->hasJob($this->job))
         {
-            DB::table('job_user')->where([['job_id' , $this->job->id] , ['user_id' , $agent->id]])->delete();
+        DB::table('job_user')->where([['job_id' , $this->job->id] , ['user_id' , $agent->id]])->delete();
         }
     }
 

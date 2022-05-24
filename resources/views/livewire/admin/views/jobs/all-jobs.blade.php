@@ -84,6 +84,9 @@
                                                     <td><span>{{ $job->created_at }}</span>
                                                     </td>
                                                     <td>
+                                                        <a href="{{route('admin.demand.details' , $job->id)}}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
                                                         <a href="{{route('admin.send-job-to-agent' , $job->id)}}" title="send to agent"><i class="fa fa-location-arrow"></i></a>
                                                     </td>
                                                     {{-- <td>

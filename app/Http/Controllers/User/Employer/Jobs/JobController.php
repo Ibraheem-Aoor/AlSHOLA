@@ -7,6 +7,7 @@ use App\Http\Requests\User\Employer\Job\CreateJobRequest;
 use App\Http\Requests\User\Employer\Job\UpdateJobRequest;
 use App\Http\Traits\User\ApplicationAttachmentTrait;
 use App\Http\Traits\User\JobAttachmentTrait;
+use App\Models\Application;
 use App\Models\Attachment;
 use App\Models\FileType;
 use App\Models\Job;
@@ -201,6 +202,10 @@ class JobController extends Controller
         return redirect(route('employer.dashboard'));
 
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

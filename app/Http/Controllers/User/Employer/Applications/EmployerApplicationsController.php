@@ -160,4 +160,12 @@ class EmployerApplicationsController extends Controller
         notify()->success('Keep tracking for medical files');
         return redirect()->back();
     }//end method
+
+
+
+    public function getDetails($id)
+    {
+        $application = Application::with(['job:id,post_number' , 'employers'])->with('job.title.sector')->findOrFail($id);
+        return view('user.employer.applications.application-details' , compact('application'));
+    }
 }

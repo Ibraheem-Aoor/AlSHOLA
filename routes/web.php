@@ -113,6 +113,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::resource('/job' , JobController::class);
         Route::get('/sector/{id}' , [JobController::class , 'setSelectedSector']);
         Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('employer.pdf.generate');
+        Route::get('/aplication/pdf/{id}' ,  [PDFPdfController::class , 'generateApplicationPDF'])->name('employer.application.pdf.generate');
 
         Route::group(['controller' => EmployerJobsController::class ], function()
         {
@@ -129,6 +130,7 @@ Route::group(['middleware' => ['auth']], function()
 
         //Applications
         Route::get('/applications/{id}/attachments' , [EmployerApplicationsController::class , 'applicationAttachments'])->name('employer.application.attachments');
+        Route::get('/applications/{id}/details' , [EmployerApplicationsController::class , 'getDetails'])->name('employer.application.details');
         Route::get('/applications/all' , [EmployerApplicationsController::class , 'allForwardedApplications'])->name('employer.applications.all');
         Route::get('/applications/medical' , [EmployerApplicationsController::class , 'allMedicalApplications'])->name('employer.applications.medical');
         Route::get('/applications/visa' , [EmployerApplicationsController::class , 'allVisaApplications'])->name('employer.applications.visa');

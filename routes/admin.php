@@ -50,6 +50,7 @@ use App\Models\Sector;
 use App\Models\UserAttachment;
 use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationDetails;
+use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
 
 //prefix => admin
 
@@ -67,6 +68,7 @@ use App\Http\Livewire\Admin\Views\Applications\ApplicationDetails;
         //jobs
         Route::get('jobs/all' , AllJobs::class)->name('admin.jobs.all');
         Route::get('/demand/new' , NewDemand::class)->name('admin.demand.new');
+        Route::get('/demand/{id}/details' , DemandDetails::class)->name('admin.demand.details');
         Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
         Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
 

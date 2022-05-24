@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\User\Employer\Jobs\PDF;
 
 use App\Http\Controllers\Controller;
+use App\Models\Application;
 use App\Models\Job;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
@@ -31,6 +33,34 @@ class PdfController extends Controller
         $canvas->page_text($width/5, $height/2, 'ALSHOLA.com', null,
         55, array(0,0,0),2,2,-30);
         return $pdf->download('ALSHOLA-JOB-'.$job->post_number.'.pdf');
+    }//end method
+
+
+
+    public function generateApplicationPDF($id)
+    {
+        FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
+        // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
+        $application =  Application::with(['job:id,post_number' , 'employers'])->with('job.title.sector')->findOrFail($id);
+        $data = [
+            'application' => $application,
+        ];
+        $html = view('user.employer.applications.pdf.application-pdf' , compact($data))->render();
+        $pdf = FacadePdf::loadHTML($html);
+        $pdf->setPaper('L');
+        $pdf->output();
+        $canvas = $pdf->getDomPDF()->getCanvas();
+
+        $height = $canvas->get_height();
+        $width = $canvas->get_width();
+
+        $canvas->set_opacity(.2,"Multiply");
+
+        // $canvas->set_opacity(.2);
+
+        $canvas->page_text($width/5, $height/2, 'ALSHOLA.com', null,
+        55, array(0,0,0),2,2,-30);
+        return $pdf->download('ALSHOLA-Application-'.$application->job->post_number.'.pdf');
     }//end method
 
 }
