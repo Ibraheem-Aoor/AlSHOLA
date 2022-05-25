@@ -56,11 +56,6 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
-        // if($request->input('responsibilities') == null && $request->input('file_type') == null)
-        //     {
-        //         notify()->error('Job Responsibilities Required');
-        //         return redirect()->withErrors('error' , 'Job Responsibilities Required');
-        //     }
         $job = Job::create([
             'post_number' => $this->generatePosteNumber(),
             'title_id' => $request->input('title'),

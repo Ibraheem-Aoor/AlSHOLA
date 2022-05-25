@@ -36,10 +36,13 @@
                                         <td>{{ $application->status }}</td>
                                         <td>{{ $application->created_at }}</td>
                                         <td>
-                                            <a href="{{route('employer.application.details' , $application->id)}}" class="badge bg-warning" title="show details">
+                                            <a href="{{ route('employer.application.details', $application->id) }}"
+                                                class="badge bg-warning" title="show details">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{route('employer.application.pdf.generate' , $application->id)}}" class="badge bg-success" title="print application"><i class="fa fa-print"></i></a>
+                                            <a href="{{ route('employer.application.pdf.generate', $application->id) }}"
+                                                class="badge bg-success" title="print application"><i
+                                                    class="fa fa-print"></i></a>
                                         </td>
 
 

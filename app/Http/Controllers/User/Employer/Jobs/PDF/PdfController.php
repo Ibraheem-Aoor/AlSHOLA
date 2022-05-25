@@ -18,7 +18,7 @@ class PdfController extends Controller
         $data = [
             'job' => $job,
         ];
-        $pdf = FacadePdf::loadView('user.employer.jobs.pdf.job-pdf', $data);
+        $pdf = FacadePdf::loadHTML('user.employer.jobs.pdf.job-pdf', $data)->render();
         $pdf->setPaper('L');
         $pdf->output();
         $canvas = $pdf->getDomPDF()->getCanvas();
@@ -39,14 +39,13 @@ class PdfController extends Controller
 
     public function generateApplicationPDF($id)
     {
-        FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
+        // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
         // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
         $application =  Application::with(['job:id,post_number' , 'employers'])->with('job.title.sector')->findOrFail($id);
         $data = [
             'application' => $application,
         ];
-        $html = view('user.employer.applications.pdf.application-pdf' , compact($data))->render();
-        $pdf = FacadePdf::loadHTML($html);
+        $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf', $data);
         $pdf->setPaper('L');
         $pdf->output();
         $canvas = $pdf->getDomPDF()->getCanvas();
@@ -60,7 +59,7 @@ class PdfController extends Controller
 
         $canvas->page_text($width/5, $height/2, 'ALSHOLA.com', null,
         55, array(0,0,0),2,2,-30);
-        return $pdf->download('ALSHOLA-Application-'.$application->job->post_number.'.pdf');
+        return $pdf->download('ALSHOLA-JOB-'.$application->job->post_number.'.pdf');
     }//end method
 
 }
