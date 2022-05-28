@@ -29,7 +29,9 @@ return new class extends Migration
             $table->string('working_days')->nullable(true);
             $table->string('off_day')->nullable(true);
             $table->string('accommodation')->nullable(true);
-            $table->string('transport')->nullable(true);
+            $table->string('transport')
+            ->default('Provided By Employer')
+            ->nullable(true);
             $table->string('medical')
             ->default('As per Labour Law')
             ->nullable(true);

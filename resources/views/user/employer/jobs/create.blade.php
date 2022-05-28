@@ -152,14 +152,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="transport"
-                                        value="{{ old('transport') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; TRANSPORT</label>
-                                    @error('transport')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
 
 
 
