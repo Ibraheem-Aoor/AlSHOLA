@@ -151,8 +151,7 @@
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <label for="inputPassword3" class="col-form-label">Covid
-                                                        Test:</label>
+                                                    <label for="inputPassword3" class="col-form-label">Country Entry Requirments If Any:</label>
                                                     <input type="text" value="{{ $job->covid_test }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
