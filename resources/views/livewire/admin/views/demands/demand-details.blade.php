@@ -19,6 +19,9 @@
                                             href="#custom-nav-descreption" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Descreption And Terms</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Attachment</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-applications" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Application</a>
                                         {{-- <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
@@ -172,7 +175,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- Languages Levels --}}
+                                    {{-- Other Temrs --}}
                                     <div class="tab-pane fade" id="custom-nav-descreption" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
@@ -190,6 +193,64 @@
                                         </div>
                                         </p>
                                     </div>
+
+
+
+                                    {{-- Attachments --}}
+                                    <div class="tab-pane fade" id="custom-nav-attachments" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">file name</th>
+                                                            <th scope="col">file type</th>
+                                                            <th scope="col">Publisher</th>
+                                                            <th scope="col">creation_date</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($job->attachments as $attachment)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $attachment->name }}</td>
+                                                                <td>{{ $attachment->type }}</td>
+                                                                <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
+                                                                </td>
+                                                                <td>{{ $attachment->created_at }}</td>
+                                                                <td>
+                                                                    <a class="btn btn-outline-primary"
+                                                                        href="{{ route('file.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
+                                                                            class="fa fa-download"></i></a>
+                                                                    <a class="btn btn-outline-danger"
+                                                                        href="{{ route('file.delete', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="5"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
+
 
                                     {{-- Notes --}}
                                     <div class="tab-pane fade" id="custom-nav-applications" role="tabpanel"

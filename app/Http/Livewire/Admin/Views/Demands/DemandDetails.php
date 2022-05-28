@@ -14,7 +14,7 @@ class DemandDetails extends Component
     public function mount($id)
     {
         $this->job = Job::with(['user:id,name'  , 'applications:id,user_id,full_name,contact_no' ,
-                    'nationality' , 'title.sector'])
+                    'nationality' , 'title.sector' , 'attachments'])
                     ->findOrFail($id);
 
     }
