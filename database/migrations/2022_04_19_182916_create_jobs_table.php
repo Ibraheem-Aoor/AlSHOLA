@@ -55,6 +55,7 @@ return new class extends Migration
             $table->string('age')->nullable(true);
             $table->string('requested_by')->nullable(true);
             $table->string('sex')->nullable(true);
+            $table->string('currency')->nullable(true);
 
             $table->enum('gender_prefrences' , ['male' , 'female' , 'no prefrences'])->nullable(true);
             $table->enum('age_limit' , ['Below 40' , 'Below 50', 'Below 60'])->nullable(true);

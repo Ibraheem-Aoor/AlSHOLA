@@ -25,6 +25,8 @@ class Job extends Model
         'medical',
         'insurance',
         'food',
+        'food_amount',
+        'accommodation_amount',
         'annual_leave',
         'air_ticket',
         'off_day',
@@ -34,6 +36,13 @@ class Job extends Model
         'age',
         'sex',
         'requested_by',
+        'food',
+        'age',
+        'gender_prefrences',
+        'age_limit',
+        'joining_ticket',
+        'return_ticket',
+        'currency',
         'user_id',
     ];
 

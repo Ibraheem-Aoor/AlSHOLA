@@ -85,6 +85,23 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <select name="currency" class="form-control">
+                                        <option value="">-- select one --</option>
+                                        @foreach ($currencies as $currency)
+                                            <option value="{{ $currency->key }}">
+                                                {{ $currency->key . ' (' . $currency->value . ')' }}</option>
+                                        @endforeach
+                                        @error('currency')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </select>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Salary</label>
+                                    @error('salary')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
 
 
 
@@ -127,9 +144,8 @@
 
 
                                 <div class="form-floating mb-3 col-sm-4" id="acc-div" style="display: none">
-                                    <input  placeholder="accommodation amount" type="text"
-                                        class="form-control" name="accommodation_amount"
-                                        value="{{ old('accommodation_amount') }}">
+                                    <input placeholder="accommodation amount" type="text" class="form-control"
+                                        name="accommodation_amount" value="{{ old('accommodation_amount') }}">
                                     <label for="floatingPassword">&nbsp;&nbsp; Accommodation Amount</label>
                                     @error('accommodation_amount')
                                         <span class="text-danger">{{ $message }}</span>
@@ -165,7 +181,7 @@
 
 
                                 <div class="form-floating mb-3 col-sm-4" id="acc-food-div" style="display: none">
-                                    <input  placeholder="food amount" type="text" class="form-control"
+                                    <input placeholder="food amount" type="text" class="form-control"
                                         name="food_amount" value="{{ old('food_amount') }}">
                                     <label for="floatingPassword">&nbsp;&nbsp; Food Amount</label>
                                     @error('food_amount')
@@ -193,8 +209,22 @@
                                         <option value="Every Completion One Year">Every Completion One Year</option>
                                         <option value="Every Completion Two Year">Every Completion Two Year</option>
                                     </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Joining Ticket</label>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Return Ticket</label>
                                     @error('return_ticket')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <select required type="text" class="form-control" name="gender_prefrences"
+                                        value="{{ old('gender_prefrences') }}">
+                                        <option value="">-- select one</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="no prefrences">No Prefrences</option>
+                                    </select>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Gender Prefrences</label>
+                                    @error('gender_prefrences')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -222,7 +252,7 @@
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-12">
-                                    <input type="file" class="form-control" multiple name="attachments">
+                                    <input type="file" class="form-control" name="attachments[]" multiple >
                                     <label for="floatingTextarea">&nbsp;&nbsp; Job Description Attachment</label>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>

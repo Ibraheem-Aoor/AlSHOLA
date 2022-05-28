@@ -9,6 +9,7 @@ use App\Http\Traits\User\ApplicationAttachmentTrait;
 use App\Http\Traits\User\JobAttachmentTrait;
 use App\Models\Application;
 use App\Models\Attachment;
+use App\Models\Currency;
 use App\Models\FileType;
 use App\Models\Job;
 use App\Models\Nationality;
@@ -45,7 +46,8 @@ class JobController extends Controller
         $fileTypes = FileType::all();
         $sectors = Sector::all();
         $nationalities = Nationality::orderBy('name')->get()->chunk(50);
-        return view('user.employer.jobs.create' , compact('fileTypes' , 'sectors' , 'nationalities'));
+        $currencies = Currency::all();
+        return view('user.employer.jobs.create' , compact('fileTypes' , 'sectors' , 'nationalities' , 'currencies'));
     }
 
     /**
@@ -56,6 +58,10 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
+      $job = Job::create(array_merge($request->all() , ['post_number'=>$this->generatePosteNumber() ,
+      'user_id' => Auth::id() , 'title_id' => $request->input('title') , 'natoinality_id' => $request->input('nationality'),
+    ]));
+      /*
         $job = Job::create([
             'post_number' => $this->generatePosteNumber(),
             'title_id' => $request->input('title'),
@@ -82,8 +88,9 @@ class JobController extends Controller
             // 'contract_period' => $request->input('contract_period'),
             'user_id' => Auth::id(), //The Publisher
         ]);
+        */
         if($request->hasFile('attachments'))
-            $this->addAttachementsToJob($request->attachments  , $job->id , $request->file_type);
+            $this->addAttachementsToJob($request->attachments  , $job->id , 'Job Descreption');
         if($request->hasFile('responsibilites_file'))
             $this->uploadJobFile($request->responsibilites_file  , $job->id);
         notify()->success('Job Addeed Successfully');

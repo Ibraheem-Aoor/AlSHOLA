@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Sector;
+use COM;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             AdminSeeder::class,
             ApplicationStatusSeeder::class,
+            CurrencySeeder::class,
         ]);
     }
 }

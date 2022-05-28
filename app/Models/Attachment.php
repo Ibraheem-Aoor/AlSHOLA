@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     use HasFactory;
+    /**
+     * This is the Job Attachments Model 
+     */
     protected $fillable = ['job_id' , 'name' , 'user_id' , 'type'];
 
     public function job()
@@ -18,11 +21,6 @@ class Attachment extends Model
     public function user()
     {
         return $this->belongsTo(User::class , 'user_id');//represents the publisher
-    }
-
-    public function application()
-    {
-        return $this->belongsTo(Application::class , 'application_id');
     }
 
 }
