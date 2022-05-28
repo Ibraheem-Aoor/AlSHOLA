@@ -150,7 +150,7 @@
                                                         value="{{ $job->indemnity_leave_and_overtime_salary }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-12">
                                                     <label for="inputPassword3" class="col-form-label">Covid
                                                         Test:</label>
                                                     <input type="text" value="{{ $job->covid_test }}"
