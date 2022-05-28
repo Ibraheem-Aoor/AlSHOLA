@@ -1,5 +1,5 @@
 <div>
-    @section('title' , 'AlSHLOA - Admin | DEMAND LIST')
+    @section('title', 'AlSHLOA - Admin | DEMAND LIST')
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -40,7 +40,7 @@
                                                         {{ $job->post_number }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->user->company->name ?? ''}}
+                                                        {{ $job->user->company->name ?? '' }}
                                                     </td>
                                                     <td>
                                                         {{ $job->quantity }}
@@ -52,42 +52,48 @@
                                                         {{ 'UNKOWN' }}
                                                     </td>
                                                     <td>{{ $job->user->name }}</td>
+                                                    <td>
+                                                        @php
+                                                            $badgeColor = '';
+                                                        @endphp
+                                                        @switch($job->status)
+                                                            @case('active')
+                                                                @php
+                                                                    $badgeColor = 'complete';
+                                                                @endphp
+                                                            @break
 
-                                                    @php
-                                                        $badgeColor = '';
-                                                    @endphp
-                                                    @switch($job->status)
-                                                        @case('active')
-                                                            @php
-                                                                $badgeColor = 'complete';
-                                                            @endphp
-                                                        @break
+                                                            @case('completed')
+                                                                @php
+                                                                    $badgeColor = 'primary';
+                                                                @endphp
+                                                            @break
 
-                                                        @case('completed')
-                                                            @php
-                                                                $badgeColor = 'primary';
-                                                            @endphp
-                                                        @break
+                                                            @case('cancelled')
+                                                                @php
+                                                                    $badgeColor = 'danger';
+                                                                @endphp
+                                                            @break
 
-                                                        @case('cancelled')
-                                                            @php
-                                                                $badgeColor = 'danger';
-                                                            @endphp
-                                                        @break
+                                                            @case('pending')
+                                                                @php
+                                                                    $badgeColor = 'pending';
+                                                                @endphp
+                                                            @break
+                                                        @endswitch
 
-                                                        @case('pending')
-                                                            @php
-                                                                $badgeColor = 'pending';
-                                                            @endphp
-                                                        @break
-                                                    @endswitch
+                                                        <span
+                                                            class="badge badge-{{ $badgeColor }}">{{ $job->status }}</span>
+                                                    </td>
                                                     <td><span>{{ $job->created_at }}</span>
                                                     </td>
                                                     <td>
-                                                        <a href="{{route('admin.demand.details' , $job->id)}}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                        <a href="{{route('admin.send-job-to-agent' , $job->id)}}" title="send to agent"><i class="fa fa-location-arrow"></i></a>
+                                                        <a href="{{ route('admin.demand.details', $job->id) }}">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{ route('admin.send-job-to-agent', $job->id) }}"
+                                                            title="send to agent"><i
+                                                                class="fa fa-location-arrow"></i></a>
                                                     </td>
                                                     {{-- <td>
                                                         <span
