@@ -9,14 +9,15 @@ use Livewire\Component;
 
 class ApplicationAllNotes extends Component
 {
-    public $applicationId , $jobTitle , $jobNumber;
+    public $applicationId , $jobTitle  , $jobSector, $jobNumber;
 
     public function mount($id)
     {
         $this->applicationId = $id;
-        $application = Application::with('job:id,title,post_number')->findOrFail($this->applicationId);
+        $application = Application::with('job:id,post_number')->with('job.title.sector')->findOrFail($this->applicationId);
         $this->jobNumber = $application->job->post_number;
-        $this->jobTitle = $application->job->title;
+        $this->jobTitle = $application->job->title->name;
+        $this->jobSector = $application->job->title->sector->name;
     }
     public function render()
     {

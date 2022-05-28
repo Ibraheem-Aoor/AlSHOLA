@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Helpers\ApplicationHelper;
 use App\Http\Livewire\Admin\Veiws\Settings\Sectors\AllSectors;
 use App\Http\Livewire\Admin\View\Users\Profile\ShowUserProfile;
 use App\Http\Livewire\Admin\Views\Admin\Sectors\AllSectors as SectorsAllSectors;
@@ -158,19 +159,33 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
         Route::get('/applications/visa' , ApplicationsWaitingForVisa::class)->name('admin.applications.visa');
         Route::get('/applications/{id}/notes/all' , ApplicationAllNotes::class)->name('admin.application.notes.all');
         Route::get('/applications/{id}/attachments' , ApplicationAttachments::class)->name('admin.application.attachments.all');
-        Route::get('/application/{id}/attachment/{fileName}/download/{userId}' , function($id , $fileName , $userId)
+        Route::get('/application/substatus/{id}' , [ApplicationHelper::class , 'getSubStatuses']);
+        Route::post('/application/status/change/{id}' , [ApplicationHelper::class , 'postChangeApplicationStatus'])->name('admin.application.change-status');
+        Route::get('/application/{id}/attachment/{fileName}/download' , function($id , $fileName , )
         {
             $application  = Application::with('job:id')->findOrFail($id);
-            $jobId = $application->job->id;
             try{
                 // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
-                return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.$userId.'/attachments'.'/'.$fileName);
+                return Storage::download('public/uploads/applications/'.$application->id.'/'.'attachments'.'/'.$fileName);
             }Catch(Throwable $e)
             {
                 return dd($e->getMessage());
                 return redirect()->back();
             }
         })->name('admin.application.attachment.download');
+
+        Route::get('/application/{id}/attachment/{fileName}' , function($id , $fileName , )
+        {
+            $application  = Application::with('job:id')->findOrFail($id);
+            try{
+                // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+                return response()->file(Storage::get('public/uploads/applications/'.$application->id.'/'.'attachments'.'/'.$fileName));
+            }Catch(Throwable $e)
+            {
+                return dd($e->getMessage());
+                return redirect()->back();
+            }
+        })->name('admin.application.attachment.open');
 
         //Contacts routes
         Route::get('/employer/queries'  , EmployerContacts::class)->name('admin.contacts.employers');

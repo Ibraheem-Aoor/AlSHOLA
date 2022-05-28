@@ -85,27 +85,17 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="contract_period"
-                                        value="{{ old('contract_period') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; CONTRACT PERIOD</label>
-                                    @error('contract_period')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
+
 
                                 <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="working_hours"
-                                        value="{{ old('working_hours') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; WORKING HOURS PER DAY</label>
-                                    @error('working_hours')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="working_days"
-                                        value="{{ old('working_days') }}">
+                                    <select class="form-control" name="working_days">
+                                        <option value="">-- select one --</option>
+                                        <option value="5" @if (old('working_days') == 5) {{ 'selected' }} @endif>
+                                            5</option>
+                                        <option value="6" @if (old('working_days') == 6) {{ 'selected' }} @endif>
+                                            6</option>
+                                    </select>
                                     <label for="floatingPassword">&nbsp;&nbsp; WORKING DAYS</label>
                                     @error('working_days')
                                         <span class="text-danger">{{ $message }}</span>
@@ -115,7 +105,7 @@
 
                                 <div class="form-floating mb-3 col-sm-4">
                                     <input required type="text" class="form-control" name="off_day"
-                                        value="{{ old('off_day') }}">
+                                        value="{{ old('off_day') }}" readonly>
                                     <label for="floatingPassword">&nbsp;&nbsp; OFF DAY</label>
                                     @error('off_day')
                                         <span class="text-danger">{{ $message }}</span>
@@ -123,10 +113,25 @@
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="accommodation"
-                                        value="{{ old('accommodation') }}">
+                                    <select class="form-control" name="accommodation">
+                                        <option value="">-- select one --</option>
+                                        <option value="Provided By Employer">Provided By Employer</option>
+                                        <option value="Allowance">Allowance</option>
+                                    </select>
                                     <label for="floatingPassword">&nbsp;&nbsp; ACCOMMODATION</label>
                                     @error('accommodation')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+
+                                <div class="form-floating mb-3 col-sm-4" id="acc-div" style="display: none">
+                                    <input  placeholder="accommodation amount" type="text"
+                                        class="form-control" name="accommodation_amount"
+                                        value="{{ old('accommodation_amount') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Accommodation Amount</label>
+                                    @error('accommodation_amount')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -140,70 +145,56 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="medical"
-                                        value="{{ old('medical') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; MEDICAL</label>
-                                    @error('medical')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
 
 
 
                                 <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="insurance"
-                                        value="{{ old('insurance') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; INSURANCE</label>
-                                    @error('insurance')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="food"
+                                    <select required type="text" class="form-control" name="food"
                                         value="{{ old('food') }}">
+                                        <option value="">-- select one --</option>
+                                        <option value="Provided By Employer">Provided By Employer</option>
+                                        <option value="Not Provided">Not Provided</option>
+                                        <option value="Duty Meals">Duty Meals</option>
+                                        <option value="Allowance">Allowance</option>
+                                    </select>
                                     <label for="floatingPassword">&nbsp;&nbsp; FOOD</label>
                                     @error('food')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="annual_leave"
-                                        value="{{ old('annual_leave') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; ANNUAL LEAVE</label>
-                                    @error('annual_leave')
+
+                                <div class="form-floating mb-3 col-sm-4" id="acc-food-div" style="display: none">
+                                    <input  placeholder="food amount" type="text" class="form-control"
+                                        name="food_amount" value="{{ old('food_amount') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Food Amount</label>
+                                    @error('food_amount')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
 
+
                                 <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="air_ticket"
-                                        value="{{ old('air_ticket') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; AIR TICKET</label>
-                                    @error('air_ticket')
+                                    <select required type="text" class="form-control" name="joining_ticket"
+                                        value="{{ old('joining_ticket') }}">
+                                        <option value="Provided by Employer">Provided by Employer</option>
+                                        <option value="Not Provided">Not Provided</option>
+                                    </select>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Joining Ticket</label>
+                                    @error('joining_ticket')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control"
-                                        name="indemnity_leave_and_overtime_salary"
-                                        value="{{ old('indemnity_leave_and_overtime_salary') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; indemnity and over time salary</label>
-                                    @error('indemnity_leave_and_overtime_salary')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input required type="text" class="form-control" name="covid_test"
-                                        value="{{ old('covid_test') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; COVID-19 TEST</label>
-                                    @error('covid_test')
+                                    <select required type="text" class="form-control" name="return_ticket"
+                                        value="{{ old('return_ticket') }}">
+                                        <option value="Every Completion One Year">Every Completion One Year</option>
+                                        <option value="Every Completion Two Year">Every Completion Two Year</option>
+                                    </select>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Joining Ticket</label>
+                                    @error('return_ticket')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -218,25 +209,21 @@
                                     @enderror
                                 </div>
 
-                                {{-- <div class="form-floating mb-3 col-sm-4" id="fileTypeDiv">
-                                    <select name="file_type" class="form-control">
-                                        @foreach ($fileTypes as $type)
-                                            <option value="{{ $type->name }}"
-                                                @if (old('file_type') == $type->id) {{ 'selected' }} @endif>
-                                                {{ $type->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; File Type</label>
-                                    @error('file_type')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div> --}}
+
 
 
                                 <div class="form-floating mb-3 col-sm-12">
                                     <textarea required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
                                         style="height: 150px;" name="description">{{ old('description') }}</textarea>
                                     <label for="floatingTextarea">&nbsp;&nbsp; Job Description</label>
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-12">
+                                    <input type="file" class="form-control" multiple name="attachments">
+                                    <label for="floatingTextarea">&nbsp;&nbsp; Job Description Attachment</label>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -274,7 +261,34 @@
                 var file = document.forms['jobForm']['attachments[]'].files[0];
                 if (file != null)
                     $('#fileTypeDiv').show();
-            })
+            });
+            $('select[name="working_days"]').on('change', function() {
+                var workingDays = $(this).val();
+                if (workingDays == 5)
+                    $('input[name="off_day"]').val(2);
+                else if (workingDays == 6)
+                    $('input[name="off_day"]').val(1);
+            });
+
+            $('select[name="accommodation"]').on('change', function() {
+                var acc = $(this).val();
+                if (acc == 'Allowance')
+                    $('#acc-div').show();
+                else {
+                    $('#acc-div').hide();
+                    $('input[name="accommodation_amount"]').removeAttribute('name');
+                }
+            });
+            $('select[name="food"]').on('change', function() {
+                var food = $(this).val();
+                if (food == 'Allowance')
+                    $('#acc-food-div').show();
+                else {
+                    $('#acc--food-div').hide();
+                    $('input[name="food_amount"]').removeAttribute('name');
+                }
+
+            });
         });
     </script>
     <script>
@@ -299,6 +313,7 @@
                     console.log('AJAX load did not work');
                 }
             });
+
 
         });
     </script>

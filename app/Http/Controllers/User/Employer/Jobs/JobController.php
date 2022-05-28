@@ -64,19 +64,22 @@ class JobController extends Controller
             'quantity' => $request->input('quantity'),
             'description' => $request->input('description'),
             'other_terms' => $request->input('other_terms') ?? null,
-            'covid_test' => $request->input('covid_test'),
-            'indemnity_leave_and_overtime_salary' => $request->input('indemnity_leave_and_overtime_salary'),
-            'air_ticket' => $request->input('air_ticket'),
-            'annual_leave' => $request->input('annual_leave'),
+            // 'covid_test' => $request->input('covid_test'),
+            // 'indemnity_leave_and_overtime_salary' => $request->input('indemnity_leave_and_overtime_salary'),
+            // 'air_ticket' => $request->input('air_ticket'),
+            // 'annual_leave' => $request->input('annual_leave'),
             'food' => $request->input('food'),
-            'insurance' => $request->input('insurance'),
-            'medical' => $request->input('medical'),
+            // 'insurance' => $request->input('insurance'),
+            // 'medical' => $request->input('medical'),
             'transport' => $request->input('transport'),
-            'accommodation' => $request->input('accommodation'),
+            'accommodation_amount' => $request->accommodation_amount,
+            'food_amount' => $request->input('food_amount'),
             'off_day' => $request->input('off_day'),
             'working_days' => $request->input('working_days'),
-            'working_hours' => $request->input('working_hours'),
-            'contract_period' => $request->input('contract_period'),
+            'joining_ticked' => $request->input('joining_ticked'),
+            'return_ticket' => $request->input('return_ticket'),
+            // 'working_hours' => $request->input('working_hours'),
+            // 'contract_period' => $request->input('contract_period'),
             'user_id' => Auth::id(), //The Publisher
         ]);
         if($request->hasFile('attachments'))
@@ -158,6 +161,8 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     /*
     public function update(UpdateJobRequest $request, $id)
     {
         $job = Job::findOrFail($id);
@@ -185,7 +190,7 @@ class JobController extends Controller
             'accommodation' => $request->input('accommodation'),
             'off_day' => $request->input('off_day'),
             'working_days' => $request->input('working_days'),
-            'working_hours' => $request->input('working_hours'),
+            // 'working_hours' => $request->input('working_hours'),
             'contract_period' => $request->input('contract_period'),
             'user_id' => Auth::id(), //The Publisher
         ]);
@@ -198,7 +203,7 @@ class JobController extends Controller
 
     }
 
-
+ */
 
 
 

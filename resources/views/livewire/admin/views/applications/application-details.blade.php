@@ -1,11 +1,12 @@
-<div>
+<div wire:ignore>
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Application Details</strong><small> status: {{ $application->status }}</small>
+                            <strong>Application Details</strong><small> status:
+                                {{ $application->mainStatus->name }}</small>
                         </div>
                         <div class="card-body">
                             <div class="custom-tab">
@@ -275,10 +276,10 @@
                                                         @forelse ($application->statusHistory->sortByDesc('id') as $record)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
-                                                                <td>{{$record->prev_status}}</td>
-                                                                <td>{{$record->status}}</td>
-                                                                <td>{{$record->user->name}}</td>
-                                                                <td>{{$record->created_at}}</td>
+                                                                <td>{{ $record->prev_status }}</td>
+                                                                <td>{{ $record->status }}</td>
+                                                                <td>{{ $record->user->name }}</td>
+                                                                <td>{{ $record->created_at }}</td>
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -430,40 +431,38 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form  wire:submit.preventDefault="changeStatus()">
+                                    <form wire:submit="changeStatus()">
                                         <div class="modal-body">
-                                            <select wire:model="status" class="form-control">
-                                                <option value="waiting for medical">waiting for medical</option>
-                                                <option value="waiting for visa">waiting for visa</option>
-                                                <option value="CV Submitted">CV Submitted</option>
-                                                <option value="For Selection">For Selection</option>
-                                                <option value="waiting for interview">waiting for interview</option>
-                                                <option value="cancelled">cancelled</option>
-                                                <option value="active">active</option>
-                                                <option value="hold">hold</option>
-                                                <option value="completed">completed</option>
-                                                <option value="Arrival Scheduled">Arrival Scheduled</option>
-                                                <option value="LMRA Process">LMRA Process</option>
-                                                <option value="Ready for Payment">Ready for Payment</option>
-                                                <option value="Embassy">Embassy</option>
-                                                <option value="Emigrate Process">Emigrate Process</option>
-                                                <option value="To Be Arrived">To Be Arrived</option>
-                                                <option value="Arrived">Arrived</option>
-                                                <option value="Arrival Scheduled">Arrival Scheduled</option>
-                                                <option value="For Exited">For Exited</option>
-                                                <option value="Exited">Exited</option>
-                                                <option value="Worker Refuse to Work">Worker Refuse to Work</option>
-                                                <option value="UNFIT">UNFIT</option>
-                                                <option value="Runaway">Runaway</option>
-                                                <option value="For Local Transfer">For Local Transfer</option>
-                                                <option value="Canceled Application">Canceled Application</option>
-                                            </select>
+                                            <div class="form-group">
+                                                <select name="mainStatus" wire:model.lazy="mainStatus" class="form-control" required>
+                                                    <option value="">--select one --</option>
+                                                    @foreach ($mainStatuses as $status)
+                                                        <option value="{{ $status->id }}"
+                                                            @if ($application->main_status_id == $status->id) {{ 'selected' }} @endif>
+                                                            {{ $status->name }}
+                                                        </option>
+                                                    @endforeach
+                                                    @error($mainStatus)
+                                                    <span style="color:red">{{$message}}</span>
+                                                    @enderror
+                                                </select>
+                                            </div>
+                                            <div class="form-gorup">
+
+                                                <select name="subStatus" class="form-control" wire:model.lazy="subStatus" required>
+                                                    <option value="">--select one --</option>
+                                                    
+                                                </select>
+                                                @error($subStatus)
+                                                <span style="color:red">{{$message}}</span>
+                                                @enderror
+                                            </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success"
-                                            >Change</button>
+                                            <button type="submit" class="btn btn-success">Change</button>
                                         </div>
                                     </form>
 
@@ -494,6 +493,34 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #message').val(message);
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('select[name="mainStatus"]').on('change', function() {
+                    var id = $(this).val();
+                    if (id) {
+                        $.ajax({
+                            url: "{{ URL::to('admin/application/substatus') }}/" + id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="subStatus"]').empty();
+                                $.each(data, function(key, value) { //for each loop
+                                    $('select[name="subStatus"]').append('<option value="' +
+                                        value.id + '" selected>' + value.name + '</option>');
+                                });
+                            },
+                        });
+
+                    } else {
+                        console.log('AJAX load did not work');
+                    }
+                });
+
+
             });
         </script>
     @endpush

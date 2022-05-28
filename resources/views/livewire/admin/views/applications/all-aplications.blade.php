@@ -20,6 +20,8 @@
                                                 <th class="serial">#</th>
                                                 <th>Agent_Name</th>
                                                 <th>Demand_Serial_Number</th>
+                                                <th>Status</th>
+                                                <th>Attahments</th>
                                                 <th>Applied At</th>
                                                 <th>Number_Of_Notes</th>
                                                 <th>Actions</th>
@@ -38,6 +40,12 @@
                                                     <td>
                                                         <a href="#"
                                                             class="text-info">{{ $application->job->post_number }}</a>
+                                                    </td>
+                                                    <td>{{$application->subStatus->name}}</td>
+                                                    <td>
+                                                        <a href="{{route('admin.application.attachments.all' , $application->id)}}">
+                                                            {{$application->attachments_count}}
+                                                        </a>
                                                     </td>
                                                     <td>{{ $application->created_at }}</td>
                                                     <td><a

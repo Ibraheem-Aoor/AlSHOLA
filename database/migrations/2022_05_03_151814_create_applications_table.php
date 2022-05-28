@@ -48,19 +48,11 @@ return new class extends Migration
             $table->string('hindi_understand');
             $table->string('hindi_read');
             $table->string('hindi_write');
-
+            $table->string('visa_number')->nullable();
             $table->text('recommendations');
             $table->string('applicant_interviewd_by');
             $table->string('min_salary');
             $table->string('signature');
-
-
-            $table->enum('status' , [
-                                    'waiting for medical' , 'waiting for visa'  , 'CV Submitted' , 'For Selection'
-                                    ,'waiting for interview' , 'active' , 'cancelled' , 'hold' , 'completed'  , 'LMRA Process',
-                                    'Ready for Payment' , 'Embassy' , 'Emigrate Process' , 'To Be Arrived' , 'Arrival Scheduled' , 'Arrived' , 'For Exited' ,
-                                    'Exited ' , 'Worker Refuse to Work' , 'UNFIT' , 'Runaway' , 'For Local Transfer' , 'Canceled Application'
-                                ])->default('hold');
             $table->boolean('forwarded')->default(false); //forwarded to employer
             $table->unsignedBigInteger('user_id'); //agent who submited this form
             $table->index('user_id');

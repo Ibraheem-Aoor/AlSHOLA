@@ -18,7 +18,7 @@ class Application extends Model
         'height' , 'weihgt' , 'arabic_speak' , 'arabic_understand' , 'arabic_read',
         'arabic_write' , 'english_speak' , 'english_understand' , 'english_read' , 'english_write',
         'hindi_speak' , 'hindi_understand' , 'hindi_read' , 'hindi_write', 'recommendations',
-        'applicant_interviewd_by' , 'min_salary' , 'signature' , 'status' , 'forwarded',
+        'applicant_interviewd_by' , 'min_salary' , 'signature' , 'main_status_id' , 'sub_status_id' , 'forwarded',
         'user_id' , 'job_id'
     ];
 
@@ -56,5 +56,15 @@ class Application extends Model
     public function statusHistory()
     {
         return $this->hasMany(ApplicationStatusHistory::class  , 'application_id');
+    }
+
+    public function mainStatus()
+    {
+        return $this->belongsTo(ApplicationMainStatus::class , 'main_status_id');
+    }
+
+    public function subStatus()
+    {
+        return $this->belongsTo(subStatus::class , 'sub_status_id');
     }
 }

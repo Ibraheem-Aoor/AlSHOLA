@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Views\Applications;
 
 use App\Models\Application;
+use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationNote;
 use App\Models\ApplicationStatusHistory;
 use Illuminate\Routing\Route;
@@ -12,11 +13,12 @@ use Livewire\Component;
 
 class ApplicationDetails extends Component
 {
-    public $application , $note , $currentRoute , $status;
+    public $application , $note , $currentRoute , $mainStatus , $subStatus;
 
     public function mount($id)
     {
-        $this->application = Application::with(['user' , 'job:id,post_number' , 'job.title' , 'employers' , 'notes' , 'statusHistory'])
+        $this->application = Application::with(['user' , 'job:id,post_number' , 'job.title' ,
+                                                'employers' , 'notes' , 'statusHistory' , 'mainStatus' , 'subStatus' ])
         ->with(['job.title.sector' , 'notes.user' , 'statusHistory.user:id,name'])
         ->findOrFail($id);
         $this->status = $this->application->status;
@@ -58,20 +60,45 @@ class ApplicationDetails extends Component
 
     public function changeStatus()
     {
-        $hisory = new ApplicationStatusHistory();
-        $hisory->prev_status  = $this->application->status;
-        $this->application->status = $this->status;
-        $hisory->status = $this->application->status;
-        $hisory->application_id = $this->application->id;
-        $hisory->user_id = Auth::id();
-        $hisory->save();
+        $this->validate($this->rules() , $this->messages());
+        $hisory_1 = new ApplicationStatusHistory();
+        $hisory_2 = new ApplicationStatusHistory();
+        $hisory_1->prev_status  = $this->application->mainStatus->name;
+        $hisory_2->prev_status  = $this->application->subStatus->name;
+        $this->application->main_status_id = $this->mainStatus;
+        $this->application->sub_status_id = $this->subStatus;
+        $hisory_1->status = $this->application->mainStatus->name;
+        $hisory_2->status = $this->application->subStatus->name;
+        $hisory_1->application_id = $this->application->id;
+        $hisory_2->application_id = $this->application->id;
+        $hisory_1->user_id = Auth::id();
+        $hisory_2->user_id = Auth::id();
+        $hisory_1->save();
+        $hisory_2->save();
         $this->application->save();
-        notify()->success('Note Sended Successfully');
+        notify()->success('Status Updated Successfully');
         return redirect(route($this->currentRoute , $this->application->id));
+    }
+
+    public function rules()
+    {
+        return [
+            'mainStatus' => 'required',
+            'subStatus' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'mainStatus.required' => 'This Field is required',
+            'subStatus.required' => 'This Field is required',
+        ];
     }
 
     public function render()
     {
-        return view('livewire.admin.views.applications.application-details') ->extends('layouts.admin.master')->section('content');
+        $mainStatuses = ApplicationMainStatus::all();
+        return view('livewire.admin.views.applications.application-details' , ['mainStatuses' => $mainStatuses]) ->extends('layouts.admin.master')->section('content');
     }
 }

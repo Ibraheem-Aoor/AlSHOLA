@@ -222,7 +222,7 @@
                                                                     {{ $application->contact_no }}
                                                                 </td>
                                                                 <td>
-                                                                    {{ $application->status }}
+                                                                    {{ $application->mainStatus->name }}
                                                                 </td>
                                                                 <td>{{ $application->created_at }}</td>
                                                                 <td>

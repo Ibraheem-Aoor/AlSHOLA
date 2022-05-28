@@ -40,7 +40,8 @@ class ApplicationController extends Controller
      */
     public function createApplication(CreateApplicationRequest $request , $jobId)
     {
-        $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId , 'title_id' => $request->get('title')]));
+        $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId ,
+                'title_id' => $request->get('title') , 'main_status_id' => 1 , 'sub_status_id' => 7]));
         $this->createEmoployersRecords($request->addMoreInputFields  ,  $application->id);
         notify()->success('Application Send Successfully');
         return redirect(route('employee.dashboard'));
@@ -65,7 +66,7 @@ class ApplicationController extends Controller
     public function allApplications()
     {
         $applications = Application::where('user_id' , Auth::id())
-                        ->with(['job.title'])
+                        ->with(['job.title' , 'mainStatus.subStatus' , 'mainStatus' , 'subStatus'])
                         ->withCount('notes')
                         ->orderByDesc('id')
                         ->simplePaginate(15);

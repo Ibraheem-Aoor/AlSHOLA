@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Views\Applications;
 use App\Models\ApplicationAttachment;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationAttachments extends Component
 {
@@ -28,6 +29,14 @@ class ApplicationAttachments extends Component
         return redirect(route($this->currentRoute , $this->application_id));
     }
 
+    public function deleteFile($id)
+    {
+        $file = ApplicationAttachment::findOrFail($id);
+        Storage::delete('public/uploads/applications/'.$file->application_id.'/'.'attachments'.'/'.$file->name);
+        $file->delete();
+        notify()->success('File Deleted Successfully');
+        return redirect(route($this->currentRoute));
+    }
 
 
     public function render()

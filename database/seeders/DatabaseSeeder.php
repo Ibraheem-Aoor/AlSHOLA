@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CountriesSeeder::class,
             CompanySeeder::class,
             AdminSeeder::class,
+            ApplicationStatusSeeder::class,
         ]);
     }
 }

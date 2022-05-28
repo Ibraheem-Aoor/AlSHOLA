@@ -143,15 +143,15 @@
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>
 
-                                                    <a href="{{ route('employer.pdf.generate', $job->id) }}" title="print document"
+                                                    {{-- <a href="{{ route('employer.pdf.generate', $job->id) }}" title="print document"
                                                         class=" badge bg-success" href="#"><i
                                                             class="fa fa-print"></i>
-                                                        </a>
+                                                        </a> --}}
 
-                                                    <a href="#exampleModal_5" class=" badge bg-secondary" title="upload attachment to managment"
+                                                    {{-- <a href="#exampleModal_5" class=" badge bg-secondary" title="upload attachment to managment"
                                                         data-toggle="modal" data-title="{{ $job->title }}"
                                                         data-number="{{ $job->post_number }}"
-                                                        data-id="{{ $job->id }}"><i class="fa fa-upload"></i></a>
+                                                        data-id="{{ $job->id }}"><i class="fa fa-upload"></i></a> --}}
 
                                                 </td>
                                             </tr>

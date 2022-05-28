@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->boolean('is_forwarded_employer')->default(false);
             $table->boolean('is_forwarded_talent')->default(false);
+            $table->string('type');
             $table->unsignedBigInteger('application_id');
             $table->index('application_id');
             $table->foreign('application_id')->references('id')->on('applications')->constrained()->onDelete('cascade');//note writer

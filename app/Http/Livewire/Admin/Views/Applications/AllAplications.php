@@ -61,7 +61,7 @@ class AllAplications extends Component
 
     public function render()
     {
-        $applications = Application::with(['user:id,name,email' , 'job:id,post_number'] )->withCount('notes')->simplePaginate(15);
+        $applications = Application::with(['user:id,name,email' , 'job:id,post_number' , 'subStatus'] )->withCount(['notes' , 'attachments'])->simplePaginate(15);
         return view('livewire.admin.views.applications.all-aplications' , ['applications' => $applications])
         ->extends('layouts.admin.master')->section('content');
     }

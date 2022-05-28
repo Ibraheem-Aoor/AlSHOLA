@@ -13,16 +13,16 @@ class DemandDetails extends Component
 
     public function mount($id)
     {
-        $this->job = Job::with(['user:id,name'  , 'applications:id,user_id,full_name,contact_no,status' ,
+        $this->job = Job::with(['user:id,name'  , 'applications:id,user_id,full_name,contact_no' ,
                     'nationality' , 'title.sector'])
                     ->findOrFail($id);
 
     }
     public function render()
     {
-        $applications = Application::whereJobId($this->job->id)->
-                    orderByDesc('id')
-                    ->with('user:id,name')
+        $applications = Application::whereJobId($this->job->id)
+                    ->orderByDesc('id')
+                    ->with(['user:id,name' , 'mainStatus.subStatus'])
                     ->simplePaginate(15);
         return view('livewire.admin.views.demands.demand-details'  , [
             'applications' => $applications

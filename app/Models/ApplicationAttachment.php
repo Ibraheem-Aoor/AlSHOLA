@@ -8,8 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ApplicationAttachment extends Model
 {
     use HasFactory;
+
+    /**
+     * if the is_forwarded_employer  == true then the attachment will be shown to emoloyer.
+     * if the is_forwarded_talent == true then the attachment will be shown to emoloyer.
+     */
     protected $fillable = [
-        'application_id' , 'user_id' , 'name' , 'forwarded' , 'is_forwarded_employer' , 'is_forwarded_talent' ,
+        'application_id' , 'user_id' , 'name' ,
+        'type', 'is_forwarded_employer' , 'is_forwarded_talent' ,
     ];
 
     public function user()
