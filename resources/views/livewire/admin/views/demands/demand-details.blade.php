@@ -62,7 +62,7 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Salary:</label>
-                                                    <input type="text" value="{{ $job->salary }}$"
+                                                    <input type="text" value="{{ $job->salary }}{{ " ( " . $job->currency ." )"}}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -125,9 +125,21 @@
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Air
+                                                    <label for="inputPassword3" class="col-form-label">Joining
                                                         Ticket:</label>
-                                                    <input type="text" value="{{ $job->air_ticket }}"
+                                                    <input type="text" value="{{ $job->joining_ticket }}"
+                                                        class="form-control" id="inputPassword3" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="inputPassword3" class="col-form-label">Return
+                                                        Ticket:</label>
+                                                    <input type="text" value="{{ $job->return_ticket }}"
+                                                        class="form-control" id="inputPassword3" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="inputPassword3" class="col-form-label">Gender
+                                                        Prefrences:</label>
+                                                    <input type="text" value="{{ $job->gender_prefrences }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -295,7 +307,8 @@
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="5" class="alert alert-warning  bg-dark"
+                                                                <td colspan="6"
+                                                                    class="alert alert-warning  bg-dark text-center"
                                                                     style="color:#fff">
                                                                     No Records Yet
                                                                 </td>
