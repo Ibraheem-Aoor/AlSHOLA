@@ -30,8 +30,13 @@
                                         <td>{{ $note->application->job->post_number }}</td>
                                         <td>{{ Str::limit($note->message, 40, '...') }}</td>
                                         <td>{{ $note->created_at }}</td>
-                                        <td><a data-message="{{$note->message}}" data-toggle="modal" href="#exampleModal_5"><i class="fa fa-eye"></i> Show
-                                                Message</a>
+                                        <td>
+                                            <a title="show message" data-message="{{ $note->message }}"
+                                                data-toggle="modal" href="#exampleModal_5"><i class="fa fa-eye"></i>
+                                            </a>
+                                            <a title="Reply" data-id="{{ $note->application->id }}" data-toggle="modal"
+                                                href="#exampleModal_6"><i class="fa fa-envelope"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
@@ -52,7 +57,7 @@
 
     </div>
 
-    <!-- Modal -->
+    <!-- Show Message Modal -->
     <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -74,6 +79,33 @@
     </div>
 
 
+    <!-- Reply Modal -->
+    <div class="modal fade" id="exampleModal_6" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Your Reply:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('employee.note.send') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" id="id" name="application_id">
+                        <textarea class="form-control" id="message" cols="30" rows="10" name="message"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">SEND</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -90,6 +122,13 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #message').val(message);
+            })
+            $('#exampleModal_6').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var id = button.data('id')
+                // var description = button.data('description')
+                var modal = $(this)
+                modal.find('.modal-body #id').val(id);
             })
         </script>
     @endpush

@@ -24,7 +24,7 @@ class CreateApplicationRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return  [
             "ref" => "required|string",
             "date" => "required|date",
             "title" => "required|string",
@@ -60,10 +60,15 @@ class CreateApplicationRequest extends FormRequest
             "addMoreInputFields.*.duration" => "required|string",
             "addMoreInputFields.*.country" => "required|string",
             "addMoreInputFields.*.designation" => "required|string",
+            'addMoreEducationRecords.*.degree' => 'required|string',
+            'addMoreEducationRecords.*.year' => 'required|numeric',
+            'addMoreEducationRecords.*.from' => 'required|string',
+            'addMoreEducationRecords.*.country' => 'required|string',
             "applicant_interviewd_by" => "required|string",
             "min_salary" => "required|numeric",
             "recommendations" => "required|string",
-            "signature" => "required|string",
+            'father_name' => 'required|string',
+            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }
 }

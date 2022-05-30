@@ -41,10 +41,11 @@
                                                         <a href="#"
                                                             class="text-info">{{ $application->job->post_number }}</a>
                                                     </td>
-                                                    <td>{{$application->subStatus->name}}</td>
+                                                    <td>{{ $application->subStatus->name }}</td>
                                                     <td>
-                                                        <a href="{{route('admin.application.attachments.all' , $application->id)}}">
-                                                            {{$application->attachments_count}}
+                                                        <a
+                                                            href="{{ route('admin.application.attachments.all', $application->id) }}">
+                                                            {{ $application->attachments_count }}
                                                         </a>
                                                     </td>
                                                     <td>{{ $application->created_at }}</td>
@@ -58,8 +59,7 @@
 
                                                         <a href="{{ route('admin.application.details', $application->id) }}"
                                                             class="btn btn-outline-primary" title="show details">
-                                                            <i
-                                                                class="fa fa-eye"></i>
+                                                            <i class="fa fa-eye"></i>
                                                         </a>
 
                                                         <a class="btn btn-outline-info" title="send note to agent"

@@ -23,6 +23,12 @@
                                             href="#custom-nav-employers" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Employer Experince</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-education" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Education</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Attachments</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-notes" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Notes</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
@@ -299,7 +305,6 @@
 
 
                                     {{-- Employer Experince --}}
-
                                     <div class="tab-pane fade" id="custom-nav-employers" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
@@ -341,6 +346,104 @@
                                         </div>
                                         </p>
                                     </div>
+
+                                    {{-- Employer Education --}}
+                                    <div class="tab-pane fade" id="custom-nav-education" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 ">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Degree</th>
+                                                            <th scope="col">Year</th>
+                                                            <th scope="col">Educational Body</th>
+                                                            <th scope="col">Country</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($application->educations as $edu)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $edu->degree }}</td>
+                                                                <td>{{ $edu->year }}</td>
+                                                                <td>{{ $edu->collage }}</td>
+                                                                <td>{{ $edu->country }}</td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="7" class="alert alert-warning  bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
+
+                                    {{-- Attachments --}}
+                                    <div class="tab-pane fade" id="custom-nav-attachments" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 ">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Type</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($application->attachments as $attachment)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $attachment->name }}</td>
+                                                                <td>{{ $attachment->type }}</td>
+                                                                <td>{{ $attachment->date }}</td>
+                                                                <td>
+                                                                    <a href="{{ route('admin.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                        class="text-primary">
+                                                                        <i class="fa fa-download"></i>
+                                                                        <a href="{{ route('admin.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                            class="text-danger">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="7" class="alert alert-warning  bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
+
+
                                     <div class="tab-pane fade" id="custom-nav-actions" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
@@ -434,7 +537,8 @@
                                     <form wire:submit="changeStatus()">
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <select name="mainStatus" wire:model.lazy="mainStatus" class="form-control" required>
+                                                <select name="mainStatus" wire:model.lazy="mainStatus"
+                                                    class="form-control" required>
                                                     <option value="">--select one --</option>
                                                     @foreach ($mainStatuses as $status)
                                                         <option value="{{ $status->id }}"
@@ -443,18 +547,19 @@
                                                         </option>
                                                     @endforeach
                                                     @error($mainStatus)
-                                                    <span style="color:red">{{$message}}</span>
+                                                        <span style="color:red">{{ $message }}</span>
                                                     @enderror
                                                 </select>
                                             </div>
                                             <div class="form-gorup">
 
-                                                <select name="subStatus" class="form-control" wire:model.lazy="subStatus" required>
+                                                <select name="subStatus" class="form-control"
+                                                    wire:model.lazy="subStatus" required>
                                                     <option value="">--select one --</option>
-                                                    
+
                                                 </select>
                                                 @error($subStatus)
-                                                <span style="color:red">{{$message}}</span>
+                                                    <span style="color:red">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -510,7 +615,8 @@
                                 $('select[name="subStatus"]').empty();
                                 $.each(data, function(key, value) { //for each loop
                                     $('select[name="subStatus"]').append('<option value="' +
-                                        value.id + '" selected>' + value.name + '</option>');
+                                        value.id + '" selected>' + value.name +
+                                        '</option>');
                                 });
                             },
                         });

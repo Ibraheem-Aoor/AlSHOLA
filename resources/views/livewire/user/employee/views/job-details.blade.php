@@ -12,10 +12,10 @@
                             <h3 class="mb-3">{{ $job->title->name }}</h3>
                             <span class="text-truncate me-0"><i class="fa fa-sun text-primary me-2"></i>
                                 {{ $job->status }}
-                            </span>
+                            </span>&nbsp;&nbsp;
                             <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>
-                                {{ $job->salary }}
-                            </span>
+                                {{ $job->salary . ' ( ' . $job->currency . ' )' }}
+                            </span>&nbsp;&nbsp;
                             <span class="text-truncate me-0"><i class="fa fa-clock text-primary me-2"></i>
                                 {{ $job->contract_period }}
                             </span>
@@ -34,6 +34,12 @@
                                     <h4>Accommodation:</h4>
                                     <p class="mb-3">&nbsp;&nbsp;{{ $job->accommodation }}</p>
                                 </div>
+                                @isset($job->accommodation_amount)
+                                    <div class="col-sm-6">
+                                        <h4>Accommodation Amount:</h4>
+                                        <p class="mb-3">&nbsp;&nbsp;{{ $job->accommodation_amount }}</p>
+                                    </div>
+                                @endisset
                                 <div class="col-sm-6">
                                     <h4>Medical:</h4>
                                     <p class="mb-3">&nbsp;&nbsp;{{ $job->medical }}</p>
@@ -47,8 +53,8 @@
                                     <p class="mb-3">&nbsp;&nbsp;{{ $job->annual_leave }}</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4>Covid-19 Test:</h4>
-                                    <p class="mb-3">&nbsp;&nbsp;{{ $job->covid_test }}</p>
+                                    <h4>Country Entry Requirments If Any:</h4>
+                                    <p class="mb-3">{{ $job->covid_test }}</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <h4>Cindemnity, leave, and overtime salary:</h4>
@@ -58,13 +64,31 @@
                                     <h4>Food:</h4>
                                     <p class="mb-3">&nbsp;&nbsp;{{ $job->food }}</p>
                                 </div>
+                                @isset($job->food_amount)
+                                    <div class="col-sm-6">
+                                        <h4>Food Amount:</h4>
+                                        <p class="mb-3">&nbsp;&nbsp;{{ $job->food_amount }}</p>
+                                    </div>
+                                @endisset
+                                <div class="col-sm-6">
+                                    <h4>Gender Prefrences:</h4>
+                                    <p class="mb-3">&nbsp;&nbsp;{{ $job->gender_prefrences }}</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4>Age Limit:</h4>
+                                    <p class="mb-3">&nbsp;&nbsp;{{ $job->age_limit }}</p>
+                                </div>
                                 <div class="col-sm-6">
                                     <h4>Transport:</h4>
                                     <p class="mb-3">&nbsp;&nbsp;{{ $job->transport }}</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4>Air Ticket:</h4>
-                                    <p class="mb-3">&nbsp;&nbsp;{{ $job->air_ticket }}</p>
+                                    <h4>Joining Ticket:</h4>
+                                    <p class="mb-3">&nbsp;&nbsp;{{ $job->joining_ticket }}</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4>Return Ticket:</h4>
+                                    <p class="mb-3">&nbsp;&nbsp;{{ $job->return_ticket }}</p>
                                 </div>
                                 <div class="col-sm-12">
                                     <h4>Job description:</h4>
@@ -111,7 +135,8 @@
                         <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Days:
                             {{ $job->working_days }}
                         </p>
-                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary: {{ $job->salary }}$
+                        <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary:
+                            {{ $job->salary . ' ( ' . $job->currency . ' )' }}
                         </p>
                         <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>OFF Day:
                             {{ $job->off_day }}</p>

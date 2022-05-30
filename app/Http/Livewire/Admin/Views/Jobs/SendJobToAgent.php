@@ -12,7 +12,7 @@ class SendJobToAgent extends Component
     public $job , $nameFilter;
     public function mount($id)
     {
-        $this->job = Job::findOrFail($id);
+        $this->job = Job::with(['title.sector' , 'user:id,name'])->findOrFail($id);
     }
 
       //This method send the job post to talent using many to many relationship

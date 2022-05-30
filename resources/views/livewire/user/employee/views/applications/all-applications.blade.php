@@ -16,6 +16,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Job_Number</th>
                                     <th scope="col">Job_Title</th>
+                                    <th scope="col">Client_Name</th>
                                     <th scope="col">Number_Of_Notes</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Applied At</th>
@@ -35,6 +36,7 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $application->job->post_number }}</td>
                                         <td>{{ $application->job->title->name }}</td>
+                                        <td>{{ $application->job->user->name }}</td>
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>
@@ -66,7 +68,7 @@
                                     </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="alert alert-warning text-center bg-dark" style="color:#fff">
+                                            <td colspan="8" class="alert alert-warning text-center bg-dark" style="color:#fff">
                                                 No Records Yet
                                             </td>
                                         </tr>

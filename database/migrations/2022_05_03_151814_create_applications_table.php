@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('address');
             $table->string('full_name');
+            $table->string('father_name');
             $table->string('passport_no');
             $table->string('contact_no');
             $table->string('place_of_birth');
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->string('children');
             $table->string('height');
             $table->string('weihgt');
+            $table->string('employer_photo')->nullable();
 
             //Language:
             $table->string('arabic_speak');
@@ -44,6 +46,7 @@ return new class extends Migration
             $table->string('english_read');
             $table->string('english_write');
 
+            $table->string('third_language');
             $table->string('hindi_speak');
             $table->string('hindi_understand');
             $table->string('hindi_read');
@@ -52,7 +55,6 @@ return new class extends Migration
             $table->text('recommendations');
             $table->string('applicant_interviewd_by');
             $table->string('min_salary');
-            $table->string('signature');
             $table->boolean('forwarded')->default(false); //forwarded to employer
             $table->unsignedBigInteger('user_id'); //agent who submited this form
             $table->index('user_id');

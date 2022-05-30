@@ -174,6 +174,22 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
             }
         })->name('admin.application.attachment.download');
 
+        Route::get('/application/{id}/attachment/{fileName}/delete' , function($id , $fileName , )
+        {
+            $application  = Application::with('job:id')->findOrFail($id);
+            try{
+                // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+                Storage::delete('public/uploads/applications/'.$application->id.'/'.'attachments'.'/'.$fileName);
+                ApplicationAttachment::whereApplicationId($id)->where('name' , $fileName)->first()->delete();
+                notify()->success('Attachment Deleted Successfully');
+                return redirect()->back();
+            }Catch(Throwable $e)
+            {
+                return dd($e->getMessage());
+                return redirect()->back();
+            }
+        })->name('admin.application.attachment.delete');
+
         Route::get('/application/{id}/attachment/{fileName}' , function($id , $fileName , )
         {
             $application  = Application::with('job:id')->findOrFail($id);

@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('application/visa' , [ApplicationController::class , 'visaApplications'])->name('employee.applications.visa');
         Route::get('application/{id}/notes' , [ApplicationController::class , 'applicationNotes'])->name('employee.application.notes');
         Route::get('application/{id}/attachments' , [ApplicationController::class , 'applicationAttachments'])->name('employee.application.attachments');
+        Route::post('application/note/reply' , [ApplicationController::class , 'sendNoteToAdmin'])->name('employee.note.send');
 
 
         //Candidacy oreders

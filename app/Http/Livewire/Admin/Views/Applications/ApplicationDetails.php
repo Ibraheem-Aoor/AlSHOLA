@@ -18,7 +18,8 @@ class ApplicationDetails extends Component
     public function mount($id)
     {
         $this->application = Application::with(['user' , 'job:id,post_number' , 'job.title' ,
-                                                'employers' , 'notes' , 'statusHistory' , 'mainStatus' , 'subStatus' ])
+                                                'employers' , 'notes' ,
+                                                'statusHistory' , 'mainStatus' , 'subStatus' , 'educations' , 'attachments' ])
         ->with(['job.title.sector' , 'notes.user' , 'statusHistory.user:id,name'])
         ->findOrFail($id);
         $this->status = $this->application->status;
@@ -62,19 +63,14 @@ class ApplicationDetails extends Component
     {
         $this->validate($this->rules() , $this->messages());
         $hisory_1 = new ApplicationStatusHistory();
-        $hisory_2 = new ApplicationStatusHistory();
-        $hisory_1->prev_status  = $this->application->mainStatus->name;
-        $hisory_2->prev_status  = $this->application->subStatus->name;
-        $this->application->main_status_id = $this->mainStatus;
+        $hisory_1->prev_status  = $this->application->subStatus->name;
         $this->application->sub_status_id = $this->subStatus;
-        $hisory_1->status = $this->application->mainStatus->name;
-        $hisory_2->status = $this->application->subStatus->name;
+        $this->application->save();
+        $hisory_1->status = $this->application->subStatus->name;
         $hisory_1->application_id = $this->application->id;
-        $hisory_2->application_id = $this->application->id;
         $hisory_1->user_id = Auth::id();
-        $hisory_2->user_id = Auth::id();
         $hisory_1->save();
-        $hisory_2->save();
+        $this->application->main_status_id = $this->mainStatus;
         $this->application->save();
         notify()->success('Status Updated Successfully');
         return redirect(route($this->currentRoute , $this->application->id));

@@ -37,7 +37,6 @@ class Job extends Model
         'sex',
         'requested_by',
         'food',
-        'age',
         'gender_prefrences',
         'age_limit',
         'joining_ticket',

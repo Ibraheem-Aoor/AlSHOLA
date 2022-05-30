@@ -12,14 +12,14 @@ class Application extends Model
 
 
     protected $fillable = [
-        'ref' , 'date' , 'title_id' , 'address' , 'full_name' , 'passport_no' ,
+        'ref' , 'date' , 'title_id' , 'address' , 'full_name' , 'father_name' ,'passport_no' ,
         'contact_no' , 'place_of_birth' , 'date_of_birth' , 'age' , 'relegion' ,
         'place_issued' , 'date_issued' , 'expiry_issued' , 'sex' , 'children' ,
         'height' , 'weihgt' , 'arabic_speak' , 'arabic_understand' , 'arabic_read',
         'arabic_write' , 'english_speak' , 'english_understand' , 'english_read' , 'english_write',
         'hindi_speak' , 'hindi_understand' , 'hindi_read' , 'hindi_write', 'recommendations',
-        'applicant_interviewd_by' , 'min_salary' , 'signature' , 'main_status_id' , 'sub_status_id' , 'forwarded',
-        'user_id' , 'job_id'
+        'applicant_interviewd_by' , 'min_salary' , 'main_status_id' , 'sub_status_id' , 'forwarded',
+        'user_id' , 'job_id' , 'employer_photo', 'third_language',
     ];
 
     public function user()
@@ -46,6 +46,11 @@ class Application extends Model
     public function employers()
     {
         return $this->hasMany(Employer::class);
+    }
+
+    public function educations()
+    {
+        return $this->hasMany(Education::class , 'application_id');
     }
 
     public function visa()

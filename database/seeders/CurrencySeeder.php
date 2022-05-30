@@ -153,18 +153,15 @@ $currencies = [
     'XOF' => 'West African Cfa Franc',
     'YER' => 'Yemeni Rial',
     'ZMW' => 'Zambian Kwacha',
-    'Bahraini Dinar' =>
+    'BHD' => "Bahraini Dinar",
 ];
-
-
-
 
 
 
 
     foreach($currencies as $key => $value)
         {
-            Currency::create(['key' => $key , 'value' => $value])
+            Currency::create(['key' => $key , 'value' => $value]);
         }
     }
 }

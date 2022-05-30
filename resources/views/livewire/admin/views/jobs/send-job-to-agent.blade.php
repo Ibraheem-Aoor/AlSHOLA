@@ -9,6 +9,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">All Registerd Agents</h4>
+                                <h5 class="text-primary">
+                                    DSR: {{$job->post_number}}
+                                </h5>
+                                <h5 class="text-primary">
+                                    Category: {{$job->title->sector->name}}
+                                </h5>
+                                <h5 class="text-primary">
+                                    Title: {{$job->title->name}}
+                                </h5>
+                                <h5 class="text-primary">
+                                    Client: {{$job->user->name}}
+                                </h5>
                             </div>
                             <div class="card-body--">
                                 <div class="container mb-2">
@@ -38,34 +50,34 @@
                                             @endphp
                                             @forelse($users as $user)
                                                 <tr>
-                                                    <td class="serial">{{ $i++ }}</td>
-                                                    <td>
+                                                    <td  class="serial">{{ $i++ }}</td>
+                                                    <td class="">
                                                         <a href="{{ route('admin.user.profile.show', $user->id) }}">
                                                             {{ $user->name }}
                                                         </a>
                                                     </td>
-                                                    <td>
+                                                    <td class="">
                                                         {{ $user->registration_No }}
                                                     </td>
-                                                    <td>
+                                                    <td class="">
                                                         {{ $user->country->name }}
                                                     </td>
-                                                    <td>{{ $user->responsible_person }}</td>
-                                                    <td>{{ $user->mobile }}</td>
+                                                    <td class="">{{ $user->responsible_person }}</td>
+                                                    <td class="">{{ $user->mobile }}</td>
                                                     @if ($user->hasJob($job))
                                                         @if ($user->hasAppliedToJob($job->id))
-                                                            <td>
+                                                            <td class="">
                                                                 <span class="badge badge-complete">Applied</span>
                                                             </td>
                                                         @else
-                                                            <td>
+                                                            <td class="">
                                                                 <a href="#"
                                                                     wire:click="takeJobFromAgent('{{ $user->id }}')"
                                                                     class="btn btn-outline-danger">Cancel</a>
                                                             </td>
                                                         @endif
                                                     @else
-                                                        <td>
+                                                        <td class="">
                                                             <a href="#"
                                                                 wire:click="sendJobToAgent('{{ $user->id }}')"
                                                                 class="btn btn-primary">SEND</a>
@@ -74,7 +86,7 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="7" class="text-center alert alert-warning">No Records
+                                                    <td class="" colspan="7" class="text-center alert alert-warning">No Records
                                                         Yet!
                                                     </td>
                                                 </tr>

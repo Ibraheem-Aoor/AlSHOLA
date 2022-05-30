@@ -172,6 +172,8 @@
                                 </div>
 
 
+
+
                                 <div class="form-floating mb-3 col-sm-4" id="acc-food-div" style="display: none">
                                     <input placeholder="food amount" type="text" class="form-control"
                                         name="food_amount" value="{{ old('food_amount') }}">
@@ -221,6 +223,20 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-floating mb-3 col-sm-4">
+                                    <select required type="text" class="form-control" name="age_limit"
+                                        value="{{ old('age_limit') }}">
+                                        <option value="">-- select one</option>
+                                        <option value="Below 40">Below 40</option>
+                                        <option value="Below 50">Below 50</option>
+                                        <option value="Below 60">Below 60</option>
+                                    </select>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Age Limit</label>
+                                    @error('age_limit')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
 
                                 <div class="form-floating mb-3 col-sm-12">
                                     <textarea required class="form-control" name="other_terms"
@@ -244,7 +260,7 @@
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-12">
-                                    <input type="file" class="form-control" name="attachments[]" multiple >
+                                    <input type="file" class="form-control" name="attachments[]" multiple>
                                     <label for="floatingTextarea">&nbsp;&nbsp; Job Description Attachment</label>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>

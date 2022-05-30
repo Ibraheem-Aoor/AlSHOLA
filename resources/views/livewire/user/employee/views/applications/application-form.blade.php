@@ -29,22 +29,24 @@
 
                         <div class="mb-5">
                             <div class="container">
-                                <form action="{{ route('employee.application.create', $job->id) }}" method="POST">
+                                <form action="{{ route('employee.application.create', $job->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
+
                                     <div class="row">
                                         {{-- Basic Info --}}
                                         <div class="col-sm-4 mb-3">
                                             <h4>Reference:</h4>
                                             <input required type="text" name="ref" class="form-control"
-                                                value="{{ old('ref') }}">
+                                                value="{{ $ref }}" readonly>
                                             @error('ref')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Date:</h4>
-                                            <input required type="date" name="date" class="form-control"
-                                                value="{{ old('date') }}">
+                                            <input readonly required type="text" name="date" class="form-control"
+                                                value="{{ Carbon\Carbon::now() }}">
                                             @error('date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -68,6 +70,14 @@
                                             <input required type="text" name="full_name" class="form-control"
                                                 value="{{ old('full_name') }}">
                                             @error('full_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-4 mb-3">
+                                            <h4>Father Name:</h4>
+                                            <input required type="text" name="father_name" class="form-control"
+                                                value="{{ old('father_name') }}">
+                                            @error('father_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -152,7 +162,7 @@
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Age:</h4>
-                                            <input required type="number" name="age" class="form-control"
+                                            <input required type="number" name="age" class="form-control" readonly
                                                 value="{{ old('age') }}">
                                             @error('age')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -160,7 +170,7 @@
                                         </div>
                                         <div class="col-sm-4 mb-3">
                                             <h4>Relegion:</h4>
-                                            <input required type="date" name="relegion" class="form-control"
+                                            <input required type="text" name="relegion" class="form-control"
                                                 value="{{ old('relegion') }}">
                                             @error('relegion')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -183,26 +193,36 @@
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>children:</h4>
-                                            <input required type="text" name="children" class="form-control" value="{{old('children')}}">
+                                            <input required type="text" name="children" class="form-control"
+                                                value="{{ old('children') }}">
                                             @error('children')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>Height:</h4>
-                                            <input required type="text" name="height" class="form-control" value="{{old('height')}}">
+                                            <input required type="text" name="height" class="form-control"
+                                                value="{{ old('height') }}">
                                             @error('height')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-sm-3 mb-3">
                                             <h4>weight:</h4>
-                                            <input required type="text" name="weihgt" class="form-control" value="{{old('weihgt')}}">
+                                            <input required type="text" name="weihgt" class="form-control"
+                                                value="{{ old('weihgt') }}">
                                             @error('weihgt')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-
+                                        <div class="col-sm-3 mb-3">
+                                            <h4>Employer Photo:</h4>
+                                            <input type="file" class="form-control" name="photo" id="photo">
+                                            @error('weihgt')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-6"></div>
                                         {{-- Arabic Language --}}
                                         <div class="col-sm-2 mb-3">
                                             <h4>Language:</h4>
@@ -320,9 +340,9 @@
                                         </div>
 
                                         {{-- Hindi Langauge --}}
-                                        <div class="col-sm-2 mb-3">
+                                        <div class="col-sm-2 mb-4">
                                             <h4>Language:</h4>
-                                            <input required type="text" value="Hindi" readonly class="form-control">
+                                            <input required type="text" name="third_language" class="form-control">
                                         </div>
                                         <div class="col-sm-2 mb-3">
                                             <h4>Speak:</h4>
@@ -376,6 +396,44 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+
+                                        {{-- Language --}}
+                                        <div class="col-sm-12 mt-2">
+                                            <h4>Education:</h4>
+                                            <table class="table table-responsive" id="dynamicAddRemoveEdu">
+                                                <tr>
+                                                    <th>Degree</th>
+                                                    <th>Year</th>
+                                                    <th>educational body</th>
+                                                    <th>Country</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" required
+                                                            name="addMoreEducationRecords[0][degree]"
+                                                            placeholder="Enter Degree" class="form-control" />
+                                                    </td>
+                                                    <td><input type="text" required name="addMoreEducationRecords[0][year]"
+                                                            placeholder="Enter Year" class="form-control" />
+                                                    </td>
+                                                    <td><input type="text" required
+                                                            name="addMoreEducationRecords[0][country]"
+                                                            placeholder="Enter education body" class="form-control" />
+                                                    </td>
+                                                    <td><input type="text" required name="addMoreEducationRecords[0][from]"
+                                                            placeholder="Enter country" class="form-control" />
+                                                    </td>
+                                                    <td><button type="button" name="add" id="dynamic-edu-ar"
+                                                            class="btn btn-outline-primary">Add</button></td>
+                                                </tr>
+                                            </table>
+                                            @error('addMoreEducationRecords')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+
+
+                                        {{-- Experince --}}
                                         <div class="col-sm-12 mt-2">
                                             <h4>Experince:</h4>
                                             <table class="table table-responsive" id="dynamicAddRemove">
@@ -388,7 +446,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><input type="text" required name="addMoreInputFields[0][name]"
-                                                            placeholder="Enter Empoloyer" class="form-control" />
+                                                            placeholder="Enter Employer" class="form-control" />
                                                     </td>
                                                     <td><input type="text" required name="addMoreInputFields[0][duration]"
                                                             placeholder="Enter Duration" class="form-control" />
@@ -405,6 +463,7 @@
                                                 </tr>
                                             </table>
                                         </div>
+
                                         <div class="col-sm-6 mb-3">
                                             <h4>Applicant Interviewed By: </h4>
                                             <input required type="text" required class="form-control"
@@ -415,25 +474,38 @@
                                         </div>
                                         <div class="col-sm-6 mb-3">
                                             <h4>Minumum Expected Salary: </h4>
-                                            <input required type="number" required class="form-control" name="min_salary">
+                                            <input required type="number" required class="form-control"
+                                                name="min_salary">
                                             @error('min_salary')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-12 mt-2">
                                             <h4>Recommendations: </h4>
                                             <textarea name="recommendations" class="form-control" cols="30" rows="10"></textarea>
                                             @error('recommendations')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 mt-3">
-                                        <h4>Signutare:</h4>
-                                        <input required type="text" required class="form-control" name="signature">
-                                        @error('signature')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <div class="col-sm-12">
+                                            <span class="text-danger">Accepted File Types: pdf , jpg , png</span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4>Passport Attachment: </h4>
+                                            <input type="file" class="form-control" name="files['passport']" id="">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4>Medical Attachment: </h4>
+                                            <input type="file" class="form-control" name="files['medical']" id="">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4>Experince Attachment:</h4>
+                                            <input type="file" class="form-control" name="files['experince']" id="">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <h4>Eucation Attachment:</h4>
+                                            <input type="file" class="form-control" name="files['education']" id="">
+                                        </div>
                                     </div>
                                     <div class="col-sm-12 mt-4">
                                         <button type="submit" onclick="myFunc()"
@@ -459,7 +531,7 @@
                                 {{ $job->working_days }}
                             </p>
                             <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary:
-                                {{ $job->salary }}$
+                                {{ $job->salary . ' ( ' . $job->currency . ' )' }}
                             </p>
                             <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>OFF Day:
                                 {{ $job->off_day }}</p>
@@ -492,6 +564,9 @@
 @push('js')
     {{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script> --}}
     <script>
+        let myDropzone = new Dropzone("#photo")
+    </script>
+    <script>
         var i = 0;
         $("#dynamic-ar").click(function() {
             ++i;
@@ -509,5 +584,44 @@
         $(document).on('click', '.remove-input-field', function() {
             $(this).parents('tr').remove();
         });
+
+
+        $("#dynamic-edu-ar").click(function() {
+            ++i;
+            $("#dynamicAddRemoveEdu").append(
+                '<tr><td><input type="text" name="addMoreEducationRecords[' + i +
+                '][degree]" placeholder="Enter Degree"  required class="form-control" /></td><td><input type="text" name="addMoreEducationRecords[' +
+                i +
+                '][year]" placeholder="Enter Year" required class="form-control" /></td><td><input type="text" name="addMoreEducationRecords[' +
+                i +
+                '][from]" placeholder="Enter educational body" required class="form-control" /></td><td><input type="text" name="addMoreEducationRecords[' +
+                i +
+                '][country]" placeholder="Enter country" required class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-edu-input-field">Delete</button></td></tr>'
+            );
+        });
+        $(document).on('click', '.remove-edu-input-field', function() {
+            $(this).parents('tr').remove();
+        });
+
+
+
+
+
+        $('input[name="date_of_birth"]').on('change', function() {
+            var birthDate = $(this).val();
+            var age = getAge(birthDate);
+            $('input[name="age"]').val(age);
+        });
+
+        function getAge(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
     </script>
 @endpush

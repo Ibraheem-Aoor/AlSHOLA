@@ -26,14 +26,13 @@ class CreateJobRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return  [
             'title' => 'required',
             'nationality' => 'required',
             'salary' => 'required|numeric',
             'quantity' => 'required|numeric',
             'working_days' => 'required',
             'accommodation' => 'required',
-            'transport' => 'required',
             'accommodation_amount' => 'sometimes',
             'food_amount' => 'sometimes',
             'food' => 'required',

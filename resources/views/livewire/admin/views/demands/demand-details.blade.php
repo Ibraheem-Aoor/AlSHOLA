@@ -62,7 +62,8 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Salary:</label>
-                                                    <input type="text" value="{{ $job->salary }}{{ " ( " . $job->currency ." )"}}"
+                                                    <input type="text"
+                                                        value="{{ $job->salary }}{{ ' ( ' . $job->currency . ' )' }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -117,6 +118,30 @@
                                                     <input type="text" value="{{ $job->food }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
+                                                @isset($job->food_amount)
+                                                    <div class="col-sm-4">
+                                                        <label for="inputPassword3" class="col-form-label">Food
+                                                            Amount:</label>
+                                                        <input type="text" value="{{ $job->food_amount }}"
+                                                            class="form-control" id="inputPassword3" readonly>
+                                                    </div>
+                                                @endisset
+
+                                                <div class="col-sm-4">
+                                                    <label for="inputPassword3"
+                                                        class="col-form-label">Accomodation:</label>
+                                                    <input type="text" value="{{ $job->accommodation }}"
+                                                        class="form-control" id="inputPassword3" readonly>
+                                                </div>
+
+                                                @isset($job->accommodation_amount)
+                                                    <div class="col-sm-4">
+                                                        <label for="inputPassword3" class="col-form-label">Accommodation
+                                                            Amount:</label>
+                                                        <input type="text" value="{{ $job->accommodation_amount }}"
+                                                            class="form-control" id="inputPassword3" readonly>
+                                                    </div>
+                                                @endisset
 
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Annual
@@ -150,20 +175,23 @@
                                                         value="{{ $job->indemnity_leave_and_overtime_salary }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
+
+
+                                                <div class="col-sm-4">
+                                                    <label for="inputPassword3" class="col-form-label">Age
+                                                        Limit:</label>
+                                                    <input type="text" value="{{ $job->age_limit }}"
+                                                        class="form-control" id="inputPassword3" readonly>
+                                                </div>
+
                                                 <div class="col-sm-12">
-                                                    <label for="inputPassword3" class="col-form-label">Country Entry Requirments If Any:</label>
+                                                    <label for="inputPassword3" class="col-form-label">Country Entry
+                                                        Requirments If Any:</label>
                                                     <input type="text" value="{{ $job->covid_test }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
 
-                                                @isset($job->age)
-                                                    <div class="col-sm-4">
-                                                        <label for="inputPassword3" class="col-form-label">age:</label>
-                                                        <input type="text" value="{{ $job->age }}"
-                                                            class="form-control" id="inputPassword3" readonly>
-                                                    </div>
-                                                @endisset
 
                                                 @isset($job->requested_by)
                                                     <div class="col-sm-4">
