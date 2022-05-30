@@ -14,8 +14,6 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">MY APPLICATIONS</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         <a href="{{ route('employee.applications.all') }}" class="dropdown-item">ALL APPLICATIONS</a>
-                        <a href="{{ route('employee.applications.medical') }}" class="dropdown-item">WAITING FOR MEDICAL</a>
-                        <a href="{{ route('employee.applications.visa') }}" class="dropdown-item">WAITING FOR VISA</a>
                     </div>
                 </div>
                 <a href="{{ route('employee.jobs.avilable') }}" class="nav-item nav-link">AVILABLE JOBS</a>

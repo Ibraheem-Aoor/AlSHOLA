@@ -26,10 +26,8 @@ class ApplicationHelper
      * Change the applciation status
      * ajax: post
      */
-    public function postChangeApplicationStatus(Request $request , $id)
+    public function postChangeApplicationStatus(Request $request)
     {
-        $application =  Application::findorFail($id);
-        $application->main_status_id = $request->mainStatus;
-        $application->sub_status_id = $request->subStatus;
+        return dd('goooood');
     }
 }

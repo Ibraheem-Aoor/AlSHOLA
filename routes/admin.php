@@ -160,7 +160,7 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
         Route::get('/applications/{id}/notes/all' , ApplicationAllNotes::class)->name('admin.application.notes.all');
         Route::get('/applications/{id}/attachments' , ApplicationAttachments::class)->name('admin.application.attachments.all');
         Route::get('/application/substatus/{id}' , [ApplicationHelper::class , 'getSubStatuses']);
-        Route::post('/application/status/change/{id}' , [ApplicationHelper::class , 'postChangeApplicationStatus'])->name('admin.application.change-status');
+        Route::post('/application/status/change' , [ApplicationHelper::class , 'postChangeApplicationStatus'])->name('admin.application.change-status');
         Route::get('/application/{id}/attachment/{fileName}/download' , function($id , $fileName , )
         {
             $application  = Application::with('job:id')->findOrFail($id);

@@ -22,11 +22,14 @@
                                             href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Attachment</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-notes" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Notes</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-applications" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Application</a>
-                                        {{-- <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
+                                        <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
                                             href="#custom-nav-actions" role="tab" aria-controls="custom-nav-contact"
-                                            aria-selected="false">Actions</a> --}}
+                                            aria-selected="false">Actions</a>
                                     </div>
                                 </nav>
                                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -290,8 +293,62 @@
                                     </div>
 
 
-
                                     {{-- Notes --}}
+                                    <div class="tab-pane fade" id="custom-nav-notes" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">User Name</th>
+                                                            <th scope="col">message</th>
+                                                            <th scope="col">date</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($job->notes as $note)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
+                                                                </td>
+                                                                <td>{{ Str::limit($note->message, 40, '..') }}</td>
+                                                                <td>{{ $note->created_at }}
+                                                                </td>
+                                                                <td>{{ $note->created_at }}</td>
+                                                                <td>
+                                                                    <a class="btn btn-outline-info"
+                                                                        data-message="{{ $note->message }}"
+                                                                        data-toggle="modal" href="#exampleModal_5"><i
+                                                                            class="fa fa-eye"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="5"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
+
+
+                                    {{-- Applications --}}
                                     <div class="tab-pane fade" id="custom-nav-applications" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
@@ -440,22 +497,22 @@
 
 
 
-                                    {{-- <div class="tab-pane fade" id="custom-nav-actions" role="tabpanel"
+                                    <div class="tab-pane fade" id="custom-nav-actions" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
                                             <a class="btn btn-success col-sm-12 mb-2"
-                                                wire:click="passjobToEmployer()">Forward To Client</a>
+                                                href="{{route('admin.send-job-to-agent' , $job->id)}}">Forward To Client</a>
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>
-                                            <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
+                                            {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
-                                                Change Status</a>
+                                                Change Status</a> --}}
                                         </div>
                                         </p>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -17,9 +17,12 @@ class NoteController extends Controller
 {
     public function index($id)
     {
-        $job = Job::with('notes')->select(['id' , 'status'])->findOrFail($id);
-        $user = User::findOrFail(Auth::id());
-        return view('user.employer.jobs.notes.all-job-notes' , compact('job'));
+        $job = Job::findOrFail($id);
+        $notes = Note::where('job_id' ,  $id)->with('user')->whereHas('user' , function($q)
+        {
+            $q->where('type' , 'Admin');
+        })->get();
+        return view('user.employer.jobs.notes.all-job-notes' , compact('notes'  , 'job'));
     }
 
     //This function either serve the refuse choice by sending a note that is nullable then remvoing the job from the user
@@ -69,6 +72,27 @@ class NoteController extends Controller
                 'user_id' => Auth::id()
             ]
         );
+    }
+
+
+    public function sendJobNoteToAdmin(Request $request , $jobId)
+    {
+        $validate = Validator::make($request->all() , ['message'=>'required|string']);
+        if($validate->fails())
+        {
+            $errors = '';
+            notify()->error($validate->errors()->first());
+            return redirect()->back();
+        }
+        Note::create(
+            [
+                'message' => $request->message,
+                'user_id' => Auth::id(),
+                'job_id' => $jobId,
+            ]
+        );
+        notify()->success('note sended Successfully');
+        return redirect()->back();
     }
 
 }

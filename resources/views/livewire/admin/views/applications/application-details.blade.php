@@ -537,7 +537,7 @@
                                     <form wire:submit="changeStatus()">
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <select name="mainStatus" wire:model.lazy="mainStatus"
+                                                <select name="mainStatus" id="mainStatus" wire:model="mainStatus"
                                                     class="form-control" required>
                                                     <option value="">--select one --</option>
                                                     @foreach ($mainStatuses as $status)
@@ -554,7 +554,7 @@
                                             <div class="form-gorup">
 
                                                 <select name="subStatus" class="form-control"
-                                                    wire:model.lazy="subStatus" required>
+                                                    wire:model="subStatus" id="subStatus" required>
                                                     <option value="">--select one --</option>
 
                                                 </select>
@@ -567,7 +567,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success">Change</button>
+                                            <button type="submit" class="btn btn-success"
+                                                >Change</button>
                                         </div>
                                     </form>
 
@@ -602,6 +603,36 @@
         </script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                $('#ajaxSubmit').click(function(e) {
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                });
+
+                $.ajax({
+                    url: "{{ url('/admin/application/status/change') }}",
+                    method: 'POST',
+                    data: {
+                        name: $('#mainStatus').val(),
+                        type: $('#subStatus').val(),
+                    },
+                    success: function(result) {
+                        alert('good');
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+            });
+        </script>
+
         <script>
             $(document).ready(function() {
                 $('select[name="mainStatus"]').on('change', function() {

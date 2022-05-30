@@ -38,9 +38,11 @@
                                     <div class="alert"></div>
                                 @endif
                                 <h4 class="box-title">
-                                    <span class="text-danger">Job_Title:</span>
+                                    <span class="text-danger">Category:</span>
+                                    {{$jobSector}} <br>
+                                    <span class="text-danger">Title:</span>
                                     {{ $jobTitle }} <br>
-                                    <span class="text-danger">Job_number:</span>
+                                    <span class="text-danger">DSR:</span>
                                     {{ $jobNumber }}
                                 </h4>
                             </div>

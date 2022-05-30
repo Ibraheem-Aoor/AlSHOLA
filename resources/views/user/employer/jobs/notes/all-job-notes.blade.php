@@ -7,71 +7,99 @@
         <div class="container">
 
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Notes</h1>
-                    <div class="row g-4">
-                        <div class="col-sm-12 text-center">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">send_date</th>
-                                            <th scope="col">message</th>
-                                            <th scope="col">Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $i = 1;
-                                        @endphp
-                                        @forelse ($job->notes as $note)
-                                            <tr>
-                                                <th scope="row">{{ $i++ }}</th>
-                                                <td>{{ $note->created_at }}</td>
-                                                <td>{{ Str::limit($note->message, 50, '...') }}</td>
-                                                <td>
-                                                    <a class="btn btn-outline-primary"
-                                                        data-message="{{ $note->message }}" data-toggle="modal"
-                                                        href="#exampleModal_5"><i class="fa fa-eye"></i> show
-                                                        message</a>
-                                                </td>
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="5" class="alert alert-warning text-center bg-dark"
-                                                    style="color:#fff">
-                                                    No Records Yet
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-        </div>
-    </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                    <textarea class="form-control" id="message" cols="30" rows="10" readonly></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="row g-4">
+                <div class="col-sm-12 text-center">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">send_date</th>
+                                    <th scope="col">message</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i = 1;
+                                @endphp
+                                @forelse ($notes as $note)
+                                    <tr>
+                                        <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $note->created_at }}</td>
+                                        <td>{{ Str::limit($note->message, 50, '...') }}</td>
+                                        <td>
+                                            <a class="btn btn-outline-primary" data-message="{{ $note->message }}"
+                                                data-toggle="modal" href="#exampleModal_5"><i class="fa fa-eye"></i>
+                                            </a>
+                                            <a class="btn btn-outline-primary" data-toggle="modal"
+                                                href="#exampleModal_6"><i class="fa fa-envelope"></i>
+                                            </a>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="alert alert-warning text-center bg-dark"
+                                            style="color:#fff">
+                                            No Records Yet
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Show Modal -->
+    <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="message" cols="30" rows="10" readonly></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div class="modal fade" id="exampleModal_6" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Your Reply:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('employer.job.note.send' , $job->id) }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="hidden" id="id" name="application_id">
+                        <textarea class="form-control" id="message" cols="30" rows="10" name="message"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">SEND</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

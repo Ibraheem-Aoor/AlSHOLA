@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth']], function()
 
         //Job Notes Routes:
         Route::get('/job/{id}/notes' , [NoteController::class , 'index'])->name('employer.job.notes');
+        Route::post('/job/{id}/note/reply' , [NoteController::class , 'sendJobNoteToAdmin'])->name('employer.job.note.send');
 
         //Applications
         Route::get('/applications/{id}/attachments' , [EmployerApplicationsController::class , 'applicationAttachments'])->name('employer.application.attachments');

@@ -21,7 +21,10 @@ class ApplicationAllNotes extends Component
     }
     public function render()
     {
-        $notes = ApplicationNote::where('application_id' , $this->applicationId)->with('user:id,name,type,email')->simplePaginate(15);
+        $notes = ApplicationNote::where('application_id' , $this->applicationId)
+        ->with('user:id,name,type,email')
+        ->orderByDesc('id')
+        ->simplePaginate(15);
         return view('livewire.admin.views.applications.notes.application-all-notes' , ['notes' => $notes])
         ->extends('layouts.admin.master')->section('content');
     }
