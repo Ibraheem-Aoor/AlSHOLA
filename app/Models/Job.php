@@ -36,7 +36,6 @@ class Job extends Model
         'age',
         'sex',
         'requested_by',
-        'food',
         'gender_prefrences',
         'age_limit',
         'joining_ticket',
@@ -78,6 +77,10 @@ class Job extends Model
     public function nationality()
     {
         return $this->belongsTo(Nationality::class , 'natoinality_id' , 'id');
+    }
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class , 'currency_id' , 'id');
     }
 
 }

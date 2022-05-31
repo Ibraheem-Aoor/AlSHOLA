@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Views\Demands;
 
 use App\Http\Traits\General\JobSerialGenerationTrait;
+use App\Models\Currency;
 use App\Models\Job;
 use App\Models\Nationality;
 use App\Models\Sector;
@@ -21,7 +22,7 @@ class NewRequestJob extends Component
      */
 
     public $category , $title , $nationality , $currentStatus , $age , $salary,
-            $sex , $client , $requestBy , $descreption , $currentRoute;
+            $sex , $client , $requestBy , $descreption , $currentRoute , $currency;
 
     public function mount()
     {
@@ -37,12 +38,13 @@ class NewRequestJob extends Component
                 'title_id' => $this->title,
                 'natoinality_id' => $this->nationality,
                 'status' => $this->currentStatus,
-                'age' => $this->sex,
+                'age' => $this->age,
                 'salary' => $this->salary,
                 'sex' => $this->sex,
                 'user_id' => $this->client,
                 'requested_by' => $this->requestBy,
                 'description' => $this->descreption,
+                'currency'=> $this->currency,
             ]
         );
         notify()->success('New Demand Created Successfully');
@@ -62,6 +64,8 @@ class NewRequestJob extends Component
             'client' => 'required',
             'requestBy' => 'required',
             'descreption' => 'required',
+            'currency' => 'required',
+
         ];
     }
 
@@ -70,6 +74,7 @@ class NewRequestJob extends Component
         $clients = User::where('type' , 'Client')->get()->chunk(100 , function(){});
         $categoires = Sector::all();
         $titles = [];
+        $currencies = Currency::all();
         if($this->category)
             $titles = Title::where('sector_id' , $this->category)->get();
         $nationalities = Nationality::all();
@@ -78,6 +83,7 @@ class NewRequestJob extends Component
             'categoires' => $categoires,
             'titles' => $titles,
             'nationalities' => $nationalities,
+            'currencies' => $currencies,
         ]
         )->extends('layouts.admin.master')->section('content');
     }

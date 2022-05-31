@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController;
 use App\Http\Helpers\ApplicationHelper;
 use App\Http\Livewire\Admin\Veiws\Settings\Sectors\AllSectors;
 use App\Http\Livewire\Admin\View\Users\Profile\ShowUserProfile;
@@ -52,6 +53,9 @@ use App\Models\UserAttachment;
 use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationDetails;
 use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
+use App\Http\Livewire\Admin\Views\Settings\Currency\AddCurrency;
+use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
+use App\Models\Currency;
 
 //prefix => admin
 
@@ -72,6 +76,7 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
         Route::get('/demand/{id}/details' , DemandDetails::class)->name('admin.demand.details');
         Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
         Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
+        Route::get('/job/pdf/{id}' ,  [PdfController::class , 'generateJobPDF'])->name('admin.pdf.generate');
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');
@@ -81,6 +86,10 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
         Route::get('nationality/new' , AddNewNationality::class)->name('admin.nationality.new');
         Route::get('title/new' , AddNewTitle::class)->name('admin.title.new');
         Route::get('title/all' , AllTitles::class)->name('admin.title.all');
+
+        Route::get('currency/all' , AllCurrencies::class)->name('admin.currency.all');
+        Route::get('currency/new' , AddCurrency::class)->name('admin.currency.new');
+
 
 
         // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');

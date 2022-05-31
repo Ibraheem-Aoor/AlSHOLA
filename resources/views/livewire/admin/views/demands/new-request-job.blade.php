@@ -1,5 +1,5 @@
 <div>
-    @section('title' , 'ALSHOLA - Admin | NEW JOB POST')
+    @section('title', 'ALSHOLA - Admin | NEW JOB POST')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
@@ -69,6 +69,20 @@
                                         </div>
 
                                         <div class="form-group col-sm-3">
+                                            <label class=" form-control-label">Currency:</label>
+                                            <select type="text" id="name" class="form-control"
+                                                wire:model.lazy="currency">
+                                                <option value="completed">-- select one --</option>
+                                                @foreach ($currencies as $currency)
+                                                    <option value="{{$currency->key}}">{{$currency->value}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('currency')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-sm-3">
                                             <label class=" form-control-label">Current Status:</label>
                                             <select type="text" id="name" class="form-control"
                                                 wire:model.lazy="currentStatus">
@@ -85,7 +99,12 @@
 
                                         <div class="form-group col-sm-3">
                                             <label class=" form-control-label">Age:</label>
-                                            <input type="text" id="name" class="form-control" wire:model.lazy="age">
+                                            <select id="name" class="form-control" wire:model.lazy="age">
+                                                <option value="">-- select one --</option>
+                                                <option value="Below 40">Below 40</option>
+                                                <option value="Below 50">Below 50</option>
+                                                <option value="Below 60">Below 60</option>
+                                            </select>
                                             @error('age')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -93,7 +112,11 @@
 
                                         <div class="form-group col-sm-3">
                                             <label class=" form-control-label">Sex:</label>
-                                            <input type="text" id="name" class="form-control" wire:model.lazy="sex">
+                                            <select id="name" class="form-control" wire:model.lazy="sex">
+                                                <option value="">-- select one --</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
                                             @error('sex')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

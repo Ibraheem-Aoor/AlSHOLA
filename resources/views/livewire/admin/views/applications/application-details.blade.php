@@ -553,8 +553,8 @@
                                             </div>
                                             <div class="form-gorup">
 
-                                                <select name="subStatus" class="form-control"
-                                                    wire:model="subStatus" id="subStatus" required>
+                                                <select name="subStatus" class="form-control" wire:model="subStatus"
+                                                    id="subStatus" required>
                                                     <option value="">--select one --</option>
 
                                                 </select>
@@ -567,8 +567,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success"
-                                                >Change</button>
+                                            <button type="submit" class="btn btn-success">Change</button>
                                         </div>
                                     </form>
 
@@ -626,7 +625,7 @@
                     success: function(result) {
                         alert('good');
                     },
-                    error: function(data){
+                    error: function(data) {
                         console.log(data);
                     },
                 });

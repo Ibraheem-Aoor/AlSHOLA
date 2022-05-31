@@ -82,6 +82,14 @@
                           <i class="menu-icon fa fa-plus"></i>
                           <a href="{{ route('admin.nationality.new') }}"> Add Nationality</a>
                       </li>
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.currency.all') }}"> Currency</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.currency.new') }}"> Add Currency</a>
+                      </li>
                   </ul>
               </li>
 

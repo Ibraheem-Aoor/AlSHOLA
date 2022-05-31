@@ -22,6 +22,7 @@
                                                 <th>Total Qty</th>
                                                 <th>Supply</th>
                                                 <th>Balance</th>
+                                                <th>Client_Name</th>
                                                 <th>Status</th>
                                                 <th>Open Date</th>
                                                 <th>

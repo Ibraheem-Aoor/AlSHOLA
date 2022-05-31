@@ -5,7 +5,7 @@
     <style>
         table {
             font-family: arial, sans-serif;
-            font-size:10px;
+            font-size: 10px;
             border-collapse: collapse;
             width: 100%;
         }
@@ -26,7 +26,7 @@
 
 <body>
 
-    <h2>Demand Information</h2>
+    <h3>Demand Information</h3>
 
     <table>
         <tr>
@@ -49,7 +49,7 @@
         </tr>
     </table>
 
-    <h2>Application Information</h2>
+    <h3>Application Information</h3>
 
     <table>
         <tr>
@@ -133,6 +133,44 @@
             <td>{{ $application->hindi_read }}</td>
         </tr>
 
+    </table>
+
+
+    <h3>Education</h3>
+    <table>
+        <tr>
+            <th>Degree/th>
+            <th>Edu-Body</th>
+            <th>Country</th>
+            <th>Year</th>
+        </tr>
+        <tr>
+            @foreach ($application->educations as $education)
+                <td>{{ $education->degree }}</td>
+                <td>{{ $education->from }}</td>
+                <td>{{ $education->country }}</td>
+                <td>{{ $education->year }}</td>
+            @endforeach
+        </tr>
+    </table>
+
+
+    <h3>Education</h3>
+    <table>
+        <tr>
+            <th>Employer/th>
+            <th>Duration</th>
+            <th>Country</th>
+            <th>Designation</th>
+        </tr>
+        <tr>
+            @foreach ($application->employers as $emplyoer)
+                <td>{{ $emplyoer->name }}</td>
+                <td>{{ $emplyoer->duration }}</td>
+                <td>{{ $emplyoer->country }}</td>
+                <td>{{ $emplyoer->designation }}</td>
+            @endforeach
+        </tr>
     </table>
 </body>
 

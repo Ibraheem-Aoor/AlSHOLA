@@ -1,64 +1,129 @@
-<!-- Job Detail Start -->
-<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-    <div class="container">
-        <div class="row gy-5 gx-4">
+<!DOCTYPE html>
+<html>
 
-            <div class="mb-5">
-                <h1 class="mb-3 text-center">Job Documentation:</h1>
-                    <h4 class="mb-3" style="color:red">Title:</h4>
-                    <p style="font-weight: 600; "> {{ $job->title }}</p>
-                    <h4 class="mb-3" style="color:red">Location:</h4>
-                    <p style="font-weight: 600; ">{{ $job->location }}</p>
-                    <h4 class="mb-3" style="color:red">Nature:</h4>
-                    <p style="font-weight: 600; ">{{ $job->nature }}</p>
-                    <h4 class="mb-3" style="color:red">Salary:</h4>
-                    <p style="font-weight: 600; ">{{ $job->salary }}</p>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            font-size: 10px;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
 
-            </div>
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
 
-            <div class="mb-5">
-                <h4 class="mb-3" style="color:red">Job description:</h4>
-                <p>{{ $job->descreption }}</p>
-                <h4 class="mb-3" style="color:red">Responsibility:</h4>
-                <p>{{ $job->responsibilities }}</p>
-                <h4 class="mb-3" style="color:red">Qualifications:</h4>
-                <p>{{ $job->requirements }}</p>
-            </div>
+    </style>
+</head>
 
-        </div>
+<body>
 
-        <div class="col-lg-4">
-            <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
-                <h4 class="mb-4" style="color:red">Job Summery:</h4>
-                <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ $job->created_at }}</p>
-                <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{ $job->vacancy }} Position
-                </p>
-                <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ $job->nature }}</p>
-                <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ $job->salary }}</p>
-                <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ $job->location }}</p>
-                <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line:
-                    {{ $job->end_date }}
-                </p>
-            </div>
-            <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
-                <h4 class="mb-4" style="color:red">Company Detail:</h4>
-                <p class="m-0">Ipsum dolor ipsum accusam stet et et diam dolores, sed rebum
-                    sadipscing
-                    elitr vero dolores.
-                    Lorem dolore elitr justo et no gubergren sadipscing, ipsum et takimata aliquyam et rebum est
-                    ipsum lorem
-                    diam. Et lorem magna eirmod est et et sanctus et, kasd clita labore.</p>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- Job Detail End -->
+    <h3>Demand Information</h3>
 
+    <table>
+        <tr>
+            <th>Demand SR</th>
+            <th>Category</th>
+            <th> Title</th>
+            <th> Quantity</th>
+            <th> Salary</th>
+            <th>currency</th>
+            <th>Date</th>
+        </tr>
+        <tr>
+            <td>{{ $job->post_number }}</td>
+            <td>{{ $job->title->sector->name }}</td>
+            <td>{{ $job->title->name }}</td>
+            <td>{{ $job->quantity }}</td>
+            <td>{{ $job->salary }}</td>
+            <td>{{ $job->currency }}</td>
+            <td>{{ $job->created_at }}</td>
+        </tr>
 
+        <tr>
+            <th>Status</th>
+            <th>natoinality</th>
+            <th>Contract Period</th>
+            <th>working_hours</th>
+            <th>Working Days</th>
+            <th>Accommodation</th>
+            <th>accommodation_amount</th>
+        </tr>
+        <tr>
+            <td>{{ $job->status }}</td>
+            <td>{{ $job->nationality->name }}</td>
+            <td>{{ $job->contract_period}}</td>
+            <td>{{ $job->working_hours }}</td>
+            <td>{{ $job->working_days }}</td>
+            <td>{{ $job->accommodation }}</td>
+            <td>{{ $job->accommodation_amount }}</td>
+        </tr>
 
+        <tr>
+            <th>medical</th>
+            <th>insurance</th>
+            <th>food</th>
+            <th>food_amount</th>
+            <th>Transport</th>
+            <th>off_day</th>
+            <th>indemnity_leave_and_overtime_salary</th>
+        </tr>
+        <tr>
+            <td>{{ $job->medical }}</td>
+            <td>{{ $job->insurance }}</td>
+            <td>{{ $job->food}}</td>
+            <td>{{ $job->transport }}</td>
+            <td>{{ $job->annual_leave }}</td>
+            <td>{{ $job->off_day }}</td>
+            <td>{{ $job->indemnity_leave_and_overtime_salary }}</td>
+        </tr>
 
+        <tr>
+            <th>age</th>
+            <th>age_limit</th>
+            <th>sex</th>
+            <th>requested_by</th>
+            <th>joining_ticket</th>
+            <th>return_ticket</th>
+            <th>covid_test</th>
+        </tr>
+        <tr>
+            <td>{{ $job->age }}</td>
+            <td>{{ $job->age_limit }}</td>
+            <td>{{ $job->sex }}</td>
+            <td>{{ $job->requested_by}}</td>
+            <td>{{ $job->joining_ticket}}</td>
+            <td>{{ $job->return_ticket }}</td>
+            <td>{{ $job->covid_test }}</td>
+        </tr>
+    </table>
 
+    <table>
+        <tr>
+            <th>Desccreption</th>
+        </tr>
+        <tr>
+            <th>{{$job->description}}</th>
+        </tr>
+    </table>
 
-</div>
+    <table>
+        <tr>
+            <th>Other Terms</th>
+        </tr>
+        <tr>
+            <th>{{$job->other_terms}}</th>
+        </tr>
+    </table>
+
+</body>
+
+</html>

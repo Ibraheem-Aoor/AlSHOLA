@@ -507,6 +507,7 @@
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>
+                                                <a href="{{route('admin.pdf.generate' , $job->id)}}">PRINT PDF</a>
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
                                                 Change Status</a> --}}
