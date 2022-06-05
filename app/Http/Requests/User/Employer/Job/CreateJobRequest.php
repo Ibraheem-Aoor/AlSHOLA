@@ -42,6 +42,11 @@ class CreateJobRequest extends FormRequest
             'other_terms' => 'required',
             'description' => 'required|string',
             'attachments.*' => 'sometimes|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            // 'subJob.*.title' => 'required',
+            // 'subJob.*.quantity' => 'required',
+            // 'subJob.*.salary' => 'required',
+            // 'subJob.*.nationality' => 'required',
+            // 'subJob.*.descreption' => 'required',
         ];
     }
 

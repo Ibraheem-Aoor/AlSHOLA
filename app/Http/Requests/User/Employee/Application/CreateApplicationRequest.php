@@ -69,6 +69,7 @@ class CreateApplicationRequest extends FormRequest
             "recommendations" => "required|string",
             'father_name' => 'required|string',
             'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            
         ];
     }
 }

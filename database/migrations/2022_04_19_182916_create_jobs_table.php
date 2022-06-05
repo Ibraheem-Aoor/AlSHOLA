@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('post_number');
             $table->enum('status' , ['completed' , 'active' , 'cancelled' , 'pending'])->default('active');
             $table->text('description')->nullable(true);
-            $table->text('quantity')->nullable(true);
-            $table->string('salary')->nullable(true);
             $table->string('contract_period')
             ->default('2 Years')
             ->nullable(true);

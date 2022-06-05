@@ -503,7 +503,7 @@
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
                                             <a class="btn btn-success col-sm-12 mb-2"
-                                                href="{{route('admin.send-job-to-agent' , $job->id)}}">Forward To Client</a>
+                                                href="{{route('admin.send-job-to-agent' , $job->id)}}">Forward To Agent</a>
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>

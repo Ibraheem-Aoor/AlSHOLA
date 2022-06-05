@@ -14,6 +14,7 @@ use App\Models\FileType;
 use App\Models\Job;
 use App\Models\Nationality;
 use App\Models\Sector;
+use App\Models\SubJob;
 use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,37 +59,12 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
-      $job = Job::create(array_merge($request->all() , ['post_number'=>$this->generatePosteNumber() ,
-      'user_id' => Auth::id() , 'title_id' => $request->input('title') , 'natoinality_id' => $request->input('nationality'),
-    ]));
-      /*
-        $job = Job::create([
-            'post_number' => $this->generatePosteNumber(),
-            'title_id' => $request->input('title'),
-            'natoinality_id' => $request->input('nationality'),
-            'salary' => $request->input('salary'),
-            'quantity' => $request->input('quantity'),
-            'description' => $request->input('description'),
-            'other_terms' => $request->input('other_terms') ?? null,
-            // 'covid_test' => $request->input('covid_test'),
-            // 'indemnity_leave_and_overtime_salary' => $request->input('indemnity_leave_and_overtime_salary'),
-            // 'air_ticket' => $request->input('air_ticket'),
-            // 'annual_leave' => $request->input('annual_leave'),
-            'food' => $request->input('food'),
-            // 'insurance' => $request->input('insurance'),
-            // 'medical' => $request->input('medical'),
-            'transport' => $request->input('transport'),
-            'accommodation_amount' => $request->accommodation_amount,
-            'food_amount' => $request->input('food_amount'),
-            'off_day' => $request->input('off_day'),
-            'working_days' => $request->input('working_days'),
-            'joining_ticked' => $request->input('joining_ticked'),
-            'return_ticket' => $request->input('return_ticket'),
-            // 'working_hours' => $request->input('working_hours'),
-            // 'contract_period' => $request->input('contract_period'),
-            'user_id' => Auth::id(), //The Publisher
-        ]);
-        */
+        $job = Job::create(array_merge($request->except(['subJob' , 'title' , 'quantity' , 'description' , 'salary' , 'nationality']) ,
+            [
+                'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()
+            ]
+        ));
+        $this->createSubJobs($request->subJobs , $job->id);
         if($request->hasFile('attachments'))
             $this->addAttachementsToJob($request->attachments  , $job->id , 'Job Descreption');
         if($request->hasFile('responsibilites_file'))
@@ -115,6 +91,26 @@ class JobController extends Controller
         // query the database and return a boolean
         // for instance, it might look like this in Laravel
         return Job::where('post_number' , $number)->exists();
+    }
+
+
+    /**
+     * Create All The SubJobs of the main sended Job
+     */
+    public function createSubJobs($subJobs , $mainJobId)
+    {
+        foreach($subJobs as $subjob)
+        {
+            SubJob::create(
+                [
+                    'job_id' => $mainJobId,
+                    'title_id' => $subjob['title'],
+                    'nationality_id' => $subjob['nationality'],
+                    'salary' => $subjob['salary'],
+                    'quantity' => $subjob['quantity'],
+                ]
+            );
+        }
     }
 
 

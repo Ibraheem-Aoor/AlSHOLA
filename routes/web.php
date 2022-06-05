@@ -17,6 +17,7 @@ use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfControlle
 use App\Http\Controllers\User\GeneralJobController;
 use App\Http\Controllers\User\ProfileController;
 use App\Models\Application;
+use App\Models\Title;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -146,6 +147,11 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('test' , function()
         {
             return Storage::download('public/uploads/attachments/jobs/5/snapchat.png');
+        });
+
+        Route::get('get-title/{id}' , function($id)
+        {
+            return Title::findOrFail($id);
         });
 
     });//end Emloyer RouteGroup.
