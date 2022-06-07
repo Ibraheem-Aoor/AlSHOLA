@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Job extends Model
 {
@@ -13,7 +14,6 @@ class Job extends Model
         'post_number',
         'title_id',
         'natoinality_id',
-        'description',
         'salary',
         'quantity',
         'contract_period',
@@ -54,6 +54,19 @@ class Job extends Model
         return $this->belongsTo(User::class , 'user_id'); //represnts the publisher Only
     }
 
+    public function subJobs()
+    {
+        return $this->hasMany(SubJob::class , 'job_id' , 'id');
+    }
+
+    public function qty()
+    {
+        $total = 0;
+        foreach($this->subJobs as $subJob)
+            $total += $subJob->quantity;
+        return $total;
+    }
+
     public function attachments()
     {
         return $this->hasMany(Attachment::class , 'job_id');
@@ -74,6 +87,7 @@ class Job extends Model
         return $this->belongsTo(Title::class , 'title_id' , 'id');
     }
 
+
     public function nationality()
     {
         return $this->belongsTo(Nationality::class , 'natoinality_id' , 'id');
@@ -82,5 +96,4 @@ class Job extends Model
     {
         return $this->belongsTo(Currency::class , 'currency_id' , 'id');
     }
-
 }

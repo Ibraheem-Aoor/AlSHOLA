@@ -9,7 +9,7 @@ class SubJob extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title_id' , 'nationality_id' , 'quantity' , 'salary' , 'job_id'
+        'title_id' , 'nationality_id' , 'quantity' , 'salary' , 'job_id' , 'description',
     ];
 
 
@@ -25,7 +25,7 @@ class SubJob extends Model
 
     public function nationality()
     {
-        return $this->belongsTo(Nationality::class , 'natoinality_id' , 'id');
+        return $this->belongsTo(Nationality::class , 'nationality_id' , 'id');
     }
 
 }

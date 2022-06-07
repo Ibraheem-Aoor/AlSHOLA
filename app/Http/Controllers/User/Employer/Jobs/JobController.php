@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User\Employer\Jobs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Employer\Job\SetUpJobReqeust;
 use App\Http\Requests\User\Employer\Job\CreateJobRequest;
+use App\Http\Requests\User\Employer\Job\SetUpJobReqeust as JobSetUpJobReqeust;
 use App\Http\Requests\User\Employer\Job\UpdateJobRequest;
 use App\Http\Traits\User\ApplicationAttachmentTrait;
 use App\Http\Traits\User\JobAttachmentTrait;
@@ -18,6 +20,7 @@ use App\Models\SubJob;
 use App\Models\Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
@@ -35,6 +38,37 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function setupFrom(Request $request)
+    {
+        $oldData  = $request->session()->has('step_1') ? $request->session()->get('step_1') : null;
+        $sectors = Sector::all();
+        $currencies = Currency::all();
+        return view('user.employer.jobs.creation-setup' , compact('sectors' , 'currencies'));
+
+    }
+
+
+    /**
+     * Set up the basic demand data
+     * The Incoming request have the basic demand data which will be kept in the session till the creation of the job model
+     */
+
+    public function setup(JobSetUpJobReqeust $request)
+    {
+        if($request->session()->has('step_1'))
+            $request->session()->remove('step_1');
+        $request->session()->put('step_1' ,  $request->except('attachments'));
+        if($request->hasFile('attachments'))
+            foreach($request->attachments as $asttachment)
+            {
+                $path = 'public/tempUploads/'.Auth::id().'/';
+                $asttachment->storeAs($path , $asttachment->getClientOriginalName());
+            }
+        return redirect(route('job.create'));
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,14 +76,25 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
+
+
+    public function create(Request $request)
     {
         $fileTypes = FileType::all();
-        $sectors = Sector::all();
+        $titles = Title::whereSectorId($request->session()->get('step_1')['sector'])->get();
         $nationalities = Nationality::orderBy('name')->get()->chunk(50);
         $currencies = Currency::all();
-        return view('user.employer.jobs.create' , compact('fileTypes' , 'sectors' , 'nationalities' , 'currencies'));
+        return view('user.employer.jobs.create' , compact('fileTypes' , 'titles' , 'nationalities' , 'currencies'));
     }
+
+
+
+    // public function step2(Request $request)
+    // {
+    //     $request->session()->put('step_2_data' , $request->data);
+    //     return $request;
+    // }
+
 
     /**
      * Store a newly created resource in storage.
@@ -59,16 +104,21 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
-        $job = Job::create(array_merge($request->except(['subJob' , 'title' , 'quantity' , 'description' , 'salary' , 'nationality']) ,
+        $basicJobData = $request->session()->get('step_1');
+        $job = Job::create(array_merge($basicJobData ,
             [
                 'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()
             ]
         ));
-        $this->createSubJobs($request->subJobs , $job->id);
-        if($request->hasFile('attachments'))
-            $this->addAttachementsToJob($request->attachments  , $job->id , 'Job Descreption');
-        if($request->hasFile('responsibilites_file'))
-            $this->uploadJobFile($request->responsibilites_file  , $job->id);
+        if($request->has('subJob'))
+        {
+            $this->createSubJobs($request->subJob , $job->id);
+        }else{
+            // return dd($request);
+            $this->createTheOnlySubJob($request ,  $job->id);
+        }
+        if(count(Storage::files('public/tempUploads/'.Auth::id().'/')) > 0)
+                $this->moveFilesToPrimaryFile($job->id);
         notify()->success('Job Addeed Successfully');
         return redirect(route('employer.dashboard'));
     }//end method
@@ -108,11 +158,31 @@ class JobController extends Controller
                     'nationality_id' => $subjob['nationality'],
                     'salary' => $subjob['salary'],
                     'quantity' => $subjob['quantity'],
+                    'description' => $subjob['description'],
                 ]
             );
         }
     }
 
+    /**
+     * Create the only sub job if there is no detection for mutliple subjob records
+     */
+    public function createTheOnlySubJob($subjob , $mainJobId)
+    {
+        SubJob::create([
+            'job_id' => $mainJobId,
+            'title_id' => $subjob['title'],
+            'nationality_id' => $subjob['nationality'],
+            'salary' => $subjob['salary'],
+            'quantity' => $subjob['quantity'],
+            'description' => $subjob['description'],
+        ]);
+    }
+
+    public function moveFilesToPrimaryFile($jobId)
+    {
+        Storage::move('public/tempUploads/'.Auth::id().'/',  'public/uploads/attachments/jobs/'.$jobId.'/');
+    }
 
     public function uploadJobFile($file , $jobId)
     {
@@ -138,8 +208,13 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        $job = Job::with(['title.sector' , 'nationality'])->findorFail($id);
-        return view('user.employer.jobs.show' , compact('job'));
+        $job =Job::with(['subJobs.title' ,'subJobs.nationality' , 'user:id,name'])
+        ->with(['subJobs.title.sector' , 'subJobs.nationality'])
+        ->findOrFail($id);
+        if($job->user->id == Auth::id())
+            return view('user.employer.jobs.show' , compact('job'));
+        return abort(404);
+
     }
 
     /**

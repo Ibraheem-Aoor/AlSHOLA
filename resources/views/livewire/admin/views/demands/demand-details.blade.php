@@ -17,7 +17,10 @@
                                             aria-selected="false">General Information</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-descreption" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Descreption And Terms</a>
+                                            aria-selected="false">Other Terms</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-titles" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Avilable Positions</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Attachment</a>
@@ -49,24 +52,12 @@
                                                 <div class="col-sm-4">
                                                     <label for="inputEmail3" class="">Job
                                                         Category:</label>
-                                                    <input type="text" value="{{ $job->title->sector->name }}"
+                                                    <input type="text" value="{{ $job->subJobs->first()->title->sector->name }}"
                                                         class="form-control" id="inputEmail3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Title:</label>
-                                                    <input type="text" value="{{ $job->title->name }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Quantity:</label>
-                                                    <input type="text" value="{{ $job->quantity }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Salary:</label>
-                                                    <input type="text"
-                                                        value="{{ $job->salary }}{{ ' ( ' . $job->currency . ' )' }}"
+                                                    <input type="text" value="{{$job->subJobs->first()->title->name }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -223,11 +214,6 @@
                                         <p>
                                         <div class="col-sm-12 ">
                                             <div class="form-group">
-                                                <label for="">Descreption</label>
-                                                <textarea readonly class="form-control" id="" cols="30" rows="10">{{ $job->description }}
-                                                </textarea>
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="">Other Terms and Conditions</label>
                                                 <textarea readonly class="form-control" id="" cols="30" rows="10">{{ $job->other_terms }}
                                                 </textarea>
@@ -235,6 +221,64 @@
                                         </div>
                                         </p>
                                     </div>
+
+
+
+                                    {{-- Attachments --}}
+                                    <div class="tab-pane fade" id="custom-nav-titles" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Title</th>
+                                                            <th scope="col">Salary</th>
+                                                            <th scope="col">QTY</th>
+                                                            <th scope="col">Nationlaity</th>
+                                                            <th scope="col">Descreption</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($job->subJobs as $subjob)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $subjob->title->name }}</td>
+                                                                <td>{{ $subjob->salary }}</td>
+                                                                <td>{{ $subjob->quantity }}</td>
+                                                                <td>{{ $subjob->nationality->name }}</td>
+                                                                <td>{{ Str::limit($subjob->description , 35 , '...') }}</td>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="5"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td>Submission Date: {{$job->created_at}}</td>
+                                                                <td>Total QTY: {{$job->qty()}}</td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
 
 
 

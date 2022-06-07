@@ -15,10 +15,11 @@ class DemandDetails extends Component
 
     public function mount($id)
     {
-        $this->job = Job::with(['user:id,name'  , 'applications:id,user_id,full_name,contact_no' ,
-                    'nationality' , 'title.sector' , 'attachments' , 'notes'])
-                    ->with(['notes.user'])
+        $this->job = Job::with(['subJobs'  , 'applications:id,user_id,full_name,contact_no' ,
+                        'title.sector' , 'attachments' , 'notes' , 'user'])
+                    ->with(['notes.user' , 'subJobs.title.sector'])
                     ->findOrFail($id);
+        // return dd($this->job);
     }
 
 

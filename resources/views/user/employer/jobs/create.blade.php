@@ -21,26 +21,13 @@
                         <div class="container-fluid pt-4 px-4">
                             <div class="row rounded">
                                 <div class="form-floating mb-3 col-sm-3">
-                                    <select name="sector" class="form-control" required>
-                                        <option value="">--- select one ---</option>
-                                        @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->id }}"
-                                                @if (old('sector') == $sector->id) {{ 'selected' }} @endif>
-                                                {{ $sector->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingInput">&nbsp;&nbsp; Job Category</label>
-                                    @error('sector')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-floating mb-3 col-sm-3">
                                     <select name="title" class="form-control" required>
-                                        @if ($id = old('title'))
-                                            {{ $title = \App\Models\Title::where('id', $id)->first() }}
-                                            <option value="{{ old('title') }}">{{ $title->name }}</option>
-                                        @endif
                                         <option value="title">--- select one ---</option>
+                                        @foreach ($titles as $title)
+                                            <option value="{{ $title->id }}"
+                                                @if (old('title') == $title) selected @endif>{{ $title->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
                                     @error('title')
@@ -86,187 +73,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select name="currency" class="form-control" required>
-                                        <option value="">-- select one --</option>
-                                        @foreach ($currencies as $currency)
-                                            <option value="{{ $currency->key }}"
-                                                @if (old('currency') == $currency->key) selected @endif>
-                                                {{ $currency->key . ' (' . $currency->value . ')' }}</option>
-                                        @endforeach
-                                        @error('currency')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Currency</label>
-                                </div>
-
-
-
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select class="form-control" name="working_days" required>
-                                        <option value="">-- select one --</option>
-                                        <option value="5" @if (old('working_days') == 5) {{ 'selected' }} @endif>
-                                            5</option>
-                                        <option value="6" @if (old('working_days') == 6) {{ 'selected' }} @endif>
-                                            6</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; WORKING DAYS</label>
-                                    @error('working_days')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <input required type="text" class="form-control" name="off_day"
-                                        value="{{ old('off_day') }}" readonly>
-                                    <label for="floatingPassword">&nbsp;&nbsp; OFF DAY</label>
-                                    @error('off_day')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select class="form-control" name="accommodation" required>
-                                        <option value="">-- select one --</option>
-                                        <option value="Provided By Employer"
-                                            @if (old('accommodation') == 'Provided By Employer') selected @endif>Provided By Employer
-                                        </option>
-                                        <option value="Allowance" @if (old('accommodation') == 'Allowance') selected @endif>
-                                            Allowance</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; ACCOMMODATION</label>
-                                    @error('accommodation')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-
-                                <div class="form-floating mb-3 col-sm-3" id="acc-div" style="display: none">
-                                    <input placeholder="accommodation amount" type="text" class="form-control"
-                                        name="accommodation_amount" value="{{ old('accommodation_amount') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Accommodation Amount</label>
-                                    @error('accommodation_amount')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-
-
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select required type="text" class="form-control" name="food" required
-                                        value="{{ old('food') }}">
-                                        <option value="">-- select one --</option>
-                                        <option value="Provided By Employer"
-                                            @if (old('food') == 'Provided By Employer') selected @endif>Provided By Employer
-                                        </option>
-                                        <option value="Not Provided" @if (old('food') == 'Not Provided') selected @endif>
-                                            Not Provided</option>
-                                        <option value="Duty Meals" @if (old('food') == 'Duty Meals') selected @endif>
-                                            Duty Meals</option>
-                                        <option value="Allowance" @if (old('food') == 'Allowance') selected @endif>
-                                            Allowance</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; FOOD</label>
-                                    @error('food')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-
-
-                                <div class="form-floating mb-3 col-sm-3" id="acc-food-div" style="display: none">
-                                    <input placeholder="food amount" type="text" class="form-control"
-                                        name="food_amount" value="{{ old('food_amount') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Food Amount</label>
-                                    @error('food_amount')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select required type="text" class="form-control" name="joining_ticket"
-                                        value="{{ old('joining_ticket') }}">
-                                        <option value="Provided by Employer"
-                                            @if (old('joining_ticket') == 'Provided by Employer') selected @endif>Provided by Employer
-                                        </option>
-                                        <option value="Not Provided"
-                                            @if (old('joining_ticket') == 'Not Provided') selected @endif>Not Provided</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Joining Ticket</label>
-                                    @error('joining_ticket')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select required type="text" class="form-control" name="return_ticket"
-                                        value="{{ old('return_ticket') }}">
-                                        <option value="Every Completion One Year"
-                                            @if (old('return_ticket') == 'Every Completion One Year') selected @endif>Every Completion One
-                                            Year</option>
-                                        <option value="Every Completion Two Year"
-                                            @if (old('return_ticket') == 'Every Completion Two Year') selected @endif>Every Completion Two
-                                            Year</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Return Ticket</label>
-                                    @error('return_ticket')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select required type="text" class="form-control" name="gender_prefrences"
-                                        value="{{ old('gender_prefrences') }}">
-                                        <option value="">-- select one</option>
-                                        <option value="male" @if (old('gender_prefrences') == 'male') selected @endif>Male
-                                        </option>
-                                        <option value="female" @if (old('gender_prefrences') == 'female') selected @endif>
-                                            Female</option>
-                                        <option value="no prefrences"
-                                            @if (old('gender_prefrences') == 'no prefrences') selected @endif>No Prefrences</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Gender Prefrences</label>
-                                    @error('gender_prefrences')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select required type="text" class="form-control" name="age_limit"
-                                        value="{{ old('age_limit') }}">
-                                        <option value="">-- select one</option>
-                                        <option value="Below 40" @if (old('age_limit') == 'Below 40') selected @endif>
-                                            Below 40 </option>
-                                        <option value="Below 50" @if (old('age_limit') == 'Below 50') selected @endif>
-                                            Below 50</option>
-                                        <option value="Below 60" @if (old('age_limit') == 'Below 60') selected @endif>
-                                            Below 60</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Age Limit</label>
-                                    @error('age_limit')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-floating mb-3 col-sm-12">
-                                    <textarea required class="form-control" name="other_terms"
-                                        style="height: 150px;">{{ old('other_terms') }}</textarea>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Other Terms</label>
-                                    @error('other_terms')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
 
 
 
@@ -279,14 +85,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-floating mb-3 col-sm-12">
-                                    <input type="file" class="form-control" name="attachments[]" multiple
-                                        style="font-size:14px;height:60px !important;">
-                                    <label for="floatingTextarea">&nbsp;&nbsp; Job Description Attachment</label>
-                                    @error('attachments')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
 
                                 {{-- <div class="form-floating mb-3 col-sm-3">
                                     <input type="file" name="responsibilites_file" class="form-control">
@@ -328,6 +126,7 @@
                                     NEXT
                                 </button>
 
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -354,11 +153,25 @@
                                 </div>
 
 
-                                <div class="col-sm-3"></div>
-                                <button type="button" id="add-new-title" class="btn btn-info col-sm-3">Add New</button>
+                                <div class="col-sm-4"></div>
+                                <button type="button" id="add-new-title" class="btn btn-info col-sm-3"><i
+                                        class="fa fa-plus"></i> Add New</button>
 
 
                             </div>
+                            <!-- Button trigger modal -->
+
+                            {{-- <div class="container mt-3">
+                                <div class="row">
+                                    <div class="col-sm-4 text-left">
+                                        <a href="#" id="back" class="btn btn-warning col-sm-3">
+                                            <i class="fa fa-arrow-left"></i> Back
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+
                         </div>
                     </div>
                 </form>
@@ -455,28 +268,30 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
-            $('select[name="sector"]').on('change', function() {
-                var SectorId = $(this).val();
-                if (SectorId) {
-                    $.ajax({
-                        url: "{{ URL::to('employer/sector') }}/" + SectorId,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="title"]').empty();
-                            $.each(data, function(key, value) { //for each loop
-                                $('select[name="title"]').append('<option value="' +
-                                    value.id + '">' + value.name + '</option>');
-                            });
-                        },
-                    });
+            var SendInfo = {
+                SendInfo: document.getElementById("my-form").elements
+            };
 
-                } else {
-                    console.log('AJAX load did not work');
-                }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
             });
+            $('#back').on('click', function() {
 
-
+                $.post("{{ route('creation-step-2') }}", {
+                        data: JSON.stringify($('form').serialize()),
+                    },
+                    function(data, status) {
+                        if (status == 'success') {
+                            console.log(data);
+                            window.location.href = "{{ route('setupJob') }}";
+                        }
+                    });
+            });
         });
     </script>
 
@@ -531,14 +346,14 @@
                     $(this).parents('tr').remove();
                 });
             });
+            makeInputsReadOnly();
 
-            clearInputs(elements);
 
         });
 
         function clearInputs(elements) {
             elements.forEach(element => {
-                element.addAttriubte('readonly');
+                element.setAttribute('readonly', '');
             });
         }
     </script>

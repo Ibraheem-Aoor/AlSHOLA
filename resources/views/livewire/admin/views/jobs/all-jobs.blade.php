@@ -44,7 +44,7 @@
                                                         {{ $job->user->company->name ?? '' }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->quantity }}
+                                                        {{ $job->qty() }}
                                                     </td>
                                                     <td>
                                                         {{ 'UNKOWN' }}

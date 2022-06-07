@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use FontLib\Table\Type\name;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,12 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('dashboard' , ViewsDashboard::class)->name('employer.dashboard');
         // Jobs Routes
         Route::resource('/job' , JobController::class);
+
+        Route::get('/setup-job' , [JobController::class , 'setupFrom'])->name('setupJob');
+        Route::post('/setup/job' , [JobController::class , 'setup'])->name('creation-setup');
+        Route::post('/setup-2/job' , [JobController::class , 'step2'])->name('creation-step-2');
+
+
         Route::get('/sector/{id}' , [JobController::class , 'setSelectedSector']);
         Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('employer.pdf.generate');
         Route::get('/aplication/pdf/{id}' ,  [PDFPdfController::class , 'generateApplicationPDF'])->name('employer.application.pdf.generate');

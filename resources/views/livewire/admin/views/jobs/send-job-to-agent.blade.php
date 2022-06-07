@@ -13,10 +13,10 @@
                                     DSR: {{$job->post_number}}
                                 </h5>
                                 <h5 class="text-primary">
-                                    Category: {{$job->title->sector->name}}
+                                    Category: {{$job->subJobs->first()->title->sector->name}}
                                 </h5>
                                 <h5 class="text-primary">
-                                    Title: {{$job->title->name}}
+                                    Title: {{$job->subJobs->first()->title->name}}
                                 </h5>
                                 <h5 class="text-primary">
                                     Client: {{$job->user->name}}

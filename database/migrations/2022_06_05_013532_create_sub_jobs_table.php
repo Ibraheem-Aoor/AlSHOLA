@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('title_id')->references('id')->on('titles')->constrained()->onDelete('cascade');
             $table->foreignId('nationality_id')->references('id')->on('nationalities')->constrained()->onDelete('cascade');
             $table->string('salary');
+            $table->text('description');
             $table->string('quantity');
             $table->timestamps();
         });

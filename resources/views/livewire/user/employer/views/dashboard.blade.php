@@ -111,6 +111,7 @@
                                             <th scope="col">number</th>
                                             <th scope="col">Sector</th>
                                             <th scope="col">Title</th>
+                                            <th scope="col">Total QTY</th>
                                             <th scope="col">Creation_date</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Actions</th>
@@ -124,34 +125,28 @@
                                             <tr>
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $job->post_number }}</td>
-                                                <td>{{ $job->title->sector->name }}</td>
-                                                <td>{{ $job->title->name }}</td>
+                                                <td>{{ $job->subJobs->first()->title->sector->name }}</td>
+                                                <td>{{ $job->subJobs->first()->title->name }}</td>
+                                                <td>{{ $job->qty() }}</td>
                                                 <td>{{ $job->created_at }}</td>
                                                 <td>{{ $job->status }}</td>
                                                 <td>
                                                     <a href="{{ route('job.show', $job->id) }}" title="details"
-                                                        class="badge bg-primary" href="#"><i class="fa fa-eye"></i></a>
+                                                        class="badge bg-primary" href="#"><i
+                                                            class="fa fa-eye"></i></a>
 
-                                                    <a href="#" title="delete" onclick="event.preventDefault();document.getElementById('delete-form').submit();" class=" badge bg-danger"><i
-                                                            class="fa fa-trash"></i></a>
-                                                            <form id="delete-form"  style="display: none;" action="{{ route('job.destroy', $job) }}" method="POST">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                            </form>
+                                                    {{-- <a href="#" title="delete"
+                                                        onclick="event.preventDefault();document.getElementById('delete-form').submit();"
+                                                        class=" badge bg-danger"><i class="fa fa-trash"></i></a> --}}
+                                                    <form id="delete-form" style="display: none;"
+                                                        action="{{ route('job.destroy', $job) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                    </form>
 
                                                     <a class=" badge bg-info" title="notes"
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>
-
-                                                    {{-- <a href="{{ route('employer.pdf.generate', $job->id) }}" title="print document"
-                                                        class=" badge bg-success" href="#"><i
-                                                            class="fa fa-print"></i>
-                                                        </a> --}}
-
-                                                    {{-- <a href="#exampleModal_5" class=" badge bg-secondary" title="upload attachment to managment"
-                                                        data-toggle="modal" data-title="{{ $job->title }}"
-                                                        data-number="{{ $job->post_number }}"
-                                                        data-id="{{ $job->id }}"><i class="fa fa-upload"></i></a> --}}
 
                                                 </td>
                                             </tr>

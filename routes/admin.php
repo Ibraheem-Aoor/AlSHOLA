@@ -58,6 +58,7 @@ use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
 use App\Models\Currency;
 
 //prefix => admin
+Route::get('/job/pdf/{id}' ,  [PdfController::class , 'generateJobPDF'])->name('admin.pdf.generate');
 
     Route::get('login' , function()
         {
@@ -76,7 +77,6 @@ use App\Models\Currency;
         Route::get('/demand/{id}/details' , DemandDetails::class)->name('admin.demand.details');
         Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
         Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
-        Route::get('/job/pdf/{id}' ,  [PdfController::class , 'generateJobPDF'])->name('admin.pdf.generate');
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');
