@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('application_id');
             $table->index('application_id'); // represents the writer of the note.
             $table->foreign('application_id')->references('id')->on('applications')->constrained()->onDelete('cascade');
+            $table->boolean('seen')->default(false);
             $table->timestamps();
         });
     }

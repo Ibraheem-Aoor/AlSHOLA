@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->text('message');
+            $table->boolean('seen')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->index('user_id'); // represents the writer of the note.
             $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');

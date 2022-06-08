@@ -28,7 +28,7 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $job->post_number }}</td>
-                                        <td>{{ $job->title->name }}</td>
+                                        <td>{{ $job->subJobs()->first()->title->name }}</td>
                                         <td>{{ $job->user->name }}</td>
                                         <td>{{ $job->status }}</td>
                                         <td>

@@ -33,6 +33,7 @@ trait ApplicationTrait
             'user_id' => Auth::id(),
             'application_id' => $this->applicationId,
             'message' => $this->note,
+            'seen' => true,
         ]);
         notify()->success('Note Sended Successfully');
         return redirect(route($this->currentRouteName));

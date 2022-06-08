@@ -14,7 +14,8 @@ class PdfController extends Controller
 {
     public function generateJobPDF($id)
     {
-        $job = Job::with(['title.sector' , 'user' , 'nationality'])->findOrFail($id);
+        $job = Job::with(['subJobs.title.sector' , 'subJobs.nationality', 'user'])
+                ->findOrFail($id);
         $data = [
             'job' => $job,
         ];

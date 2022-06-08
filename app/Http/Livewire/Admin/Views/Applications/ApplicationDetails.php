@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationNote;
 use App\Models\ApplicationStatusHistory;
+use App\Models\Note;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route as FacadesRoute;
@@ -13,17 +14,17 @@ use Livewire\Component;
 
 class ApplicationDetails extends Component
 {
-    public $application , $note , $currentRoute , $mainStatus , $subStatus;
-
+    public $application , $note , $currentRoute , $mainStatus , $subStatus , $unreadNotes;
     public function mount($id)
     {
+        $this->currentRoute = FacadesRoute::currentRouteName();
         $this->application = Application::with(['user' , 'job:id,post_number' , 'job.title' ,
                                                 'employers' , 'notes' ,
                                                 'statusHistory' , 'mainStatus' , 'subStatus' , 'educations' , 'attachments' ])
-        ->with(['job.title.sector' , 'notes.user' , 'statusHistory.user:id,name'])
+        ->with(['job.subJobs.title.sector' , 'notes.user' , 'statusHistory.user:id,name'])
         ->findOrFail($id);
         $this->status = $this->application->status;
-        $this->currentRoute = FacadesRoute::currentRouteName();
+        $this->unreadNotes = $this->application->notes->where('seen', false)->count();
     }
 
 
@@ -90,6 +91,13 @@ class ApplicationDetails extends Component
             'mainStatus.required' => 'This Field is required',
             'subStatus.required' => 'This Field is required',
         ];
+    }
+
+    public function setReadNote($id)
+    {
+        $note = Note::findOrFail($id);
+        $note->seen = true;
+        $note->save();
     }
 
     public function render()

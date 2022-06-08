@@ -1,4 +1,11 @@
 <div wire:ignore>
+    <style>
+        input {
+            font-size: 0.9rem !important;
+            line-height: 1;
+
+        }
+    </style>
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
@@ -30,7 +37,13 @@
                                             aria-selected="false">Attachments</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-notes" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Notes</a>
+                                            aria-selected="false">Notes
+                                            @if ($unreadNotes)
+                                            <span class="text-danger">
+                                                {{ '( ' . $unreadNotes . ' )' }}
+                                            </span>
+                                            @endif
+                                        </a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-history" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Status History</a>
@@ -47,12 +60,13 @@
                                                     <label for="inputEmail3" class="">Job
                                                         Category:</label>
                                                     <input type="text"
-                                                        value="{{ $application->job->title->sector->name }}"
+                                                        value="{{ $application->job->subJobs->first()->title->sector->name }}"
                                                         class="form-control" id="inputEmail3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Title:</label>
-                                                    <input type="text" value="{{ $application->job->title->name }}"
+                                                    <input type="text"
+                                                        value="{{ $application->job->subJobs->first()->title->name }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -240,9 +254,10 @@
                                                                 <td>{{ $note->created_at }}</td>
                                                                 <td><a class="btn btn-outline-primary"
                                                                         data-message="{{ $note->message }}"
-                                                                        data-toggle="modal" href="#exampleModal_5"><i
-                                                                            class="fa fa-eye"></i> show
-                                                                        message</a></td>
+                                                                        data-toggle="modal" href="#exampleModal_5"
+                                                                        wire:click="setReadNote('{{ $note->id }}')"><i
+                                                                            class="fa fa-eye"></i>
+                                                                    </a></td>
                                                             </tr>
                                                         @empty
                                                             <tr>

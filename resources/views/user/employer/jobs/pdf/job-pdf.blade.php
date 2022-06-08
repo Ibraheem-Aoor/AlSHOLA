@@ -21,49 +21,12 @@
             background-color: #dddddd;
         }
     </style>
-    <!-- Favicon -->
-    <link href="{{ asset('assets/dist_1/img/favicon.ico') }}" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{{ asset('assets/dist_1/lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/dist_1/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('assets/dist_1/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="{{ asset('assets/dist_1/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <h3>Demand for Recruitment</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 text-right">
-                <h6>
-                    DSR: {{ $job->post_number }} <br>
-                    Date: {{ $job->created_at }}
-                </h6>
-            </div>
-        </div>
-    </div>
-    
-{{--
+
+    <h3>Demand Documentaion</h3>
     <table>
         <tr>
             <th>Demand SR</th>
@@ -76,8 +39,8 @@
         </tr>
         <tr>
             <td>{{ $job->post_number }}</td>
-            <td>{{ $job->title->sector->name }}</td>
-            <td>{{ $job->title->name }}</td>
+            <td>{{ $job->subJobs->first()->title->sector->name }}</td>
+            <td>{{ $job->subJobs->first()->title->name }}</td>
             <td>{{ $job->quantity }}</td>
             <td>{{ $job->salary }}</td>
             <td>{{ $job->currency }}</td>
@@ -86,7 +49,6 @@
 
         <tr>
             <th>Status</th>
-            <th>natoinality</th>
             <th>Contract Period</th>
             <th>working_hours</th>
             <th>Working Days</th>
@@ -95,7 +57,7 @@
         </tr>
         <tr>
             <td>{{ $job->status }}</td>
-            <td>{{ $job->nationality->name }}</td>
+            <td>{{ $job->subJobs()->first()->nationality->name }}</td>
             <td>{{ $job->contract_period }}</td>
             <td>{{ $job->working_hours }}</td>
             <td>{{ $job->working_days }}</td>
@@ -142,25 +104,28 @@
         </tr>
     </table>
 
+    <h3>Demand Avilable Poistions</h3>
     <table>
         <tr>
-            <th>Desccreption</th>
+            <th>Title</th>
+            <th>Salary</th>
+            <th>Quantity</th>
+            <th>Nationality</th>
+            <th>Descreption</th>
         </tr>
-        <tr>
-            <th>{{ $job->description }}</th>
-        </tr>
+        @forelse ($job->subJobs as $subjob)
+            !
+            <tr>
+                <td>{{ $subjob->title->name }}</td>
+                <td>{{ $subjob->salary }}</td>
+                <td>{{ $subjob->quantity }}</td>
+                <td>{{ $subjob->nationality->name }}</td>
+                <td>{{ $subjob->description }}
+                </td>
+            </tr>
+        @empty
+        @endforelse
     </table>
-
-    <table>
-        <tr>
-            <th>Other Terms</th>
-        </tr>
-        <tr>
-            <th>{{ $job->other_terms }}</th>
-        </tr> --}}
-    </table>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

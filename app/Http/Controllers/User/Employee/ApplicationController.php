@@ -31,8 +31,8 @@ class ApplicationController extends Controller
 
     public function showApplicationForm($id)
     {
-        $job = Job::with(['title.sector'])->findOrFail($id);
-        $titles = Title::all();
+        $job = Job::with('subJobs.title.sector')->findOrFail($id);
+        $titles = Title::whereSectorId($job->subJobs->first()->title->sector->id)->get();
         $nationalities = DB::table('nationalities')->get();
         $ref = $this->generateApplicationRef();
         return view('livewire.user.employee.views.applications.application-form' ,
@@ -69,8 +69,10 @@ class ApplicationController extends Controller
      */
     public function createApplication(CreateApplicationRequest $request , $jobId)
     {
+
         $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId ,
                 'title_id' => $request->get('title') , 'main_status_id' => 1 , 'sub_status_id' => 7 ]));
+
         $this->createEducationRecords($request->addMoreEducationRecords , $application->id);
         $this->createEmoployersRecords($request->addMoreInputFields  ,  $application->id);
         $this->storeApplicationAttachments($request->file('files'), $application->id);
@@ -148,6 +150,7 @@ class ApplicationController extends Controller
         $applications = Application::where('user_id' , Auth::id())
                         ->with(['job.title' , 'mainStatus.subStatus' , 'mainStatus' , 'subStatus' ])
                         ->with('job.user:id,name')
+                        ->with('job.subJobs.title.sector')
                         ->withCount('notes')
                         ->orderByDesc('id')
                         ->simplePaginate(15);

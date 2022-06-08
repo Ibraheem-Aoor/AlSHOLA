@@ -15,6 +15,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Job_Number</th>
+                                    <th scope="col">Category</th>
                                     <th scope="col">Job_Title</th>
                                     <th scope="col">Client_Name</th>
                                     <th scope="col">Number_Of_Notes</th>
@@ -35,7 +36,8 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $application->job->post_number }}</td>
-                                        <td>{{ $application->job->title->name }}</td>
+                                        <td>{{ $application->job->subJobs->first()->title->sector->name }}</td>
+                                        <td>{{ $application->job->subJobs->first()->title->name }}</td>
                                         <td>{{ $application->job->user->name }}</td>
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>

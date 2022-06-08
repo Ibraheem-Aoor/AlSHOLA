@@ -9,7 +9,8 @@ class Note extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'message' ,
+        'message',
+        'seen',
         'job_id' ,
         'user_id',
     ];

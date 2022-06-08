@@ -14,7 +14,7 @@ class ApplicationNote extends Model
 
 
     protected $fillable = [
-        'user_id'  , 'application_id'  , 'message'
+        'user_id'  , 'application_id'  , 'message' , 'seen'
     ];
 
     public function application()

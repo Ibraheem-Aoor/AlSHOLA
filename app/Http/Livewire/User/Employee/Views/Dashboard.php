@@ -9,7 +9,7 @@ class Dashboard extends Component
 {
     public function render()
     {
-        $avlialbeJobs = Auth::user()->jobs()->with('title')->get();
+        $avlialbeJobs = Auth::user()->jobs()->with('subJobs.title.sector')->get();
         return view('livewire.user.employee.views.dashboard' , ['avlialbeJobs' => $avlialbeJobs]
         )->extends('layouts.user.employee.master')->section('content');
     }

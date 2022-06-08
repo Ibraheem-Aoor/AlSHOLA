@@ -11,7 +11,7 @@ use Livewire\Component;
 class DemandDetails extends Component
 {
 
-    public $job  , $note;
+    public $job  , $note , $unreadNotes;
 
     public function mount($id)
     {
@@ -19,7 +19,9 @@ class DemandDetails extends Component
                         'title.sector' , 'attachments' , 'notes' , 'user'])
                     ->with(['notes.user' , 'subJobs.title.sector'])
                     ->findOrFail($id);
-        // return dd($this->job);
+        $this->unreadNotes = $this->job->notes->where('seen', false)->count();
+
+        // return dd($this->job->subJobs->first()->title->sector->name);
     }
 
 
@@ -31,9 +33,17 @@ class DemandDetails extends Component
             'message' => $this->note,
             'job_id' => $this->job->id,
             'user_id' => Auth::id(),
+            'seen' => true,
         ]);
         notify()->success('Note Sended Successfully');
         return redirect(route('admin.demand.details' , $this->job->id));
+    }
+
+    public function setReadNote($id)
+    {
+        $note = Note::findOrFail($id);
+        $note->seen = true;
+        $note->save();
     }
 
     public function rules()

@@ -74,6 +74,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Category</th>
                             <th scope="col">Title</th>
                             <th scope="col">Creation_date</th>
                             <th scope="col">Status</th>
@@ -88,7 +89,8 @@
                         @forelse ($avlialbeJobs as $job)
                             <tr>
                                 <th scope="row">{{ $i++ }}</th>
-                                <td>{{ $job->title->name }}</td>
+                                <td>{{ $job->subJobs->first()->title->sector->name }}</td>
+                                <td>{{ $job->subJobs->first()->title->name }}</td>
                                 <td>{{ $job->created_at }}</td>
                                 <td>{{ $job->status }}</td>
                                 <td>

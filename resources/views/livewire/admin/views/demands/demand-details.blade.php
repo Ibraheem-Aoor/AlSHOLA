@@ -25,8 +25,12 @@
                                             href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Attachment</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-notes" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Notes</a>
+                                            aria-selected="false" href="#custom-nav-notes" role="tab"
+                                            aria-controls="custom-nav-home">Notes<span class="text-danger">
+                                                @if ($unreadNotes)
+                                                    {{ '( ' . $unreadNotes . ' )' }}
+                                                @endif
+                                            </span></a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-applications" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Application</a>
@@ -52,12 +56,14 @@
                                                 <div class="col-sm-4">
                                                     <label for="inputEmail3" class="">Job
                                                         Category:</label>
-                                                    <input type="text" value="{{ $job->subJobs->first()->title->sector->name }}"
+                                                    <input type="text"
+                                                        value="{{ $job->subJobs->first()->title->sector->name }}"
                                                         class="form-control" id="inputEmail3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Title:</label>
-                                                    <input type="text" value="{{$job->subJobs->first()->title->name }}"
+                                                    <input type="text"
+                                                        value="{{ $job->subJobs->first()->title->name }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -224,10 +230,9 @@
 
 
 
-                                    {{-- Attachments --}}
+                                    {{-- Job Positions --}}
                                     <div class="tab-pane fade" id="custom-nav-titles" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
-                                        <p>
                                         <div class="col-sm-12 text-center">
                                             <div class="table-responsive">
                                                 <table class="table">
@@ -253,7 +258,14 @@
                                                                 <td>{{ $subjob->salary }}</td>
                                                                 <td>{{ $subjob->quantity }}</td>
                                                                 <td>{{ $subjob->nationality->name }}</td>
-                                                                <td>{{ Str::limit($subjob->description , 35 , '...') }}</td>
+                                                                <td>{{ Str::limit($subjob->description, 35, '...') }}
+                                                                </td>
+                                                                <td>
+                                                                    <a data-toggle="modal"
+                                                                        data-desc="{{ $subjob->description }}"
+                                                                        href="#descmodal">
+                                                                        <i class="fa fa-eye"></i>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -265,12 +277,12 @@
                                                                 </td>
                                                             </tr>
                                                         @endforelse
-                                                        <tfoot>
-                                                            <tr>
-                                                                <td>Submission Date: {{$job->created_at}}</td>
-                                                                <td>Total QTY: {{$job->qty()}}</td>
-                                                            </tr>
-                                                        </tfoot>
+                                                        <tr>
+                                                            <td><span class="text-danger">Submission Date</span>:
+                                                                {{ $job->created_at }}</td>
+                                                            <td><span class="text-danger">Total QTY</span>:
+                                                                {{ $job->qty() }}</td>
+                                                        </tr>
                                                     </tbody>
 
                                                 </table>
@@ -368,8 +380,8 @@
                                                                 <td>{{ $note->created_at }}</td>
                                                                 <td>
                                                                     <a class="btn btn-outline-info"
-                                                                        data-message="{{ $note->message }}"
-                                                                        data-toggle="modal" href="#exampleModal_5"><i
+                                                                    data-message="{{ $note->message }}"
+                                                                        data-toggle="modal" href="#exampleModal_5" wire:click="setReadNote('{{$note->id}}')"><i
                                                                             class="fa fa-eye"></i>
                                                                     </a>
                                                                 </td>
@@ -547,11 +559,13 @@
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
                                             <a class="btn btn-success col-sm-12 mb-2"
-                                                href="{{route('admin.send-job-to-agent' , $job->id)}}">Forward To Agent</a>
+                                                href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward To
+                                                Agent</a>
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>
-                                                <a href="{{route('admin.pdf.generate' , $job->id)}}" class="brn btn-outline-info">PRINT PDF</a>
+                                            <a href="{{ route('admin.pdf.generate', $job->id) }}"
+                                                class="btn btn-info col-sm-12">PRINT PDF</a>
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
                                                 Change Status</a> --}}
@@ -598,6 +612,29 @@
                             </div>
                         </div>
 
+                        <!-- subjob descreption Modal -->
+                        <div class="modal fade" id="descmodal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Job Descreption</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <textarea name="" id="desc" readonly name="desc" cols="30" rows="10" class="form-control"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- End subjob descreption modal --}}
 
                         <!--SHOW NOTE  Modal -->
                         <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
@@ -697,6 +734,13 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #message').val(message);
+            });
+            $('#descmodal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var desc = button.data('desc')
+                // var description = button.data('description')
+                var modal = $(this)
+                modal.find('.modal-body #desc').val(desc);
             });
         </script>
     @endpush
