@@ -96,4 +96,10 @@ class Job extends Model
     {
         return $this->belongsTo(Currency::class , 'currency_id' , 'id');
     }
+
+    public function refuseTimes()
+    {
+        return $this->hasMany(RefusedJob::class , 'job_id');
+    }
+    
 }

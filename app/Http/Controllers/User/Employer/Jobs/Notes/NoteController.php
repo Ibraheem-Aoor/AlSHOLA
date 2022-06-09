@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\User\Employee\Note\CreateJobNoteRequest;
+use App\Models\Application;
+use App\Models\RefusedJob;
 use App\Models\User;
 
 class NoteController extends Controller
@@ -25,35 +27,32 @@ class NoteController extends Controller
         return view('user.employer.jobs.notes.all-job-notes' , compact('notes'  , 'job'));
     }
 
-    //This function either serve the refuse choice by sending a note that is nullable then remvoing the job from the user
-    //Or send a comment form the employee to admin in order to report some job details with a required note.
-    //And the user id represents the publisher
     public function store(CreateJobNoteRequest $request , $id)
     {
         $job = Job::findOrFail($id);
-        switch(Route::currentRouteName())
-        {
-            case 'employee.job.refuse':
-                $this->refuseJob($request->note , $job->id);
-                $message = 'Job Offer refused Successfully';
-                break;
-                case 'employee.job.note.create':
-                    $this->createJobNote($request->note , $id);
-                    $message = 'Note Sended Successfully';
-                break;
-        }
+        $this->createJobNote($request->note , $id);
+        $message = 'Note Sended Successfully';
         notify()->success($message);
         return redirect(route('employee.dashboard'));
     }//end method
 
 
-    public function refuseJob($note , $jobId)
+    public function refuseJob(Request $request , $jobId)
     {
-        if($note != null)
+        $validate = Validator::make($request->all() , ['refuseReason' => 'required' , 'other_reason' => 'sometimes']);
+        if($validate->fails())
         {
-            $this->sendNote($note , $jobId);
+            return redirect()->back()->withErrors($validate->errors());
         }
+        RefusedJob::create([
+            'job_id' => $jobId,
+            'user_id' => Auth::id(),
+            'reason' => $request->other_reason != null ? $request->other_reason : $request->refuseReason,
+        ]);
         DB::table('job_user')->where([['job_id' , $jobId] , ['user_id' , Auth::id()]])->delete();
+        $this->deleteAllAgentApplications();
+        notify()->success('Job Refused Successfully');
+        return redirect(route('employee.dashboard'));
     }
 
 
@@ -95,4 +94,12 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Delete All The Agent Applciation and their notes and attachments after refusing his job
+     */
+
+    public function deleteAllAgentApplications()
+    {
+        Application::whereUserId(Auth::id())->delete();
+    }
 }

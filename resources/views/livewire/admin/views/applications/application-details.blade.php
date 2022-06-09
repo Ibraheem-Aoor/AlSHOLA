@@ -17,7 +17,6 @@
                         </div>
                         <div class="card-body">
                             <div class="custom-tab">
-
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
@@ -356,6 +355,11 @@
                                                             </tr>
                                                         @endforelse
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>Total Experince: {{\App\Models\Employer::where('application_id' , $application->id)->sum('duration')}} Year</td>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             </div>
                                         </div>
@@ -549,7 +553,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form wire:submit="changeStatus()">
+                                    <form method="POST" action="{{route('admin.application.change-status' , $application->id)}}">
+                                        @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <select name="mainStatus" id="mainStatus" wire:model="mainStatus"
@@ -568,7 +573,7 @@
                                             </div>
                                             <div class="form-gorup">
 
-                                                <select name="subStatus" class="form-control" wire:model="subStatus"
+                                                <select name="subStatus" class="form-control"
                                                     id="subStatus" required>
                                                     <option value="">--select one --</option>
 

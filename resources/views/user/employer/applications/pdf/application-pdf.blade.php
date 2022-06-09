@@ -20,7 +20,6 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
-
     </style>
 </head>
 
@@ -33,17 +32,13 @@
             <th>Demand SR</th>
             <th>Demand Category</th>
             <th> Title</th>
-            <th> Quantity</th>
-            <th> Salary</th>
             <th>status</th>
             <th>Date</th>
         </tr>
         <tr>
             <td>{{ $application->job->post_number }}</td>
-            <td>{{ $application->job->title->sector->name }}</td>
-            <td>{{ $application->job->title->name }}</td>
-            <td>{{ $application->job->quantity }}</td>
-            <td>{{ $application->job->salary }}</td>
+            <td>{{ $application->title->sector->name }}</td>
+            <td>{{ $application->title->name }}</td>
             <td>{{ $application->job->status }}</td>
             <td>{{ $application->job->created_at }}</td>
         </tr>
@@ -158,7 +153,7 @@
     <h3>Education</h3>
     <table>
         <tr>
-            <th>Employer/th>
+            <th>Employer</th>
             <th>Duration</th>
             <th>Country</th>
             <th>Designation</th>

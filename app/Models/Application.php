@@ -72,4 +72,9 @@ class Application extends Model
     {
         return $this->belongsTo(subStatus::class , 'sub_status_id');
     }
+
+    public function title()
+    {
+        return $this->belongsTo(Title::class , 'title_id');
+    }
 }

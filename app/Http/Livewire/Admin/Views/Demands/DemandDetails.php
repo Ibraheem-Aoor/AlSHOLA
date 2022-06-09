@@ -16,7 +16,7 @@ class DemandDetails extends Component
     public function mount($id)
     {
         $this->job = Job::with(['subJobs'  , 'applications:id,user_id,full_name,contact_no' ,
-                        'title.sector' , 'attachments' , 'notes' , 'user'])
+                        'title.sector' , 'attachments' , 'notes' , 'user' , 'refuseTimes'])
                     ->with(['notes.user' , 'subJobs.title.sector'])
                     ->findOrFail($id);
         $this->unreadNotes = $this->job->notes->where('seen', false)->count();

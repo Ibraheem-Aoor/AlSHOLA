@@ -56,6 +56,7 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
 use App\Http\Livewire\Admin\Views\Settings\Currency\AddCurrency;
 use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
 use App\Models\Currency;
+use App\Http\Controllers\HelperControllers\AdminDemandController;
 
 //prefix => admin
 
@@ -77,6 +78,7 @@ use App\Models\Currency;
         Route::get('/demand/requested' , NewRequestJob::class)->name('admin.demand.requested');
         Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
         Route::get('/job/pdf/{id}' ,  [PdfController::class , 'generateJobPDF'])->name('admin.pdf.generate');
+        Route::post('/job/{id}/change-status' , [AdminDemandController::class , 'changeDemandStatus'])->name('admin.demand.chane-status');
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');
@@ -169,7 +171,7 @@ use App\Models\Currency;
         Route::get('/applications/{id}/notes/all' , ApplicationAllNotes::class)->name('admin.application.notes.all');
         Route::get('/applications/{id}/attachments' , ApplicationAttachments::class)->name('admin.application.attachments.all');
         Route::get('/application/substatus/{id}' , [ApplicationHelper::class , 'getSubStatuses']);
-        Route::post('/application/status/change' , [ApplicationHelper::class , 'postChangeApplicationStatus'])->name('admin.application.change-status');
+        Route::post('/application/{id}/status/change' , [ApplicationHelper::class , 'postChangeApplicationStatus'])->name('admin.application.change-status');
         Route::get('/application/{id}/attachment/{fileName}/download' , function($id , $fileName , )
         {
             $application  = Application::with('job:id')->findOrFail($id);

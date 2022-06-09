@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RefusedJob extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id' , 'job_id' , 'reason'];
+    protected $fillable = ['user_id' , 'job_id' , 'reason' ];
 
     public function job()
     {

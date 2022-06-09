@@ -176,17 +176,28 @@
                     <h4 class="mb-4">What You want to do?</h4>
                     <div class="row g-3">
                         <div class="col-12 col-sm-12">
-
-                            <button type="button" class="btn btn-outline-warning col-sm-12 mb-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal_1">Refuse The Demand
-                            </button>
+                            {{-- If the agent has submited an application so he cant refuse the demand again. --}}
+                            @if (!$hasApplication)
+                                <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Demand
+                                </button>
+                            @endif
                             <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal_2">
                                 Send a comment
                             </button>
+                            @if ($hasApplication)
+                                @php
+                                    $txt = 'Submit Another Application';
+                                @endphp
+                            @else
+                                @php
+                                    $txt = 'Accept Demand & Terms & Conditions';
+                                @endphp
+                            @endif
                             <a class="btn btn-outline-success col-sm-12 mb-2"
                                 href="{{ route('employee.application.form', $job->id) }}">
-                                Accept Demand & Terms & Conditions
+                                {{ $txt }}
                             </a>
 
                         </div>
@@ -226,7 +237,8 @@
                         <option value="other">Other</option>
                     </select>
                     <br>
-                    <textarea class="form-control" name="other-reason" placeholder="Tell Us The Resaon"></textarea>
+                    <textarea class="form-control" id="other_reason" name="other_reason" name="other_reason"
+                        placeholder="Tell Us The Resaon"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -332,13 +344,16 @@
     </script>
     <script>
         $(document).ready(function() {
-            // $('textarea[name="other-reason"]').removeAttribute('name');
-            $('textarea[name="other-reason"]').hide();
+            // $('textarea[name="other_reason"]').removeAttr('name');
+            $('#other_reason').hide();
             $('select[name="refuseReason"]').on('change', function() {
-                if ($(this).val() == 'other')
-                    $('textarea[name="other-reason"]').show();
-                else
-                    $('textarea[name="other-reason"]').hide();
+                if ($(this).val() == 'other') {
+                    $('#other_reason').show();
+                } else {
+                    $('#other_reason').hide();
+                    $('#other_reason').removeAttr('name');
+                }
+
             })
         });
 

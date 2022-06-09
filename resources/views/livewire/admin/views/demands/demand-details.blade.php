@@ -32,6 +32,10 @@
                                                 @endif
                                             </span></a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            aria-selected="false" href="#custom-nav-refused" role="tab"
+                                            aria-controls="custom-nav-home">Refused
+                                        </a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-applications" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Application</a>
                                         <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
@@ -380,8 +384,9 @@
                                                                 <td>{{ $note->created_at }}</td>
                                                                 <td>
                                                                     <a class="btn btn-outline-info"
-                                                                    data-message="{{ $note->message }}"
-                                                                        data-toggle="modal" href="#exampleModal_5" wire:click="setReadNote('{{$note->id}}')"><i
+                                                                        data-message="{{ $note->message }}"
+                                                                        data-toggle="modal" href="#exampleModal_5"
+                                                                        wire:click="setReadNote('{{ $note->id }}')"><i
                                                                             class="fa fa-eye"></i>
                                                                     </a>
                                                                 </td>
@@ -401,6 +406,60 @@
                                         </div>
                                         </p>
                                     </div>
+
+
+                                    {{-- Refused Times --}}
+                                    <div class="tab-pane fade" id="custom-nav-refused" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Agent Name</th>
+                                                            <th scope="col">Reason</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @forelse ($job->refuseTimes as $refuse)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $refuse->user->name }}
+                                                                </td>
+                                                                <td>{{ Str::limit($refuse->reason, 40, '...') }}</td>
+                                                                <td>{{ $refuse->created_at }}
+                                                                </td>
+                                                                <td>
+                                                                    <a class="btn btn-outline-info"
+                                                                        data-message="{{ $refuse->reason }}"
+                                                                        data-toggle="modal" href="#exampleModal_5"><i
+                                                                            class="fa fa-eye"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="5"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
 
 
 
@@ -558,14 +617,19 @@
                                         <p>
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
-                                            <a class="btn btn-success col-sm-12 mb-2"
+                                            <a class="btn btn-outline-success col-sm-12 mb-2"
                                                 href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward To
                                                 Agent</a>
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>
+
+                                            <a data-toggle="modal" href="#exampleModal_8"
+                                                class="btn btn-secondary col-sm-12 mb-2">Change Demand Status</a>
+
                                             <a href="{{ route('admin.pdf.generate', $job->id) }}"
-                                                class="btn btn-info col-sm-12">PRINT PDF</a>
+                                                class="btn btn-outline-info col-sm-12">PRINT PDF</a>
+
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
                                                 Change Status</a> --}}
@@ -671,33 +735,19 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form wire:submit.preventDefault="changeStatus()">
+                                    <form method="POST" action="{{ route('admin.demand.chane-status' , $job->id) }}">
+                                        @csrf
                                         <div class="modal-body">
-                                            <select wire:model="status" class="form-control">
-                                                <option value="waiting for medical">waiting for medical</option>
-                                                <option value="waiting for visa">waiting for visa</option>
-                                                <option value="CV Submitted">CV Submitted</option>
-                                                <option value="For Selection">For Selection</option>
-                                                <option value="waiting for interview">waiting for interview</option>
+                                            <select name="status" class="form-control">
                                                 <option value="cancelled">cancelled</option>
                                                 <option value="active">active</option>
-                                                <option value="hold">hold</option>
                                                 <option value="completed">completed</option>
-                                                <option value="Arrival Scheduled">Arrival Scheduled</option>
-                                                <option value="LMRA Process">LMRA Process</option>
-                                                <option value="Ready for Payment">Ready for Payment</option>
-                                                <option value="Embassy">Embassy</option>
-                                                <option value="Emigrate Process">Emigrate Process</option>
-                                                <option value="To Be Arrived">To Be Arrived</option>
-                                                <option value="Arrived">Arrived</option>
-                                                <option value="Arrival Scheduled">Arrival Scheduled</option>
-                                                <option value="For Exited">For Exited</option>
-                                                <option value="Exited">Exited</option>
-                                                <option value="Worker Refuse to Work">Worker Refuse to Work</option>
-                                                <option value="UNFIT">UNFIT</option>
-                                                <option value="Runaway">Runaway</option>
-                                                <option value="For Local Transfer">For Local Transfer</option>
-                                                <option value="Canceled job">Canceled job</option>
+                                                <option value="pending">pending</option>
+                                                <option value="Demand Submitted">Demand Submitted</option>
+                                                <option value="Demand Accepted">Demand Accepted</option>
+                                                <option value="Demand Under Process">Demand Under Process</option>
+                                                <option value="Demand Completed">Demand Completed</option>
+                                                <option value="Demand Canceled">Demand Canceled</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">

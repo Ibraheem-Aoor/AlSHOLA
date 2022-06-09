@@ -34,7 +34,7 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $application->job->post_number }}</td>
-                                        <td>{{ $application->job->title->name }}</td>
+                                        <td>{{ $application->title->name }}</td>
                                         <td>{{ $application->subStatus->name }}</td>
                                         <td>{{ $application->created_at }}</td>
                                         <td>

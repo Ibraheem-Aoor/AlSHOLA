@@ -60,7 +60,7 @@ class CreateApplicationRequest extends FormRequest
             "addMoreInputFields.*.duration" => "required|string",
             "addMoreInputFields.*.country" => "required|string",
             "addMoreInputFields.*.designation" => "required|string",
-            'addMoreEducationRecords.*.degree' => 'required|string',
+            'a.*.degree' => 'required|string',
             'addMoreEducationRecords.*.year' => 'required|numeric',
             'addMoreEducationRecords.*.from' => 'required|string',
             'addMoreEducationRecords.*.country' => 'required|string',
@@ -69,7 +69,7 @@ class CreateApplicationRequest extends FormRequest
             "recommendations" => "required|string",
             'father_name' => 'required|string',
             'photo' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        'files.*' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'files.*' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
 
         ];
     }

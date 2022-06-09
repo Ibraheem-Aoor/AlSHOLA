@@ -1,4 +1,13 @@
-@extends('layouts.front.master')
+{{-- @extends('layouts.front.master') --}}
+@switch(Auth::user()->type)
+    @case('Client')
+        @extends('layouts.user.employer.master')
+    @break
+
+    @case('Agent')
+        @extends('layouts.user.employee.master')
+    @break
+@endswitch
 @section('content')
     @php
     $page = 'CONTACT US';

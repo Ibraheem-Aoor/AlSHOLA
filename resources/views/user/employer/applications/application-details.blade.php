@@ -18,7 +18,7 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <strong>Application Details</strong><small> Job:
-                                                    {{ $application->job->post_number}}</small>
+                                                    {{ $application->job->post_number }}</small>
                                             </div>
                                             <div class="card-body">
                                                 <div class="custom-tab">
@@ -37,6 +37,11 @@
                                                                 data-toggle="tab" href="#custom-nav-employers"
                                                                 role="tab" aria-controls="custom-nav-home"
                                                                 aria-selected="false">Employer Experince</a>
+
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
+                                                                data-toggle="tab" href="#custom-nav-education"
+                                                                role="tab" aria-controls="custom-nav-home"
+                                                                aria-selected="false">Education</a>
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -49,7 +54,7 @@
                                                                         <label for="inputEmail3"
                                                                             class="">Job Category:</label>
                                                                         <input type="text"
-                                                                            value="{{ $application->job->title->sector->name }}"
+                                                                            value="{{ $application->title->sector->name }}"
                                                                             class="form-control" id="inputEmail3"
                                                                             readonly>
                                                                     </div>
@@ -57,7 +62,7 @@
                                                                         <label for="inputPassword3"
                                                                             class="col-form-label">Title:</label>
                                                                         <input type="text"
-                                                                            value="{{ $application->job->title->name }}"
+                                                                            value="{{ $application->title->name }}"
                                                                             class="form-control" id="inputPassword3"
                                                                             readonly>
                                                                     </div>
@@ -335,9 +340,67 @@
                                                             </p>
                                                         </div>
 
+
+
+
+                                                        {{-- Employer Education --}}
+                                                        <div class="tab-pane fade" id="custom-nav-education"
+                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                                                            <p>
+                                                            <div class="col-sm-12 ">
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">#</th>
+                                                                                <th scope="col">Degree</th>
+                                                                                <th scope="col">Year</th>
+                                                                                <th scope="col">Educational Body</th>
+                                                                                <th scope="col">Country</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @php
+                                                                                $i = 1;
+                                                                            @endphp
+                                                                            @forelse ($application->educations as $edu)
+                                                                                <tr>
+                                                                                    <th scope="row">{{ $i++ }}
+                                                                                    </th>
+                                                                                    <td>{{ $edu->degree }}</td>
+                                                                                    <td>{{ $edu->year }}</td>
+                                                                                    <td>{{ $edu->collage }}</td>
+                                                                                    <td>{{ $edu->country }}</td>
+                                                                                </tr>
+                                                                            @empty
+                                                                                <tr>
+                                                                                    <td colspan="7"
+                                                                                        class="alert alert-warning  bg-dark"
+                                                                                        style="color:#fff">
+                                                                                        No Records Yet
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforelse
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            </p>
+                                                        </div>
+
+
+
+
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+
+
+
+
 
                                             <!--
                                                 Modal_1

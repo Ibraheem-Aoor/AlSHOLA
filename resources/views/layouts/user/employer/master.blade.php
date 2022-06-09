@@ -11,6 +11,8 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Favicon -->
     <link href="{{ asset('assets/dist_1/img/favicon.ico') }}" rel="icon">
+    <link rel="shortcut icon" href="{{ asset('assets/dist_3/assets/images/header-logo.png') }}">
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

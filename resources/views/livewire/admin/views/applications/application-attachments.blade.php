@@ -50,16 +50,12 @@
                                                     <td>
                                                         <a title="download"
                                                         href="{{ route('admin.application.attachment.download', ['id' => $application_id, 'fileName' => $file->name]) }}"
-                                                            class="btn btn-primary"> <i class="fa fa-download"></i>
+                                                            class="btn btn-primary btn-sm"> <i class="fa fa-download"></i>
                                                             </a>
-                                                        <a title="open"
-                                                        href="{{ route('admin.application.attachment.open', ['id' => $application_id, 'fileName' => $file->name]) }}"
-                                                            class="btn btn-success">
-                                                            <i class="fa fa-eye"></i></a>
 
                                                         <a title="delete"
-                                                        wire:click.prevent="deleteFile('{{$file->id}}')"
-                                                            class="btn btn-danger">
+                                                        href="{{ route('admin.application.attachment.delete', ['id' => $application_id, 'fileName' => $file->name]) }}"
+                                                            class="btn btn-danger btn-sm">
                                                             <i class="fa fa-trash"></i></a>
 
                                                         {{-- @switch($file->user->type)

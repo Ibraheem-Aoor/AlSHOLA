@@ -182,6 +182,16 @@ class JobController extends Controller
     public function moveFilesToPrimaryFile($jobId)
     {
         Storage::move('public/tempUploads/'.Auth::id().'/',  'public/uploads/attachments/jobs/'.$jobId.'/');
+        $files = Storage::files('public/uploads/attachments/jobs/'.$jobId.'/');
+        foreach($files as $file)
+        Attachment::create(
+            [
+                'job_id' => $jobId,
+                'user_id'=> Auth::id(),
+                'name' =>  basename($file),
+                'type' => 'job descreption',
+            ]
+        );
     }
 
     public function uploadJobFile($file , $jobId)

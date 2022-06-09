@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('job/{id}' , JobDetails::class)->name('employee.job.details');
 
         //Job Notes
-        Route::post('/job/refuse/{id}' , [NoteController::class , 'store'])->name('employee.job.refuse');
+        Route::post('/job/refuse/{id}' , [NoteController::class , 'refuseJob'])->name('employee.job.refuse');
         Route::post('/job/sendnote/{id}' , [NoteController::class , 'store'])->name('employee.job.note.create');
 
         //talent job application routes
