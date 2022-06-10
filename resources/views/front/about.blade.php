@@ -1,4 +1,5 @@
 @extends('layouts.front.master')
+@section('title' , 'ALSHOLA | About Us')
 @section('content')
     @php
         $page = 'ABOUT US';

@@ -1,5 +1,5 @@
 <div>
-    @section('title' , 'AlSHLOA - Admin | NATIONALITY LIST')
+    @section('title', 'AlSHLOA - Admin | NATIONALITY LIST')
 
     <div class="content">
         <!-- Animated -->
@@ -10,6 +10,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">All Created Categories</h4>
+                                <div class="text-right">
+                                    <a href="{{ route('admin.nationality.new') }}" class="btn btn-outline-success"><i
+                                            class="fa fa-plus"></i> Add Nationality</a>
+                                </div>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -75,8 +79,8 @@
                                     <form wire:submit.prevent="editNationality()">
                                         <div class="form-group">
                                             <label for="">Category Name<span class="text-danger">* </span> :</label>
-                                            <input type="text" class="form-control" wire:model.lazy="newNationalityName"
-                                                id="name">
+                                            <input type="text" class="form-control"
+                                                wire:model.lazy="newNationalityName" id="name">
                                             @error('newNationalityName')
                                                 <span class="text-dagner">{{ $message }}</span>
                                             @enderror

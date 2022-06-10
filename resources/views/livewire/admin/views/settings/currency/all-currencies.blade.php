@@ -10,6 +10,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">All Created Categories</h4>
+                                <div class="text-right">
+                                    <a href="{{ route('admin.currency.new') }}" class="btn btn-outline-success"><i
+                                            class="fa fa-plus"></i> Add Currency</a>
+                                </div>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">

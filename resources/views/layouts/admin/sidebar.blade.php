@@ -51,49 +51,6 @@
 
 
 
-
-
-              {{-- * Settings --}}
-              <li class="menu-item-has-children dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="menu-icon fa fa-cog"></i> Settings</a>
-                  <ul class="sub-menu children dropdown-menu">
-                      <li>
-                          <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('admin.sector.all') }}"> Category List</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('admin.sector.new') }}"> Add Category</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('admin.title.all') }}"> Titles List</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('admin.title.new') }}"> Add Title</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('admin.nationality.all') }}"> Nationality List</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('admin.nationality.new') }}"> Add Nationality</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('admin.currency.all') }}"> Currency</a>
-                      </li>
-                      <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('admin.currency.new') }}"> Add Currency</a>
-                      </li>
-                  </ul>
-              </li>
-
-
               {{-- * Agent --}}
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -126,6 +83,17 @@
                   </ul>
               </li>
 
+
+              {{-- Cotnact Queires   --}}
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="menu-icon fa fa-file"></i>Applications Mangament</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li><i class="menu-icon fa fa-file-text"></i><a href="{{ route('admin.applications.all') }}">All
+                              Applications</a></li>
+                  </ul>
+              </li>
+
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="menu-icon fa fa-phone"></i>Contact Queries</a>
@@ -139,18 +107,35 @@
                   </ul>
               </li>
 
+              {{-- * Settings --}}
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="menu-icon fa fa-file"></i>Applications Mangament</a>
+                      <i class="menu-icon fa fa-cog"></i> Settings</a>
                   <ul class="sub-menu children dropdown-menu">
-                      <li><i class="menu-icon fa fa-file-text"></i><a
-                              href="{{ route('admin.applications.all') }}">All Applications</a></li>
-                      {{-- <li><i class="menu-icon fa fa-file-text"></i><a
-                            href="{{ route('admin.applications.medical') }}">Waiting For Medical</a></li>
-                    <li><i class="menu-icon fa fa-file-text"></i><a
-                            href="{{ route('admin.applications.visa') }}">Waiting For Visa</a></li> --}}
+                      <li>
+                          <i class="menu-icon fa fa-bars"></i>
+                          <a href="{{ route('admin.sector.all') }}"> Category Management</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-bars"></i>
+                          <a href="{{ route('admin.title.all') }}"> Titles Management</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-bars"></i>
+                          <a href="{{ route('admin.nationality.all') }}"> Nationality List</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.currency.all') }}"> Currency Management</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('admin.settings.general') }}"> General Settings</a>
+                      </li>
                   </ul>
               </li>
+
+
 
               {{-- <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"

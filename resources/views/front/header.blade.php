@@ -4,7 +4,7 @@
         <h1 class="display-3 text-white mb-3 animated slideInDown">{{$page}}</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb text-uppercase">
-                <li class="breadcrumb-item"><a href="/">JobEntry</a></li>
+                <li class="breadcrumb-item"><a href="/">ALSHOLA</a></li>
                 <li class="breadcrumb-item text-white active" aria-current="page">{{$page}}</li>
             </ol>
         </nav>

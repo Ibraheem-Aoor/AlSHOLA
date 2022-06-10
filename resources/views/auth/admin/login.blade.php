@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -11,8 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="{{ asset('assets/dist_3/assets/images/header-logo.png') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -36,7 +34,8 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="#">
-                        <img class="align-content" src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="30%" alt="">
+                        <img class="align-content" src="{{ asset('assets/dist_3/assets/images/logo.png') }}"
+                            width="30%" alt="">
                     </a>
                 </div>
                 <div class="login-form">

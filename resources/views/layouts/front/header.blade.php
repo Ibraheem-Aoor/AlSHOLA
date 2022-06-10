@@ -11,7 +11,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="/" class="nav-item nav-link">Home</a>
                 <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
-                <a href="{{ route('categories') }}" class="nav-item nav-link">Job Category</a>
+                <a href="{{ route('categories') }}" class="nav-item nav-link">INDUSTRIES</a>
                 <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
                 @if (!Auth::check())
                     <a href="{{ route('login') }}" class="nav-item nav-link ">LogIn</a>

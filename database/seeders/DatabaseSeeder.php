@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             ApplicationStatusSeeder::class,
             CurrencySeeder::class,
+            BusinessSettingSeeder::class,
         ]);
     }
 }

@@ -1,5 +1,5 @@
 <div>
-    @section('title' , 'AlSHLOA - Admin | CATEGORY LIST')
+    @section('title', 'AlSHLOA - Admin | CATEGORY LIST')
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -9,6 +9,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">All Created Categories</h4>
+                                <div class="text-right">
+                                    <a href="{{ route('admin.sector.new') }}" class="btn btn-outline-success"> <i class="fa fa-plus"></i> Add Category</a>
+                                </div>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">

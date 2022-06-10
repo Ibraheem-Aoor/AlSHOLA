@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta content="{{Cache::get('businessSetting')->where('key' , 'keywords')->first()->value}}" name="keywords">
+    <meta content="{{Cache::get('businessSetting')->where('key' , 'description')->first()->value}}" name="description">
+    <meta name="og:title" property="og:title" content="Your Open Graph Title Goes Here">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Favicon -->
     <link href="{{ asset('assets/dist_1/img/favicon.ico') }}" rel="icon">

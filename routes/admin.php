@@ -57,12 +57,23 @@ use App\Http\Livewire\Admin\Views\Settings\Currency\AddCurrency;
 use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
 use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
+use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
+use App\Models\BusinessSetting;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 //prefix => admin
 
     Route::get('login' , function()
         {
-            return view('auth.admin.login');
+            if(!Cache::has('businessSetting'))
+            {
+                Cache::rememberForever('businessSetting' , function()
+                {
+                    return DB::table('business_settings')->get();
+                });
+            }
+                return view('auth.admin.login');
         });
 
     Route::group(['middleware' => ['auth' , 'authAdmin'] ] , function()
@@ -91,6 +102,8 @@ use App\Http\Controllers\HelperControllers\AdminDemandController;
 
         Route::get('currency/all' , AllCurrencies::class)->name('admin.currency.all');
         Route::get('currency/new' , AddCurrency::class)->name('admin.currency.new');
+
+        Route::get('/general-settings' , GeneralBessniuessSettings::class)->name('admin.settings.general');
 
 
 

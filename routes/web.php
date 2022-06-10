@@ -17,6 +17,7 @@ use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfControlle
 use App\Http\Controllers\User\GeneralJobController;
 use App\Http\Controllers\User\ProfileController;
 use App\Models\Application;
+use App\Models\BusinessSetting;
 use App\Models\Title;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use FontLib\Table\Type\name;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,13 @@ Route::group(['middleware' => 'guestOnly'] , function()
 {
 
     Route::get('/', function () {
+        if(!Cache::has('businessSetting'))
+        {
+            Cache::rememberForever('businessSetting' , function()
+            {
+                return DB::table('business_settings')->get();
+            });
+        }
         return  view('front.home');
     })->name('home');
 
