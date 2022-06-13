@@ -7,6 +7,14 @@ use Livewire\Component;
 
 class TalentContacts extends Component
 {
+
+
+    public function deleteContact($id)
+    {
+        UserCotnact::findOrFail($id)->delete();
+        notify()->success('Deleted Successfully');
+        return redirect(route('admin.contacts.talents'));
+    }
     public function render()
     {
         $contacts = UserCotnact::with('user')->where('user_type' , 'Agent')->simplePaginate(15);

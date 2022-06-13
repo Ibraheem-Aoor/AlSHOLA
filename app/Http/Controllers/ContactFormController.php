@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactFormRequest;
 use App\Models\Contact;
+use App\Models\User;
+use App\Notifications\NewContactNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactFormController extends Controller
 {
@@ -34,6 +37,16 @@ class ContactFormController extends Controller
     {
         Contact::create($request->all());
         notify()->success('We will reach you Soon!');
+        $data = [
+            'name' => $request->name,
+            'subject' => $request->subject,
+            'email' => $request->email,
+            'message' => $request->message,
+            'userType' => 'Guest',
+        ];
+        $users = User::where('is_admin' , '1')->get();
+        foreach($users as $user)
+        $user->notify( new NewContactNotification($data));
         return redirect(route('home'));
     }
 

@@ -92,6 +92,13 @@ Route::group(['middleware' => ['auth']], function()
 
     //Talented Routes
     Route::group(['prefix' => 'talented' , 'middleware' => ['employeeCheck'] ] , function(){
+        if(!Cache::has('businessSetting'))
+        {
+            Cache::rememberForever('businessSetting' , function()
+            {
+                return DB::table('business_settings')->get();
+            });
+        }
         Route::get('dashboard' , Dashboard::class)->name('employee.dashboard');
         Route::get('jobs/avilable' , AvilabeJobs::class)->name('employee.jobs.avilable');
         Route::get('job/{id}' , JobDetails::class)->name('employee.job.details');
@@ -120,9 +127,18 @@ Route::group(['middleware' => ['auth']], function()
 
     // Employer Routes
     Route::group(['prefix' => 'employer' , 'middleware' => ['employerCheck' ] ] , function(){
+        if(!Cache::has('businessSetting'))
+        {
+            Cache::rememberForever('businessSetting' , function()
+            {
+                return DB::table('business_settings')->get();
+            });
+        }
         Route::get('dashboard' , ViewsDashboard::class)->name('employer.dashboard');
         // Jobs Routes
         Route::resource('/job' , JobController::class);
+        Route::post('/jobs/edit-1-save/{id}' , [JobController::class , 'editStep_1'])->name('jobs.edit.step-1');
+        Route::post('/jobs/edit-2-save/{id}' , [JobController::class , 'updateJob'])->name('jobs.edit.step-2');
 
         Route::get('/setup-job' , [JobController::class , 'setupFrom'])->name('setupJob');
         Route::post('/setup/job' , [JobController::class , 'setup'])->name('creation-setup');
@@ -165,10 +181,10 @@ Route::group(['middleware' => ['auth']], function()
             return Storage::download('public/uploads/attachments/jobs/5/snapchat.png');
         });
 
-        Route::get('get-title/{id}' , function($id)
+        Route::get('title/{id}' , function($id)
         {
-            return Title::findOrFail($id);
-        });
+            return Title::findOrFail($id)->name;
+        })->name('employer.title.all');
 
     });//end Emloyer RouteGroup.
 

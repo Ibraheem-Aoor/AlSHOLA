@@ -71,81 +71,86 @@
                                     <div class="tab-pane fade" id="custom-nav-seo" role="tabpanel"
                                         aria-labelledby="custom-nav-contact-tab">
                                         <div class="contianer">
-                                            <div class="row">
+                                            <form wire:submit="saveSeo()">
+                                                <div class="row">
+                                                    <div class="col-sm-12 text-danger">
+                                                        Tip 1: OG SEO Tags is used to optimize your webistes when sharing it on social media platforms.
+                                                    </div>
+                                                    <div class="col-sm-12 text-danger mb-2">
+                                                        Tip 2: Meta Tags is used to optimize your webistes on Search Engines.
+                                                    </div>
+                                                    <div class="col-sm-6 mb-2">
+                                                        <label for="">OG:Title</label>
+                                                        <input type="text" class="form-control"
+                                                            wire:model.lazy="og_title">
+                                                    </div>
 
-                                                <div class="col-sm-6 mb-2">
-                                                    <label for="">OG:Title</label>
-                                                    <input type="text" class="form-control"
-                                                        wire:model.lazy="og_title">
-                                                </div>
+                                                    <div class="col-sm-6 mb-2">
+                                                        <label for="">OG:Type</label>
 
-                                                <div class="col-sm-6 mb-2">
-                                                    <label for="">OG:Type</label>
+                                                        <input type="text" class="form-control"
+                                                            wire:model.lazy="og_type">
+                                                    </div>
 
-                                                    <input type="text" class="form-control" wire:model.lazy="og_type">
-                                                </div>
+                                                    <div class="col-sm-6 mb-2">
+                                                        <label for="">OG:Descreption</label>
 
-                                                <div class="col-sm-6 mb-2">
-                                                    <label for="">OG:Descreption</label>
+                                                        <input type="text" class="form-control"
+                                                            wire:model.lazy="og_descreption">
+                                                    </div>
 
-                                                    <input type="text" class="form-control"
-                                                        wire:model.lazy="og_descreption">
-                                                </div>
 
-                                                <div class="col-sm-6 mb-2">
-                                                    <label for="">OG:Image</label>
-                                                    <input type="text" class="form-control"
-                                                        wire:model.lazy="og_image">
+                                                    <div class="col-sm-12 ">
+                                                        <div class="form-group">
+                                                            <label for="">Meta descreption</label>
+                                                            <textarea name="" id="" cols="30" rows="10" class="form-control" wire:model.lazy="description"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="form-group">
+                                                            <label for="">Meta keywords</label>
+                                                            <textarea name="" id="" cols="30" rows="10" class="form-control" wire:model.lazy="keywords"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-outline-primary col-sm-12">SAVE</button>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-12 ">
-                                                <div class="form-group">
-                                                    <label for="">Meta descreption</label>
-                                                    <textarea name="" id="" cols="30" rows="10" class="form-control" wire:model.lazy="descreption"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 ">
-                                                <div class="form-group">
-                                                    <label for="">Meta keywords</label>
-                                                    <textarea name="" id="" cols="30" rows="10" class="form-control" wire:model.lazy="keywords"></textarea>
-                                                </div>
-                                            </div>
-                                                <button type="submit" class="btn btn-outline-primary col-sm-12">SAVE</button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                @push('js')
-                    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                                        crossorigin="anonymous"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-                                        crossorigin="anonymous"></script>
+                    @push('js')
+                        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                                                crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                                                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+                                                crossorigin="anonymous"></script>
 
-                    <script>
-                        $('#exampleModal_5').on('show.bs.modal', function(event) {
-                            var button = $(event.relatedTarget)
-                            var message = button.data('message')
-                            // var description = button.data('description')
-                            var modal = $(this)
-                            modal.find('.modal-body #message').val(message);
-                        });
-                        $('#descmodal').on('show.bs.modal', function(event) {
-                            var button = $(event.relatedTarget)
-                            var desc = button.data('desc')
-                            // var description = button.data('description')
-                            var modal = $(this)
-                            modal.find('.modal-body #desc').val(desc);
-                        });
-                    </script>
-                @endpush
+                        <script>
+                            $('#exampleModal_5').on('show.bs.modal', function(event) {
+                                var button = $(event.relatedTarget)
+                                var message = button.data('message')
+                                // var description = button.data('description')
+                                var modal = $(this)
+                                modal.find('.modal-body #message').val(message);
+                            });
+                            $('#descmodal').on('show.bs.modal', function(event) {
+                                var button = $(event.relatedTarget)
+                                var desc = button.data('desc')
+                                // var description = button.data('description')
+                                var modal = $(this)
+                                modal.find('.modal-body #desc').val(desc);
+                            });
+                        </script>
+                    @endpush
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>

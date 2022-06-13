@@ -86,7 +86,7 @@
 
 
 @extends('layouts.front.master')
-@section('title', 'JobEntry | SignUp')
+@section('title', 'ALSHOLA | SignUp')
 @section('content')
     @php
     $page = 'SignUp';

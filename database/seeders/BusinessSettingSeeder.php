@@ -16,6 +16,8 @@ class BusinessSettingSeeder extends Seeder
     public function run()
     {
         $generalInfo = [
+
+            // Socail Links
             'facebook' => '' ,
             'instagram' => 'https://www.instagram.com/alshoalagroup/' ,
             'linkedin' => '' ,
@@ -25,6 +27,15 @@ class BusinessSettingSeeder extends Seeder
             Manama / Bu Ashira, Bahrain,',
             'telephone' => '+973 17720041',
             'email' => 'info@alshola.com',
+
+
+            //Seo
+            'og_type' => '',
+            'og_descreption' => '',
+            'og_image' => '',
+            'og_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
         ];
 
         foreach($generalInfo as $key => $value)

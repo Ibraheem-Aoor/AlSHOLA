@@ -1,4 +1,5 @@
 @extends('layouts.front.master')
+@section('title' , 'CONTACT US')
 @section('content')
     @php
     $page = 'CONTACT US';

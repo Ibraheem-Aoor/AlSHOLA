@@ -57,8 +57,10 @@ use App\Http\Livewire\Admin\Views\Settings\Currency\AddCurrency;
 use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
 use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
+use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
 use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
 use App\Models\BusinessSetting;
+use App\Models\Title;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -99,7 +101,7 @@ use Illuminate\Support\Facades\DB;
         Route::get('nationality/new' , AddNewNationality::class)->name('admin.nationality.new');
         Route::get('title/new' , AddNewTitle::class)->name('admin.title.new');
         Route::get('title/all' , AllTitles::class)->name('admin.title.all');
-
+    
         Route::get('currency/all' , AllCurrencies::class)->name('admin.currency.all');
         Route::get('currency/new' , AddCurrency::class)->name('admin.currency.new');
 
@@ -231,6 +233,7 @@ use Illuminate\Support\Facades\DB;
         Route::get('/employer/queries'  , EmployerContacts::class)->name('admin.contacts.employers');
         Route::get('/employee/queries'  , TalentContacts::class)->name('admin.contacts.talents');
         Route::get('/guests/queries'  , GuestContacts::class)->name('admin.contacts.guests');
+        Route::get('guests/notification/{notification}' , [NotificaitonHelperController::class , 'markNotification'])->name('admin.contact.notficiation');
 
         //candidacy orders routes
         Route::get('/candidacy/orders/all'  , AllCandidacyOrders::class)->name('admin.candidacy.orders.all');

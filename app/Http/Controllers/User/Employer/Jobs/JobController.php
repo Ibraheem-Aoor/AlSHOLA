@@ -56,7 +56,12 @@ class JobController extends Controller
     public function setup(JobSetUpJobReqeust $request)
     {
         if($request->session()->has('step_1'))
+        {
             $request->session()->remove('step_1');
+            $files = Storage::files('public/tempUploads/'.Auth::id().'/');
+            foreach($files as $file)
+                Storage::delete($file);
+        }
         $request->session()->put('step_1' ,  $request->except('attachments'));
         if($request->hasFile('attachments'))
             foreach($request->attachments as $asttachment)
@@ -88,12 +93,6 @@ class JobController extends Controller
     }
 
 
-
-    // public function step2(Request $request)
-    // {
-    //     $request->session()->put('step_2_data' , $request->data);
-    //     return $request;
-    // }
 
 
     /**
@@ -235,12 +234,39 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        $job = Job::with(['title.sector' , 'nationality'])->findorFail($id);
-        $fileTypes = FileType::all();
+        $job = Job::with(['subJobs.title.sector' , 'subJobs.nationality'])->findorFail($id);
         $sectors = Sector::all();
         $nationalities = Nationality::orderBy('name')->get()->chunk(50);
-        return view('user.employer.jobs.edit' , compact('job' , 'sectors' , 'nationalities' , 'fileTypes'));
+        $currencies = Currency::all();
+        return view('user.employer.jobs.edit' , compact('job' , 'sectors' , 'nationalities' , 'currencies'));
     }
+
+
+    public function editStep_1(JobSetUpJobReqeust $requset , $id)
+    {
+        if($requset->session()->has('edit_step_1'))
+        {
+            $requset->session()->remove('edit_step_1');
+            $files = Storage::files('public/tempUploads/'.Auth::id().'/');
+            foreach($files as $file)
+                Storage::delete($file);
+        }
+        $requset->session()->put('edit_step_1' , $requset->except('attachments'));
+        if($requset->hasFile('attachments'))
+            foreach($requset->attachments as $asttachment)
+            {
+                $path = 'public/tempUploads/'.Auth::id().'/';
+                $asttachment->storeAs($path , $asttachment->getClientOriginalName());
+            }
+        $job = Job::with('subJobs')->findOrFail($id);
+        // return dd($job);
+        $nationalities = Nationality::orderBy('name')->get()->chunk(50);
+        $titles = Title::whereSectorId($requset->session()->get('edit_step_1')['sector'])->get();
+        return view('user.employer.jobs.edit_step_2 ' , compact('titles' , 'nationalities' , 'job'));
+    }
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -250,48 +276,29 @@ class JobController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     /*
-    public function update(UpdateJobRequest $request, $id)
+
+    public function updateJob(UpdateJobRequest $request, $id)
     {
-        $job = Job::findOrFail($id);
-        // if($request->input('responsibilities') == null && $request->input('file_type') == null)
-        // {
-        //     notify()->error('Job Responsibilities Required');
-        //     return redirect()->withErrors('error' , 'Job Responsibilities Required');
-        // }
-        $job->update([
-            'post_number' => $this->generatePosteNumber(),
-            'title_id' => $request->input('title'),
-            'natoinality_id' => $request->input('nationality'),
-            'salary' => $request->input('salary'),
-            'quantity' => $request->input('quantity'),
-            'description' => $request->input('description'),
-            'other_terms' => $request->input('other_terms') ?? null,
-            'covid_test' => $request->input('covid_test'),
-            'indemnity_leave_and_overtime_salary' => $request->input('indemnity_leave_and_overtime_salary'),
-            'air_ticket' => $request->input('air_ticket'),
-            'annual_leave' => $request->input('annual_leave'),
-            'food' => $request->input('food'),
-            'insurance' => $request->input('insurance'),
-            'medical' => $request->input('medical'),
-            'transport' => $request->input('transport'),
-            'accommodation' => $request->input('accommodation'),
-            'off_day' => $request->input('off_day'),
-            'working_days' => $request->input('working_days'),
-            // 'working_hours' => $request->input('working_hours'),
-            'contract_period' => $request->input('contract_period'),
-            'user_id' => Auth::id(), //The Publisher
-        ]);
-        if($request->hasFile('attachments'))
-            $this->addAttachementsToJob($request->attachments  , $id , $request->file_type);
-        if($request->hasFile('responsibilites_file'))
-            $this->uploadJobFile($request->responsibilites_file  , $id);
+        return dd($request);
+        $job = Job::with('subJobs')->findOrFail($id);
+        // Edit the basic data from step_1
+        $job->update($request->session()->get('edit_step_1'));
+        //clear the job prev subJobs
+        $job->subJobs->delete();
+        if($request->has('subJob'))
+        {
+            $this->createSubJobs($request->subJob , $job->id);
+        }else{
+            $this->createTheOnlySubJob($request ,  $job->id);
+        }
+        if(count(Storage::files('public/tempUploads/'.Auth::id().'/')) > 0)
+                $this->moveFilesToPrimaryFile($job->id);
         notify()->success('Job Updated Successfully');
         return redirect(route('employer.dashboard'));
 
     }
 
- */
+
 
 
 

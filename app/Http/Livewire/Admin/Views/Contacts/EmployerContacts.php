@@ -12,6 +12,14 @@ class EmployerContacts extends Component
     use GeneralUserTrait;
 
     public $recoredId;
+
+
+    public function deleteContact($id)
+    {
+        UserCotnact::findOrFail($id)->delete();
+        notify()->success('Deleted Successfully');
+        return redirect(route('admin.contacts.employers'));
+    }
     public function render()
     {
         $contacts = UserCotnact::with('user')->where('user_type' , 'Client')->simplePaginate(15);

@@ -143,7 +143,7 @@
                                                         @method('DELETE')
                                                         @csrf
                                                     </form>
-
+                                                    <a  class="badge badge-success text-primary" href="{{route('job.edit' , $job->id)}}"><i class="fa fa-edit"></i></a>
                                                     <a class=" badge bg-info" title="notes"
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>
