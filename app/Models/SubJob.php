@@ -9,7 +9,7 @@ class SubJob extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title_id' , 'nationality_id' , 'quantity' , 'salary' , 'job_id' , 'description',
+        'title_id' , 'nationality_id' , 'quantity' , 'salary' , 'job_id' , 'age' , 'gender'
     ];
 
 

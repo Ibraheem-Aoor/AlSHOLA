@@ -42,6 +42,7 @@ class Job extends Model
         'return_ticket',
         'currency',
         'user_id',
+        'description',
     ];
 
     public function users()
@@ -101,5 +102,5 @@ class Job extends Model
     {
         return $this->hasMany(RefusedJob::class , 'job_id');
     }
-    
+
 }

@@ -4,6 +4,38 @@
 @section('content')
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+        <style>
+            .form-control {
+                /* height: 20px !important; */
+                width: 90% !important;
+            }
+        </style>
+        <style>
+            table {
+                font-size: 0.8rem;
+            }
+
+            .titles tr:nth-child(even) {
+                background-color: #00B074;
+                color: #ffff;
+            }
+
+            .titles th {
+                background-color: #d8e8a7;
+            }
+
+            .basicInfo tr td:nth-child(even) {
+                background-color: #00B074;
+                color: #ffff;
+                width: 50% !important;
+            }
+
+            .basicInfo input {
+                background: transparent;
+                /* height: 20px; */
+                width: 100% !important;
+            }
+        </style>
     @endpush
 @section('title', 'Dashboard | Create Job Post')
 <div class="container-xxl py-5">
@@ -19,21 +51,81 @@
                     @csrf
                     <div class="rounded h-100 p-4">
                         <div class="container-fluid pt-4 px-4">
+
                             <div class="row rounded">
+                                <div class="form-floating mb-3 col-sm-3">
+                                    <select name="sector" class="form-control" required>
+                                        <option>--- select one ---</option>
+                                        @foreach ($sectors as $sector)
+                                            <option value="{{ $sector->id }}"
+                                                @if (old('sector') == $sector) selected @endif>{{ $sector->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label for="floatingInput">&nbsp;&nbsp; Job Category</label>
+                                    @error('sector')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-floating mb-3 col-sm-3">
                                     <select name="title" class="form-control" required>
                                         <option value="title">--- select one ---</option>
-                                        @foreach ($titles as $title)
-                                            <option value="{{ $title->id }}"
-                                                @if (old('title') == $title) selected @endif>{{ $title->name }}
-                                            </option>
-                                        @endforeach
+
                                     </select>
                                     <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+
+
+                                <div class="form-floating mb-3 col-sm-3">
+                                    <input required type="number" class="form-control" id="floatingPassword"
+                                        name="quantity" value="{{ old('quantity') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Quantity</label>
+                                    @error('quantity')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-3">
+                                    <input required type="number" class="form-control" name="salary"
+                                        value="{{ old('salary') }}">
+                                    <label for="floatingPassword">&nbsp;&nbsp; Salary</label>
+                                    @error('salary')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-floating mb-3 col-sm-3">
+                                    <select name="gender" class="form-control" required>
+                                        <option value="title">--- select one ---</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <label for="floatingInput">&nbsp;&nbsp; Gender</label>
+                                    @error('gender')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-floating mb-3 col-sm-3">
+                                    <select name="age_limit" class="form-control" required>
+                                        <option value="title">--- select one ---</option>
+                                        <option value="Below 40">Below 40</option>
+                                        <option value="Below 50">Below 50</option>
+                                        <option value="Below 60">Below 60</option>
+                                    </select>
+                                    <label for="floatingInput">&nbsp;&nbsp; Age</label>
+                                    @error('age_limit')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
 
                                 <div class="form-floating mb-3 col-sm-3">
                                     <select name="nationality" class="form-control" required>
@@ -53,78 +145,178 @@
                                     @enderror
                                 </div>
 
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <input required type="text" class="form-control" id="floatingPassword"
-                                        name="quantity" value="{{ old('quantity') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Quantity</label>
-                                    @error('quantity')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <input required type="text" class="form-control" name="salary"
-                                        value="{{ old('salary') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Salary</label>
-                                    @error('salary')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-
-
-                                <div class="form-floating mb-3 col-sm-12">
-                                    <textarea required class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                                        style="height: 150px;" name="description">{{ old('description') }}</textarea>
-                                    <label for="floatingTextarea">&nbsp;&nbsp; Job Description</label>
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                                {{-- <div class="form-floating mb-3 col-sm-3">
-                                    <input type="file" name="responsibilites_file" class="form-control">
-                                    <label for="floatingPassword">Responsibilities File</label>
-                                    <p class="text-info">attach file instead of write the Responsebilites</p> <br>
-                                    @error('responsibilites_file')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div> --}}
                                 <div class="card mb-5" id="add-new-title-dev">
                                     <div class="card-body">
                                         <table class="table table-responsive" id="newTtile">
                                             <tr>
+                                                <th>Job Category</th>
                                                 <th>Title</th>
                                                 <th>Quantity</th>
                                                 <th>salary</th>
+                                                <th>Gender</th>
+                                                <th>Age</th>
                                                 <th>Nationality</th>
-                                                <th>Descreption</th>
                                             </tr>
                                             @if (old('subJob'))
-                                                @forelse(old('subJob') as $job)
-                                                    <tr>
-                                                        <td>{{ $job['title'] }}</td>
-                                                        <td>{{ $job['quantity'] }}</td>
-                                                        <td>{{ $job['salary'] }}</td>
-                                                        <td>{{ $job['nationality'] }}</td>
-                                                        <td>{{ $job['description'] }}</td>
-                                                    </tr>
-                                                @empty
-                                                @endforelse
+                                                <h3>SETED</h3>
                                             @endif
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary col-sm-4" data-toggle="modal"
+                                <div class="container mb-2">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="text-left">
+
+                                                <button type="button" id="add-new-title"
+                                                    class="btn btn-info col-sm-4"><i class="fa fa-plus"></i> Add
+                                                    New</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="container mt-3">
+                                    <div class="row mb-3">
+                                        <table class="table table basicInfo">
+
+                                            <tr>
+                                                <td>Working Days:</td>
+                                                <td>
+                                                    <select class="form-control" name="working_days" required>
+                                                        <option value="">-- select one --</option>
+                                                        <option value="5"
+                                                            @if (old('working_days') == 5) {{ 'selected' }} @endif>
+                                                            5</option>
+                                                        <option value="6"
+                                                            @if (old('working_days') == 6) {{ 'selected' }} @endif>
+                                                            6</option>
+                                                    </select>
+                                                    @error('working_days')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Off Day:</td>
+                                                <td><input type="text" class="form-control" name="off_day" readonly>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Working Hours:</td>
+                                                <td><input type="text" class="form-control" name="working_hours"
+                                                        value="8 Hours" readonly></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Overtime: </td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="As Per Labour Law"
+                                                        readonly>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Food Allowance: </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="food"
+                                                        value="{{ old('food') }}">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Contract Period: </td>
+                                                <td><input type="text" class="form-control" value="2 Years" readonly>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Joining Ticket: </td>
+                                                <td><input type="text" class="form-control" name="joining_ticket"
+                                                        value="{{ old('joining_ticket') }}">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Annual Leave: </td>
+                                                <td><input type="text" class="form-control" value="As per Labour Law"
+                                                        readonly>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Medical Insurance: </td>
+                                                <td><input type="text" class="form-control" value="As per Labour Law"
+                                                        readonly>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Transport</td>
+                                                <td><input type="text" class="form-control"
+                                                        value="Provided By Employer" readonly>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>Accommodation: </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="accommodation"
+                                                        value="{{ old('accommodation') }}" required>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    Country Entry requirements if any:
+                                                </td>
+
+                                                <td>
+                                                    Employer is liable for any additional fees, imposed by
+                                                    official authorities
+                                                    inside employer country
+                                                </td>
+
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="form-floating mb-3 col-sm-12">
+                                        <textarea required class="form-control" name="description" style="height: 150px;">{{ old('description') }}</textarea>
+                                        <label for="floatingPassword">&nbsp;&nbsp;Description</label>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-floating mb-3 col-sm-12">
+                                        <input type="file" class="form-control" name="attachments[]" multiple
+                                            style="font-size:14px;height:60px !important;">
+                                        <label for="floatingTextarea">&nbsp;&nbsp; Job Description Attachment</label>
+                                        @error('attachments')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary col-sm-12" data-toggle="modal"
                                     data-target="#exampleModalCenter" id="next">
                                     NEXT
                                 </button>
+
+
 
 
                                 <!-- Modal -->
@@ -148,7 +340,7 @@
                                                                 I hereby declare that the information provided is true
                                                                 and
                                                                 correct.
-                                                            </p>   <br>
+                                                            </p> <br>
 
                                                             <p class="text-center">
                                                                 My submission of this application is subject to the fees
@@ -162,7 +354,7 @@
                                                                 This demand is exclusive to Alshoala, and if it is given
                                                                 another
                                                                 agency, the employer must notify Alshoala.
-                                                            </p>  <br>
+                                                            </p> <br>
 
                                                             <p class="text-center">
                                                                 I also understand that all terms and conditions of the
@@ -192,22 +384,10 @@
 
 
                                 <div class="col-sm-4"></div>
-                                <button type="button" id="add-new-title" class="btn btn-info col-sm-3"><i
-                                        class="fa fa-plus"></i> Add New</button>
 
 
                             </div>
-                            <!-- Button trigger modal -->
 
-                            {{-- <div class="container mt-3">
-                                <div class="row">
-                                    <div class="col-sm-4 text-left">
-                                        <a href="#" id="back" class="btn btn-warning col-sm-3">
-                                            <i class="fa fa-arrow-left"></i> Back
-                                        </a>
-                                    </div>
-                                </div>
-                            </div> --}}
 
 
                         </div>
@@ -318,20 +498,27 @@
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
             });
-            $('#back').on('click', function() {
-
-                $.post("{{ route('creation-step-2') }}", {
-                        data: JSON.stringify($('form').serialize()),
-                    },
-                    function(data, status) {
-                        if (status == 'success') {
-                            console.log(data);
-                            window.location.href = "{{ route('setupJob') }}";
+            $('select[name="sector"]').on('change', function() {
+                var SectorId = $(this).val();
+                if (SectorId) {
+                    $.ajax({
+                        url: "{{ URL::to('employer/sector') }}/" + SectorId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="title"]').empty();
+                            $.each(data, function(key, value) { //for each loop
+                                $('select[name="title"]').append('<option value="' +
+                                    value.id + '">' + value.name + '</option>');
+                            });
                         }
                     });
+                }
             });
+
         });
     </script>
+
 
 
 
@@ -343,7 +530,7 @@
                 $('#add-new-title-dev').show();
                 $('#next').show();
 
-                var title, qty, salary, description, nationality;
+                var title, qty, salary, age, nationality, gender, sector;
                 var elements = document.getElementById("my-form").elements;
                 elements.forEach(element => {
                     if (element.name == 'title') {
@@ -353,32 +540,42 @@
                     } else if (element.name == 'salary') {
                         salary = element.value;
 
-                    } else if (element.name == 'description') {
-                        description = element.value;
+                    } else if (element.name == 'age_limit') {
+                        age = element.value;
                     } else if (element.name == 'nationality') {
                         nationality = element.value;
+                    } else if (element.name == 'gender') {
+                        gender = element.value;
+                    } else if (element.name == 'sector') {
+                        sector = element.value;
                     }
                 });
                 ++i;
                 $('#newTtile').append(
                     '<tr><td><input type="text" name="subJob[' + i +
-                    '][title]" readonly class="form-control" value = "' +
+                    '][sector]" readonly class="form-control" value = "' +
+                    sector +
+                    ' " /></td><td><input type="text" name="subJob[' + i +
+                    '][title]" placeholder="Enter Year" readonly class="form-control" value = "' +
                     title +
                     ' " /></td><td><input type="text" name="subJob[' + i +
-                    '][quantity]" placeholder="Enter Year" readonly class="form-control" value = "' +
+                    '][quantity]" placeholder="Enter educational body" readonly class="form-control" value = "' +
                     qty +
                     ' " /></td><td><input type="text" name="subJob[' + i +
-                    '][salary]" placeholder="Enter educational body" readonly class="form-control" value = "' +
+                    '][salary]" readonly class="form-control" value = "' +
                     salary +
                     ' " /></td><td><input type="text" name="subJob[' + i +
+                    '][gender]" readonly class="form-control" value = "' +
+                    gender +
+                    ' " /></td>' + '<td><input type="text" name="subJob[' + i +
+                    '][age]" readonly class="form-control" value = "' +
+                    age +
+                    ' " /></td>' +
+                    ' " /></td>' + '<td><input type="text" name="subJob[' + i +
                     '][nationality]" readonly class="form-control" value = "' +
                     nationality +
-                    ' " /></td><td><input type="text" name="subJob[' + i +
-                    '][description]" readonly class="form-control" value = "' +
-                    description +
-                    ' " /></td><td><button type="button" class="btn btn-outline-danger remove-edu-input-field">Delete</button></td><td><a  data-desc="' +
-                    description +
-                    '"   data-toggle="modal" href="#descmodal" class="btn btn-outline-primary"><i class="fa fa-eye"></i></a></td></tr>'
+                    ' " /></td>' +
+                    '<td><button type="button" class="btn btn-outline-danger remove-edu-input-field">Delete</button></td></tr>'
                 );
                 $(document).on('click', '.remove-edu-input-field', function() {
                     $(this).parents('tr').remove();

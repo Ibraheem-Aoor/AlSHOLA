@@ -109,8 +109,7 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">number</th>
-                                            <th scope="col">Sector</th>
-                                            <th scope="col">Title</th>
+                                            <th scope="col">Applications</th>
                                             <th scope="col">Total QTY</th>
                                             <th scope="col">Creation_date</th>
                                             <th scope="col">Status</th>
@@ -125,8 +124,11 @@
                                             <tr>
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $job->post_number }}</td>
-                                                <td>{{ $job->subJobs->first()->title->sector->name }}</td>
-                                                <td>{{ $job->subJobs->first()->title->name }}</td>
+                                                <td>
+                                                    <a href="{{route('employer.job.applications.all' , $job->id)}}">
+                                                        {{$job->applications_count}}
+                                                </a>
+                                                </td>
                                                 <td>{{ $job->qty() }}</td>
                                                 <td>{{ $job->created_at }}</td>
                                                 <td>{{ $job->status }}</td>
@@ -143,7 +145,9 @@
                                                         @method('DELETE')
                                                         @csrf
                                                     </form>
-                                                    <a  class="badge badge-success text-primary" href="{{route('job.edit' , $job->id)}}"><i class="fa fa-edit"></i></a>
+                                                    <a class="badge badge-success text-primary"
+                                                        href="{{ route('job.edit', $job->id) }}"><i
+                                                            class="fa fa-edit"></i></a>
                                                     <a class=" badge bg-info" title="notes"
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>

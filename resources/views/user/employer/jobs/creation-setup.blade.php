@@ -54,17 +54,7 @@
 
 
                                 <div class="form-floating mb-3 col-sm-3">
-                                    <select class="form-control" name="working_days" required>
-                                        <option value="">-- select one --</option>
-                                        <option value="5" @if (old('working_days') == 5) {{ 'selected' }} @endif>
-                                            5</option>
-                                        <option value="6" @if (old('working_days') == 6) {{ 'selected' }} @endif>
-                                            6</option>
-                                    </select>
-                                    <label for="floatingPassword">&nbsp;&nbsp; WORKING DAYS</label>
-                                    @error('working_days')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+
                                 </div>
 
 
@@ -147,8 +137,8 @@
                                         <option value="Provided by Employer"
                                             @if (old('joining_ticket') == 'Provided by Employer') selected @endif>Provided by Employer
                                         </option>
-                                        <option value="Not Provided"
-                                            @if (old('joining_ticket') == 'Not Provided') selected @endif>Not Provided</option>
+                                        <option value="Not Provided" @if (old('joining_ticket') == 'Not Provided') selected @endif>
+                                            Not Provided</option>
                                     </select>
                                     <label for="floatingPassword">&nbsp;&nbsp; Joining Ticket</label>
                                     @error('joining_ticket')

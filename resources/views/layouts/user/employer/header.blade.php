@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('setupJob') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
+            <a href="{{ route('job.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
                 A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
         </div>

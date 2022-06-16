@@ -27,16 +27,27 @@ class CreateJobRequest extends FormRequest
     public function rules()
     {
         return  [
-            'title' => 'required',
-            'nationality' => 'required',
-            'salary' => 'required|numeric',
-            'quantity' => 'required|numeric',
-            'description' => 'required|string',
-            // 'subJob.*.title' => 'required',
-            // 'subJob.*.quantity' => 'required',
-            // 'subJob.*.salary' => 'required',
-            // 'subJob.*.nationality' => 'required',
-            // 'subJob.*.descreption' => 'required',
+            'sector' => 'required',
+            // 'currency' => 'required',
+            'working_days' => 'required',
+            'accommodation' => 'required',
+            'accommodation_amount' => 'sometimes',
+            'food_amount' => 'sometimes',
+            'food' => 'required',
+            'joining_ticket' => 'required',
+            // 'return_ticket' => 'required',
+            'off_day' => 'required',
+            // 'other_terms' => 'required',
+            // 'gender_prefrences' => 'required',
+            // 'age_limit' => 'required',
+            'attachments.*' => 'sometimes|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            'subJob.*.title' => 'required',
+            'subJob.*.quantity' => 'required',
+            'subJob.*.salary' => 'required',
+            'subJob.*.nationality' => 'required',
+            'subJob.*.age' => 'required',
+            'subJob.*.gender' => 'required',
+            'subJob.*.sector' => 'required',
         ];
     }
 

@@ -142,7 +142,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::post('/jobs/edit-1-save/{id}' , [JobController::class , 'editStep_1'])->name('jobs.edit.step-1');
         Route::post('/jobs/edit-2-save/{id}' , [JobController::class , 'updateJob'])->name('jobs.edit.step-2');
 
-        Route::get('/setup-job' , [JobController::class , 'setupFrom'])->name('setupJob');
+        // Route::get('/setup-job' , [JobController::class , 'setupFrom'])->name('setupJob');
         Route::post('/setup/job' , [JobController::class , 'setup'])->name('creation-setup');
         Route::post('/setup-2/job' , [JobController::class , 'step2'])->name('creation-step-2');
 
@@ -169,6 +169,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('/applications/{id}/attachments' , [EmployerApplicationsController::class , 'applicationAttachments'])->name('employer.application.attachments');
         Route::get('/applications/{id}/details' , [EmployerApplicationsController::class , 'getDetails'])->name('employer.application.details');
         Route::get('/applications/all' , [EmployerApplicationsController::class , 'allForwardedApplications'])->name('employer.applications.all');
+        Route::get('/applications/{id}' , [EmployerApplicationsController::class , 'getAllApplications'])->name('employer.job.applications.all');
         Route::get('/applications/medical' , [EmployerApplicationsController::class , 'allMedicalApplications'])->name('employer.applications.medical');
         Route::get('/applications/visa' , [EmployerApplicationsController::class , 'allVisaApplications'])->name('employer.applications.visa');
         Route::post('/applications/visa/upload' , [EmployerApplicationsController::class , 'createVisa'])->name('employer.application.visa.upload');

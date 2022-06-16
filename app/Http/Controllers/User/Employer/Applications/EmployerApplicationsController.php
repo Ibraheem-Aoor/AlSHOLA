@@ -25,7 +25,7 @@ class EmployerApplicationsController extends Controller
 
 
     //Show All Applications forwarded To the employer form admin
-    public function allForwardedApplications()
+    public function allForwardedApplications($id = null)
     {
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $applications = Application::whereIn('job_id' , $jobIds)
@@ -35,6 +35,19 @@ class EmployerApplicationsController extends Controller
         return view('user.employer.applications.all-applications' , compact('applications'));
     }//end mthod
 
+
+    /**
+     * return all selected job applications
+     */
+    public function getAllApplications($id)
+    {
+        $applications  = Application::whereJobId($id)
+                        ->where('forwarded' , true)
+                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])
+                        ->with('job.subJobs')
+                        ->simplePaginate(15);
+        return view('user.employer.applications.all-applications' , compact('applications'));
+    }
 
     public function allMedicalApplications()
     {

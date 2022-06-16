@@ -85,11 +85,11 @@ class JobController extends Controller
 
     public function create(Request $request)
     {
-        $fileTypes = FileType::all();
-        $titles = Title::whereSectorId($request->session()->get('step_1')['sector'])->get();
+        $titles = Title::all();
         $nationalities = Nationality::orderBy('name')->get()->chunk(50);
         $currencies = Currency::all();
-        return view('user.employer.jobs.create' , compact('fileTypes' , 'titles' , 'nationalities' , 'currencies'));
+        $sectors = Sector::all();
+        return view('user.employer.jobs.create' , compact('titles' , 'nationalities' , 'currencies' , 'sectors'));
     }
 
 
@@ -103,29 +103,31 @@ class JobController extends Controller
      */
     public function store(CreateJobRequest $request)
     {
-        $basicJobData = $request->session()->get('step_1');
-        $job = Job::create(array_merge($basicJobData ,
+        try
+        {
+
+            $job = Job::create(array_merge($request->except(['title' , 'sector' , 'salary' , 'quantity' , 'gender' , 'age_limit' , 'nationality']) ,
             [
                 'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()
-            ]
-        ));
-        if($request->has('subJob'))
-        {
+                ]
+            ));
             $this->createSubJobs($request->subJob , $job->id);
-        }else{
-            // return dd($request);
-            $this->createTheOnlySubJob($request ,  $job->id);
+            if($request->hasFile('attachments'))
+                $this->uploadAttachments($request->attachments , $job->id);
+            notify()->success('Job Addeed Successfully');
+            return redirect(route('employer.dashboard'));
+        }catch(Throwable $e)
+        {
+            return dd($e->getMessage());
+            notify()->error('soemting went wrong');
+            return back();
         }
-        if(count(Storage::files('public/tempUploads/'.Auth::id().'/')) > 0)
-                $this->moveFilesToPrimaryFile($job->id);
-        notify()->success('Job Addeed Successfully');
-        return redirect(route('employer.dashboard'));
     }//end method
 
 
 
     function generatePosteNumber() {
-        $number = date('y').mt_rand(10000000, 99999999); // better than rand()
+        $number ='S'.mt_rand(1000, 9999); // better than rand()
 
         // call the same function if the barcode exists already
         if ($this->postNumberExists($number)) {
@@ -157,7 +159,8 @@ class JobController extends Controller
                     'nationality_id' => $subjob['nationality'],
                     'salary' => $subjob['salary'],
                     'quantity' => $subjob['quantity'],
-                    'description' => $subjob['description'],
+                    'age' => $subjob['age'],
+                    'gender' => $subjob['gender'],
                 ]
             );
         }
@@ -178,19 +181,23 @@ class JobController extends Controller
         ]);
     }
 
-    public function moveFilesToPrimaryFile($jobId)
+    public function uploadAttachments($files ,  $jobId)
     {
-        Storage::move('public/tempUploads/'.Auth::id().'/',  'public/uploads/attachments/jobs/'.$jobId.'/');
-        $files = Storage::files('public/uploads/attachments/jobs/'.$jobId.'/');
+        $path = 'public/uploads/attachments/jobs/'.$jobId.'/';
         foreach($files as $file)
-        Attachment::create(
-            [
-                'job_id' => $jobId,
-                'user_id'=> Auth::id(),
-                'name' =>  basename($file),
-                'type' => 'job descreption',
-            ]
-        );
+        {
+            $name = $file->getClientOriginalName();
+            $file->storeAs($path , $name);
+            Attachment::create(
+                [
+                    'job_id' => $jobId,
+                    'user_id'=> Auth::id(),
+                    'name' =>  basename($file),
+                    'type' => 'job descreption',
+                ]
+            );
+        }
+
     }
 
     public function uploadJobFile($file , $jobId)
