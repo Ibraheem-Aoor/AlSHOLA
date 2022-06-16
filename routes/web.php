@@ -39,6 +39,8 @@ use Illuminate\Support\Facades\DB;
 */
 
 
+
+
 Route::group(['middleware' => 'guestOnly'] , function()
 {
 
@@ -206,3 +208,15 @@ Route::get('/home' , function()
 
 
 
+
+  // Download job attachments
+  Route::get('job/{jobId}/{fileName}' , function($jobId , $fileName)
+  {
+      try{
+          return Storage::download('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
+      }Catch(Throwable $e)
+      {
+          notify()->error('someting went wrong');
+          return redirect()->back();
+      }
+  })->name('job.attachment.download');

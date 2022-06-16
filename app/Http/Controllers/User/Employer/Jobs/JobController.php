@@ -217,7 +217,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        $job =Job::with(['subJobs.title' ,'subJobs.nationality' , 'user:id,name'])
+        $job =Job::with(['subJobs.title' ,'subJobs.nationality' , 'user:id,name' , 'attachments'])
         ->with(['subJobs.title.sector' , 'subJobs.nationality'])
         ->findOrFail($id);
         if($job->user->id == Auth::id())

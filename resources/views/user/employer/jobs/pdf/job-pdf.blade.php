@@ -5,7 +5,7 @@
     <style>
         table {
             font-family: arial, sans-serif;
-            font-size: 10px;
+            font-size: 9px;
             border-collapse: collapse;
             width: 100%;
         }
@@ -17,9 +17,6 @@
             padding: 8px;
         }
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
 
         .parent {
             /* border: 1px solid black; */
@@ -37,116 +34,43 @@
 
         ul {
             list-style-type: disc;
-            font-size: 0.8rem;
+            font-size: 9px;
         }
 
         footer {
-            font-size: 0.8rem;
+            font-size: 9px;
 
+        }
+
+        .titles tr:nth-child(even) {
+            background-color: #00B074;
+        }
+
+        .titles th {
+            background-color: #d8e8a7;
+        }
+
+        .basicInfo tr td:nth-child(even) {
+            background-color: #00B074;
+        }
+
+        body {
+            font-size: 9px;
         }
     </style>
 </head>
 
 <body>
     <h3>Demand for Recruitment</h3>
-    <div class='parent'>
-        <div class='child'>
-            <p>
-                Clinet Name: {{ $job->user->name }}
-            </p>
-            <p>
-                Telephone: {{ $job->user->mobile }}
-            </p>
-            <p>
-                E-mail: {{ $job->user->email }}
-            </p>
-        </div>
-        <div class='child'>
-            <p> Al Shoala Recruitment Service W.L.L</p>
-            <p> Job No: {{ $job->post_number }}</p>
-            <p>&nbsp;&nbsp;&nbsp;</p>
-        </div>
+    <div>
+        <p style="background: #f7ff9c">
+            From: {{ $job->user->name }}
+        </p>
     </div>
     <br>
 
-    {{-- <table>
-        <tr>
-            <th>Demand SR</th>
-            <th>Category</th>
-            <th> Title</th>
-            <th> Quantity</th>
-            <th> Salary</th>
-            <th>currency</th>
-            <th>Date</th>
-        </tr>
-        <tr>
-            <td>{{ $job->post_number }}</td>
-            <td>{{ $job->subJobs->first()->title->sector->name }}</td>
-            <td>{{ $job->subJobs->first()->title->name }}</td>
-            <td>{{ $job->quantity }}</td>
-            <td>{{ $job->salary }}</td>
-            <td>{{ $job->currency }}</td>
-            <td>{{ $job->created_at }}</td>
-        </tr>
 
-        <tr>
-            <th>Status</th>
-            <th>Contract Period</th>
-            <th>working_hours</th>
-            <th>Working Days</th>
-            <th>Accommodation</th>
-            <th>accommodation_amount</th>
-        </tr>
-        <tr>
-            <td>{{ $job->status }}</td>
-            <td>{{ $job->subJobs()->first()->nationality->name }}</td>
-            <td>{{ $job->contract_period }}</td>
-            <td>{{ $job->working_hours }}</td>
-            <td>{{ $job->working_days }}</td>
-            <td>{{ $job->accommodation }}</td>
-            <td>{{ $job->accommodation_amount }}</td>
-        </tr>
-
-        <tr>
-            <th>medical</th>
-            <th>insurance</th>
-            <th>food</th>
-            <th>food_amount</th>
-            <th>Transport</th>
-            <th>off_day</th>
-            <th>indemnity_leave_and_overtime_salary</th>
-        </tr>
-        <tr>
-            <td>{{ $job->medical }}</td>
-            <td>{{ $job->insurance }}</td>
-            <td>{{ $job->food }}</td>
-            <td>{{ $job->transport }}</td>
-            <td>{{ $job->annual_leave }}</td>
-            <td>{{ $job->off_day }}</td>
-            <td>{{ $job->indemnity_leave_and_overtime_salary }}</td>
-        </tr>
-
-        <tr>
-            <th>age</th>
-            <th>age_limit</th>
-            <th>sex</th>
-            <th>requested_by</th>
-            <th>joining_ticket</th>
-            <th>return_ticket</th>
-            <th>covid_test</th>
-        </tr>
-        <tr>
-            <td>{{ $job->age }}</td>
-            <td>{{ $job->age_limit }}</td>
-            <td>{{ $job->sex }}</td>
-            <td>{{ $job->requested_by }}</td>
-            <td>{{ $job->joining_ticket }}</td>
-            <td>{{ $job->return_ticket }}</td>
-            <td>{{ $job->covid_test }}</td>
-        </tr>
-    </table> --}}
-
-    <table>
+    <table class="titles">
         <tr>
             <th>Title</th>
             <th>Salary</th>
@@ -169,15 +93,62 @@
 
     <br><br>
 
-    <table>
+    <table class="basicInfo" style="font-size: 9px;">
+
+        <tr>
+            <td>Working Days:</td>
+            <td>{{ $job->working_days }}</td>
+        </tr>
+
+        <tr>
+            <td>Off Day:</td>
+            <td>{{ $job->off_Day }}</td>
+        </tr>
+
+        <tr>
+            <td>Working Hours:</td>
+            <td>{{ $job->working_hours }}</td>
+        </tr>
+
+        <tr>
+            <td>Overtime: </td>
+            <td>As Per Labour Law</td>
+        </tr>
+
+        <tr>
+            <td>Food Allowance: </td>
+            <td>{{ $job->food }} @if ($job->food_amount)
+                    {{ ' | ' . $job->food_amount }}
+                @endif
+            </td>
+        </tr>
+
         <tr>
             <td>Contract Period: </td>
             <td>{{ $job->contract_period }}</td>
         </tr>
+
         <tr>
-            <td>Duty:</td>
-            <td>{{ $job->working_hours . ' | ' . $job->working_days . ' Days Per Week' }}</td>
+            <td>Joining Ticket: </td>
+            <td>{{ $job->joining_ticket }}</td>
         </tr>
+
+        <tr>
+            <td>Annual Leave: </td>
+            <td>{{ $job->annual_leave }}</td>
+        </tr>
+
+
+        <tr>
+            <td>Medical Insurance: </td>
+            <td>{{ $job->medical }}</td>
+        </tr>
+
+        <tr>
+            <td>Transport</td>
+            <td>{{ $job->transport }}</td>
+        </tr>
+
 
         <tr>
             <td>Accommodation: </td>
@@ -189,50 +160,41 @@
 
 
         <tr>
-            <td>Transport</td>
-            <td>{{ $job->transport }}</td>
-        </tr>
-        <tr>
-            <td>Insurance: </td>
-            <td>{{ $job->insurance }}</td>
-        </tr>
+            <td>
+                Country Entry requirements if any:
+            </td>
 
-        <tr>
-            <td>Medical: </td>
-            <td>{{ $job->medical }}</td>
-        </tr>
+            <td>
+                Employer is liable for any additional fees, imposed by official authorities inside employer country
+            </td>
 
-        <tr>
-            <td>Joining Ticket: </td>
-            <td>{{ $job->joining_ticket }}</td>
-        </tr>
-
-        <tr>
-            <td>Overtime: </td>
-            <td>{{ $job->indemnity_leave_and_overtime_salary }}}</td>
-        </tr>
-
-        <tr>
-            <td>Quarantine Expenses (Bahrain): </td>
-            <td>Company will pay</td>
-        </tr>
-
-        <tr>
-            <td>Swab Test (Covid-19 Bahrain): </td>
-            <td>Company will pay</td>
-        </tr>
-
-        <tr>
-            All Other Terms & Conditions are as per Bahrain Labour Law.
         </tr>
 
     </table>
+
+        {{-- @isset($job->attachments)
+            <div class="row rounded">
+                <table class="basicInfo table table-striped">
+                    @forelse($job->attachments as $attachment)
+                        <tr>
+                            <td>
+                                {{ $attachment->name }}
+                            </td>
+                            <td>
+                                <a
+                                    href="job/{{$job->id}}/{{$attachment->name}}">
+                                    <i class="fa fa-download"></i>&nbsp;&nbsp;{{ $attachment->created_at }}
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
+                </table>
+            </div>
+        @endisset --}}
 
     <h3>Supply Terms & Conditions:</h3>
-    <table>
-
-    </table>
-    <ul>
+    <ul style="font-size: 9px;">
         <li>Agent Confirm the Demand accepted or Rejected within 1 Day</li>
         <li>Agent Submit the candidate CV's within 5 Days from receiving the signature of the demand </li>
         <li> A 45 day total duration is expected for demand till complete.</li>
@@ -240,7 +202,7 @@
         </li>
     </ul>
 
-    <footer>
+    <footer style="font-size: 9px;">
         <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
         <div class="parent">
             <div class="child">

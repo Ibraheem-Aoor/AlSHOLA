@@ -1,5 +1,27 @@
 @extends('layouts.user.employer.master')
 @section('title', 'Dashboard | Add New Jobs')
+@push('css')
+    <style>
+        table {
+            font-size: 0.8rem;
+        }
+
+        .titles tr:nth-child(even) {
+            background-color: #00B074;
+            color: #ffff;
+        }
+
+        .titles th {
+            background-color: #d8e8a7;
+        }
+
+        .basicInfo tr td:nth-child(even) {
+            background-color: #00B074;
+            color: #ffff;
+
+        }
+    </style>
+@endpush
 @section('content')
     <div>
     @section('title', 'Dashboard | Create Job Post')
@@ -18,154 +40,145 @@
                     <div class="rounded h-100 p-4">
                         <div class="container-fluid pt-4 px-4">
                             <div class="row rounded">
-                                <table class="table table-striped">
-                                    <thead>
+                                <table class="table table-striped titles">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Salary</th>
+                                        <th>Quantity</th>
+                                        <th>Nationality</th>
+                                        <th>Descreption</th>
+                                    </tr>
+                                    @forelse ($job->subJobs as $subjob)
                                         <tr>
-                                            <th scope="col">DSR</th>
-                                            <th scope="col">Categeory</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Total QTY</th>
-                                            <th scope="col">contract_period</th>
-                                            <th scope="col">working_hours</th>
-                                            <th scope="col">working_days</th>
-                                            @isset($job->currency)
-                                                <th scope="col">Currency</th>
-                                            @endisset
+                                            <td>{{ $subjob->title->name }}</td>
+                                            <td>{{ $subjob->salary }}</td>
+                                            <td>{{ $subjob->quantity }}</td>
+                                            <td>{{ $subjob->nationality->name }}</td>
+                                            <td>{{ $subjob->description ?? 'as per attachment' }}
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $job->post_number }}</td>
-                                            <td>{{ $job->subJobs->first()->title->sector->name }}</td>
-                                            <td>{{ $job->subJobs->first()->title->name }}</td>
-                                            <td>{{ $job->qty() }}</td>
-                                            <td>{{ $job->contract_period }}</td>
-                                            <td>{{ $job->working_hours }}</td>
-                                            <td>{{ $job->working_days }}</td>
-                                            @isset($job->currency)
-                                                <td>{{ $job->currency }}</td>
-                                            @endisset
-                                        </tr>
-                                    </tbody>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">off_day</th>
-                                            <th scope="col">accommodation</th>
-                                            @isset($job->accommodation_amount)
-                                                <th scope="col">accommodation_amount</th>
-                                            @endisset
-                                            <th scope="col">Food</th>
-                                            @isset($job->food_amount)
-                                                <th scope="col">Food Amount</th>
-                                            @endisset
-                                            <th scope="col">working_hours</th>
-                                            <th scope="col">working_days</th>
-                                            <th scope="col">transport</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $job->off_day }}</td>
-                                            <td>{{ $job->accommodation }}</td>
-                                            @isset($job->accommodation_amount)
-                                                <td>{{ $job->accommodation_amount }}</td>
-                                            @endisset
-                                            <td>{{ $job->food }}</td>
-                                            @isset($job->food_amount)
-                                                <td>{{ $job->food_amount }}</td>
-                                            @endisset
-                                            <td>{{ $job->working_hours }}</td>
-                                            <td>{{ $job->working_days }}</td>
-                                            <td>{{ $job->transport }}</td>
-                                        </tr>
-                                    </tbody>
-
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">annual_leave</th>
-                                            <th scope="col">medical</th>
-                                            <th scope="col">joining_ticket</th>
-                                            <th scope="col">return_ticket</th>
-                                            <th scope="col">indemnity_leave_and_overtime_salary</th>
-                                            @isset($job->age)
-                                                <th scope="col">age</th>
-                                            @endisset
-                                            @isset($job->sex)
-                                                <th scope="col">sex</th>
-                                            @endisset
-                                            <th scope="col">insurance</th>
-                                            <th scope="col">gender_prefrences</th>
-                                            <th scope="col">age_limit</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $job->annual_leave }}</td>
-                                            <td>{{ $job->medical }}</td>
-                                            <td>{{ $job->joining_ticket }}</td>
-                                            <td>{{ $job->return_ticket }}</td>
-                                            <td>{{ $job->indemnity_leave_and_overtime_salary }}</td>
-                                            @isset($job->age)
-                                                <td>{{ $job->age }}</td>
-                                            @endisset
-                                            @isset($job->sex)
-                                                <td>{{ $job->sex }}</td>
-                                            @endisset
-                                            <td>{{ $job->insurance }}</td>
-                                            <td>{{ $job->gender_prefrences }}</td>
-                                            <td>{{ $job->age_limit }}</td>
-                                        </tr>
-                                    </tbody>
+                                    @empty
+                                    @endforelse
                                 </table>
+                            </div>
+                            <div class="row rounded">
+                                <table class="table table-striped basicInfo">
+
+                                    <tr>
+                                        <td>Working Days:</td>
+                                        <td>{{ $job->working_days }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Off Day:</td>
+                                        <td>{{ $job->off_Day }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Working Hours:</td>
+                                        <td>{{ $job->working_hours }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Overtime: </td>
+                                        <td>As Per Labour Law</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Food Allowance: </td>
+                                        <td>{{ $job->food }} @if ($job->food_amount)
+                                                {{ ' | ' . $job->food_amount }}
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Contract Period: </td>
+                                        <td>{{ $job->contract_period }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Joining Ticket: </td>
+                                        <td>{{ $job->joining_ticket }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Annual Leave: </td>
+                                        <td>{{ $job->annual_leave }}</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>Medical Insurance: </td>
+                                        <td>{{ $job->medical }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Transport</td>
+                                        <td>{{ $job->transport }}</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>Accommodation: </td>
+                                        <td>{{ $job->accommodation }} @if ($job->accommodation_amount)
+                                                {{ ' | ' . $job->accommodation_amount }}
+                                            @endif
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            Country Entry requirements if any:
+                                        </td>
+
+                                        <td>
+                                            Employer is liable for any additional fees, imposed by official authorities
+                                            inside employer country
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+
+
+                            @isset($job->description)
                                 <div class="col-sm-12">
                                     <div class="form-group">
-
-                                        <label for="">Other Terms</label>
-                                        <textarea class="form-control" readonly cols="30" style="height: 150px">{{ $job->other_terms }}</textarea>
+                                        <label for="">Desacription</label>
+                                        <textarea class="form-control" readonly cols="30" style="height: 150px">{{ $job->description }}</textarea>
                                     </div>
                                 </div>
-                            </div>
+                            @endisset
 
-                            {{-- SubJobs table --}}
-                            <div class="row rounded">
-                                <table class="table table-striped">
-                                    <table class="table table-striped">
-                                        <thead>
+                            @isset($job->attachments)
+                                <div class="row rounded">
+                                    <table class="basicInfo table table-striped">
+                                        @forelse($job->attachments as $attachment)
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Title</th>
-                                                <th scope="col">QTY</th>
-                                                <th scope="col">Salary</th>
-                                                <th scope="col">nationality</th>
-                                                <th scope="col">Descreption</th>
-                                                <th scope="col">Action</th>
+                                                <td>
+                                                    {{ $attachment->name }}
+                                                </td>
+                                                <td>
+                                                    <a
+                                                        href="{{ route('job.attachment.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}">
+                                                        <i
+                                                            class="fa fa-download"></i>&nbsp;&nbsp;{{ $attachment->created_at }}
+                                                    </a>
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $i = 1;
-                                            @endphp
-                                            @forelse($job->subJobs as $subJob)
-                                                <tr>
-                                                    <th scope="row">{{ $i++ }}</th>
-                                                    <td>{{ $subJob->title->name }}</td>
-                                                    <td>{{ $subJob->quantity }}</td>
-                                                    <td>{{ $subJob->salary }}</td>
-                                                    <td>{{ $subJob->nationality->name }}</td>
-                                                    <td>{{ Str::limit($subJob->description, 35, '...') }}</td>
-                                                    <td>
-                                                        <a data-toggle="modal" data-desc="{{$subJob->description}}"   href="#descmodal">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                            @endforelse
-                                        </tbody>
+                                        @empty
+                                        @endforelse
                                     </table>
-                            </div>
+                                </div>
+                            @endisset
                         </div>
                     </div>
+
+
+
 
                     <!-- Modal -->
                     <div class="modal fade" id="descmodal" tabindex="-1" role="dialog"

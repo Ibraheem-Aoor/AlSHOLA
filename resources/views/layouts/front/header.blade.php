@@ -21,9 +21,19 @@
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
         @else
             @php
-                $type = Str::lower(Auth::user()->type);
+                $type = Auth::user()->type;
+                $actualType = '';
+                switch ($type) {
+                    case 'Client':
+                        $actualType = 'employer';
+                        break;
+                    case 'Agent':
+                        $actualType = 'talented';
+                        break;
+                }
             @endphp
-            <a href="{{ $type . '/dashboard' }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Go
+            <a href="{{ route($actualType . '.dashboard') }}"
+                class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Go
                 To
                 DashBoard<i class="fa fa-arrow-right ms-3"></i></a>
             @endif

@@ -86,6 +86,7 @@
         }
 
     </style>
+    @stack('css')
     @livewireStyles
 </head>
 

@@ -209,7 +209,7 @@
 
                                 {{-- Start Deffaulkt Value Inputs --}}
                                 <div class="form-floating mb-3 col-sm-3">
-                                    <input type="text" class="form-control" value="contract_period" readonly>
+                                    <input type="text" class="form-control" value="2 Years" readonly>
                                     <label for="floatingPassword">&nbsp;&nbsp; Contract Period</label>
                                 </div>
 
@@ -219,8 +219,8 @@
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-3">
-                                    <input type="text" class="form-control" value="8 Hours" readonly>
-                                    <label for="floatingPassword">&nbsp;&nbsp; Working Hours</label>
+                                    <input type="text" class="form-control" value="As per Labour Laow" readonly>
+                                    <label for="floatingPassword">&nbsp;&nbsp; Insurance</label>
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-3">
@@ -243,9 +243,9 @@
                                     <label for="floatingPassword">&nbsp;&nbsp; Indemnity Leave And Overtime
                                         Salary</label>
                                 </div>
-                                
+
                                 <div class="form-floating mb-3 col-sm-12">
-                                    <textarea type="text" class="form-control"   style="height: 150px;" readonly>Employers are liable for measures or preventive measures imposed by official authorities inside their country</textarea>
+                                    <textarea type="text" class="form-control" style="height: 130px;" readonly>The employer is liable for any additional fees, imposed by official authorities inside employer country</textarea>
                                     <label for="floatingPassword">&nbsp;&nbsp; Indemnity Leave And Overtime
                                         Salary</label>
                                 </div>

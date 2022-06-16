@@ -50,7 +50,7 @@ return new class extends Migration
             $table->string('joining_ticket')->nullable(true);
             $table->string('return_ticket')->nullable(true);
             $table->string('indemnity_leave_and_overtime_salary')
-            ->default('As per Labour Law')
+            ->default('The employer is liable for any additional fees, imposed by official authorities inside employer country')
             ->nullable(true);
             $table->string('covid_test')
             ->default('Employers are liable for measures or preventive measures imposed by official authorities inside their country')

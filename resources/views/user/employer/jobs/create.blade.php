@@ -139,14 +139,52 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <input type="checkbox" name="agree" required>
-                                                I Agree To All Terms And Conditions.
+                                            <div class="modal-body" style="font-size:13px;">
+                                                <div class="container">
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 text-center">
+                                                            <p class="text-center">
+                                                                I hereby declare that the information provided is true
+                                                                and
+                                                                correct.
+                                                            </p>   <br>
+
+                                                            <p class="text-center">
+                                                                My submission of this application is subject to the fees
+                                                                of the
+                                                                recruitment process, and therefore I confirm my
+                                                                commitment to
+                                                                it.
+                                                            </p> <br>
+
+                                                            <p class="text-center">
+                                                                This demand is exclusive to Alshoala, and if it is given
+                                                                another
+                                                                agency, the employer must notify Alshoala.
+                                                            </p>  <br>
+
+                                                            <p class="text-center">
+                                                                I also understand that all terms and conditions of the
+                                                                Employment Services Agreement signed between Alshoala
+                                                                and the
+                                                                employer shall apply.
+                                                            </p> <br> <br> <br>
+                                                        </div>
+
+                                                        <br> <br> <br>
+                                                        <div class="col-sm-12  mb-2" style="font-size:1rem">
+                                                            <input type="checkbox" name="agree" required>
+                                                            I Agree To All Terms And Conditions.
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-info"
                                                     data-dismiss="modal">BACK</button>
-                                                <button type="submit" class="btn btn-primary">AGREE & SUBMIT</button>
+                                                <button type="submit" class="btn btn-primary">AGREE &
+                                                    SUBMIT</button>
                                             </div>
                                         </div>
                                     </div>

@@ -238,8 +238,13 @@
                                                 <td>
                                                     <div>
                                                         <label>Relegion:</label>
-                                                        <input required type="text" name="relegion" class="form-control"
-                                                            value="{{ old('relegion') }}">
+                                                        <select name="relegion" class="form-control">
+                                                            <option value="Muslim" @if(old('relegion')  == 'Muslim') selected @endif>Muslim</option>
+                                                            <option value="Christian"  @if(old('relegion')  == 'Christian') selected @endif>Christian</option>
+                                                            <option value="Hindu"  @if(old('relegion')  == 'Hindu') selected @endif>Hindu</option>
+                                                            <option value="Buddhist"  @if(old('relegion')  == 'Buddhist') selected @endif>Buddhist</option>
+                                                            <option value="other"  @if(old('relegion')  == 'other') selected @endif>other</option>
+                                                        </select>
                                                         @error('relegion')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
