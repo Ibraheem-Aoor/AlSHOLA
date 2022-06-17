@@ -10,18 +10,21 @@
                             <div class="card-body">
                                 <h4 class="box-title">All Registerd Agents</h4>
                                 <h5 class="text-primary">
-                                    DSR: {{$job->post_number}}
+                                    DSR: {{ $job->post_number }}
                                 </h5>
                                 <h5 class="text-primary">
-                                    Category: {{$job->subJobs->first()->title->sector->name}}
+                                    Category: {{ $job->subJobs->first()->title->sector->name }}
                                 </h5>
                                 <h5 class="text-primary">
-                                    Title: {{$job->subJobs->first()->title->name}}
+                                    Title: {{ $job->subJobs->first()->title->name }}
                                 </h5>
                                 <h5 class="text-primary">
-                                    Client: {{$job->user->name}}
+                                    Client: {{ $job->user->name }}
                                 </h5>
                             </div>
+
+
+
                             <div class="card-body--">
                                 <div class="container mb-2">
                                     <div class="row">
@@ -50,7 +53,7 @@
                                             @endphp
                                             @forelse($users as $user)
                                                 <tr>
-                                                    <td  class="serial">{{ $i++ }}</td>
+                                                    <td class="serial">{{ $i++ }}</td>
                                                     <td class="">
                                                         <a href="{{ route('admin.user.profile.show', $user->id) }}">
                                                             {{ $user->name }}
@@ -78,7 +81,7 @@
                                                         @endif
                                                     @else
                                                         <td class="">
-                                                            <a href="#"
+                                                            <a data-toggle="modal" href="#exampleModal_5"
                                                                 wire:click="sendJobToAgent('{{ $user->id }}')"
                                                                 class="btn btn-primary">SEND</a>
                                                         </td>
@@ -86,7 +89,8 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td class="" colspan="7" class="text-center alert alert-warning">No Records
+                                                    <td class="" colspan="7"
+                                                        class="text-center alert alert-warning">No Records
                                                         Yet!
                                                     </td>
                                                 </tr>
@@ -98,6 +102,103 @@
                             </div>
                         </div> <!-- /.card -->
                     </div> <!-- /.col-lg-8 -->
+
+
+                    <!--SHOW NOTE  Modal -->
+                    <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Set Up Demand Terms:</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{-- Language --}}
+                                    <div class="col-sm-12 mt-2">
+                                        <table class="table table-responsive" id="dynamicAddRemove">
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Service charge</th>
+                                                <th>Per</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <select id="allTiltes" name="demandTerms[0][title]" class="form-control">
+                                                        @foreach ($job->subJobs as $subJob)
+                                                            <option value="{{ $subJob->title->name }}" selected>
+                                                                {{$subJob->title->name}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" required
+                                                        name="demandTerms[0][service_charge]" placeholder="charge"
+                                                        class="form-control" />
+                                                </td>
+                                                <td><input type="text" required
+                                                        name="demandTerms[0][per]"
+                                                        placeholder="per" class="form-control" />
+                                                </td>
+                                                <td><button type="button" name="add" id="dynamic-edu-ar"
+                                                        class="btn btn-outline-primary btn-sm">Add</button></td>
+                                            </tr>
+                                        </table>
+                                        @error('addMoreEducationRecords')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @push('js')
+                        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                                                crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                                                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+                                                crossorigin="anonymous"></script>
+                        <script>
+                            $('#exampleModal_5').on('show.bs.modal', function(event) {
+                                var button = $(event.relatedTarget)
+                                var message = button.data('message')
+                                // var description = button.data('description')
+                                var modal = $(this)
+                                modal.find('.modal-body #message').val(message);
+                            });
+                        </script>
+
+                        <script>
+                            var i = 0;
+                            $("#dynamic-edu-ar").click(function() {
+                                var el = document.getElementsByTagName('select')[0];
+                                let newTitles = el;
+                                ++i;
+                                newTitles.setAttribute('name' , 'demandTerms[' + i+ '][title]')
+                                alert(newTitles.name);
+                                el.setAttribute('name' , 'demandTerms[' + i + '][title]');
+                                $("#dynamicAddRemove").append(
+                                    '<tr><td>'+el.outerHTML+'</td><td><input type="numeric" name="demandTerms[' +
+                                    i +
+                                    '][service_charge]" placeholder="service charge" required class="form-control" /></td><td><input type="text" name="demandTerms[' +
+                                    i +
+                                    '][per]" placeholder="Enter Country" required class="form-control" /></td></td><td><button type="button" class="btn btn-outline-danger btn-sm remove-input-field">Delete</button></td></tr>'
+                                );
+                            });
+                            $(document).on('click', '.remove-input-field', function() {
+                                $(this).parents('tr').remove();
+                            });
+                        </script>
+                    @endpush
+
 
                 </div>
             </div>

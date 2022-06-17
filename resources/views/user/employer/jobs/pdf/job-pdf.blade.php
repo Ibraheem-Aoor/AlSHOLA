@@ -42,7 +42,7 @@
 
         }
 
-        .titles tr:nth-child(even) {
+        .titles tr{
             background-color: #00B074;
         }
 
@@ -57,14 +57,29 @@
         body {
             font-size: 9px;
         }
+        .fromDiv
+        {
+            width: 100%;
+        }
+        .fromDiv p
+        {
+            display: inline-block;
+            margin:0px 30px;
+        }
     </style>
 </head>
 
 <body>
     <h3>Demand for Recruitment</h3>
-    <div>
-        <p style="background: #f7ff9c">
+    <div style="background: #f7ff9c" class="fromDiv">
+        <p>
             From: {{ $job->user->name }}
+        </p>
+        <p >
+            E-mail: {{ $job->user->email }}
+        </p>
+        <p >
+            Mobile: {{ $job->user->mobile }}
         </p>
     </div>
     <br>
@@ -72,19 +87,23 @@
 
     <table class="titles">
         <tr>
+            <th>Category</th>
             <th>Title</th>
-            <th>Salary</th>
             <th>Quantity</th>
+            <th>Salary</th>
+            <th>Gender</th>
+            <th>Age</th>
             <th>Nationality</th>
-            <th>Descreption</th>
         </tr>
         @forelse ($job->subJobs as $subjob)
             <tr>
+                <td>{{ $subjob->title->sector->name }}</td>
                 <td>{{ $subjob->title->name }}</td>
-                <td>{{ $subjob->salary }}</td>
                 <td>{{ $subjob->quantity }}</td>
+                <td>{{ $subjob->salary }}</td>
+                <td>{{ $subjob->gender }}</td>
+                <td>{{ $subjob->age }}</td>
                 <td>{{ $subjob->nationality->name }}</td>
-                <td>{{ $subjob->description ?? 'as per attachment' }}
                 </td>
             </tr>
         @empty
@@ -172,26 +191,6 @@
 
     </table>
 
-        {{-- @isset($job->attachments)
-            <div class="row rounded">
-                <table class="basicInfo table table-striped">
-                    @forelse($job->attachments as $attachment)
-                        <tr>
-                            <td>
-                                {{ $attachment->name }}
-                            </td>
-                            <td>
-                                <a
-                                    href="job/{{$job->id}}/{{$attachment->name}}">
-                                    <i class="fa fa-download"></i>&nbsp;&nbsp;{{ $attachment->created_at }}
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                    @endforelse
-                </table>
-            </div>
-        @endisset --}}
 
     <h3>Supply Terms & Conditions:</h3>
     <ul style="font-size: 9px;">
