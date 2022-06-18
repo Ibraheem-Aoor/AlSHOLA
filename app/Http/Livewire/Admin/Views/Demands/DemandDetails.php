@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Views\Demands;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -15,12 +16,15 @@ class DemandDetails extends Component
 
     public function mount($id)
     {
-        $this->job = Job::with(['subJobs'  , 'applications:id,user_id,full_name,contact_no' ,
+        $this->job = Job::with(['subJobs'  , 'applications.user' ,
                         'title.sector' , 'attachments' , 'notes' , 'user' , 'refuseTimes'])
                     ->with(['notes.user' , 'subJobs.title.sector'])
                     ->findOrFail($id);
         $this->unreadNotes = $this->job->notes->where('seen', false)->count();
+        // $allAgents = User::where('type' , 'Agent')->with('applications')->get();
+        // $t = $allAgents->applications->where('forwarder' , true)->get();
 
+        // return dd($t);
         // return dd($this->job->subJobs->first()->title->sector->name);
     }
 

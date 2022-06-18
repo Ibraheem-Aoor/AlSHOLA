@@ -291,7 +291,7 @@ use LaravelDaily\Invoices\Invoice;
 
 
 
-        Route::get('test' , [DemandHelper::class , 'testInvoice']);
+        Route::post('test' , [DemandHelper::class , 'testInvoice'])->name('invoice.test');
     });
 
 

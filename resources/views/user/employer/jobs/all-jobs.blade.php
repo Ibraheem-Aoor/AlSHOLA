@@ -98,6 +98,7 @@
                                                 data-number="{{ $job->post_number }}"
                                                 data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
                                             </a>
+                                            
 
                                             </ul>
                     </div>

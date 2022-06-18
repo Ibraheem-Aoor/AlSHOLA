@@ -38,14 +38,14 @@
                                             href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">General Information</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-descreption" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Other Terms</a>
+                                            href="#custom-nav-descreption" role="tab"
+                                            aria-controls="custom-nav-home" aria-selected="false">Other Terms</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-titles" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Avilable Positions</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Attachment</a>
+                                            href="#custom-nav-attachments" role="tab"
+                                            aria-controls="custom-nav-home" aria-selected="false">Attachment</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             aria-selected="false" href="#custom-nav-notes" role="tab"
                                             aria-controls="custom-nav-home">Notes<span class="text-danger">
@@ -58,8 +58,8 @@
                                             aria-controls="custom-nav-home">Refused
                                         </a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-applications" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Application</a>
+                                            href="#custom-nav-applications" role="tab"
+                                            aria-controls="custom-nav-home" aria-selected="false">Application</a>
                                         <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
                                             href="#custom-nav-actions" role="tab" aria-controls="custom-nav-contact"
                                             aria-selected="false">Actions</a>
@@ -757,6 +757,8 @@
                                             <a href="{{ route('admin.pdf.generate', $job->id) }}"
                                                 class="btn btn-outline-info col-sm-12">PRINT PDF</a>
 
+                                            <a title="issue" data-toggle="modal" href="#exampleModal_115"><i
+                                                    class="fa fa-money"></i> ISSUE INVOICE</a>
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
                                                 Change Status</a> --}}
@@ -785,7 +787,8 @@
                                     <div class="modal-body">
                                         <form wire:submit.prevent="sendjobNote()">
                                             <div class="form-group">
-                                                <label for="">Note<span class="text-danger">* </span> :</label>
+                                                <label for="">Note<span class="text-danger">* </span>
+                                                    :</label>
                                                 <textarea class="form-control" required wire:model.lazy="note"></textarea>
                                                 @error('note')
                                                     <span class="text-dagner">{{ $message }}</span>
@@ -816,7 +819,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <textarea name="" id="desc" readonly name="desc" cols="30" rows="10" class="form-control"></textarea>
+                                        <textarea name="" id="desc" readonly name="desc" cols="30" rows="10"
+                                            class="form-control"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -862,7 +866,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST" action="{{ route('admin.demand.chane-status', $job->id) }}">
+                                    <form method="POST"
+                                        action="{{ route('admin.demand.chane-status', $job->id) }}">
                                         @csrf
                                         <div class="modal-body">
                                             <select name="status" class="form-control">
@@ -889,6 +894,44 @@
                         </div>
 
 
+
+
+
+                        <!-- INVOICE Modal -->
+                        <div class="modal fade" id="exampleModal_115" tabindex="-1" wire:ignore
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="{{route('invoice.test')}}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <select class="form-control">
+                                                <option value="">-- select one --</option>
+                                                @foreach ($job->applications->pluck('user')->unique() as $user)
+                                                    <option value="{{ $application->user->id }}">
+                                                        {{ $application->user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            {{-- <input type="text" placeholder="VAT" class="form-control"
+                                                name="vat"> --}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                >ISSUE INVOICE</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -918,6 +961,16 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #desc').val(desc);
+            });
+        </script>
+
+        <script>
+            $('#exampleModal_115').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var job = button.data('job')
+                // var description = button.data('description')
+                var modal = $(this)
+                modal.find('.modal-body #job').val(job);
             });
         </script>
     @endpush

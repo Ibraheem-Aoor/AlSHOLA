@@ -80,7 +80,7 @@ class DemandHelper
 
 
 
-    public function testInvoice()
+    public function testInvoice(Request $request)
     {
         $client = new Party([
             'name'          => 'Roosevelt Lloyd',
@@ -101,6 +101,7 @@ class DemandHelper
         ]);
 
         $items = [
+
             (new InvoiceItem())
                 ->title('Service 1')
                 ->description('Your product or service description')
@@ -110,21 +111,6 @@ class DemandHelper
             (new InvoiceItem())->title('Service 2')->pricePerUnit(71.96)->quantity(2),
             (new InvoiceItem())->title('Service 3')->pricePerUnit(4.56),
             (new InvoiceItem())->title('Service 4')->pricePerUnit(87.51)->quantity(7)->discount(4)->units('kg'),
-            (new InvoiceItem())->title('Service 5')->pricePerUnit(71.09)->quantity(7)->discountByPercent(9),
-            (new InvoiceItem())->title('Service 6')->pricePerUnit(76.32)->quantity(9),
-            (new InvoiceItem())->title('Service 7')->pricePerUnit(58.18)->quantity(3)->discount(3),
-            (new InvoiceItem())->title('Service 8')->pricePerUnit(42.99)->quantity(4)->discountByPercent(3),
-            (new InvoiceItem())->title('Service 9')->pricePerUnit(33.24)->quantity(6)->units('m2'),
-            (new InvoiceItem())->title('Service 11')->pricePerUnit(97.45)->quantity(2),
-            (new InvoiceItem())->title('Service 12')->pricePerUnit(92.82),
-            (new InvoiceItem())->title('Service 13')->pricePerUnit(12.98),
-            (new InvoiceItem())->title('Service 14')->pricePerUnit(160)->units('hours'),
-            (new InvoiceItem())->title('Service 15')->pricePerUnit(62.21)->discountByPercent(5),
-            (new InvoiceItem())->title('Service 16')->pricePerUnit(2.80),
-            (new InvoiceItem())->title('Service 17')->pricePerUnit(56.21),
-            (new InvoiceItem())->title('Service 18')->pricePerUnit(66.81)->discountByPercent(8),
-            (new InvoiceItem())->title('Service 19')->pricePerUnit(76.37),
-            (new InvoiceItem())->title('Service 20')->pricePerUnit(55.80),
         ];
 
         $notes = [
@@ -134,13 +120,12 @@ class DemandHelper
         ];
         $notes = implode("<br>", $notes);
 
-        $invoice = Invoice::make('receipt')
-            ->series('BIG')
+        $invoice = Invoice::make('TAX INVOICE')
+            ->series($this->generateInvoiceNumber())
             // ability to include translated invoice status
             // in case it was paid
             ->status(__('invoices::invoice.paid'))
-            ->sequence(667)
-            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
+            ->serialNumberFormat('{SEQUENCE}-{SERIES}')
             ->seller($client)
             ->buyer($customer)
             ->date(now()->subWeeks(3))
@@ -154,7 +139,7 @@ class DemandHelper
             ->filename($client->name . ' ' . $customer->name)
             ->addItems($items)
             ->notes($notes)
-            ->logo(public_path('vendor/invoices/sample-logo.png'))
+            // ->logo(public_path('vendor/invoices/sample-logo.png'))
             // You can additionally save generated invoice to configured disk
             ->save('public');
 
@@ -164,6 +149,27 @@ class DemandHelper
         // And return invoice itself to browser or have a different view
         return $invoice->stream();
     }
+
+
+
+    function generateInvoiceNumber() {
+        $number = mt_rand(100, 999); // better than rand()
+
+        // call the same function if the barcode exists already
+        if ($this->applicationRefExists($number)) {
+            return $this->generateInvoiceNumber();
+        }
+
+        // otherwise, it's valid and can be used
+        return $number;
+    }
+
+    function applicationRefExists($number) {
+        // query the database and return a boolean
+        // for instance, it might look like this in Laravel
+        return Application::where('ref' , $number)->exists();
+    }//end method
+
 
 
 
