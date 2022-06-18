@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('height');
             $table->string('weihgt');
             $table->string('employer_photo')->nullable();
+            $table->string('nationality');
 
             //Language:
             $table->string('arabic_speak');

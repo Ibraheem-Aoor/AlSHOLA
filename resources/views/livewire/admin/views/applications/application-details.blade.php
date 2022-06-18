@@ -14,6 +14,7 @@
                         <div class="card-header">
                             <strong>Application Details</strong><small> status:
                                 {{ $application->mainStatus->name }}</small>
+
                         </div>
                         <div class="card-body">
                             <div class="custom-tab">
@@ -32,15 +33,15 @@
                                             href="#custom-nav-education" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Education</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Attachments</a>
+                                            href="#custom-nav-attachments" role="tab"
+                                            aria-controls="custom-nav-home" aria-selected="false">Attachments</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-notes" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Notes
                                             @if ($unreadNotes)
-                                            <span class="text-danger">
-                                                {{ '( ' . $unreadNotes . ' )' }}
-                                            </span>
+                                                <span class="text-danger">
+                                                    {{ '( ' . $unreadNotes . ' )' }}
+                                                </span>
                                             @endif
                                         </a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
@@ -81,7 +82,8 @@
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Address:</label>
+                                                    <label for="inputPassword3"
+                                                        class="col-form-label">Address:</label>
                                                     <input type="text" value="{{ $application->address }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
@@ -109,7 +111,8 @@
                                                     <label for="inputPassword3" class="col-form-label">Place Of
                                                         Birth:</label>
 
-                                                    <input type="text" value="{{ $application->place_of_birth }}"
+                                                    <input type="text"
+                                                        value="{{ $application->place_of_birth }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -126,7 +129,8 @@
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Relegion:</label>
+                                                    <label for="inputPassword3"
+                                                        class="col-form-label">Relegion:</label>
                                                     <input type="text" value="{{ $application->relegion }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
@@ -158,7 +162,8 @@
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Children:</label>
+                                                    <label for="inputPassword3"
+                                                        class="col-form-label">Children:</label>
                                                     <input type="text" value="{{ $application->children }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
@@ -260,7 +265,8 @@
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="5" class="alert alert-warning  bg-dark"
+                                                                <td colspan="5"
+                                                                    class="alert alert-warning  bg-dark"
                                                                     style="color:#fff">
                                                                     No Records Yet
                                                                 </td>
@@ -303,7 +309,8 @@
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="5" class="alert alert-warning  bg-dark"
+                                                                <td colspan="5"
+                                                                    class="alert alert-warning  bg-dark"
                                                                     style="color:#fff">
                                                                     No Records Yet
                                                                 </td>
@@ -348,7 +355,8 @@
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="7" class="alert alert-warning  bg-dark"
+                                                                <td colspan="7"
+                                                                    class="alert alert-warning  bg-dark"
                                                                     style="color:#fff">
                                                                     No Records Yet
                                                                 </td>
@@ -357,7 +365,9 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <td>Total Experince: {{\App\Models\Employer::where('application_id' , $application->id)->sum('duration')}} Year</td>
+                                                            <td>Total Experince:
+                                                                {{ \App\Models\Employer::where('application_id', $application->id)->sum('duration') }}
+                                                                Year</td>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -396,7 +406,8 @@
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="7" class="alert alert-warning  bg-dark"
+                                                                <td colspan="7"
+                                                                    class="alert alert-warning  bg-dark"
                                                                     style="color:#fff">
                                                                     No Records Yet
                                                                 </td>
@@ -444,11 +455,15 @@
                                                                             class="text-danger">
                                                                             <i class="fa fa-trash"></i>
                                                                         </a>
+                                                                        <a title="Forward To Client" class="text-info" wire:click="passAttachmentToEmployer('{{$attachment->id}}')">
+                                                                            <i class="fa fa-location-arrow"></i>
+                                                                        </a>
                                                                 </td>
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="7" class="alert alert-warning  bg-dark"
+                                                                <td colspan="7"
+                                                                    class="alert alert-warning  bg-dark"
                                                                     style="color:#fff">
                                                                     No Records Yet
                                                                 </td>
@@ -473,6 +488,9 @@
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>
+                                            <a class="btn btn-primary col-sm-12 mb-2"
+                                                href="{{route('admin.application.pdf.generate' , $application->id)}}">
+                                                PRINT PDF</a>
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
                                                 Change Status</a>
@@ -499,7 +517,8 @@
                                     <div class="modal-body">
                                         <form wire:submit.prevent="sendApplicationNote()">
                                             <div class="form-group">
-                                                <label for="">Note<span class="text-danger">* </span> :</label>
+                                                <label for="">Note<span class="text-danger">* </span>
+                                                    :</label>
                                                 <textarea class="form-control" required wire:model.lazy="note"></textarea>
                                                 @error('note')
                                                     <span class="text-dagner">{{ $message }}</span>
@@ -553,7 +572,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST" action="{{route('admin.application.change-status' , $application->id)}}">
+                                    <form method="POST"
+                                        action="{{ route('admin.application.change-status', $application->id) }}">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
@@ -573,8 +593,8 @@
                                             </div>
                                             <div class="form-gorup">
 
-                                                <select name="subStatus" class="form-control"
-                                                    id="subStatus" required>
+                                                <select name="subStatus" class="form-control" id="subStatus"
+                                                    required>
                                                     <option value="">--select one --</option>
 
                                                 </select>

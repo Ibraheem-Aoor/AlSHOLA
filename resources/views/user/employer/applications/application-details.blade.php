@@ -1,5 +1,35 @@
 @extends('layouts.user.employer.master')
 @section('title', 'Dashboard | Add New Jobs')
+@push('css')
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            font-size: 10px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+        .fromDiv {
+            width: 100%;
+        }
+
+        .fromDiv p {
+            display: inline-block;
+            margin: 0px 30px;
+        }
+    </style>
+@endpush
 @section('content')
     <div>
     @section('title', 'Dashboard | Create Job Post')
@@ -45,7 +75,110 @@
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                                        <div class="tab-pane fade" id="custom-nav-home"
+                                                        <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
+
+                                                            <h3>Application Information</h3>
+                                                            <div style="background: #f7ff9c" class="fromDiv">
+                                                                <p>
+                                                                    From: {{ $application->user->name }}
+                                                                </p>
+                                                                <p>
+                                                                    E-mail: {{ $application->user->email }}
+                                                                </p>
+                                                                <p>
+                                                                    Mobile: {{ $application->user->mobile }}
+                                                                </p>
+                                                            </div>
+                                                            <br>
+
+                                                            <div class="contiane">
+                                                                <div class="row">
+
+                                                                    <div>
+                                                                        Position Applied For:
+                                                                        {{ $application->title->name }}
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <img src="{{ asset('storage/uploads/applications/'.$application->id.'/attachments'.'/'.$application->attachments->where('type'  , 'Personal Photo')->first()->name) }}"
+                                                                            width="200" height="200"
+                                                                            style="margin-left:70%;border: 1px solid black;">
+                                                                    </div>
+
+                                                                    <div class="col-sm-">
+                                                                        <table style="margin-top: -150px"
+                                                                            class="table table-responsive">
+                                                                            <tr>
+                                                                                <td>Ref: {{ $application->ref }}</td>
+                                                                                <td>Date:
+                                                                                    {{ $application->job->created_at }}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr></tr>
+
+                                                                            <tr>
+                                                                                <td>Full_Name:
+                                                                                    {{ $application->full_name }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Address:
+                                                                                    {{ $application->address }}</td>
+                                                                                <th>Contact_No:
+                                                                                    {{ $application->contact_no }}
+                                                                                </th>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Passport_No:
+                                                                                    {{ $application->passport_no }}
+                                                                                </td>
+                                                                                <th>Nationality:
+                                                                                    {{ $application->Nationlaity ?? 'UNKOWN' }}
+                                                                                </th>
+                                                                            </tr>
+                                                                            <tr id="tt">
+                                                                                <td>Place Issued:
+                                                                                    {{ $application->place_issued }}
+                                                                                </td>
+                                                                                <td>Place Issued:
+                                                                                    {{ $application->place_of_birth }}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Date Issued:
+                                                                                    {{ $application->date_issued }}
+                                                                                </td>
+                                                                                <td>Date Issued:
+                                                                                    {{ $application->date_of_birth }}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Expiry Dte:
+                                                                                    {{ $application->expiry_issued }}
+                                                                                </td>
+                                                                                <td>Age: {{ $application->age }}</td>
+                                                                                <td>Relegion:
+                                                                                    {{ $application->relegion }}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>sex: {{ $application->sex }}</td>
+                                                                                <td>status:
+                                                                                    {{ $application->status }}</td>
+                                                                                <td>children:
+                                                                                    {{ $application->children }}</td>
+                                                                                <td>height:
+                                                                                    {{ $application->height }}</td>
+                                                                                <td>weight:
+                                                                                    {{ $application->weight }}</td>
+                                                                            </tr>
+
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        {{-- <div class="tab-pane fade" id="custom-nav-home"
                                                             role="tabpanel">
                                                             <div class="container">
                                                                 <div class="row">
@@ -224,7 +357,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
 
                                                         {{-- Languages Levels --}}
                                                         <div class="tab-pane fade" id="custom-nav-lang" role="tabpanel"
@@ -245,7 +378,8 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                                <th scope="row">{{ 1 }}
+                                                                                <th scope="row">
+                                                                                    {{ 1 }}
                                                                                 </th>
                                                                                 <td>Arabic</td>
                                                                                 <td>{{ $application->arabic_speak }}
@@ -258,7 +392,8 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <th scope="row">{{ 2 }}
+                                                                                <th scope="row">
+                                                                                    {{ 2 }}
                                                                                 </th>
                                                                                 <td>English</td>
                                                                                 <td>{{ $application->english_speak }}
@@ -271,7 +406,8 @@
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <th scope="row">{{ 3 }}
+                                                                                <th scope="row">
+                                                                                    {{ 3 }}
                                                                                 </th>
                                                                                 <td>Hindi</td>
                                                                                 <td>{{ $application->hindi_speak }}
@@ -303,7 +439,8 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th scope="col">#</th>
-                                                                                <th scope="col">Employer Name</th>
+                                                                                <th scope="col">Employer Name
+                                                                                </th>
                                                                                 <th scope="col">Duration</th>
                                                                                 <th scope="col">Country</th>
                                                                                 <th scope="col">Designation</th>
@@ -315,12 +452,15 @@
                                                                             @endphp
                                                                             @forelse ($application->employers as $emplyoer)
                                                                                 <tr>
-                                                                                    <th scope="row">{{ $i++ }}
+                                                                                    <th scope="row">
+                                                                                        {{ $i++ }}
                                                                                     </th>
-                                                                                    <td>{{ $emplyoer->name }}</td>
+                                                                                    <td>{{ $emplyoer->name }}
+                                                                                    </td>
                                                                                     <td>{{ $emplyoer->duration }}
                                                                                     </td>
-                                                                                    <td>{{ $emplyoer->country }}</td>
+                                                                                    <td>{{ $emplyoer->country }}
+                                                                                    </td>
                                                                                     <td>{{ $emplyoer->designation }}
                                                                                     </td>
                                                                                 </tr>
@@ -355,7 +495,8 @@
                                                                                 <th scope="col">#</th>
                                                                                 <th scope="col">Degree</th>
                                                                                 <th scope="col">Year</th>
-                                                                                <th scope="col">Educational Body</th>
+                                                                                <th scope="col">Educational Body
+                                                                                </th>
                                                                                 <th scope="col">Country</th>
                                                                             </tr>
                                                                         </thead>
@@ -365,7 +506,8 @@
                                                                             @endphp
                                                                             @forelse ($application->educations as $edu)
                                                                                 <tr>
-                                                                                    <th scope="row">{{ $i++ }}
+                                                                                    <th scope="row">
+                                                                                        {{ $i++ }}
                                                                                     </th>
                                                                                     <td>{{ $edu->degree }}</td>
                                                                                     <td>{{ $edu->year }}</td>
@@ -419,7 +561,8 @@
                                                         <div class="modal-body">
                                                             <form wire:submit.prevent="sendApplicationNote()">
                                                                 <div class="form-group">
-                                                                    <label for="">Note<span class="text-danger">*
+                                                                    <label for="">Note<span
+                                                                            class="text-danger">*
                                                                         </span> :</label>
                                                                     <textarea class="form-control" required wire:model.lazy="note"></textarea>
                                                                     @error('note')
@@ -447,7 +590,8 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Message:
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Message:
                                                             </h5>
                                                             <button type="button" class="close"
                                                                 data-dismiss="modal" aria-label="Close">
@@ -483,31 +627,42 @@
                                                                 <select wire:model="status" class="form-control">
                                                                     <option value="waiting for medical">waiting for
                                                                         medical</option>
-                                                                    <option value="waiting for visa">waiting for visa
+                                                                    <option value="waiting for visa">waiting for
+                                                                        visa
                                                                     </option>
-                                                                    <option value="CV Submitted">CV Submitted</option>
-                                                                    <option value="For Selection">For Selection</option>
-                                                                    <option value="waiting for interview">waiting for
+                                                                    <option value="CV Submitted">CV Submitted
+                                                                    </option>
+                                                                    <option value="For Selection">For Selection
+                                                                    </option>
+                                                                    <option value="waiting for interview">waiting
+                                                                        for
                                                                         interview</option>
                                                                     <option value="cancelled">cancelled</option>
                                                                     <option value="active">active</option>
                                                                     <option value="hold">hold</option>
                                                                     <option value="completed">completed</option>
-                                                                    <option value="Arrival Scheduled">Arrival Scheduled
+                                                                    <option value="Arrival Scheduled">Arrival
+                                                                        Scheduled
                                                                     </option>
-                                                                    <option value="LMRA Process">LMRA Process</option>
-                                                                    <option value="Ready for Payment">Ready for Payment
+                                                                    <option value="LMRA Process">LMRA Process
+                                                                    </option>
+                                                                    <option value="Ready for Payment">Ready for
+                                                                        Payment
                                                                     </option>
                                                                     <option value="Embassy">Embassy</option>
-                                                                    <option value="Emigrate Process">Emigrate Process
+                                                                    <option value="Emigrate Process">Emigrate
+                                                                        Process
                                                                     </option>
-                                                                    <option value="To Be Arrived">To Be Arrived</option>
+                                                                    <option value="To Be Arrived">To Be Arrived
+                                                                    </option>
                                                                     <option value="Arrived">Arrived</option>
-                                                                    <option value="Arrival Scheduled">Arrival Scheduled
+                                                                    <option value="Arrival Scheduled">Arrival
+                                                                        Scheduled
                                                                     </option>
                                                                     <option value="For Exited">For Exited</option>
                                                                     <option value="Exited">Exited</option>
-                                                                    <option value="Worker Refuse to Work">Worker Refuse
+                                                                    <option value="Worker Refuse to Work">Worker
+                                                                        Refuse
                                                                         to Work</option>
                                                                     <option value="UNFIT">UNFIT</option>
                                                                     <option value="Runaway">Runaway</option>

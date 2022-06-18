@@ -79,13 +79,13 @@ Route::group(['middleware' => ['auth']], function()
 
     Route::post('/job/attachment/upload' , [GeneralJobController::class , 'uploadJobAttachment'] )->name('job.attachment.upload');
     Route::post('/application/attach' , [ApplicationController::class , 'uploadApplicationAttachment'])->name('application.file.upload');
-    Route::get('/application/{id}/attachment/{fileName}/download/{userId}' , function($id , $fileName , $userId)
+    Route::get('/application/{id}/attachment/{fileName}/download' , function($id , $fileName )
     {
         $application  = Application::with('job:id')->findOrFail($id);
         $jobId = $application->job->id;
         try{
             // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
-            return Storage::download('public/uploads/applications/jobs/'.$jobId.'/'.$userId.'/attachments'.'/'.$fileName);
+            return Storage::download('public/uploads/applications/'.$application->id.'/attachments'.'/'.$fileName);
         }Catch(Throwable $e)
         {
             return dd($e->getMessage());
@@ -212,7 +212,8 @@ Route::get('/home' , function()
 
 
 
-  // Download job attachments
+  // Download job
+
   Route::get('job/{jobId}/{fileName}' , function($jobId , $fileName)
   {
       try{

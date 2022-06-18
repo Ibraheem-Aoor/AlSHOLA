@@ -229,8 +229,9 @@ class ApplicationController extends Controller
     //SHOW ALL THE ATTACHMENTS OF A SPECIFIC EMPLOYER
     public function applicationAttachments($id)
     {
+
         $attachments = ApplicationAttachment::where([['application_id' , $id ,] , ['is_forwarded_talent' , true]])
-        ->with(['user:id,name,email' , 'application.job:id,post_number,title'])
+        ->with(['user:id,name,email' , 'application.job:id,post_number'])
         ->simplePaginate(15);
         return view('livewire.user.employee.views.applications.application-attachments' , compact('attachments'));
     }//end method

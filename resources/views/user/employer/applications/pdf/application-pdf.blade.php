@@ -17,17 +17,26 @@
             padding: 8px;
         }
 
-        tr:nth-child(even) {
+        th {
             background-color: #dddddd;
         }
+
+        .fromDiv {
+            width: 100%;
+        }
+
+        .fromDiv p {
+            display: inline-block;
+            margin: 0px 30px;
+        }
+
     </style>
 </head>
 
 <body>
 
-    <h3>Demand Information</h3>
 
-    <table>
+    {{-- <table>
         <tr>
             <th>Demand SR</th>
             <th>Demand Category</th>
@@ -42,60 +51,67 @@
             <td>{{ $application->job->status }}</td>
             <td>{{ $application->job->created_at }}</td>
         </tr>
-    </table>
-
+    </table> --}}
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}"   width="5%" >
     <h3>Application Information</h3>
+    <div style="background: #f7ff9c" class="fromDiv">
+        <p>
+            From: {{ $application->user->name }}
+        </p>
+        <p>
+            E-mail: {{ $application->user->email }}
+        </p>
+        <p>
+            Mobile: {{ $application->user->mobile }}
+        </p>
+    </div>
+    <br>
+    <img src="{{asset('storage/uploads/applications/2/attachments/ali-jassem.png')}}" width="200" height="200"
+        style="margin-left:70%;border: 1px solid black;">
+    <table style="margin-top: -150px">
+        <tr>
+            <td>Ref: {{ $application->ref }}</td>
+            <td>Date: {{ $application->job->created_at }}</td>
+        </tr>
+        <tr>
+            {{ $application->title->name }}
+        </tr>
+        <tr>
+            <td>Full_Name: {{ $application->full_name }}</td>
+        </tr>
+        <tr>
+            <td>Address: {{ $application->address }}</td>
+            <td>Contact_No: {{ $application->contact_no }}</td>
+        </tr>
+        <tr>
+            <td>Passport_No: {{ $application->passport_no }}</td>
+            <td>Nationality: {{ $application->Nationlaity ?? 'UNKOWN' }}</td>
+        </tr>
+        <tr id="tt">
+            <td>Place Issued: {{ $application->place_issued }}</td>
+            <td>Place Issued: {{ $application->place_of_birth }}</td>
+        </tr>
+        <tr>
+            <td>Date Issued: {{ $application->date_issued }}</td>
+            <td>Date Issued: {{ $application->date_of_birth }}</td>
+        </tr>
+        <tr>
+            <td>Expiry Dte: {{ $application->expiry_issued }}</td>
+            <td>Age: {{ $application->age }}</td>
+            <td>Relegion: {{ $application->relegion }}</td>
+        </tr>
+        <tr>
+            <td>sex: {{ $application->sex }}</td>
+            <td>status: {{ $application->status }}</td>
+            <td>children: {{ $application->children }}</td>
+            <td>height: {{ $application->height }}</td>
+            <td>weight: {{ $application->weight }}</td>
+        </tr>
 
-    <table>
-        <tr>
-            <th>Full_Name:</th>
-            <th>Ref</th>
-            <th>Address</th>
-            <th>Passport_No</th>
-            <th>Contact_No</th>
-            <th>Age</th>
-        </tr>
-        <tr>
-            <td>{{ $application->full_name }}</td>
-            <td>{{ $application->ref }}</td>
-            <td>{{ $application->address }}</td>
-            <td>{{ $application->passport_no }}</td>
-            <td>{{ $application->contact_no }}</td>
-            <td>{{ $application->age }}</td>
-        </tr>
-        <tr>
-            <th>Relegion</th>
-            <th>Date_Issued</th>
-            <th>Place_Issued</th>
-            <th>Place_Of_Birth</th>
-            <th>Date_Of_Birth</th>
-            <th>Expiry_Issued</th>
-        </tr>
-        <tr>
-            <td>{{ $application->relegion }}</td>
-            <td>{{ $application->date_issued }}</td>
-            <td>{{ $application->place_issued }}</td>
-            <td>{{ $application->place_of_birth }}</td>
-            <td>{{ $application->date_of_birth }}</td>
-            <td>{{ $application->expiry_issued }}</td>
-        </tr>
-        <tr>
-            <th>Date</th>
-            <th>sex</th>
-            <th>Children</th>
-            <th>height</th>
-            <th>weight</th>
-            <th>Min_Salary</th>
-        </tr>
-        <tr>
-            <td>{{ $application->date }}</td>
-            <td>{{ $application->sex }}</td>
-            <td>{{ $application->height }}</td>
-            <td>{{ $application->weight }}</td>
-            <td>{{ $application->sex }}</td>
-            <td>{{ $application->min_salary }}</td>
-        </tr>
     </table>
+
+
+
 
     <h3>Languages</h3>
     <table>
@@ -134,7 +150,7 @@
     <h3>Education</h3>
     <table>
         <tr>
-            <th>Degree/th>
+            <th>Degree</th>
             <th>Edu-Body</th>
             <th>Country</th>
             <th>Year</th>
@@ -150,7 +166,7 @@
     </table>
 
 
-    <h3>Education</h3>
+    <h3>Working Experince In <span style="color: red">GCC/ABROAD</span></h3>
     <table>
         <tr>
             <th>Employer</th>
@@ -165,6 +181,23 @@
                 <td>{{ $emplyoer->country }}</td>
                 <td>{{ $emplyoer->designation }}</td>
             @endforeach
+        </tr>
+    </table>
+    <br>
+    <table class="tableNoBorder">
+        <tr>
+            <td>FOR OFFICAL ONLY</td>
+            <td>Minimum Expected Salary: {{ $application->min_salary }}</td>
+        </tr>
+        <tr>
+            Applicant Interviewed By: {{ $application->applicant_interviewd_by }}
+        </tr>
+        <tr>
+            Recommendations: {{ $application->recommendations }}
+        </tr>
+        <tr>
+            <td>Signature: </td>
+            <td>Date: </td>
         </tr>
     </table>
 </body>

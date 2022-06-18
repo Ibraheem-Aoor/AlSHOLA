@@ -42,7 +42,7 @@ class PdfController extends Controller
     {
         // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
         // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
-        $application =  Application::with(['job:id,post_number' , 'employers' , 'educations' , 'title.sector'])->with('job.title.sector')->findOrFail($id);
+        $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector'])->with('job.title.sector')->findOrFail($id);
         $data = [
             'application' => $application,
         ];

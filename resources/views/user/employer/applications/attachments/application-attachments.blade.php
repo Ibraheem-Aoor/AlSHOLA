@@ -16,7 +16,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Candidate_Name</th>
+                                    <th scope="col">SR</th>
+                                    <th scope="col">BY</th>
                                     <th scope="col">file</th>
                                     <th scope="col">date</th>
                                     <th scope="col">Actions</th>
@@ -29,35 +30,27 @@
                                 @forelse ($attachments as $file)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $file->application->job->post_number }}</td>
                                         <td>{{ $file->user->name }}</td>
                                         <td>{{ $file->name }}</td>
                                         <td>{{ $file->created_at }}</td>
                                         <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    Actions
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a href="{{ route('application.attachment.download' , ['id'=>$file->application_id , 'fileName' => $file->name , 'userId' => $file->user->id]) }}"
-                                                            class="dropdown-item badge bg-primary"
-                                                            >
-                                                            <i class="fa fa-download"></i>&nbsp;
-                                                            Download</a>
-                                                    </li>
-                                                    <li><a href="#exampleModal_5" class="dropdown-item badge bg-primary"
-                                                            data-id="{{ $file->application->id }}" data-toggle="modal"
-                                                            href="#">Send Note</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
+
+                                            <a title="Download"
+                                                href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                <i class="fa fa-download"></i>&nbsp;
+                                                </a>
+                                            </li>
+                                            <a title="Send Note" href="#exampleModal_5" data-id="{{ $file->application->id }}"
+                                                data-toggle="modal" href="#"><i class="fa fa-edit"></i></a>
+
+                                            {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
                                                             data-id="{{ $file->application->id }}"
                                                             data-title="{{ $file->application->job->title }}"
                                                             data-number="{{ $file->application->job->post_number }}"
                                                             href="#exampleModal_6">Accept</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    </li> --}}
+
 
                                         </td>
                                     </tr>
@@ -115,8 +108,8 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal_6" tabindex="-1" wire:ignore
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal_6" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -135,7 +128,7 @@
                                 </div>
                                 <div class="form-group col-sm-6 mb-3">
                                     <label for="" style="font-weight: 600">Job Number: </label>
-                                    &nbsp; &nbsp; <input type="text" class="form-control" id="number" readonly >
+                                    &nbsp; &nbsp; <input type="text" class="form-control" id="number" readonly>
                                 </div>
                                 <div class="form-group col-sm-6 text-center" style="width: 100%">
                                     <button type="submit" class="btn btn-outline-primary"><i class="fa fa-submit"></i>

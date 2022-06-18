@@ -9,6 +9,7 @@ use App\Models\ApplicationAttachment;
 use App\Models\ApplicationNote;
 use App\Models\Employer;
 use App\Models\Job;
+use App\Models\User;
 use App\Models\VisaInoformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,8 +42,11 @@ class EmployerApplicationsController extends Controller
      */
     public function getAllApplications($id)
     {
+        $job = Job::findOrFail($id);
+        $user = User::findOrFail(Auth::id());
         $applications  = Application::whereJobId($id)
                         ->where('forwarded' , true)
+                        ->withCount('attachments')
                         ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])
                         ->with('job.subJobs')
                         ->simplePaginate(15);
@@ -126,8 +130,9 @@ class EmployerApplicationsController extends Controller
     // application attachments
     public function applicationAttachments($id)
     {
+
         $attachments = ApplicationAttachment::where([['application_id' , $id ,] , ['is_forwarded_employer' , true]])
-        ->with(['user:id,name,email' , 'application.job:id,post_number,title'])
+        ->with(['user:id,name,email' , 'application.job:id,post_number'])
         ->simplePaginate(15);
         return view('user.employer.applications.attachments.application-attachments' , compact('attachments'));
     }//end method
@@ -179,7 +184,7 @@ class EmployerApplicationsController extends Controller
 
     public function getDetails($id)
     {
-        $application = Application::with(['job:id,post_number' , 'employers' ,'title.sector' , 'educations'])->with('job.subJobs.title.sector')->findOrFail($id);
+        $application = Application::with(['job:id,post_number' , 'employers' , 'user'  , 'title.sector', 'attachments' ,'educations'])->with('job.subJobs.title.sector')->findOrFail($id);
         $totalExperince = Employer::whereApplicationId($application->id)->sum('duration');
         return view('user.employer.applications.application-details' , compact('application'  , 'totalExperince'));
     }//end

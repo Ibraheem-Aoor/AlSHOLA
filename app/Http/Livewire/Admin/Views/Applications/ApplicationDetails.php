@@ -100,6 +100,20 @@ class ApplicationDetails extends Component
         $note->save();
     }
 
+
+    /**
+     * Forward Application Attachment to Emplyoer
+     */
+    public function passAttachmentToEmployer($id)
+    {
+        $attachment = $this->application->attachments->where('id' , $id)->first();
+        $attachment->is_forwarded_employer = true;
+        $attachment->save();
+        notify()->success('Forwarded Successfully');
+        return redirect(route($this->currentRoute , $this->application));
+    }
+
+
     public function render()
     {
         $mainStatuses = ApplicationMainStatus::all();

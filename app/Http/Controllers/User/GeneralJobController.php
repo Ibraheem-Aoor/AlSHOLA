@@ -23,7 +23,7 @@ class GeneralJobController extends Controller
         if($request->has('id') && $request->hasFile('attachments'))
         {
             $job = Job::findOrFail($request->id);
-            $this->addAttachementsToJob($request->attachments  , $job->id);
+            $this->addAttachementsToJob($request->attachments  , $job->id , '');
             notify()->success('File Uploaded Successfully');
             return redirect()->back();
         }
