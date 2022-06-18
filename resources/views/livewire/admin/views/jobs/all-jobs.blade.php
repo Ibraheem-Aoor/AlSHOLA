@@ -19,7 +19,6 @@
                                                 <th class="serial">#</th>
                                                 <th>DM SR </th>
                                                 <th>Company </th>
-                                                <th>Total Qty</th>
                                                 <th>Supply</th>
                                                 <th>Balance</th>
                                                 <th>Client_Name</th>
@@ -46,11 +45,9 @@
                                                     <td>
                                                         {{ $job->qty() }}
                                                     </td>
+
                                                     <td>
-                                                        {{ 'UNKOWN' }}
-                                                    </td>
-                                                    <td>
-                                                        {{ 'UNKOWN' }}
+                                                        {{  ($job->qty() - $job->applications->where('forwarded' , true)->count()) }}
                                                     </td>
                                                     <td>{{ $job->user->name }}</td>
                                                     <td>

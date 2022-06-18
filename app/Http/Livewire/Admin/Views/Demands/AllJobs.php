@@ -17,7 +17,7 @@ class AllJobs extends Component
 
     public function render()
     {
-        $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'user'])
+        $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'user' , 'applications'])
         ->with('subJobs.title.sector')
         ->orderByDesc('id')->simplePaginate();
         return view('livewire.admin.views.jobs.all-jobs' , ['jobs' => $jobs])->extends('layouts.admin.master')->section('content');

@@ -64,6 +64,9 @@ use App\Models\BusinessSetting;
 use App\Models\Title;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use LaravelDaily\Invoices\Classes\InvoiceItem;
+use LaravelDaily\Invoices\Classes\Party;
+use LaravelDaily\Invoices\Invoice;
 
 //prefix => admin
 
@@ -285,6 +288,10 @@ use Illuminate\Support\Facades\DB;
             }
         })->name('admin.user.attachment.delete');
 
+
+
+
+        Route::get('test' , [DemandHelper::class , 'testInvoice']);
     });
 
 
