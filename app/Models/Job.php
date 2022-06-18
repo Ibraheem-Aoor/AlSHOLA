@@ -103,4 +103,10 @@ class Job extends Model
         return $this->hasMany(RefusedJob::class , 'job_id');
     }
 
+
+    public function terms()
+    {
+        return $this->hasMany(DemandTerms::class , 'job_id');
+    }
+
 }

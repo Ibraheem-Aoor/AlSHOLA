@@ -81,9 +81,8 @@
                                                         @endif
                                                     @else
                                                         <td class="">
-                                                            <a data-toggle="modal" href="#exampleModal_5"
-                                                                wire:click="sendJobToAgent('{{ $user->id }}')"
-                                                                class="btn btn-primary">SEND</a>
+                                                            <a data-toggle="modal" data-agent="{{ $user->id }}"
+                                                                href="#exampleModal_5" class="btn btn-primary">SEND</a>
                                                         </td>
                                                     @endif
                                                 </tr>
@@ -105,9 +104,9 @@
 
 
                     <!--SHOW NOTE  Modal -->
-                    <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="exampleModal_5"
+                        style="height: 600px;" aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore>
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Set Up Demand Terms:</h5>
@@ -115,45 +114,62 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    {{-- Language --}}
-                                    <div class="col-sm-12 mt-2">
-                                        <table class="table table-responsive" id="dynamicAddRemove">
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Service charge</th>
-                                                <th>Per</th>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <select id="allTiltes" name="demandTerms[0][title]" class="form-control">
-                                                        @foreach ($job->subJobs as $subJob)
-                                                            <option value="{{ $subJob->title->name }}" selected>
-                                                                {{$subJob->title->name}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" required
-                                                        name="demandTerms[0][service_charge]" placeholder="charge"
-                                                        class="form-control" />
-                                                </td>
-                                                <td><input type="text" required
-                                                        name="demandTerms[0][per]"
-                                                        placeholder="per" class="form-control" />
-                                                </td>
-                                                <td><button type="button" name="add" id="dynamic-edu-ar"
-                                                        class="btn btn-outline-primary btn-sm">Add</button></td>
-                                            </tr>
-                                        </table>
-                                        @error('addMoreEducationRecords')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                <form action="{{ route('admin.demand.set-terms', $job->id) }}" method="POST">
+                                    @csrf
+                                    <div class="modal-body ">
+                                        <input type="text" id="agent" name="agent" hidden>
+                                        {{-- titles --}}
+                                        <div class="col-sm-12 mt-2">
+                                            <table class="table table-responsive" id="dynamicAddRemove">
+                                                <tr>
+                                                    <th colspan="2">Title</th>
+                                                    <th colspan="2">Service charge</th>
+                                                    <th>Per</th>
+                                                    <th>
+                                                        <select name="currency" id="" class="form-control"
+                                                            required>
+                                                            <option value=""> -- choose currency -- </option>
+                                                            @foreach ($currencies as $currency)
+                                                                <option value="{{ $currency->key }}">
+                                                                    {{ $currency->value }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <select id="allTiltes" name="demandTerms[0][title]"
+                                                            class="form-control" required>
+                                                            @foreach ($job->subJobs as $subJob)
+                                                                <option value="{{ $subJob->title->name }}" selected>
+                                                                    {{ $subJob->title->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td colspan="2"><input type="text" required
+                                                            name="demandTerms[0][service_charge]" placeholder="charge"
+                                                            class="form-control" required />
+                                                    </td>
+                                                    <td><input type="text" required name="demandTerms[0][per]"
+                                                            placeholder="per" class="form-control" />
+                                                    </td>
+                                                    <td><button type="button" name="add" id="dynamic-edu-ar"
+                                                            class="btn btn-outline-primary btn-sm">Add</button></td>
+                                                </tr>
+                                            </table>
+                                            @error('dynamicAddRemove')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">SEND
+                                            DEMAND</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -169,32 +185,38 @@
                         <script>
                             $('#exampleModal_5').on('show.bs.modal', function(event) {
                                 var button = $(event.relatedTarget)
-                                var message = button.data('message')
+                                var agent = button.data('agent')
                                 // var description = button.data('description')
                                 var modal = $(this)
-                                modal.find('.modal-body #message').val(message);
+                                modal.find('.modal-body #agent').val(agent);
                             });
                         </script>
 
                         <script>
                             var i = 0;
                             $("#dynamic-edu-ar").click(function() {
-                                var el = document.getElementsByTagName('select')[0];
+                                var el = document.getElementsByTagName('select')[1];
                                 let newTitles = el;
                                 ++i;
-                                newTitles.setAttribute('name' , 'demandTerms[' + i+ '][title]')
-                                alert(newTitles.name);
-                                el.setAttribute('name' , 'demandTerms[' + i + '][title]');
+                                newTitles.setAttribute('name', 'demandTerms[' + i + '][title]')
                                 $("#dynamicAddRemove").append(
-                                    '<tr><td>'+el.outerHTML+'</td><td><input type="numeric" name="demandTerms[' +
+                                    '<tr><td colspan="2">' + newTitles.outerHTML +
+                                    '</td><td><input type="numeric" name="demandTerms[' +
                                     i +
-                                    '][service_charge]" placeholder="service charge" required class="form-control" /></td><td><input type="text" name="demandTerms[' +
+                                    '][service_charge]" placeholder="service charge" required class="form-control" /></td><td colspan="2"><input type="text" name="demandTerms[' +
                                     i +
-                                    '][per]" placeholder="Enter Country" required class="form-control" /></td></td><td><button type="button" class="btn btn-outline-danger btn-sm remove-input-field">Delete</button></td></tr>'
+                                    '][per]" placeholder="per" required class="form-control" /></td></td><td><button type="button" class="btn btn-outline-danger btn-sm remove-input-field">Delete</button></td></tr>'
                                 );
+                                el.setAttribute('name', 'demandTerms[' + 0 + '][title]');
                             });
                             $(document).on('click', '.remove-input-field', function() {
                                 $(this).parents('tr').remove();
+                            });
+                        </script>
+
+                        <script>
+                            $('#submitForm').on('click', function() {
+
                             });
                         </script>
                     @endpush

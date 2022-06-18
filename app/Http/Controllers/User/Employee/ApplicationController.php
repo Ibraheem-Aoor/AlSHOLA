@@ -32,7 +32,8 @@ class ApplicationController extends Controller
     public function showApplicationForm($id)
     {
         $job = Job::with('subJobs.title.sector')->findOrFail($id);
-        $titles = Title::whereSectorId($job->subJobs->first()->title->sector->id)->get();
+        $titlesArray = $job->subJobs->pluck('title');
+        $titles = Title::whereIn('sector_id'  , $job->subJobs->pluck('title.sector.id'))->get();
         $nationalities = DB::table('nationalities')->get();
         $ref = $this->generateApplicationRef();
         return view('livewire.user.employee.views.applications.application-form' ,
@@ -42,7 +43,7 @@ class ApplicationController extends Controller
 
 
     function generateApplicationRef() {
-        $number = date('y').mt_rand(10000000, 99999999); // better than rand()
+        $number = mt_rand(1000, 9999); // better than rand()
 
         // call the same function if the barcode exists already
         if ($this->applicationRefExists($number)) {

@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('demand_terms', function (Blueprint $table) {
             $table->id();
-            $table->stirng('title');
-            $table->stirng('serivce_charge');
-            $table->stirng('per');
+            $table->string('title');
+            $table->string('serivce_charge');
+            $table->string('per');
+            $table->string('currency');
             $table->foreignId('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->constrained()->onDelete('cascade'); //because temrms differs from agent to another.
             $table->timestamps();

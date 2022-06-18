@@ -58,6 +58,7 @@ use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
 use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
 use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
+use App\Http\Helpers\DemandHelper;
 use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
 use App\Models\BusinessSetting;
 use App\Models\Title;
@@ -65,6 +66,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 //prefix => admin
+
+    Route::redirect('/' , '/admin/login');
 
     Route::get('login' , function()
         {
@@ -92,6 +95,7 @@ use Illuminate\Support\Facades\DB;
         Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
         Route::get('/job/pdf/{id}' ,  [PdfController::class , 'generateJobPDF'])->name('admin.pdf.generate');
         Route::post('/job/{id}/change-status' , [AdminDemandController::class , 'changeDemandStatus'])->name('admin.demand.chane-status');
+        Route::post('/demand/{id}/set-terms'  , [DemandHelper::class , 'setDemandTermsAndSendToAgent'])->name('admin.demand.set-terms');
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');
@@ -101,7 +105,7 @@ use Illuminate\Support\Facades\DB;
         Route::get('nationality/new' , AddNewNationality::class)->name('admin.nationality.new');
         Route::get('title/new' , AddNewTitle::class)->name('admin.title.new');
         Route::get('title/all' , AllTitles::class)->name('admin.title.all');
-    
+
         Route::get('currency/all' , AllCurrencies::class)->name('admin.currency.all');
         Route::get('currency/new' , AddCurrency::class)->name('admin.currency.new');
 

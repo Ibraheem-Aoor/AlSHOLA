@@ -42,7 +42,7 @@
 
         }
 
-        .titles tr{
+        .titles tr {
             background-color: #00B074;
         }
 
@@ -56,15 +56,20 @@
 
         body {
             font-size: 9px;
+            height: 5vh;
         }
-        .fromDiv
-        {
+
+        .fromDiv {
             width: 100%;
         }
-        .fromDiv p
-        {
+
+        .fromDiv p {
             display: inline-block;
-            margin:0px 30px;
+            margin: 0px 30px;
+        }
+        tr
+        {
+            line-height: 1;
         }
     </style>
 </head>
@@ -75,10 +80,10 @@
         <p>
             From: {{ $job->user->name }}
         </p>
-        <p >
+        <p>
             E-mail: {{ $job->user->email }}
         </p>
-        <p >
+        <p>
             Mobile: {{ $job->user->mobile }}
         </p>
     </div>
@@ -192,28 +197,46 @@
     </table>
 
 
-    <h3>Supply Terms & Conditions:</h3>
-    <ul style="font-size: 9px;">
-        <li>Agent Confirm the Demand accepted or Rejected within 1 Day</li>
-        <li>Agent Submit the candidate CV's within 5 Days from receiving the signature of the demand </li>
-        <li> A 45 day total duration is expected for demand till complete.</li>
-        <li>Alshoala Recruitment Services W. L. L. will pay to Agent the Service Charge after candidate arrival date.
-        </li>
-    </ul>
+    <div style="border:1px solid black; margin-top:5px; padding:5px;">
+        <h3>Supply Terms & Conditions:</h3>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Service_Charge</th>
+            </tr>
+            @foreach ($job->terms->where('user_id' , Auth::id()) as $term)
+                <tr>
+                    <td>{{ $term->title }}</td>
+                    <td>{{ $term->serivce_charge . ' (' . $term->currency . ' )' }}</td>
+                    <td>{{ 'Per ' . $term->per }}</td>
+                </tr>
+            @endforeach
+        </table>
 
-    <footer style="font-size: 9px;">
-        <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
-        <div class="parent">
-            <div class="child">
-                <p> Abdulla Ali Al Shoala</p>
-                <p>General Manager</p>
+        <ul style="font-size: 9px;">
+            <li>Agent Confirm the Demand accepted or Rejected within 1 Day</li>
+            <li>Agent Submit the candidate CV's within 5 Days from receiving the signature of the demand </li>
+            <li> A 45 day total duration is expected for demand till complete.</li>
+            <li>Alshoala Recruitment Services W. L. L. will pay to Agent the Service Charge after candidate arrival
+                date.
+            </li>
+        </ul>
+
+        <footer style="font-size: 9px;">
+            <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
+            <div class="parent">
+                <div class="child">
+                    <p> Abdulla Ali Al Shoala</p>
+                    <p>General Manager</p>
+                </div>
+                <div class="child">
+                    <p>Agent Accept the demand terms</p>
+                    <p>Signature & Stamp</p>
+                </div>
             </div>
-            <div class="child">
-                <p>Agent Accept the demand terms</p>
-                <p>Signature & Stamp</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
 </body>
 
 </html>

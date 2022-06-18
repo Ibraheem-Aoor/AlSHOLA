@@ -81,6 +81,11 @@
                                                                     $badgeColor = 'pending';
                                                                 @endphp
                                                             @break
+
+                                                            @default
+                                                                @php
+                                                                    $badgeColor = 'warning';
+                                                                @endphp
                                                         @endswitch
 
                                                         <span
@@ -107,7 +112,8 @@
                                                 </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="10" class="text-center alert alert-warning">No Records
+                                                        <td colspan="10" class="text-center alert alert-warning">No
+                                                            Records
                                                             Yet!
                                                         </td>
                                                     </tr>

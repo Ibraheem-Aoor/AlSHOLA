@@ -269,7 +269,7 @@
 
                                                     <tr>
                                                         <td>Off Day:</td>
-                                                        <td>{{ $job->off_Day }}</td>
+                                                        <td>{{ $job->off_day }}</td>
                                                     </tr>
 
                                                     <tr>

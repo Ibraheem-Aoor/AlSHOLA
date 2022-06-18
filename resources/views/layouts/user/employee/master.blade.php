@@ -38,6 +38,7 @@
         }
 
     </style>
+    @stack('css')
     @notifyCss
 </head>
 

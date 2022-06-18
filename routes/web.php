@@ -71,6 +71,9 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+    Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('job.pdf.generate');
+
+
     // profile route regard the type of the user
     Route::resource('profile', ProfileController::class);
 
@@ -148,7 +151,6 @@ Route::group(['middleware' => ['auth']], function()
 
 
         Route::get('/sector/{id}' , [JobController::class , 'setSelectedSector']);
-        Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('employer.pdf.generate');
         Route::get('/aplication/pdf/{id}' ,  [PDFPdfController::class , 'generateApplicationPDF'])->name('employer.application.pdf.generate');
 
         Route::group(['controller' => EmployerJobsController::class ], function()

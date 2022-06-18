@@ -42,15 +42,12 @@
                             style="width: 80px; height: 80px;"> --}}
                             <div class="text-start ps-4">
                                 {{-- <h3 class="mb-3">{{ $job->SubJobs->first()->title->name }}</h3> --}}
-                                <span class="text-truncate me-0"><i class="fa fa-sun text-primary me-2"></i>
-                                    {{ $job->status }}
-                                </span>
-                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>
-                                    {{ $job->salary }}
-                                </span>
-                                <span class="text-truncate me-0"><i class="fa fa-clock text-primary me-2"></i>
-                                    {{ $job->contract_period }}
-                                </span>
+                                @forelse ($errors->all() as $error)
+                                    <span class="text-truncate me-0 text-danger">
+                                        {{ $error }}
+                                    </span>
+                                    @empty
+                                @endforelse
                             </div>
                         </div>
 
@@ -239,11 +236,21 @@
                                                     <div>
                                                         <label>Relegion:</label>
                                                         <select name="relegion" class="form-control">
-                                                            <option value="Muslim" @if(old('relegion')  == 'Muslim') selected @endif>Muslim</option>
-                                                            <option value="Christian"  @if(old('relegion')  == 'Christian') selected @endif>Christian</option>
-                                                            <option value="Hindu"  @if(old('relegion')  == 'Hindu') selected @endif>Hindu</option>
-                                                            <option value="Buddhist"  @if(old('relegion')  == 'Buddhist') selected @endif>Buddhist</option>
-                                                            <option value="other"  @if(old('relegion')  == 'other') selected @endif>other</option>
+                                                            <option value="Muslim"
+                                                                @if (old('relegion') == 'Muslim') selected @endif>Muslim
+                                                            </option>
+                                                            <option value="Christian"
+                                                                @if (old('relegion') == 'Christian') selected @endif>Christian
+                                                            </option>
+                                                            <option value="Hindu"
+                                                                @if (old('relegion') == 'Hindu') selected @endif>Hindu
+                                                            </option>
+                                                            <option value="Buddhist"
+                                                                @if (old('relegion') == 'Buddhist') selected @endif>Buddhist
+                                                            </option>
+                                                            <option value="other"
+                                                                @if (old('relegion') == 'other') selected @endif>other
+                                                            </option>
                                                         </select>
                                                         @error('relegion')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -274,8 +281,8 @@
                                                 <td>
                                                     <div>
                                                         <label>children:</label>
-                                                        <input required type="text" name="children" class="form-control"
-                                                            value="{{ old('children') }}">
+                                                        <input required type="text" name="children"
+                                                            class="form-control" value="{{ old('children') }}">
                                                         @error('children')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -285,8 +292,8 @@
                                                 <td>
                                                     <div>
                                                         <label>Height:</label>
-                                                        <input required type="text" name="height" class="form-control"
-                                                            value="{{ old('height') }}">
+                                                        <input required type="text" name="height"
+                                                            class="form-control" value="{{ old('height') }}">
                                                         @error('height')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -302,8 +309,8 @@
                                                 <td>
                                                     <div>
                                                         <label>weight:</label>
-                                                        <input required type="text" name="weihgt" class="form-control"
-                                                            value="{{ old('weihgt') }}">
+                                                        <input required type="text" name="weihgt"
+                                                            class="form-control" value="{{ old('weihgt') }}">
                                                         @error('weihgt')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -323,7 +330,8 @@
                                                 <td>
                                                     <div>
                                                         <label>Employer Photo:</label>
-                                                        <input type="file" class="form-control" name="photo" id="photo">
+                                                        <input type="file" class="form-control" name="photo"
+                                                            id="photo">
                                                         @error('weihgt')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -578,14 +586,16 @@
                                                             name="addMoreEducationRecords[0][degree]"
                                                             placeholder="Enter Degree" class="form-control" />
                                                     </td>
-                                                    <td><input type="text" required name="addMoreEducationRecords[0][year]"
+                                                    <td><input type="text" required
+                                                            name="addMoreEducationRecords[0][year]"
                                                             placeholder="Enter Year" class="form-control" />
                                                     </td>
                                                     <td><input type="text" required
                                                             name="addMoreEducationRecords[0][country]"
                                                             placeholder="Enter education body" class="form-control" />
                                                     </td>
-                                                    <td><input type="text" required name="addMoreEducationRecords[0][from]"
+                                                    <td><input type="text" required
+                                                            name="addMoreEducationRecords[0][from]"
                                                             placeholder="Enter country" class="form-control" />
                                                     </td>
                                                     <td><button type="button" name="add" id="dynamic-edu-ar"
@@ -614,10 +624,12 @@
                                                     <td><input type="text" required name="addMoreInputFields[0][name]"
                                                             placeholder="Enter Employer" class="form-control" />
                                                     </td>
-                                                    <td><input type="text" required name="addMoreInputFields[0][duration]"
+                                                    <td><input type="text" required
+                                                            name="addMoreInputFields[0][duration]"
                                                             placeholder="Enter Duration" class="form-control" />
                                                     </td>
-                                                    <td><input type="text" required name="addMoreInputFields[0][country]"
+                                                    <td><input type="text" required
+                                                            name="addMoreInputFields[0][country]"
                                                             placeholder="Enter Country" class="form-control" />
                                                     </td>
                                                     <td><input type="text" required
@@ -664,19 +676,23 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Passport Attachment: </label>
-                                            <input type="file" class="form-control" name="files['passport']" id="">
+                                            <input type="file" class="form-control" name="files['passport']"
+                                                id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Medical Attachment: </label>
-                                            <input type="file" class="form-control" name="files['medical']" id="">
+                                            <input type="file" class="form-control" name="files['medical']"
+                                                id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Experince Attachment:</label>
-                                            <input type="file" class="form-control" name="files['experince']" id="">
+                                            <input type="file" class="form-control" name="files['experince']"
+                                                id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Eucation Attachment:</label>
-                                            <input type="file" class="form-control" name="files['education']" id="">
+                                            <input type="file" class="form-control" name="files['education']"
+                                                id="">
                                         </div>
                                         <div>
                                             @error('files')

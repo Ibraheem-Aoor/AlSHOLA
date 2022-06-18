@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Views\Jobs;
 
+use App\Models\Currency;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -15,20 +16,7 @@ class SendJobToAgent extends Component
         $this->job = Job::with(['subJobs.title' , 'user:id,name'])->findOrFail($id);
     }
 
-      //This method send the job post to talent using many to many relationship
-    public function sendJobToAgent($id)
-    {
-        $agent = User::findOrFail($id);
-        if($agent->hasJob($this->job))
-            {
-                session()->flash('warning' , 'The Job is Already Sent to the Agent');
-            }
-        DB::table('job_user')->insert([
-            'user_id' => $agent->id,
-            'job_id' => $this->job->id,
-        ]);
-        session()->flash('success' , 'Job Has been Send Successfully');
-    }
+
 
 
 
@@ -57,9 +45,11 @@ class SendJobToAgent extends Component
     public function render()
     {
         $users = $this->getUsers();
+        $currencies = Currency::all();
         return view('livewire.admin.views.jobs.send-job-to-agent'
         , [
             'users' => $users,
+            'currencies' => $currencies,
         ]
         )->extends('layouts.admin.master')->section('content');
     }
