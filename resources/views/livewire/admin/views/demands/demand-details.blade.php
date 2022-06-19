@@ -755,9 +755,9 @@
                                                 class="btn btn-secondary col-sm-12 mb-2">Change Demand Status</a>
 
                                             <a href="{{ route('admin.pdf.generate', $job->id) }}"
-                                                class="btn btn-outline-info col-sm-12">PRINT PDF</a>
+                                                class="btn btn-outline-info col-sm-12 mb-2">PRINT PDF</a>
 
-                                            <a title="issue" data-toggle="modal" href="#exampleModal_115"><i
+                                            <a title="issue" data-toggle="modal" href="#exampleModal_115" class="btn btn-info col-sm-12"><i
                                                     class="fa fa-money"></i> ISSUE INVOICE</a>
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">

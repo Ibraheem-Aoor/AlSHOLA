@@ -30,10 +30,27 @@
                 width: 50% !important;
             }
 
+
+
+            select,
+            input {
+                font-size: 11px !important;
+            }
+
+            input .form-control {
+                height: calc(2.8rem + 2px) !important;
+            }
+
+            select {
+                padding-bottom: 4px !important;
+            }
+
             .basicInfo input {
                 background: transparent;
                 /* height: 20px; */
                 width: 100% !important;
+                font-size:10px !important;
+                padding: 2px !important;
             }
         </style>
     @endpush
@@ -57,7 +74,7 @@
                                     <select name="sector" class="form-control" required>
                                         <option>--- select one ---</option>
                                         @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->id }}"
+                                            <option value="{{ $sector->name }}"
                                                 @if (old('sector') == $sector) selected @endif>{{ $sector->name }}
                                             </option>
                                         @endforeach
@@ -132,8 +149,8 @@
                                         <option value="">--- select one ---</option>
                                         @foreach ($nationalities as $nationalitiesChunk)
                                             @foreach ($nationalitiesChunk as $nationality)
-                                                <option value="{{ $nationality->id }}"
-                                                    @if (old('nationality') == $nationality->id) {{ 'selected' }} @endif>
+                                                <option value="{{ $nationality->name }}"
+                                                    @if (old('nationality') == $nationality->name) {{ 'selected' }} @endif>
                                                     {{ $nationality->name }}
                                                 </option>
                                             @endforeach
@@ -217,22 +234,46 @@
                                             <tr>
                                                 <td>Overtime: </td>
                                                 <td>
-                                                    <input type="text" class="form-control" value="As Per Labour Law"
-                                                        readonly>
+                                                    <input type="text" class="form-control"
+                                                        value="As Per Labour Law" readonly>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td>Food Allowance: </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="food"
+                                                    <select required class="form-control" name="food" required
                                                         value="{{ old('food') }}">
+                                                        <option value="">-- select one --</option>
+                                                        <option value="Provided By Employer"
+                                                            @if (old('food') == 'Provided By Employer') selected @endif>Provided
+                                                            By Employer
+                                                        </option>
+                                                        <option value="Not Provided"
+                                                            @if (old('food') == 'Not Provided') selected @endif>
+                                                            Not Provided</option>
+                                                        <option value="Duty Meals"
+                                                            @if (old('food') == 'Duty Meals') selected @endif>
+                                                            Duty Meals</option>
+                                                        <option value="Allowance"
+                                                            @if (old('food') == 'Allowance') selected @endif>
+                                                            Allowance</option>
+                                                    </select>
+                                                </td>
+
+                                            </tr>
+                                            <tr id="acc-food-div">
+                                                <td>Food Amount:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="food_amount"
+                                                        value="{{ old('food_amount') }}">
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td>Contract Period: </td>
-                                                <td><input type="text" class="form-control" value="2 Years" readonly>
+                                                <td><input type="text" class="form-control" value="2 Years"
+                                                        readonly>
                                                 </td>
                                             </tr>
 
@@ -242,19 +283,32 @@
                                                         value="{{ old('joining_ticket') }}">
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>Return Ticket: </td>
+                                                <td><input type="text" class="form-control" name="return_ticket"
+                                                        value="{{ old('return_ticket') }}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Indemnity Leave And Overtime Salary: </td>
+                                                <td><input type="text" class="form-control"
+                                                        name="indemnity_leave_and_overtime_salary"
+                                                        value="{{ old('indemnity_leave_and_overtime_salary') }}">
+                                                </td>
+                                            </tr>
 
                                             <tr>
                                                 <td>Annual Leave: </td>
-                                                <td><input type="text" class="form-control" value="As per Labour Law"
-                                                        readonly>
+                                                <td><input type="text" class="form-control"
+                                                        value="As per Labour Law" readonly>
                                                 </td>
                                             </tr>
 
 
                                             <tr>
                                                 <td>Medical Insurance: </td>
-                                                <td><input type="text" class="form-control" value="As per Labour Law"
-                                                        readonly>
+                                                <td><input type="text" class="form-control"
+                                                        value="As per Labour Law" readonly>
                                                 </td>
                                             </tr>
 
@@ -266,11 +320,35 @@
                                             </tr>
 
 
-                                            <tr>
+                                            <tr >
                                                 <td>Accommodation: </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="accommodation"
-                                                        value="{{ old('accommodation') }}" required>
+                                                    <select required class="form-control" name="accommodation"
+                                                        required value="{{ old('accommodation') }}">
+                                                        <option value="">-- select one --</option>
+                                                        <option value="Provided By Employer"
+                                                            @if (old('accommodation') == 'Provided By Employer') selected @endif>Provided
+                                                            By Employer
+                                                        </option>
+                                                        <option value="Not Provided"
+                                                            @if (old('accommodation') == 'Not Provided') selected @endif>
+                                                            Not Provided</option>
+                                                        <option value="Duty Meals"
+                                                            @if (old('accommodation') == 'Duty Meals') selected @endif>
+                                                            Duty Meals</option>
+                                                        <option value="Allowance"
+                                                            @if (old('accommodation') == 'Allowance') selected @endif>
+                                                            Allowance</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr id="acc-div">
+                                                <td>Accommodation Amount: </td>
+                                                <td>
+                                                    <input type="text" class="form-control"
+                                                        name="accommodation_amount"
+                                                        value="{{ old('accommodation_amount') }}" required>
                                                 </td>
                                             </tr>
 
@@ -365,7 +443,7 @@
                                                         </div>
 
                                                         <br> <br> <br>
-                                                        <div class="col-sm-12  mb-2" style="font-size:1rem">
+                                                        <div class="col-sm-12  mb-2" style="font-size:1rem" style="height: calc(3.5rem + 2px);">
                                                             <input type="checkbox" name="agree" required>
                                                             I Agree To All Terms And Conditions.
                                                         </div>
@@ -406,7 +484,8 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <textarea name="" id="desc" readonly name="desc" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="" id="desc" readonly name="desc" cols="30" rows="10"
+                                    class="form-control"></textarea>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -499,17 +578,17 @@
                 traditional: true,
             });
             $('select[name="sector"]').on('change', function() {
-                var SectorId = $(this).val();
-                if (SectorId) {
+                var sectorName = $(this).val();
+                if (sectorName) {
                     $.ajax({
-                        url: "{{ URL::to('employer/sector') }}/" + SectorId,
+                        url: "{{ URL::to('employer/sector') }}/" + sectorName,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
                             $('select[name="title"]').empty();
                             $.each(data, function(key, value) { //for each loop
                                 $('select[name="title"]').append('<option value="' +
-                                    value.id + '">' + value.name + '</option>');
+                                    value.name + '">' + value.name + '</option>');
                             });
                         }
                     });

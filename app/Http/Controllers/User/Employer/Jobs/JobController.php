@@ -118,7 +118,7 @@ class JobController extends Controller
             return redirect(route('employer.dashboard'));
         }catch(Throwable $e)
         {
-            return dd($e->getMessage());
+            return dd($e);
             notify()->error('soemting went wrong');
             return back();
         }
@@ -155,10 +155,10 @@ class JobController extends Controller
             SubJob::create(
                 [
                     'job_id' => $mainJobId,
-                    'title_id' => $subjob['title'],
-                    'nationality_id' => $subjob['nationality'],
+                    'title_id' => Title::where('name' , $subjob['title'])->first()->id,
+                    'nationality_id' => Nationality::where('name' , $subjob['nationality'])->first()->id,
                     'salary' => $subjob['salary'],
-                    'quantity' => $subjob['quantity'],
+                    'quantity' =>  $subjob['quantity'],
                     'age' => $subjob['age'],
                     'gender' => $subjob['gender'],
                 ]
@@ -326,7 +326,7 @@ class JobController extends Controller
     //ajax request
     public function setSelectedSector($id)
     {
-        $sector = Sector::with('titles')->findOrFail($id);
+        $sector = Sector::with('titles')->where('name' , $id)->first();
         $titles = $sector->titles;
         return $titles;
     }
