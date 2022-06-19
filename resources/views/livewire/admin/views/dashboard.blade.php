@@ -3,6 +3,9 @@
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
+            @php
+                $data = Cache::get('adminData');
+            @endphp
             <!-- Widgets  -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -14,7 +17,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text">$<span class="count">23569</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalDemands']}}</span></div>
                                         <div class="stat-heading">Existing Client Demand</div>
                                     </div>
                                 </div>
@@ -32,7 +35,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">3435</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalCandidates']}}</span></div>
                                         <div class="stat-heading">Existing Candidates</div>
                                     </div>
                                 </div>
@@ -52,7 +55,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalApplicationsWFSelection']}}</span></div>
                                         <div class="stat-heading">Waiting for Offer</div>
                                     </div>
                                 </div>
@@ -70,7 +73,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalApplicationsWFMedical']}}</span></div>
                                         <div class="stat-heading">Waiting for Medical</div>
                                     </div>
                                 </div>
@@ -88,7 +91,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalApplicationsWFArrival']}}</span></div>
                                         <div class="stat-heading">Waiting for Arrival</div>
                                     </div>
                                 </div>
@@ -106,7 +109,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalApplicationsWFvisa']}}</span></div>
                                         <div class="stat-heading">Waiting for Visa</div>
                                     </div>
                                 </div>
@@ -124,7 +127,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalApplicationsWFInterview']}}</span></div>
                                         <div class="stat-heading">Waiting for Interview</div>
                                     </div>
                                 </div>
@@ -142,7 +145,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2986</span></div>
+                                        <div class="stat-text"><span class="count">{{$data['totalClients']}}</span></div>
                                         <div class="stat-heading">Clients</div>
                                     </div>
                                 </div>
@@ -170,37 +173,40 @@
                                 <div class="card-body">
                                     <div class="progress-box progress-1">
                                         <h4 class="por-title">Total Demand</h4>
-                                        <div class="por-txt">96,930 (40%)</div>
+                                        <div class="por-txt">{{($data['totalDemands'] * 100 )/ 100}}%</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-1" role="progressbar"
-                                                style="width: 40%;" aria-valuenow="25" aria-valuemin="0"
+                                            @php
+                                                $totalDemandss  = ($data['totalDemands'] * 100) /100;
+                                            @endphp
+                                                style="width: {{$totalDemandss}}%;" aria-valuenow="{{$totalDemandss}}" aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                     <div class="progress-box progress-2">
                                         <h4 class="por-title">Total Under Proccess</h4>
-                                        <div class="por-txt">3,220 (24%)</div>
+                                        <div class="por-txt">{{($data['totalUnderProccess'] * 100 )/ 100}}%</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-2" role="progressbar"
-                                                style="width: 24%;" aria-valuenow="25" aria-valuemin="0"
+                                                style="width: {{($data['totalUnderProccess'] * 100 )/ 100}}%;" aria-valuenow="25" aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                    <div class="progress-box progress-2">
+                                    {{-- <div class="progress-box progress-2">
                                         <h4 class="por-title">Total Arrived</h4>
-                                        <div class="por-txt">29,658 Users (60%)</div>
+                                        <div class="por-txt">2{{($data['totalUnderProccess'] * 100 )/ 100}}%</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-3" role="progressbar"
                                                 style="width: 60%;" aria-valuenow="60" aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="progress-box progress-2">
                                         <h4 class="por-title">To be Supply</h4>
-                                        <div class="por-txt">99,658 (90%)</div>
+                                        <div class="por-txt">{{($data['totalToBeSupply'] * 100 )/ 100}}%</div>
                                         <div class="progress mb-2" style="height: 5px;">
                                             <div class="progress-bar bg-flat-color-4" role="progressbar"
-                                                style="width: 90%;" aria-valuenow="90" aria-valuemin="0"
+                                                style="width:{{($data['totalToBeSupply'] * 100 )/ 100}}%;" aria-valuenow="{{($data['totalToBeSupply'] * 100 )/ 100}}" aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
@@ -344,7 +350,7 @@
                 </div>
             </div>
             <!-- /.orders -->
-            <!-- To Do and Live Chat -->
+            {{-- <!-- To Do and Live Chat -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -416,11 +422,10 @@
                 </div>
 
             </div>
-            <!-- /To Do and Live Chat -->
+            <!-- /To Do and Live Chat --> --}}
 
             <!-- Calender Chart Weather  -->
             <div class="row">
-
                 <div class="col-lg-4 col-md-6" style="visibility: hidden">
                     <div class="card ov-h">
                         <div class="card-body bg-flat-color-2">
