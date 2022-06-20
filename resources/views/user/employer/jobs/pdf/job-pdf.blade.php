@@ -105,7 +105,7 @@
     <br>
 
 
-    <table class="titles">
+    <table class="titles" style="margin-top: -8%;">
         <tr>
             <th>Category</th>
             <th>Title</th>
