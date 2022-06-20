@@ -192,7 +192,7 @@ class JobController extends Controller
                 [
                     'job_id' => $jobId,
                     'user_id'=> Auth::id(),
-                    'name' =>  basename($file),
+                    'name' =>  $file->getClientOriginalName(),
                     'type' => 'job descreption',
                 ]
             );

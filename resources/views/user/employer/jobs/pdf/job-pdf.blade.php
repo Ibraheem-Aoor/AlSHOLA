@@ -20,7 +20,7 @@
 
         .parent {
             /* border: 1px solid black; */
-            margin: 1rem;
+            /* margin: 1rem; */
             padding: 2rem 2rem;
             text-align: center;
         }
@@ -67,8 +67,8 @@
             display: inline-block;
             margin: 0px 30px;
         }
-        tr
-        {
+
+        tr {
             line-height: 1;
         }
     </style>
@@ -76,16 +76,31 @@
 
 <body>
     <h3>Demand for Recruitment</h3>
-    <div style="background: #f7ff9c" class="fromDiv">
-        <p>
-            From: {{ $job->user->name }}
-        </p>
-        <p>
-            E-mail: {{ $job->user->email }}
-        </p>
-        <p>
-            Mobile: {{ $job->user->mobile }}
-        </p>
+    <div class="parent">
+        <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
+            <p>
+                Client Name: {{ $job->user->name }}
+            </p>
+            @isset($job->user->responsible_person)
+                <p>
+                    Represntative: {{ $job->user->responsible_person }}
+                </p>
+            @endisset
+            <p>
+                Mobile: {{ $job->user->mobile }}
+            </p>
+            <p>
+                E-mail: {{ $job->user->email }}
+            </p>
+        </div>
+        <div class="child">
+            <p>
+                Al Shoala Recruitment Service W.L.L
+            </p>
+            <p>
+                Job No: {{ $job->post_number }}
+            </p>
+        </div>
     </div>
     <br>
 
@@ -204,7 +219,7 @@
                 <th>Title</th>
                 <th>Service_Charge</th>
             </tr>
-            @foreach ($job->terms->where('user_id' , Auth::id()) as $term)
+            @foreach ($job->terms->where('user_id', Auth::id()) as $term)
                 <tr>
                     <td>{{ $term->title }}</td>
                     <td>{{ $term->serivce_charge . ' (' . $term->currency . ' )' }}</td>

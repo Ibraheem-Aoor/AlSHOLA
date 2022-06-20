@@ -12,7 +12,7 @@
                                 <h5 class="text-primary">
                                     DSR: {{ $job->post_number }}
                                 </h5>
-                                <h5 class="text-primary">
+                                {{-- <h5 class="text-primary">
                                     Category: {{ $job->subJobs->first()->title->sector->name }}
                                 </h5>
                                 <h5 class="text-primary">
@@ -20,7 +20,7 @@
                                 </h5>
                                 <h5 class="text-primary">
                                     Client: {{ $job->user->name }}
-                                </h5>
+                                </h5> --}}
                             </div>
 
 
@@ -122,8 +122,8 @@
                                         <div class="col-sm-12 mt-2">
                                             <table class="table table-responsive" id="dynamicAddRemove">
                                                 <tr>
-                                                    <th colspan="2">Title</th>
-                                                    <th colspan="2">Service charge</th>
+                                                    <th colspan="3">Title</th>
+                                                    <th>Service charge</th>
                                                     <th>Per</th>
                                                     <th>
                                                         <select name="currency" id="" class="form-control"
@@ -137,7 +137,7 @@
                                                     </th>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">
+                                                    <td colspan="3">
                                                         <select id="allTiltes" name="demandTerms[0][title]"
                                                             class="form-control" required>
                                                             @foreach ($job->subJobs as $subJob)
@@ -147,7 +147,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td colspan="2"><input type="text" required
+                                                    <td><input type="text" required
                                                             name="demandTerms[0][service_charge]" placeholder="charge"
                                                             class="form-control" required />
                                                     </td>
@@ -200,10 +200,10 @@
                                 ++i;
                                 newTitles.setAttribute('name', 'demandTerms[' + i + '][title]')
                                 $("#dynamicAddRemove").append(
-                                    '<tr><td colspan="2">' + newTitles.outerHTML +
+                                    '<tr><td colspan="3">' + newTitles.outerHTML +
                                     '</td><td><input type="numeric" name="demandTerms[' +
                                     i +
-                                    '][service_charge]" placeholder="service charge" required class="form-control" /></td><td colspan="2"><input type="text" name="demandTerms[' +
+                                    '][service_charge]" placeholder="service charge" required class="form-control" /></td><td><input type="text" name="demandTerms[' +
                                     i +
                                     '][per]" placeholder="per" required class="form-control" /></td></td><td><button type="button" class="btn btn-outline-danger btn-sm remove-input-field">Delete</button></td></tr>'
                                 );

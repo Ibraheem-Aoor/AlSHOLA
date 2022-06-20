@@ -49,7 +49,7 @@
                 background: transparent;
                 /* height: 20px; */
                 width: 100% !important;
-                font-size:10px !important;
+                font-size: 10px !important;
                 padding: 2px !important;
             }
         </style>
@@ -162,6 +162,12 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-floating mb-3 col-sm-3">
+                                    <button type="button" id="add-new-title"
+                                        class="btn btn-info col-sm-12" style="line-height: 30px;"><i class="fa fa-plus"></i> Add
+                                        New</button>
+                                </div>
+
                                 <div class="card mb-5" id="add-new-title-dev">
                                     <div class="card-body">
                                         <table class="table table-responsive" id="newTtile">
@@ -181,19 +187,7 @@
                                     </div>
                                 </div>
 
-                                <div class="container mb-2">
-                                    <div class="row">
-                                        <div class="col-sm-12">
 
-                                            <div class="text-left">
-
-                                                <button type="button" id="add-new-title"
-                                                    class="btn btn-info col-sm-4"><i class="fa fa-plus"></i> Add
-                                                    New</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
 
@@ -231,13 +225,6 @@
                                                         value="8 Hours" readonly></td>
                                             </tr>
 
-                                            <tr>
-                                                <td>Overtime: </td>
-                                                <td>
-                                                    <input type="text" class="form-control"
-                                                        value="As Per Labour Law" readonly>
-                                                </td>
-                                            </tr>
 
                                             <tr>
                                                 <td>Food Allowance: </td>
@@ -292,8 +279,8 @@
                                             <tr>
                                                 <td>Indemnity Leave And Overtime Salary: </td>
                                                 <td><input type="text" class="form-control"
-                                                        name="indemnity_leave_and_overtime_salary"
-                                                        value="{{ old('indemnity_leave_and_overtime_salary') }}">
+                                                        value="The employer is liable for any additional fees, imposed by official authorities inside employer country"
+                                                        readonly>
                                                 </td>
                                             </tr>
 
@@ -320,7 +307,7 @@
                                             </tr>
 
 
-                                            <tr >
+                                            <tr>
                                                 <td>Accommodation: </td>
                                                 <td>
                                                     <select required class="form-control" name="accommodation"
@@ -443,7 +430,8 @@
                                                         </div>
 
                                                         <br> <br> <br>
-                                                        <div class="col-sm-12  mb-2" style="font-size:1rem" style="height: calc(3.5rem + 2px);">
+                                                        <div class="col-sm-12  mb-2" style="font-size:1rem"
+                                                            style="height: calc(3.5rem + 2px);">
                                                             <input type="checkbox" name="agree" required>
                                                             I Agree To All Terms And Conditions.
                                                         </div>
@@ -453,7 +441,9 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-info"
                                                     data-dismiss="modal">BACK</button>
-                                                <button type="submit" class="btn btn-primary">AGREE &
+                                                <button type="submit" class="btn btn-primary"
+                                                    onclick="event.preventDefault();document.getElementById('my-form').submit();">AGREE
+                                                    &
                                                     SUBMIT</button>
                                             </div>
                                         </div>

@@ -70,7 +70,7 @@ use LaravelDaily\Invoices\Invoice;
 
 //prefix => admin
 
-    Route::redirect('/' , '/admin/login');
+    Route::redirect('/' , '/admin/login')->middleware('guest');
 
     Route::get('login' , function()
         {
