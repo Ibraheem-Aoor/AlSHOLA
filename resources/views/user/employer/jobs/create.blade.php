@@ -181,7 +181,7 @@
                                                 <th>Nationality</th>
                                             </tr>
                                             @if (old('subJob'))
-                                                <h3>SETED</h3>
+                                                {{-- <h3>SETED</h3> --}}
                                             @endif
                                         </table>
                                     </div>

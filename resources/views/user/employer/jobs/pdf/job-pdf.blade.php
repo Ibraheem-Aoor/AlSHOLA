@@ -93,7 +93,7 @@
                 E-mail: {{ $job->user->email }}
             </p>
         </div>
-        <div class="child">
+        <div class="child" style="background: #f7ff9c" class="child" style="font-weight: 500;">
             <p>
                 Al Shoala Recruitment Service W.L.L
             </p>
