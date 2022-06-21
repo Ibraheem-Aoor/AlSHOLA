@@ -17,11 +17,17 @@ class PermessionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'jobs management' ,
-            'users management' ,
-            'contact management' ,
-            'roles management',
-            'applications management',
+            'Rise Demand' ,
+            'Job Posting' ,
+            'Users Authorities' ,
+            'Applications Mangement',
+            'Agent',
+            'Client',
+            'Contact Queries',
+            'Invoices',
+            'Roels & Permessions',
+            'History Recored',
+            'Settings',
         ];
 
         foreach($permissions as $p)

@@ -11,7 +11,6 @@ class CreateRole extends Component
     public $name , $permissions=[];
 
 
-
     //Add New Role with the selected permessions.
     public function addRole()
     {

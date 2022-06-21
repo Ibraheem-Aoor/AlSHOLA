@@ -11,7 +11,7 @@
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Contact For Any Query</h1>
             <div class="row g-4">
-                <div class="col-12">
+                <div class="Admcol-12">
                     <div class="row gy-4">
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
                             <div class="d-flex align-items-center bg-light rounded p-4">
@@ -19,7 +19,7 @@
                                     style="width: 45px; height: 45px;">
                                     <i class="fa fa-map-marker-alt text-primary"></i>
                                 </div>
-                                <span>123 Street, New York, USA</span>
+                                <span>{{ Cache::get('businessSetting')->where('key', 'address')->first()->value }}</span>
                             </div>
                         </div>
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
@@ -28,7 +28,7 @@
                                     style="width: 45px; height: 45px;">
                                     <i class="fa fa-envelope-open text-primary"></i>
                                 </div>
-                                <span>info@example.com</span>
+                                <span>{{ Cache::get('businessSetting')->where('key', 'email')->first()->value }}</span>
                             </div>
                         </div>
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
@@ -37,7 +37,7 @@
                                     style="width: 45px; height: 45px;">
                                     <i class="fa fa-phone-alt text-primary"></i>
                                 </div>
-                                <span>+012 345 6789</span>
+                                <span>{{ Cache::get('businessSetting')->where('key', 'telephone')->first()->value }}</span>
                             </div>
                         </div>
                     </div>

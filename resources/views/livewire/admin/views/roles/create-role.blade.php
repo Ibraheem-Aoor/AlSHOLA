@@ -8,7 +8,7 @@
                             <strong>Create New Role</strong><small></small>
                         </div>
                         <div class="card-body card-block">
-                            <form wire:submit.prevent="addNewSector()">
+                            <form wire:submit.prevent="addRole()">
                                 <div class="container">
                                     <div class="row text-center">
 

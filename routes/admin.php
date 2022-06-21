@@ -59,6 +59,7 @@ use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
 use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
 use App\Http\Helpers\DemandHelper;
+use App\Http\Livewire\Admin\Views\Roles\AddNewAdmin;
 use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
 use App\Models\BusinessSetting;
 use App\Models\Title;
@@ -115,19 +116,6 @@ use LaravelDaily\Invoices\Invoice;
 
         Route::get('/general-settings' , GeneralBessniuessSettings::class)->name('admin.settings.general');
 
-
-
-        // Route::get('job/details/{id}' , JobDetails::class)->name('admin.job.details');
-        // Route::get('job/details/{id}/edit' , JobDetailsEdit::class)->name('admin.job.details.edit');
-
-
-        //Attachments Rotues:
-        /*
-        Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
-        {
-            return response()->file(public_path('storage/uploads/attachments/jobs/'.$jobId.'/'.$fileName));
-        })->name('file.open');
-        */
 
         // Download job attachments
         Route::get('download/{jobId}/{fileName}' , function($jobId , $fileName)
@@ -249,9 +237,13 @@ use LaravelDaily\Invoices\Invoice;
 
 
         //Roles Routes:
-        Route::get('roles' , AllRoles::class)->name('roles.all');
-        Route::get('roles/add' , CreateRole::class)->name('roles.add');
-        Route::get('roles/edit/{id}' , RoleEdit::class)->name('roles.edit');
+        Route::group(['middleware' => ['permission:Roels & Permessions'] , ] , function()
+        {
+            Route::get('roles' , AllRoles::class)->name('roles.all');
+            Route::get('roles/add' , CreateRole::class)->name('roles.add');
+            Route::get('roles/edit/{id}' , RoleEdit::class)->name('roles.edit');
+            Route::get('roles/admin/new' , AddNewAdmin::class)->name('role.new-admin');
+        });
 
 
 
