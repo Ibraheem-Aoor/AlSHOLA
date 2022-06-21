@@ -31,7 +31,7 @@ class EmployerApplicationsController extends Controller
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $applications = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded' , true)
-                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->with('job.subJobs.title.sector')
+                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus' , 'attachments'])->with('job.subJobs.title.sector')
                         ->simplePaginate(15);
         return view('user.employer.applications.all-applications' , compact('applications'));
     }//end mthod

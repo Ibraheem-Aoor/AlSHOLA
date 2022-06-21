@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Facades\Invoice;
+use Throwable;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -28,18 +29,26 @@ class DemandHelper
 
     public function setDemandTermsAndSendToAgent(Request $request , $id)
     {
-        $job = Job::with('terms')->findOrFail($id);
-        $validate = Validator::make($request->all() , ['demandTerms.*' => 'required']);
-        if($validate->fails())
+        try
         {
-            return redirect()->back()->withErrors($validate->errors());
+            $job = Job::with('terms')->findOrFail($id);
+            $validate = Validator::make($request->all() , ['demandTerms.*' => 'required']);
+            if($validate->fails())
+            {
+                return redirect()->back()->withErrors($validate->errors());
+            }
+            if(count($job->terms) > 0)
+                $this->deleteOldTerms($job);
+            $this->saveJobTerms($request , $job);
+            $this->sendJobToAgent($request->agent , $job);
+            notify()->success('Demand Sended Successfully');
+            return redirect()->back();
+        }catch(Throwable $e)
+        {
+            notify()->error('Something Went Wrong');
+            return redirect()->back();
         }
-        if(count($job->terms) > 0)
-            $this->deleteOldTerms($job);
-        $this->saveJobTerms($request , $job);
-        $this->sendJobToAgent($request->agent , $job);
-        notify()->success('Demand Sended Successfully');
-        return redirect()->back();
+
     }//end method
 
 
@@ -59,6 +68,9 @@ class DemandHelper
                 'title' => $term['title'],
                 'serivce_charge' => $term['service_charge'],
                 'per' => $term['per'],
+                'acceptence_duration' => $request->acceptence_duration ,
+                'submission_duration' => $request->submission_duration ,
+                'completion_duration' => $request->completion_duration ,
             ]);
         }
     }//end method

@@ -52,6 +52,10 @@
                 font-size: 10px !important;
                 padding: 2px !important;
             }
+            .basicInfo input , select
+            {
+                width: 100% !important;
+            }
         </style>
     @endpush
 @section('title', 'Dashboard | Create Job Post')
@@ -163,8 +167,8 @@
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-3">
-                                    <button type="button" id="add-new-title"
-                                        class="btn btn-info col-sm-12" style="line-height: 30px;"><i class="fa fa-plus"></i> Add
+                                    <button type="button" id="add-new-title" class="btn btn-info col-sm-12"
+                                        style="line-height: 30px;"><i class="fa fa-plus"></i> Add
                                         New</button>
                                 </div>
 
@@ -266,20 +270,37 @@
 
                                             <tr>
                                                 <td>Joining Ticket: </td>
-                                                <td><input type="text" class="form-control" name="joining_ticket"
-                                                        value="{{ old('joining_ticket') }}">
+                                                <td>
+                                                    <select class="form-control" name="joining_ticket">
+                                                        <option value="">-- choose one --</option>
+                                                        <option value="Provided by Employer">Provided by Employer"</option>
+                                                        <option value="Not Provided">Not Provided"</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Return Ticket: </td>
-                                                <td><input type="text" class="form-control" name="return_ticket"
-                                                        value="{{ old('return_ticket') }}">
+                                                <td>
+                                                    <select class="form-control" name="return_ticket">
+                                                        <option value="">-- choose one --</option>
+                                                        <option value="Every Completion One Year">Every Completion One Year"</option>
+                                                        <option value="Return Ticket">Not Provided"</option>
+                                                    </select>
                                                 </td>
                                             </tr>
+
                                             <tr>
-                                                <td>Indemnity Leave And Overtime Salary: </td>
+                                                <td>Indemnity: </td>
                                                 <td><input type="text" class="form-control"
-                                                        value="The employer is liable for any additional fees, imposed by official authorities inside employer country"
+                                                        value="As per Labour Law"
+                                                        readonly>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Overtime salary: </td>
+                                                <td><input type="text" class="form-control"
+                                                        value="As per Labour Law"
                                                         readonly>
                                                 </td>
                                             </tr>

@@ -163,6 +163,29 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <div class="col-sm-4">
+                                                <label for="">Accept/Reject Duration:</label>
+                                                <input type="text" class="form-control" name="acceptence_duration">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="">CV Submission Duration:</label>
+                                                <input type="text" class="form-control"
+                                                    name="submission_duration">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="">Completion Duration:</label>
+                                                <input type="text" class="form-control"
+                                                    name="completion_duration">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>

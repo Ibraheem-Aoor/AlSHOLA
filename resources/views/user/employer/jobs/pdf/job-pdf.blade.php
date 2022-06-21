@@ -76,7 +76,7 @@
 
 <body>
     <h3>Demand for Recruitment</h3>
-    <div class="parent">
+    <div class="parent" style="margin-top:3%;">
         <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
             <p>
                 Client Name: {{ $job->user->name }}
@@ -105,7 +105,7 @@
     <br>
 
 
-    <table class="titles" style="margin-top: -8%;">
+    <table class="titles" style="margin-top: -5%;">
         <tr>
             <th>Category</th>
             <th>Title</th>
@@ -229,9 +229,9 @@
         </table>
 
         <ul style="font-size: 9px;">
-            <li>Agent Confirm the Demand accepted or Rejected within 1 Day</li>
-            <li>Agent Submit the candidate CV's within 5 Days from receiving the signature of the demand </li>
-            <li> A 45 day total duration is expected for demand till complete.</li>
+            <li>Agent Confirm the Demand accepted or Rejected within {{$job->terms->first()->acceptence_duration}} Day</li>
+            <li>Agent Submit the candidate CV's within {{$job->terms->first()->submission_duration}} Days from receiving the signature of the demand </li>
+            <li> A {{$job->terms->first()->completion_duration}} day total duration is expected for demand till complete.</li>
             <li>Alshoala Recruitment Services W. L. L. will pay to Agent the Service Charge after candidate arrival
                 date.
             </li>

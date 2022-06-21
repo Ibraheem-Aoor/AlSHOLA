@@ -10,7 +10,8 @@ class DemandTerms extends Model
     use HasFactory;
     protected $fillable = [
                             'user_id' , 'title' ,
-                            'serivce_charge' , 'per' , 'job_id' , 'currency'
+                            'serivce_charge' , 'per' , 'job_id' , 'currency' ,
+                            'acceptence_duration' , 'submission_duration' , 'completion_duration',
                         ];
 
 
