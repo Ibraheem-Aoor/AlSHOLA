@@ -32,19 +32,23 @@
                             <div class="row">
                                 <table class="table table-striped titles">
                                     <tr>
+                                        <th>Categorey</th>
                                         <th>Title</th>
-                                        <th>Salary</th>
                                         <th>Quantity</th>
+                                        <th>Salary</th>
+                                        <th>Gender</th>
+                                        <th>Age</th>
                                         <th>Nationality</th>
-                                        <th>Descreption</th>
                                     </tr>
                                     @forelse ($job->subJobs as $subjob)
                                         <tr>
+                                            <td>{{ $subjob->title->sector->name }}</td>
                                             <td>{{ $subjob->title->name }}</td>
-                                            <td>{{ $subjob->salary }}</td>
                                             <td>{{ $subjob->quantity }}</td>
+                                            <td>{{ $subjob->salary }}</td>
+                                            <td>{{ $subjob->gender }}</td>
+                                            <td>{{ $subjob->age }}</td>
                                             <td>{{ $subjob->nationality->name }}</td>
-                                            <td>{{ $subjob->description ?? 'as per attachment' }}
                                             </td>
                                         </tr>
                                     @empty

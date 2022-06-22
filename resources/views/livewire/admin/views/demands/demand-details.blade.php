@@ -241,19 +241,23 @@
                                             <div class="row">
                                                 <table class="table table-striped titles">
                                                     <tr>
+                                                        <th>Categorey</th>
                                                         <th>Title</th>
-                                                        <th>Salary</th>
                                                         <th>Quantity</th>
+                                                        <th>Salary</th>
+                                                        <th>Gender</th>
+                                                        <th>Age</th>
                                                         <th>Nationality</th>
-                                                        <th>Descreption</th>
                                                     </tr>
                                                     @forelse ($job->subJobs as $subjob)
                                                         <tr>
+                                                            <td>{{ $subjob->title->sector->name }}</td>
                                                             <td>{{ $subjob->title->name }}</td>
-                                                            <td>{{ $subjob->salary }}</td>
                                                             <td>{{ $subjob->quantity }}</td>
+                                                            <td>{{ $subjob->salary }}</td>
+                                                            <td>{{ $subjob->gender }}</td>
+                                                            <td>{{ $subjob->age }}</td>
                                                             <td>{{ $subjob->nationality->name }}</td>
-                                                            <td>{{ $subjob->description ?? 'as per attachment' }}
                                                             </td>
                                                         </tr>
                                                     @empty
@@ -757,8 +761,9 @@
                                             <a href="{{ route('admin.pdf.generate', $job->id) }}"
                                                 class="btn btn-outline-info col-sm-12 mb-2">PRINT PDF</a>
 
-                                            <a title="issue" data-toggle="modal" href="#exampleModal_115" class="btn btn-info col-sm-12"><i
-                                                    class="fa fa-money"></i> ISSUE INVOICE</a>
+                                            <a title="issue" data-toggle="modal" href="#exampleModal_115"
+                                                class="btn btn-info col-sm-12"><i class="fa fa-money"></i> ISSUE
+                                                INVOICE</a>
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
                                                 Change Status</a> --}}
@@ -909,7 +914,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="{{route('invoice.test')}}" method="POST">
+                                    <form action="{{ route('invoice.test') }}" method="POST">
                                         @csrf
                                         <div class="modal-body">
                                             <select class="form-control">
@@ -925,8 +930,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary"
-                                                >ISSUE INVOICE</button>
+                                            <button type="submit" class="btn btn-primary">ISSUE INVOICE</button>
                                         </div>
                                     </form>
                                 </div>
