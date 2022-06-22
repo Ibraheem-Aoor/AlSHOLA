@@ -67,7 +67,7 @@
     </div>
     <br>
     @php
-        $photo = ApplicationAttachment::where('type' , 'Personal Photo')->first()->name;
+        $photo = \App\Models\ApplicationAttachment::where('type' , 'Personal Photo')->first()->name;
     @endphp
     <img src="{{asset('storage/uploads/applications/'.$application->id.'/attachments'.'/'.$photo)}}" width="200" height="200"
         style="margin-left:70%;border: 1px solid black;">
