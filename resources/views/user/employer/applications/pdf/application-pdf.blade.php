@@ -66,7 +66,10 @@
         </p>
     </div>
     <br>
-    <img src="{{asset('storage/uploads/applications/'.$application->id.'/attachments'.'/'.$application->employer_photo)}}" width="200" height="200"
+    @php
+        $photo = ApplicationAttachment::where('type' , 'Personal Photo')->first()->name;
+    @endphp
+    <img src="{{asset('storage/uploads/applications/'.$application->id.'/attachments'.'/'.$photo)}}" width="200" height="200"
         style="margin-left:70%;border: 1px solid black;">
     <table style="margin-top: -150px">
         <tr>
