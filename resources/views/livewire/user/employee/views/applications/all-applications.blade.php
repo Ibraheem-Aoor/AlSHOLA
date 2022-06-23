@@ -45,7 +45,7 @@
                                         <td>{{ $application->subStatus->name }}</td>
                                         <td>{{ $application->created_at }}</td>
                                         <td>
-                                            @switch($application->subStatus->name)
+                                            @switch($application->job->subStatus->name)
                                                 @case('Demand Under Proccess')
                                                     @php
                                                         $title[$i] = 'Upload Medical/Agreement File(s)';

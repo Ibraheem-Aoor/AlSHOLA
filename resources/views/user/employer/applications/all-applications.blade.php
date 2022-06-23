@@ -52,7 +52,7 @@
                                                 class="badge bg-success" title="print application"><i
                                                     class="fa fa-print"></i></a>
 
-                                            @switch($application->subStatus->name)
+                                            @switch($application->job->subStatus->name)
                                                 @case('Demand Under Proccess')
                                                     @php
                                                         $title[$i] = 'Upload File';

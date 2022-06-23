@@ -297,4 +297,3 @@ use LaravelDaily\Invoices\Invoice;
         })->name('downlaod.test');
     });
 
-
