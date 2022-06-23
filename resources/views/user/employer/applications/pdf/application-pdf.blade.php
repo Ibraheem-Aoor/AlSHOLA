@@ -77,7 +77,7 @@
     </table> --}}
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <h3>Application Information</h3>
-    <div class="parent" style="margin-top:3%;">
+    <div class="parent" style="margin-top:5%;">
         <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
             <p style="padding: 3px;">
                 Agent Name: {{ $application->user->name }}
@@ -105,17 +105,14 @@
     </div>
     <div style="font-size: 13px;font-weight:600;">
         <h4>Demand Information:</h4>
-        <table>
-            <tr>
-                <th>DSR</th>
-                <th>Creation_Date</th>
-            </tr>
-            <tr>
-                <td>{{ $application->job->post_number }}</td>
-                <td>{{ $application->job->created_at }}</td>
-            </tr>
-        </table>
+        <p>DSR: {{ $application->job->post_number }}</p>
+        <p>Creation Date: {{ $application->job->created_at }}</p>
     </div>
+    @php
+        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
+    @endphp
+    <img src="{{ asset('storage/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo) }}"
+        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <br>
     <table style="margin-top: -150px">
         <tr>
@@ -160,11 +157,7 @@
 
     </table>
 
-    @php
-        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
-    @endphp
-    <img src="{{asset('storage/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo) }}"
-        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
+
 
 
     <h3>Languages</h3>
