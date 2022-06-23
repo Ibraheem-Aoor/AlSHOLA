@@ -30,7 +30,7 @@
                                         <td>{{ $job->post_number }}</td>
                                         <td>{{ $job->subJobs()->first()->title->name }}</td>
                                         <td>{{ $job->user->name }}</td>
-                                        <td>{{ $job->status }}</td>
+                                        <td>{{ $job->subStatus->name }}</td>
                                         <td>
                                             <a href="{{ route('employee.job.details', $job->id) }}"
                                                 class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>

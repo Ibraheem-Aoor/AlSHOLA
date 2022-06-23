@@ -99,7 +99,7 @@
                                                                         {{ $application->title->name }}
                                                                     </div>
                                                                     <div class="text-right">
-                                                                        <img src="{{ asset('storage/uploads/applications/'.$application->id.'/attachments'.'/'.$application->attachments->where('type'  , 'Personal Photo')->first()->name) }}"
+                                                                        <img src="{{ asset('storage/uploads/applications/' . $application->id . '/attachments' . '/' . $application->attachments->where('type', 'Personal Photo')->first()->name) }}"
                                                                             width="200" height="200"
                                                                             style="margin-left:70%;border: 1px solid black;">
                                                                     </div>
@@ -133,21 +133,18 @@
                                                                                 <th>Nationality:
                                                                                     {{ $application->Nationlaity ?? 'UNKOWN' }}
                                                                                 </th>
+                                                                                <th>Place Of Birth:
+                                                                                    {{ $application->place_of_birth ?? 'UNKOWN' }}
+                                                                                </th>
                                                                             </tr>
                                                                             <tr id="tt">
                                                                                 <td>Place Issued:
                                                                                     {{ $application->place_issued }}
                                                                                 </td>
-                                                                                <td>Place Issued:
-                                                                                    {{ $application->place_of_birth }}
-                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Date Issued:
                                                                                     {{ $application->date_issued }}
-                                                                                </td>
-                                                                                <td>Date Issued:
-                                                                                    {{ $application->date_of_birth }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -693,12 +690,12 @@
                         </div>
                         @push('js')
                             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                                                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                                                        crossorigin="anonymous"></script>
+                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+                            </script>
                             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                                                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-                                                        crossorigin="anonymous"></script>
+                                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+                            </script>
 
                             <script>
                                 $('#exampleModal_5').on('show.bs.modal', function(event) {
@@ -797,10 +794,10 @@
 
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 

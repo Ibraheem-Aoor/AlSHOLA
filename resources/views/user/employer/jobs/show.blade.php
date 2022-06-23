@@ -29,7 +29,7 @@
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">
                 <span class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Demand Status:
-                    {{ $job->status }}</span>&nbsp;&nbsp;&nbsp;
+                    {{ $job->subStatus->name }}</span>&nbsp;&nbsp;&nbsp;
                 <span class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Demand Date:
                     {{ $job->created_at }}</span>
             </h1>

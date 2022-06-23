@@ -183,7 +183,7 @@
                                             <div class="col-sm-6">
                                                 <label for="">Pay From:</label>
                                                 <select name="pay_from" class="form-control" required>
-                                                    <option value="Alshoala" selected>ALSOHALA</option>
+                                                    <option value="Alshoala" selected>ALSHOALA</option>
                                                     <option value="Agent">AGENT</option>
                                                 </select>
                                             </div>

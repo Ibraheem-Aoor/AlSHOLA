@@ -43,6 +43,8 @@ class Job extends Model
         'currency',
         'user_id',
         'description',
+        'sub_status_id' ,
+        'main_status_id'
     ];
 
     public function users()
@@ -109,4 +111,14 @@ class Job extends Model
         return $this->hasMany(DemandTerms::class , 'job_id');
     }
 
+
+    public function mainStatus()
+    {
+        return $this->belongsTo(JobMainStatus::class,  'main_status_id');
+    }
+
+    public function subStatus()
+    {
+        return $this->belongsTo(JobSubStatus::class,  'sub_status_id');
+    }
 }

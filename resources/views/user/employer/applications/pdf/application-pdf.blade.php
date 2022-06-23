@@ -3,10 +3,11 @@
 
 <head>
     <style>
-        *{
+        * {
             margin: 0 !important;
-            padding:0 !important;
+            padding: 0 !important;
         }
+
         table {
             font-family: arial, sans-serif;
             font-size: 10px;
@@ -33,8 +34,8 @@
             display: inline-block;
             margin: 0px 30px;
         }
-        body
-        {
+
+        body {
             height: 3508px !important;
         }
     </style>
@@ -72,13 +73,26 @@
             Mobile: {{ $application->user->mobile }}
         </p>
     </div>
+    <div style="font-size: 13px;font-weight:600;">
+        <h4>Demand Information:</h4>
+        <table>
+            <tr>
+                <th>DSR</th>
+                <th>Creation_Date</th>
+            </tr>
+            <tr>
+                <td>$application->job->post_number</td>
+                <td>$application->job->created_at</td>
+            </tr>
+        </table>
+    </div>
     <br>
     @php
         $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
         echo $photo;
     @endphp
-    <img src="{{ asset(Storage::get('public/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo)) }}"
-        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
+    {{-- <img src="{{ asset(Storage::get('public/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo)) }}"
+        width="200" height="200" style="margin-left:70%;border: 1px solid black;"> --}}
     <table style="margin-top: -150px">
         <tr>
             <td>Ref: {{ $application->ref }}</td>
@@ -89,6 +103,7 @@
         </tr>
         <tr>
             <td>Full_Name: {{ $application->full_name }}</td>
+            <td>Father_Name: {{ $application->father_name }}</td>
         </tr>
         <tr>
             <td>Address: {{ $application->address }}</td>
@@ -192,6 +207,10 @@
                 <td>{{ $emplyoer->country }}</td>
                 <td>{{ $emplyoer->designation }}</td>
             @endforeach
+        </tr>
+        <tr>
+            <td>Total Experince: </td>
+            <td>{{ $application->employers->count('duration') }}</td>
         </tr>
     </table>
     <br>

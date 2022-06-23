@@ -131,7 +131,7 @@
                                                 </td>
                                                 <td>{{ $job->qty() }}</td>
                                                 <td>{{ $job->created_at }}</td>
-                                                <td>{{ $job->status }}</td>
+                                                <td>{{ $job->subStatus->name }}</td>
                                                 <td>
                                                     <a href="{{ route('job.show', $job->id) }}" title="details"
                                                         class="badge bg-primary" href="#"><i

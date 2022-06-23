@@ -100,8 +100,10 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('job/{id}/send-to-agent' , SendJobToAgent::class)->name('admin.send-job-to-agent');
         Route::get('/job/pdf/{id}' ,  [PdfController::class , 'generateJobPDF'])->name('admin.pdf.generate');
         Route::get('/aplication/pdf/{id}' ,  [PdfController::class , 'generateApplicationPDF'])->name('admin.application.pdf.generate');
-        Route::post('/job/{id}/change-status' , [AdminDemandController::class , 'changeDemandStatus'])->name('admin.demand.chane-status');
+        Route::post('/job/{id}/change-status' , [DemandHelper::class , 'postChangeDemandStatus'])->name('admin.demand.chane-status');
         Route::post('/demand/{id}/set-terms'  , [DemandHelper::class , 'setDemandTermsAndSendToAgent'])->name('admin.demand.set-terms');
+        Route::get('/job/substatus/{id}' , [DemandHelper::class , 'getSubStatuses']);
+
 
         //Settings
         Route::get('sector/new' , AddNewSector::class)->name('admin.sector.new');

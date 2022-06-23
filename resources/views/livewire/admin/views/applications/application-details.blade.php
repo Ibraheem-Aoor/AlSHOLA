@@ -149,14 +149,14 @@
                                                 </div>
 
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Place
-                                                        Issued:</label>
+                                                    <label for="inputPassword3" class="col-form-label">Expiry
+                                                        Date:</label>
                                                     <input type="text" value="{{ $application->expiry_issued }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Date
-                                                        Issued:</label>
+                                                    <label for="inputPassword3" class="col-form-label">Gender
+                                                        :</label>
                                                     <input type="text" value="{{ $application->sex }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>

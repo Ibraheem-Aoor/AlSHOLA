@@ -28,7 +28,7 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $job->title }}</td>
                                         <td>{{ $job->location }}</td>
-                                        <td>{{ $job->status }}</td>
+                                        <td>{{ $job->subStatus->name }}</td>
                                         <td><a href="{{route('job.show' , $job->id) }}"
                                                 class="btn btn-info">Details</a></td>
                                     </tr>

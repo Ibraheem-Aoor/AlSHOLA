@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('post_number');
-            $table->enum('status' , [
-                'completed' , 'active' , 'cancelled' , 'pending' ,
-                ])->default('active');
+            // $table->enum('status' , [
+            //     'completed' , 'active' , 'cancelled' , 'pending' ,
+            //     ])->default('active');
             $table->text('description')->nullable(true);
             $table->string('contract_period')
             ->default('2 Years')

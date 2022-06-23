@@ -6,6 +6,7 @@ use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationStatusHistory;
 use App\Models\DemandTerms;
 use App\Models\Job;
+use App\Models\JobSubStatus;
 use App\Models\subStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -184,6 +185,30 @@ class DemandHelper
         return Application::where('ref' , $number)->exists();
     }//end method
 
+
+
+    /**
+     * Ajax get demand substatus
+     */
+    public function getSubStatuses($id)
+    {
+        return JobSubStatus::where('job_main_status_id' , $id)->get();
+    }
+
+    /**
+     * Change Demand Status (main status and sub status)
+     */
+
+    public function postChangeDemandStatus(Request $request  , $id)
+    {
+        Validator::make($request->all() ,  ['mainStatus' => 'required' , 'subStatus' => 'required']);
+        $job = Job::with(['subStatus' , 'mainStatus'])->findOrFail($id);
+        $job->sub_status_id = $request->subStatus;
+        $job->main_status_id = $request->mainStatus;
+        $job->save();
+        notify()->success('Demand status changed Successfully');
+        return redirect()->back();
+    }
 
 
 

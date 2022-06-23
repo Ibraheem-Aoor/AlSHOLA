@@ -54,7 +54,7 @@
                                                         @php
                                                             $badgeColor = '';
                                                         @endphp
-                                                        @switch($job->status)
+                                                        @switch($job->subStatus->name)
                                                             @case('active')
                                                                 @php
                                                                     $badgeColor = 'complete';
@@ -86,7 +86,7 @@
                                                         @endswitch
 
                                                         <span
-                                                            class="badge badge-{{ $badgeColor }}">{{ $job->status }}</span>
+                                                            class="badge badge-{{ $badgeColor }}">{{ $job->subStatus->name }}</span>
                                                     </td>
                                                     <td><span>{{ $job->created_at }}</span>
                                                     </td>
@@ -101,7 +101,7 @@
                                                     </td>
                                                     {{-- <td>
                                                         <span
-                                                            class="badge badge-{{ $badgeColor }}">{{ $job->status }}</span>
+                                                            class="badge badge-{{ $badgeColor }}">{{ $job->subStatus->name }}</span>
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('admin.job.details', $job->id) }}"

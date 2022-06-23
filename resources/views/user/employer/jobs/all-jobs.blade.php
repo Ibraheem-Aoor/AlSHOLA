@@ -78,7 +78,7 @@
                                             </a>
                                         </td>
                                         <td>{{ $job->qty() }}</td>
-                                        <td>{{ $job->status }}</td>
+                                        <td>{{ $job->subStatus->name }}</td>
                                         <td>
                                             <a title="Notes" href="{{ route('employer.job.notes', $job->id) }}">
                                                 {{ $job->notes_count }}

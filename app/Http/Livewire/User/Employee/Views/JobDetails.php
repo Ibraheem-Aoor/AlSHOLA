@@ -17,7 +17,7 @@ class JobDetails extends Component
     public $job , $hasApplication;
     public function mount($id)
     {
-        $this->job = Job::with(['subJobs.title.sector' , 'subJobs.nationality'])->findOrFail($id);
+        $this->job = Job::with(['subJobs.title.sector' , 'subJobs.nationality' , 'subStatus'])->findOrFail($id);
         if(!Auth::user()->hasJob($this->job))
             abort(403);
         $this->hasApplication  = Application::where('user_id', Auth::id())->exists();

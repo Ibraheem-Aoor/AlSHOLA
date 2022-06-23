@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Views\Demands;
 
 use App\Models\Application;
 use App\Models\Job;
+use App\Models\JobMainStatus;
 use App\Models\Note;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class DemandDetails extends Component
     {
         $this->job = Job::with(['subJobs'  , 'applications.user' ,
                         'title.sector' , 'attachments' , 'notes' , 'user' , 'refuseTimes'])
-                    ->with(['notes.user' , 'subJobs.title.sector'])
+                    ->with(['notes.user' , 'subJobs.title.sector' , 'subStatus'])
                     ->findOrFail($id);
         $this->unreadNotes = $this->job->notes->where('seen', false)->count();
         // $allAgents = User::where('type' , 'Agent')->with('applications')->get();
@@ -60,8 +61,10 @@ class DemandDetails extends Component
                     ->orderByDesc('id')
                     ->with(['user:id,name' , 'mainStatus.subStatus'])
                     ->simplePaginate(15);
+        $mainStatuses = JobMainStatus::all();
         return view('livewire.admin.views.demands.demand-details'  , [
-            'applications' => $applications
+            'applications' => $applications,
+            'mainStatuses'  => $mainStatuses,
         ])
         ->extends('layouts.admin.master')->section('content');
     }

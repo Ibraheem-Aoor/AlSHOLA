@@ -16,12 +16,12 @@ class AllJobs extends Component
 
     public function setTragetJob($id)
     {
-        $this->targetJob = Job::with('applications.user')->findOrFail($id);
+        $this->targetJob = Job::with(['applications.user' , 'subStatus' , 'mainStatus' , ])->findOrFail($id);
     }
 
     public function render()
     {
-        $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'user' , 'applications.user'])
+        $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'user' , 'applications.user' , 'subStatus'])
         ->with('subJobs.title.sector')
         ->orderByDesc('id')->simplePaginate();
         return view('livewire.admin.views.jobs.all-jobs' , ['jobs' => $jobs])->extends('layouts.admin.master')->section('content');

@@ -27,7 +27,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Demand Details</strong><small> status: {{ $job->status }}</small>
+                            <strong>Demand Details</strong><small> status: {{ $job->subStatus->name }}</small>
                         </div>
                         <div class="card-body">
                             <div class="custom-tab">
@@ -681,7 +681,7 @@
                                                         @php
                                                             $i = 1;
                                                         @endphp
-                                                        @forelse ($job->statusHistory->sortByDesc('id') as $record)
+                                                        @forelse ($job->subStatus->nameHistory->sortByDesc('id') as $record)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $record->prev_status }}</td>
@@ -881,23 +881,40 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+
                                     <form method="POST"
                                         action="{{ route('admin.demand.chane-status', $job->id) }}">
                                         @csrf
                                         <div class="modal-body">
-                                            <select name="status" class="form-control">
-                                                <option value="cancelled">cancelled</option>
-                                                <option value="active">active</option>
-                                                <option value="completed">completed</option>
-                                            </select>
+                                            <div class="form-group">
+                                                <select name="mainStatus" id="mainStatus" class="form-control"
+                                                    required>
+                                                    <option value="">--select one --</option>
+                                                    @foreach ($mainStatuses as $status)
+                                                        <option value="{{ $status->id }}"
+                                                            @if ($job->main_status_id == $status->id) {{ 'selected' }} @endif>
+                                                            {{ $status->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-gorup">
+
+                                                <select name="subStatus" class="form-control" id="subStatus"
+                                                    required>
+                                                    <option value="">--select one --</option>
+
+                                                </select>
+
+                                            </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-success">Change</button>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -977,6 +994,41 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #job').val(job);
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+            integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(document).ready(function() {
+                $('select[name="mainStatus"]').on('change', function() {
+                    var id = $(this).val();
+                    if (id) {
+                        $.ajax({
+                            url: "{{ URL::to('admin/job/substatus') }}/" + id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="subStatus"]').empty();
+                                $.each(data, function(key, value) { //for each loop
+                                    $('select[name="subStatus"]').append('<option value="' +
+                                        value.id + '" selected>' + value.name +
+                                        '</option>');
+                                });
+                            },
+                        });
+
+                    } else {
+                        console.log('AJAX load did not work');
+                    }
+                });
             });
         </script>
     @endpush

@@ -31,7 +31,7 @@ class ApplicationController extends Controller
 
     public function showApplicationForm($id)
     {
-        $job = Job::with('subJobs.title.sector')->findOrFail($id);
+        $job = Job::with(['subJobs.title.sector' , 'subStatus'])->findOrFail($id);
         $titlesArray = $job->subJobs->pluck('title');
         $titles = Title::whereIn('sector_id'  , $job->subJobs->pluck('title.sector.id'))->get();
         $nationalities = DB::table('nationalities')->get();

@@ -108,7 +108,7 @@ class JobController extends Controller
 
             $job = Job::create(array_merge($request->except(['title' , 'sector' , 'salary' , 'quantity' , 'gender' , 'age_limit' , 'nationality']) ,
             [
-                'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()
+                'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()  , 'main_status_id'=> 1 , 'sub_status_id' => 1
                 ]
             ));
             $this->createSubJobs($request->subJob , $job->id);
@@ -224,7 +224,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        $job =Job::with(['subJobs.title' ,'subJobs.nationality' , 'user:id,name' , 'attachments'])
+        $job =Job::with(['subJobs.title' ,'subJobs.nationality' , 'user:id,name' , 'attachments' , 'subStatus'])
         ->with(['subJobs.title.sector' , 'subJobs.nationality'])
         ->findOrFail($id);
         if($job->user->id == Auth::id())
@@ -241,7 +241,7 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        $job = Job::with(['subJobs.title.sector' , 'subJobs.nationality'])->findorFail($id);
+        $job = Job::with(['subJobs.title.sector' , 'subJobs.nationality' , 'subStatus'])->findorFail($id);
         $sectors = Sector::all();
         $nationalities = Nationality::orderBy('name')->get()->chunk(50);
         $currencies = Currency::all();
