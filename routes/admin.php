@@ -62,6 +62,7 @@ use App\Http\Helpers\DemandHelper;
 use App\Http\Livewire\Admin\Views\Roles\AddNewAdmin;
 use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
 use App\Models\BusinessSetting;
+use App\Models\Job;
 use App\Models\Title;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -284,6 +285,14 @@ use LaravelDaily\Invoices\Invoice;
 
 
         Route::post('test' , [DemandHelper::class , 'testInvoice'])->name('invoice.test');
+
+        Route::get('test2'  , function()
+        {
+            $job = Job::with('applications.attachments')->first();
+            $application = $job->applications->first();
+            $fileName = $application->attachments->where('type' , 'Personal Photo')->first()->name;
+            return Storage::get('public/uploads/applications/'.$application->id.'/'.'attachments'.'/'.$fileName);
+        })->name('downlaod.test');
     });
 
 

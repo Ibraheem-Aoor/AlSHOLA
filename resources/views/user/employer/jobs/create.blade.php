@@ -52,8 +52,9 @@
                 font-size: 10px !important;
                 padding: 2px !important;
             }
-            .basicInfo input , select
-            {
+
+            .basicInfo input,
+            select {
                 width: 100% !important;
             }
         </style>
@@ -273,7 +274,8 @@
                                                 <td>
                                                     <select class="form-control" name="joining_ticket">
                                                         <option value="">-- choose one --</option>
-                                                        <option value="Provided by Employer">Provided by Employer"</option>
+                                                        <option value="Provided by Employer">Provided by Employer
+                                                        </option>
                                                         <option value="Not Provided">Not Provided"</option>
                                                     </select>
                                                 </td>
@@ -283,8 +285,10 @@
                                                 <td>
                                                     <select class="form-control" name="return_ticket">
                                                         <option value="">-- choose one --</option>
-                                                        <option value="Every Completion One Year">Every Completion One Year"</option>
-                                                        <option value="Return Ticket">Not Provided"</option>
+                                                        <option value="Every Completion One Year">Every Completion One
+                                                            Year</option>
+                                                        <option value="Every Completion Two Year">Every Completion Two
+                                                            Year</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -292,16 +296,14 @@
                                             <tr>
                                                 <td>Indemnity: </td>
                                                 <td><input type="text" class="form-control"
-                                                        value="As per Labour Law"
-                                                        readonly>
+                                                        value="As per Labour Law" readonly>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td>Overtime salary: </td>
                                                 <td><input type="text" class="form-control"
-                                                        value="As per Labour Law"
-                                                        readonly>
+                                                        value="As per Labour Law" readonly>
                                                 </td>
                                             </tr>
 
@@ -341,9 +343,6 @@
                                                         <option value="Not Provided"
                                                             @if (old('accommodation') == 'Not Provided') selected @endif>
                                                             Not Provided</option>
-                                                        <option value="Duty Meals"
-                                                            @if (old('accommodation') == 'Duty Meals') selected @endif>
-                                                            Duty Meals</option>
                                                         <option value="Allowance"
                                                             @if (old('accommodation') == 'Allowance') selected @endif>
                                                             Allowance</option>

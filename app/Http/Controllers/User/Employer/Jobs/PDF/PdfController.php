@@ -20,7 +20,7 @@ class PdfController extends Controller
             'job' => $job,
         ];
         $pdf = FacadePdf::loadView('user.employer.jobs.pdf.job-pdf', $data);
-        $pdf->setPaper('L');
+        $pdf->setPaper('A4');
         $pdf->output();
         $canvas = $pdf->getDomPDF()->getCanvas();
 
@@ -42,12 +42,13 @@ class PdfController extends Controller
     {
         // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
         // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
-        $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector'])->with('job.title.sector')->findOrFail($id);
+        $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments'])->with('job.title.sector')->findOrFail($id);
         $data = [
             'application' => $application,
         ];
         $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf', $data);
-        $pdf->setPaper('L');
+        $pdf->setPaper('A4');
+
         $pdf->output();
         $canvas = $pdf->getDomPDF()->getCanvas();
 

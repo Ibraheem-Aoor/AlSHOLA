@@ -47,24 +47,22 @@
                                         <th>Salary</th>
                                         <th>Quantity</th>
                                         <th>Nationality</th>
-                                        <th>Descreption</th>
                                     </tr>
                                     @forelse ($job->subJobs as $subjob)
                                         <tr>
-                                            <td>{{ $subjob->title->sector->name}}</td>
+                                            <td>{{ $subjob->title->sector->name }}</td>
                                             <td>{{ $subjob->title->name }}</td>
                                             <td>{{ $subjob->salary }}</td>
                                             <td>{{ $subjob->quantity }}</td>
                                             <td>{{ $subjob->nationality->name }}</td>
-                                            <td>{{ $subjob->description ?? 'as per attachment' }}
-                                            </td>
                                         </tr>
                                     @empty
                                     @endforelse
                                 </table>
                             </div>
                             <div class="row rounded">
-                                <table class="table table-striped basicInfo">
+
+                                <table class="table table-stripped basicInfo" style="font-size: 9px;">
 
                                     <tr>
                                         <td>Working Days:</td>
@@ -87,6 +85,11 @@
                                     </tr>
 
                                     <tr>
+                                        <td>Indemnity: </td>
+                                        <td>As Per Labour Law</td>
+                                    </tr>
+
+                                    <tr>
                                         <td>Food Allowance: </td>
                                         <td>{{ $job->food }} @if ($job->food_amount)
                                                 {{ ' | ' . $job->food_amount }}
@@ -102,6 +105,11 @@
                                     <tr>
                                         <td>Joining Ticket: </td>
                                         <td>{{ $job->joining_ticket }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Return Ticket: </td>
+                                        <td>{{ $job->return_ticket }}</td>
                                     </tr>
 
                                     <tr>
@@ -143,6 +151,7 @@
                                     </tr>
 
                                 </table>
+
                             </div>
 
 
@@ -156,7 +165,7 @@
                             @endisset
 
                             @isset($job->attachments)
-                                <div class="row rounded">
+                                <div class="row rounded mt-5">
                                     <table class="basicInfo table table-striped">
                                         @forelse($job->attachments as $attachment)
                                             <tr>
@@ -189,8 +198,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Job Descreption</h5>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>

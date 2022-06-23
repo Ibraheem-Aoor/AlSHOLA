@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('acceptence_duration');
             $table->string('submission_duration');
             $table->string('completion_duration');
+            $table->string('pay_from');
+            $table->string('pay_to');
             $table->foreignId('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->constrained()->onDelete('cascade'); //because temrms differs from agent to another.
             $table->timestamps();

@@ -16,30 +16,25 @@ class ApplicationStatusSeeder extends Seeder
      */
     public function run()
     {
-        $mainStatuses = ['Active' , 'Hold' , 'Cancelled' , 'Completed'];
+        $mainStatuses = ['Active'  , 'Cancelled' , 'Completed'];
         foreach($mainStatuses as $status)
         {
             ApplicationMainStatus::create(['name' => $status]);
         }
 
         $substatuses =  [
-            'waiting for visa'  , 'CV Submitted' , 'For Selection' , 'waiting for medical'
-            ,'waiting for interview'  , 'Hold' , 'LMRA Process',
-            'Ready for Payment' , 'Embassy' , 'Emigrate Process' , 'To Be Arrived' , 'Arrival Scheduled' , 'Arrived' , 'For Exited' ,
-            'Exited ' , 'Worker Refuse to Work' , 'UNFIT' , 'Runaway' , 'For Local Transfer' , 'Cancelled Application'
+            'Demand Submitted' , 'Demand Under Proccess' , 'Demand Complete' , 'Demand Cancelled'
         ];
 
         foreach($substatuses as $subStatus)
         {
-            if($subStatus == 'Cancelled Application' || $subStatus == 'For Exited' || $subStatus == 'Exited' || $subStatus == 'Worker Refuse to Work' || $subStatus == 'UNFIT' || $subStatus == 'Runaway')
-                $mainStatusId = 3;
-            elseif($subStatus == 'Hold')
-                $mainStatusId = 2;
-            elseif($subStatus == 'Arrived')
-                $mainStatusId = 4;
-            else
+            if($subStatus == 'Demand Submitted' || $subStatus == 'Demand Under Proccess')
                 $mainStatusId = 1;
-
+            elseif($subStatus ==  'Demand Cancelled')
+                $mainStatusId = 2;
+            else
+                $mainStatusId = 3;
+                
             subStatus::create(
                 [
                     'name' => $subStatus ,

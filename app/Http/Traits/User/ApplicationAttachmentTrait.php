@@ -18,9 +18,9 @@ trait  ApplicationAttachmentTrait
     public function uploadApplicationAttachment(Request $request)
     {
         $validate = Validator::make($request->all(),[
-            'file' => 'required|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            'files.*' => 'required|mimes:jpg,jpeg,png,svg,pdf|max:10024',
             'file_type' => 'required|string',
-            'visa_number' => 'sometimes|string',
+            'visa_number' => 'nullable|string',
         ]);
         if($validate->fails())
         {
@@ -28,24 +28,28 @@ trait  ApplicationAttachmentTrait
             return redirect()->back();
         }
 
-        if($request->has('id') && $request->hasFile('file'))
+        if($request->has('id') && $request->hasFile('files'))
         {
             $application = Application::with('job:id')->findOrFail($request->id);
-            $file = $request->file('file');
-            $fileName  = $file->getClientOriginalName();
-            $path = 'public/uploads/applications/'.$application->id.'/'.'attachments'.'/';
-            $file->storeAs($path , $fileName);
-            ApplicationAttachment::create(
-                [
-                    'name' => $fileName,
-                    'user_id' => Auth::id(),
-                    'application_id' => $application->id,
-                    'is_forwarded_talent' => Auth::user()->type == 'Agent' ? true : false,
-                    'is_forwarded_employer' => Auth::user()->type == 'Agent' ? false : true,
-                    'type' => $request->file_type,
-                    'visa_number' => $request->visa_number
-                ]
-            );
+            $files = $request->file('files');
+            foreach($files as $file)
+            {
+                $fileName  = $file->getClientOriginalName();
+                $path = 'public/uploads/applications/'.$application->id.'/'.'attachments'.'/';
+                $file->storeAs($path , $fileName);
+                ApplicationAttachment::create(
+                    [
+                        'name' => $fileName,
+                        'user_id' => Auth::id(),
+                        'application_id' => $application->id,
+                        'is_forwarded_talent' => Auth::user()->type == 'Agent' ? true : false,
+                        'is_forwarded_employer' => Auth::user()->type == 'Agent' ? false : true,
+                        'type' => $request->file_type,
+                        'visa_number' => $request->visa_number
+                    ]
+                );
+        }
+
             notify()->success('File Uploaded Successfully');
             return redirect()->back();
         }//end if

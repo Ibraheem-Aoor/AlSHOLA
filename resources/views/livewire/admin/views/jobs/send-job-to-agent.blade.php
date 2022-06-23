@@ -166,20 +166,31 @@
 
                                     <div class="container">
                                         <div class="row">
-
                                             <div class="col-sm-4">
                                                 <label for="">Accept/Reject Duration:</label>
-                                                <input type="text" class="form-control" name="acceptence_duration">
+                                                <input type="text" class="form-control" required name="acceptence_duration">
                                             </div>
                                             <div class="col-sm-4">
                                                 <label for="">CV Submission Duration:</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" required
                                                     name="submission_duration">
                                             </div>
                                             <div class="col-sm-4">
                                                 <label for="">Completion Duration:</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" required
                                                     name="completion_duration">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="">Pay From:</label>
+                                                <select name="pay_from" class="form-control" required>
+                                                    <option value="Alshoala" selected>ALSOHALA</option>
+                                                    <option value="Agent">AGENT</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="">Pay To:</label>
+                                                <input type="text" class="form-control" required
+                                                    name="pay_to" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -239,7 +250,16 @@
 
                         <script>
                             $('#submitForm').on('click', function() {
+                            });
+                        </script>
 
+                        <script>
+                            $('select[name="pay_from"]').on('change' , function()
+                            {
+                                if(this.value == 'Alshoala')
+                                    $('input[name="pay_to"]').val('Agent');
+                                else
+                                    $('input[name="pay_to"]').val('Alshoala');
                             });
                         </script>
                     @endpush

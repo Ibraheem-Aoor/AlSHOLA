@@ -96,6 +96,11 @@
                                     </tr>
 
                                     <tr>
+                                        <td>Return Ticket: </td>
+                                        <td>{{ $job->return_ticket }}</td>
+                                    </tr>
+
+                                    <tr>
                                         <td>Annual Leave: </td>
                                         <td>{{ $job->annual_leave }}</td>
                                     </tr>
@@ -160,8 +165,9 @@
                         </p>
                         <br>
                         <p>
-                            <a href="{{route('job.pdf.generate' , $job->id)}}" class="btn btn-outline-success"><i class="fa fa-download"></i> Download PDF</a>
-                            </p>
+                            <a href="{{ route('job.pdf.generate', $job->id) }}" class="btn btn-outline-success"><i
+                                    class="fa fa-download"></i> Download PDF</a>
+                        </p>
                         </p>
                     </div>
                 </div>
@@ -231,8 +237,9 @@
                         <option value="other">Other</option>
                     </select>
                     <br>
-                    <textarea class="form-control" id="other_reason" name="other_reason" name="other_reason"
-                        placeholder="Tell Us The Resaon"></textarea>
+                        <textarea class="form-control" id="other_reason" name="other_reason"
+                            placeholder="Tell Us The Resaon" style="display: none;"></textarea>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -342,11 +349,12 @@
             // $('textarea[name="other_reason"]').removeAttr('name');
             $('#other_reason').hide();
             $('select[name="refuseReason"]').on('change', function() {
-                if ($(this).val() == 'other') {
+                var otherReason = $(this).val();
+                if (otherReason == 'other') {
                     $('#other_reason').show();
                 } else {
                     $('#other_reason').hide();
-                    $('#other_reason').removeAttr('name');
+                    $('#other_reason').removeAttribute('name');
                 }
 
             })

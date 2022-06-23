@@ -330,7 +330,7 @@
                                                 <td>
                                                     <div>
                                                         <label>Employer Photo:</label>
-                                                        <input type="file" class="form-control" name="photo"
+                                                        <input type="file"  required class="form-control" name="photo"
                                                             id="photo">
                                                         @error('weihgt')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -586,7 +586,7 @@
                                                             name="addMoreEducationRecords[0][degree]"
                                                             placeholder="Enter Degree" class="form-control" />
                                                     </td>
-                                                    <td><input type="text" required
+                                                    <td><input type="number" required
                                                             name="addMoreEducationRecords[0][year]"
                                                             placeholder="Enter Year" class="form-control" />
                                                     </td>
@@ -676,22 +676,22 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Passport Attachment: </label>
-                                            <input type="file" class="form-control" name="files['passport']"
+                                            <input type="file" required  class="form-control" name="files['passport']"
                                                 id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Medical Attachment: </label>
-                                            <input type="file" class="form-control" name="files['medical']"
+                                            <input type="file" required  class="form-control" name="files['medical']"
                                                 id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Experince Attachment:</label>
-                                            <input type="file" class="form-control" name="files['experince']"
+                                            <input type="file" required  class="form-control" name="files['experince']"
                                                 id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Eucation Attachment:</label>
-                                            <input type="file" class="form-control" name="files['education']"
+                                            <input type="file" required  class="form-control" name="files['education']"
                                                 id="">
                                         </div>
                                         <div>
@@ -774,7 +774,7 @@
             ++i;
             $("#dynamicAddRemoveEdu").append(
                 '<tr><td><input type="text" name="addMoreEducationRecords[' + i +
-                '][degree]" placeholder="Enter Degree"  required class="form-control" /></td><td><input type="text" name="addMoreEducationRecords[' +
+                '][degree]" placeholder="Enter Degree"  required class="form-control" /></td><td><input type="number" name="addMoreEducationRecords[' +
                 i +
                 '][year]" placeholder="Enter Year" required class="form-control" /></td><td><input type="text" name="addMoreEducationRecords[' +
                 i +

@@ -94,11 +94,10 @@
 
 
                                             <a href="#exampleModal_5" data-toggle="modal" title="upload attachment"
-                                                data-title="{{ $job->title }}"
                                                 data-number="{{ $job->post_number }}"
                                                 data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
                                             </a>
-                                            
+
 
                                             </ul>
                     </div>

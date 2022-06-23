@@ -3,6 +3,10 @@
 
 <head>
     <style>
+        *{
+            margin: 0 !important;
+            padding:0 !important;
+        }
         table {
             font-family: arial, sans-serif;
             font-size: 10px;
@@ -29,7 +33,10 @@
             display: inline-block;
             margin: 0px 30px;
         }
-
+        body
+        {
+            height: 3508px !important;
+        }
     </style>
 </head>
 
@@ -52,7 +59,7 @@
             <td>{{ $application->job->created_at }}</td>
         </tr>
     </table> --}}
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}"   width="5%" >
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="5%">
     <h3>Application Information</h3>
     <div style="background: #f7ff9c" class="fromDiv">
         <p>
@@ -67,11 +74,11 @@
     </div>
     <br>
     @php
-        $photo = \App\Models\ApplicationAttachment::where('type' , 'Personal Photo')->first()->name;
+        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
         echo $photo;
     @endphp
-    <img src="{{asset('uploads/applications/'.$application->id.'/attachments'.'/'.$photo)}}" width="200" height="200"
-        style="margin-left:70%;border: 1px solid black;">
+    <img src="{{ asset(Storage::get('public/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo)) }}"
+        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <table style="margin-top: -150px">
         <tr>
             <td>Ref: {{ $application->ref }}</td>

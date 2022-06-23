@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use Throwable;
 
 class ApplicationController extends Controller
 {
@@ -72,14 +72,21 @@ class ApplicationController extends Controller
     {
 
         $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId ,
-                'title_id' => $request->get('title') , 'main_status_id' => 1 , 'sub_status_id' => 7 ]));
+                'title_id' => $request->get('title') , 'main_status_id' => 1 , 'sub_status_id' => 1 ]));
+        try
+        {
+            $this->createEducationRecords($request->addMoreEducationRecords , $application->id);
+            $this->createEmoployersRecords($request->addMoreInputFields  ,  $application->id);
+            $this->storeApplicationAttachments($request->file('files'), $application->id);
+            $this->storePersonalPhoto($request->file('photo') , $application->id);
+            notify()->success('Application Send Successfully');
+            return redirect(route('employee.dashboard'));
+        }catch(Throwable $e)
+        {
+            notify()->error('something went wrong');
+            return redirect(route('employee.dashboard'));
+        }
 
-        $this->createEducationRecords($request->addMoreEducationRecords , $application->id);
-        $this->createEmoployersRecords($request->addMoreInputFields  ,  $application->id);
-        $this->storeApplicationAttachments($request->file('files'), $application->id);
-        $this->storePersonalPhoto($request->file('photo') , $application->id);
-        notify()->success('Application Send Successfully');
-        return redirect(route('employee.dashboard'));
     }//end method
 
     /**

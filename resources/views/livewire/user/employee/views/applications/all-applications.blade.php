@@ -46,13 +46,12 @@
                                         <td>{{ $application->created_at }}</td>
                                         <td>
                                             @switch($application->subStatus->name)
-                                                @case('waiting for medical')
+                                                @case('Demand Under Proccess')
                                                     @php
-                                                        $title[$i] = 'Upload Medical File';
-                                                        $file_type[$i] = 'visa';
+                                                        $title[$i] = 'Upload Medical/Agreement File(s)';
+                                                        $file_type[$i] = 'visa/medical/agreement';
                                                     @endphp
                                                 @break
-
                                                 @default
                                                     @php
                                                         $title[$i] = null;
@@ -101,8 +100,8 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group col-sm-6 mb-3">
-                                        <label for="" style="font-weight: 600" id="title">UPLOAD FILE</label>
-                                        &nbsp; &nbsp; <input type="file" name="file" required>
+                                        <label for="" style="font-weight: 600" id="title">UPLOAD</label>
+                                        &nbsp; &nbsp; <input type="file" name="files[]" required multiple>
                                         <input type="text" id="type" name="file_type" hidden>
                                         <input type="text" id="id" name="id" hidden>
                                     </div>

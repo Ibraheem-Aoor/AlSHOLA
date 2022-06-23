@@ -264,7 +264,7 @@
                                                     @endforelse
                                                 </table>
                                                 <br>
-                                                <table class="table table-striped basicInfo">
+                                                <table class="table table-striped  basicInfo">
 
                                                     <tr>
                                                         <td>Working Days:</td>
@@ -287,6 +287,11 @@
                                                     </tr>
 
                                                     <tr>
+                                                        <td>Indemnity: </td>
+                                                        <td>As Per Labour Law</td>
+                                                    </tr>
+
+                                                    <tr>
                                                         <td>Food Allowance: </td>
                                                         <td>{{ $job->food }} @if ($job->food_amount)
                                                                 {{ ' | ' . $job->food_amount }}
@@ -302,6 +307,11 @@
                                                     <tr>
                                                         <td>Joining Ticket: </td>
                                                         <td>{{ $job->joining_ticket }}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Return Ticket: </td>
+                                                        <td>{{ $job->return_ticket }}</td>
                                                     </tr>
 
                                                     <tr>
@@ -337,13 +347,13 @@
 
                                                         <td>
                                                             Employer is liable for any additional fees, imposed by
-                                                            official authorities
-                                                            inside employer country
+                                                            official authorities inside employer country
                                                         </td>
 
                                                     </tr>
 
                                                 </table>
+
 
                                             </div>
                                         </div>
@@ -879,12 +889,6 @@
                                                 <option value="cancelled">cancelled</option>
                                                 <option value="active">active</option>
                                                 <option value="completed">completed</option>
-                                                <option value="pending">pending</option>
-                                                <option value="Demand Submitted">Demand Submitted</option>
-                                                <option value="Demand Accepted">Demand Accepted</option>
-                                                <option value="Demand Under Process">Demand Under Process</option>
-                                                <option value="Demand Completed">Demand Completed</option>
-                                                <option value="Demand Canceled">Demand Canceled</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
@@ -924,8 +928,6 @@
                                                         {{ $application->user->name }}</option>
                                                 @endforeach
                                             </select>
-                                            {{-- <input type="text" placeholder="VAT" class="form-control"
-                                                name="vat"> --}}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -944,11 +946,11 @@
     </div>
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
 
         <script>

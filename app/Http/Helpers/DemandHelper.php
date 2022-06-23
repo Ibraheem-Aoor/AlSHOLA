@@ -71,6 +71,8 @@ class DemandHelper
                 'acceptence_duration' => $request->acceptence_duration ,
                 'submission_duration' => $request->submission_duration ,
                 'completion_duration' => $request->completion_duration ,
+                'pay_from' => $request->pay_from ,
+                'pay_to' => $request->pay_to ,
             ]);
         }
     }//end method
