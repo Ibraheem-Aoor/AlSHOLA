@@ -99,7 +99,7 @@
                                                                         {{ $application->title->name }}
                                                                     </div>
                                                                     <div class="text-right">
-                                                                        <img src="{{ Storage::url('/uploads/applications/' . $application->id . '/attachments' . '/' . $application->attachments->where('type', 'Personal Photo')->first()->name) }}"
+                                                                        <img src="{{ Storage::url('uploads/applications/' . $application->id . '/attachments' . '/' . $application->attachments->where('type', 'Personal Photo')->first()->name) }}"
                                                                             width="200" height="200"
                                                                             style="margin-left:70%;border: 1px solid black;">
                                                                     </div>
