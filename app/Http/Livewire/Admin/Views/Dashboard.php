@@ -35,8 +35,8 @@ class Dashboard extends Component
                             // 'totalArrived' => Job::with('applications.subStatus' , 'applications')->where('applications' , function($q)
                             // {
                             //         $q->where('subStatus.name' , 'Arrived');
-                            // })->count(),
-                            'totalToBeSupply' => Job::where('status' , 'pending')->count(),
+                            // // })->count(),
+                            // 'totalToBeSupply' => Job::where('status' , 'pending')->count(),
                             'allDemands' => $demands,
 
 
