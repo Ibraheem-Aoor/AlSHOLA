@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('post_number');
             $table->enum('status' , [
                 'completed' , 'active' , 'cancelled' , 'pending' ,
-                ])->default('Demand Submitted');
+                ])->default('active');
             $table->text('description')->nullable(true);
             $table->string('contract_period')
             ->default('2 Years')
