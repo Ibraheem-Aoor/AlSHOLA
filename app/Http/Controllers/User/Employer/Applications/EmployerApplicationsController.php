@@ -31,7 +31,7 @@ class EmployerApplicationsController extends Controller
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $applications = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded' , true)
-                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'job.subStatus'])->with('job.subJobs.title.sector')->withCount('attachments')
+                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
                         ->simplePaginate(15);
         return view('user.employer.applications.all-applications' , compact('applications'));
     }//end mthod
@@ -46,7 +46,7 @@ class EmployerApplicationsController extends Controller
         $user = User::findOrFail(Auth::id());
         $applications  = Application::whereJobId($id)
                         ->where('forwarded' , true)
-                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'job.subStatus' , 'attachments' ])
+                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus' , 'attachments' ])
                         ->withCount('attachments')
                         ->with(['job.subJobs' , 'job.subStatus'])
                         ->simplePaginate(15);
