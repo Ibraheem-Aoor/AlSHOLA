@@ -84,7 +84,7 @@
             </p>
             @isset($application->user->responsible_person)
                 <p>
-                    Represntative: {{ $job->user->responsible_person }}
+                    Represntative: {{ $application->user->responsible_person }}
                 </p>
             @endisset
             <p>
@@ -99,7 +99,7 @@
                 Al Shoala Recruitment Service W.L.L
             </p>
             <p>
-                Job No: {{ $job->post_number }}
+                Job No: {{ $application->job->post_number }}
             </p>
         </div>
     </div>
