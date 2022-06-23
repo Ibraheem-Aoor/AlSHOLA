@@ -48,7 +48,7 @@ class EmployerApplicationsController extends Controller
                         ->where('forwarded' , true)
                         ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus' , 'attachments' ])
                         ->withCount('attachments')
-                        ->with(['job.subJobs' , 'jobb.subStatus'])
+                        ->with(['job.subJobs' , 'job.subStatus'])
                         ->simplePaginate(15);
         return view('user.employer.applications.all-applications' , compact('applications'));
     }
