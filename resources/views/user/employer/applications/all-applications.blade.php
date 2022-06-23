@@ -40,7 +40,7 @@
                                         <td>{{ $application->user->name }}</td>
                                         <td>{{ $application->subStatus->name }}</td>
                                         <td><a
-                                                href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments->count() }}</a>
+                                                href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>
                                         </td>
                                         <td>{{ $application->created_at }}</td>
                                         <td>
