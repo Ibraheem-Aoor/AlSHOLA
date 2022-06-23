@@ -42,7 +42,7 @@
 
         .parent {
             /* border: 1px solid black; */
-            /* margin: 1rem; */
+            margin-top:10px !important;
             padding: 2rem 2rem;
             text-align: center;
         }
@@ -111,7 +111,7 @@
     @php
         $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
     @endphp
-    <img src="{{ asset('storage/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo) }}"
+    <img src="{{ asset('storage/uploads/applications/'.$application->id.'/'.'attachments'.'/'. $photo) }}"
         width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <br>
     <table style="margin-top: -150px">
