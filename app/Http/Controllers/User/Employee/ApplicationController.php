@@ -156,7 +156,7 @@ class ApplicationController extends Controller
     public function allApplications()
     {
         $applications = Application::where('user_id' , Auth::id())
-                        ->with(['job.title' , 'mainStatus.subStatus' , 'mainStatus' , 'subStatus' ])
+                        ->with(['job.title' , 'mainStatus.subStatus' , 'mainStatus' , 'job.subStatus' ])
                         ->with('job.user:id,name')
                         ->with('job.subJobs.title.sector')
                         ->withCount('notes')
@@ -188,7 +188,7 @@ class ApplicationController extends Controller
     {
         $applications = Application::whereBelongsTo(Auth::user())
                         ->where('status' , 'waiting for medical')
-                        ->with(['job.title'])
+                        ->with(['job.title' , 'job.subStatus'])
                         ->withCount('notes')
                         ->orderByDesc('id')
                         ->simplePaginate();

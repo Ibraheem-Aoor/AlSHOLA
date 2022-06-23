@@ -46,7 +46,7 @@ class EmployerApplicationsController extends Controller
         $user = User::findOrFail(Auth::id());
         $applications  = Application::whereJobId($id)
                         ->where('forwarded' , true)
-                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus' , 'attachments' ])
+                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'job.subStatus' , 'attachments' ])
                         ->withCount('attachments')
                         ->with(['job.subJobs' , 'job.subStatus'])
                         ->simplePaginate(15);
