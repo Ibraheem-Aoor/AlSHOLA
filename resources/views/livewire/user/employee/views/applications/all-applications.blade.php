@@ -49,7 +49,7 @@
                                                 @case('Demand Under Proccess')
                                                     @php
                                                         $title[$i] = 'Upload Medical/Agreement File(s)';
-                                                        $file_type[$i] = 'visa/medical/agreement';
+                                                        $file_type[$i] = 'medical/agreement';
                                                     @endphp
                                                 @break
                                                 @default
