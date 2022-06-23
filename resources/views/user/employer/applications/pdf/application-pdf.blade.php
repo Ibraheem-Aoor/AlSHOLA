@@ -37,7 +37,21 @@
 
         body {
             height: 3508px !important;
-            padding:5px !important;
+            padding: 5px !important;
+        }
+
+        .parent {
+            /* border: 1px solid black; */
+            /* margin: 1rem; */
+            padding: 2rem 2rem;
+            text-align: center;
+        }
+
+        .child {
+            display: inline-block;
+            border: 1px solid #000;
+            padding: 1rem 1rem;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -63,16 +77,31 @@
     </table> --}}
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%">
     <h3>Application Information</h3>
-    <div style="background: #f7ff9c" class="fromDiv">
-        <p>
-            From: {{ $application->user->name }}
-        </p>
-        <p>
-            E-mail: {{ $application->user->email }}
-        </p>
-        <p>
-            Mobile: {{ $application->user->mobile }}
-        </p>
+    <div class="parent" style="margin-top:3%;">
+        <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
+            <p>
+                Agent Name: {{ $application->user->name }}
+            </p>
+            @isset($application->user->responsible_person)
+                <p>
+                    Represntative: {{ $job->user->responsible_person }}
+                </p>
+            @endisset
+            <p>
+                Mobile: {{ $application->user->mobile }}
+            </p>
+            <p>
+                E-mail: {{ $application->user->email }}
+            </p>
+        </div>
+        <div class="child" style="background: #f7ff9c" class="child" style="font-weight: 500;">
+            <p>
+                Al Shoala Recruitment Service W.L.L
+            </p>
+            <p>
+                Job No: {{ $job->post_number }}
+            </p>
+        </div>
     </div>
     <div style="font-size: 13px;font-weight:600;">
         <h4>Demand Information:</h4>
@@ -82,8 +111,8 @@
                 <th>Creation_Date</th>
             </tr>
             <tr>
-                <td>{{$application->job->post_number}}</td>
-                <td>{{$application->job->created_at}}</td>
+                <td>{{ $application->job->post_number }}</td>
+                <td>{{ $application->job->created_at }}</td>
             </tr>
         </table>
     </div>
@@ -91,7 +120,7 @@
     @php
         $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
     @endphp
-     <img src="{{ asset(Storage::get('public/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo)) }}"
+    <img src="{{ file_get_contents(asset(Storage::get('public/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $photo))) }}"
         width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <table style="margin-top: -150px">
         <tr>
