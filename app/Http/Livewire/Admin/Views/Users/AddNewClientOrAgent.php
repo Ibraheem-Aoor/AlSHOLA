@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Views\Users;
 
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Nationality;
@@ -66,6 +67,7 @@ class AddNewClientOrAgent extends Component
             ]
         );
         $this->uploadAttachments($user->id);
+        HistoryRecordHelper::registerUserManagementLog("$this->type Created" . '<a href="/admin/profile/'.$user->id.'">'.'( '.$user->registration_No.' )'.'</a>');
         notify()->success($this->intendedUserType.' Created Successfully');
         return redirect(route($this->currentRoute));
     }
@@ -76,7 +78,7 @@ class AddNewClientOrAgent extends Component
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'country' => 'required|string',
-            'registerationNo' => 'required|string',
+            'registerationNo' => 'required|string|unique:users,registration_No,'.$this->id,
             'resposebilePerson' => 'required|string',
             'titlePosition' => 'required|string',
             'mobile' => 'required|numeric',

@@ -1,16 +1,19 @@
 <div>
-    @section('title', 'AlSHLOA - Admin | DEMAND HISTORY')
-    <style>
-        .table-stats table th,
-        .table-stats table td {
-            border: none;
-            border-bottom: 1px solid #e8e9ef;
-            color: #868e96;
-            font-size: 12px;
-            font-weight: normal;
-            padding: .75em 1.25em;
-        }
-    </style>
+    @section('title', 'ALSHOALA - Admin | DEMAND HISTORY')
+    @push('css')
+        <style>
+            .table-stats table th,
+            .table-stats table td {
+                border: none;
+                border-bottom: 1px solid #e8e9ef;
+                color: #868e96;
+                font-size: 12px;
+                font-weight: normal;
+                padding: .75em 1.25em;
+                text-transform: none;
+            }
+        </style>
+    @endpush
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -20,7 +23,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">Demand List</h4>
+                                <h4 class="box-title">User Mangament History</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -29,6 +32,7 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>User</th>
+                                                <th>User E-mail</th>
                                                 <th>Action</th>
                                                 <th>date</th>
                                             </tr>
@@ -39,9 +43,12 @@
                                             @endphp
                                             @forelse($histories as $history)
                                                 <tr>
-                                                    <td class="serial">{{ $i }}</td>
+                                                    <td class="serial">{{ $i++ }}</td>
                                                     <td>
-                                                        {{ $history->actor->name }}
+                                                        {{ $history->actor->name . ' (' . $history->actor->type . ' )' }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $history->actor->email }}
                                                     </td>
                                                     <td style="text-transform:none;">
                                                         {!! Str::lower($history->action) !!}
@@ -60,6 +67,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
+                                    {{ $histories->links() }}
                                 </div> <!-- /.table-stats -->
                             </div>
                         </div> <!-- /.card -->

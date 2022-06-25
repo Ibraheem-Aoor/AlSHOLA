@@ -86,7 +86,7 @@
 
 
 @extends('layouts.front.master')
-@section('title', 'ALSHOLA | SignUp')
+@section('title', 'ALSHOALA | SignUp')
 @section('content')
     @php
     $page = 'SignUp';
@@ -162,7 +162,7 @@
                                                 <option value="" selected>Who Are You?</option>
                                                 <option value="Client">Client</option>
                                                 <option value="Agent">Agent</option>
-                                                {{-- <option value="Broker">AlSHOLA - Broker</option> --}}
+                                                {{-- <option value="Broker">ALSHOALA - Broker</option> --}}
                                             @endif
                                         </select>
                                         <label><i class="fa fa-category"></i> </label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Views\Applications;
 
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Models\Application;
 use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationNote;
@@ -34,6 +35,7 @@ class ApplicationDetails extends Component
     {
         $this->application->forwarded = true;
         $this->application->save();
+        HistoryRecordHelper::registerApplicationLog('Application Sended To Employer' .'<a href="/admin/application/'.$this->application->id.'/details">'.'( '.$this->application->ref.' )'.'</a>');
         notify()->success('Application Sended Successfully');
         return redirect(route('admin.applications.all'));
     }
@@ -51,6 +53,7 @@ class ApplicationDetails extends Component
                 'message' => $this->note,
             ]
         );
+        HistoryRecordHelper::registerApplicationLog('Application PDF Printing' .'<a href="/admin/application/'.$this->application->id.'/details">'.'( '.$this->application->ref.' )'.'</a>');
         notify()->success('Note Sended Successfully');
         return redirect(route($this->currentRoute , $this->application->id));
     }

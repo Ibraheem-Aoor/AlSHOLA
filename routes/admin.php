@@ -59,7 +59,11 @@ use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
 use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
 use App\Http\Helpers\DemandHelper;
-use App\Http\Livewire\Admin\Views\Histroy\DemandHistory;
+use App\Http\Livewire\Aadmin\Views\History\ApplicationHistory;
+use App\Http\Livewire\Admin\Views\History\ApplicationHistory as HistoryApplicationHistory;
+use App\Http\Livewire\Admin\Views\History\AuthenticationHistory;
+use App\Http\Livewire\Admin\Views\History\DemandHistory;
+use App\Http\Livewire\Admin\Views\History\UserManagementHistory;
 use App\Http\Livewire\Admin\Views\Roles\AddNewAdmin;
 use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
 use App\Models\BusinessSetting;
@@ -124,6 +128,9 @@ use LaravelDaily\Invoices\Invoice;
 
         //History Recoreds Rotues:
         Route::get('/history/demand' ,  DemandHistory::class)->name('admin.history.demand');
+        Route::get('/history/application' ,  HistoryApplicationHistory::class)->name('admin.history.application');
+        Route::get('/history/user' ,  UserManagementHistory::class)->name('admin.history.user');
+        Route::get('/history/auth' ,  AuthenticationHistory::class)->name('admin.history.auth');
 
 
         // Download job attachments

@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'ALSHOLA | AVILABLE JOBS')
+    @section('title', 'ALSHOALA | AVILABLE JOBS')
     <div class="container-xxl py-5">
         <div class="container">
             @php

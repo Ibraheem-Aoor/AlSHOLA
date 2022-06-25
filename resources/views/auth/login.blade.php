@@ -1,5 +1,5 @@
 @extends('layouts.front.master')
-@section('title', 'ALSHOLA | LogIn')
+@section('title', 'ALSHOALA | LogIn')
 @section('content')
     @php
     $page = 'LogIn';

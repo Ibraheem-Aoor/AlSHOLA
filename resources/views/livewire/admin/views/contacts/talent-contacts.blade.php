@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'AlSHLOA - Admin | Agents Contacts')
+    @section('title', 'ALSHOALA - Admin | Agents Contacts')
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -39,7 +39,7 @@
                                                     <td>{{ Str::limit($contact->message, 40, '...') }}
                                                     </td>
                                                     <td>{{ $contact->created_at }}</td>
-                                                    <td> 
+                                                    <td>
                                                         <a data-toggle="modal" data-message="{{ $contact->message }}"
                                                             href="#exampleModal_5" class="text-primary"><i
                                                                 class="fa fa-eye"></i></a>

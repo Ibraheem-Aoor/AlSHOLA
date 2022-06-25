@@ -1,5 +1,5 @@
 @extends('layouts.user.employer.master')
-@section('title', 'ALSHOLA | ALL JOB POSTS')
+@section('title', 'ALSHOALA | ALL JOB POSTS')
 
 @section('content')
     <div>

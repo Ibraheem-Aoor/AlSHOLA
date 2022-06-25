@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Employer\Jobs\PDF;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Models\Application;
 use App\Models\Job;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
@@ -31,17 +32,17 @@ class PdfController extends Controller
 
         // $canvas->set_opacity(.2);
 
-        $canvas->page_text($width/5, $height/2, 'ALSHOLA.com', null,
+        $canvas->page_text($width/5, $height/2, 'ALSHOALA.com', null,
         55, array(0,0,0),2,2,-30);
-        return $pdf->download('ALSHOLA-JOB-'.$job->post_number.'.pdf');
+        HistoryRecordHelper::registerDemandLog('Demand PDF Printing' .'<a href="/admin/demand/'.$this->job->id.'/details">'.'( '.$this->job->post_number.' )'.'</a>');
+
+        return $pdf->download('ALSHOALA-JOB-'.$job->post_number.'.pdf');
     }//end method
 
 
 
     public function generateApplicationPDF($id)
     {
-        // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
-        // FacadePdf::setOptions(['isRemoteEnabled' => TRUE, 'enable_javascript' => TRUE]);
         $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments'])->with('job.title.sector')->findOrFail($id);
         $data = [
             'application' => $application,
@@ -59,9 +60,10 @@ class PdfController extends Controller
 
         // $canvas->set_opacity(.2);
 
-        $canvas->page_text($width/5, $height/2, 'ALSHOLA.com', null,
+        $canvas->page_text($width/5, $height/2, 'ALSHOALA.com', null,
         55, array(0,0,0),2,2,-30);
-        return $pdf->download('ALSHOLA-Application-'.$application->ref.'.pdf');
+        HistoryRecordHelper::registerApplicationLog('Application PDF Printing' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
+        return $pdf->download('ALSHOALA-Application-'.$application->ref.'.pdf');
     }//end method
 
 }

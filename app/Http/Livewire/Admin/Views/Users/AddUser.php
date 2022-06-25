@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Views\Users;
 
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Nationality;
@@ -21,6 +22,7 @@ class AddUser extends Component
     {
         $this->validate($this->rules());
         $user = User::create([
+            'registration_No' => $this->type[0].' - '.$this->generateRegisterationNo(), //the first letter of his type with the new number
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
@@ -29,8 +31,8 @@ class AddUser extends Component
             'company_id' => $this->company,
             'country_id' => $this->country,
             'mobile' => $this->mobile,
-
         ]);
+        HistoryRecordHelper::registerUserManagementLog("$this->type Created" . '<a href="/admin/profile/'.$user->id.'">'.'( '.$user->registration_No.' )'.'</a>');
         notify()->success('User Addedd Successfully');
         return redirect(route('admin.dashboard'));
     }
@@ -53,6 +55,27 @@ class AddUser extends Component
             'company' => 'required',
             'country' => 'required',
             ];
+    }
+
+
+
+    //Generating a registeration Number for the new
+    function generateRegisterationNo() {
+        $number = date('y').mt_rand(1000000, 9999999); // better than rand()
+
+        // call the same function if the barcode exists already
+        if ($this->registerationNoExists($number)) {
+            return $this->generateRegisterationNo();
+        }
+
+        // otherwise, it's valid and can be used
+        return $number;
+    }
+
+    function registerationNoExists($number) {
+        // query the database and return a boolean
+        // for instance, it might look like this in Laravel
+        return User::where('registration_No' , $number)->exists();
     }
 
     public function render()

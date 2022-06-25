@@ -42,6 +42,7 @@ class DemandHelper
                 $this->deleteOldTerms($job);
             $this->saveJobTerms($request , $job);
             $this->sendJobToAgent($request->agent , $job);
+            HistoryRecordHelper::registerDemandLog('Demand Forwarded To Agent' .'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
             notify()->success('Demand Sended Successfully');
             return redirect()->back();
         }catch(Throwable $e)
@@ -60,14 +61,14 @@ class DemandHelper
 
     public function saveJobTerms($request , $job)
     {
-        foreach($request->demandTerms as $term)
+foreach($request->demandTerms as $term)
         {
             DemandTerms::create([
                 'user_id' => $request->agent,
                 'job_id' => $job->id,
                 'currency' => $request->currency,
                 'title' => $term['title'],
-                'serivce_charge' => $term['service_charge'],
+                        'serivce_charge' => $term['service_charge'],
                 'per' => $term['per'],
                 'acceptence_duration' => $request->acceptence_duration ,
                 'submission_duration' => $request->submission_duration ,
@@ -206,6 +207,7 @@ class DemandHelper
         $job->sub_status_id = $request->subStatus;
         $job->main_status_id = $request->mainStatus;
         $job->save();
+        HistoryRecordHelper::registerDemandLog('Status Changed'.'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
         notify()->success('Demand status changed Successfully');
         return redirect()->back();
     }

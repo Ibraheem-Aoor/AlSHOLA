@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'ALSHOLA - Admin | NEW JOB POST')
+    @section('title', 'ALSHOALA - Admin | NEW JOB POST')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">

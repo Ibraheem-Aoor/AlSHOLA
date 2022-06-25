@@ -26,7 +26,7 @@ class BusinessSettingSeeder extends Seeder
             Bldg 41, Road 3201, Block 332,
             Manama / Bu Ashira, Bahrain,',
             'telephone' => '+973 17720041',
-            'email' => 'info@alshola.com',
+            'email' => 'info@ALSHOALA.com',
 
 
             //Seo

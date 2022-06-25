@@ -1,5 +1,5 @@
 @extends('layouts.front.master')
-@section('title' , 'ALSHOLA | INDUSTRIES')
+@section('title' , 'ALSHOALA | INDUSTRIES')
 @section('content')
     @php
     $page = 'INDUSTRIES';

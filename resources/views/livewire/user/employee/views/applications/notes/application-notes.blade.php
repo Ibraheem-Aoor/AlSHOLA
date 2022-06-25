@@ -1,5 +1,5 @@
 @extends('layouts.user.employee.master')
-@section('title', 'ALSHOLA | AVILABLE JOBS')
+@section('title', 'ALSHOALA | AVILABLE JOBS')
 @section('content')
     <div class="container-xxl py-5">
         <div class="container">

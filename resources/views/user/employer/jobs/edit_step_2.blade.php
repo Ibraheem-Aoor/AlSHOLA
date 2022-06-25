@@ -1,5 +1,5 @@
 @extends('layouts.user.employer.master')
-@section('title', 'ALSHOLA | ADD NEW JOB')
+@section('title', 'ALSHOALA | ADD NEW JOB')
 
 @section('content')
     @push('css')

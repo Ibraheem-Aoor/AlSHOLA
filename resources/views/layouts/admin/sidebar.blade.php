@@ -175,9 +175,11 @@
                           <li><i class="menu-icon fa fa-users"></i><a
                                   href="{{ route('admin.history.demand') }}">Deamnd Recored</a></li>
                           <li><i class="menu-icon fa fa-users"></i><a
-                                  href="{{ route('admin.contacts.talents') }}">Application Recored</a></li>
+                                  href="{{ route('admin.history.application') }}">Application Recored</a></li>
                           <li><i class="menu-icon fa fa-users"></i><a
-                                  href="{{ route('admin.contacts.guests') }}">Authentication Recored</a></li>
+                                  href="{{ route('admin.history.user') }}">User Managament Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.history.auth') }}">Authentication Recored</a></li>
                       </ul>
                   </li>
               @endcan

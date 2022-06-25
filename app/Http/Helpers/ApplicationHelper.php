@@ -39,6 +39,7 @@ class ApplicationHelper
         $application->save();
         $historyNewStatus = subStatus::findOrFail($request->subStatus)->name;
         $this->makeHistoryRecord($historyPrevStatus , $historyNewStatus , $application->id);
+        HistoryRecordHelper::registerApplicationLog('Application Status Changed' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
         notify()->success('application status changed Successfully');
         return redirect()->back();
     }

@@ -1,5 +1,5 @@
 <div>
-    @section('title' , 'AlSHLOA - Admin | ADD USER')
+    @section('title' , 'ALSHOALA - Admin | ADD USER')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
@@ -67,7 +67,7 @@
                                                 {{-- <option value="">Personal</option> --}}
                                                 <option value="Agent">Agent</option>
                                                 <option value="Client">Client</option>
-                                                <option value="Broker">AlSHLOA - Broker</option>
+                                                <option value="Broker">ALSHOALA - Broker</option>
                                                 <option value="Personal">Personal</option>
                                             </select>
                                             @error('type')

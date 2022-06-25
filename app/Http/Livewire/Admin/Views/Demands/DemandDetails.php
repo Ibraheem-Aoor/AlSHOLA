@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Views\Demands;
 
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\JobMainStatus;
@@ -40,6 +41,7 @@ class DemandDetails extends Component
             'user_id' => Auth::id(),
             'seen' => true,
         ]);
+        HistoryRecordHelper::registerDemandLog('Demand Note Sended'.'<a href="/admin/demand/'.$this->job->id.'/details">'.'( '.$this->job->post_number.' )'.'</a>');
         notify()->success('Note Sended Successfully');
         return redirect(route('admin.demand.details' , $this->job->id));
     }

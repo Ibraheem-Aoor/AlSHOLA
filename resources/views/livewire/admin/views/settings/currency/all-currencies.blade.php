@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'AlSHLOA - Admin | NATIONALITY LIST')
+    @section('title', 'ALSHOALA - Admin | NATIONALITY LIST')
 
     <div class="content">
         <!-- Animated -->

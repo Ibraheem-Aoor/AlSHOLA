@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -46,6 +47,7 @@ class LoginController extends Controller
     //Override
     public function redirectTo()
     {
+        HistoryRecordHelper::registerAuthenticationLog(Auth::user()->name.' has Logged In');
         if(Auth::user()->type == 'Client')
             return 'employer/dashboard';
         elseif(Auth::user()->type == 'Agent')

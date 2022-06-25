@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Http\Livewire\Admin\Views\Applications\ApplicationAttachments;
 use App\Http\Requests\User\Employee\Application\CreateApplicationRequest;
 use App\Http\Traits\User\ApplicationAttachmentTrait;
@@ -79,6 +80,7 @@ class ApplicationController extends Controller
             $this->createEmoployersRecords($request->addMoreInputFields  ,  $application->id);
             $this->storeApplicationAttachments($request->file('files'), $application->id);
             $this->storePersonalPhoto($request->file('photo') , $application->id);
+            HistoryRecordHelper::registerApplicationLog('Application Created' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
             notify()->success('Application Send Successfully');
             return redirect(route('employee.dashboard'));
         }catch(Throwable $e)
