@@ -115,7 +115,7 @@ class JobController extends Controller
             $this->createSubJobs($request->subJob , $job->id);
             if($request->hasFile('attachments'))
                 $this->uploadAttachments($request->attachments , $job->id);
-            HistoryRecordHelper::registerDemandLog('Create New Demand'."<a href='{{route('admin.demand.details' , $job->id}}'>{{$job->post_number}}</a>");
+            HistoryRecordHelper::registerDemandLog('Create New Demand'. '<a href='.'route("admin.demand.details" , $job->id>'.$job->post_number.'</a>');
             notify()->success('Job Addeed Successfully');
             return redirect(route('employer.dashboard'));
         }catch(Throwable $e)
@@ -276,7 +276,7 @@ class JobController extends Controller
             $job->save();
             if($request->hasFile('attachments'))
                 $this->uploadAttachments($request->attachments , $job->id);
-            HistoryRecordHelper::registerDemandLog('Demand Updated'."<a href='{{route('admin.demand.details' , $job->id}}'>{{$job->post_number}}</a>");
+            HistoryRecordHelper::registerDemandLog('Demand Updated'.'<a href='.'route("admin.demand.details" , $job->id>'.$job->post_number.'</a>');
             notify()->success('Job Updated Successfully');
             return redirect(route('employer.dashboard'));
         }catch(Throwable $e)

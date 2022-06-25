@@ -1,5 +1,16 @@
 <div>
     @section('title', 'AlSHLOA - Admin | DEMAND HISTORY')
+    <style>
+        .table-stats table th,
+        .table-stats table td {
+            border: none;
+            border-bottom: 1px solid #e8e9ef;
+            color: #868e96;
+            font-size: 12px;
+            font-weight: normal;
+            padding: .75em 1.25em;
+        }
+    </style>
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -32,8 +43,8 @@
                                                     <td>
                                                         {{ $history->actor->name }}
                                                     </td>
-                                                    <td>
-                                                        {{ strtolower($history->action) }}
+                                                    <td style="text-transform:none;">
+                                                        {!! Str::lower($history->action) !!}
                                                     </td>
                                                     <td>
                                                         {{ $history->created_at }}
