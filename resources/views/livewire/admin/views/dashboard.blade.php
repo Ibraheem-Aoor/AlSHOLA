@@ -201,7 +201,7 @@
                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div> --}}
-                                    <div class="progress-box progress-2">
+                                    {{-- <div class="progress-box progress-2">
                                         <h4 class="por-title">To be Supply</h4>
                                         <div class="por-txt">{{($data['totalToBeSupply'] * 100 )/ 100}}%</div>
                                         <div class="progress mb-2" style="height: 5px;">
@@ -209,7 +209,7 @@
                                                 style="width:{{($data['totalToBeSupply'] * 100 )/ 100}}%;" aria-valuenow="{{($data['totalToBeSupply'] * 100 )/ 100}}" aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div> <!-- /.card-body -->
                             </div>
                         </div> <!-- /.row -->
