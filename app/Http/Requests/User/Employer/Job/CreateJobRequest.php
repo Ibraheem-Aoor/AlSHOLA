@@ -52,4 +52,19 @@ class CreateJobRequest extends FormRequest
     }
 
 
+    public function messages()
+    {
+        return
+        [
+            'subJob.*.title.required' => 'Demand Title Field Required',
+            'subJob.*.quantity.required' => 'Demand quantity Field Required',
+            'subJob.*.salary.required' => 'Demand salary Field Required',
+            'subJob.*.nationality.required' => 'Demand nationality Field Required',
+            'subJob.*.age.required' => 'Demand age Field Required',
+            'subJob.*.gender.required' => 'Demand gender Field Required',
+            'subJob.*.sector.required' => 'Demand sector Field Required',
+        ];
+    }
+
+
 }

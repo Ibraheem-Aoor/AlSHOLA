@@ -1,5 +1,5 @@
 @extends('layouts.user.employer.master')
-@section('title', 'ALSHOLA | ADD NEW JOB')
+@section('title', 'ALSHOLA | ADD NEW DEMAND')
 
 @section('content')
     @push('css')
@@ -65,8 +65,15 @@
         <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Post A New Job For Your Business</h1>
         <div class="row g-4">
             <div class="col-sm-12 text-center">
-                @if (Session::has('error'))
-                    <div class="alert alet-danger">{{ $request->session()->get('error') }}</div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        @forelse ($errors->all() as $error)
+                            <ul>
+                                <li class="text-truncate me-0 text-danger"> {{ $error }}</li>
+                            </ul>
+                        @empty
+                        @endforelse
+                    </div>
                 @endif
                 <form action="{{ route('job.store') }}" method="POST" enctype="multipart/form-data" id="my-form"
                     name="jobForm">

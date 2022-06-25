@@ -23,34 +23,43 @@ class UpdateJobRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required',
-            'nationality' => 'required',
-            'salary' => 'required|numeric',
-            'quantity' => 'required|numeric',
-            'contract_period' => 'required',
-            'working_hours' => 'required',
+        return  [
+            'sector' => 'required',
+            // 'currency' => 'required',
             'working_days' => 'required',
             'accommodation' => 'required',
-            'transport' => 'required',
-            'medical' => 'required',
-            'insurance' => 'required',
+            'accommodation_amount' => 'sometimes',
+            'food_amount' => 'sometimes',
             'food' => 'required',
-            'annual_leave' => 'required',
-            'air_ticket' => 'required',
+            'joining_ticket' => 'required',
+            // 'return_ticket' => 'required',
             'off_day' => 'required',
-            'indemnity_leave_and_overtime_salary' => 'required',
-            'covid_test' => 'required',
-            'other_terms' => 'required',
-            'description' => 'required|string',
-            // 'location' => 'required|string',
-            // 'file_type' => 'sometimes',
-            // 'responsibilities' => 'required_without:responsibilites_file|nullable|string',
-            // 'end_date' => 'required|date',
-            // 'vacancy' => 'required|numeric',
-            // 'nationality' => 'required',
-            // 'attachments.*' => 'sometimes|mimes:jpg,jpeg,png,svg,pdf|max:10024',
-            // 'responsibilites_file' => 'required_without:responsibilities|nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
-    ];
+            // 'other_terms' => 'required',
+            // 'gender_prefrences' => 'required',
+            // 'age_limit' => 'required',
+            'attachments.*' => 'sometimes|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            'subJob.*.title' => 'required',
+            'subJob.*.quantity' => 'required',
+            'subJob.*.salary' => 'required',
+            'subJob.*.nationality' => 'required',
+            'subJob.*.age' => 'required',
+            'subJob.*.gender' => 'required',
+            'subJob.*.sector' => 'required',
+        ];
+    }
+
+
+    public function messages()
+    {
+        return
+        [
+            'subJob.*.title.required' => 'Demand Title Field Required',
+            'subJob.*.quantity.required' => 'Demand quantity Field Required',
+            'subJob.*.salary.required' => 'Demand salary Field Required',
+            'subJob.*.nationality.required' => 'Demand nationality Field Required',
+            'subJob.*.age.required' => 'Demand age Field Required',
+            'subJob.*.gender.required' => 'Demand gender Field Required',
+            'subJob.*.sector.required' => 'Demand sector Field Required',
+        ];
     }
 }

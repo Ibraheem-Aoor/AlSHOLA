@@ -59,6 +59,7 @@ use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
 use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
 use App\Http\Helpers\DemandHelper;
+use App\Http\Livewire\Admin\Views\Histroy\DemandHistory;
 use App\Http\Livewire\Admin\Views\Roles\AddNewAdmin;
 use App\Http\Livewire\Admin\Views\Settings\GeneralBessniuessSettings;
 use App\Models\BusinessSetting;
@@ -118,6 +119,11 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('currency/new' , AddCurrency::class)->name('admin.currency.new');
 
         Route::get('/general-settings' , GeneralBessniuessSettings::class)->name('admin.settings.general');
+
+
+
+        //History Recoreds Rotues:
+        Route::get('/history/demand' ,  DemandHistory::class)->name('admin.history.demand');
 
 
         // Download job attachments

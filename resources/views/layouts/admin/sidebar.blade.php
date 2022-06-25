@@ -171,14 +171,14 @@
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false">
                           <i class="menu-icon fa fa-history"></i>History Recored</a>
-                      {{-- <ul class="sub-menu children dropdown-menu">
-                      <li><i class="menu-icon fa fa-users"></i><a
-                              href="{{ route('admin.contacts.employers') }}">Clients Queries</a></li>
-                      <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.contacts.talents') }}">Agents
-                              Queries</a></li>
-                      <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.contacts.guests') }}">Guests
-                              Queries</a></li>
-                  </ul> --}}
+                      <ul class="sub-menu children dropdown-menu">
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.history.demand') }}">Deamnd Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.contacts.talents') }}">Application Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.contacts.guests') }}">Authentication Recored</a></li>
+                      </ul>
                   </li>
               @endcan
 

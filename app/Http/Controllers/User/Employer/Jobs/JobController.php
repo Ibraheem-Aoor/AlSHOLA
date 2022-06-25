@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 use Throwable;
+use App\Http\Helpers\HistoryRecordHelper;
 
 class JobController extends Controller
 {
@@ -114,6 +115,7 @@ class JobController extends Controller
             $this->createSubJobs($request->subJob , $job->id);
             if($request->hasFile('attachments'))
                 $this->uploadAttachments($request->attachments , $job->id);
+            HistoryRecordHelper::registerDemandLog('Create New Demand'."<a href='{{route('admin.demand.details' , $job->id}}'>{{$job->post_number}}</a>");
             notify()->success('Job Addeed Successfully');
             return redirect(route('employer.dashboard'));
         }catch(Throwable $e)
@@ -249,28 +251,6 @@ class JobController extends Controller
     }
 
 
-    public function editStep_1(JobSetUpJobReqeust $requset , $id)
-    {
-        if($requset->session()->has('edit_step_1'))
-        {
-            $requset->session()->remove('edit_step_1');
-            $files = Storage::files('public/tempUploads/'.Auth::id().'/');
-            foreach($files as $file)
-                Storage::delete($file);
-        }
-        $requset->session()->put('edit_step_1' , $requset->except('attachments'));
-        if($requset->hasFile('attachments'))
-            foreach($requset->attachments as $asttachment)
-            {
-                $path = 'public/tempUploads/'.Auth::id().'/';
-                $asttachment->storeAs($path , $asttachment->getClientOriginalName());
-            }
-        $job = Job::with('subJobs')->findOrFail($id);
-        // return dd($job);
-        $nationalities = Nationality::orderBy('name')->get()->chunk(50);
-        $titles = Title::whereSectorId($requset->session()->get('edit_step_1')['sector'])->get();
-        return view('user.employer.jobs.edit_step_2 ' , compact('titles' , 'nationalities' , 'job'));
-    }
 
 
 
@@ -284,25 +264,27 @@ class JobController extends Controller
      */
 
 
-    public function updateJob(UpdateJobRequest $request, $id)
+    public function update(UpdateJobRequest $request, $id)
     {
-        return dd($request);
         $job = Job::with('subJobs')->findOrFail($id);
-        // Edit the basic data from step_1
-        $job->update($request->session()->get('edit_step_1'));
-        //clear the job prev subJobs
-        $job->subJobs->delete();
-        if($request->has('subJob'))
+        try
         {
+            $job->update($request->except(['title' , 'sector' , 'salary' , 'quantity' , 'gender' , 'age_limit' , 'nationality']));
+            $job->save();
+            $job->subJobs()->delete();
             $this->createSubJobs($request->subJob , $job->id);
-        }else{
-            $this->createTheOnlySubJob($request ,  $job->id);
+            $job->save();
+            if($request->hasFile('attachments'))
+                $this->uploadAttachments($request->attachments , $job->id);
+            HistoryRecordHelper::registerDemandLog('Demand Updated'."<a href='{{route('admin.demand.details' , $job->id}}'>{{$job->post_number}}</a>");
+            notify()->success('Job Updated Successfully');
+            return redirect(route('employer.dashboard'));
+        }catch(Throwable $e)
+        {
+            return dd($e);
+            notify()->error('Something went wrong');
+            return redirect(route('employer.dashboard'));
         }
-        if(count(Storage::files('public/tempUploads/'.Auth::id().'/')) > 0)
-                $this->moveFilesToPrimaryFile($job->id);
-        notify()->success('Job Updated Successfully');
-        return redirect(route('employer.dashboard'));
-
     }
 
 

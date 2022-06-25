@@ -42,7 +42,7 @@
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>
-                                        <td>{{ $application->subStatus->name }}</td>
+                                        <td>{{ $application->mainStatus->subStatus->name }}</td>
                                         <td>{{ $application->created_at }}</td>
                                         <td>
                                             @switch($application->job->subStatus->name)
