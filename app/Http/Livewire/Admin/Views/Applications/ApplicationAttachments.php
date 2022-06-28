@@ -43,6 +43,7 @@ class ApplicationAttachments extends Component
     {
         $attachments = ApplicationAttachment::where('application_id' , $this->application_id)
         ->with(['user:id,name,email,type'])
+        ->orderByDesc('created_at')
         ->simplePaginate(15);
         return view('livewire.admin.views.applications.application-attachments'
                 , [

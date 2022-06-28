@@ -53,6 +53,7 @@ return new class extends Migration
             $table->string('hindi_read');
             $table->string('hindi_write');
             $table->string('visa_number')->nullable();
+            $table->string('flight_ticket')->nullable();
             $table->text('recommendations');
             $table->string('applicant_interviewd_by');
             $table->string('min_salary');

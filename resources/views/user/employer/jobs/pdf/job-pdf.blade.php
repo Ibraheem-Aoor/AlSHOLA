@@ -20,7 +20,7 @@
 
         .parent {
             /* border: 1px solid black; */
-            /* margin: 1rem; */
+            margin-top: -30px;
             padding: 2rem 2rem;
             text-align: center;
         }
@@ -75,8 +75,10 @@
 </head>
 
 <body>
+    {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
+
     <h3>Demand for Recruitment</h3>
-    <div class="parent" style="margin-top:3%;">
+    <div class="parent" >
         <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
             <p>
                 Client Name: {{ $job->user->name }}
@@ -105,7 +107,7 @@
     <br>
 
 
-    <table class="titles" style="margin-top: -5%;">
+    <table class="titles" style="margin-top: -15px;">
         <tr>
             <th>Category</th>
             <th>Title</th>
@@ -220,9 +222,14 @@
         </tr>
 
     </table>
+    @isset($job->description)
+        <div style="margin-top: 20px; font-weight: 400;" >
+            <label for="">Description:</label>
+            <p>{{$job->description}}</p>
+        </div>
+    @endisset
 
-
-    @if ($job->terms->count() > 0)
+    @if ($job->terms->count() > 0 && Auth::user()->type == 'Agent')
         <div style="border:1px solid black; margin-top:5px; padding:5px;">
             <h3>Supply Terms & Conditions:</h3>
             <table>
@@ -255,7 +262,7 @@
                 </li>
             </ul>
 
-            <footer style="font-size: 9px;">
+            <footer style="font-size: 8 px;">
                 <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
                 <div class="parent">
                     <div class="child">

@@ -158,7 +158,7 @@
                             @isset($job->description)
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Desacription</label>
+                                        <label for="">Description</label>
                                         <textarea class="form-control" readonly cols="30" style="height: 150px">{{ $job->description }}</textarea>
                                     </div>
                                 </div>

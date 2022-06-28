@@ -36,7 +36,6 @@
                     <a href="#" class="nav-link dropdown-toggle"
                         data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="{{route('profile.index')}}" class="dropdown-item">Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                             <i class="fa fa-power-off"></i> {{ __('Logout') }}

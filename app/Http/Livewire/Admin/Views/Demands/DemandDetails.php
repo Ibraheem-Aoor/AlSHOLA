@@ -62,7 +62,7 @@ class DemandDetails extends Component
         $applications = Application::whereJobId($this->job->id)
                     ->orderByDesc('id')
                     ->with(['user:id,name' , 'mainStatus.subStatus'])
-                    ->simplePaginate(15);
+                    ->simplePaginate(10);
         $mainStatuses = JobMainStatus::all();
         return view('livewire.admin.views.demands.demand-details'  , [
             'applications' => $applications,

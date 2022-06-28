@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\User\Employer\Applications;
 
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\HistoryRecordHelper;
 use App\Http\Traits\User\ApplicationAttachmentTrait;
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use App\Models\ApplicationNote;
 use App\Models\Employer;
 use App\Models\Job;
+use App\Models\RefusedApplications;
+use App\Models\subStatus;
 use App\Models\User;
 use App\Models\VisaInoformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class EmployerApplicationsController extends Controller
@@ -139,8 +143,9 @@ class EmployerApplicationsController extends Controller
 
 
     //Send Note To Admin about a specific application
-    public function sendNoteToAdmin(Request $request)
+    public function sendNoteToAdmin(Request $request , $id)
     {
+        $application = Application::findOrFail($id);
         $validate = Validator::make($request->all() , ['message'=>'required|string']);
         if($validate->fails())
         {
@@ -154,7 +159,7 @@ class EmployerApplicationsController extends Controller
             [
                 'message' => $request->message,
                 'user_id' => Auth::id(),
-                'application_id' => $request->application_id,
+                'application_id' => $application->id,
             ]
         );
         notify()->success('note sended Successfully');
@@ -163,20 +168,15 @@ class EmployerApplicationsController extends Controller
 
 
     // Accept Specific Application
-    public function acceptApplication(Request $request)
+    public function acceptApplication(Request $request , $id)
     {
-        $validate = Validator::make($request->all() , ['application_id'=>'required']);
-        if($validate->fails())
-        {
-            notify()->error('something went wrong');
-            return redirect()->back();
-        }
-
-        $application = Application::findOrFail($request->application_id);
-        $application->status = 'waiting for medical';
+        $application = Application::findOrFail($id);
+        $subStatus = subStatus::where('name' , 'waiting for medical')->first();
+        $application->sub_status_id = $subStatus->id;
+        $application->main_status_id = $subStatus->mainStatus->id;
         $application->save();
+        HistoryRecordHelper::registerApplicationLog('Application Accepted' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
         notify()->success('Job Accepted Successfully');
-        notify()->success('Keep tracking for medical files');
         return redirect()->back();
     }//end method
 
@@ -188,4 +188,25 @@ class EmployerApplicationsController extends Controller
         $totalExperince = Employer::whereApplicationId($application->id)->sum('duration');
         return view('user.employer.applications.application-details' , compact('application'  , 'totalExperince'));
     }//end
+
+
+    public function refuseApplication(Request $request , $id)
+    {
+        $application = Application::findOrFail($id);
+        $validate = Validator::make($request->all() , ['reason' => 'required|string']);
+        if($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors()->first());
+        }
+        RefusedApplications::create([
+            'application_id' => $application->id,
+            'user_id' => Auth::id(),
+            'reason' => $request->reason,
+        ]);
+        $application->forwarded = false;
+        $application->save();
+        HistoryRecordHelper::registerApplicationLog('Application Rejected' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
+        notify()->success('Application Rejected Successfully');
+        return redirect(route('employer.dashboard'));
+    }
 }

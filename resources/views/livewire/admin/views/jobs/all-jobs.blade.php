@@ -43,7 +43,7 @@
                                                         {{ $job->user->company->name ?? '' }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->qty() }}
+                                                        {{ $job->applications->where('forwarded', true)->count() }}
                                                     </td>
 
                                                     <td>

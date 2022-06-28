@@ -138,12 +138,12 @@
                                         </td>
 
                                     </tr>
-
                                 </table>
 
                             </div>
 
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -171,43 +171,92 @@
                         </p>
                     </div>
                 </div>
-                <div class="">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">file name</th>
+                                <th scope="col">file type</th>
+                                <th scope="col">Publisher</th>
+                                <th scope="col">creation_date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @forelse ($job->attachments as $attachment)
+                                <tr>
+                                    <th scope="row">{{ $i++ }}</th>
+                                    <td>{{ $attachment->name }}</td>
+                                    <td>{{ $attachment->type }}</td>
+                                    <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
+                                    </td>
+                                    <td>{{ $attachment->created_at }}</td>
+                                    <td>
+                                        <a class="btn btn-outline-primary"
+                                            href="{{ route('job.attachment.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
+                                                class="fa fa-download"></i></a>
 
-                    <h4 class="mb-4">What You want to do?</h4>
-                    <div class="row g-3">
-                        <div class="col-12 col-sm-12">
-                            {{-- If the agent has submited an application so he cant refuse the demand again. --}}
-                            @if (!$hasApplication)
-                                <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Demand
-                                </button>
-                            @endif
-                            <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal_2">
-                                Send a comment
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="alert alert-warning text-center bg-dark"
+                                        style="color:#fff">
+                                        No Records Yet
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                @isset($job->description)
+                    <div class="col-sm-12 mt-4">
+                        <label for="">Demand Description:</label>
+                        <textarea cols="30" rows="10" class="form-control" style="height:150px;" readonly>{{ $job->description }}</textarea>
+                    </div>
+                @endisset
+            </div>
+            <div class="">
+
+                <h4 class="mb-4 mt-4">What You want to do?</h4>
+                <div class="row g-3">
+                    <div class="col-12 col-sm-12">
+                        {{-- If the agent has submited an application so he cant refuse the demand again. --}}
+                        @if (!$hasApplication)
+                            <button type="button" class="btn btn-outline-warning col-sm-12 mb-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal_1">Refuse The Demand
                             </button>
-                            @if ($hasApplication)
-                                @php
-                                    $txt = 'Submit Another Application';
-                                @endphp
-                            @else
-                                @php
-                                    $txt = 'Accept Demand & Terms & Conditions';
-                                @endphp
-                            @endif
-                            <a class="btn btn-outline-success col-sm-12 mb-2"
-                                href="{{ route('employee.application.form', $job->id) }}">
-                                {{ $txt }}
-                            </a>
+                        @endif
+                        <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal_2">
+                            Send a comment
+                        </button>
+                        @if ($hasApplication)
+                            @php
+                                $txt = 'Submit Another Application';
+                            @endphp
+                        @else
+                            @php
+                                $txt = 'Accept Demand & Terms & Conditions';
+                            @endphp
+                        @endif
+                        <a class="btn btn-outline-success col-sm-12 mb-2"
+                            href="{{ route('employee.application.form', $job->id) }}">
+                            {{ $txt }}
+                        </a>
 
-                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
+</div>
 </div>
 <!-- Job Detail End -->
 
@@ -237,8 +286,8 @@
                         <option value="other">Other</option>
                     </select>
                     <br>
-                        <textarea class="form-control" id="other_reason" name="other_reason"
-                            placeholder="Tell Us The Resaon" style="display: none;"></textarea>
+                    <textarea class="form-control" id="other_reason" name="other_reason" placeholder="Tell Us The Resaon"
+                        style="display: none;"></textarea>
 
                 </div>
                 <div class="modal-footer">
@@ -258,16 +307,16 @@
                 <h5 class="modal-title" id="exampleModalLabel">Send a Comment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Help Us Improve the Quality of Job Post.Tell Us Anything that can help us:
-                <form action="{{ route('employee.job.note.create', $job->id) }}" method="POST">
-                    @csrf
+            <form action="{{ route('employee.job.note.create', $job->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    Help Us Improve the Quality of Demand Post.Tell Us Anything that can help us:
                     <textarea class="form-control" required name="note"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>

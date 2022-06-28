@@ -121,6 +121,8 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('application/{id}/notes' , [ApplicationController::class , 'applicationNotes'])->name('employee.application.notes');
         Route::get('application/{id}/attachments' , [ApplicationController::class , 'applicationAttachments'])->name('employee.application.attachments');
         Route::post('application/note/reply' , [ApplicationController::class , 'sendNoteToAdmin'])->name('employee.note.send');
+        Route::get('/applications/{id}/details' , [ApplicationController::class , 'getDetails'])->name('employeee.application.details');
+
 
 
         //Candidacy oreders
@@ -176,8 +178,10 @@ Route::group(['middleware' => ['auth']], function()
         Route::get('/applications/visa' , [EmployerApplicationsController::class , 'allVisaApplications'])->name('employer.applications.visa');
         Route::post('/applications/visa/upload' , [EmployerApplicationsController::class , 'createVisa'])->name('employer.application.visa.upload');
         Route::post('/applications/medical/accept' , [EmployerApplicationsController::class , 'UpgradeApplicationToNextStage'])->name('employer.application.upgrade');
-        Route::post('/applications/send-note' , [EmployerApplicationsController::class , 'sendNoteToAdmin'])->name('employer.applications.note.send');
-        Route::post('/applications/accept' , [EmployerApplicationsController::class , 'acceptApplication'])->name('employer.application.accept');
+        Route::post('/applications/send-note/{id}' , [EmployerApplicationsController::class , 'sendNoteToAdmin'])->name('employer.applications.note.send');
+        Route::post('/applications/accept/{id}' , [EmployerApplicationsController::class , 'acceptApplication'])->name('employer.application.accept');
+        Route::post('/applications/refuse/{id}' , [EmployerApplicationsController::class , 'refuseApplication'])->name('employer.application.refuse');
+
 
 
         // Route::get('/profile' , ProfileShow::class)->name('employer.profile');

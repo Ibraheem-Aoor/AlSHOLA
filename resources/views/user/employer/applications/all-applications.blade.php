@@ -114,10 +114,11 @@
                                         <select name="file_type" class="form-control" id="">
                                             <option value="visa">Visa</option>
                                             <option value="offer letter">Offer Letter</option>
+                                            <option value="other">Other</option>
                                         </select>
                                         <input type="text" id="vnumber" name="visa_number" class="form-control mt-2"
                                              placeholder="Enter Visa Number..">
-                                        &nbsp; &nbsp; <input type="file" name="files[]" required multiple>
+                                        &nbsp; &nbsp; <input type="file" name="files[]"  multiple>
                                         <input type="text" id="id" name="id" hidden>
                                     </div>
                                     <div class="form-group col-sm-6 text-center" style="width: 100%">

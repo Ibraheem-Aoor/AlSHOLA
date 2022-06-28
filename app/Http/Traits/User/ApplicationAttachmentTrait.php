@@ -18,9 +18,10 @@ trait  ApplicationAttachmentTrait
     public function uploadApplicationAttachment(Request $request)
     {
         $validate = Validator::make($request->all(),[
-            'files.*' => 'required|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            'files.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
             'file_type' => 'required|string',
             'visa_number' => 'nullable|string',
+            'flight_ticket' => 'nullable|string',
         ]);
         if($validate->fails())
         {
@@ -37,7 +38,7 @@ trait  ApplicationAttachmentTrait
                 $fileName  = $file->getClientOriginalName();
                 $path = 'public/uploads/applications/'.$application->id.'/'.'attachments'.'/';
                 $file->storeAs($path , $fileName);
-                ApplicationAttachment::create(
+                $attachment  = ApplicationAttachment::create(
                     [
                         'name' => $fileName,
                         'user_id' => Auth::id(),
@@ -49,6 +50,9 @@ trait  ApplicationAttachmentTrait
                     ]
                 );
         }
+        $application->visa_number = $request->vlsa_number;
+        $application->flight_ticket = $request->flight_ticket;
+        $application->save();
 
             notify()->success('File Uploaded Successfully');
             return redirect()->back();

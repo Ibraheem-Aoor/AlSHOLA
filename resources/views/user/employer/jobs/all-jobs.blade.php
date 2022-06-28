@@ -135,12 +135,8 @@
                 <form action="{{ route('job.attachment.upload') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group col-sm-6">
-                        <label for="" style="font-weight: 600">Job Title:</label>
-                        &nbsp; &nbsp; <input type="text" readonly id="title">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="" style="font-weight: 600">number:</label>
-                        &nbsp; &nbsp; <input type="text" readonly id="number">
+                        <label for="" style="font-weight: 600">Demand SR:</label>
+                        &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<input type="text" readonly id="number" style="paadding-left:10px;margin-left:15px;">
                         <input type="text" readonly name="id" id="id" hidden>
 
                     </div>

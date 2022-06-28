@@ -125,9 +125,9 @@
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $job->post_number }}</td>
                                                 <td>
-                                                    <a href="{{route('employer.job.applications.all' , $job->id)}}">
-                                                        {{$job->applications_count}}
-                                                </a>
+                                                    <a href="{{ route('employer.job.applications.all', $job->id) }}">
+                                                        {{ $job->applications_count }}
+                                                    </a>
                                                 </td>
                                                 <td>{{ $job->qty() }}</td>
                                                 <td>{{ $job->created_at }}</td>
@@ -151,6 +151,12 @@
                                                     <a class=" badge bg-info" title="notes"
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>
+                                                    <a href="#exampleModal_5" data-toggle="modal"
+                                                        title="upload attachment"
+                                                        data-number="{{ $job->post_number }}"
+                                                        data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
+                                                    </a>
+
 
                                                 </td>
                                             </tr>
@@ -203,7 +209,8 @@
                                     &nbsp; &nbsp; <input type="file" name="attachments[]" multiple required>
                                 </div>
                                 <div class="form-group col-sm-6 text-center" style="width: 100%">
-                                    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-upload"></i>
+                                    <button type="submit" class="btn btn-outline-primary"><i
+                                            class="fa fa-upload"></i>
                                         UPLOAD</button>
                                 </div>
                             </form>
@@ -220,10 +227,10 @@
     </div>
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 

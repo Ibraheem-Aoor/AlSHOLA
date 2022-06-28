@@ -36,6 +36,9 @@
                                             href="#custom-nav-attachments" role="tab"
                                             aria-controls="custom-nav-home" aria-selected="false">Attachments</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-refused" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Refused</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-notes" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Notes
                                             @if ($unreadNotes)
@@ -116,8 +119,28 @@
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
+                                                @isset($application->visa_number)
+                                                    <div class="col-sm-4">
+                                                        <label for="">
+                                                            Visa_Number:
+                                                        </label>
+                                                        <input type="text" value="{{ $application->visa_number }}"
+                                                            readonly>
+                                                    </div>
+                                                @endisset
+                                                @isset($application->flight_ticket)
+                                                    <div class="col-sm-4">
+                                                        <label for="">
+                                                            Flight Ticket:
+                                                        </label>
+                                                        <input type="text" readonly
+                                                            value="{{ $application->flight_ticket }}">
+                                                    </div>
+                                                @endisset
+
                                                 <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Date Of Birth:
+                                                    <label for="inputPassword3" class="col-form-label">Date Of
+                                                        Birth:
                                                     </label>
                                                     <input type="text" value="{{ $application->date_of_birth }}"
                                                         class="form-control" id="inputPassword3" readonly>
@@ -431,6 +454,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
+                                                            <th scope="col">User</th>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Type</th>
                                                             <th scope="col">Date</th>
@@ -441,12 +465,20 @@
                                                         @php
                                                             $i = 1;
                                                         @endphp
-                                                        @forelse ($application->attachments as $attachment)
+                                                        @php
+                                                            $attachments = $application
+                                                                ->attachments()
+                                                                ->orderByDesc('created_at')
+                                                                ->simplePaginate(15);
+                                                        @endphp
+                                                        @forelse ($attachments as $attachment)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $attachment->user->name . ' (' . $attachment->user->type . ' )' }}
+                                                                </td>
                                                                 <td>{{ $attachment->name }}</td>
                                                                 <td>{{ $attachment->type }}</td>
-                                                                <td>{{ $attachment->date }}</td>
+                                                                <td>{{ $attachment->created_at }}</td>
                                                                 <td>
                                                                     <a href="{{ route('admin.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
                                                                         class="text-primary">
@@ -455,9 +487,19 @@
                                                                             class="text-danger">
                                                                             <i class="fa fa-trash"></i>
                                                                         </a>
-                                                                        <a title="Forward To Client" class="text-info" wire:click="passAttachmentToEmployer('{{$attachment->id}}')">
-                                                                            <i class="fa fa-location-arrow"></i>
-                                                                        </a>
+                                                                        @if ($attachment->user->type == 'Agent')
+                                                                            <a title="Forward To Client"
+                                                                                class="text-info"
+                                                                                wire:click="passAttachmentToEmployer('{{ $attachment->id }}')">
+                                                                                <i class="fa fa-location-arrow"></i>
+                                                                            </a>
+                                                                        @else
+                                                                            <a title="Forward To Agent"
+                                                                                class="text-info"
+                                                                                wire:click="passAttachmentToEmployee('{{ $attachment->id }}')">
+                                                                                <i class="fa fa-location-arrow"></i>
+                                                                            </a>
+                                                                        @endif
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -471,6 +513,66 @@
                                                         @endforelse
                                                     </tbody>
                                                 </table>
+                                                {!! $attachments->fragment('custom-nav-attachments')->links() !!}
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
+
+                                    {{-- Refused --}}
+                                    <div class="tab-pane fade" id="custom-nav-refused" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 ">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Client Name</th>
+                                                            <th scope="col">Reason</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @php
+                                                            $refused = $application
+                                                                ->refused()
+                                                                ->orderByDesc('created_at')
+                                                                ->simplePaginate(15);
+                                                        @endphp
+                                                        @forelse ($refused as $refuse)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $refuse->user->name }}</td>
+                                                                <td>{{ Str::limit($refuse->reason, 30, '...') }}
+                                                                </td>
+                                                                <td>{{ $refuse->created_at }}</td>
+                                                                <td>
+                                                                    <a class="btn btn-outline-info"
+                                                                        data-message="{{ $refuse->reason }}"
+                                                                        data-toggle="modal" href="#exampleModal_5"><i
+                                                                            class="fa fa-eye"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="7"
+                                                                    class="alert alert-warning  bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                                {!! $attachments->fragment('custom-nav-attachments')->links() !!}
                                             </div>
                                         </div>
                                         </p>
@@ -489,7 +591,7 @@
                                                 href="#exampleModal">
                                                 Send a Note </a>
                                             <a class="btn btn-primary col-sm-12 mb-2"
-                                                href="{{route('admin.application.pdf.generate' , $application->id)}}">
+                                                href="{{ route('admin.application.pdf.generate', $application->id) }}">
                                                 PRINT PDF</a>
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal_8">
@@ -624,11 +726,11 @@
     </div>
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
 
         <script>
@@ -643,7 +745,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
         <script>
             $(document).ready(function() {
                 $('#ajaxSubmit').click(function(e) {
@@ -695,7 +797,21 @@
                         console.log('AJAX load did not work');
                     }
                 });
+            });
+        </script>
 
+        <script>
+            $(document).ready(function() {
+
+                var url = document.location.toString();
+                if (url.match('#')) {
+                    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]')[0].click();
+                }
+
+                //To make sure that the page always goes to the top
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 200);
 
             });
         </script>

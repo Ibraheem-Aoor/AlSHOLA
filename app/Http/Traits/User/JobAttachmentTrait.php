@@ -23,7 +23,7 @@ trait JobAttachmentTrait
                 'name' => $fileName ,
                 'job_id' => $jobId,
                 'user_id' => Auth::id(), //The publisher
-                'type' => $type ?? null,
+                'type' => $type == null  ? 'Extra File' : $type,
             ]);
         }
     }//end method

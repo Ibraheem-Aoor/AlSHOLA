@@ -122,7 +122,7 @@
                                         <div class="col-sm-12 mt-2">
                                             <table class="table table-responsive" id="dynamicAddRemove">
                                                 <tr>
-                                                    <th colspan="3">Title</th>
+                                                    <th colspan="2">Title</th>
                                                     <th>Service charge</th>
                                                     <th>Per</th>
                                                     <th>
@@ -137,7 +137,7 @@
                                                     </th>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="3">
+                                                    <td colspan="2">
                                                         <select id="allTiltes" name="demandTerms[0][title]"
                                                             class="form-control" required>
                                                             @foreach ($job->subJobs as $subJob)
@@ -234,7 +234,7 @@
                                 ++i;
                                 newTitles.setAttribute('name', 'demandTerms[' + i + '][title]')
                                 $("#dynamicAddRemove").append(
-                                    '<tr><td colspan="3">' + newTitles.outerHTML +
+                                    '<tr><td colspan="2">' + newTitles.outerHTML +
                                     '</td><td><input type="numeric" name="demandTerms[' +
                                     i +
                                     '][service_charge]" placeholder="service charge" required class="form-control" /></td><td><input type="text" name="demandTerms[' +

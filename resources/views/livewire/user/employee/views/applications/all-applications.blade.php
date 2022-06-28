@@ -52,13 +52,16 @@
                                                         $file_type[$i] = 'medical/agreement';
                                                     @endphp
                                                 @break
+
                                                 @default
                                                     @php
                                                         $title[$i] = null;
                                                         $file_type[$i] = null;
                                                     @endphp
                                             @endswitch
-
+                                            <a href="{{ route('employeee.application.details', $application->id) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                             @isset($file_type[$i])
                                                 <a href="#exampleModal_5" data-title="{{ $title[$i] }}" data-toggle="modal"
                                                     data-type="{{ $file_type[$i] }}" data-id="{{ $application->id }}">
@@ -69,7 +72,8 @@
                                     </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="alert alert-warning text-center bg-dark" style="color:#fff">
+                                            <td colspan="8" class="alert alert-warning text-center bg-dark"
+                                                style="color:#fff">
                                                 No Records Yet
                                             </td>
                                         </tr>
@@ -96,13 +100,20 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <label for="" style="font-weight: 600" id="title">UPLOAD</label>
+
                                 <form action="{{ route('application.file.upload') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group col-sm-6 mb-3">
-                                        <label for="" style="font-weight: 600" id="title">UPLOAD</label>
+                                        <select name="file_type" class="form-control" id="">
+                                            <option value="Medical">Medical</option>
+                                            <option value="Agreement">Agreement</option>
+                                            <option value="Flight Ticket">Flight Ticket</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <input type="text" id="flight_ticket" name="flight_ticket" class="form-control mt-3">
                                         &nbsp; &nbsp; <input type="file" name="files[]" required multiple>
-                                        <input type="text" id="type" name="file_type" hidden>
                                         <input type="text" id="id" name="id" hidden>
                                     </div>
                                     <div class="form-group col-sm-6 text-center" style="width: 100%">
@@ -120,14 +131,16 @@
 
                 @push('js')
                     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                                        crossorigin="anonymous"></script>
+                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+                    </script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-                                        crossorigin="anonymous"></script>
+                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+                    </script>
                     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
                     <script>
+                        $('#flight_ticket').hide();
+
                         $('#exampleModal_5').on('show.bs.modal', function(event) {
                             var button = $(event.relatedTarget)
                             var id = button.data('id')
@@ -137,6 +150,16 @@
                             modal.find('.modal-body #id').val(id);
                             modal.find('.modal-body #type').val(type);
                             document.getElementById('title').innerHTML = title;
+                            $('select[name="file_type"]').on('change', function() {
+                                if ($(this).val() == 'Flight Ticket') {
+                                    $('#flight_ticket').show();
+                                } else {
+                                    $('#flight_ticket').hide();
+                                    $('#flight_ticket').removeAttribute('name');
+                                }
+
+                            });
+
                         })
                     </script>
                 @endpush

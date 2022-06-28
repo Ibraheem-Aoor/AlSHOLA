@@ -1,4 +1,4 @@
-@extends('layouts.user.employer.master')
+@extends('layouts.user.employee.master')
 @section('title', 'Dashboard | Add New Jobs')
 @push('css')
     <style>
@@ -578,7 +578,7 @@
                                                                             @php
                                                                                 $attachments = $application
                                                                                     ->attachments()
-                                                                                    ->where('is_forwarded_employer', true)
+                                                                                    ->where('is_forwarded_talent', true)
                                                                                     ->orderByDesc('created_at')
                                                                                     ->paginate(15);
                                                                             @endphp

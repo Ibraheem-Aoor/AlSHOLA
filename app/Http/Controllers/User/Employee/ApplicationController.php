@@ -274,6 +274,13 @@ class ApplicationController extends Controller
 
 
 
+    public function getDetails($id)
+    {
+        $application = Application::with(['job:id,post_number' , 'employers' , 'user'  , 'title.sector', 'attachments' ,'educations'])->with('job.subJobs.title.sector')->findOrFail($id);
+        $totalExperince = Employer::whereApplicationId($application->id)->sum('duration');
+        return view('livewire.user.employee.views.applications.application-details' , compact('application'  , 'totalExperince'));
+    }//end
+
 
 
 }

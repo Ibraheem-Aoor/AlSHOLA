@@ -39,7 +39,7 @@
                                             aria-selected="false">General Information</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-descreption" role="tab"
-                                            aria-controls="custom-nav-home" aria-selected="false">Other Terms</a>
+                                            aria-controls="custom-nav-home" aria-selected="false">Description</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-titles" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Avilable Positions</a>
@@ -364,11 +364,21 @@
                                         aria-labelledby="custom-nav-contact-tab">
                                         <p>
                                         <div class="col-sm-12 ">
-                                            <div class="form-group">
-                                                <label for="">Other Terms and Conditions</label>
-                                                <textarea readonly class="form-control" id="" cols="30" rows="10">{{ $job->other_terms }}
+                                            @isset($job->other_terms)
+                                                <div class="form-group">
+                                                    <label for="">Other Terms and Conditions</label>
+                                                    <textarea readonly class="form-control" id="" cols="30" rows="10">{{ $job->other_terms }}
                                                 </textarea>
-                                            </div>
+                                                </div>
+                                            @endisset
+
+                                            @isset($job->description)
+                                                <div class="form-group">
+                                                    <label for="">General Description</label>
+                                                    <textarea readonly class="form-control" id="" cols="30" rows="10">{{ $job->description }}
+                                                </textarea>
+                                                </div>
+                                            @endisset
                                         </div>
                                         </p>
                                     </div>
@@ -387,31 +397,39 @@
                                                             <th scope="col">Title</th>
                                                             <th scope="col">Salary</th>
                                                             <th scope="col">QTY</th>
+                                                            <th scope="col">Gender</th>
+                                                            <th scope="col">Age</th>
                                                             <th scope="col">Nationlaity</th>
-                                                            <th scope="col">Descreption</th>
-                                                            <th scope="col">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @php
                                                             $i = 1;
                                                         @endphp
-                                                        @forelse ($job->subJobs as $subjob)
+                                                        @php
+                                                            $subJobs = $job
+                                                                ->subJobs()
+                                                                ->orderBy('created_at', 'desc')
+                                                                ->paginate(10);
+                                                        @endphp
+                                                        @forelse ($subJobs as $subjob)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $subjob->title->name }}</td>
                                                                 <td>{{ $subjob->salary }}</td>
                                                                 <td>{{ $subjob->quantity }}</td>
+                                                                <td>{{ $subjob->gender }}</td>
+                                                                <td>{{ $subjob->age }}</td>
                                                                 <td>{{ $subjob->nationality->name }}</td>
                                                                 <td>{{ Str::limit($subjob->description, 35, '...') }}
                                                                 </td>
-                                                                <td>
+                                                                {{-- <td>
                                                                     <a data-toggle="modal"
                                                                         data-desc="{{ $subjob->description }}"
                                                                         href="#descmodal">
                                                                         <i class="fa fa-eye"></i>
                                                                     </a>
-                                                                </td>
+                                                                </td> --}}
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -422,15 +440,18 @@
                                                                 </td>
                                                             </tr>
                                                         @endforelse
+                                                    </tbody>
+                                                    <tfoot>
                                                         <tr>
                                                             <td><span class="text-danger">Submission Date</span>:
                                                                 {{ $job->created_at }}</td>
                                                             <td><span class="text-danger">Total QTY</span>:
                                                                 {{ $job->qty() }}</td>
                                                         </tr>
-                                                    </tbody>
+                                                    </tfoot>
 
                                                 </table>
+                                                {!! $subJobs->fragment('custom-nav-titles')->links() !!}
                                             </div>
                                         </div>
                                         </p>
@@ -460,7 +481,13 @@
                                                         @php
                                                             $i = 1;
                                                         @endphp
-                                                        @forelse ($job->attachments as $attachment)
+                                                        @php
+                                                            $attachments = $job
+                                                                ->attachments()
+                                                                ->orderBy('created_at', 'desc')
+                                                                ->paginate(10);
+                                                        @endphp
+                                                        @forelse ($attachments as $attachment)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $attachment->name }}</td>
@@ -488,6 +515,7 @@
                                                         @endforelse
                                                     </tbody>
                                                 </table>
+                                                {!! $attachments->fragment('custom-nav-attachments')->links() !!}
                                             </div>
                                         </div>
                                         </p>
@@ -514,7 +542,13 @@
                                                         @php
                                                             $i = 1;
                                                         @endphp
-                                                        @forelse ($job->notes as $note)
+                                                        @php
+                                                            $notes = $job
+                                                                ->notes()
+                                                                ->orderBy('created_at', 'desc')
+                                                                ->paginate(10);
+                                                        @endphp
+                                                        @forelse ($notes as $note)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
@@ -543,6 +577,7 @@
                                                         @endforelse
                                                     </tbody>
                                                 </table>
+                                                {!! $notes->fragment('custom-nav-notes')->links() !!}
                                             </div>
                                         </div>
                                         </p>
@@ -569,7 +604,13 @@
                                                         @php
                                                             $i = 1;
                                                         @endphp
-                                                        @forelse ($job->refuseTimes as $refuse)
+                                                        @php
+                                                            $refuseTimes = $job
+                                                                ->refuseTimes()
+                                                                ->orderBy('created_at', 'desc')
+                                                                ->paginate(10);
+                                                        @endphp
+                                                        @forelse ($refuseTimes as $refuse)
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $refuse->user->name }}
@@ -596,6 +637,7 @@
                                                         @endforelse
                                                     </tbody>
                                                 </table>
+                                                {!! $refuseTimes->fragment('custom-nav-refused')->links() !!}
                                             </div>
                                         </div>
                                         </p>
@@ -656,6 +698,7 @@
                                                         @endforelse
                                                     </tbody>
                                                 </table>
+                                                {!! $applications->fragment('custom-nav-applications')->links() !!}
                                             </div>
                                         </div>
                                         </p>
@@ -835,7 +878,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <textarea name="" id="desc" readonly name="desc" cols="30" rows="10"
-                                            class="form-control"></textarea>
+                                            class="form-control">{{ $job->description }}</textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -1029,6 +1072,22 @@
                         console.log('AJAX load did not work');
                     }
                 });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+
+                var url = document.location.toString();
+                if (url.match('#')) {
+                    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]')[0].click();
+                }
+
+                //To make sure that the page always goes to the top
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 200);
+
             });
         </script>
     @endpush

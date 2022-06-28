@@ -34,7 +34,7 @@ class PdfController extends Controller
 
         $canvas->page_text($width/5, $height/2, 'ALSHOALA.com', null,
         55, array(0,0,0),2,2,-30);
-        HistoryRecordHelper::registerDemandLog('Demand PDF Printing' .'<a href="/admin/demand/'.$this->job->id.'/details">'.'( '.$this->job->post_number.' )'.'</a>');
+        HistoryRecordHelper::registerDemandLog('Demand PDF Printing' .'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
 
         return $pdf->download('ALSHOALA-JOB-'.$job->post_number.'.pdf');
     }//end method

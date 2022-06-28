@@ -21,7 +21,7 @@ class ApplicationDetails extends Component
         $this->currentRoute = FacadesRoute::currentRouteName();
         $this->application = Application::with(['user' , 'job:id,post_number' , 'job.title' ,
                                                 'employers' , 'notes' ,
-                                                'statusHistory' , 'mainStatus' , 'subStatus' , 'educations' , 'attachments' ])
+                                                'statusHistory' , 'mainStatus' , 'subStatus' , 'educations' , 'attachments' , 'refused' ])
         ->with(['job.subJobs.title.sector' , 'notes.user' , 'statusHistory.user:id,name'])
         ->findOrFail($id);
         $this->status = $this->application->status;
@@ -115,6 +115,17 @@ class ApplicationDetails extends Component
         notify()->success('Forwarded Successfully');
         return redirect(route($this->currentRoute , $this->application));
     }
+    public function passAttachmentToEmployee($id)
+    {
+        $attachment = $this->application->attachments->where('id' , $id)->first();
+        $attachment->is_forwarded_talent = true;
+        $attachment->save();
+        notify()->success('Forwarded Successfully');
+        return redirect(route($this->currentRoute , $this->application));
+    }
+
+
+
 
 
     public function render()

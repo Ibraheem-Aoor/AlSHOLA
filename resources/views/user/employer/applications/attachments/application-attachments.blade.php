@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+           <!-- Modal -->
             <div class="modal fade" id="exampleModal_5" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -81,13 +81,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('employer.applications.note.send') }}" method="POST">
+                            <form action="{{ route('employer.applications.note.send' , $attachments->first()->application->id) }}" method="POST">
                                 @csrf
                                 <div class="form-group col-sm-12 mb-3">
                                     <label for="" style="font-weight: 600">Message:</label>
                                     &nbsp; &nbsp;
                                     <textarea name="message" class="form-control"></textarea>
-                                    <input type="text" id="id" name="application_id" hidden>
                                 </div>
                                 <div class="form-group col-sm-6 text-center" style="width: 100%">
                                     <button type="submit" class="btn btn-outline-primary"><i class="fa fa-submit"></i>

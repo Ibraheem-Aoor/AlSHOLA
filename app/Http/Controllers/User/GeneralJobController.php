@@ -19,7 +19,10 @@ class GeneralJobController extends Controller
             'attachments.*' => 'required|mimes:jpg,jpeg,png,svg,pdf|max:10024',
         ]);
         if($validate->fails())
-            return redirect()->back()->with(['error' , 'no file detected']);
+        {
+            notify()->error('No File Detected');
+            return back();
+        }
         if($request->has('id') && $request->hasFile('attachments'))
         {
             $job = Job::findOrFail($request->id);

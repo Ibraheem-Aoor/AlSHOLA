@@ -77,4 +77,9 @@ class Application extends Model
     {
         return $this->belongsTo(Title::class , 'title_id');
     }
+
+    public function refused()
+    {
+        return $this->hasMany(RefusedApplications::class , 'application_id');
+    }
 }
