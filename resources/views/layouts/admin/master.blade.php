@@ -80,11 +80,9 @@
         #cellPaiChart {
             height: 160px;
         }
-
         .notify {
             margin-top: 80px;
         }
-
     </style>
     @stack('css')
     @livewireStyles

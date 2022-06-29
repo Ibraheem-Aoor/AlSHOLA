@@ -11,7 +11,7 @@ class Dashboard extends Component
 {
     public function render()
     {
-        $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'subStatus'])
+        $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'subStatus' ,'applications' , 'mainStatus'])
         ->with('subJobs.title.sector')
         ->withCount('applications')
         ->where('user_id' , Auth::id())->orderByDesc('id')->take(10)->get();

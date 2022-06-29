@@ -16,9 +16,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Demand No</th>
                                     <th scope="col">Ref</th>
+                                    <th scope="col">Full Name</th>
                                     <th scope="col">Passport</th>
-                                    <th scope="col">Agent</th>
+                                    <th scope="col">Title</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Attachments</th>
                                     <th scope="col">Applied At</th>
@@ -35,9 +37,11 @@
                                 @forelse ($applications as $application)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $application->job->post_number }}</td>
                                         <td>{{ $application->ref }}</td>
+                                        <td>{{ $application->full_name }}</td>
                                         <td>{{ $application->passport_no }}</td>
-                                        <td>{{ $application->user->name }}</td>
+                                        <td>{{ $application->title->name}}</td>
                                         <td>{{ $application->subStatus->name }}</td>
                                         <td><a
                                                 href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>

@@ -45,7 +45,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total  Returned Applications</p>
+                            <p class="mb-2">Total Returned Applications</p>
                             <h6 class="mb-0">$1234</h6>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total  Fees </p>
+                            <p class="mb-2">Total Fees </p>
                             <h6 class="mb-0">$1234</h6>
                         </div>
                     </div>
@@ -74,8 +74,11 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Title</th>
+                            <th scope="col">DSR</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Supply</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Client</th>
                             <th scope="col">Creation_date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions</th>
@@ -84,13 +87,25 @@
                     <tbody>
                         @php
                             $i = 1;
-                            $activeJobs = [];
                         @endphp
                         @forelse ($avlialbeJobs as $job)
                             <tr>
                                 <th scope="row">{{ $i++ }}</th>
-                                <td>{{ $job->subJobs->first()->title->sector->name }}</td>
-                                <td>{{ $job->subJobs->first()->title->name }}</td>
+                                <td>{{ $job->post_number }}</td>
+                                <td>{{ $job->qty() }}</td>
+                                <td>
+                                    {{ $job->applications->where('forwarded', true)->count() }}
+                                </td>
+
+                                <td>
+                                    {{ $job->qty() - $job->applications->where('forwarded', true)->count() }}
+                                </td>
+
+                                <td>
+                                    <a href="{{ route('employer.job.applications.all', $job->id) }}">
+                                        {{ $job->user->name }}
+                                    </a>
+                                </td>
                                 <td>{{ $job->created_at }}</td>
                                 <td>{{ $job->subStatus->name }}</td>
                                 <td>

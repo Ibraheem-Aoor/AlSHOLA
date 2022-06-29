@@ -55,7 +55,7 @@ class EmployerApplicationsController extends Controller
                         ->with(['job.subJobs' , 'job.subStatus'])
                         ->simplePaginate(15);
         return view('user.employer.applications.all-applications' , compact('applications'));
-    }
+    }//end method
 
     public function allMedicalApplications()
     {

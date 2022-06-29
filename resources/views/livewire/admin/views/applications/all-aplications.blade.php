@@ -1,4 +1,13 @@
 <div>
+    @push('css')
+        <style>
+            table tr td , th{
+                font-size:12px !important;
+                text-transform: none !important;
+                text-decoration: none !important;
+            }
+        </style>
+    @endpush
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -18,10 +27,15 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>Agent_Name</th>
-                                                <th>Demand_Serial_Number</th>
+                                                <th>Demand SR</th>
+                                                <th>Ref</th>
+                                                <th>Full Name</th>
+                                                <th>Passport</th>
+                                                <th>Title</th>
+                                                <th>Clinet</th>
+                                                <th>Agent</th>
                                                 <th>Status</th>
-                                                <th>Attahments</th>
+                                                {{-- <th>Attahments</th> --}}
                                                 <th>Applied At</th>
                                                 <th>Number_Of_Notes</th>
                                                 <th>Actions</th>
@@ -34,46 +48,52 @@
                                             @forelse($applications as $application)
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
+                                                    <td>{{ $application->job->post_number }}</td>
+                                                    <td>{{ $application->ref }}</td>
+                                                    <td>{{ $application->full_name }}</td>
+                                                    <td>{{ $application->passport_no }}</td>
+                                                    <td>{{ $application->title->name }}</td>
+                                                    <td>
+                                                        {{ $application->job->user->name }}
+                                                    </td>
                                                     <td>
                                                         {{ $application->user->name }}
                                                     </td>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-info">{{ $application->job->post_number }}</a>
-                                                    </td>
+
                                                     <td>{{ $application->subStatus->name }}</td>
-                                                    <td>
+                                                    {{-- <td>
                                                         <a
                                                             href="{{ route('admin.application.attachments.all', $application->id) }}">
                                                             {{ $application->attachments_count }}
                                                         </a>
-                                                    </td>
-                                                    <td>{{ $application->created_at }}</td>
+                                                    </td> --}}
+                                                    <td>{{ $application->created_at->diffForHumans() }}</td>
                                                     <td><a
                                                             href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
                                                     </td>
-                                                    <td colspan="6">
+                                                    <td colspan="2">
                                                         {{-- <button class="btn btn-outline-primary " href="#"
                                                             wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{ $application->user->id }}')"><i
                                                                 class="fa fa-download"></i> CV</button> --}}
 
                                                         <a href="{{ route('admin.application.details', $application->id) }}"
-                                                            class="btn btn-outline-primary" title="show details">
+                                                            style="width:15px;"
+                                                            title="show details">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-
-                                                        <a class="btn btn-outline-info" title="send note to agent"
+                                                        <a title="send note to agent"
+                                                            style="width:15px;"
                                                             wire:click="setCurrentApplicationId({{ $application->id }})"
                                                             data-application="{{ $application->id }}"
                                                             data-toggle="modal" href="#exampleModal_5"><i
                                                                 class="fa fa-envelope"></i>
                                                         </a>
-                                                        <a class="btn btn-outline-info"
+                                                        <a style="width:15px;"
                                                             title="Forward this application to Client"
                                                             wire:click="passApplicationToEmployer({{ $application->id }})"><i
                                                                 class="fa fa-location-arrow"></i>
                                                         </a>
-                                                        <a class="btn btn-outline-danger  "
+                                                        <a   style="width:15px;"
                                                             wire:click="deleteApplication('{{ $application->id }}')"><i
                                                                 class="fa fa-trash"></i></a>
                                                     </td>
@@ -116,8 +136,8 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

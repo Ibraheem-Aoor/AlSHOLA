@@ -18,10 +18,10 @@
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>DM SR </th>
-                                                <th>Company </th>
+                                                <th>Total </th>
                                                 <th>Supply</th>
                                                 <th>Balance</th>
-                                                <th>Client_Name</th>
+                                                <th>Client</th>
                                                 <th>Status</th>
                                                 <th>Open Date</th>
                                                 <th>
@@ -40,7 +40,7 @@
                                                         {{ $job->post_number }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->user->company->name ?? '' }}
+                                                        {{ $job->qty() }}
                                                     </td>
                                                     <td>
                                                         {{ $job->applications->where('forwarded', true)->count() }}
@@ -98,7 +98,12 @@
                                                             title="send to agent"><i
                                                                 class="fa fa-location-arrow"></i></a>
 
+                                                        <a data-toggle="modal" data-job="{{ $job->id }}"
+                                                            href="#exampleModal_5" title="Issue Invoice"
+                                                            title="Issue Invoice">
+                                                            <i class="menu-icon fa fa-money"></i></a>
                                                     </td>
+
                                                     {{-- <td>
                                                         <span
                                                             class="badge badge-{{ $badgeColor }}">{{ $job->subStatus->name }}</span>
@@ -124,7 +129,7 @@
                         </div> <!-- /.col-lg-8 -->
 
 
-                        {{-- <!--SHOW NOTE  Modal -->
+                        <!--SHOW NOTE  Modal -->
                         <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -135,22 +140,27 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <input type="text" id="job">
-                                        <select name="" id="" class="form-control">
-                                                @foreach ($targetJob->applications as $application)
-                                                    <option value="{{ $application->user->id }}">
-                                                        {{ $application->user->name }}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
+                                    <form action="{{ route('admin.invoice.select-payer') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <input type="text" id="job" name="job_id" hidden>
+                                            <label for="">Issue To:</label>
+                                            <select name="payer"  class="form-control">
+                                                <option value="">-- select one --</option>
+                                                <option value="client">Client</option>
+                                                <option value="agent">Agent</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-success">Continue</button>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
- --}}
 
 
 
@@ -162,11 +172,11 @@
 
         @push('js')
             <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
             </script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
             </script>
             <script>
                 $('#exampleModal_5').on('show.bs.modal', function(event) {

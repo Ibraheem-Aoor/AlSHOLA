@@ -108,9 +108,11 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">number</th>
+                                            <th scope="col">DSR</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Supply</th>
+                                            <th scope="col">Balance</th>
                                             <th scope="col">Applications</th>
-                                            <th scope="col">Total QTY</th>
                                             <th scope="col">Creation_date</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Actions</th>
@@ -124,12 +126,20 @@
                                             <tr>
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $job->post_number }}</td>
+                                                <td>{{ $job->qty() }}</td>
+                                                <td>
+                                                    {{ $job->applications->where('forwarded', true)->count() }}
+                                                </td>
+
+                                                <td>
+                                                    {{ $job->qty() - $job->applications->where('forwarded', true)->count() }}
+                                                </td>
+
                                                 <td>
                                                     <a href="{{ route('employer.job.applications.all', $job->id) }}">
                                                         {{ $job->applications_count }}
                                                     </a>
                                                 </td>
-                                                <td>{{ $job->qty() }}</td>
                                                 <td>{{ $job->created_at }}</td>
                                                 <td>{{ $job->subStatus->name }}</td>
                                                 <td>
@@ -140,11 +150,6 @@
                                                     {{-- <a href="#" title="delete"
                                                         onclick="event.preventDefault();document.getElementById('delete-form').submit();"
                                                         class=" badge bg-danger"><i class="fa fa-trash"></i></a> --}}
-                                                    <form id="delete-form" style="display: none;"
-                                                        action="{{ route('job.destroy', $job) }}" method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                    </form>
                                                     <a class="badge badge-success text-primary"
                                                         href="{{ route('job.edit', $job->id) }}"><i
                                                             class="fa fa-edit"></i></a>

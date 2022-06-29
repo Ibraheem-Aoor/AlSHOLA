@@ -13,9 +13,12 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Job_Number</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Clinet_Name</th>
+                                    <th scope="col">DSR</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Supply</th>
+                                    <th scope="col">Balance</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Creation_date</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -28,12 +31,26 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $job->post_number }}</td>
-                                        <td>{{ $job->subJobs()->first()->title->name }}</td>
-                                        <td>{{ $job->user->name }}</td>
+                                        <td>{{ $job->qty() }}</td>
+                                        <td>
+                                            {{ $job->applications->where('forwarded', true)->count() }}
+                                        </td>
+
+                                        <td>
+                                            {{ $job->qty() - $job->applications->where('forwarded', true)->count() }}
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('employer.job.applications.all', $job->id) }}">
+                                                {{ $job->user->name }}
+                                            </a>
+                                        </td>
+                                        <td>{{ $job->created_at }}</td>
                                         <td>{{ $job->subStatus->name }}</td>
                                         <td>
                                             <a href="{{ route('employee.job.details', $job->id) }}"
-                                                class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>
+                                                class=" btn btn-outline-primary" href="#"><i
+                                                    class="fa fa-eye"></i>
                                                 Details</a>
                                         </td>
                                     </tr>

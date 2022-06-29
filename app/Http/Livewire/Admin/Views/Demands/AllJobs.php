@@ -16,7 +16,7 @@ class AllJobs extends Component
 
     public function setTragetJob($id)
     {
-        $this->targetJob = Job::with(['applications.user' , 'subStatus' , 'mainStatus' , ])->findOrFail($id);
+        $this->targetJob = Job::with(['applications.user' , 'subStatus' , 'mainStatus' , ])->withCount('applications')->findOrFail($id);
     }
 
     public function render()

@@ -82,4 +82,8 @@ class Application extends Model
     {
         return $this->hasMany(RefusedApplications::class , 'application_id');
     }
+    public function subInvoice()
+    {
+        return $this->hasMany(SubInvoice::class);
+    }
 }

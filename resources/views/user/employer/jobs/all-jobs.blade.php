@@ -56,11 +56,13 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">SR</th>
+                                    <th scope="col">DSR</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Supply</th>
+                                    <th scope="col">Balance</th>
                                     <th scope="col">Applications</th>
-                                    <th scope="col">Total </th>
+                                    <th scope="col">Creation_date</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Notes</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -72,18 +74,23 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $job->post_number }}</td>
+                                        <td>{{ $job->qty() }}</td>
                                         <td>
-                                            <a href="{{ route('employer.job.applications.all' , $job->id) }}">
+                                            {{ $job->applications->where('forwarded', true)->count() }}
+                                        </td>
+
+                                        <td>
+                                            {{ $job->qty() - $job->applications->where('forwarded', true)->count() }}
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('employer.job.applications.all', $job->id) }}">
                                                 {{ $job->applications_count }}
                                             </a>
                                         </td>
-                                        <td>{{ $job->qty() }}</td>
+                                        <td>{{ $job->created_at }}</td>
                                         <td>{{ $job->subStatus->name }}</td>
-                                        <td>
-                                            <a title="Notes" href="{{ route('employer.job.notes', $job->id) }}">
-                                                {{ $job->notes_count }}
-                                            </a>
-                                        </td>
+
                                         <td>
                                             <a title="Details" href="{{ route('job.show', $job->id) }}"><i
                                                     class="fa fa-eye"></i></a>
@@ -98,11 +105,10 @@
                                                 data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
                                             </a>
 
-
-                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </ul>
                     </div>
-                    </td>
-                    </tr>
                 @empty
                     <tr>
                         <td colspan="5" class="alert alert-warning text-center bg-dark" style="color:#fff">
@@ -136,7 +142,8 @@
                     @csrf
                     <div class="form-group col-sm-6">
                         <label for="" style="font-weight: 600">Demand SR:</label>
-                        &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<input type="text" readonly id="number" style="paadding-left:10px;margin-left:15px;">
+                        &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<input type="text" readonly id="number"
+                            style="paadding-left:10px;margin-left:15px;">
                         <input type="text" readonly name="id" id="id" hidden>
 
                     </div>

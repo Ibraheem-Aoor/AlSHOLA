@@ -135,7 +135,14 @@
                   <li class="menu-item-has-children dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false">
-                          <i class="menu-icon fa fa-money"></i>Invoices </a>
+                          <i class="menu-icon fa fa-money"></i>Invoices</a>
+                      <ul class="sub-menu children dropdown-menu">
+                          <li>
+                              <a href="{{ route('admin.invoice.all') }}">All Invoices</a>
+                              <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
+                              <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a>
+                          </li>
+                      </ul>
                   </li>
               @endcan
 
@@ -172,12 +179,12 @@
                           aria-expanded="false">
                           <i class="menu-icon fa fa-history"></i>History Recored</a>
                       <ul class="sub-menu children dropdown-menu">
-                          <li><i class="menu-icon fa fa-users"></i><a
-                                  href="{{ route('admin.history.demand') }}">Deamnd Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.history.demand') }}">Deamnd
+                                  Recored</a></li>
                           <li><i class="menu-icon fa fa-users"></i><a
                                   href="{{ route('admin.history.application') }}">Application Recored</a></li>
-                          <li><i class="menu-icon fa fa-users"></i><a
-                                  href="{{ route('admin.history.user') }}">User Managament Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.history.user') }}">User
+                                  Managament Recored</a></li>
                           <li><i class="menu-icon fa fa-users"></i><a
                                   href="{{ route('admin.history.auth') }}">Authentication Recored</a></li>
                       </ul>

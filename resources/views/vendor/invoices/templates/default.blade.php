@@ -149,6 +149,7 @@
                             </h4>
                         @endif
                         <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+                        {{-- <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p> --}}
                         <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
                     </td>
                 </tr>
@@ -158,15 +159,15 @@
         {{-- Seller - Buyer --}}
         <table class="table">
             <thead>
-                <tr>
+                {{-- <tr>
                     <th class="border-0 pl-0 party-header" width="48.5%">
-                        {{ __('invoices::invoice.seller') }}
+                        From
                     </th>
                     <th class="border-0" width="3%"></th>
                     <th class="border-0 pl-0 party-header">
-                        {{ __('invoices::invoice.buyer') }}
+                        To
                     </th>
-                </tr>
+                </tr> --}}
             </thead>
             <tbody>
                 <tr>
@@ -367,9 +368,9 @@
         <p>
             {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
         </p>
-        <p>
+        {{-- <p>
             {{ trans('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
-        </p>
+        </p> --}}
 
         <script type="text/php">
             if (isset($pdf) && $PAGE_COUNT > 1) {
