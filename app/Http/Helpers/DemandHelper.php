@@ -75,6 +75,7 @@ foreach($request->demandTerms as $term)
                 'completion_duration' => $request->completion_duration ,
                 'pay_from' => $request->pay_from ,
                 'pay_to' => $request->pay_to ,
+                'after_before' => $request->after_before ,
             ]);
         }
     }//end method

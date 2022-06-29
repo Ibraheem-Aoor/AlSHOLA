@@ -168,7 +168,8 @@
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="">Accept/Reject Duration:</label>
-                                                <input type="text" class="form-control" required name="acceptence_duration">
+                                                <input type="text" class="form-control" required
+                                                    name="acceptence_duration">
                                             </div>
                                             <div class="col-sm-4">
                                                 <label for="">CV Submission Duration:</label>
@@ -183,15 +184,26 @@
                                             <div class="col-sm-6">
                                                 <label for="">Pay From:</label>
                                                 <select name="pay_from" class="form-control" required>
+                                                    <option selected>-- select one --</option>
                                                     <option value="Alshoala" selected>ALSHOALA</option>
                                                     <option value="Agent">AGENT</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="">Pay To:</label>
-                                                <input type="text" class="form-control" required
-                                                    name="pay_to" readonly>
+                                                <input type="text" class="form-control" required name="pay_to"
+                                                    readonly>
                                             </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="">Payment Will Be:</label>
+                                                <select name="after_before" class="form-control" required>
+                                                    <option value="">-- select one --</option>
+                                                    <option value="before" selected>Before</option>
+                                                    <option value="after">After</option>
+                                                </select>
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -210,12 +222,12 @@
 
                     @push('js')
                         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                                                crossorigin="anonymous"></script>
+                            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+                        </script>
                         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                                                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-                                                crossorigin="anonymous"></script>
+                            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+                        </script>
                         <script>
                             $('#exampleModal_5').on('show.bs.modal', function(event) {
                                 var button = $(event.relatedTarget)
@@ -249,14 +261,12 @@
                         </script>
 
                         <script>
-                            $('#submitForm').on('click', function() {
-                            });
+                            $('#submitForm').on('click', function() {});
                         </script>
 
                         <script>
-                            $('select[name="pay_from"]').on('change' , function()
-                            {
-                                if(this.value == 'Alshoala')
+                            $('select[name="pay_from"]').on('change', function() {
+                                if (this.value == 'Alshoala')
                                     $('input[name="pay_to"]').val('Agent');
                                 else
                                     $('input[name="pay_to"]').val('Alshoala');

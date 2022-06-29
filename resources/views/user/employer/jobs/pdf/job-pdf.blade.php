@@ -257,7 +257,7 @@
                     {{ $job->terms->first()->pay_from == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }} will
                     pay to {{ $job->terms->first()->pay_to }}
                     {{ $job->terms->first()->pay_to == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }}the
-                    Service Charge after candidate arrival
+                    Service Charge {{$job->terms->first()->after_before}} candidate arrival
                     date.
                 </li>
             </ul>

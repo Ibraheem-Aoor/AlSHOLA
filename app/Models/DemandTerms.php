@@ -12,7 +12,7 @@ class DemandTerms extends Model
     protected $fillable = [
                             'user_id' , 'title' ,
                             'serivce_charge' , 'per' ,'job_id' , 'currency' ,
-                            'acceptence_duration' , 'submission_duration' , 'completion_duration', 'pay_from' , 'pay_to'
+                            'acceptence_duration' , 'submission_duration' , 'completion_duration', 'pay_from' , 'pay_to' , 'after_before'
                         ];
 
 
