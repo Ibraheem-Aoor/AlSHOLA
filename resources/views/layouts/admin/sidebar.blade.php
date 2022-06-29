@@ -139,8 +139,8 @@
                       <ul class="sub-menu children dropdown-menu">
                           <li>
                               <a href="{{ route('admin.invoice.all') }}">All Invoices</a>
-                              <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
-                              <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a>
+                              {{-- <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
+                              <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a> --}}
                           </li>
                       </ul>
                   </li>

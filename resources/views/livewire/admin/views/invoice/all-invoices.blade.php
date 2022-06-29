@@ -48,14 +48,14 @@
                                                         {{ $invoice->user->name }}
                                                     </td>
                                                     <td class="">
-                                                        {{ $invoice->quantity }}
+                                                        {{ $invoice->qty() }}
                                                     </td>
                                                     <td class="">
-                                                        {{ $invoice->charge }}
+                                                        {{ $invoice->totalCharge()}}
                                                     </td>
                                                     <td>
                                                             <a href="{{route('admin.invoice.print' , $invoice->id)}}"><i class="fa fa-print"></i></a>
-                                                            <a href="#"><i class="fa fa-trash"></i></a>
+                                                            <a href="#"><i class="fa fa-trash" wire:click="deleteInvoice({{$invoice->id}})"></i></a>
                                                     </td>
                                                 </tr>
                                             @empty

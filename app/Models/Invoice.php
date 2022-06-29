@@ -20,4 +20,20 @@ class Invoice extends Model
     {
         return $this->hasMany(SubInvoice::class);
     }
+
+
+    public function qty()
+    {
+        $total = 0;
+        foreach($this->subInvoices as $subInvoice)
+            $total += $subInvoice->quantity;
+        return $total;
+    }
+    public function totalCharge()
+    {
+        $total = 0;
+        foreach($this->subInvoices as $subInvoice)
+            $total += $subInvoice->charge;
+        return $total;
+    }
 }

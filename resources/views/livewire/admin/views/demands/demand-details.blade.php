@@ -814,7 +814,8 @@
                                             <a href="{{ route('admin.pdf.generate', $job->id) }}"
                                                 class="btn btn-outline-info col-sm-12 mb-2">PRINT PDF</a>
 
-                                            <a title="issue" data-toggle="modal" href="#exampleModal_115"
+                                            <a title="issue" data-toggle="modal" data-job="{{ $job->id }}"
+                                                title="Issue Invoice" href="#exampleModal_115"
                                                 class="btn btn-info col-sm-12"><i class="fa fa-money"></i> ISSUE
                                                 INVOICE</a>
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
@@ -963,10 +964,8 @@
                         </div>
 
 
-
-
-
                         <!-- INVOICE Modal -->
+
                         <div class="modal fade" id="exampleModal_115" tabindex="-1" wire:ignore
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -978,30 +977,40 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="{{ route('invoice.test') }}" method="POST">
+                                    <form action="{{ route('admin.invoice.select-payer') }}" method="POST">
                                         @csrf
                                         <div class="modal-body">
-                                            <select class="form-control">
+                                            <input type="text" id="job" name="job_id" hidden>
+                                            <label for="">Issue To:</label>
+                                            <select name="payer" class="form-control">
                                                 <option value="">-- select one --</option>
-                                                @foreach ($job->applications->pluck('user')->unique() as $user)
-                                                    <option value="{{ $application->user->id }}">
-                                                        {{ $application->user->name }}</option>
-                                                @endforeach
+                                                <option value="client">Client</option>
+                                                <option value="agent">Agent</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">ISSUE INVOICE</button>
+                                            <button type="submit" class="btn btn-success">Continue</button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
 
+
+
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
         </div>
     </div>
     @push('js')
