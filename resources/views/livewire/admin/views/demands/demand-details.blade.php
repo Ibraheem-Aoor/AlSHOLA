@@ -935,8 +935,7 @@
                                                     required>
                                                     <option value="">--select one --</option>
                                                     @foreach ($mainStatuses as $status)
-                                                        <option value="{{ $status->id }}"
-                                                            @if ($job->main_status_id == $status->id) {{ 'selected' }} @endif>
+                                                        <option value="{{ $status->id }}">
                                                             {{ $status->name }}
                                                         </option>
                                                     @endforeach

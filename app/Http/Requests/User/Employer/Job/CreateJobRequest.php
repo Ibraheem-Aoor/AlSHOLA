@@ -35,6 +35,7 @@ class CreateJobRequest extends FormRequest
             'food_amount' => 'sometimes',
             'food' => 'required',
             'joining_ticket' => 'required',
+            'agree' => 'required',
             // 'return_ticket' => 'required',
             'off_day' => 'required',
             // 'other_terms' => 'required',

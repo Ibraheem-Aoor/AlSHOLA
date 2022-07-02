@@ -146,9 +146,7 @@
                                                                                 <th>Nationality:
                                                                                     {{ $application->Nationlaity ?? 'UNKOWN' }}
                                                                                 </th>
-                                                                                <th>Place Of Birth:
-                                                                                    {{ $application->place_of_birth ?? 'UNKOWN' }}
-                                                                                </th>
+
                                                                             </tr>
                                                                             @isset($application->visa_number)
                                                                                 <tr>
@@ -168,10 +166,22 @@
                                                                                 <td>Place Issued:
                                                                                     {{ $application->place_issued }}
                                                                                 </td>
+                                                                                <td>Place Of Birth:
+                                                                                    {{ $application->place_of_birth ?? 'UNKOWN' }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Date Issued:
                                                                                     {{ $application->date_issued }}
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td>Visa Number:
+                                                                                    {{ $application->visa_number ?? 'NONE' }}
+                                                                                </td>
+                                                                                <td>flight_ticket:
+                                                                                    {{ $application->flight_ticket ?? 'NONE'}}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>

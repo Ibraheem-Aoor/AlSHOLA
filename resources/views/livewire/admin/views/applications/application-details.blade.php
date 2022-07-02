@@ -36,6 +36,9 @@
                                             href="#custom-nav-attachments" role="tab"
                                             aria-controls="custom-nav-home" aria-selected="false">Attachments</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-terms" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Terms</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-refused" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Refused</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
@@ -119,24 +122,6 @@
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
-                                                @isset($application->visa_number)
-                                                    <div class="col-sm-4">
-                                                        <label for="">
-                                                            Visa_Number:
-                                                        </label>
-                                                        <input type="text" value="{{ $application->visa_number }}"
-                                                            readonly>
-                                                    </div>
-                                                @endisset
-                                                @isset($application->flight_ticket)
-                                                    <div class="col-sm-4">
-                                                        <label for="">
-                                                            Flight Ticket:
-                                                        </label>
-                                                        <input type="text" readonly
-                                                            value="{{ $application->flight_ticket }}">
-                                                    </div>
-                                                @endisset
 
                                                 <div class="col-sm-4">
                                                     <label for="inputPassword3" class="col-form-label">Date Of
@@ -168,6 +153,16 @@
                                                     <label for="inputPassword3" class="col-form-label">Date
                                                         Issued:</label>
                                                     <input type="text" value="{{ $application->date_issued }}"
+                                                        class="form-control" id="inputPassword3" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="col-form-label">Visa:</label>
+                                                    <input type="text" value="{{ $application->visa_number ?? 'NONE' }}"
+                                                        class="form-control" id="inputPassword3" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="col-form-label">Flight Ticket:</label>
+                                                    <input type="text" value="{{ $application->flight_ticket ?? 'NONE' }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -514,6 +509,113 @@
                                                     </tbody>
                                                 </table>
                                                 {!! $attachments->fragment('custom-nav-attachments')->links() !!}
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+
+
+                                    {{-- Terms --}}
+                                    <div class="tab-pane fade" id="custom-nav-terms" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Title</th>
+                                                            <th scope="col">Charge</th>
+                                                            <th scope="col">Per</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @php
+                                                            $terms = $application->job
+                                                                ->terms()
+                                                                ->where('user_id', $this->application->user->id)
+                                                                ->simplePaginate(15);
+                                                        @endphp
+                                                        @forelse ($terms as $term)
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    {{ $i++ }}</th>
+                                                                <td>{{ $term->title }}
+                                                                </td>
+                                                                <td>{{ $term->serivce_charge }}</td>
+                                                                <td>{{ $term->per }}</td>
+                                                                <td>{{ $term->created_at }}</td>
+                                                                {{-- <td>
+
+                                                                 <a title="Download"
+                                                                     href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                                     <i
+                                                                         class="fa fa-download"></i>&nbsp;
+                                                                 </a>
+                                                                 </li>
+                                                                 <a title="Send Note"
+                                                                     href="#exampleModal_5"
+                                                                     data-id="{{ $file->application->id }}"
+                                                                     data-toggle="modal"
+                                                                     href="#"><i
+                                                                         class="fa fa-edit"></i></a>
+
+                                                                  <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
+                                                                                    data-id="{{ $file->application->id }}"
+                                                                                    data-title="{{ $file->application->job->title }}"
+                                                                                    data-number="{{ $file->application->job->post_number }}"
+                                                                                    href="#exampleModal_6">Accept</a>
+                                                                            </li>
+
+
+                                                             </td> --}}
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="8"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                                {{ $terms->fragment('custom-nav-terms')->links() }}
+                                            </div>
+                                            <div>
+                                                <ul style="font-size: 9px;">
+                                                    <li>Agent Confirm the Demand accepted or
+                                                        Rejected within
+                                                        {{ $application->job->terms->first()->acceptence_duration }}
+                                                        Day</li>
+                                                    <li>Agent Submit the candidate CV's
+                                                        within
+                                                        {{ $application->job->terms->first()->submission_duration }}
+                                                        Days from
+                                                        receiving the signature of the
+                                                        demand </li>
+                                                    <li> A
+                                                        {{ $application->job->terms->first()->completion_duration }}
+                                                        day total duration is expected for
+                                                        demand till
+                                                        complete.</li>
+                                                    <li>{{ $application->job->terms->first()->pay_from }}
+                                                        {{ $application->job->terms->first()->pay_from == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }}
+                                                        will
+                                                        pay to
+                                                        {{ $application->job->terms->first()->pay_to }}
+                                                        {{ $application->job->terms->first()->pay_to == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }}the
+                                                        Service Charge
+                                                        {{ $application->job->terms->first()->after_before }}
+                                                        candidate arrival
+                                                        date.
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                         </p>

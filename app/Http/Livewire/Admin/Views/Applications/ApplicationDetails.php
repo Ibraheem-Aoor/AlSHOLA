@@ -19,13 +19,14 @@ class ApplicationDetails extends Component
     public function mount($id)
     {
         $this->currentRoute = FacadesRoute::currentRouteName();
-        $this->application = Application::with(['user' , 'job:id,post_number' , 'job.title' ,
+        $this->application = Application::with(['user' , 'job.terms' , 'job.title' ,
                                                 'employers' , 'notes' ,
                                                 'statusHistory' , 'mainStatus' , 'subStatus' , 'educations' , 'attachments' , 'refused' ])
         ->with(['job.subJobs.title.sector' , 'notes.user' , 'statusHistory.user:id,name'])
         ->findOrFail($id);
         $this->status = $this->application->status;
         $this->unreadNotes = $this->application->notes->where('seen', false)->count();
+        // return dd($this->application->job->terms()->where('user_id' , $this->application->user->id)->get());
     }
 
 

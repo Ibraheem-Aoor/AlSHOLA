@@ -468,8 +468,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-info"
                                                     data-dismiss="modal">BACK</button>
-                                                <button type="submit" class="btn btn-primary"
-                                                    onclick="event.preventDefault();document.getElementById('my-form').submit();">AGREE
+                                                <button type="submit" class="btn btn-primary">AGREE
                                                     &
                                                     SUBMIT</button>
                                             </div>

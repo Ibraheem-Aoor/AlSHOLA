@@ -229,7 +229,7 @@
         </div>
     @endisset
 
-    @if ($job->terms->count() > 0 && Auth::user()->type == 'Agent')
+    @if ($job->terms()->count() > 0 && Auth::user()->type == 'Agent')
         <div style="border:1px solid black; margin-top:5px; padding:5px;">
             <h3>Supply Terms & Conditions:</h3>
             <table>

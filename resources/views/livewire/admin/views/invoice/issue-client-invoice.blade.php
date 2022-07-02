@@ -6,7 +6,6 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Issue Invoice For Client</strong><small>DSR: {{ $job->post_number }}</small>
                         </div>
                         <div class="card-body card-block">
                             <form wire:submit.prevent="addSubInvoice()">

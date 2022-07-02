@@ -61,14 +61,14 @@ class DemandHelper
 
     public function saveJobTerms($request , $job)
     {
-foreach($request->demandTerms as $term)
+        foreach($request->demandTerms as $term)
         {
             DemandTerms::create([
                 'user_id' => $request->agent,
                 'job_id' => $job->id,
                 'currency' => $request->currency,
                 'title' => $term['title'],
-                        'serivce_charge' => $term['service_charge'],
+                'serivce_charge' => $term['service_charge'],
                 'per' => $term['per'],
                 'acceptence_duration' => $request->acceptence_duration ,
                 'submission_duration' => $request->submission_duration ,

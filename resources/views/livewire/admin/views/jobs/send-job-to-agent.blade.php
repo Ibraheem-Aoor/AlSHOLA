@@ -1,5 +1,6 @@
 <div>
     @section('title', 'ALSHOALA - Admin | AGENTS LIST')
+
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -126,12 +127,12 @@
                                                     <th>Service charge</th>
                                                     <th>Per</th>
                                                     <th>
-                                                        <select name="currency" id="" class="form-control"
+                                                        <select name="currency" id="cs" class="form-control text-center" style="width:50%;"
                                                             required>
                                                             <option value=""> -- choose currency -- </option>
                                                             @foreach ($currencies as $currency)
                                                                 <option value="{{ $currency->key }}">
-                                                                    {{ $currency->value }}</option>
+                                                                    {{ $currency->key }}</option>
                                                             @endforeach
                                                         </select>
                                                     </th>

@@ -29,29 +29,32 @@ trait  ApplicationAttachmentTrait
             return redirect()->back();
         }
 
-        if($request->has('id') && $request->hasFile('files'))
+        if($request->has('id'))
         {
             $application = Application::with('job:id')->findOrFail($request->id);
             $files = $request->file('files');
-            foreach($files as $file)
+            if($request->hasFile('files'))
             {
-                $fileName  = $file->getClientOriginalName();
-                $path = 'public/uploads/applications/'.$application->id.'/'.'attachments'.'/';
-                $file->storeAs($path , $fileName);
-                $attachment  = ApplicationAttachment::create(
-                    [
-                        'name' => $fileName,
-                        'user_id' => Auth::id(),
-                        'application_id' => $application->id,
-                        'is_forwarded_talent' => Auth::user()->type == 'Agent' ? true : false,
-                        'is_forwarded_employer' => Auth::user()->type == 'Agent' ? false : true,
-                        'type' => $request->file_type,
-                        'visa_number' => $request->visa_number
-                    ]
-                );
-        }
-        $application->visa_number = $request->vlsa_number;
-        $application->flight_ticket = $request->flight_ticket;
+                foreach($files as $file)
+                {
+                    $fileName  = $file->getClientOriginalName();
+                    $path = 'public/uploads/applications/'.$application->id.'/'.'attachments'.'/';
+                    $file->storeAs($path , $fileName);
+                    $attachment  = ApplicationAttachment::create(
+                        [
+                            'name' => $fileName,
+                            'user_id' => Auth::id(),
+                            'application_id' => $application->id,
+                            'is_forwarded_talent' => Auth::user()->type == 'Agent' ? true : false,
+                            'is_forwarded_employer' => Auth::user()->type == 'Agent' ? false : true,
+                            'type' => $request->file_type,
+                            ]
+                        );
+                    }
+            }//end if
+
+        $application->visa_number = $request->visa_number;
+        // $application->flight_ticket = $request->flight_ticket;
         $application->save();
 
             notify()->success('File Uploaded Successfully');

@@ -43,11 +43,11 @@
                                                         {{ $job->qty() }}
                                                     </td>
                                                     <td>
-                                                        {{ $job->applications->where('forwarded', true)->count() }}
+                                                        {{ $job->applications->count() }}
                                                     </td>
 
                                                     <td>
-                                                        {{ $job->qty() - $job->applications->where('forwarded', true)->count() }}
+                                                        {{ $job->qty() - $job->applications->count() }}
                                                     </td>
                                                     <td>{{ $job->user->name }}</td>
                                                     <td>

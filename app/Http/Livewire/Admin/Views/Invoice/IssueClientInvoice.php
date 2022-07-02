@@ -8,6 +8,7 @@ use App\Models\DemandTerms;
 use App\Models\Invoice;
 use App\Models\Job;
 use App\Models\SubInvoice;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
@@ -26,7 +27,6 @@ class IssueClientInvoice extends Component
         $this->job = Job::with('applications')->findOrFail($jobId);
         $this->applications = $this->job->applications()->whereDoesntHave('subInvoice')->with(['title' , 'subStatus'])->get();
         $this->currentRoute = Route::currentRouteName();
-        // return dd($this->applications);
     }
 
 

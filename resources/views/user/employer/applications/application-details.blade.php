@@ -78,6 +78,7 @@
                                                                 role="tab" aria-controls="custom-nav-home"
                                                                 aria-selected="false">Attachments</a>
 
+
                                                             <a class="nav-item nav-link" id="custom-nav-home-actions"
                                                                 data-toggle="tab" href="#custom-nav-actions"
                                                                 role="tab" aria-controls="custom-nav-home"
@@ -146,9 +147,7 @@
                                                                                 <th>Nationality:
                                                                                     {{ $application->Nationlaity ?? 'UNKOWN' }}
                                                                                 </th>
-                                                                                <th>Place Of Birth:
-                                                                                    {{ $application->place_of_birth ?? 'UNKOWN' }}
-                                                                                </th>
+
                                                                             </tr>
                                                                             @isset($application->visa_number)
                                                                                 <tr>
@@ -168,10 +167,22 @@
                                                                                 <td>Place Issued:
                                                                                     {{ $application->place_issued }}
                                                                                 </td>
+                                                                                <td>Place Of Birth:
+                                                                                    {{ $application->place_of_birth ?? 'UNKOWN' }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Date Issued:
                                                                                     {{ $application->date_issued }}
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td>Visa Number:
+                                                                                    {{ $application->visa_number ?? 'NONE' }}
+                                                                                </td>
+                                                                                <td>flight_ticket:
+                                                                                    {{ $application->flight_ticket ?? 'NONE'}}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -636,6 +647,10 @@
 
 
 
+
+
+
+
                                                         {{-- Actions --}}
                                                         <div class="tab-pane fade" id="custom-nav-actions"
                                                             role="tabpanel" aria-labelledby="custom-nav-contact-tab">
@@ -646,9 +661,12 @@
                                                                     Application</a>
                                                                 <a class="btn btn-outline-info"data-toggle="modal"
                                                                     data-target="#exampleModal_5">Send Comment</a>
-                                                                <a class="btn btn-outline-danger" data-toggle="modal"
-                                                                    href="#exampleModal_1">Reject
-                                                                    Application</a>
+                                                                @if ($application->sub_status_id == 6)
+                                                                    <a class="btn btn-outline-danger"
+                                                                        data-toggle="modal"
+                                                                        href="#exampleModal_1">Reject
+                                                                        Application</a>
+                                                                @endif
                                                             </div>
                                                             </p>
                                                         </div>

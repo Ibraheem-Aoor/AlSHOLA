@@ -73,7 +73,7 @@ class ApplicationController extends Controller
     {
 
         $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId ,
-                'title_id' => $request->get('title') , 'main_status_id' => 1 , 'sub_status_id' => 1 ]));
+                'title_id' => $request->get('title') , 'main_status_id' => 2    , 'sub_status_id' => 6  ]));
         try
         {
             $this->createEducationRecords($request->addMoreEducationRecords , $application->id);
