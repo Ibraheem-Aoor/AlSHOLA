@@ -459,7 +459,7 @@
                                                         <br> <br> <br>
                                                         <div class="col-sm-12  mb-2" style="font-size:1rem"
                                                             style="height: calc(3.5rem + 2px);">
-                                                            <input type="checkbox" name="agree" required>
+                                                            <input type="checkbox" name="agree" id="accept" required>
                                                             I Agree To All Terms And Conditions.
                                                         </div>
                                                     </div>
@@ -468,7 +468,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-info"
                                                     data-dismiss="modal">BACK</button>
-                                                <button type="submit" class="btn btn-primary">AGREE
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="submitForm();">AGREE
                                                     &
                                                     SUBMIT</button>
                                             </div>
@@ -677,14 +678,25 @@
                 });
             });
             makeInputsReadOnly();
-
-
         });
 
         function clearInputs(elements) {
             elements.forEach(element => {
                 element.setAttribute('readonly', '');
             });
+        }
+
+        function submitForm() {
+            const cb = document.querySelector('#accept');
+            if (cb.checked)
+            {
+                demandForm = document.getElementById('my-form');
+                demandForm.submit();
+            }
+            else
+            {
+                alert('You Have To Accept Terms & Conditions')
+            }
         }
     </script>
 @endpush
