@@ -160,6 +160,17 @@ use LaravelDaily\Invoices\Invoice;
             }
         })->name('file.download');
 
+        Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
+        {
+            try{
+                return response()->file(asset('storage/uploads/attachments/jobs/'.$jobId.'/'.$fileName));
+            }Catch(Throwable $e)
+            {
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('file.view');
+
         //Download job applications  cv
         Route::get('downloadcv/{jobId}/{fileName}/{userId}' , function($jobId , $fileName , $userId)
         {

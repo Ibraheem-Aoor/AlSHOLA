@@ -499,6 +499,9 @@
                                                                     <a class="btn btn-outline-primary"
                                                                         href="{{ route('file.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-download"></i></a>
+                                                                    <a class="btn btn-outline-info"
+                                                                        href="{{ route('file.view', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
+                                                                            class="fa fa-eye"></i></a>
                                                                     <a class="btn btn-outline-danger"
                                                                         href="{{ route('file.delete', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-trash"></i></a>
