@@ -76,6 +76,7 @@ use App\Models\Job;
 use App\Models\Title;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
@@ -163,9 +164,12 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
         {
             try{
-                return response()->file(asset('storage/uploads/attachments/jobs/'.$jobId.'/'.$fileName));
+                $file = Storage::url('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
+                return response()->file(asset('public'.$file));
+
             }Catch(Throwable $e)
             {
+                return dd($e);
                 notify()->error('someting went wrong');
                 return redirect()->back();
             }
