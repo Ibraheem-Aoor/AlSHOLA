@@ -164,9 +164,7 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
         {
             try{
-                $file = Storage::url('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
-                return response()->file(asset('public'.$file));
-
+                return response()->file(public_path('storage/uploads/attachments/jobs/'.$jobId.'/'.$fileName));
             }Catch(Throwable $e)
             {
                 return dd($e);
