@@ -44,31 +44,34 @@
                                         </td>
                                         <td>&nbsp;</td>
                                         <td>{{ $application->created_at }}</td>
-                                        <td>
-                                            @switch($application->job->subStatus->name)
-                                                @case('Demand Under Proccess')
-                                                    @php
-                                                        $title[$i] = 'Upload Medical/Agreement File(s)';
-                                                        $file_type[$i] = 'medical/agreement';
-                                                    @endphp
-                                                @break
+                                        @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
+                                            <td>
+                                                @switch($application->job->subStatus->name)
+                                                    @case('Demand Under Proccess')
+                                                        @php
+                                                            $title[$i] = 'Upload Medical/Agreement File(s)';
+                                                            $file_type[$i] = 'medical/agreement';
+                                                        @endphp
+                                                    @break
 
-                                                @default
-                                                    @php
-                                                        $title[$i] = null;
-                                                        $file_type[$i] = null;
-                                                    @endphp
-                                            @endswitch
-                                            <a href="{{ route('employeee.application.details', $application->id) }}">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            @isset($file_type[$i])
-                                                <a href="#exampleModal_5" data-title="{{ $title[$i] }}" data-toggle="modal"
-                                                    data-type="{{ $file_type[$i] }}" data-id="{{ $application->id }}">
-                                                    <i class="fa fa-upload"></i>
+                                                    @default
+                                                        @php
+                                                            $title[$i] = null;
+                                                            $file_type[$i] = null;
+                                                        @endphp
+                                                @endswitch
+                                                <a href="{{ route('employeee.application.details', $application->id) }}">
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
-                                            @endisset
-                                        </td>
+                                                @isset($file_type[$i])
+                                                    <a href="#exampleModal_5" data-title="{{ $title[$i] }}"
+                                                        data-toggle="modal" data-type="{{ $file_type[$i] }}"
+                                                        data-id="{{ $application->id }}">
+                                                        <i class="fa fa-upload"></i>
+                                                    </a>
+                                                @endisset
+                                            </td>
+                                        @endif
                                     </tr>
                                     @empty
                                         <tr>

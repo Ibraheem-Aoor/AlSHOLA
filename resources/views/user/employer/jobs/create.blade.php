@@ -208,6 +208,18 @@
                                         <table class="table table basicInfo">
 
                                             <tr>
+                                                <td>Cuurency</td>
+                                                <td>
+                                                    <select name="currency" class="form-control">
+                                                        @foreach ($currencies as $currency)
+                                                            <option value="{{ $currency->key }}">
+                                                                {{ $currency->key }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Working Days:</td>
                                                 <td>
                                                     <select class="form-control" name="working_days" required>
@@ -459,7 +471,8 @@
                                                         <br> <br> <br>
                                                         <div class="col-sm-12  mb-2" style="font-size:1rem"
                                                             style="height: calc(3.5rem + 2px);">
-                                                            <input type="checkbox" name="agree" id="accept" required>
+                                                            <input type="checkbox" name="agree" id="accept"
+                                                                required>
                                                             I Agree To All Terms And Conditions.
                                                         </div>
                                                     </div>
@@ -688,13 +701,10 @@
 
         function submitForm() {
             const cb = document.querySelector('#accept');
-            if (cb.checked)
-            {
+            if (cb.checked) {
                 demandForm = document.getElementById('my-form');
                 demandForm.submit();
-            }
-            else
-            {
+            } else {
                 alert('You Have To Accept Terms & Conditions')
             }
         }

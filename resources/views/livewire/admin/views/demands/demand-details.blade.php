@@ -254,7 +254,7 @@
                                                             <td>{{ $subjob->title->sector->name }}</td>
                                                             <td>{{ $subjob->title->name }}</td>
                                                             <td>{{ $subjob->quantity }}</td>
-                                                            <td>{{ $subjob->salary }}</td>
+                                                            <td>{{ $subjob->salary . ' ( ' . $job->currency . ' )' }}</td>
                                                             <td>{{ $subjob->gender }}</td>
                                                             <td>{{ $subjob->age }}</td>
                                                             <td>{{ $subjob->nationality->name }}</td>
@@ -416,7 +416,8 @@
                                                             <tr>
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $subjob->title->name }}</td>
-                                                                <td>{{ $subjob->salary }}</td>
+                                                                <td>{{ $subjob->salary . ' ( ' . $job->currency . ' )' }}
+                                                                </td>
                                                                 <td>{{ $subjob->quantity }}</td>
                                                                 <td>{{ $subjob->gender }}</td>
                                                                 <td>{{ $subjob->age }}</td>

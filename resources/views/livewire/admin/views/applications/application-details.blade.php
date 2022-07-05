@@ -157,12 +157,14 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="col-form-label">Visa:</label>
-                                                    <input type="text" value="{{ $application->visa_number ?? 'NONE' }}"
+                                                    <input type="text"
+                                                        value="{{ $application->visa_number ?? 'NONE' }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class="col-form-label">Flight Ticket:</label>
-                                                    <input type="text" value="{{ $application->flight_ticket ?? 'NONE' }}"
+                                                    <input type="text"
+                                                        value="{{ $application->flight_ticket ?? 'NONE' }}"
                                                         class="form-control" id="inputPassword3" readonly>
                                                 </div>
 
@@ -478,23 +480,47 @@
                                                                     <a href="{{ route('admin.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
                                                                         class="text-primary">
                                                                         <i class="fa fa-download"></i>
-                                                                        <a href="{{ route('admin.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
-                                                                            class="text-danger">
-                                                                            <i class="fa fa-trash"></i>
-                                                                        </a>
-                                                                        @if ($attachment->user->type == 'Agent')
-                                                                            <a title="Forward To Client"
-                                                                                class="text-info"
-                                                                                wire:click="passAttachmentToEmployer('{{ $attachment->id }}')">
-                                                                                <i class="fa fa-location-arrow"></i>
+                                                                        <a href="{{ route('admin.application.attachment.open', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                            class="text-primary">
+                                                                            <i class="fa fa-eye"></i>
+                                                                            <a href="{{ route('admin.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                                class="text-danger">
+                                                                                <i class="fa fa-trash"></i>
                                                                             </a>
-                                                                        @else
-                                                                            <a title="Forward To Agent"
-                                                                                class="text-info"
-                                                                                wire:click="passAttachmentToEmployee('{{ $attachment->id }}')">
-                                                                                <i class="fa fa-location-arrow"></i>
-                                                                            </a>
-                                                                        @endif
+                                                                            @if ($attachment->user->type == 'Agent')
+                                                                                @if (!$attachment->is_forwarded_employer)
+                                                                                    <a title="Forward To Client"
+                                                                                        class="text-info"
+                                                                                        wire:click="passAttachmentToEmployer('{{ $attachment->id }}')">
+                                                                                        <i
+                                                                                            class="fa fa-location-arrow"></i>
+                                                                                    </a>
+                                                                                @else
+                                                                                    <a title="cancel"
+                                                                                        class="text-info"
+                                                                                        style="cursor: pointer;"
+                                                                                        wire:click="takeFromEmplyoer('{{ $attachment->id }}')">
+                                                                                        <i class="fa fa-times"></i>
+                                                                                    </a>
+                                                                                @endif
+                                                                            @else
+                                                                                @if (!$attachment->is_forwarded_talent)
+                                                                                    <a title="Forward To Agent"
+                                                                                        class="text-info"
+                                                                                        style="cursor: pointer;"
+                                                                                        wire:click="passAttachmentToEmployee('{{ $attachment->id }}')">
+                                                                                        <i
+                                                                                            class="fa fa-location-arrow"></i>
+                                                                                    </a>
+                                                                                @else
+                                                                                    <a title="cancel"
+                                                                                        class="text-info"
+                                                                                        style="cursor: pointer;"
+                                                                                        wire:click="takeFromEmplyoee('{{ $attachment->id }}')">
+                                                                                        <i class="fa fa-times"></i>
+                                                                                    </a>
+                                                                                @endif
+                                                                            @endif
                                                                 </td>
                                                             </tr>
                                                         @empty

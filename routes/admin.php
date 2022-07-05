@@ -185,6 +185,18 @@ use LaravelDaily\Invoices\Invoice;
             }
         })->name('cv.download');
 
+        //open job applications  cv
+        Route::get('open/{jobId}/{fileName}/{userId}' , function($jobId , $fileName , $userId)
+        {
+            try{
+                return response()->file(public_path('storage/uploads/applications/jobs/'.$jobId.'/'.$userId.'/cv'.'/'.$fileName));
+            }Catch(Throwable $e)
+            {
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('cv.open');
+
 
         //delete file from storage.
         Route::get('delete/{jobId}/{fileName}' , function($jobId , $fileName)
@@ -240,6 +252,18 @@ use LaravelDaily\Invoices\Invoice;
             }
         })->name('admin.application.attachment.download');
 
+        Route::get('/application/{id}/attachment/{fileName}/oepn' , function($id , $fileName , )
+        {
+            $application  = Application::with('job:id')->findOrFail($id);
+            try{
+                return response()->file(public_path('storage/uploads/applications/'.$application->id.'/attachments'.'/'.$fileName));
+            }Catch(Throwable $e)
+            {
+                return dd($e->getMessage());
+                return redirect()->back();
+            }
+        })->name('admin.application.attachment.open');
+
         Route::get('/application/{id}/attachment/{fileName}/delete' , function($id , $fileName , )
         {
             $application  = Application::with('job:id')->findOrFail($id);
@@ -256,18 +280,6 @@ use LaravelDaily\Invoices\Invoice;
             }
         })->name('admin.application.attachment.delete');
 
-        Route::get('/application/{id}/attachment/{fileName}' , function($id , $fileName , )
-        {
-            $application  = Application::with('job:id')->findOrFail($id);
-            try{
-                // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
-                return response()->file(Storage::get('public/uploads/applications/'.$application->id.'/'.'attachments'.'/'.$fileName));
-            }Catch(Throwable $e)
-            {
-                return dd($e->getMessage());
-                return redirect()->back();
-            }
-        })->name('admin.application.attachment.open');
 
         //Contacts routes
         Route::get('/employer/queries'  , EmployerContacts::class)->name('admin.contacts.employers');

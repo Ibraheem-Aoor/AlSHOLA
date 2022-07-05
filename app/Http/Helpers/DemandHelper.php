@@ -43,10 +43,14 @@ class DemandHelper
             $this->saveJobTerms($request , $job);
             $this->sendJobToAgent($request->agent , $job);
             HistoryRecordHelper::registerDemandLog('Demand Forwarded To Agent' .'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
+            $job->main_status_id = 1; //Active
+            $job->sub_status_id = 2; //Under Proccess
+            $job->save();
             notify()->success('Demand Sended Successfully');
             return redirect()->back();
         }catch(Throwable $e)
         {
+            return dd($e);
             notify()->error('Something Went Wrong');
             return redirect()->back();
         }

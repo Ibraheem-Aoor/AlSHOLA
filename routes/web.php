@@ -92,6 +92,22 @@ Route::group(['middleware' => ['auth']], function()
             return redirect()->back();
         }
     })->name('application.attachment.download');
+
+    Route::get('/application/{id}/attachment/{fileName}/open' , function($id , $fileName )
+    {
+        $application  = Application::with('job:id')->findOrFail($id);
+        $jobId = $application->job->id;
+        try{
+            // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
+            // return Storage::download('public/uploads/applications/'.$application->id.'/attachments'.'/'.$fileName);
+            return response()->file(public_path('storage//uploads/applications/'.$application->id.'/attachments'.'/'.$fileName));
+
+        }Catch(Throwable $e)
+        {
+            return dd($e->getMessage());
+            return redirect()->back();
+        }
+    })->name('application.attachment.open');
     Route::post('application/ticket' , [ApplicationController::class , 'createApplicationVisaTicket'])->name('employee.application.ticket.create');
 
 

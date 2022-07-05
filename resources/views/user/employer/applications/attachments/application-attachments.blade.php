@@ -39,10 +39,16 @@
                                             <a title="Download"
                                                 href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
                                                 <i class="fa fa-download"></i>&nbsp;
-                                                </a>
+                                            </a>
+                                            <a title="Download"
+                                                href="{{ route('application.attachment.open', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                <i class="fa fa-eye"></i>&nbsp;
+                                            </a>
+
                                             </li>
-                                            <a title="Send Note" href="#exampleModal_5" data-id="{{ $file->application->id }}"
-                                                data-toggle="modal" href="#"><i class="fa fa-edit"></i></a>
+                                            <a title="Send Note" href="#exampleModal_5"
+                                                data-id="{{ $file->application->id }}" data-toggle="modal"
+                                                href="#"><i class="fa fa-edit"></i></a>
 
                                             {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
                                                             data-id="{{ $file->application->id }}"
@@ -69,7 +75,7 @@
                 </div>
             </div>
 
-           <!-- Modal -->
+            <!-- Modal -->
             <div class="modal fade" id="exampleModal_5" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -81,7 +87,9 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('employer.applications.note.send' , $attachments->first()->application->id) }}" method="POST">
+                            <form
+                                action="{{ route('employer.applications.note.send', $attachments->first()->application->id) }}"
+                                method="POST">
                                 @csrf
                                 <div class="form-group col-sm-12 mb-3">
                                     <label for="" style="font-weight: 600">Message:</label>
@@ -148,10 +156,10 @@
 
     @push('js')
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 

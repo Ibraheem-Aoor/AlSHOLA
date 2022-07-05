@@ -182,7 +182,7 @@
                                                                                     {{ $application->visa_number ?? 'NONE' }}
                                                                                 </td>
                                                                                 <td>flight_ticket:
-                                                                                    {{ $application->flight_ticket ?? 'NONE'}}
+                                                                                    {{ $application->flight_ticket ?? 'NONE' }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -609,6 +609,13 @@
                                                                                             <i
                                                                                                 class="fa fa-download"></i>&nbsp;
                                                                                         </a>
+
+                                                                                        <a title="Download"
+                                                                                            href="{{ route('application.attachment.open', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                                                            <i
+                                                                                                class="fa fa-eye"></i>&nbsp;
+                                                                                        </a>
+
                                                                                         </li>
                                                                                         <a title="Send Note"
                                                                                             href="#exampleModal_5"

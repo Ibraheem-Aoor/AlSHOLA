@@ -136,7 +136,7 @@
                                                 <td>
                                                     <div>
                                                         <label>Contact No:</label>
-                                                        <input required type="number" name="contact_no"
+                                                        <input required type="text" name="contact_no"
                                                             class="form-control" value="{{ old('contact_no') }}">
                                                         @error('contact_no')
                                                             <span class="text-danger">{{ $message }}</span>

@@ -41,6 +41,11 @@ class ApplicationDetails extends Component
         return redirect(route('admin.applications.all'));
     }
 
+
+
+
+
+
     /**
      * Send Applictino Note To Agent
      */
@@ -116,12 +121,32 @@ class ApplicationDetails extends Component
         notify()->success('Forwarded Successfully');
         return redirect(route($this->currentRoute , $this->application));
     }
+
+
     public function passAttachmentToEmployee($id)
     {
         $attachment = $this->application->attachments->where('id' , $id)->first();
         $attachment->is_forwarded_talent = true;
         $attachment->save();
         notify()->success('Forwarded Successfully');
+        return redirect(route($this->currentRoute , $this->application));
+    }
+
+    public function takeFromEmplyoee($id)
+    {
+        $attachment = $this->application->attachments->where('id' , $id)->first();
+        $attachment->is_forwarded_talent = false;
+        $attachment->save();
+        notify()->success('Attachment Sending Cancelled');
+        return redirect(route($this->currentRoute , $this->application));
+    }
+
+    public function takeFromEmplyoer($id)
+    {
+        $attachment = $this->application->attachments->where('id' , $id)->first();
+        $attachment->is_forwarded_employer = false;
+        $attachment->save();
+        notify()->success('Attachment Sending Cancelled');
         return redirect(route($this->currentRoute , $this->application));
     }
 
