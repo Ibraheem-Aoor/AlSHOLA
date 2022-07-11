@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApplicationSearchController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\Employer\Jobs\PDF\PdfController;
+use App\Http\Controllers\JobSeacrhController;
 use App\Http\Controllers\User\Employer\Jobs\EmployerJobsController;
 use App\Http\Controllers\User\Employer\Jobs\JobController;
 use App\Http\Controllers\User\Employer\Jobs\Notes\NoteController;
@@ -71,7 +73,19 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+    //Client Filters
     Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('job.pdf.generate');
+    Route::get('/job/filter/{status}' ,  [JobSeacrhController::class , 'filterJobsStatus'])->name('job.filter');
+    Route::get('/job/filter' ,  [JobSeacrhController::class , 'searchJob'])->name('job.search');
+    Route::get('/application/filter/{status}' ,  [ApplicationSearchController::class , 'filterApplicationsStatus'])->name('appliction.filter');
+    Route::get('/application/filter' ,  [ApplicationSearchController::class , 'searchApplication'])->name('application.search');
+
+    //Agent Filters
+    Route::get('/avilable_job/filter/{status}' ,  [JobSeacrhController::class , 'filterAgentJobs'])->name('agent-job.filter');
+    Route::get('/avilable_job/filter' ,  [JobSeacrhController::class , 'searchAgentJobs'])->name('agent-job.search');
+    Route::get('/agent-application/filter/{status}' ,  [ApplicationSearchController::class , 'filterAgentApplicationsStatus'])->name('agent-appliction.filter');
+    Route::get('/agent-application/filter' ,  [ApplicationSearchController::class , 'searchAgentApplications'])->name('agent-application.search');
+
 
 
     // profile route regard the type of the user

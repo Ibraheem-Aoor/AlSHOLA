@@ -21,7 +21,10 @@ class EmployerJobsController extends Controller
      */
     public function allJobs()
     {
-        $jobs = Job::withCount(['applications' , 'notes'])->with(['subJobs.title.sector' , 'subStatus' , 'applications']   )->where('user_id' , Auth::id())->paginate(15);
+        $jobs = Job::where('user_id' , Auth::id())
+        ->withCount(['applications' , 'notes'])
+        ->with(['subJobs.title.sector' , 'subStatus' , 'applications'] )
+                    ->simplePaginate(15);
         return view('user.employer.jobs.all-jobs' , compact('jobs'));
     }
 }//End Class

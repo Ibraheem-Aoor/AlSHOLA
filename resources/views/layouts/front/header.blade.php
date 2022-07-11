@@ -28,7 +28,7 @@
                         $actualType = 'employer';
                         break;
                     case 'Agent':
-                        $actualType = 'talented';
+                        $actualType = 'employee';
                         break;
                 }
             @endphp

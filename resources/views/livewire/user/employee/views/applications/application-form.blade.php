@@ -40,14 +40,18 @@
 
                             {{-- <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt=""
                             style="width: 80px; height: 80px;"> --}}
-                            <div class="text-start ps-4">
+                            <div class="text-start ps-4 mt-10">
                                 {{-- <h3 class="mb-3">{{ $job->SubJobs->first()->title->name }}</h3> --}}
-                                @forelse ($errors->all() as $error)
-                                    <span class="text-truncate me-0 text-danger">
-                                        {{ $error }}
-                                    </span>
+                                <ul>
+                                    @forelse ($errors->all() as $error)
+                                        <li>
+                                            <span class="text-truncate me-0 text-danger">
+                                                {{ $error }}
+                                            </span>
+                                        </li>
                                     @empty
-                                @endforelse
+                                    @endforelse
+                                </ul>
                             </div>
                         </div>
 
@@ -330,8 +334,8 @@
                                                 <td>
                                                     <div>
                                                         <label>Employer Photo:</label>
-                                                        <input type="file"  required class="form-control" name="photo"
-                                                            id="photo">
+                                                        <input type="file" required class="form-control"
+                                                            name="photo" id="photo" value="{{old('photo')}}">
                                                         @error('weihgt')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -676,22 +680,22 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Passport Attachment: </label>
-                                            <input type="file" required  class="form-control" name="files['passport']"
+                                            <input type="file" required class="form-control" name="files['passport']"
                                                 id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Medical Attachment: </label>
-                                            <input type="file" required  class="form-control" name="files['medical']"
+                                            <input type="file" required class="form-control" name="files['medical']"
                                                 id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Experince Attachment:</label>
-                                            <input type="file" required  class="form-control" name="files['experince']"
+                                            <input type="file" required class="form-control" name="files['experince']"
                                                 id="">
                                         </div>
                                         <div class="col-sm-3">
                                             <label>Eucation Attachment:</label>
-                                            <input type="file" required  class="form-control" name="files['education']"
+                                            <input type="file" required class="form-control" name="files['education']"
                                                 id="">
                                         </div>
                                         <div>

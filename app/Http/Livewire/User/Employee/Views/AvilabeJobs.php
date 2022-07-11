@@ -13,5 +13,5 @@ class AvilabeJobs extends Component
         return view('livewire.user.employee.views.avilabe-jobs' , [
             'avlialbeJobs' => $avlialbeJobs
         ])->extends('layouts.user.employee.master')->section('content');
-    }
+    }//end method.
 }

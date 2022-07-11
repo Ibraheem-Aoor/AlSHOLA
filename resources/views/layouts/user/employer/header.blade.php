@@ -10,8 +10,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{{ route('employer.dashboard') }}" class="nav-item nav-link">DASHBOARD</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
+                <a href="{{ route('employer.jobs.all') }}" class="nav-item nav-link">Jobs</a>
+                <a href="{{ route('employer.applications.all') }}" class="nav-item nav-link">Applications</a>
+                {{-- <div class="nav-item dropdown">
+                    <a href="employer.jobs.all" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         <a href="{{ route('employer.jobs.all') }}" class="dropdown-item">All Jobs</a>
                         <a href="{{ route('employer.jobs.active') }}" class="dropdown-item">Active Jobs</a>
@@ -20,23 +22,26 @@
                         <a href="{{ route('employer.jobs.cancelled') }}" class="dropdown-item">Cancelled Jobs</a>
                         <a href="{{ route('employer.jobs.returned') }}" class="dropdown-item">Returned Jobs</a>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="nav-item dropdown">
+                {{-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Applications</a>
                     <div class="dropdown-menu rounded-0 m-0">
                         <a href="{{ route('employer.applications.all') }}" class="dropdown-item">ALL APPLICATIONS</a>
-                        <a href="{{ route('employer.applications.medical') }}" class="dropdown-item">WAITING FOR MEDICAL</a>
-                        <a href="{{ route('employer.applications.visa') }}" class="dropdown-item">WAITING FOR VISA</a>
+                        <a href="{{ route('employer.applications.medical') }}" class="dropdown-item">WAITING FOR
+                            MEDICAL</a>
+                        <a href="{{ route('employer.applications.visa') }}" class="dropdown-item">WAITING FOR
+                            VISA</a>
                     </div>
-                </div>
+                </div> --}}
                 <a href="{{ route('user.contact') }}" class="nav-item nav-link">Contact</a>
 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle"
                         data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                             <i class="fa fa-power-off"></i> {{ __('Logout') }}
                         </a>

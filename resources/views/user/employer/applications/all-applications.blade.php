@@ -10,8 +10,25 @@
             @endphp
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications For Your Job Posts</h1>
             <div class="row g-4">
+                <div class="col-sm-4">
+                    <select name="filter" class="form-control text-center">
+                        <option value="">-- Select One -- </option>
+                        <option value="Active">Active</option>
+                        <option value="Hold">Hold</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <form action="{{ route('application.search') }}" method="GET">
+                        @csrf
+                        <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search"
+                            aria-label="Search" name="search">
+                    </form>
+                </div>
                 <div class="col-sm-12 text-center">
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="applications_table">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -83,7 +100,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="alert alert-warning text-center bg-dark"
+                                        <td colspan="10" class="alert alert-warning text-center bg-dark"
                                             style="color:#fff">
                                             No Records Yet
                                         </td>
@@ -91,8 +108,8 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $applications->links() }}
                     </div>
+                    {{ $applications->links() }}
                 </div>
             </div>
 
@@ -171,29 +188,28 @@
 
             });
         </script>
-
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+            integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            const ctx = document.getElementById('myChart');
-            const myChart = new Chart(ctx, {
-                type: 'doughnut',
-                const data = {
-                        labels: [
-                            'Red',
-                            'Blue',
-                            'Yellow'
-                        ],
-                        datasets: [{
-                            label: 'My First Dataset',
-                            data: [300, 50, 100],
-                            backgroundColor: [
-                                'rgb(255, 99, 132)',
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
-                            ],
-                            hoverOffset: 4
-                        }]
-                    },
+            $(document).ready(function() {
+                $('select[name="filter"]').on('change', function() {
+                    // alert('testing');
+                    var status = $(this).val();
+                    if (status) {
+                        $.ajax({
+                            url: "{{ URL::to('application/filter') }}/" + status,
+                            type: "GET",
+                            // dataType: "json",
+                            success: function(data) {
+                                $('#applications_table').html(data);
+                            },
+                        });
+
+                    } else {
+                        console.log('AJAX load did not work');
+                    }
+                });
             });
         </script>
     @endpush

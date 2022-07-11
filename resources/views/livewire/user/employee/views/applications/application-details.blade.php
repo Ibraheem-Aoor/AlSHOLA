@@ -1,5 +1,5 @@
 @extends('layouts.user.employee.master')
-@section('title', 'Dashboard | Add New Jobs')
+@section('title', 'Dashboard | Application Details')
 @push('css')
     <style>
         table {
@@ -77,18 +77,13 @@
                                                                 data-toggle="tab" href="#custom-nav-attachments"
                                                                 role="tab" aria-controls="custom-nav-home"
                                                                 aria-selected="false">Attachments</a>
-
-                                                            <a class="nav-item nav-link" id="custom-nav-home-actions"
-                                                                data-toggle="tab" href="#custom-nav-actions"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Actions</a>
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                                         <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
 
                                                             <h3>Application Information</h3>
-                                                            <div style="background: #f7ff9c" class="fromDiv">
+                                                            <div style="background: #f7ff9c" class="fromDiv mb-5 mt-2">
                                                                 <p>
                                                                     From: {{ $application->user->name }}
                                                                 </p>
@@ -104,10 +99,6 @@
                                                             <div class="contiane">
                                                                 <div class="row">
 
-                                                                    <div>
-                                                                        Position Applied For:
-                                                                        {{ $application->title->name }}
-                                                                    </div>
                                                                     <div class="text-right">
                                                                         @php
                                                                             $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
@@ -131,6 +122,10 @@
                                                                             <tr>
                                                                                 <td>Full_Name:
                                                                                     {{ $application->full_name }}</td>
+                                                                                <td>
+                                                                                    Position Applied For:
+                                                                                    {{ $application->title->name }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Address:
@@ -181,7 +176,7 @@
                                                                                     {{ $application->visa_number ?? 'NONE' }}
                                                                                 </td>
                                                                                 <td>flight_ticket:
-                                                                                    {{ $application->flight_ticket ?? 'NONE'}}
+                                                                                    {{ $application->flight_ticket ?? 'NONE' }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -646,22 +641,6 @@
 
 
 
-                                                        {{-- Actions --}}
-                                                        <div class="tab-pane fade" id="custom-nav-actions"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
-                                                            <p>
-                                                            <div class="col-sm-12 ">
-                                                                <a class="btn btn-outline-success" data-toggle="modal"
-                                                                    href="#exampleModal_6">Accept
-                                                                    Application</a>
-                                                                <a class="btn btn-outline-info"data-toggle="modal"
-                                                                    data-target="#exampleModal_5">Send Comment</a>
-                                                                <a class="btn btn-outline-danger" data-toggle="modal"
-                                                                    href="#exampleModal_1">Reject
-                                                                    Application</a>
-                                                            </div>
-                                                            </p>
-                                                        </div>
 
 
 

@@ -158,11 +158,11 @@ class ApplicationController extends Controller
     public function allApplications()
     {
         $applications = Application::where('user_id' , Auth::id())
-                        ->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus' ])
+                        ->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
                         ->with(['job.user:id,name' , 'job.subStatus'])
                         ->with('job.subJobs.title.sector')
                         ->withCount('notes')
-                        ->orderByDesc('id')
+                        ->orderByDesc('created_at')
                         ->simplePaginate(15);
 
         return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));

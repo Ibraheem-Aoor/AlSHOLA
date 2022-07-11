@@ -267,6 +267,11 @@
                                                 <table class="table table-striped  basicInfo">
 
                                                     <tr>
+                                                        <td>Currency:</td>
+                                                        <td>{{ $job->currency }}</td>
+                                                    </tr>
+
+                                                    <tr>
                                                         <td>Working Days:</td>
                                                         <td>{{ $job->working_days }}</td>
                                                     </tr>

@@ -104,7 +104,7 @@ class ApplicationDetails extends Component
 
     public function setReadNote($id)
     {
-        $note = Note::findOrFail($id);
+        $note = ApplicationNote::findOrFail($id);
         $note->seen = true;
         $note->save();
     }

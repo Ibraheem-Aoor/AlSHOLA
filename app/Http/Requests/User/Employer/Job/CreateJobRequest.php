@@ -28,7 +28,7 @@ class CreateJobRequest extends FormRequest
     {
         return  [
             'sector' => 'required',
-            // 'currency' => 'required',
+            'currency' => 'required',
             'working_days' => 'required',
             'accommodation' => 'required',
             'accommodation_amount' => 'sometimes',

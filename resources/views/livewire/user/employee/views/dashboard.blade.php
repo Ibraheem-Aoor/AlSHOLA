@@ -4,7 +4,15 @@
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ 'WELCOME BACK ' . Auth::user()->name }}
             </h1>
-            <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-sm-8">
+                    <canvas id="myChart" width="500" height="200"></canvas>
+                </div>
+                <div class="col-sm-4">
+                    <canvas id="myChart_2"></canvas>
+                </div>
+            </div>
+            {{-- <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-sm-4 mb-2">
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
@@ -59,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
     </div>
@@ -116,7 +124,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="alert alert-warning text-center bg-dark" style="color:#fff">
+                                <td colspan="9" class="alert alert-warning text-center bg-dark" style="color:#fff">
                                     No Records Yet
                                 </td>
                             </tr>
@@ -133,38 +141,87 @@
 </div>
 @push('js')
     <script>
-        const ctx = document.getElementById('myChart');
-        const myChart = new Chart(ctx, {
+        const ctx_2 = document.getElementById('myChart_2').getContext('2d');
+        const myChart_2 = new Chart(ctx_2, {
             type: 'pie',
             data: {
-                labels: ['Pending', 'Completed', 'Active', 'Cancelled'],
+                labels: ['Under Proccess', 'Cancelled', 'Completed'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5],
+                    label: 'Avilable Jobs',
+                    data: [{{$underProcessJobs}}, {{$cancelledJobs}}, {{$completedJobs}}],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(0, 255, 66, 0.87)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 0, 0, 1)',
+                        'rgb(255, 205, 86)',
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
                     ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(0, 255, 66, 0.07)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 0, 0, 1)',
-                    ],
-                    borderWidth: 1
                 }]
             },
+        });
+    </script>
 
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Applications'],
+                datasets: [{
+                        label: 'Active Applications',
+                        data: [{{$acitveApplicationsCount}}],
+                        backgroundColor: [
+                            'rgba(96, 240, 135, 0.2)', ,
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                        ],
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Hold Applications',
+                        data: [{{$holdApplicationsCount}}],
+                        backgroundColor: [
+                            'rgba(255, 206, 86, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                        borderWidth: 1
+                    }, {
+                        label: 'Cancelled Applications',
+                        data: [{{$cancelledApplicationsCount}}],
+                        backgroundColor: [
+                            'rgba(245, 96, 96, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                        ],
+                        borderWidth: 1
+                    }, {
+                        label: 'Completed Applications',
+                        data: [{{$completedApplicationsCount}}],
+                        backgroundColor: [
+                            'rgba(153, 102, 255, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(153, 102, 255, 1)',
+                        ],
+                        borderWidth: 1
+                    },
+                ]
+            },
             options: {
-                // scales: {
-                //     y: {
-                //         beginAtZero: true
-                //     }
-                // }
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    },
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    width: 20,
+                    height: 20,
+                }
             }
         });
     </script>
+
 @endpush
 </div>

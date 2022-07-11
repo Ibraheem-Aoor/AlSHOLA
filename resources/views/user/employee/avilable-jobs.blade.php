@@ -1,5 +1,6 @@
-<div>
-    @section('title', 'ALSHOALA | AVILABLE JOBS')
+@extends('layouts.user.employee.master')
+@section('title', 'ALSHOALA | AVILABLE JOBS')
+@section('content')
     <div class="container-xxl py-5">
         <div class="container">
             @php
@@ -58,14 +59,13 @@
                                         </td>
 
                                         <td>
-                                                {{ $job->user->name }}
+                                            {{ $job->user->name }}
                                         </td>
                                         <td>{{ $job->created_at }}</td>
                                         <td>{{ $job->subStatus->name }}</td>
                                         <td>
                                             <a href="{{ route('employee.job.details', $job->id) }}"
-                                                class=" btn btn-outline-primary" href="#"><i
-                                                    class="fa fa-eye"></i>
+                                                class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>
                                                 Details</a>
                                         </td>
                                     </tr>
@@ -86,8 +86,8 @@
 
         </div>
     </div>
-</div>
-
+    </div>
+@endsection
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
         integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
@@ -105,8 +105,7 @@
                         success: function(data) {
                             $('#avilable-jobs_table').html(data);
                         },
-                        error: function(data)
-                        {
+                        error: function(data) {
                             console.log(data);
                         },
                     });

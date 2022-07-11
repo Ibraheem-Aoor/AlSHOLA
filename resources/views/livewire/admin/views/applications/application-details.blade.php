@@ -279,7 +279,7 @@
                                                                 <td><a class="btn btn-outline-primary"
                                                                         data-message="{{ $note->message }}"
                                                                         data-toggle="modal" href="#exampleModal_5"
-                                                                        wire:click="setReadNote('{{ $note->id }}')"><i
+                                                                        wire:click="setReadNote({{ $note->id }})"><i
                                                                             class="fa fa-eye"></i>
                                                                     </a></td>
                                                             </tr>

@@ -89,7 +89,7 @@
                                                         <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
 
                                                             <h3>Application Information</h3>
-                                                            <div style="background: #f7ff9c" class="fromDiv">
+                                                            <div style="background: #f7ff9c" class="fromDiv mb-5 mt-2">
                                                                 <p>
                                                                     From: {{ $application->user->name }}
                                                                 </p>
@@ -104,11 +104,6 @@
 
                                                             <div class="contiane">
                                                                 <div class="row">
-
-                                                                    <div>
-                                                                        Position Applied For:
-                                                                        {{ $application->title->name }}
-                                                                    </div>
                                                                     <div class="text-right">
                                                                         @php
                                                                             $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
@@ -132,6 +127,10 @@
                                                                             <tr>
                                                                                 <td>Full_Name:
                                                                                     {{ $application->full_name }}</td>
+                                                                                <td>
+                                                                                    Position Applied For:
+                                                                                    {{ $application->title->name }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Address:
@@ -145,7 +144,7 @@
                                                                                     {{ $application->passport_no }}
                                                                                 </td>
                                                                                 <th>Nationality:
-                                                                                    {{ $application->Nationlaity ?? 'UNKOWN' }}
+                                                                                    {{ $application->nationlaity ?? 'UNKOWN' }}
                                                                                 </th>
 
                                                                             </tr>

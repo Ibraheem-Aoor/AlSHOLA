@@ -8,15 +8,33 @@
             @endphp
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications You have submited</h1>
             <div class="row g-4">
+                <div class="col-sm-4">
+                    <select name="filter" class="form-control text-center">
+                        <option value="">-- Select One -- </option>
+                        <option value="Active">Active</option>
+                        <option value="Hold">Hold</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <form action="{{ route('agent-application.search') }}" method="GET">
+                        @csrf
+                        <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search"
+                            aria-label="Search" name="search">
+                    </form>
+                </div>
                 <div class="col-sm-12 text-center">
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="applications_table">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Job_Number</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Job_Title</th>
+                                    <th scope="col">Demand No</th>
+                                    <th scope="col">Ref</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Passport</th>
                                     <th scope="col">Client_Name</th>
                                     <th scope="col">Number_Of_Notes</th>
                                     <th scope="col">Status</th>
@@ -36,13 +54,14 @@
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $application->job->post_number }}</td>
-                                        <td>{{ $application->job->subJobs->first()->title->sector->name }}</td>
-                                        <td>{{ $application->job->subJobs->first()->title->name }}</td>
+                                        <td>{{ $application->ref }}</td>
+                                        <td>{{ $application->full_name }}</td>
+                                        <td>{{ $application->passport_no }}</td>
                                         <td>{{ $application->job->user->name }}</td>
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>
-                                        <td>&nbsp;</td>
+                                        <td>{{ $application->subStatus->name }}</td>
                                         <td>{{ $application->created_at }}</td>
                                         @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
                                             <td>
@@ -75,7 +94,7 @@
                                     </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="alert alert-warning text-center bg-dark"
+                                            <td colspan="10" class="alert alert-warning text-center bg-dark"
                                                 style="color:#fff">
                                                 No Records Yet
                                             </td>
@@ -83,8 +102,8 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                            {{ $applications->links() }}
                         </div>
+                        {{ $applications->links() }}
                     </div>
                 </div>
 
@@ -164,6 +183,33 @@
                             });
 
                         })
+                    </script>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+                        integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $('select[name="filter"]').on('change', function() {
+                                // alert('testing');
+                                var status = $(this).val();
+                                if (status) {
+                                    $.ajax({
+                                        url: "{{ URL::to('agent-application/filter') }}/" + status,
+                                        type: "GET",
+                                        // dataType: "json",
+                                        success: function(data) {
+                                            $('#applications_table').html(data);
+                                        },error: function(data){
+                                            console.log(data);
+                                        }
+                                    });
+
+                                } else {
+                                    console.log('AJAX load did not work');
+                                }
+                            });
+                        });
                     </script>
                 @endpush
             </div>
