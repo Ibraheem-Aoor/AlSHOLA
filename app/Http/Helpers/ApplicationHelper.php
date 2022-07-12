@@ -7,6 +7,7 @@ use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationStatusHistory;
 use App\Models\subStatus;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,6 +41,7 @@ class ApplicationHelper
         $historyNewStatus = subStatus::findOrFail($request->subStatus)->name;
         $this->makeHistoryRecord($historyPrevStatus , $historyNewStatus , $application->id);
         HistoryRecordHelper::registerApplicationLog('Application Status Changed' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
+        Artisan::call('optimize:clear');
         notify()->success('application status changed Successfully');
         return redirect()->back();
     }

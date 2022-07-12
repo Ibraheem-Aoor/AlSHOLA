@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
@@ -213,6 +214,7 @@ class DemandHelper
         $job->main_status_id = $request->mainStatus;
         $job->save();
         HistoryRecordHelper::registerDemandLog('Status Changed'.'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
+        Artisan::call('optimize:clear');
         notify()->success('Demand status changed Successfully');
         return redirect()->back();
     }
