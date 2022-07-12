@@ -214,7 +214,7 @@ class DemandHelper
         $job->main_status_id = $request->mainStatus;
         $job->save();
         HistoryRecordHelper::registerDemandLog('Status Changed'.'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
-        Artisan::call('optimize:clear');
+        Artisan::call('cache:clear');
         notify()->success('Demand status changed Successfully');
         return redirect()->back();
     }
