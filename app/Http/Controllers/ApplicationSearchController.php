@@ -119,9 +119,7 @@ class ApplicationSearchController extends Controller
             ->withCount('notes')
             ->where('forwarded' , true)
             ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])
-            ->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments');
-
-            $applications = $applications
+            ->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
             ->where('ref' , 'like' , '%'.$search.'%')
             ->orWhere('date' , 'like' , '%'.$search.'%')
             ->orWhere('address' , 'like' , '%'.$search.'%')
@@ -167,6 +165,7 @@ class ApplicationSearchController extends Controller
             })
             ->orderByDesc('created_at')
             ->simplePaginate(15);
+        $applications = $applications->except($applications->where('user_id' , '!=' , Auth::id()));
         return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));
 
     }
