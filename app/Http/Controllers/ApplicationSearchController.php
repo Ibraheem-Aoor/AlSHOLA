@@ -120,8 +120,8 @@ class ApplicationSearchController extends Controller
             ->where('forwarded' , true)
             ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])
             ->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments');
-            
-            $applications
+
+            $applications = $applications
             ->where('ref' , 'like' , '%'.$search.'%')
             ->orWhere('date' , 'like' , '%'.$search.'%')
             ->orWhere('address' , 'like' , '%'.$search.'%')
