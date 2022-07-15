@@ -165,7 +165,7 @@ class ApplicationSearchController extends Controller
             })
             ->orderByDesc('created_at')
             ->simplePaginate(15);
-        $applications = $applications->except($applications->where('user_id' , '!=' , Auth::id()));
+        $applications = $applications->where('user_id' , '!=' , Auth::id())->except();
         return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));
 
     }
