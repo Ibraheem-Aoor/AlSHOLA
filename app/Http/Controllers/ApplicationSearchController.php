@@ -112,8 +112,8 @@ class ApplicationSearchController extends Controller
     public function searchAgentApplications(Request $request)
     {
         $search = $request->search;
-        $applications = Application::where('user_id' , Auth::id());
-         $applications =   $applications->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
+        $applications = Application::whereBelongsTo(Auth::user());
+            $applications =   $applications->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
             ->with(['job.user:id,name' , 'job.subStatus'])
             ->with('job.subJobs.title.sector')
             ->withCount('notes')
