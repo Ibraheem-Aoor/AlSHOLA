@@ -127,7 +127,8 @@
                                                     <th>Service charge</th>
                                                     <th>Per</th>
                                                     <th>
-                                                        <select name="currency" id="cs" class="form-control text-center" style="width:50%;"
+                                                        <select name="currency" id="cs"
+                                                            class="form-control text-center" style="width:50%;"
                                                             required>
                                                             <option value=""> -- choose currency -- </option>
                                                             @foreach ($currencies as $currency)
@@ -141,6 +142,8 @@
                                                     <td colspan="2">
                                                         <select id="allTiltes" name="demandTerms[0][title]"
                                                             class="form-control" required>
+                                                            <option value="" selected>
+                                                            </option>
                                                             @foreach ($job->subJobs as $subJob)
                                                                 <option value="{{ $subJob->title->name }}" selected>
                                                                     {{ $subJob->title->name }}
@@ -186,7 +189,7 @@
                                                 <label for="">Pay From:</label>
                                                 <select name="pay_from" class="form-control" required>
                                                     <option selected>-- select one --</option>
-                                                    <option value="Alshoala" selected>ALSHOALA</option>
+                                                    <option value="Alshoala">ALSHOALA</option>
                                                     <option value="Agent">AGENT</option>
                                                 </select>
                                             </div>

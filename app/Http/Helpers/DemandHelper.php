@@ -51,7 +51,6 @@ class DemandHelper
             return redirect()->back();
         }catch(Throwable $e)
         {
-            return dd($e);
             notify()->error('Something Went Wrong');
             return redirect()->back();
         }
@@ -68,7 +67,7 @@ class DemandHelper
     {
         foreach($request->demandTerms as $term)
         {
-            DemandTerms::create([
+            $demand  = DemandTerms::create([
                 'user_id' => $request->agent,
                 'job_id' => $job->id,
                 'currency' => $request->currency,
@@ -82,6 +81,7 @@ class DemandHelper
                 'pay_to' => $request->pay_to ,
                 'after_before' => $request->after_before ,
             ]);
+            $demand->save();
         }
     }//end method
 

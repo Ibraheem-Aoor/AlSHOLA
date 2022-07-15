@@ -21,7 +21,7 @@ class JobDetails extends Component
         $this->job->attachments = $this->job->attachments()->where('type' , 'job descreption')->get();
         if(!Auth::user()->hasJob($this->job))
             abort(403);
-        $this->hasApplication  = Application::where('user_id', Auth::id())->exists();
+        $this->hasApplication  = Application::where([['user_id', Auth::id()] , ['job_id' , $this->job->id]])->count();
     }
 
     public function render()

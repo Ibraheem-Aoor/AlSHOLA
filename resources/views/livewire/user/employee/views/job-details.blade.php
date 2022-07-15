@@ -230,7 +230,7 @@
                 <div class="row g-3">
                     <div class="col-12 col-sm-12">
                         {{-- If the agent has submited an application so he cant refuse the demand again. --}}
-                        @if (!$hasApplication)
+                        @if ($hasApplication == 0)
                             <button type="button" class="btn btn-outline-warning col-sm-12 mb-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal_1">Refuse The Demand
                             </button>
@@ -239,7 +239,7 @@
                             data-bs-target="#exampleModal_2">
                             Send a comment
                         </button>
-                        @if ($hasApplication)
+                        @if ($hasApplication > 0)
                             @php
                                 $txt = 'Submit Another Application';
                             @endphp

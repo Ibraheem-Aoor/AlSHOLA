@@ -35,7 +35,7 @@
                                             @endphp
                                             @forelse($jobs as $job)
                                                 <tr>
-                                                    <td class="serial">{{ $i }}</td>
+                                                    <td class="serial">{{ $i++ }}</td>
                                                     <td>
                                                         {{ $job->post_number }}
                                                     </td>
