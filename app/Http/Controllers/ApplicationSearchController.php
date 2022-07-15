@@ -112,8 +112,8 @@ class ApplicationSearchController extends Controller
     public function searchAgentApplications(Request $request)
     {
         $search = $request->search;
-        $applications = Application::where('user_id' , Auth::id())
-            ->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
+        $applications = Application::where('user_id' , Auth::id());
+         $applications =   $applications->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
             ->with(['job.user:id,name' , 'job.subStatus'])
             ->with('job.subJobs.title.sector')
             ->withCount('notes')
@@ -163,7 +163,6 @@ class ApplicationSearchController extends Controller
             ->orWhereHas('title' , function($title) use($search){
                 $title->where('name'  , 'like' , '%'.$search.'%');
             })
-            ->where('user_id'  , Auth::id())
             ->orderByDesc('created_at')
             ->simplePaginate(15);
         return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));
