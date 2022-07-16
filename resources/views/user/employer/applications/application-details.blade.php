@@ -669,10 +669,12 @@
                                                                 aria-labelledby="custom-nav-contact-tab">
                                                                 <p>
                                                                 <div class="col-sm-12 ">
-                                                                    <a class="btn btn-outline-success"
-                                                                        data-toggle="modal"
-                                                                        href="#exampleModal_6">Accept
-                                                                        Application</a>
+                                                                    @if (!$application->is_accepted)
+                                                                        <a class="btn btn-outline-success"
+                                                                            data-toggle="modal"
+                                                                            href="#exampleModal_6">Accept
+                                                                            Application</a>
+                                                                    @endif
                                                                     <a class="btn btn-outline-info"data-toggle="modal"
                                                                         data-target="#exampleModal_5">Send Comment</a>
                                                                     @if ($application->sub_status_id == 6)
