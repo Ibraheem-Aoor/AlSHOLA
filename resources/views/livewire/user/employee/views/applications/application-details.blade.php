@@ -207,187 +207,6 @@
 
 
 
-                                                        {{-- <div class="tab-pane fade" id="custom-nav-home"
-                                                            role="tabpanel">
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <br>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputEmail3"
-                                                                            class="">Job Category:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->title->sector->name }}"
-                                                                            class="form-control" id="inputEmail3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Title:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->title->name }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Ref:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->ref }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Date:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->date }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Address:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->address }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Full
-                                                                            Name:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->full_name }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Passport
-                                                                            No:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->passport_no }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Contact
-                                                                            No:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->contact_no }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Place Of
-                                                                            Birth:</label>
-
-                                                                        <input type="text"
-                                                                            value="{{ $application->place_of_birth }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Date Of Birth:
-                                                                        </label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->date_of_birth }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Age:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->age }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Relegion:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->relegion }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Place
-                                                                            Issued:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->place_issued }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Date
-                                                                            Issued:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->date_issued }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Place
-                                                                            Issued:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->expiry_issued }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Date
-                                                                            Issued:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->sex }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">Children:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->children }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">height:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->height }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="inputPassword3"
-                                                                            class="col-form-label">weihgt:</label>
-                                                                        <input type="text"
-                                                                            value="{{ $application->weihgt }}"
-                                                                            class="form-control" id="inputPassword3"
-                                                                            readonly>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> --}}
-
                                                         {{-- Languages Levels --}}
                                                         <div class="tab-pane fade" id="custom-nav-lang" role="tabpanel"
                                                             aria-labelledby="custom-nav-contact-tab">
@@ -765,7 +584,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="{{ route('employer.application.accept', $application->id) }}"
-                                method="POST">
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 {{-- <div class="form-group col-sm-6 mb-3">
                                     <label for="" style="font-weight: 600">JobL Title: </label>
@@ -776,6 +595,18 @@
                                     <label for="" style="font-weight: 600">Demand SR: </label>
                                     &nbsp; &nbsp; <input type="text" class="form-control" id="number" readonly
                                         value="{{ $application->job->post_number }}">
+                                </div>
+                                <div class="form-group col-sm-6 mb-3">
+                                    <label for="" style="font-weight: 600" id="title"></label>
+                                    <select name="file_type" class="form-control" id="">
+                                        <option value="visa">Visa</option>
+                                        <option value="offer letter">Offer Letter</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <input type="text" id="vnumber" name="visa_number"
+                                        class="form-control mt-2" placeholder="Enter Visa Number..">
+                                    &nbsp; &nbsp; <input type="file" name="files[]" multiple>
+                                    <input type="text" id="id" name="id" hidden>
                                 </div>
                                 <div class="form-group col-sm-6 text-center" style="width: 100%">
                                     <button type="submit" class="btn btn-outline-primary"><i
@@ -840,6 +671,15 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #id').val(id);
+                $('select[name="file_type"]').on('change', function() {
+                    if ($(this).val() == 'visa') {
+                        $('#vnumber').show();
+                    } else {
+                        $('#vnumber').hide();
+                        $('#vnumber').removeAttribute('name');
+                    }
+
+                });
                 // modal.find('.modal-body #title').val(title);
                 // modal.find('.modal-body #number').val(number);
             });
