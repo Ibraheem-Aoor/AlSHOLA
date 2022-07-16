@@ -601,7 +601,8 @@
                                                                                     <td>{{ $file->user->name }}</td>
                                                                                     <td>{{ $file->name }}</td>
                                                                                     <td>{{ $file->created_at }}</td>
-                                                                                    @if ($application->job->subStatus->name != 'Demand Cancelled' && $application->job->subStatus->name != 'Demand Complete')
+                                                                                    @if ($application->job->subStatus->name != 'Demand Cancelled' &&
+                                                                                        $application->job->subStatus->name != 'Demand Complete')
                                                                                         <td>
 
                                                                                             <a title="Download"
@@ -660,9 +661,9 @@
 
 
                                                         {{-- Actions --}}
-                                                        @if ($application->job->subStatus->name != 'Demand Cancelled' && $application->job->subStatus->name != 'Demand Complete'
-                                                            && $application->subStatus != 'Cancelled Application'
-                                                        )
+                                                        @if ($application->job->subStatus->name != 'Demand Cancelled' &&
+                                                            $application->job->subStatus->name != 'Demand Complete' &&
+                                                            $application->subStatus != 'Cancelled Application')
                                                             <div class="tab-pane fade" id="custom-nav-actions"
                                                                 role="tabpanel"
                                                                 aria-labelledby="custom-nav-contact-tab">
@@ -807,7 +808,7 @@
                         </div>
                         <div class="modal-body">
                             <form action="{{ route('employer.application.accept', $application->id) }}"
-                                method="POST">
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 {{-- <div class="form-group col-sm-6 mb-3">
                                     <label for="" style="font-weight: 600">JobL Title: </label>
@@ -818,6 +819,18 @@
                                     <label for="" style="font-weight: 600">Demand SR: </label>
                                     &nbsp; &nbsp; <input type="text" class="form-control" id="number" readonly
                                         value="{{ $application->job->post_number }}">
+                                </div>
+                                <div class="form-group col-sm-6 mb-3">
+                                    <label for="" style="font-weight: 600" id="title"></label>
+                                    <select name="file_type" class="form-control" id="">
+                                        <option value="visa">Visa</option>
+                                        <option value="offer letter">Offer Letter</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <input type="text" id="vnumber" name="visa_number"
+                                        class="form-control mt-2" placeholder="Enter Visa Number..">
+                                    &nbsp; &nbsp; <input type="file" name="files[]" multiple>
+                                    <input type="text" id="id" name="id" hidden>
                                 </div>
                                 <div class="form-group col-sm-6 text-center" style="width: 100%">
                                     <button type="submit" class="btn btn-outline-primary"><i
@@ -882,6 +895,15 @@
                 // var description = button.data('description')
                 var modal = $(this)
                 modal.find('.modal-body #id').val(id);
+                $('select[name="file_type"]').on('change', function() {
+                    if ($(this).val() == 'visa') {
+                        $('#vnumber').show();
+                    } else {
+                        $('#vnumber').hide();
+                        $('#vnumber').removeAttribute('name');
+                    }
+
+                });
                 // modal.find('.modal-body #title').val(title);
                 // modal.find('.modal-body #number').val(number);
             });
