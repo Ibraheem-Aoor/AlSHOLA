@@ -170,6 +170,47 @@ class EmployerApplicationsController extends Controller
     // Accept Specific Application
     public function acceptApplication(Request $request , $id)
     {
+        $validate = Validator::make($request->all(),[
+            'files.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
+            'file_type' => 'required|string',
+            'visa_number' => 'nullable|string',
+            'flight_ticket' => 'nullable|string',
+        ]);
+        if($validate->fails())
+        {
+            notify()->error($validate->errors()->first());
+            return redirect()->back();
+        }
+
+        if($id != null)
+        {
+
+            $application = Application::with('job:id')->findOrFail($id);
+            $files = $request->file('files');
+            if($request->hasFile('files'))
+            {
+                foreach($files as $file)
+                {
+                    $fileName  = $file->getClientOriginalName();
+                    $path = 'public/uploads/applications/'.$application->id.'/'.'attachments'.'/';
+                    $file->storeAs($path , $fileName);
+                    $attachment  = ApplicationAttachment::create(
+                        [
+                            'name' => $fileName,
+                            'user_id' => Auth::id(),
+                            'application_id' => $application->id,
+                            'is_forwarded_talent' => Auth::user()->type == 'Agent' ? true : false,
+                            'is_forwarded_employer' => Auth::user()->type == 'Agent' ? false : true,
+                            'type' => $request->file_type,
+                            ]
+                        );
+                    }
+            }//end if
+
+        $application->visa_number = $request->visa_number;
+        // $application->flight_ticket = $request->flight_ticket;
+        $application->save();
+        }//end if
         $application = Application::findOrFail($id);
         $subStatus = subStatus::where('name' , 'waiting for medical')->first();
         $application->sub_status_id = $subStatus->id;
