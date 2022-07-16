@@ -277,7 +277,7 @@
                                                                 </td>
                                                                 <td>{{ $note->created_at }}</td>
                                                                 @if ($application->job->subStatus->name != 'Demand Cancelled' &&
-                                                                    $job->subStatus->name != 'Demand Complete' &&
+                                                                    $application->job->subStatus->name != 'Demand Complete' &&
                                                                     $application->subStatus->name != 'Cancelled Application')
                                                                     <td><a class="btn btn-outline-primary"
                                                                             data-message="{{ $note->message }}"

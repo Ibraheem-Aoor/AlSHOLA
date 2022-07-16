@@ -601,7 +601,7 @@
                                                                                     <td>{{ $file->user->name }}</td>
                                                                                     <td>{{ $file->name }}</td>
                                                                                     <td>{{ $file->created_at }}</td>
-                                                                                    @if ($application->job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                                                                    @if ($application->job->subStatus->name != 'Demand Cancelled' && $application->job->subStatus->name != 'Demand Complete')
                                                                                         <td>
 
                                                                                             <a title="Download"
