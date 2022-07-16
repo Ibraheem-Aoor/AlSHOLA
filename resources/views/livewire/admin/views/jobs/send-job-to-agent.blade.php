@@ -72,6 +72,10 @@
                                                         @if ($user->hasAppliedToJob($job->id))
                                                             <td class="">
                                                                 <span class="badge badge-complete">Applied</span>
+                                                                <a data-toggle="modal" data-agent="{{ $user->id }}"
+                                                                    href="#exampleModal_5">
+                                                                    <span class="btn badge badge-success">RESEND</span>
+                                                                </a>
                                                             </td>
                                                         @else
                                                             <td class="">
@@ -143,9 +147,10 @@
                                                         <select id="allTiltes" name="demandTerms[0][title]"
                                                             class="form-control" required>
                                                             <option value="" selected>
+                                                                -- select one --
                                                             </option>
                                                             @foreach ($job->subJobs as $subJob)
-                                                                <option value="{{ $subJob->title->name }}" selected>
+                                                                <option value="{{ $subJob->title->name }}">
                                                                     {{ $subJob->title->name }}
                                                                 </option>
                                                             @endforeach
@@ -202,8 +207,8 @@
                                             <div class="col-sm-6">
                                                 <label for="">Payment Will Be:</label>
                                                 <select name="after_before" class="form-control" required>
-                                                    <option value="">-- select one --</option>
-                                                    <option value="before" selected>Before</option>
+                                                    <option value="" selected>-- select one --</option>
+                                                    <option value="before">Before</option>
                                                     <option value="after">After</option>
                                                 </select>
                                             </div>

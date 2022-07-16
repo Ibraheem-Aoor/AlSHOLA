@@ -94,9 +94,11 @@
                                                         <a href="{{ route('admin.demand.details', $job->id) }}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a href="{{ route('admin.send-job-to-agent', $job->id) }}"
-                                                            title="send to agent"><i
-                                                                class="fa fa-location-arrow"></i></a>
+                                                        @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                                            <a href="{{ route('admin.send-job-to-agent', $job->id) }}"
+                                                                title="send to agent"><i
+                                                                    class="fa fa-location-arrow"></i></a>
+                                                        @endif
 
                                                         <a data-toggle="modal" data-job="{{ $job->id }}"
                                                             href="#exampleModal_5" title="Issue Invoice"
@@ -145,7 +147,7 @@
                                         <div class="modal-body">
                                             <input type="text" id="job" name="job_id" hidden>
                                             <label for="">Issue To:</label>
-                                            <select name="payer"  class="form-control">
+                                            <select name="payer" class="form-control">
                                                 <option value="">-- select one --</option>
                                                 <option value="client">Client</option>
                                                 <option value="agent">Agent</option>

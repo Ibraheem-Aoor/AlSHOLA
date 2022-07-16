@@ -86,7 +86,7 @@ class DemandHelper
     }//end method
 
 
-        //This method send the job post to talent using many to many relationship
+    //This method send the job post to talent using many to many relationship
     public function sendJobToAgent($agentId , $job)
     {
         $agent = User::findOrFail($agentId);
@@ -209,7 +209,20 @@ class DemandHelper
     public function postChangeDemandStatus(Request $request  , $id)
     {
         Validator::make($request->all() ,  ['mainStatus' => 'required' , 'subStatus' => 'required']);
-        $job = Job::with(['subStatus' , 'mainStatus'])->findOrFail($id);
+        $job = Job::with(['subStatus' , 'mainStatus' , 'applications.mainStatus'])->findOrFail($id);
+
+        //Not Allowed To cancel Demand that have an active applicatinos.
+        if($request->mainStatus == 2)
+        {
+            $jobActiveApplicationsCount = $job->applications()->whereHas('mainStatus' , function($mainStatus){
+                $mainStatus->where([ ['name' , '!=' , 'Cancelled'] , ['name' , '!=' , 'Completed'] ]);
+            })->count();
+            if($jobActiveApplicationsCount > 0)
+            {
+                notify()->error('This Demand Has Active Applications');
+                return back();
+            }
+        }
         $job->sub_status_id = $request->subStatus;
         $job->main_status_id = $request->mainStatus;
         $job->save();

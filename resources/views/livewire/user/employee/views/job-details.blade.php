@@ -226,35 +226,38 @@
             </div>
             <div class="">
 
-                <h4 class="mb-4 mt-4">What You want to do?</h4>
-                <div class="row g-3">
-                    <div class="col-12 col-sm-12">
-                        {{-- If the agent has submited an application so he cant refuse the demand again. --}}
-                        @if ($hasApplication == 0)
-                            <button type="button" class="btn btn-outline-warning col-sm-12 mb-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal_1">Refuse The Demand
+                @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                    <h4 class="mb-4 mt-4">What You want to do?</h4>
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-12">
+                            {{-- If the agent has submited an application so he cant refuse the demand again. --}}
+                            @if ($hasApplication == 0)
+                                <button type="button" class="btn btn-outline-warning col-sm-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal_1">Refuse The Demand
+                                </button>
+                            @endif
+                            <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal_2">
+                                Send a comment
                             </button>
-                        @endif
-                        <button type="button" class="btn btn-outline-info col-sm-12 mb-2" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal_2">
-                            Send a comment
-                        </button>
-                        @if ($hasApplication > 0)
-                            @php
-                                $txt = 'Submit Another Application';
-                            @endphp
-                        @else
-                            @php
-                                $txt = 'Accept Demand & Terms & Conditions';
-                            @endphp
-                        @endif
-                        <a class="btn btn-outline-success col-sm-12 mb-2"
-                            href="{{ route('employee.application.form', $job->id) }}">
-                            {{ $txt }}
-                        </a>
+                            @if ($hasApplication > 0)
+                                @php
+                                    $txt = 'Submit Another Application';
+                                @endphp
+                            @else
+                                @php
+                                    $txt = 'Accept Demand & Terms & Conditions';
+                                @endphp
+                            @endif
+                            <a class="btn btn-outline-success col-sm-12 mb-2"
+                                href="{{ route('employee.application.form', $job->id) }}">
+                                {{ $txt }}
+                            </a>
 
+                        </div>
                     </div>
-                </div>
+
+                @endif
             </div>
         </div>
 

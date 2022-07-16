@@ -276,12 +276,16 @@
                                                                 <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
                                                                 </td>
                                                                 <td>{{ $note->created_at }}</td>
-                                                                <td><a class="btn btn-outline-primary"
-                                                                        data-message="{{ $note->message }}"
-                                                                        data-toggle="modal" href="#exampleModal_5"
-                                                                        wire:click="setReadNote({{ $note->id }})"><i
-                                                                            class="fa fa-eye"></i>
-                                                                    </a></td>
+                                                                @if ($application->job->subStatus->name != 'Demand Cancelled' &&
+                                                                    $job->subStatus->name != 'Demand Complete' &&
+                                                                    $application->subStatus->name != 'Cancelled Application')
+                                                                    <td><a class="btn btn-outline-primary"
+                                                                            data-message="{{ $note->message }}"
+                                                                            data-toggle="modal" href="#exampleModal_5"
+                                                                            wire:click="setReadNote({{ $note->id }})"><i
+                                                                                class="fa fa-eye"></i>
+                                                                        </a></td>
+                                                                @endif
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -476,52 +480,56 @@
                                                                 <td>{{ $attachment->name }}</td>
                                                                 <td>{{ $attachment->type }}</td>
                                                                 <td>{{ $attachment->created_at }}</td>
-                                                                <td>
-                                                                    <a href="{{ route('admin.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
-                                                                        class="text-primary">
-                                                                        <i class="fa fa-download"></i>
-                                                                        <a href="{{ route('admin.application.attachment.open', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                @if ($application->job->subStatus->name != 'Demand Cancelled' &&
+                                                                    $application->job->subStatus->name != 'Demand Complete' &&
+                                                                    $application->subStatus->name != 'Cancelled Application')
+                                                                    <td>
+                                                                        <a href="{{ route('admin.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
                                                                             class="text-primary">
-                                                                            <i class="fa fa-eye"></i>
-                                                                            <a href="{{ route('admin.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
-                                                                                class="text-danger">
-                                                                                <i class="fa fa-trash"></i>
-                                                                            </a>
-                                                                            @if ($attachment->user->type == 'Agent')
-                                                                                @if (!$attachment->is_forwarded_employer)
-                                                                                    <a title="Forward To Client"
-                                                                                        class="text-info"
-                                                                                        wire:click="passAttachmentToEmployer('{{ $attachment->id }}')">
-                                                                                        <i
-                                                                                            class="fa fa-location-arrow"></i>
-                                                                                    </a>
+                                                                            <i class="fa fa-download"></i>
+                                                                            <a href="{{ route('admin.application.attachment.open', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                                class="text-primary">
+                                                                                <i class="fa fa-eye"></i>
+                                                                                <a href="{{ route('admin.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                                    class="text-danger">
+                                                                                    <i class="fa fa-trash"></i>
+                                                                                </a>
+                                                                                @if ($attachment->user->type == 'Agent')
+                                                                                    @if (!$attachment->is_forwarded_employer)
+                                                                                        <a title="Forward To Client"
+                                                                                            class="text-info"
+                                                                                            wire:click="passAttachmentToEmployer('{{ $attachment->id }}')">
+                                                                                            <i
+                                                                                                class="fa fa-location-arrow"></i>
+                                                                                        </a>
+                                                                                    @else
+                                                                                        <a title="cancel"
+                                                                                            class="text-info"
+                                                                                            style="cursor: pointer;"
+                                                                                            wire:click="takeFromEmplyoer('{{ $attachment->id }}')">
+                                                                                            <i class="fa fa-times"></i>
+                                                                                        </a>
+                                                                                    @endif
                                                                                 @else
-                                                                                    <a title="cancel"
-                                                                                        class="text-info"
-                                                                                        style="cursor: pointer;"
-                                                                                        wire:click="takeFromEmplyoer('{{ $attachment->id }}')">
-                                                                                        <i class="fa fa-times"></i>
-                                                                                    </a>
+                                                                                    @if (!$attachment->is_forwarded_talent)
+                                                                                        <a title="Forward To Agent"
+                                                                                            class="text-info"
+                                                                                            style="cursor: pointer;"
+                                                                                            wire:click="passAttachmentToEmployee('{{ $attachment->id }}')">
+                                                                                            <i
+                                                                                                class="fa fa-location-arrow"></i>
+                                                                                        </a>
+                                                                                    @else
+                                                                                        <a title="cancel"
+                                                                                            class="text-info"
+                                                                                            style="cursor: pointer;"
+                                                                                            wire:click="takeFromEmplyoee('{{ $attachment->id }}')">
+                                                                                            <i class="fa fa-times"></i>
+                                                                                        </a>
+                                                                                    @endif
                                                                                 @endif
-                                                                            @else
-                                                                                @if (!$attachment->is_forwarded_talent)
-                                                                                    <a title="Forward To Agent"
-                                                                                        class="text-info"
-                                                                                        style="cursor: pointer;"
-                                                                                        wire:click="passAttachmentToEmployee('{{ $attachment->id }}')">
-                                                                                        <i
-                                                                                            class="fa fa-location-arrow"></i>
-                                                                                    </a>
-                                                                                @else
-                                                                                    <a title="cancel"
-                                                                                        class="text-info"
-                                                                                        style="cursor: pointer;"
-                                                                                        wire:click="takeFromEmplyoee('{{ $attachment->id }}')">
-                                                                                        <i class="fa fa-times"></i>
-                                                                                    </a>
-                                                                                @endif
-                                                                            @endif
-                                                                </td>
+                                                                    </td>
+                                                                @endif
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -713,17 +721,20 @@
                                         <p>
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
-                                            <a class="btn btn-success col-sm-12 mb-2"
-                                                wire:click="passApplicationToEmployer()">Forward To Client</a>
-                                            <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
-                                                href="#exampleModal">
-                                                Send a Note </a>
-                                            <a class="btn btn-primary col-sm-12 mb-2"
-                                                href="{{ route('admin.application.pdf.generate', $application->id) }}">
-                                                PRINT PDF</a>
-                                            <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
-                                                href="#exampleModal_8">
-                                                Change Status</a>
+                                            @if ($application->job->subStatus->name != 'Demand Cancelled' &&
+                                                $application->job->subStatus->name != 'Demand Complete')
+                                                <a class="btn btn-success col-sm-12 mb-2"
+                                                    wire:click="passApplicationToEmployer()">Forward To Client</a>
+                                                <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
+                                                    href="#exampleModal">
+                                                    Send a Note </a>
+                                                <a class="btn btn-primary col-sm-12 mb-2"
+                                                    href="{{ route('admin.application.pdf.generate', $application->id) }}">
+                                                    PRINT PDF</a>
+                                                <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
+                                                    href="#exampleModal_8">
+                                                    Change Status</a>
+                                            @endif
                                         </div>
                                         </p>
                                     </div>

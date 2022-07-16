@@ -151,27 +151,29 @@
                                             </td>
                                             <td>{{ $job->created_at }}</td>
                                             <td>{{ $job->subStatus->name }}</td>
-                                            <td>
-                                                <a href="{{ route('job.show', $job->id) }}" title="details"
-                                                    class="badge bg-primary" href="#"><i
-                                                        class="fa fa-eye"></i></a>
+                                            @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                                <td>
+                                                    <a href="{{ route('job.show', $job->id) }}" title="details"
+                                                        class="badge bg-primary" href="#"><i
+                                                            class="fa fa-eye"></i></a>
 
-                                                {{-- <a href="#" title="delete"
+                                                    {{-- <a href="#" title="delete"
                                                         onclick="event.preventDefault();document.getElementById('delete-form').submit();"
                                                         class=" badge bg-danger"><i class="fa fa-trash"></i></a> --}}
-                                                <a class="badge badge-success text-primary"
-                                                    href="{{ route('job.edit', $job->id) }}"><i
-                                                        class="fa fa-edit"></i></a>
-                                                <a class=" badge bg-info" title="notes"
-                                                    href="{{ route('employer.job.notes', $job->id) }}"><i
-                                                        class="fa fa-file"></i></a>
-                                                <a href="#exampleModal_5" data-toggle="modal" title="upload attachment"
-                                                    data-number="{{ $job->post_number }}"
-                                                    data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
-                                                </a>
+                                                    <a class="badge badge-success text-primary"
+                                                        href="{{ route('job.edit', $job->id) }}"><i
+                                                            class="fa fa-edit"></i></a>
+                                                    <a class=" badge bg-info" title="notes"
+                                                        href="{{ route('employer.job.notes', $job->id) }}"><i
+                                                            class="fa fa-file"></i></a>
+                                                    <a href="#exampleModal_5" data-toggle="modal"
+                                                        title="upload attachment"
+                                                        data-number="{{ $job->post_number }}"
+                                                        data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
+                                                    </a>
 
-
-                                            </td>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @empty
                                         <tr>

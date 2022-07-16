@@ -254,7 +254,8 @@
                                                             <td>{{ $subjob->title->sector->name }}</td>
                                                             <td>{{ $subjob->title->name }}</td>
                                                             <td>{{ $subjob->quantity }}</td>
-                                                            <td>{{ $subjob->salary . ' ( ' . $job->currency . ' )' }}</td>
+                                                            <td>{{ $subjob->salary . ' ( ' . $job->currency . ' )' }}
+                                                            </td>
                                                             <td>{{ $subjob->gender }}</td>
                                                             <td>{{ $subjob->age }}</td>
                                                             <td>{{ $subjob->nationality->name }}</td>
@@ -810,9 +811,12 @@
                                         <p>
                                         <div class="form-group">
                                             <label for="">Actions:</label><br>
-                                            <a class="btn btn-outline-success col-sm-12 mb-2"
-                                                href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward To
-                                                Agent</a>
+                                            @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                                <a class="btn btn-outline-success col-sm-12 mb-2"
+                                                    href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward
+                                                    To
+                                                    Agent</a>
+                                            @endif
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                 href="#exampleModal">
                                                 Send a Note </a>

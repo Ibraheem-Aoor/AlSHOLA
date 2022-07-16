@@ -163,8 +163,8 @@ class ApplicationSearchController extends Controller
             ->orWhereHas('title' , function($title) use($search){
                 $title->where('name'  , 'like' , '%'.$search.'%');
             })
-            ->orderByDesc('created_at')
-            ->simplePaginate(15);
+            ->orderByDesc('created_at')->simplePaginate(15);
+
         return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));
 
     }

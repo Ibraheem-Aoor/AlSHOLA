@@ -601,29 +601,30 @@
                                                                                     <td>{{ $file->user->name }}</td>
                                                                                     <td>{{ $file->name }}</td>
                                                                                     <td>{{ $file->created_at }}</td>
-                                                                                    <td>
+                                                                                    @if ($application->job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                                                                        <td>
 
-                                                                                        <a title="Download"
-                                                                                            href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
-                                                                                            <i
-                                                                                                class="fa fa-download"></i>&nbsp;
-                                                                                        </a>
+                                                                                            <a title="Download"
+                                                                                                href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                                                                <i
+                                                                                                    class="fa fa-download"></i>&nbsp;
+                                                                                            </a>
 
-                                                                                        <a title="Download"
-                                                                                            href="{{ route('application.attachment.open', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
-                                                                                            <i
-                                                                                                class="fa fa-eye"></i>&nbsp;
-                                                                                        </a>
+                                                                                            <a title="Download"
+                                                                                                href="{{ route('application.attachment.open', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                                                                <i
+                                                                                                    class="fa fa-eye"></i>&nbsp;
+                                                                                            </a>
 
-                                                                                        </li>
-                                                                                        <a title="Send Note"
-                                                                                            href="#exampleModal_5"
-                                                                                            data-id="{{ $file->application->id }}"
-                                                                                            data-toggle="modal"
-                                                                                            href="#"><i
-                                                                                                class="fa fa-edit"></i></a>
+                                                                                            </li>
+                                                                                            <a title="Send Note"
+                                                                                                href="#exampleModal_5"
+                                                                                                data-id="{{ $file->application->id }}"
+                                                                                                data-toggle="modal"
+                                                                                                href="#"><i
+                                                                                                    class="fa fa-edit"></i></a>
 
-                                                                                        {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
+                                                                                            {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
                                                                                                             data-id="{{ $file->application->id }}"
                                                                                                             data-title="{{ $file->application->job->title }}"
                                                                                                             data-number="{{ $file->application->job->post_number }}"
@@ -631,7 +632,8 @@
                                                                                                     </li> --}}
 
 
-                                                                                    </td>
+                                                                                        </td>
+                                                                                    @endif
                                                                                 </tr>
                                                                             @empty
                                                                                 <tr>
@@ -658,25 +660,30 @@
 
 
                                                         {{-- Actions --}}
-                                                        <div class="tab-pane fade" id="custom-nav-actions"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
-                                                            <p>
-                                                            <div class="col-sm-12 ">
-                                                                <a class="btn btn-outline-success" data-toggle="modal"
-                                                                    href="#exampleModal_6">Accept
-                                                                    Application</a>
-                                                                <a class="btn btn-outline-info"data-toggle="modal"
-                                                                    data-target="#exampleModal_5">Send Comment</a>
-                                                                @if ($application->sub_status_id == 6)
-                                                                    <a class="btn btn-outline-danger"
+                                                        @if ($application->job->subStatus->name != 'Demand Cancelled' && $application->job->subStatus->name != 'Demand Complete'
+                                                            && $application->subStatus != 'Cancelled Application'
+                                                        )
+                                                            <div class="tab-pane fade" id="custom-nav-actions"
+                                                                role="tabpanel"
+                                                                aria-labelledby="custom-nav-contact-tab">
+                                                                <p>
+                                                                <div class="col-sm-12 ">
+                                                                    <a class="btn btn-outline-success"
                                                                         data-toggle="modal"
-                                                                        href="#exampleModal_1">Reject
+                                                                        href="#exampleModal_6">Accept
                                                                         Application</a>
-                                                                @endif
+                                                                    <a class="btn btn-outline-info"data-toggle="modal"
+                                                                        data-target="#exampleModal_5">Send Comment</a>
+                                                                    @if ($application->sub_status_id == 6)
+                                                                        <a class="btn btn-outline-danger"
+                                                                            data-toggle="modal"
+                                                                            href="#exampleModal_1">Reject
+                                                                            Application</a>
+                                                                    @endif
+                                                                </div>
+                                                                </p>
                                                             </div>
-                                                            </p>
-                                                        </div>
-
+                                                        @endif
 
 
                                                     </div>

@@ -58,16 +58,18 @@
                                         </td>
 
                                         <td>
-                                                {{ $job->user->name }}
+                                            {{ $job->user->name }}
                                         </td>
                                         <td>{{ $job->created_at }}</td>
                                         <td>{{ $job->subStatus->name }}</td>
-                                        <td>
-                                            <a href="{{ route('employee.job.details', $job->id) }}"
-                                                class=" btn btn-outline-primary" href="#"><i
-                                                    class="fa fa-eye"></i>
-                                                Details</a>
-                                        </td>
+                                        @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                            <td>
+                                                <a href="{{ route('employee.job.details', $job->id) }}"
+                                                    class=" btn btn-outline-primary" href="#"><i
+                                                        class="fa fa-eye"></i>
+                                                    Details</a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @empty
                                     <tr>
@@ -105,8 +107,7 @@
                         success: function(data) {
                             $('#avilable-jobs_table').html(data);
                         },
-                        error: function(data)
-                        {
+                        error: function(data) {
                             console.log(data);
                         },
                     });

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_accepted')->default(false);
             $table->text('ref');
             $table->date('date');
             $table->string('address');

@@ -51,6 +51,9 @@
                                     $i = 1;
                                 @endphp
                                 @forelse ($applications as $application)
+                                @if($application->user_id != Auth::id())
+                                    @continue
+                                @endif
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $application->job->post_number }}</td>
@@ -103,7 +106,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $applications->links() }}
+                        {{-- {{ $applications->links() }} --}}
                     </div>
                 </div>
 

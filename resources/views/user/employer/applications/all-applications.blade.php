@@ -64,7 +64,7 @@
                                                 href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>
                                         </td>
                                         <td>{{ $application->created_at }}</td>
-                                        @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
+                                        @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled' || $application->job->subStatus->name != 'Demand Complete')
                                             <td>
                                                 <a href="{{ route('employer.application.details', $application->id) }}"
                                                     class="badge bg-warning" title="show details">

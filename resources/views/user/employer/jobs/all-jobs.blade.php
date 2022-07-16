@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                    <form action="{{route('job.search')}}" method="GET">
+                    <form action="{{ route('job.search') }}" method="GET">
                         @csrf
                         <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search"
                             aria-label="Search" name="search">
@@ -107,22 +107,22 @@
                                         </td>
                                         <td>{{ $job->created_at }}</td>
                                         <td>{{ $job->subStatus->name }}</td>
+                                        @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                            <td>
+                                                <a title="Details" href="{{ route('job.show', $job->id) }}"><i
+                                                        class="fa fa-eye"></i></a>
 
-                                        <td>
-                                            <a title="Details" href="{{ route('job.show', $job->id) }}"><i
-                                                    class="fa fa-eye"></i></a>
-
-                                            {{-- <a href="{{ route('job.pdf.generate', $job->id) }}"><i
+                                                {{-- <a href="{{ route('job.pdf.generate', $job->id) }}"><i
                                                     class="fa fa-print"></i>
                                                 </a> --}}
 
+                                                <a href="#exampleModal_5" data-toggle="modal" title="upload attachment"
+                                                    data-number="{{ $job->post_number }}"
+                                                    data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
+                                                </a>
 
-                                            <a href="#exampleModal_5" data-toggle="modal" title="upload attachment"
-                                                data-number="{{ $job->post_number }}"
-                                                data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
-                                            </a>
-
-                                        </td>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @empty
                                     <tr>
