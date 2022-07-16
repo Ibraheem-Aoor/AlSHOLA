@@ -24,8 +24,8 @@ class IssueClientInvoice extends Component
     public function mount($invoiceId , $jobId)
     {
         $this->invoice = Invoice::findOrFail($invoiceId);
-        $this->job = Job::with('applications')->findOrFail($jobId);
-        $this->applications = $this->job->applications()->whereDoesntHave('subInvoice')->with(['title' , 'subStatus'])->get();
+        $this->job = Job::with(['applications' , 'terms'])->findOrFail($jobId);
+        $this->applications = $this->job->applications()->whereDoesntHave('subInvoice')->with(['title' , 'subStatus' ])->get();
         $this->currentRoute = Route::currentRouteName();
     }
 
@@ -39,7 +39,6 @@ class IssueClientInvoice extends Component
         $term = DemandTerms::whereJobId($this->job->id)->where('title' , $application->title->name)->first();
         if($term != null)
             $this->charge = $term->serivce_charge;
-
     }
 
 
@@ -115,7 +114,7 @@ class IssueClientInvoice extends Component
                 ]
             );
         }
-        $this->invoice->currency = $this->currency;
+        $this->invoice->currency = $this->applications->first()->job->terms()->first()->currency;
         $this->invoice->save();
         notify()->success('Invoice Issued Successsfully');
         return redirect(route('admin.dashboard'));

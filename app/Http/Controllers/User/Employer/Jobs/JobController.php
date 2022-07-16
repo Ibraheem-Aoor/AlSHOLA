@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Validator;
 use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 use Throwable;
 use App\Http\Helpers\HistoryRecordHelper;
+use App\Models\User;
+use App\Notifications\DemandCreated;
+use App\Notifications\DemandUpdated;
+use Illuminate\Support\Facades\Notification;
 
 class JobController extends Controller
 {
@@ -116,6 +120,8 @@ class JobController extends Controller
             if($request->hasFile('attachments'))
                 $this->uploadAttachments($request->attachments , $job->id);
             HistoryRecordHelper::registerDemandLog('Create New Demand'. '<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
+            $admin = User::where('type' , 'admin')->first(); //ali
+            Notification::send($admin , new DemandCreated($job));
             notify()->success('Job Addeed Successfully');
             return redirect(route('employer.dashboard'));
         }catch(Throwable $e)
@@ -129,12 +135,29 @@ class JobController extends Controller
 
 
     function generatePosteNumber() {
-        $number ='S'.mt_rand(1000, 9999); // better than rand()
-
-        // call the same function if the barcode exists already
-        if ($this->postNumberExists($number)) {
-            return $this->generatePosteNumber();
+        $latestJobNumber = 0;
+        if(Job::count() == 0)
+        {
+            $latestJobNumber = 999;
+        }else{
+            /**
+             * Getting the Last post_number
+             */
+            $latestJobs = Job::pluck('post_number')->toArray();
+            $latestJobsNumbersWithoutS = array_map(function($job){
+                return (int)  substr($job , 1);
+            }, $latestJobs);
+            asort($latestJobsNumbersWithoutS);
+            $latestJobNumber = $latestJobsNumbersWithoutS[array_key_last($latestJobsNumbersWithoutS)];
         }
+        $latestJobNumber += 1;
+
+        $number ='S'.$latestJobNumber; // better than rand()
+
+        // // call the same function if the barcode exists already
+        // if ($this->postNumberExists($number)) {
+        //     return $this->generatePosteNumber();
+        // }
 
         // otherwise, it's valid and can be used
         return $number;
@@ -277,6 +300,8 @@ class JobController extends Controller
             if($request->hasFile('attachments'))
                 $this->uploadAttachments($request->attachments , $job->id);
             HistoryRecordHelper::registerDemandLog('Demand Updated'.'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
+            $admin = User::where('type' , 'admin')->first(); //ali
+            Notification::send($admin , new DemandUpdated($job));
             notify()->success('Job Updated Successfully');
             return redirect(route('employer.dashboard'));
         }catch(Throwable $e)

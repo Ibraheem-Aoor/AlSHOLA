@@ -75,8 +75,8 @@
                         @endforelse
                     </div>
                 @endif
-                <form action="{{ route('job.update' , $job->id) }}" method="POST" enctype="multipart/form-data" id="my-form"
-                    name="jobForm">
+                <form action="{{ route('job.update', $job->id) }}" method="POST" enctype="multipart/form-data"
+                    id="my-form" name="jobForm">
                     @csrf
                     @method('PUT')
                     <div class="rounded h-100 p-4">
@@ -198,13 +198,27 @@
                                             @endphp
                                             @forelse($job->subJobs as $subJob)
                                                 <tr>
-                                                    <td><input type="text" readonly name="subJob[{{$i}}][sector]" value="{{$subJob->title->sector->name}}"></td>
-                                                    <td><input type="text"  readonly name="subJob[{{$i}}][title]" value="{{$subJob->title->name}}"></td>
-                                                    <td><input type="text"  readonly name="subJob[{{$i}}][quantity]" value="{{$subJob->quantity}}"></td>
-                                                    <td><input type="text"  readonly name="subJob[{{$i}}][salary]" value="{{$subJob->salary}}"></td>
-                                                    <td><input type="text"  readonly name="subJob[{{$i}}][gender]" value="{{$subJob->gender}}"></td>
-                                                    <td><input type="text"  readonly name="subJob[{{$i}}][age]" value="{{$subJob->age }}"></td>
-                                                    <td ><input type="text" readonly name="subJob[{{$i}}][nationality]" value="{{$subJob->nationality->name}}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][sector]"
+                                                            value="{{ $subJob->title->sector->name }}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][title]"
+                                                            value="{{ $subJob->title->name }}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][quantity]"
+                                                            value="{{ $subJob->quantity }}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][salary]"
+                                                            value="{{ $subJob->salary }}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][gender]"
+                                                            value="{{ $subJob->gender }}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][age]"
+                                                            value="{{ $subJob->age }}"></td>
+                                                    <td><input type="text" readonly
+                                                            name="subJob[{{ $i }}][nationality]"
+                                                            value="{{ $subJob->nationality->name }}"></td>
                                                     <td>
                                                         <button type="button" id="manualDelete"
                                                             class="btn btn-outline-danger remove-edu-input-field"
@@ -245,7 +259,8 @@
 
                                             <tr>
                                                 <td>Off Day:</td>
-                                                <td><input type="text" class="form-control" name="off_day" readonly>
+                                                <td><input type="text" class="form-control" name="off_day"
+                                                        readonly>
                                                 </td>
                                             </tr>
 
@@ -485,7 +500,8 @@
                                                         <br> <br> <br>
                                                         <div class="col-sm-12  mb-2" style="font-size:1rem"
                                                             style="height: calc(3.5rem + 2px);">
-                                                            <input type="checkbox" name="agree" required>
+                                                            <input type="checkbox" name="agree" required
+                                                                id="accept">
                                                             I Agree To All Terms And Conditions.
                                                         </div>
                                                     </div>
@@ -494,8 +510,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-info"
                                                     data-dismiss="modal">BACK</button>
-                                                <button type="submit" class="btn btn-primary"
-                                                    onclick="event.preventDefault();document.getElementById('my-form').submit();">AGREE
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="submitForm();">AGREE
                                                     &
                                                     SUBMIT</button>
                                             </div>
@@ -639,6 +655,16 @@
             });
 
         });
+
+        function submitForm() {
+            const cb = document.querySelector('#accept');
+            if (cb.checked) {
+                demandForm = document.getElementById('my-form');
+                demandForm.submit();
+            } else {
+                alert('You Have To Accept Terms & Conditions')
+            }
+        }
     </script>
 
 
@@ -647,7 +673,7 @@
     {{-- Add new Title Script --}}
     <script>
         $(document).ready(function() {
-            var i = "{{$job->subJobs->count()+1}}";
+            var i = "{{ $job->subJobs->count() + 1 }}";
             $('#add-new-title').on('click', function() {
                 $('#add-new-title-dev').show();
                 $('#next').show();

@@ -3,9 +3,12 @@ namespace App\Http\Traits\User;
 
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
+use App\Models\User;
+use App\Notifications\NewApplicationAttachment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 trait  ApplicationAttachmentTrait
@@ -56,7 +59,8 @@ trait  ApplicationAttachmentTrait
         $application->visa_number = $request->visa_number;
         // $application->flight_ticket = $request->flight_ticket;
         $application->save();
-
+            $admin = User::where('type' , 'admin')->first();
+            Notification::send($admin , new NewApplicationAttachment($application));
             notify()->success('File Uploaded Successfully');
             return redirect()->back();
         }//end if

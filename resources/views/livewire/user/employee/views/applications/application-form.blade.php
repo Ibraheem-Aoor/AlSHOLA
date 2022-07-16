@@ -240,6 +240,7 @@
                                                     <div>
                                                         <label>Relegion:</label>
                                                         <select name="relegion" class="form-control">
+                                                            <option value="" selected>--select one --</option>
                                                             <option value="Muslim"
                                                                 @if (old('relegion') == 'Muslim') selected @endif>Muslim
                                                             </option>

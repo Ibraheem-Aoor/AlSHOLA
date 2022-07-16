@@ -116,6 +116,12 @@
                                                     class="fa fa-print"></i>
                                                 </a> --}}
 
+
+                                                @if ($job->subStatus->name != 'Demand Under Proccess')
+                                                    <a class="badge badge-success text-primary"
+                                                        href="{{ route('job.edit', $job->id) }}"><i
+                                                            class="fa fa-edit"></i></a>
+                                                @endif
                                                 <a href="#exampleModal_5" data-toggle="modal" title="upload attachment"
                                                     data-number="{{ $job->post_number }}"
                                                     data-id="{{ $job->id }}"><i class="fa fa-upload"></i>

@@ -268,6 +268,10 @@
                                                 <table class="table table-striped  basicInfo">
 
                                                     <tr>
+                                                        <td>Client:</td>
+                                                        <td>{{ $job->user->name }}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>Currency:</td>
                                                         <td>{{ $job->currency }}</td>
                                                     </tr>

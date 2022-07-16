@@ -16,11 +16,15 @@ use App\Models\Employer;
 use App\Models\Job;
 use App\Models\Nationality;
 use App\Models\Title;
+use App\Models\User;
 use App\Models\VisaInoformation;
+use App\Notifications\ApplicationCreated;
 use Illuminate\Http\Request;
 use GeneaLabs\LaravelCaffeine\Tests\CreatesApplication;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
@@ -44,15 +48,22 @@ class ApplicationController extends Controller
 
 
     function generateApplicationRef() {
-        $number = mt_rand(1000, 9999); // better than rand()
-
-        // call the same function if the barcode exists already
-        if ($this->applicationRefExists($number)) {
-            return $this->generateApplicationRef();
+        $number = 0;
+        if(Application::count() == 0)
+        {
+            $number = 0;
+        }else{
+            $applicatinosRefs = Application::pluck('ref')->toArray();
+            asort($applicatinosRefs);
+            $number = (int)$applicatinosRefs[array_key_last($applicatinosRefs)];
         }
+        // // call the same function if the barcode exists already
+        // if ($this->applicationRefExists($number)) {
+        //     return $this->generateApplicationRef();
+        // }
 
         // otherwise, it's valid and can be used
-        return $number;
+        return $number + 1;
     }
 
     function applicationRefExists($number) {
@@ -81,6 +92,8 @@ class ApplicationController extends Controller
             $this->storeApplicationAttachments($request->file('files'), $application->id);
             $this->storePersonalPhoto($request->file('photo') , $application->id);
             HistoryRecordHelper::registerApplicationLog('Application Created' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
+            $admin = User::where('type' , 'admin')->first();//ali
+            FacadesNotification::send($admin , new ApplicationCreated($application));
             notify()->success('Application Send Successfully');
             return redirect(route('employee.dashboard'));
         }catch(Throwable $e)

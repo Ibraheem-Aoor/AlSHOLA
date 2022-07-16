@@ -24,37 +24,40 @@
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="count bg-danger">3</span>
+                        @php
+                            $unReadNotifications = Auth::user()
+                                ->unReadnotifications()
+                                ->where('type', '!=', 'App\Notifications\NewContactNotification')
+                                ->get();
+                        @endphp
+                        <span class="count bg-danger">{{ $count_1 = $unReadNotifications->count() }}</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <p class="red">You have 3 Notification</p>
-                        <a class="dropdown-item media" href="#">
-                            <i class="fa fa-check"></i>
-                            <p>Server #1 overloaded.</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <i class="fa fa-info"></i>
-                            <p>Server #2 overloaded.</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <i class="fa fa-warning"></i>
-                            <p>Server #3 overloaded.</p>
-                        </a>
+                        <p class="red">You have {{ $count_1 }} Notification</p>
+                        @forelse($unReadNotifications as $notification)
+                            <a class="dropdown-item media" href="{{ route('admin.notficiation', $notification->id) }}">
+                                <i class="fa fa-file-text"></i>
+                                <p>{{ $notification->data['message'] }}</p>
+                            </a>
+                        @empty
+                        @endforelse
+
                     </div>
                 </div>
 
                 <div class="dropdown for-message">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="message"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-envelope"></i>
-                        <span class="count bg-primary">{{ Auth::user()->unReadnotifications->count() }}</span>
+                        <span
+                            class="count bg-primary">{{ $count_2 = Auth::user()->unReadnotifications->where('type', 'App\Notifications\NewContactNotification')->count() }}</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="message">
-                        <p class="red">You have {{ Auth::user()->unReadnotifications->count() }} Contacts
+                        <p class="red">You have {{ $count_2 }} Contacts
                         </p>
-                        @forelse(Auth::user()->unReadnotifications as $notification)
+                        @forelse(Auth::user()->unReadnotifications->where('type' , 'App\Notifications\NewContactNotification') as $notification)
                             <a class="dropdown-item media"
-                                href=" {{ route('admin.contact.notficiation', $notification->id) }}">
+                                href="{{ route('admin.notficiation', $notification->id) }}">
                                 <span class="photo media-left"><i class="fa fa-user"></i></span>
                                 <div class="message media-body">
                                     <span class="name float-left">{{ $notification->data['name'] }}</span>
@@ -93,7 +96,8 @@
 
                     <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
                         <i class="fa fa-power-off"></i> {{ __('Logout') }}
                     </a>

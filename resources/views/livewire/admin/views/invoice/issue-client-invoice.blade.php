@@ -51,13 +51,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <select name="currency" id="" class="form-control col-sm-6" wire:model="currency" required>
-                                            <option value=""> -- choose currency -- </option>
-                                            @foreach ($currencies as $currency)
-                                                <option value="{{ $currency->key }}">
-                                                    {{ $currency->value }}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
 
                                     <div class="col-sm-12 text-right">

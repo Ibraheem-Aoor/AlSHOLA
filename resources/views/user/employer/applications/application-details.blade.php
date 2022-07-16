@@ -675,9 +675,11 @@
                                                                             href="#exampleModal_6">Accept
                                                                             Application</a>
                                                                     @endif
-                                                                    <a class="btn btn-outline-info"data-toggle="modal"
-                                                                        data-target="#exampleModal_5">Send Comment</a>
-                                                                    @if ($application->sub_status_id == 6)
+
+                                                                    @if (!$application->is_accepted)
+                                                                        <a class="btn btn-outline-info"data-toggle="modal"
+                                                                            data-target="#exampleModal_5">Send
+                                                                            Comment</a>
                                                                         <a class="btn btn-outline-danger"
                                                                             data-toggle="modal"
                                                                             href="#exampleModal_1">Reject

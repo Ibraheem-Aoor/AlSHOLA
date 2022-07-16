@@ -285,7 +285,7 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('/employer/queries'  , EmployerContacts::class)->name('admin.contacts.employers');
         Route::get('/employee/queries'  , TalentContacts::class)->name('admin.contacts.talents');
         Route::get('/guests/queries'  , GuestContacts::class)->name('admin.contacts.guests');
-        Route::get('guests/notification/{notification}' , [NotificaitonHelperController::class , 'markNotification'])->name('admin.contact.notficiation');
+        Route::get('guests/notification/{notification}' , [NotificaitonHelperController::class , 'markNotification'])->name('admin.notficiation');
 
         //candidacy orders routes
         Route::get('/candidacy/orders/all'  , AllCandidacyOrders::class)->name('admin.candidacy.orders.all');

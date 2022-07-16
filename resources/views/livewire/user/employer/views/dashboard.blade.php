@@ -160,9 +160,11 @@
                                                     {{-- <a href="#" title="delete"
                                                         onclick="event.preventDefault();document.getElementById('delete-form').submit();"
                                                         class=" badge bg-danger"><i class="fa fa-trash"></i></a> --}}
-                                                    <a class="badge badge-success text-primary"
-                                                        href="{{ route('job.edit', $job->id) }}"><i
-                                                            class="fa fa-edit"></i></a>
+                                                    @if ($job->subStatus->name != 'Demand Under Proccess')
+                                                        <a class="badge badge-success text-primary"
+                                                            href="{{ route('job.edit', $job->id) }}"><i
+                                                                class="fa fa-edit"></i></a>
+                                                    @endif
                                                     <a class=" badge bg-info" title="notes"
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>
