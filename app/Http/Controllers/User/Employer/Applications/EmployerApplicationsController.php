@@ -215,6 +215,7 @@ class EmployerApplicationsController extends Controller
         $subStatus = subStatus::where('name' , 'waiting for medical')->first();
         $application->sub_status_id = $subStatus->id;
         $application->main_status_id = $subStatus->mainStatus->id;
+        $application->is_accepted = true;
         $application->save();
         HistoryRecordHelper::registerApplicationLog('Application Accepted' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
         notify()->success('Job Accepted Successfully');
