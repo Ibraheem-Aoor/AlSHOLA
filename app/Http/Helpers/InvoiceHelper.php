@@ -126,8 +126,6 @@ class InvoiceHelper
             ->logo(asset('assets/dist_3/assets/images/header-logo.png'))
             // You can additionally save generated invoice to configured disk
             ->save('public');
-        $invoice->paid_amount = $registerdInvoice->paid_amount;
-        $invoice->save('public');
         $link = $invoice->url();
         // Then send email to party with link
 

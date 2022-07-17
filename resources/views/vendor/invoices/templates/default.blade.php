@@ -377,20 +377,6 @@
                     {{ $invoice->formatCurrency($invoice->total_amount) }}
                 </td>
             </tr>
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">Total Paid</td>
-                <td class="text-right pr-0 total-amount">
-                    {{ $invoice->formatCurrency($invoice->paid_amount) }}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">Total Left</td>
-                <td class="text-right pr-0 total-amount">
-                    {{ $invoice->formatCurrency($invoice->total_amount - $invoice->paid_amount) }}
-                </td>
-            </tr>
         </tbody>
     </table>
 
@@ -408,14 +394,14 @@
         </p> --}}
 
     <script type="text/php">if (isset($pdf) && $PAGE_COUNT > 1) {
-                        $text = "Page {PAGE_NUM} / {PAGE_COUNT}";
-                        $size = 10;
-                        $font = $fontMetrics->getFont("Verdana");
-                        $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
-                        $x = ($pdf->get_width() - $width);
-                        $y = $pdf->get_height() - 35;
-                        $pdf->page_text($x, $y, $text, $font, $size);
-                    }</script>
+                            $text = "Page {PAGE_NUM} / {PAGE_COUNT}";
+                            $size = 10;
+                            $font = $fontMetrics->getFont("Verdana");
+                            $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
+                            $x = ($pdf->get_width() - $width);
+                            $y = $pdf->get_height() - 35;
+                            $pdf->page_text($x, $y, $text, $font, $size);
+                        }</script>
 </body>
 
 </html>
