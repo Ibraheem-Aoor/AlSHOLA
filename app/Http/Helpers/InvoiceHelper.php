@@ -62,7 +62,7 @@ class InvoiceHelper
     public function printInvoice($id)
     {
         $registerdInvoice = Invoice::with(['user' , 'subInvoices.application.title'])->findOrFail($id);
-        
+
         $client = new Party([
             'name'          => 'ALSHOALA Recruitment Services W. L. L.',
             'phone'         => BusinessSetting::where('key', 'telephone')->first()->value,
@@ -79,6 +79,7 @@ class InvoiceHelper
             // 'code'          => '#22663214',
             'custom_fields' => [
                 'E-mail' => $registerdInvoice->user->email,
+
             ],
         ]);
             $items = [];
@@ -125,7 +126,7 @@ class InvoiceHelper
             ->logo(asset('assets/dist_3/assets/images/header-logo.png'))
             // You can additionally save generated invoice to configured disk
             ->save('public');
-
+        $invoice->paid_amount = $registerdInvoice->paid_amount;
         $link = $invoice->url();
         // Then send email to party with link
 
@@ -140,6 +141,8 @@ class InvoiceHelper
         $invoice = Invoice::findOrFail($request->id);
         $invoice->status = $request->status;
         $invoice->paid_amount = $request->paid_amount ?? 0;
+        if($request->status == 'Totaly Paid')
+            $invoice->paid_amount = $invoice->totalCharge();
         $invoice->save();
         notify()->success('Invoice Updated Successfully');
         return back();
