@@ -25,7 +25,7 @@ class IssueClientInvoice extends Component
     {
         $this->invoice = Invoice::findOrFail($invoiceId);
         $this->job = Job::with(['applications' , 'terms'])->findOrFail($jobId);
-        $this->applications = $this->job->applications()->whereDoesntHave('subInvoice')->with(['title' , 'subStatus' ])->get();
+        $this->applications = $this->job->applications()->whereDoesntHave('subInvoice')->with(['title' , 'subStatus' , 'job' ])->get();
         $this->currentRoute = Route::currentRouteName();
     }
 
