@@ -25,6 +25,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
+                                                <th>Demand No.</th>
                                                 <th>Invoice No.</th>
                                                 <th>Issued To</th>
                                                 <th>Total Qty</th>
