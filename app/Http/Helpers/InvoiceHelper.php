@@ -127,6 +127,7 @@ class InvoiceHelper
             // You can additionally save generated invoice to configured disk
             ->save('public');
         $invoice->paid_amount = $registerdInvoice->paid_amount;
+        $invoice->save('public');
         $link = $invoice->url();
         // Then send email to party with link
 
@@ -142,7 +143,7 @@ class InvoiceHelper
         $invoice->status = $request->status;
         $invoice->paid_amount = $request->paid_amount ?? 0;
         if($request->status == 'Totaly Paid')
-            $invoice->paid_amount = $invoice->totalCharge();
+            $invoice->paid_amount = $invoice->totalCharge() * $invoice->qty();
         $invoice->save();
         notify()->success('Invoice Updated Successfully');
         return back();
