@@ -30,7 +30,7 @@ class AllInvoices extends Component
 
     public function render()
     {
-        $invoices = Invoice::with(['user' , 'subInvoices'])->whereHas('subInvoices')->simplePaginate(15);
+        $invoices = Invoice::with(['user' , 'subInvoices', 'job'])->whereHas('subInvoices')->simplePaginate(15);
         return view('livewire.admin.views.invoice.all-invoices' , ['invoices' => $invoices])->extends('layouts.admin.master')->section('content');
     }
 }

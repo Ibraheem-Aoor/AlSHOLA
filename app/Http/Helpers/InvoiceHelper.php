@@ -62,6 +62,7 @@ class InvoiceHelper
     public function printInvoice($id)
     {
         $registerdInvoice = Invoice::with(['user' , 'subInvoices.application.title'])->findOrFail($id);
+        
         $client = new Party([
             'name'          => 'ALSHOALA Recruitment Services W. L. L.',
             'phone'         => BusinessSetting::where('key', 'telephone')->first()->value,

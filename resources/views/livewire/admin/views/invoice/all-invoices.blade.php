@@ -42,6 +42,12 @@
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
                                                     <td class="">
+                                                        <a
+                                                            href="{{ route('admin.demand.details', $invoice->job->id) }}">
+                                                            {{ $invoice->job->post_number }}
+                                                        </a>
+                                                    </td>
+                                                    <td class="">
                                                         <a href="#">
                                                             {{ $invoice->number }}
                                                         </a>

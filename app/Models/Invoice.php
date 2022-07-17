@@ -29,12 +29,18 @@ class Invoice extends Model
             $total += $subInvoice->quantity;
         return $total;
     }
-    
+
     public function totalCharge()
     {
         $total = 0;
         foreach($this->subInvoices as $subInvoice)
             $total += $subInvoice->charge;
         return $total;
+    }
+
+
+    public function job()
+    {
+        return $this->belongsTo(Job::class);
     }
 }
