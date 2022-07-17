@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApplicationSearchController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\Employer\Jobs\PDF\PdfController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\JobSeacrhController;
 use App\Http\Controllers\User\Employer\Jobs\EmployerJobsController;
 use App\Http\Controllers\User\Employer\Jobs\JobController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\User\Employer\Applications\EmployerApplicationsControll
 use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfController;
 use App\Http\Controllers\User\GeneralJobController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Helpers\InvoiceHelper;
 use App\Models\Application;
 use App\Models\BusinessSetting;
 use App\Models\Title;
@@ -71,8 +73,14 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 
 
+
+
 Route::group(['middleware' => ['auth']], function()
 {
+
+    Route::get('/invoice/prnt/{id}' , [ InvoiceHelper::class , 'printInvoice'])->name('invoice.print');
+
+
     //Client Filters
     Route::get('/job/pdf/{id}' ,  [PDFPdfController::class , 'generateJobPDF'])->name('job.pdf.generate');
     Route::get('/job/filter/{status}' ,  [JobSeacrhController::class , 'filterJobsStatus'])->name('job.filter');
@@ -142,6 +150,7 @@ Route::group(['middleware' => ['auth']], function()
         Route::post('/job/refuse/{id}' , [NoteController::class , 'refuseJob'])->name('employee.job.refuse');
         Route::post('/job/sendnote/{id}' , [NoteController::class , 'store'])->name('employee.job.note.create');
 
+
         //talent job application routes
         Route::get('/application-form/{id}' , [ApplicationController::class , 'showApplicationForm'])->name('employee.application.form');
         Route::post('/application/{id}' , [ApplicationController::class , 'createApplication'])->name('employee.application.create');
@@ -153,7 +162,8 @@ Route::group(['middleware' => ['auth']], function()
         Route::post('application/note/reply' , [ApplicationController::class , 'sendNoteToAdmin'])->name('employee.note.send');
         Route::get('/applications/{id}/details' , [ApplicationController::class , 'getDetails'])->name('employeee.application.details');
 
-
+        //Invoices:
+        Route::get('/invoices'  , [InvoiceController::class , 'emplyoeeInvoices'])->name('employee.invoices');
 
         //Candidacy oreders
         Route::get('recommendation/order/{id}' , [CandidacyController::class , 'index'])->name('employee.candidacy.order.index');
@@ -212,6 +222,9 @@ Route::group(['middleware' => ['auth']], function()
         Route::post('/applications/accept/{id}' , [EmployerApplicationsController::class , 'acceptApplication'])->name('employer.application.accept');
         Route::post('/applications/refuse/{id}' , [EmployerApplicationsController::class , 'refuseApplication'])->name('employer.application.refuse');
 
+
+        //Invoices
+        Route::get('/invoices'  , [InvoiceController::class , 'emplyoerInvoices'])->name('employer.invoices');
 
 
         // Route::get('/profile' , ProfileShow::class)->name('employer.profile');

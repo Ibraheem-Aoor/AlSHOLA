@@ -23,7 +23,7 @@ class AllJobs extends Component
     {
         $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'user' , 'applications.user' , 'subStatus'])
         ->with('subJobs.title.sector')
-        ->orderByDesc('id')->simplePaginate();
+        ->orderByDesc('created_at')->simplePaginate();
         return view('livewire.admin.views.jobs.all-jobs' , ['jobs' => $jobs])->extends('layouts.admin.master')->section('content');
     }
 }

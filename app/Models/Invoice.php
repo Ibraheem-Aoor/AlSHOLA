@@ -29,6 +29,7 @@ class Invoice extends Model
             $total += $subInvoice->quantity;
         return $total;
     }
+    
     public function totalCharge()
     {
         $total = 0;

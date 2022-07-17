@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');
             $table->string('number');
+            $table->enum('status' , ['Totaly Paid' , 'Partly Paid' , 'Unpaid']);
+            $table->double('paid_amount')->default(0.0);
             $table->string('trn')->nullable();
             $table->string('currency')->nullable();
             $table->foreignId('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');

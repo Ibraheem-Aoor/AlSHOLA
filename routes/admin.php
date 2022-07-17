@@ -138,6 +138,7 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('/invoice/{invoiceId}/agnet-select/{jobId}' ,  SelectAgent::class)->name('admin.invoice.agent-select');
         Route::get('/invoices/all/' ,  InvoiceAllInvoices::class)->name('admin.invoice.all');
         Route::get('/invoice/prnt/{id}' , [ InvoiceHelper::class , 'printInvoice'])->name('admin.invoice.print');
+        Route::post('/invoice/update' , [InvoiceHelper::class , 'updateInvoice'])->name(('admin.invoice.update'));
 
 
 

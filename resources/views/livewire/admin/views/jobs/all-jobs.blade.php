@@ -126,6 +126,7 @@
                                             </tbody>
                                         </table>
                                     </div> <!-- /.table-stats -->
+                                    {{$jobs->links()}}
                                 </div>
                             </div> <!-- /.card -->
                         </div> <!-- /.col-lg-8 -->

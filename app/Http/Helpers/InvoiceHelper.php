@@ -114,8 +114,8 @@ class InvoiceHelper
             ->dateFormat('m/d/Y')
             // ->payUntilDays(14)
             ->currencySymbol($registerdInvoice->currency)
-            ->currencyCode($registerdInvoice->currency)
-            // ->currencyFormat('{SYMBOL}{VALUE}')
+                ->currencyCode($registerdInvoice->currency)
+                // ->currencyFormat('{SYMBOL}{VALUE}')
             // ->currencyThousandsSeparator('.')
             // ->currencyDecimalPoint(',')
             ->filename('ALSHOALA-INVOICE-' . $registerdInvoice->number)
@@ -130,6 +130,18 @@ class InvoiceHelper
 
         // And return invoice itself to browser or have a different view
         return $invoice->stream();
-    }
+    }//end method
+
+
+    public function updateInvoice(Request $request)
+    {
+        $request->validate(['status' => 'required' , 'id' => 'required']);
+        $invoice = Invoice::findOrFail($request->id);
+        $invoice->status = $request->status;
+        $invoice->paid_amount = $request->paid_amount ?? 0;
+        $invoice->save();
+        notify()->success('Invoice Updated Successfully');
+        return back();
+    }//end method
 
 }

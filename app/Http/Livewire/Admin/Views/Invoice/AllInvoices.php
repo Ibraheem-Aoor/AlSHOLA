@@ -21,6 +21,13 @@ class AllInvoices extends Component
         return redirect(route($this->currentRoute));
     }
 
+    public function updateInvoiceStatus()
+    {
+        return dd($this->selectInvoiceId);
+    }
+
+
+
     public function render()
     {
         $invoices = Invoice::with(['user' , 'subInvoices'])->whereHas('subInvoices')->simplePaginate(15);

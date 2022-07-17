@@ -85,7 +85,7 @@ class User extends Authenticatable
     }
 
 
-    /**
+    /*
      * Check if the user have the given jobId in his applications.,
      */
 
@@ -127,6 +127,12 @@ class User extends Authenticatable
     public function company()
     {
         return $this->belongsTo(Company::class , 'company_id');
+    }
+
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 
 }
