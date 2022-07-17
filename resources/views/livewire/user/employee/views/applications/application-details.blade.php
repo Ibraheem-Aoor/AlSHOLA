@@ -172,9 +172,6 @@
                                                                             </tr>
 
                                                                             <tr>
-                                                                                <td>Visa Number:
-                                                                                    {{ $application->visa_number ?? 'NONE' }}
-                                                                                </td>
                                                                                 <td>flight_ticket:
                                                                                     {{ $application->flight_ticket ?? 'NONE' }}
                                                                                 </td>

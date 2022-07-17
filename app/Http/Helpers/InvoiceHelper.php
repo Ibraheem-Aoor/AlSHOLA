@@ -113,7 +113,7 @@ class InvoiceHelper
             ->date(now()->subWeeks(3))
             ->dateFormat('m/d/Y')
             // ->payUntilDays(14)
-            ->currencySymbol($registerdInvoice->currency)
+            // ->currencySymbol($registerdInvoice->currency)
                 ->currencyCode($registerdInvoice->currency)
                 // ->currencyFormat('{SYMBOL}{VALUE}')
             // ->currencyThousandsSeparator('.')
