@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -97,7 +98,16 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(['name' => 'required|string' , 'email'=>'required|email|unique:users,email,'.$id , 'password' => 'nullable|string|min:8|confirmed']);
+        $user = User::findOrFail(Auth::id());
+        $user->update($request->only(['name' , 'email']));
+        if(isset($request->password))
+        {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        notify()->success('Personal Information Updated Successfully');
+        return redirect()->back();
     }
 
     /**

@@ -1,4 +1,5 @@
 <div>
+    @section('title', 'ALSHOALA|CV BANK')
     @push('css')
         <style>
             table tr td,
@@ -20,7 +21,7 @@
                                 @if (Session::has('success'))
                                     <div class="alert"></div>
                                 @endif
-                                <h4 class="box-title">All Agents Submited Applications</h4>
+                                <h4 class="box-title">All CV's</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -28,18 +29,16 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>Demand SR</th>
                                                 <th>Ref</th>
                                                 <th>Full Name</th>
                                                 <th>Passport</th>
                                                 <th>Title</th>
-                                                <th>Clinet</th>
-                                                <th>Agent</th>
                                                 <th>Status</th>
-                                                {{-- <th>Attahments</th> --}}
-                                                <th>Applied At</th>
-                                                <th>Number_Of_Notes</th>
-                                                <th>Actions</th>
+                                                <th colspan="2">Actions</th>    
+                                                <th>
+                                                    <a href="{{ route('admin.cv.new') }}" class="btn btn-success"><i
+                                                            class="fa fa-plus"></i> NEW</a>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -49,29 +48,10 @@
                                             @forelse($applications as $application)
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
-                                                    <td>
-                                                        @isset($application->job_id)
-                                                            {{ $application->job->post_number }}
-                                                        @endisset
-
-                                                    </td>
                                                     <td>{{ $application->ref }}</td>
                                                     <td>{{ $application->full_name }}</td>
                                                     <td>{{ $application->passport_no }}</td>
-                                                    <td>
-                                                        @isset($application->job_id)
-                                                            {{ $application->title->name }}
-                                                        @endisset
-                                                    </td>
-                                                    <td>
-                                                        @isset($application->job_id)
-                                                            {{ $application->job->user->name }}
-                                                        @endisset
-                                                    </td>
-                                                    <td>
-                                                        {{ $application->user->name }}
-                                                    </td>
-
+                                                    <td>{{ $application->title->name }}</td>
                                                     <td>{{ $application->subStatus->name }}</td>
                                                     {{-- <td>
                                                         <a
@@ -79,43 +59,50 @@
                                                             {{ $application->attachments_count }}
                                                         </a>
                                                     </td> --}}
-                                                    <td>{{ $application->created_at->diffForHumans() }}</td>
-                                                    <td><a
-                                                            href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
-                                                    </td>
-                                                    <td colspan="2">
-                                                        {{-- <button class="btn btn-outline-primary " href="#"
-                                                            wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{ $application->user->id }}')"><i
-                                                                class="fa fa-download"></i> CV</button> --}}
 
+
+                                                    <td colspan="2">
+                                                        @switch(isset($application->job_id) &&
+                                                            $application->job->subStatus->name)
+                                                            @case('Demand Under Proccess')
+                                                                @php
+                                                                    $title[$i] = 'Upload Medical/Agreement File(s)';
+                                                                    $file_type[$i] = 'medical/agreement';
+                                                                @endphp
+                                                            @break
+
+                                                            @default
+                                                                @php
+                                                                    $title[$i] = null;
+                                                                    $file_type[$i] = null;
+                                                                @endphp
+                                                        @endswitch
                                                         <a href="{{ route('admin.application.details', $application->id) }}"
                                                             style="width:15px;" title="show details">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a title="send note to agent" style="width:15px;"
-                                                            wire:click="setCurrentApplicationId({{ $application->id }})"
-                                                            data-application="{{ $application->id }}"
-                                                            data-toggle="modal" href="#exampleModal_5"><i
-                                                                class="fa fa-envelope"></i>
+                                                        <a style="width:15px;"
+                                                            title="Forward this application to Client"
+                                                            class="fa fa-location-arrow"
+                                                            href="{{ route('admin.cv.apply', $application->id) }}"></i>
                                                         </a>
-                                                        @if ($application->forwarded)
-                                                            <a style="width:15px;cursor: pointer;"
-                                                                title="Forward this application to Client"
-                                                                wire:click="takeApplicationFromEmployer({{ $application->id }})"><i
-                                                                    class="fa fa-times"></i>
+                                                        @isset($file_type[$i])
+                                                            <a href="#exampleModal_5" data-title="{{ $title[$i] }}"
+                                                                data-toggle="modal" data-type="{{ $file_type[$i] }}"
+                                                                data-id="{{ $application->id }}">
+                                                                <i class="fa fa-upload"></i>
                                                             </a>
-                                                        @else
-                                                            <a style="width:15px;cursor: pointer;"
-                                                                title="Forward this application to Client"
-                                                                wire:click="passApplicationToEmployer({{ $application->id }})"><i
-                                                                    class="fa fa-location-arrow"></i>
-                                                            </a>
-                                                        @endif
+                                                        @endisset
                                                         <a title="send note to agent" style="width:15px;"
                                                             data-id="{{ $application->id }}" data-toggle="modal"
                                                             href="#exampleModal_6"><i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>
+
+
+
+
+
                                                 </tr>
 
                                 </div>
@@ -137,59 +124,73 @@
                                                                 </li>
                                                         </div> --}}
 
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center alert alert-warning">No Records
-                                    Yet!
-                                </td>
-                            </tr>
-                            @endforelse
-                            </tbody>
-                            </table>
-                            {{ $applications->links() }}
-                        </div> <!-- /.table-stats -->
+                            @empty
+                                <tr>
+                                    <td colspan="11" class="text-center alert alert-warning">No Records
+                                        Yet!
+                                    </td>
+                                </tr>
+                                @endforelse
+                                </tbody>
+                                </table>
+                                {{ $applications->links() }}
+                            </div> <!-- /.table-stats -->
+                        </div>
+                    </div> <!-- /.card -->
+                </div> <!-- /.col-lg-8 -->
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Upload Attachment:</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="" style="font-weight: 600" id="title">UPLOAD</label>
+
+                                <form action="{{ route('application.file.upload') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group col-sm-6 mb-3">
+                                        <select name="file_type" class="form-control" id="">
+                                            <option value="Medical">Medical</option>
+                                            <option value="Agreement">Agreement</option>
+                                            <option value="Flight Ticket">Flight Ticket</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <input type="text" id="flight_ticket" name="flight_ticket"
+                                            class="form-control mt-3">
+                                        &nbsp; &nbsp; <input type="file" name="files[]" required multiple>
+                                        <input type="text" id="id" name="id" hidden>
+                                    </div>
+                                    <div class="form-group col-sm-6 text-center" style="width: 100%">
+                                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-upload"></i>
+                                            UPLOAD</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
-                </div> <!-- /.card -->
-            </div> <!-- /.col-lg-8 -->
-
-
-
-
-
-        </div>
-
-
-
-    </div>
-
-    <!-- Message Modal -->
-    <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
-                <form wire:submit.prevent="sendNoteToAppliedTalent()">
-                    <div class="modal-body">
-                        <textarea class="form-control" cols="30" rows="10" wire:model.lazy="note"></textarea>
-                        @error('note')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">SEND</button>
-                    </div>
-                </form>
+
             </div>
+
+
+
         </div>
     </div>
-
-
+    </div>
+    </div>
 
     <!-- Delete Modal -->
     <div class="modal fade" id="exampleModal_6" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -210,10 +211,17 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">DELETE</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
+
+
+
 
 
     @push('js')
@@ -233,15 +241,32 @@
                 var modal = $(this)
                 modal.find('.modal-body #id').val(id);
             });
+        </script>
+
+        <script>
+            $('#flight_ticket').hide();
+
             $('#exampleModal_5').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget)
-                var application = button.data('application')
-                // var description = button.data('description')
+                var id = button.data('id')
+                var type = button.data('type')
+                var title = button.data('title')
                 var modal = $(this)
-                modal.find('.modal-body #application').val(application);
+                modal.find('.modal-body #id').val(id);
+                modal.find('.modal-body #type').val(type);
+                document.getElementById('title').innerHTML = title;
+                $('select[name="file_type"]').on('change', function() {
+                    if ($(this).val() == 'Flight Ticket') {
+                        $('#flight_ticket').show();
+                    } else {
+                        $('#flight_ticket').hide();
+                        $('#flight_ticket').removeAttribute('name');
+                    }
+
+                });
+
             });
         </script>
     @endpush
-
-
-</div>
+    </div>
+    </div>

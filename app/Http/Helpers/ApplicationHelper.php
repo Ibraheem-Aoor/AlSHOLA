@@ -10,6 +10,7 @@ use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class ApplicationHelper
 {
@@ -56,4 +57,16 @@ class ApplicationHelper
         $history->user_id = Auth::id();
         $history->save();
     }
+
+
+    /**
+     * Admin Delete Application
+     */
+    public function deleteApplication(HttpFoundationRequest $request)
+    {
+            Application::findOrFail($request->id)->delete();
+            notify()->success('Application Deleted Successfully');
+            return back();
+    }
+
 }

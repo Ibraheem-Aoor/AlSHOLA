@@ -74,7 +74,7 @@
                     aria-expanded="false">
                     <i class="menu-icon fa fa-file-pdf-o"></i>CV Bank</a>
                 <ul class="sub-menu children dropdown-menu">
-                    <li><i class="menu-icon fa fa-file-text"></i><a href="#">All
+                    <li><i class="menu-icon fa fa-file-text"></i><a href="{{route('admin.cv.all')}}">All
                             CV's</a></li>
                 </ul>
             </li>

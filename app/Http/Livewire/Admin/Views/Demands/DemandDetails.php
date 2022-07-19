@@ -27,7 +27,7 @@ class DemandDetails extends Component
         // $t = $allAgents->applications->where('forwarder' , true)->get();
 
         // return dd($t);
-        // return dd($this->job->subJobs->first()->title->sector->name);
+        // return dd($this->job->subJobs->first()->title->sector->  name);
     }
 
 

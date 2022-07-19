@@ -148,7 +148,7 @@ class ApplicationDetails extends Component
         $attachment->save();
         notify()->success('Attachment Sending Cancelled');
         return redirect(route($this->currentRoute , $this->application));
-    }
+        }
 
 
 

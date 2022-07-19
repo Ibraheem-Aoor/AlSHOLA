@@ -62,7 +62,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); //agent who submited this form
             $table->index('user_id');
             $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');//The user who proposed the application (Talent)
-            $table->unsignedBigInteger('job_id'); //the job that this application submited for.
+            $table->unsignedBigInteger('job_id')
+            ->nullable(); //the job that this application submited for.
             $table->index('job_id');
             $table->foreign('job_id')->references('id')->on('jobs')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -80,7 +80,7 @@ class ApplicationController extends Controller
      * Each application has many employer experince records
      * Each application has many education records.
      */
-    public function createApplication(CreateApplicationRequest $request , $jobId)
+    public function createApplication(CreateApplicationRequest $request , $jobId = null)
     {
 
         $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId ,
@@ -94,12 +94,14 @@ class ApplicationController extends Controller
             HistoryRecordHelper::registerApplicationLog('Application Created' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
             $admin = User::where('type' , 'admin')->first();//ali
             FacadesNotification::send($admin , new ApplicationCreated($application));
-            notify()->success('Application Send Successfully');
-            return redirect(route('employee.dashboard'));
+            $message = Auth::user()->type == 'Agent' ? 'Application Send Successfully' : 'Application Created Successfully';
+            notify()->success($message);
+            return Auth::user()->type == 'Agent' ? redirect(route('employee.dashboard')) : redirect(route('admin.dashboard'));
+
         }catch(Throwable $e)
         {
             notify()->error('something went wrong');
-            return redirect(route('employee.dashboard'));
+            return Auth::user()->type == 'Agent' ? redirect(route('employee.dashboard')) : redirect(route('admin.dashboard'));
         }
 
     }//end method

@@ -58,6 +58,14 @@ class AllAplications extends Component
         notify()->success('Application Sended Successfully');
         return redirect(route('admin.applications.all'));
     }
+    public function takeApplicationFromEmployer($id)
+    {
+        $application = Application::findOrFail($id);
+        $application->forwarded = false;
+        $application->save();
+        notify()->success('Application Updated Successfully');
+        return redirect(route('admin.applications.all'));
+    }
 
     public function render()
     {

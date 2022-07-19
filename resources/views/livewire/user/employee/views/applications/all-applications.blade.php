@@ -127,8 +127,7 @@
                             <div class="modal-body">
                                 <label for="" style="font-weight: 600" id="title">UPLOAD</label>
 
-                                <form action="{{ route('application.file.upload') }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('application.file.upload') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group col-sm-6 mb-3">
                                         <select name="file_type" class="form-control" id="">

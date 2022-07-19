@@ -62,6 +62,9 @@ use App\Http\Helpers\DemandHelper;
 use App\Http\Helpers\InvoiceHelper;
 use App\Http\Livewire\Aadmin\Views\History\ApplicationHistory;
 use App\Http\Livewire\Admin\Veiws\Invoice\AllInvoices;
+use App\Http\Livewire\Admin\Views\Bank\AllCv;
+use App\Http\Livewire\Admin\Views\Bank\CvApply;
+use App\Http\Livewire\Admin\Views\Bank\NewCv;
 use App\Http\Livewire\Admin\Views\Invoice\SelectAgent;
 use App\Http\Livewire\Admin\Views\History\ApplicationHistory as HistoryApplicationHistory;
 use App\Http\Livewire\Admin\Views\History\AuthenticationHistory;
@@ -139,6 +142,12 @@ use LaravelDaily\Invoices\Invoice;
         Route::get('/invoices/all/' ,  InvoiceAllInvoices::class)->name('admin.invoice.all');
         Route::get('/invoice/prnt/{id}' , [ InvoiceHelper::class , 'printInvoice'])->name('admin.invoice.print');
         Route::post('/invoice/update' , [InvoiceHelper::class , 'updateInvoice'])->name(('admin.invoice.update'));
+
+
+        //CV Bank
+        Route::get('/bank' , AllCv::class)->name('admin.cv.all');
+        Route::get('/bank/new' , NewCv::class)->name('admin.cv.new');
+        Route::get('/bank/cv/{id}', CvApply::class)->name('admin.cv.apply');
 
 
 
@@ -233,6 +242,7 @@ use LaravelDaily\Invoices\Invoice;
         //Applications Routes
 
         Route::get('/application/{id}/details' , ApplicationDetails::class)->name('admin.application.details');
+        Route::post('/application/delete' , [ApplicationHelper::class , 'deleteApplication'])->name('admin.application.delete');
         Route::get('/applications/all' , AllAplications::class)->name('admin.applications.all');
         Route::get('/applications/medical' , ApplicationsWaitingForMedical::class)->name('admin.applications.medical');
         Route::get('/applications/visa' , ApplicationsWaitingForVisa::class)->name('admin.applications.visa');
