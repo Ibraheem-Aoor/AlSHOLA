@@ -1,5 +1,5 @@
 @extends('layouts.user.employer.master')
-@section('title', 'Dashboard | APPLICATIONS')
+@section('title', 'Dashboard | Add New Jobs')
 @section('content')
     <div>
     @section('title', 'Dashboard | Create Job Post')
@@ -33,69 +33,25 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Demand No</th>
-                                    <th scope="col">Ref</th>
-                                    <th scope="col">Full Name</th>
-                                    <th scope="col">Passport</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Attachments</th>
-                                    <th scope="col">Applied At</th>
+                                    <th scope="col">Case ID</th>
+                                    <th scope="col">Application Ref</th>
+                                    <th scope="col">Demand No.</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Actions</th>
                                     {{-- <th scope="col">Actions</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
-                                    $i = 1;
-                                    $title = [];
-                                    $file_type = [];
+                                    $i = 1;     
                                 @endphp
-                                @forelse ($applications as $application)
+                                @forelse ($cases as $case)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $application->job->post_number }}</td>
-                                        <td>{{ $application->ref }}</td>
-                                        <td>{{ $application->full_name }}</td>
-                                        <td>{{ $application->passport_no }}</td>
-                                        <td>{{ $application->title->name }}</td>
-                                        <td>{{ $application->subStatus->name }}</td>
-                                        <td><a
-                                                href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>
-                                        </td>
-                                        <td>{{ $application->created_at }}</td>
-                                        @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled' || $application->job->subStatus->name != 'Demand Complete')
-                                            <td>
-                                                <a href="{{ route('employer.application.details', $application->id) }}"
-                                                    class="badge bg-warning" title="show details">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('employer.application.pdf.generate', $application->id) }}"
-                                                    class="badge bg-success" title="print application"><i
-                                                        class="fa fa-print"></i></a>
-
-                                                @switch($application->job->subStatus->name)
-                                                    @case('Demand Under Proccess')
-                                                        @php
-                                                            $title[$i] = 'Upload File';
-                                                            $file_type[$i] = 'asdasd';
-                                                        @endphp
-                                                    @break
-
-                                                    @php
-                                                        $title[$i] = null;
-                                                        $file_type[$i] = null;
-                                                    @endphp
-                                                @endswitch
-
-                                                @isset($file_type[$i])
-                                                    <a data-toggle="modal" data-id="{{ $application->id }}"
-                                                        href="#exampleModal_5">
-                                                        <i class="fa fa-upload"></i>
-                                                    </a>
-                                                @endisset
-                                            </td>
-                                        @endif
+                                        <td>{{ $case->id }}</td>
+                                        <td>{{ $case->application->ref }}</td>
+                                        <td>{{ $case->application->job->post_number }}</td>
+                                        <td>{{ $case->created_at->diffForHumans() }}</td>
 
                                     </tr>
                                 @empty
@@ -109,7 +65,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{ $applications->links() }}
+                    {{ $cases->links() }}
                 </div>
             </div>
 

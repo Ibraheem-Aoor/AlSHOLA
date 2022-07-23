@@ -144,6 +144,9 @@ use LaravelDaily\Invoices\Invoice;
         Route::post('/invoice/update' , [InvoiceHelper::class , 'updateInvoice'])->name(('admin.invoice.update'));
 
 
+        // Cases
+        // Route::get('cases' , )
+
         //CV Bank
         Route::get('/bank' , AllCv::class)->name('admin.cv.all');
         Route::get('/bank/new' , NewCv::class)->name('admin.cv.new');

@@ -121,4 +121,10 @@ class Job extends Model
     {
         return $this->belongsTo(JobSubStatus::class,  'sub_status_id');
     }
+
+
+    public function tickets()
+    {
+        return $this->hasManyThrough(Ticket::class , Application::class);
+    }
 }

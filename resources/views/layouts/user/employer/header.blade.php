@@ -13,18 +13,15 @@
                 <a href="{{ route('employer.jobs.all') }}" class="nav-item nav-link">Jobs</a>
                 <a href="{{ route('employer.applications.all') }}" class="nav-item nav-link">Applications</a>
                 <a href="{{ route('employer.invoices') }}" class="nav-item nav-link">BILLING</a>
+                {{-- <a href="{{ route('cases.index') }}" class="nav-item nav-link">Cases</a> --}}
 
-                {{-- <div class="nav-item dropdown">
-                    <a href="employer.jobs.all" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
+                <div class="nav-item dropdown">
+                    <a href="employer.jobs.all" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Cases</a>
                     <div class="dropdown-menu rounded-0 m-0">
-                        <a href="{{ route('employer.jobs.all') }}" class="dropdown-item">All Jobs</a>
-                        <a href="{{ route('employer.jobs.active') }}" class="dropdown-item">Active Jobs</a>
-                        <a href="{{ route('employer.jobs.completed') }}" class="dropdown-item">Completed Jobs</a>
-                        <a href="{{ route('employer.jobs.pending') }}" class="dropdown-item">Pending Jobs</a>
-                        <a href="{{ route('employer.jobs.cancelled') }}" class="dropdown-item">Cancelled Jobs</a>
-                        <a href="{{ route('employer.jobs.returned') }}" class="dropdown-item">Returned Jobs</a>
+                        <a href="{{ route('cases.index') }}" class="dropdown-item">ALL CASES</a>
+                        <a href="{{ route('cases.create') }}" class="dropdown-item">NEW CASE</a>
                     </div>
-                </div> --}}
+                </div>
 
                 {{-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Applications</a>

@@ -86,4 +86,9 @@ class Application extends Model
     {
         return $this->hasMany(SubInvoice::class);
     }
+
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class);
+    }
 }

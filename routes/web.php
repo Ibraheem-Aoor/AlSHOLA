@@ -16,6 +16,7 @@ use App\Http\Controllers\User\Contact\UserContact;
 use App\Http\Controllers\User\Employee\ApplicationController;
 use App\Http\Controllers\User\Employee\CandidacyController;
 use App\Http\Controllers\User\Employer\Applications\EmployerApplicationsController;
+use App\Http\Controllers\User\Employer\Cases\CaseController;
 use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfController;
 use App\Http\Controllers\User\GeneralJobController;
 use App\Http\Controllers\User\ProfileController;
@@ -167,6 +168,8 @@ Route::group(['middleware' => ['auth']], function()
         //Invoices:
         Route::get('/invoices'  , [InvoiceController::class , 'emplyoeeInvoices'])->name('employee.invoices');
 
+
+
         //Candidacy oreders
         Route::get('recommendation/order/{id}' , [CandidacyController::class , 'index'])->name('employee.candidacy.order.index');
         Route::post('recommendation/order/{id}' , [CandidacyController::class , 'makeOrder'])->name('employee.candidacy.order.create');
@@ -227,7 +230,9 @@ Route::group(['middleware' => ['auth']], function()
 
         //Invoices
         Route::get('/invoices'  , [InvoiceController::class , 'emplyoerInvoices'])->name('employer.invoices');
-
+        
+        //Cases
+        Route::resource('cases', CaseController::class);
 
         // Route::get('/profile' , ProfileShow::class)->name('employer.profile');
         Route::get('test' , function()

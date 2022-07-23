@@ -69,15 +69,29 @@
                   </li>
               @endcan
 
+
+                {{-- Cases --}}
               <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    <i class="menu-icon fa fa-file-pdf-o"></i>CV Bank</a>
-                <ul class="sub-menu children dropdown-menu">
-                    <li><i class="menu-icon fa fa-file-text"></i><a href="{{route('admin.cv.all')}}">All
-                            CV's</a></li>
-                </ul>
-            </li>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="menu-icon fa fa-file-pdf-o"></i>Case Management</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li><i class="menu-icon fa fa-file-text"></i><a href="#">All
+                              Cases</a></li>
+                  </ul>
+              </li>
+
+
+
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="menu-icon fa fa-file-pdf-o"></i>CV Bank</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li><i class="menu-icon fa fa-file-text"></i><a href="{{ route('admin.cv.all') }}">All
+                              CV's</a></li>
+                  </ul>
+              </li>
 
 
 
