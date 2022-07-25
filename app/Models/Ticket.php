@@ -26,6 +26,11 @@ class Ticket extends Model
         return $this->hasMany(CaseAttachment::class , 'ticket_id');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(CaseMessage::class , 'ticket_id');
+    }
+
 }
 
 

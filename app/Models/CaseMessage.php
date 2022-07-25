@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class CaseMessage extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['user_id' , 'ticket_id' , 'message' , 'is_forwarded_employer' , 'is_forwarded_employee'];
+
+
+    //sender
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }//end user
+}

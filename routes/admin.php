@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Cases\CaseController as CasesCaseController;
 use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController;
 use App\Http\Helpers\ApplicationHelper;
 use App\Http\Livewire\Admin\Veiws\Settings\Sectors\AllSectors;
@@ -58,6 +59,7 @@ use App\Http\Livewire\Admin\Views\Settings\Currency\AllCurrencies;
 use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
 use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
+use App\Http\Controllers\User\Employer\Cases\CaseController;
 use App\Http\Helpers\DemandHelper;
 use App\Http\Helpers\InvoiceHelper;
 use App\Http\Livewire\Aadmin\Views\History\ApplicationHistory;
@@ -85,6 +87,8 @@ use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 use App\Http\Livewire\Admin\Views\Cases\AllCases;
 use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
+use App\Models\CaseAttachment;
+use Illuminate\Http\Request;
 
 //prefix => admin
 
@@ -149,7 +153,9 @@ use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
         // Cases
         Route::get('cases' , AllCases::class)->name('admin.cases.all');
         Route::get('/cases/details/{id}' ,  CaseDetails::class)->name('admin.case.details');
-
+        Route::post('/cases/attach/{id}' ,  [CaseController::class , 'attachMoreFiles'])->name('admin.case.attach');
+        Route::get('/case/{id}/delete' ,[CasesCaseController::class , 'destroy'] )->name('admin.case.delete');
+        Route::post('case/{id}/change-status' , [CasesCaseController::class , 'changeStatus'])->name('admin.case.chane-status');
 
         //CV Bank
         Route::get('/bank' , AllCv::class)->name('admin.cv.all');
@@ -173,11 +179,36 @@ use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
                 return Storage::download('public/uploads/attachments/jobs/'.$jobId.'/'.$fileName);
             }Catch(Throwable $e)
             {
-                notify()->error('someting went wrong');
+                return dd($e);
+
                 return redirect()->back();
             }
         })->name('file.download');
 
+        // Download job attachments
+        Route::get('/case/download/{caseId}/{fileName}' , function($caseId , $fileName)
+        {
+            try{
+                return Storage::download('public/uploads/cases/'.$caseId.'/'.$fileName);
+            }Catch(Throwable $e)
+            {
+                return dd($e);
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('case.file.download');
+
+        Route::get('/case/open/{caseId}/{fileName}' , function($caseId , $fileName)
+        {
+            try{
+                return response()->file(public_path('storage/uploads/cases/'.$caseId.'/'.$fileName));
+            }Catch(Throwable $e)
+            {
+                return dd($e);
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('case.file.view');
         Route::get('open/{jobId}/{fileName}' , function($jobId , $fileName)
         {
             try{
@@ -229,6 +260,21 @@ use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
                 return redirect()->back();
             }
         })->name('file.delete');
+
+        //delete file from storage.
+        // Route::get('/case/delete/{caseId}' , function(Request $request ,  $caseId)
+        // {
+        //     try{
+        //         $attachment = CaseAttachment::findOrFail($request->id);
+        //         Storage::delete('public/uploads/cases/'.$caseId.'/'.$attachment->name);
+        //         $attachment->delete();
+        //         return "asdasdasdasdasdasd";
+        //     }Catch(Throwable $e)
+        //     {
+        //         notify()->error('someting went wrong');
+        //         return ;
+        //     }
+        // })->name('case.attachment.delete');
 
 
         /* Users Managment */

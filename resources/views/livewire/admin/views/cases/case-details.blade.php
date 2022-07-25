@@ -38,8 +38,8 @@
                                             href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Case Information</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-descreption" role="tab"
-                                            aria-controls="custom-nav-home" aria-selected="false">Messages</a>
+                                            href="#custom-nav-messages" role="tab"
+                                            aria-controls="custom-nav-messages" aria-selected="false">Messages</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-attachments" role="tab"
                                             aria-controls="custom-nav-home" aria-selected="false">Attachment</a>
@@ -108,6 +108,67 @@
 
 
 
+                                    {{-- Attachments --}}
+                                    <div class="tab-pane fade" id="custom-nav-messages" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Sender</th>
+                                                            <th scope="col">Publisher</th>
+                                                            <th scope="col">creation_date</th>
+                                                            <th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @php
+                                                            $i = 1;
+                                                        @endphp
+                                                        @php
+                                                            $messages = $case
+                                                                ->messages()
+                                                                ->orderBy('created_at', 'desc')
+                                                                ->paginate(10);
+                                                        @endphp
+                                                        @forelse ($messages as $message)
+                                                            <tr>
+                                                                <th scope="row">{{ $i++ }}</th>
+                                                                <td>{{ $message->user->name . ' ( ' . $message->user->type . ' )' }}
+                                                                <td>{{ Str::limit($message->message, 30, '...') }}
+                                                                </td>
+                                                                </td>
+                                                                <td>{{ $message->created_at->diffForHumans() }}</td>
+                                                                <td>
+                                                                    {{-- <a class="btn btn-outline-primary"
+                                                                        href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
+                                                                            class="fa fa-download"></i></a> --}}
+                                                                    <a class="btn btn-outline-info" data-toggle="modal"
+                                                                        data-message="{{ $message->message }}"
+                                                                        href="#descmodal"><i class="fa fa-eye"></i></a>
+
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="6"
+                                                                    class="alert alert-warning text-center bg-dark"
+                                                                    style="color:#fff">
+                                                                    No Records Yet
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
+                                                    </tbody>
+                                                </table>
+                                                {!! $messages->fragment('custom-nav-attachments')->links() !!}
+                                            </div>
+                                        </div>
+                                        </p>
+                                    </div>
+                                    {{-- End Attachments --}}
 
 
 
@@ -146,15 +207,17 @@
                                                                 </td>
                                                                 <td>{{ $attachment->created_at }}</td>
                                                                 <td>
-                                                                    {{-- <a class="btn btn-outline-primary"
-                                                                        href="{{ route('file.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
+                                                                    <a class="btn btn-outline-primary"
+                                                                        href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-download"></i></a>
                                                                     <a class="btn btn-outline-info"
-                                                                        href="{{ route('file.view', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
+                                                                        href="{{ route('case.file.view', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-eye"></i></a>
                                                                     <a class="btn btn-outline-danger"
-                                                                        href="{{ route('file.delete', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
-                                                                            class="fa fa-trash"></i></a> --}}
+                                                                        data-toggle="modal"
+                                                                        data-id="{{ $attachment->id }}"
+                                                                        href="#exampleModal_6"><i
+                                                                            class="fa fa-trash"></i></a>
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -173,9 +236,41 @@
                                         </div>
                                         </p>
                                     </div>
+                                    {{-- End Attachments --}}
 
+                                    {{-- Actions Tab --}}
+                                    <div class="tab-pane fade" id="custom-nav-actions" role="tabpanel"
+                                        aria-labelledby="custom-nav-contact-tab">
+                                        <p>
+                                        <div class="form-group">
+                                            <label for="">Actions:</label><br>
+                                            @if ($case->status != 'Case Cancelled' && $case->status != 'Case Complete')
+                                                {{-- <a class="btn btn-outline-success col-sm-12 mb-2"
+                                                    href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward
+                                                    To
+                                                    Agent</a> --}}
+                                            @endif
 
+                                            <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
+                                                href="#exampleModal_5">
+                                                Attach files</a>
 
+                                            <a class="btn btn-outline-info col-sm-12 mb-2" data-toggle="modal"
+                                                href="#exampleModal_10">
+                                                <i class="fa fa-plus"></i>
+                                                New Message </a>
+
+                                            <a data-toggle="modal" href="#exampleModal_8"
+                                                class="btn btn-secondary col-sm-12 mb-2">Change Demand Status</a>
+                                            {{-- <a href="{{ route('admin.pdf.generate', $job->id) }}"
+                                                class="btn btn-outline-info col-sm-12 mb-2">PRINT PDF</a> --}}
+                                            {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
+                                            href="#exampleModal_8">
+                                            Change Status</a> --}}
+                                        </div>
+                                        </p>
+                                    </div>
+                                    {{-- End Actionns Tab --}}
 
 
 
@@ -190,22 +285,22 @@
                         -->
 
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            wire:ignore aria-hidden="true">
+                        <div class="modal fade" id="exampleModal_10" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" wire:ignore aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Write A Note:</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Write A Message:</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form wire:submit.prevent="sendjobNote()">
+                                        <form wire:submit.prevent="addMessage()">
                                             <div class="form-group">
-                                                <label for="">Note<span class="text-danger">* </span>
+                                                <label for="">Message<span class="text-danger">* </span>
                                                     :</label>
-                                                <textarea class="form-control" required wire:model.lazy="note"></textarea>
-                                                @error('note')
+                                                <textarea class="form-control" required wire:model.lazy="message"></textarea>
+                                                @error('message')
                                                     <span class="text-dagner">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -221,32 +316,62 @@
                             </div>
                         </div>
 
-                        <!-- subjob descreption Modal -->
+                        <!-- Show Message Modal  descreption Modal -->
                         <div class="modal fade" id="descmodal" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Job Descreption</h5>
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Case Message</h5>
                                         <button type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
-                                    </div>
+                                    </div v>
                                     <div class="modal-body">
-                                        <textarea name="" id="desc" readonly name="desc" cols="30" rows="10"
+                                        <textarea name="" id="message" readonly name="desc" cols="30" rows="10"
                                             class="form-control"></textarea>
                                     </div>
                                     <div class="modal-footer">
+
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{-- End subjob descreption modal --}}
+                        {{-- Endsubjob descreption modal --}}
 
-                        <!--SHOW NOTE  Modal -->
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="exampleModal_6" tabindex="-2"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="{{ route('admin.case.delete', $case->id) }}" id="deleteForm">
+                                        <div class="modal-body">
+                                            <input type="hidden" id="id" name="id">
+                                            Are you Sure about Delete Action?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">DELETE</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- End Delete Modal --}}
+
+                        <!--ATTACH FILEs   Modal -->
                         <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -258,19 +383,28 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <textarea class="form-control" id="message" cols="30" rows="10" readonly></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
+                                    <form action="{{ route('admin.case.attach', $case->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <label for="">Files</label>
+                                            <input type="file" name="attachments[]" multiple class="form-control">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">ADD</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                        {{-- END ATTACH FILES MODAL --}}
+
+
 
                         <!-- Change status modal Modal -->
-                        {{-- <div class="modal fade" id="exampleModal_8" tabindex="-1" wire:ignore
+                        <div class="modal fade" id="exampleModal_8" tabindex="-1" wire:ignore
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -282,28 +416,17 @@
                                         </button>
                                     </div>
 
-                                    <form method="POST" action="{{ route('admin.demand.chane-status', $job->id) }}">
+                                    <form method="POST" action="{{ route('admin.case.chane-status', $case->id) }}">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <select name="mainStatus" id="mainStatus" class="form-control"
-                                                    required>
+                                                <select name="status" id="status" class="form-control" required>
                                                     <option value="">--select one --</option>
-                                                    @foreach ($mainStatuses as $status)
-                                                        <option value="{{ $status->id }}">
-                                                            {{ $status->name }}
-                                                        </option>
-                                                    @endforeach
+                                                    <option value="Case Submitted">Case Submitted</option>
+                                                    <option value="Case Under Proccess">Case Under Proccess</option>
+                                                    <option value="Case Completed">Case Completed</option>
+                                                    <option value="Case Cancelled">Case Cancelled</option>
                                                 </select>
-                                            </div>
-                                            <div class="form-gorup">
-
-                                                <select name="subStatus" class="form-control" id="subStatus"
-                                                    required>
-                                                    <option value="">--select one --</option>
-
-                                                </select>
-
                                             </div>
                                         </div>
 
@@ -315,7 +438,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
 
 
@@ -350,10 +473,17 @@
             });
             $('#descmodal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget)
-                var desc = button.data('desc')
-                // var description = button.data('description')
+                var message = button.data('message')
+                // var messageription = button.data('messageription')
                 var modal = $(this)
-                modal.find('.modal-body #desc').val(desc);
+                modal.find('.modal-body #message').val(message);
+            });
+            $('#exampleModal_6').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget)
+                var id = button.data('id')
+                // var idription = button.data('idription')
+                var modal = $(this)
+                modal.find('.modal-body #id').val(id);
             });
         </script>
 
@@ -378,6 +508,32 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             $(document).ready(function() {
+
+                let form = $('#deleteForm');
+                $('#deleteForm').submit(function(e) {
+                    // e.preventDefault();
+                    // $.ajax(function() {
+                    //     headers: {
+                    //         X - CSRF - TOKEN: "{{ csrf_token() }}",
+                    //     },
+                    //     url: "#",
+                    //     type: "DELETE",
+                    //     data: this.serialize(),
+                    //     success: function(data) {
+                    //         let delay = 5000;
+                    //         let url = "https://www.geeksforgeeks.org/";
+                    //         setTimeout(function() {
+                    //             location = url;
+                    //         }, 5000)
+                    //     },
+                    //     error: function(data) {
+                    //         console.log(data);
+                    //     },
+                    // })
+                });
+
+
+
                 $('select[name="mainStatus"]').on('change', function() {
                     var id = $(this).val();
                     if (id) {
@@ -414,6 +570,7 @@
                 setTimeout(function() {
                     window.scrollTo(0, 0);
                 }, 200);
+                $
 
             });
         </script>

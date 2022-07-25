@@ -11,6 +11,7 @@ use App\Models\subStatus;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Mockery\Undefined;
 
 class CaseController extends Controller
@@ -56,24 +57,14 @@ class CaseController extends Controller
         $ticket = Ticket::create(array_merge($request->all() , ['user_id' => Auth::id() , 'status' => 'Case Submitted'] ));
         if($request->has('attachments'))
         {
-            $files = $request->attachments;
-            foreach($files as $file)
-            {
-                $path = 'public/uploads/cases/'.$ticket->id.'/';
-                $fileName = $file->getClientOriginalName();
-                $file->storeAs($path , $fileName);
-                CaseAttachment::create([
-                    'ticket_id' => $ticket->id,
-                    'user_id' => Auth::id(),
-                    'is_forwarded_employer' => true,
-                    'is_forwarded_employee' => false,
-                    'name' => $fileName,
-                ]);
-            }
+            $this->uplaodCaseAttachments($request->attachments , $ticket->id);
         }
         notify()->success('Case Sended Successfully');
         return redirect(route('employer.dashboard'));
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -115,8 +106,51 @@ class CaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request , $id)
     {
-        //
+        $attachment = CaseAttachment::findOrFail($request->id);
+        Storage::delete('public/uploads/cases/'.$id.'/'.$attachment->name);
+        $attachment->delete();
     }
+
+
+    /**
+     * Attach more Files (admin - client -agnet)
+     */
+
+    public function attachMoreFiles(Request $request , $id)
+    {
+        $request->validate(['attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024']);
+        if(!$request->has('attachments'))
+        {
+            notify()->error('Something Went Wrong');
+            return redirect()->back();
+        }
+        $this->uplaodCaseAttachments($request->attachments , $id);
+        notify()->success('Files Uploaded Successfully');
+        return redirect()->back();
+    }//end  attachMoreFiles
+
+
+
+    /**
+     * Upload The Attachment of the case (storage  + db)
+     */
+    public function uplaodCaseAttachments($attachments , $caseId)
+    {
+        foreach($attachments as $file)
+        {
+            $path = 'public/uploads/cases/'.$caseId.'/';
+            $fileName = $file->getClientOriginalName();
+            $file->storeAs($path , $fileName);
+            CaseAttachment::create([
+                'ticket_id' => $caseId,
+                'user_id' => Auth::id(),
+                'is_forwarded_employer' => true,
+                'is_forwarded_employee' => false,
+                'name' => $fileName,
+            ]);
+        }
+    }//end uplaodCaseAttachments
+
 }
