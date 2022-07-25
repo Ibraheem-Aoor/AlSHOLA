@@ -76,7 +76,7 @@
                       aria-expanded="false">
                       <i class="menu-icon fa fa-file-pdf-o"></i>Case Management</a>
                   <ul class="sub-menu children dropdown-menu">
-                      <li><i class="menu-icon fa fa-file-text"></i><a href="#">All
+                      <li><i class="menu-icon fa fa-file-text"></i><a href="{{route('admin.cases.all')}}">All
                               Cases</a></li>
                   </ul>
               </li>

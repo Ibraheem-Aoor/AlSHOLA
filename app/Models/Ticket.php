@@ -21,6 +21,11 @@ class Ticket extends Model
         return $this->belongsTo(Application::class , 'application_id');
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(CaseAttachment::class , 'ticket_id');
+    }
+
 }
 
 

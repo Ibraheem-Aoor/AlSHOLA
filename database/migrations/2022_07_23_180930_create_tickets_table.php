@@ -20,7 +20,7 @@ return new class extends Migration
             // $table->string('title');
             $table->string('reason');
             $table->text('other_reason')->nullable();
-            $table->string('status');
+            $table->string('status')->default('Case Submitted');
             $table->text('contact_number')->nullable();
             $table->timestamps();
         });

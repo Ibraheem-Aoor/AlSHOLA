@@ -11,7 +11,8 @@ class AllCases extends Component
 
     public function render()
     {
-        $cases = Ticket::paginate(15);
-        return view('livewire.admin.views.cases.all-cases' , ['cases' => $cases]);
+        $cases = Ticket::with(['application.job:id,post_number' , 'user'])->paginate(15);
+        return view('livewire.admin.views.cases.all-cases' , ['cases' => $cases])
+            ->extends('layouts.admin.master')->section('content');
     }
 }

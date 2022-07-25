@@ -83,6 +83,8 @@ use Illuminate\Support\Facades\Response;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
+use App\Http\Livewire\Admin\Views\Cases\AllCases;
+use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
 
 //prefix => admin
 
@@ -145,7 +147,9 @@ use LaravelDaily\Invoices\Invoice;
 
 
         // Cases
-        // Route::get('cases' , )
+        Route::get('cases' , AllCases::class)->name('admin.cases.all');
+        Route::get('/cases/details/{id}' ,  CaseDetails::class)->name('admin.case.details');
+
 
         //CV Bank
         Route::get('/bank' , AllCv::class)->name('admin.cv.all');

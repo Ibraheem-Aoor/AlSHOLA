@@ -21,6 +21,7 @@ use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfControlle
 use App\Http\Controllers\User\GeneralJobController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Helpers\InvoiceHelper;
+use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
 use App\Models\Application;
 use App\Models\BusinessSetting;
 use App\Models\Title;
@@ -230,7 +231,7 @@ Route::group(['middleware' => ['auth']], function()
 
         //Invoices
         Route::get('/invoices'  , [InvoiceController::class , 'emplyoerInvoices'])->name('employer.invoices');
-        
+
         //Cases
         Route::resource('cases', CaseController::class);
 
