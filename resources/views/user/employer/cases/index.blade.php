@@ -43,7 +43,7 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $i = 1;     
+                                    $i = 1;
                                 @endphp
                                 @forelse ($cases as $case)
                                     <tr>
@@ -52,7 +52,11 @@
                                         <td>{{ $case->application->ref }}</td>
                                         <td>{{ $case->application->job->post_number }}</td>
                                         <td>{{ $case->created_at->diffForHumans() }}</td>
-
+                                        <td>
+                                            <a href="{{route('cases.show' , $case->id)}}" class="btn btn-info">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>

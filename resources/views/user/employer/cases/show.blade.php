@@ -1,26 +1,27 @@
-<div>
-    @push('css')
-        <style>
-            table {
-                font-size: 0.8rem;
-            }
+@extends('layouts.user.employer.master')
+@push('css')
+    <style>
+        table {
+            font-size: 0.8rem;
+        }
 
-            .titles tr:nth-child(even) {
-                background-color: #00B074;
-                color: #ffff;
-            }
+        .titles tr:nth-child(even) {
+            background-color: #00B074;
+            color: #ffff;
+        }
 
-            .titles th {
-                background-color: #d8e8a7;
-            }
+        .titles th {
+            background-color: #d8e8a7;
+        }
 
-            .basicInfo tr td:nth-child(even) {
-                background-color: #00B074;
-                color: #ffff;
+        .basicInfo tr td:nth-child(even) {
+            background-color: #00B074;
+            color: #ffff;
 
-            }
-        </style>
-    @endpush
+        }
+    </style>
+@endpush
+@section('content')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
@@ -38,11 +39,11 @@
                                             href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Case Information</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-messages" role="tab"
-                                            aria-controls="custom-nav-messages" aria-selected="false">Messages</a>
+                                            href="#custom-nav-messages" role="tab" aria-controls="custom-nav-messages"
+                                            aria-selected="false">Messages</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-attachments" role="tab"
-                                            aria-controls="custom-nav-home" aria-selected="false">Attachment</a>
+                                            href="#custom-nav-attachments" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Attachment</a>
                                         <a class="nav-item nav-link" id="custom-nav-contact-tab" data-toggle="tab"
                                             href="#custom-nav-actions" role="tab" aria-controls="custom-nav-contact"
                                             aria-selected="false">Actions</a>
@@ -144,32 +145,12 @@
                                                                 <td>{{ $message->created_at->diffForHumans() }}</td>
                                                                 <td>
                                                                     {{-- <a class="btn btn-outline-primary"
-                                                                        href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
-                                                                            class="fa fa-download"></i></a> --}}
+                                                                href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
+                                                                    class="fa fa-download"></i></a> --}}
                                                                     <a class="btn btn-outline-info" data-toggle="modal"
                                                                         data-message="{{ $message->message }}"
                                                                         href="#descmodal"><i class="fa fa-eye"></i></a>
-                                                                    @if ($message->is_forwarded_employer)
-                                                                        <a href="#" title="Cancel To Client"
-                                                                            wire:click.prevent="takeMessageFromClient('{{ $message->id }}')">
-                                                                            <i class="fa fa-times"></i></a>
-                                                                    @else
-                                                                        <a href="#" title="Send To Client"
-                                                                            wire:click.prevent="sendMessageToClient('{{ $message->id }}')">
-                                                                            <i class="fa fa-location-arrow"></i>
-                                                                        </a>
-                                                                    @endif
-                                                                    @if ($message->is_forwarded_employee)
-                                                                        <a href="#" title="Cancel To Agent"
-                                                                            wire:click.prevent="takeMessageFromAgent('{{ $message->id }}')">
-                                                                            <i class="fa fa-times"></i>
-                                                                        </a>
-                                                                    @else
-                                                                        <a href="#" title="Send To Agent"
-                                                                            wire:click.prevent="sendMessageToAgent('{{ $message->id }}')">
-                                                                            <i class="fa fa-location-arrow"></i>
-                                                                        </a>
-                                                                    @endif
+
                                                                 </td>
                                                             </tr>
                                                         @empty
@@ -233,8 +214,7 @@
                                                                     <a class="btn btn-outline-info"
                                                                         href="{{ route('case.file.view', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-eye"></i></a>
-                                                                    <a class="btn btn-outline-danger"
-                                                                        data-toggle="modal"
+                                                                    <a class="btn btn-outline-danger" data-toggle="modal"
                                                                         data-id="{{ $attachment->id }}"
                                                                         href="#exampleModal_6"><i
                                                                             class="fa fa-trash"></i></a>
@@ -266,9 +246,9 @@
                                             <label for="">Actions:</label><br>
                                             @if ($case->status != 'Case Cancelled' && $case->status != 'Case Complete')
                                                 {{-- <a class="btn btn-outline-success col-sm-12 mb-2"
-                                                    href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward
-                                                    To
-                                                    Agent</a> --}}
+                                            href="{{ route('admin.send-job-to-agent', $job->id) }}">Forward
+                                            To
+                                            Agent</a> --}}
                                             @endif
 
                                             <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
@@ -280,13 +260,11 @@
                                                 <i class="fa fa-plus"></i>
                                                 New Message </a>
 
-                                            <a data-toggle="modal" href="#exampleModal_8"
-                                                class="btn btn-secondary col-sm-12 mb-2">Change Case Status</a>
                                             {{-- <a href="{{ route('admin.pdf.generate', $job->id) }}"
-                                                class="btn btn-outline-info col-sm-12 mb-2">PRINT PDF</a> --}}
+                                        class="btn btn-outline-info col-sm-12 mb-2">PRINT PDF</a> --}}
                                             {{-- <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
-                                            href="#exampleModal_8">
-                                            Change Status</a> --}}
+                                    href="#exampleModal_8">
+                                    Change Status</a> --}}
                                         </div>
                                         </p>
                                     </div>
@@ -300,13 +278,13 @@
                         </div>
 
                         <!--
-                            Modal_1
-                            This modal is for sending notes
-                        -->
+                                                            Modal_1
+                                                            This modal is for sending notes
+                                                        -->
 
 
-                        <div class="modal fade" id="exampleModal_10" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" wire:ignore aria-hidden="true">
+                        <div class="modal fade" id="exampleModal_10" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            wire:ignore aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -343,8 +321,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">Case Message</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div v>
@@ -364,14 +341,13 @@
 
 
                         <!-- Delete Modal -->
-                        <div class="modal fade" id="exampleModal_6" tabindex="-2"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal_6" tabindex="-2" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -398,8 +374,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -430,8 +405,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">ٍjob Status:</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -469,130 +443,75 @@
 
 
 
+            @push('js')
+                <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+
+
+                <script>
+                    $(document).ready(function() {
+
+                        $('#exampleModal_5').on('show.bs.modal', function(event) {
+                            var button = $(event.relatedTarget);
+                            var message = button.data('message');
+                            // var description = button.data('description')
+                            var modal = $(this);
+                            modal.find('.modal-body #message').val(message);
+                        });
+                        $('#descmodal').on('show.bs.modal', function(event) {
+                            var button = $(event.relatedTarget);
+                            var message = button.data('message');
+                            // var messageription = button.data('messageription')
+                            var modal = $(this);
+                            modal.find('.modal-body #message').val(message);
+                        });
+                        $('#exampleModal_6').on('show.bs.modal', function(event) {
+                            var button = $(event.relatedTarget);
+                            var id = button.data('id');
+                            // var idription = button.data('idription')
+                            var modal = $(this);
+                            modal.find('.modal-body #id').val(id);
+                        });
+
+                        $('#exampleModal_115').on('show.bs.modal', function(event) {
+                            var button = $(event.relatedTarget);
+                            var job = button.data('job');
+                            // var description = button.data('description')
+                            var modal = $(this)
+                            modal.find('.modal-body #job').val(job);
+                        });
+                    });
+                </script>
+
+
+
+                <script>
+                    $(document).ready(function() {
+
+                        var url = document.location.toString();
+                        if (url.match('#')) {
+                            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]')[0].click();
+                        }
+
+                        //To make sure that the page always goes to the top
+                        setTimeout(function() {
+                            window.scrollTo(0, 0);
+                        }, 200);
+                        $
+
+                    });
+                </script>
+            @endpush
+
+
 
 
 
         </div>
     </div>
-    @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-        </script>
-
-        <script>
-            $('#exampleModal_5').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var message = button.data('message')
-                // var description = button.data('description')
-                var modal = $(this)
-                modal.find('.modal-body #message').val(message);
-            });
-            $('#descmodal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var message = button.data('message')
-                // var messageription = button.data('messageription')
-                var modal = $(this)
-                modal.find('.modal-body #message').val(message);
-            });
-            $('#exampleModal_6').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var id = button.data('id')
-                // var idription = button.data('idription')
-                var modal = $(this)
-                modal.find('.modal-body #id').val(id);
-            });
-        </script>
-
-        <script>
-            $('#exampleModal_115').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var job = button.data('job')
-                // var description = button.data('description')
-                var modal = $(this)
-                modal.find('.modal-body #job').val(job);
-            });
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
-            integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>
-            $(document).ready(function() {
-
-                let form = $('#deleteForm');
-                $('#deleteForm').submit(function(e) {
-                    // e.preventDefault();
-                    // $.ajax(function() {
-                    //     headers: {
-                    //         X - CSRF - TOKEN: "{{ csrf_token() }}",
-                    //     },
-                    //     url: "#",
-                    //     type: "DELETE",
-                    //     data: this.serialize(),
-                    //     success: function(data) {
-                    //         let delay = 5000;
-                    //         let url = "https://www.geeksforgeeks.org/";
-                    //         setTimeout(function() {
-                    //             location = url;
-                    //         }, 5000)
-                    //     },
-                    //     error: function(data) {
-                    //         console.log(data);
-                    //     },
-                    // })
-                });
-
-
-
-                $('select[name="mainStatus"]').on('change', function() {
-                    var id = $(this).val();
-                    if (id) {
-                        $.ajax({
-                            url: "{{ URL::to('admin/job/substatus') }}/" + id,
-                            type: "GET",
-                            dataType: "json",
-                            success: function(data) {
-                                $('select[name="subStatus"]').empty();
-                                $.each(data, function(key, value) { //for each loop
-                                    $('select[name="subStatus"]').append('<option value="' +
-                                        value.id + '" selected>' + value.name +
-                                        '</option>');
-                                });
-                            },
-                        });
-
-                    } else {
-                        console.log('AJAX load did not work');
-                    }
-                });
-            });
-        </script>
-
-        <script>
-            $(document).ready(function() {
-
-                var url = document.location.toString();
-                if (url.match('#')) {
-                    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]')[0].click();
-                }
-
-                //To make sure that the page always goes to the top
-                setTimeout(function() {
-                    window.scrollTo(0, 0);
-                }, 200);
-                $
-
-            });
-        </script>
-    @endpush
-</div>
+@endsection

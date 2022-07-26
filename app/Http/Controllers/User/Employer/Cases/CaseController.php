@@ -74,7 +74,8 @@ class CaseController extends Controller
      */
     public function show($id)
     {
-        //
+        $case = Ticket::with(['application.job:id,post_number' , 'attachments.user' , 'messages.user'])->findOrFail($id);
+        return view('user.employer.cases.show' , compact('case'));
     }
 
     /**
