@@ -1,48 +1,39 @@
 <?php
+namespace App\Http\Traits\User;
 
-namespace App\Http\Controllers\Admin\Cases;
-
-use App\Http\Controllers\Controller;
 use App\Models\CaseAttachment;
+use App\Models\CaseMessage;
 use App\Models\Ticket;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Support\Facades\Validator;
 
-class CaseController extends Controller
+Trait CaseTrait
 {
-    public function destroy(Request $request , $id)
+    public function sendMessage(Request $request , $id)
     {
-        $attachment = CaseAttachment::findOrFail($request->id);
-        Storage::delete('public/uploads/cases/'.$id.'/'.$attachment->name);
-        $attachment->delete();
-        return redirect(route('admin.case.details' , $id).'#custom-nav-attachments');
-    }//End destroy
-
-
-
-
-    public function changeStatus(Request $request , $id)
-    {
-        $validate  = FacadesValidator::make ($request->all() , ['status' => 'required']);
+        $validate = Validator::make($request->all() , ['message' => 'required']);
         if($validate->fails())
         {
-            notify()->error('Something Went Wrong');
-            return redirect()->back();
+            notify()->error('Something went wrong');
+            return back();
         }
         $case = Ticket::findOrFail($id);
-        $case->status = $request->status;
-        $case->save();
-        notify()->success('Status Changed Successfully');
-        return redirect()->back();
-    }//end message
+        CaseMessage::create(
+            [
+                'user_id' => Auth::id(),
+                'ticket_id' => $id,
+                'message' => $request->get('message'),
+                'is_forwarded_employer' => Auth::user()->type == 'Client' ? 1 : 0,
+                'is_forwarded_employee' =>  Auth::user()->type == 'Agent' ? 1 : 0,
+            ]
+            );
+        notify()->success('Message Sended Successfully');
+        return back();
+    }//End sendMessage
 
 
-     /**
-     * Attach more Files (admin - client -agnet)
-     */
+
 
     public function attachMoreFiles(Request $request , $id)
     {
@@ -72,10 +63,11 @@ class CaseController extends Controller
             CaseAttachment::create([
                 'ticket_id' => $caseId,
                 'user_id' => Auth::id(),
-                'is_forwarded_employer' => 1,
-                'is_forwarded_employee' => 0,
+                'is_forwarded_employer' => Auth::user()->type == 'Client' ? 1 : 0,
+                'is_forwarded_employee' => Auth::user()->type == 'Agent' ? 1 : 0,
                 'name' => $fileName,
             ]);
         }
     }//end uplaodCaseAttachments
+
 }

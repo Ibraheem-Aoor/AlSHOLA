@@ -153,9 +153,10 @@ use Illuminate\Http\Request;
         // Cases
         Route::get('cases' , AllCases::class)->name('admin.cases.all');
         Route::get('/cases/details/{id}' ,  CaseDetails::class)->name('admin.case.details');
-        Route::post('/cases/attach/{id}' ,  [CaseController::class , 'attachMoreFiles'])->name('admin.case.attach');
+        Route::post('/cases/attach/{id}' ,  [CasesCaseController::class , 'attachMoreFiles'])->name('admin.case.attach');
         Route::get('/case/{id}/delete' ,[CasesCaseController::class , 'destroy'] )->name('admin.case.delete');
         Route::post('case/{id}/change-status' , [CasesCaseController::class , 'changeStatus'])->name('admin.case.chane-status');
+
 
         //CV Bank
         Route::get('/bank' , AllCv::class)->name('admin.cv.all');

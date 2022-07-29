@@ -48,7 +48,7 @@
                                             <td>{{ $subjob->salary }}</td>
                                             <td>{{ $subjob->gender }}</td>
                                             <td>{{ $subjob->age }}</td>
-                                            <td>{{ $subjob->nationality->name }}</td>
+                                            <td>{{ $subjob->nationality->name ?? '' }}</td>
                                             </td>
                                         </tr>
                                     @empty
@@ -208,7 +208,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="alert alert-warning text-center bg-dark"
+                                    <td colspan="6" class="alert alert-warning text-center bg-dark"
                                         style="color:#fff">
                                         No Records Yet
                                     </td>

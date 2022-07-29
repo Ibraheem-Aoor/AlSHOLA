@@ -227,6 +227,17 @@
                                                                 </td>
                                                                 <td>{{ $attachment->created_at }}</td>
                                                                 <td>
+                                                                    @if ($attachment->is_forwarded_employee)
+                                                                        <a href="#" title="Cancel Agent"
+                                                                            wire:click.prevent="takeAttachmentFromAgent({{ $attachment->id }})">
+                                                                            <i class="fa fa-times"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        <a href="#" title="To Agent"
+                                                                            wire:click.prevent="sendAttachmentToAgent({{ $attachment->id }})">
+                                                                            <i class="fa fa-location-arrow"></i>
+                                                                        </a>
+                                                                    @endif
                                                                     <a class="btn btn-outline-primary"
                                                                         href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-download"></i></a>
@@ -238,6 +249,18 @@
                                                                         data-id="{{ $attachment->id }}"
                                                                         href="#exampleModal_6"><i
                                                                             class="fa fa-trash"></i></a>
+
+                                                                    @if ($attachment->is_forwarded_employer)
+                                                                        <a href="#" title="Cancel Client"
+                                                                            wire:click.prevent="takeAttachmentFromClient({{ $attachment->id }})">
+                                                                            <i class="fa fa-times"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        <a href="#" title="To Client"
+                                                                            wire:click.prevent="sendAttachmentToClient({{ $attachment->id }})">
+                                                                            <i class="fa fa-location-arrow"></i>
+                                                                        </a>
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                         @empty

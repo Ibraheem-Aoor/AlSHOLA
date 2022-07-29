@@ -56,15 +56,15 @@
                                 @endif
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $application->job->post_number }}</td>
+                                        <td>{{ $application->job->post_number?? '' }}</td>
                                         <td>{{ $application->ref }}</td>
                                         <td>{{ $application->full_name }}</td>
                                         <td>{{ $application->passport_no }}</td>
-                                        <td>{{ $application->job->user->name }}</td>
+                                        <td>{{ $application->job->user->name ?? '' }}</td>
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>
-                                        <td>{{ $application->subStatus->name }}</td>
+                                        <td>{{ $application->subStatus->name ?? ''}}</td>
                                         <td>{{ $application->created_at }}</td>
                                         @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
                                             <td>

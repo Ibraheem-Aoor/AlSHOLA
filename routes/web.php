@@ -15,6 +15,7 @@ use App\Http\Livewire\User\Employer\Views\Dashboard as ViewsDashboard;
 use App\Http\Controllers\User\Contact\UserContact;
 use App\Http\Controllers\User\Employee\ApplicationController;
 use App\Http\Controllers\User\Employee\CandidacyController;
+use App\Http\Controllers\User\Employee\Cases\CaseController as CasesCaseController;
 use App\Http\Controllers\User\Employer\Applications\EmployerApplicationsController;
 use App\Http\Controllers\User\Employer\Cases\CaseController;
 use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController as PDFPdfController;
@@ -79,6 +80,32 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+
+        // Cse Attahments Routes
+        Route::get('/case/download/{caseId}/{fileName}' , function($caseId , $fileName)
+        {
+            try{
+                return Storage::download('public/uploads/cases/'.$caseId.'/'.$fileName);
+            }Catch(Throwable $e)
+            {
+                return dd($e);
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('user.case.file.download');
+
+        Route::get('/case/open/{caseId}/{fileName}' , function($caseId , $fileName)
+        {
+            try{
+                return response()->file(public_path('storage/uploads/cases/'.$caseId.'/'.$fileName));
+            }Catch(Throwable $e)
+            {
+                return dd($e);
+                notify()->error('someting went wrong');
+                return redirect()->back();
+            }
+        })->name('user.case.file.view');
+
 
     Route::post('/application/{id?}' , [ApplicationController::class , 'createApplication'])->name('employee.application.create');
 
@@ -154,6 +181,16 @@ Route::group(['middleware' => ['auth']], function()
         //Job Notes
         Route::post('/job/refuse/{id}' , [NoteController::class , 'refuseJob'])->name('employee.job.refuse');
         Route::post('/job/sendnote/{id}' , [NoteController::class , 'store'])->name('employee.job.note.create');
+
+
+        // Case
+        Route::group(['controller' => CasesCaseController::class , 'as'=>'employee.case.'  , 'prefix' => 'cases'] ,  function()
+        {
+            Route::get('/' , [CasesCaseController::class ,  'index'])->name('index');
+            Route::get('/{id}' , [CasesCaseController::class ,  'showCase'])->name('show');
+            Route::post('message/{id}' , [CasesCaseController::class , 'sendMessage'])->name('message');
+            Route::post('attach/{id}' , [CasesCaseController::class , 'attachMoreFiles'])->name('attach');
+        });
 
 
         //talent job application routes
@@ -234,12 +271,13 @@ Route::group(['middleware' => ['auth']], function()
 
         //Cases
         Route::resource('cases', CaseController::class);
+     // Case
+     Route::group(['controller' => CaseController::class , 'as'=>'employer.case.'  , 'prefix' => 'cases'] ,  function()
+     {
+         Route::post('message/{id}' , [CaseController::class , 'sendMessage'])->name('message');
+         Route::post('attach/{id}' , [CaseController::class , 'attachMoreFiles'])->name('attach');
+     });
 
-        // Route::get('/profile' , ProfileShow::class)->name('employer.profile');
-        Route::get('test' , function()
-        {
-            return Storage::download('public/uploads/attachments/jobs/5/snapchat.png');
-        });
 
         Route::get('title/{id}' , function($id)
         {

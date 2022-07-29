@@ -1,4 +1,4 @@
-@extends('layouts.user.employer.master')
+@extends('layouts.user.employee.master')
 @push('css')
     <style>
         table {
@@ -294,7 +294,7 @@
                                                         @php
                                                             $messages = $case
                                                                 ->messages()
-                                                                ->where('is_forwarded_employer' , true)
+                                                                ->where('is_forwarded_employee' , true)
                                                                 ->orderBy('created_at', 'desc')
                                                                 ->paginate(10);
                                                         @endphp
@@ -358,7 +358,7 @@
                                                         @php
                                                             $attachments = $case
                                                                 ->attachments()
-                                                                ->where('is_forwarded_employer' , true)
+                                                                ->where('is_forwarded_employee' , true)
                                                                 ->orderBy('created_at', 'desc')
                                                                 ->paginate(10);
                                                         @endphp
@@ -437,9 +437,9 @@
                         </div>
 
                         <!--
-                                                                                                                        Modal_1
-                                                                                                                        This modal is for sending notes
-                                                                                                                    -->
+                                                                                                                    Modal_1
+                                                                                                                    This modal is for sending notes
+                                                                                                                -->
 
 
 
@@ -470,7 +470,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('employer.case.message', $case->id) }}" method="POST">
+                <form action="{{route('employee.case.message' , $case->id)}}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="">Message<span class="text-danger">*</span>
@@ -516,7 +516,30 @@
 {{-- Endsubjob descreption modal --}}
 
 
-
+<!-- Delete Modal -->
+<div class="modal fade" id="exampleModal_6" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('admin.case.delete', $case->id) }}" id="deleteForm">
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="id">
+                    Are you Sure about Delete Action?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- End Delete Modal --}}
 
 <!--ATTACH FILEs   Modal -->
 <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore aria-labelledby="exampleModalLabel"
@@ -529,8 +552,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('employer.case.attach', $case->id) }}" method="POST"
-                enctype="multipart/form-data">
+            <form action="{{ route('employee.case.attach', $case->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <label for="">Files</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Employer\Cases;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateNewCaseRequest;
+use App\Http\Traits\User\CaseTrait;
 use App\Models\Application;
 use App\Models\CaseAttachment;
 use App\Models\Job;
@@ -16,6 +17,8 @@ use Mockery\Undefined;
 
 class CaseController extends Controller
 {
+    use CaseTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -74,7 +77,8 @@ class CaseController extends Controller
      */
     public function show($id)
     {
-        $case = Ticket::with(['application.job:id,post_number' , 'attachments.user' , 'messages.user'])->findOrFail($id);
+        $case = Ticket::with(['application.job:id,post_number' , 'attachments.user' , 'messages.user' ,
+                            'application.attachments' , 'application.user' , 'application.title'])->findOrFail($id);
         return view('user.employer.cases.show' , compact('case'));
     }
 
@@ -115,43 +119,6 @@ class CaseController extends Controller
     }
 
 
-    /**
-     * Attach more Files (admin - client -agnet)
-     */
 
-    public function attachMoreFiles(Request $request , $id)
-    {
-        $request->validate(['attachments.*' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024']);
-        if(!$request->has('attachments'))
-        {
-            notify()->error('Something Went Wrong');
-            return redirect()->back();
-        }
-        $this->uplaodCaseAttachments($request->attachments , $id);
-        notify()->success('Files Uploaded Successfully');
-        return redirect()->back();
-    }//end  attachMoreFiles
-
-
-
-    /**
-     * Upload The Attachment of the case (storage  + db)
-     */
-    public function uplaodCaseAttachments($attachments , $caseId)
-    {
-        foreach($attachments as $file)
-        {
-            $path = 'public/uploads/cases/'.$caseId.'/';
-            $fileName = $file->getClientOriginalName();
-            $file->storeAs($path , $fileName);
-            CaseAttachment::create([
-                'ticket_id' => $caseId,
-                'user_id' => Auth::id(),
-                'is_forwarded_employer' => true,
-                'is_forwarded_employee' => false,
-                'name' => $fileName,
-            ]);
-        }
-    }//end uplaodCaseAttachments
 
 }

@@ -179,7 +179,6 @@ class ApplicationController extends Controller
                         ->withCount('notes')
                         ->orderByDesc('created_at')
                         ->simplePaginate(15);
-
         return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));
     }
 
