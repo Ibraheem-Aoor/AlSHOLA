@@ -91,8 +91,12 @@ use LaravelDaily\Invoices\Invoice;
 use App\Http\Livewire\Admin\Views\Cases\AllCases;
 use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
 use App\Http\Livewire\Admin\Views\Reports\AgentReport;
+use App\Http\Livewire\Admin\Views\Reports\CandidaateAgentWiseReport;
+use App\Http\Livewire\Admin\Views\Reports\CandidateStatusWiseReport;
+use App\Http\Livewire\Admin\Views\Reports\ClientReport;
 use App\Models\CaseAttachment;
 use Illuminate\Http\Request;
+use App\Http\Livewire\Admin\Views\Reports\CandidaateClientWiseReport;
 
 //prefix => admin
 
@@ -159,6 +163,14 @@ use Illuminate\Http\Request;
         {
 
             Route::get('/agents'  , AgentReport::class)->name('agents');
+            Route::get('/clients'  , ClientReport::class)->name('clients');
+            //Candidate Reports "Applications"
+            Route::group(['prefix' => 'applications' , 'as' => 'applications_'] , function()
+            {
+                Route::get('status' , CandidateStatusWiseReport::class)->name('status');
+                Route::get('agent' , CandidaateAgentWiseReport::class)->name('agent');
+                Route::get('' , CandidaateClientWiseReport::class)->name('client');
+            });
         });
 
 

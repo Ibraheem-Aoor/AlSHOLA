@@ -148,4 +148,9 @@ class User extends Authenticatable
         return $this->hasOne(IncomeGoal::class , 'broker_id');
     }
 
+
+    public function clientJobs()
+    {
+        return $this->hasMany(Job::class , 'user_id');
+    }
 }

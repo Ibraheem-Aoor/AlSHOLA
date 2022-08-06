@@ -14,10 +14,10 @@
                                 <div class="container mb-2">
                                     <div class="row">
                                         <div class="col-sm-6" wire:ignore>
-                                            <select id="select-state" multiple placeholder="select agents .."
-                                                autocomplete="off" wire:model.lazy="selectedAgents">
-                                                @forelse($agents as $agnet)
-                                                    <option value="{{ $agnet->id }}">{{ $agnet->name }}
+                                            <select id="select-state" multiple placeholder="select clients .."
+                                                autocomplete="off" wire:model.lazy="selectedClients">
+                                                @forelse($clients as $client)
+                                                    <option value="{{ $client->id }}">{{ $client->name }}
                                                     </option>
                                                 @empty
                                                 @endforelse
@@ -28,13 +28,13 @@
                                 <div class="table-stats order-table ov-h">
                                     <table class="table ">
                                         @php
-                                            $i = 0;
+                                            $j = 0;
                                         @endphp
-                                        @forelse($agents as $agent)
+                                        @forelse($clients as $client)
                                             <thead>
                                                 <tr>
                                                     <th class="serial">#</th>
-                                                    <th>Agent Name</th>
+                                                    <th>Client Name</th>
                                                     <th>Registration No</th>
                                                     <th>Country</th>
                                                     <th>Responsible Person</th>
@@ -44,25 +44,25 @@
                                             <tbody>
 
                                                 <tr>
-                                                    <td class="serial">{{ ++$i }}</td>
+                                                    <td class="serial">{{ ++$j }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.user.profile.show', $agent->id) }}">
-                                                            {{ $agent->name }}
+                                                        <a href="{{ route('admin.user.profile.show', $client->id) }}">
+                                                            {{ $client->name }}
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        {{ $agent->registration_No }}
+                                                        {{ $client->registration_No }}
                                                     </td>
                                                     <td>
-                                                        {{ $agent->country->name }}
+                                                        {{ $client->country->name }}
                                                     </td>
-                                                    <td>{{ $agent->responsible_person }}</td>
-                                                    <td>{{ $agent->mobile }}</td>
+                                                    <td>{{ $client->responsible_person }}</td>
+                                                    <td>{{ $client->mobile }}</td>
                                                 </tr>
-                                                @if (count($agent->applications) > 0 )
+                                                @if (count($client->clientJobs) > 0)
                                                     <tr style="background-color:lightgray">
                                                         <td>&nbsp;</td>
-                                                        <td>Client</td>
+                                                        <td>Agent</td>
                                                         <td>Title</td>
                                                         <td>Demand</td>
                                                         <td>Supply</td>
@@ -71,16 +71,31 @@
                                                     @php
                                                         $i = 0;
                                                     @endphp
-                                                    @forelse($agent->applications as $application)
-                                                        <td>&nbsp;</td>
-                                                        <td>{{ $application->job->user->name }}</td>
-                                                        <td>{{ $application->job->subJobs[$i++]?->title->name }}</td>
-                                                        <td>{{ $titleQty = $application->job->subJobs()->where('title_id', $application->title_id)->sum('quantity') }}
-                                                        </td>
-                                                        <td>{{ $agent->applications->where('title_id', 1)->count() }}
-                                                        </td>
-                                                        <td>{{ $titleQty - $agent->applications_count }}
-                                                        </td>
+                                                    @forelse($client->clientJobs as $job)
+                                                        @php
+                                                            $i = 0;
+                                                        @endphp
+                                                        @forelse($job->applications as $application)
+                                                            <td>&nbsp;</td>
+                                                            <td>{{ $application->user->name }}</td>
+                                                            <td>{{ $job->subJobs[$i++]?->title->name }}</td>
+                                                            <td>{{ $titleQty = $job->subJobs()->where('title_id', $application->title_id)->sum('quantity') }}
+                                                            </td>
+                                                            <td>{{ $appliedApplications = $job->applications->where('title_id', 1)->count() }}
+                                                            </td>
+                                                            <td>{{ $titleQty - $appliedApplications }}
+                                                            </td>
+                                                        @empty
+                                                            <tr>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                                <td>{{ $job->subJobs[$i++]?->title->name }}</td>
+                                                                <td>{{ $titleQty = $job->subJobs()->where('title_id', $application->title_id)->sum('quantity') }}
+                                                                </td>
+                                                                <td>0</td>
+                                                                <td>{{ $titleQty }}</td>
+                                                        @endforelse
+                                                        </tr>
                                                     @empty
                                                     @endforelse
                                                     <tr>
@@ -97,7 +112,7 @@
                                         @endforelse
                                         </tbody>
                                     </table>
-                                    {{ $agents->links() }}
+                                    {{ $clients->links() }}
                                 </div> <!-- /.table-stats -->
                             </div>
                         </div> <!-- /.card -->

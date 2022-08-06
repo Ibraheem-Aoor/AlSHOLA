@@ -174,16 +174,29 @@
               @endcan
 
 
-                {{-- <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="menu-icon fa fa-money"></i>Reports</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li>
-                            <a href="{{ route('reports.agents') }}">Agent Reports</a>
-                        </li>
-                    </ul>
-                </li> --}}
+
+              {{-- Start Reports --}}
+
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="menu-icon fa fa-money"></i>Reports</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li>
+                          <a href="{{ route('reports.agents') }}">Agent Reports</a>
+                      </li>
+                      <li>
+                          <a href="{{ route('reports.clients') }}">Client Reports</a>
+                      </li>
+                      <li>
+                          <a href="{{ route('reports.applications_status') }}">Candidate Status Reports</a>
+                      </li>
+                      <li>
+                          <a href="{{ route('reports.applications_client') }}">Candidate Client Reports</a>
+                      </li>
+                  </ul>
+              </li>
+              {{-- End Reports --}}
 
 
               {{-- History Recored --}}
