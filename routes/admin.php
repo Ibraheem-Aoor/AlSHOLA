@@ -67,6 +67,9 @@ use App\Http\Livewire\Admin\Veiws\Invoice\AllInvoices;
 use App\Http\Livewire\Admin\Views\Bank\AllCv;
 use App\Http\Livewire\Admin\Views\Bank\CvApply;
 use App\Http\Livewire\Admin\Views\Bank\NewCv;
+use App\Http\Livewire\Admin\Views\Broker\AllBrokers;
+use App\Http\Livewire\Admin\Views\Broker\AssignDemandToBroker;
+use App\Http\Livewire\Admin\Views\Broker\BrokerDetails;
 use App\Http\Livewire\Admin\Views\Invoice\SelectAgent;
 use App\Http\Livewire\Admin\Views\History\ApplicationHistory as HistoryApplicationHistory;
 use App\Http\Livewire\Admin\Views\History\AuthenticationHistory;
@@ -87,6 +90,7 @@ use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 use App\Http\Livewire\Admin\Views\Cases\AllCases;
 use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
+use App\Http\Livewire\Admin\Views\Reports\AgentReport;
 use App\Models\CaseAttachment;
 use Illuminate\Http\Request;
 
@@ -148,6 +152,14 @@ use Illuminate\Http\Request;
         Route::get('/invoices/all/' ,  InvoiceAllInvoices::class)->name('admin.invoice.all');
         Route::get('/invoice/prnt/{id}' , [ InvoiceHelper::class , 'printInvoice'])->name('admin.invoice.print');
         Route::post('/invoice/update' , [InvoiceHelper::class , 'updateInvoice'])->name(('admin.invoice.update'));
+
+
+        //Reports
+        Route::group(['prefix' => 'reports' , 'as' => 'reports.'] , function()
+        {
+
+            Route::get('/agents'  , AgentReport::class)->name('agents');
+        });
 
 
         // Cases
@@ -291,6 +303,18 @@ use Illuminate\Http\Request;
         Route::get('profile/{id}' , ProfileShowUserProfile::class)->name('admin.user.profile.show');
 
         /* Users Managment */
+
+
+
+        // Brokers
+
+        Route::group(['prefix' =>'broker' , 'as' => 'brokers.'] , function()
+        {
+            Route::get('all' , AllBrokers::class)->name('all');
+            Route::get('assign_to_dmeand/{id}' , AssignDemandToBroker::class)->name('assign');
+            Route::post('delete' , [AllBrokers::class , 'delete'])->name('delete');
+            Route::get('/{id}/details' , BrokerDetails::class)->name('details');
+        });
 
 
         //Applications Routes

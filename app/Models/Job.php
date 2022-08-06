@@ -44,7 +44,8 @@ class Job extends Model
         'user_id',
         'description',
         'sub_status_id' ,
-        'main_status_id'
+        'main_status_id',
+        'broker_id'
     ];
 
     public function users()
@@ -127,4 +128,16 @@ class Job extends Model
     {
         return $this->hasManyThrough(Ticket::class , Application::class);
     }
+
+    public function broker()
+    {
+        return $this->belongsTo(User::class , 'broker_id');
+    }
+
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
 }

@@ -32,7 +32,8 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-2">
-                                    <i class="pe-7s-cart"></i>
+                                    <i class="pe-7s-users"></i>
+
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -376,8 +377,8 @@
     </div>
 </div>
 @php
-    $jobsCount = Cache::get('adminData')['jobsCount'];
-    $applicationsCount = Cache::get('adminData')['applicationsCount'];
+$jobsCount = Cache::get('adminData')['jobsCount'];
+$applicationsCount = Cache::get('adminData')['applicationsCount'];
 @endphp
 @push('js')
     <script>
@@ -388,7 +389,7 @@
                 labels: ['Total Demands', 'Total Applications'],
                 datasets: [{
                     label: 'Avilable Jobs',
-                    data: [{{$jobsCount}}, {{$applicationsCount}}],
+                    data: [{{ $jobsCount }}, {{ $applicationsCount }}],
                     backgroundColor: [
                         'rgb(255, 205, 86)',
                         'rgb(54, 162, 235)',

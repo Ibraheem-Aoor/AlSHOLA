@@ -113,7 +113,7 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <input type="text" id="id" name="id">
+                                            <input type="hidden" id="id" name="id">
                                             <select id="" class="form-control" name="status" required>
                                                 <option value="" selected>--select status--</option>
                                                 <option value="Totaly Paid">Totaly Paid</option>

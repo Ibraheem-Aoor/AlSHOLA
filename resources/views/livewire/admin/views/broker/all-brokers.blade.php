@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'ALSHOALA|CV BANK')
+    @section('title', 'ALSHOALA| All Brokers')
     @push('css')
         <style>
             table tr td,
@@ -21,7 +21,7 @@
                                 @if (Session::has('success'))
                                     <div class="alert"></div>
                                 @endif
-                                <h4 class="box-title">All CV's</h4>
+                                <h4 class="box-title">All Brokers</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -29,74 +29,26 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>Ref</th>
-                                                <th>Full Name</th>
-                                                <th>Passport</th>
-                                                <th>Title</th>
-                                                <th>Status</th>
+                                                <th>Name</th>
+                                                <th>Total Target</th>
+                                                <th>Total Achived</th>
                                                 <th colspan="2">Actions</th>
-                                                <th>
-                                                    <a href="{{ route('admin.cv.new') }}" class="btn btn-success"><i
-                                                            class="fa fa-plus"></i> NEW</a>
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @php
                                                 $i = 1;
                                             @endphp
-                                            @forelse($applications as $application)
+                                            @forelse($brokers as $broker)
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
-                                                    <td>{{ $application->ref }}</td>
-                                                    <td>{{ $application->full_name }}</td>
-                                                    <td>{{ $application->passport_no }}</td>
-                                                    <td>{{ $application->title->name }}</td>
-                                                    <td>{{ $application->subStatus->name }}</td>
-                                                    {{-- <td>
-                                                        <a
-                                                            href="{{ route('admin.application.attachments.all', $application->id) }}">
-                                                            {{ $application->attachments_count }}
-                                                        </a>
-                                                    </td> --}}
-
+                                                    <td>{{ $broker->name }}</td>
+                                                    <td>{{ $broker->total_required_sales }}</td>
+                                                    <td>{{ $broker->total_achived }}</td>
 
                                                     <td colspan="2">
-                                                        @switch(isset($application->job_id) &&
-                                                            $application->job->subStatus->name)
-                                                            @case('Demand Under Proccess')
-                                                                @php
-                                                                    $title[$i] = 'Upload Medical/Agreement File(s)';
-                                                                    $file_type[$i] = 'medical/agreement';
-                                                                @endphp
-                                                            @break
-
-                                                            @default
-                                                                @php
-                                                                    $title[$i] = null;
-                                                                    $file_type[$i] = null;
-                                                                @endphp
-                                                        @endswitch
-                                                        <a href="{{ route('admin.application.details', $application->id) }}"
-                                                            style="width:15px;" title="show details">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                        <a style="width:15px;"
-                                                            title="Forward this application to Client"
-                                                            class="fa fa-location-arrow"
-                                                            href="{{ route('admin.cv.apply', $application->id) }}"></i>
-                                                        </a>
-                                                        @isset($file_type[$i])
-                                                            <a href="#exampleModal_5" data-title="{{ $title[$i] }}"
-                                                                data-toggle="modal" data-type="{{ $file_type[$i] }}"
-                                                                data-id="{{ $application->id }}">
-                                                                <i class="fa fa-upload"></i>
-                                                            </a>
-                                                        @endisset
-                                                        <a title="send note to agent" style="width:15px;"
-                                                            data-id="{{ $application->id }}" data-toggle="modal"
-                                                            href="#exampleModal_6"><i class="fa fa-trash"></i>
-                                                        </a>
+                                                        <a class="btn btn-outline-success" href="{{route('brokers.details' , $broker->id)}}"><i class="fa fa-eye"></i></a>
+                                                        <a class="btn btn-outline-danger" data-toggle="modal" data-id="{{$broker->id}}" href="#exampleModal_6"><i class="fa fa-trash"></i></a>
                                                     </td>
 
 
@@ -133,7 +85,7 @@
                                 @endforelse
                                 </tbody>
                                 </table>
-                                {{ $applications->links() }}
+                                {{ $brokers->links() }}
                             </div> <!-- /.table-stats -->
                         </div>
                     </div> <!-- /.card -->
@@ -202,7 +154,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.application.delete') }}" method="POST">
+                <form action="{{ route('brokers.delete') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" id="id" name="id">
@@ -270,3 +222,5 @@
     @endpush
     </div>
     </div>
+
+

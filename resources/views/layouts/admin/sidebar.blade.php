@@ -70,13 +70,13 @@
               @endcan
 
 
-                {{-- Cases --}}
+              {{-- Cases --}}
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
                       <i class="menu-icon fa fa-file-pdf-o"></i>Case Management</a>
                   <ul class="sub-menu children dropdown-menu">
-                      <li><i class="menu-icon fa fa-file-text"></i><a href="{{route('admin.cases.all')}}">All
+                      <li><i class="menu-icon fa fa-file-text"></i><a href="{{ route('admin.cases.all') }}">All
                               Cases</a></li>
                   </ul>
               </li>
@@ -134,6 +134,82 @@
                   </li>
               @endcan
 
+              {{-- Start Broker --}}
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="menu-icon fa fa-users"></i> Broker</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li>
+                          <i class="menu-icon fa fa-plus"></i>
+                          <a href="{{ route('brokers.all') }}"> All Brokers</a>
+                      </li>
+                      <li>
+                          <i class="menu-icon fa fa-bars"></i>
+                          <a href="{{ route('client.list') }}"> Client Mangament</a>
+                      </li>
+                  </ul>
+              </li>
+              {{-- End Broker --}}
+
+
+
+
+
+
+              {{-- Invoices And Reciepts --}}
+              @can('Invoices')
+                  <li class="menu-item-has-children dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          <i class="menu-icon fa fa-money"></i>Invoices</a>
+                      <ul class="sub-menu children dropdown-menu">
+                          <li>
+                              <a href="{{ route('admin.invoice.all') }}">All Invoices</a>
+                              {{-- <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
+                              <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a> --}}
+                          </li>
+                      </ul>
+                  </li>
+              @endcan
+
+
+              <li class="menu-item-has-children dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      <i class="menu-icon fa fa-money"></i>Reports</a>
+                  <ul class="sub-menu children dropdown-menu">
+                      <li>
+                          <a href="{{ route('reports.agents') }}">Agent Reports</a>
+                          {{-- <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
+                        <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a> --}}
+                      </li>
+                  </ul>
+              </li>
+
+
+              {{-- History Recored --}}
+              @can('History Recored')
+                  <li class="menu-item-has-children dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          <i class="menu-icon fa fa-history"></i>History Recored</a>
+                      <ul class="sub-menu children dropdown-menu">
+                          <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.history.demand') }}">Deamnd
+                                  Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.history.application') }}">Application Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.history.user') }}">User
+                                  Managament Recored</a></li>
+                          <li><i class="menu-icon fa fa-users"></i><a
+                                  href="{{ route('admin.history.auth') }}">Authentication Recored</a></li>
+                      </ul>
+                  </li>
+              @endcan
+
+
+
+
 
 
               {{-- Contact management --}}
@@ -153,22 +229,6 @@
                   </li>
               @endcan
 
-
-              {{-- Invoices And Reciepts --}}
-              @can('Invoices')
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          <i class="menu-icon fa fa-money"></i>Invoices</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li>
-                              <a href="{{ route('admin.invoice.all') }}">All Invoices</a>
-                              {{-- <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
-                              <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a> --}}
-                          </li>
-                      </ul>
-                  </li>
-              @endcan
 
 
               @can('Roels & Permessions')
@@ -190,27 +250,6 @@
                               <i class="fa fa-bars"></i>
                               <a href="{{ route('role.new-admin') }}">New Admin</a>
                           </li>
-                      </ul>
-                  </li>
-              @endcan
-
-
-
-              {{-- History Recored --}}
-              @can('History Recored')
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          <i class="menu-icon fa fa-history"></i>History Recored</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.history.demand') }}">Deamnd
-                                  Recored</a></li>
-                          <li><i class="menu-icon fa fa-users"></i><a
-                                  href="{{ route('admin.history.application') }}">Application Recored</a></li>
-                          <li><i class="menu-icon fa fa-users"></i><a href="{{ route('admin.history.user') }}">User
-                                  Managament Recored</a></li>
-                          <li><i class="menu-icon fa fa-users"></i><a
-                                  href="{{ route('admin.history.auth') }}">Authentication Recored</a></li>
                       </ul>
                   </li>
               @endcan

@@ -32,6 +32,9 @@ class User extends Authenticatable
         'mobile',
         'registration_No',
         'company_id',
+        'total_required_sales',
+        'total_achived',
+        'commission_rate',
     ];
 
     /**
@@ -75,7 +78,6 @@ class User extends Authenticatable
     {
         return $this->HasManyThrough(Note::class , Job::class);
     }
-
 
 
 
@@ -133,6 +135,17 @@ class User extends Authenticatable
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
+    }
+
+
+    public function brokerJobs()
+    {
+        return $this->hasMany(Job::class , 'broker_id');
+    }
+
+    public function brokerSalesGoal()
+    {
+        return $this->hasOne(IncomeGoal::class , 'broker_id');
     }
 
 }

@@ -204,7 +204,7 @@
                 <form action="{{ route('admin.application.delete') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input type="text" id="id" name="id">
+                        <input type="hidden" id="id" name="id">
                         Are you Sure about Delete Action?
                     </div>
                     <div class="modal-footer">

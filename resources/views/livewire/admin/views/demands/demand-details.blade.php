@@ -656,6 +656,9 @@
                                                 href="#exampleModal">
                                                 Send a Note </a>
 
+                                            <a href="{{route('brokers.assign' , $job->id)}}"
+                                                class="btn btn-secondary col-sm-12 mb-2">Assign To Broker</a>
+
                                             <a data-toggle="modal" href="#exampleModal_8"
                                                 class="btn btn-secondary col-sm-12 mb-2">Change Demand Status</a>
 
@@ -762,7 +765,7 @@
                         </div>
 
                         <!-- Change status modal Modal -->
-                        <div class="modal fade" id="exampleModal_8" tabindex="-1" wire:ignore
+                        {{-- <div class="modal fade" id="exampleModal_8" tabindex="-1" wire:ignore
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -809,6 +812,12 @@
                                 </div>
                             </div>
                         </div>
+ --}}
+
+
+
+
+
 
 
                         <!-- INVOICE Modal -->

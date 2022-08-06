@@ -113,7 +113,8 @@ class JobController extends Controller
 
             $job = Job::create(array_merge($request->except(['title' , 'sector' , 'salary' , 'quantity' , 'gender' , 'age_limit' , 'nationality']) ,
             [
-                'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()  , 'main_status_id'=> 1 , 'sub_status_id' => 1
+                'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()  , 'main_status_id'=> 1 , 'sub_status_id' => 1,
+                'broker_id' => null,
                 ]
             ));
             $this->createSubJobs($request->subJob , $job->id);

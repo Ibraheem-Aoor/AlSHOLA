@@ -67,6 +67,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); //represents the user.
             $table->index('user_id');
             $table->foreign('user_id')->references('id')->on('users')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('broker_id')->nullable(); //broker_id
             $table->timestamps();
         });
     }

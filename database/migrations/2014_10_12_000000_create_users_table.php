@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('type' , ['Agent' , 'Client' , 'Broker' , 'Personal' , 'Admin']);
             $table->enum('status' , ['blocked' , 'active'])->default('active');
+            $table->bigInteger('total_required_sales')->nullable(); //For Broker
+            $table->bigInteger('total_achived')->nullable(); //For Broker
+            $table->bigInteger('commission_rate')->nullable(); //For Broker
             $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
