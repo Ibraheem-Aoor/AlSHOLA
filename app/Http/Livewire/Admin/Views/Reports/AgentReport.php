@@ -11,7 +11,7 @@ class AgentReport extends Component
     public function getAgents()
     {
         return User::with(['applications.job' => function($q){
-            $q->with(['user' , 'subJobs.title:id,name']);
+            $q->with(['user' , 'subJobs']);
         }])->withCount('applications')->where('type' , 'Agent')->paginate(15);
     }
     public function render()

@@ -65,17 +65,16 @@
                                                     <td>Supply</td>
                                                     <td>Balance</td>
                                                 </tr>
-                                                @forelse($agent->applications as $application)
-                                                <td>&nbsp;</td>
-                                                        <td>{{ $application->job->user->name }}</td>
-                                                        <td>{{ $application->job->qty() }}</td>
-                                                        <td>{{ $agent->applications_count }}</td>
-                                                        <td>{{ $application->job->qty() - $agent->applications_count }}
-                                                        </td>
+                                                @forelse($agent->job->subJobs as $subJob)
+                                                    <td>&nbsp;</td>
+                                                    <td>{{ $application->job->user->name }}</td>
+                                                    <td>{{ $application->job->subJobs()->where('title_id' , $application->title_id)->count('quantity') }}</td>
+                                                    <td>{{ $agent->applications->where('title_id' , 1)->count() }}</td>
+                                                    <td>{{ $application->job->qty() - $agent->applications_count }}
+                                                    </td>
                                                 @empty
                                                 @endforelse
                                                 <tr>
-
                                                 </tr>
                                             @empty
                                                 <tr>

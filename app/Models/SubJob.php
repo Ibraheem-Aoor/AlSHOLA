@@ -28,4 +28,7 @@ class SubJob extends Model
         return $this->belongsTo(Nationality::class , 'nationality_id' , 'id');
     }
 
+
+    
+
 }

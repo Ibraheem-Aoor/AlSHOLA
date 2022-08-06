@@ -174,18 +174,16 @@
               @endcan
 
 
-              <li class="menu-item-has-children dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="menu-icon fa fa-money"></i>Reports</a>
-                  <ul class="sub-menu children dropdown-menu">
-                      <li>
-                          <a href="{{ route('reports.agents') }}">Agent Reports</a>
-                          {{-- <a href="{{ route('admin.invoice.all', 'Agent') }}">Agents Invoices</a>
-                        <a href="{{ route('roles.add', 'Client') }}">Clients Invoices</a> --}}
-                      </li>
-                  </ul>
-              </li>
+                {{-- <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="menu-icon fa fa-money"></i>Reports</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li>
+                            <a href="{{ route('reports.agents') }}">Agent Reports</a>
+                        </li>
+                    </ul>
+                </li> --}}
 
 
               {{-- History Recored --}}
