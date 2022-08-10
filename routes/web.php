@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('/job/filter/{status}' ,  [JobSeacrhController::class , 'filterJobsStatus'])->name('job.filter');
     Route::get('/job/filter' ,  [JobSeacrhController::class , 'searchJob'])->name('job.search');
     Route::get('/application/filter/{status}' ,  [ApplicationSearchController::class , 'filterApplicationsStatus'])->name('appliction.filter');
+    Route::get('/application/filter/substatus/{status}' ,  [ApplicationSearchController::class , 'filterApplicationsSubStatus'])->name('appliction.filter.sub_status');
     Route::get('/application/filter' ,  [ApplicationSearchController::class , 'searchApplication'])->name('application.search');
 
     //Agent Filters
@@ -128,7 +129,6 @@ Route::group(['middleware' => ['auth']], function()
 
 
 
-    // profile route regard the type of the user
     Route::resource('profile', ProfileController::class);
 
     Route::post('/job/attachment/upload' , [GeneralJobController::class , 'uploadJobAttachment'] )->name('job.attachment.upload');

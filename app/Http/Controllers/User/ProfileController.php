@@ -98,14 +98,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['name' => 'required|string' , 'email'=>'required|email|unique:users,email,'.$id , 'password' => 'nullable|string|min:8|confirmed']);
-        $user = User::findOrFail(Auth::id());
-        $user->update($request->only(['name' , 'email']));
-        if(isset($request->password))
-        {
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
+        $request->validate(['password' => 'required|string|min:8|confirmed']);
+        $data = $request->toArray();
+        $user = $this->getAuthUser();
+        $user->update([
+            'password' => Hash::make($data['password'])
+        ]);
         notify()->success('Personal Information Updated Successfully');
         return redirect()->back();
     }

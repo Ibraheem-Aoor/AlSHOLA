@@ -33,12 +33,18 @@ class EmployerApplicationsController extends Controller
     public function allForwardedApplications($id = null)
     {
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
-        $applications = Application::whereIn('job_id' , $jobIds)
+        $data['applications'] = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded' , true)
-                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
+                        ->with(['job' => function($job)
+                        {
+                            $job->select(['id' , 'post_nmber']);
+                            $job->with(['subJobs.title.sector' , 'subStatus']);
+                        },
+                            'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->withCount('attachments')
                         ->orderByDesc('created_at')
                         ->simplePaginate(15);
-        return view('user.employer.applications.all-applications' , compact('applications'));
+            $data['sub_statuses'] =  subStatus::all();
+        return view('user.employer.applications.all-applications' , $data);
     }//end mthod
 
 

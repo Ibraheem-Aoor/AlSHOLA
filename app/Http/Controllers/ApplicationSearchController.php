@@ -30,6 +30,26 @@ class ApplicationSearchController extends Controller
 
 
 
+    public function filterApplicationsSubStatus(Request $request , $status)
+    {
+        $user = $this->getAuthUser();
+        $jobIds = Job::whereBelongsTo($user)->pluck('id');
+        $applications = Application::whereIn('job_id' , $jobIds)
+                        ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
+                        ->whereHas('subStatus' , function($q) use($status)
+                        {
+                            $q->where('id' , $status);
+                        })
+                        ->simplePaginate(15);
+        return view('user.applications_table' , compact('applications'));
+    }//end method
+
+
+
+
+
+
+
     public function searchApplication(Request $request)
     {
         $search = $request->search;

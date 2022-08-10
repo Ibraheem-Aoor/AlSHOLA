@@ -29,24 +29,17 @@
 
                         <div class="col-sm-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control"  value="{{ Auth::user()->name }}"
-                                    name="name">
+                                <input type="text" class="form-control" readonly value="{{ Auth::user()->name }}">
                                 <label for="email"><i class="fa fa-user"></i> Name</label>
                             </div>
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" value="{{ Auth::user()->email }}"
+                                <input type="text" class="form-control" readonly value="{{ Auth::user()->email }}"
                                     name="email">
                                 <label for="email"><i class="fa fa-envelope"></i> E-mail</label>
                             </div>
-                            @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
 
                         <div class="col-sm-6">

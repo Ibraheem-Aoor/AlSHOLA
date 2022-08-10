@@ -19,7 +19,14 @@
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
-                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <select name="substatus_filter" class="form-control text-center">
+                        <option value="">-- Select One -- </option>
+                        @foreach ($sub_statuses as $sub_status)
+                            <option value="{{$sub_status->id}}">{{$sub_status->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-sm-4">
                     <form action="{{ route('application.search') }}" method="GET">
                         @csrf
@@ -64,7 +71,9 @@
                                                 href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>
                                         </td>
                                         <td>{{ $application->created_at }}</td>
-                                        @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled' || $application->job->subStatus->name != 'Demand Complete')
+                                        @if (($application->subStatus->name != 'Cancelled Application' &&
+                                            $application->job->subStatus->name != 'Demand Cancelled') ||
+                                            $application->job->subStatus->name != 'Demand Complete')
                                             <td>
                                                 <a href="{{ route('employer.application.details', $application->id) }}"
                                                     class="badge bg-warning" title="show details">
@@ -199,6 +208,27 @@
                     if (status) {
                         $.ajax({
                             url: "{{ URL::to('application/filter') }}/" + status,
+                            type: "GET",
+                            // dataType: "json",
+                            success: function(data) {
+                                $('#applications_table').html(data);
+                            },
+                        });
+
+                    } else {
+                        console.log('AJAX load did not work');
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('select[name="substatus_filter"]').on('change', function() {
+                    // alert('testing');
+                    var status = $(this).val();
+                    if (status) {
+                        $.ajax({
+                            url: "{{ URL::to('application/filter/substatus') }}/" + status,
                             type: "GET",
                             // dataType: "json",
                             success: function(data) {
