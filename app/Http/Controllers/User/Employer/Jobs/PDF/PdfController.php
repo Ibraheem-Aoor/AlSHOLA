@@ -10,15 +10,19 @@ use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PdfController extends Controller
 {
     public function generateJobPDF($id)
     {
+        $user = $this->getAuthUser();
         $job = Job::with(['subJobs.title.sector' , 'subJobs.nationality', 'user' , 'attachments' , 'terms' , 'subStatus'])
                 ->findOrFail($id);
         $data = [
             'job' => $job,
+            'is_agent' => $user->type == 'Agent',
+            'has_terms' => $job->terms()->count() > 0,
         ];
         $pdf = FacadePdf::loadView('user.employer.jobs.pdf.job-pdf', $data);
         $pdf->setPaper('A4');

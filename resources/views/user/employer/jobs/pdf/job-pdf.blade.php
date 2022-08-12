@@ -78,7 +78,7 @@
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
     <h3>Demand for Recruitment</h3>
-    <div class="parent" >
+    <div class="parent">
         <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
             <p>
                 Client Name: {{ $job->user->name }}
@@ -228,59 +228,65 @@
 
     </table>
     @isset($job->description)
-        <div style="margin-top: 20px; font-weight: 400;" >
+        <div style="margin-top: 20px; font-weight: 400;">
             <label for="">Description:</label>
-            <p>{{$job->description}}</p>
+            <p>{{ $job->description }}</p>
         </div>
     @endisset
 
-    @if ($job->terms()->count() > 0 && Auth::user()->type == 'Agent')
-        <div style="border:1px solid black; margin-top:5px; padding:5px;">
-            <h3>Supply Terms & Conditions:</h3>
-            <table>
-                <tr>
-                    <th>Title</th>
-                    <th>Service_Charge</th>
-                </tr>
-                @foreach ($job->terms->where('user_id', Auth::id()) as $term)
+
+    @if ($is_agent)
+        @if ($has_terms)
+            <div style="border:1px solid black; margin-top:5px; padding:5px;">
+                <h3>Supply Terms & Conditions:</h3>
+                <table>
                     <tr>
-                        <td>{{ $term->title }}</td>
-                        <td>{{ $term->serivce_charge . ' (' . $term->currency . ' )' }}</td>
-                        <td>{{ 'Per ' . $term->per }}</td>
+                        <th>Title</th>
+                        <th>Service_Charge</th>
                     </tr>
-                @endforeach
-            </table>
+                    @foreach ($job->terms->where('user_id', Auth::id()) as $term)
+                        <tr>
+                            <td>{{ $term->title }}</td>
+                            <td>{{ $term->serivce_charge . ' (' . $term->currency . ' )' }}</td>
+                            <td>{{ 'Per ' . $term->per }}</td>
+                        </tr>
+                    @endforeach
+                </table>
 
-            <ul style="font-size: 9px;">
-                <li>Agent Confirm the Demand accepted or Rejected within
-                    {{ $job->terms->first()->acceptence_duration }} Day</li>
-                <li>Agent Submit the candidate CV's within {{ $job->terms->first()->submission_duration }} Days from
-                    receiving the signature of the demand </li>
-                <li> A {{ $job->terms->first()->completion_duration }} day total duration is expected for demand till
-                    complete.</li>
-                <li>{{ $job->terms->first()->pay_from }}
-                    {{ $job->terms->first()->pay_from == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }} will
-                    pay to {{ $job->terms->first()->pay_to }}
-                    {{ $job->terms->first()->pay_to == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }}the
-                    Service Charge {{$job->terms->first()->after_before}} candidate arrival
-                    date.
-                </li>
-            </ul>
+                <ul style="font-size: 9px;">
+                    <li>Agent Confirm the Demand accepted or Rejected within
+                        {{ $job->terms->first()->acceptence_duration }} Day</li>
+                    <li>Agent Submit the candidate CV's within {{ $job->terms->first()->submission_duration }} Days
+                        from
+                        receiving the signature of the demand </li>
+                    <li> A {{ $job->terms->first()->completion_duration }} day total duration is expected for demand
+                        till
+                        complete.</li>
+                    <li>{{ $job->terms->first()->pay_from }}
+                        {{ $job->terms->first()->pay_from == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }}
+                        will
+                        pay to {{ $job->terms->first()->pay_to }}
+                        {{ $job->terms->first()->pay_to == 'Alshoala' ? ' Recruitment Services W. L. L. ' : '' }}the
+                        Service Charge {{ $job->terms->first()->after_before }} candidate arrival
+                        date.
+                    </li>
+                </ul>
 
-            <footer style="font-size: 8 px;">
-                <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
-                <div class="parent">
-                    <div class="child">
-                        <p> Abdulla Ali Al Shoala</p>
-                        <p>General Manager</p>
+                <footer style="font-size: 8 px;">
+                    <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
+                    <div class="parent">
+                        <div class="child">
+                            <p> Abdulla Ali Al Shoala</p>
+                            <p>General Manager</p>
+                        </div>
+                        <div class="child">
+                            <p>Agent Accept the demand terms</p>
+                            <p>Signature & Stamp</p>
+                        </div>
                     </div>
-                    <div class="child">
-                        <p>Agent Accept the demand terms</p>
-                        <p>Signature & Stamp</p>
-                    </div>
-                </div>
-            </footer>
-        </div>
+                </footer>
+            </div>
+        @endif
     @endif
 
 </body>

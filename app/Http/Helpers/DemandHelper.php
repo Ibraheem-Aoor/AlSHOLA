@@ -61,7 +61,7 @@ class DemandHelper
     public function deleteOldTerms($job)
     {
         $job->terms()->delete();
-    }
+    }//End deleteOldTerms
 
     public function saveJobTerms($request , $job)
     {
@@ -83,7 +83,7 @@ class DemandHelper
             ]);
             $demand->save();
         }
-    }//end method
+    }//End saveJobTerms
 
 
     //This method send the job post to talent using many to many relationship
@@ -91,9 +91,10 @@ class DemandHelper
     {
         $agent = User::findOrFail($agentId);
         if($agent->hasJob($job))
-            {
-                session()->flash('warning' , 'The Job is Already Sent to the Agent');
-            }
+        {
+            notify()->error('The Job is Already Sent to the Agent');
+            return back();
+        }
         DB::table('job_user')->insert([
             'user_id' => $agent->id,
             'job_id' => $job->id,
@@ -184,13 +185,13 @@ class DemandHelper
 
         // otherwise, it's valid and can be used
         return $number;
-    }
+    }//End generateInvoiceNumber
 
     function applicationRefExists($number) {
         // query the database and return a boolean
         // for instance, it might look like this in Laravel
         return Application::where('ref' , $number)->exists();
-    }//end method
+    }//End applicationRefExists
 
 
 
@@ -200,7 +201,7 @@ class DemandHelper
     public function getSubStatuses($id)
     {
         return JobSubStatus::where('job_main_status_id' , $id)->get();
-    }
+    }//End getSubStatuses
 
     /**
      * Change Demand Status (main status and sub status)
@@ -230,7 +231,7 @@ class DemandHelper
         Artisan::call('cache:clear');
         notify()->success('Demand status changed Successfully');
         return redirect()->back();
-    }
+    }//End postChangeDemandStatus
 
 
 

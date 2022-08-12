@@ -656,7 +656,7 @@
                                                 href="#exampleModal">
                                                 Send a Note </a>
 
-                                            <a href="{{route('brokers.assign' , $job->id)}}"
+                                            <a href="{{ route('brokers.assign', $job->id) }}"
                                                 class="btn btn-secondary col-sm-12 mb-2">Assign To Broker</a>
 
                                             <a data-toggle="modal" href="#exampleModal_8"
@@ -765,7 +765,7 @@
                         </div>
 
                         <!-- Change status modal Modal -->
-                        {{-- <div class="modal fade" id="exampleModal_8" tabindex="-1" wire:ignore
+                        <div class="modal fade" id="exampleModal_8" tabindex="-1" wire:ignore
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -777,8 +777,7 @@
                                         </button>
                                     </div>
 
-                                    <form method="POST"
-                                        action="{{ route('admin.demand.chane-status', $job->id) }}">
+                                    <form method="POST" action="{{ route('admin.demand.chane-status', $job->id) }}">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
@@ -812,7 +811,7 @@
                                 </div>
                             </div>
                         </div>
- --}}
+
 
 
 

@@ -132,9 +132,9 @@
                                                     <th>Per</th>
                                                     <th>
                                                         <select name="currency" id="cs"
-                                                            class="form-control text-center" style="width:50%;"
+                                                            class="form-control text-center" 
                                                             required>
-                                                            <option value=""> -- choose currency -- </option>
+                                                            <option value=""> -- currency -- </option>
                                                             @foreach ($currencies as $currency)
                                                                 <option value="{{ $currency->key }}">
                                                                     {{ $currency->key }}</option>
