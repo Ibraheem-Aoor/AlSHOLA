@@ -33,27 +33,55 @@
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
                 <div class="row gy-5 gx-4">
-                    <div class="col-lg-8">
-                        <div class="d-flex align-items-center mb-5">
-                            <img class="flex-shrink-0 img-fluid  rounded"
-                                src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" alt="">
+                    <div class="col-lg-12">
+                        {{-- <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 d-flex align-items-center mb-5">
+                                    <img class="flex-shrink-0 img-fluid  rounded"
+                                        src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%"
+                                        alt="">
 
-                            {{-- <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt=""
-                            style="width: 80px; height: 80px;"> --}}
-                            <div class="text-start ps-4 mt-10">
-                                {{-- <h3 class="mb-3">{{ $job->SubJobs->first()->title->name }}</h3> --}}
-                                <ul>
-                                    @forelse ($errors->all() as $error)
-                                        <li>
-                                            <span class="text-truncate me-0 text-danger">
-                                                {{ $error }}
-                                            </span>
-                                        </li>
-                                    @empty
-                                    @endforelse
-                                </ul>
+                                    <div class="text-start ps-4 mt-10">
+                                        <ul>
+                                            @forelse ($errors->all() as $error)
+                                                <li>
+                                                    <span class="text-truncate me-0 text-danger">
+                                                        {{ $error }}
+                                                    </span>
+                                                </li>
+                                            @empty
+                                            @endforelse
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="col-lg-4">
+                                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                                            <label class="mb-4">Job Summery</label>
+                                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Published On:
+                                                {{ $job->created_at }}
+                                            </p>
+                                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Hours:
+                                                {{ $job->working_hours }}
+                                            </p>
+                                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Days:
+                                                {{ $job->working_days }}
+                                            </p>
+                                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary:
+                                                {{ $job->salary . ' ( ' . $job->currency . ' )' }}
+                                            </p>
+                                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>OFF Day:
+                                                {{ $job->off_day }}</p>
+                                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Quantiy:
+                                                {{ $job->quantity }}</p>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div> --}}
+
+
 
                         <div class="mb-5">
                             <div class="container">
@@ -101,7 +129,7 @@
                                                     </div>
                                                 </td>
 
-                                                <td>
+                                                <td colspan="2">
                                                     <div class=>
                                                         <label>Full Name:</label>
                                                         <input required type="text" name="full_name" class="form-control"
@@ -112,7 +140,7 @@
                                                     </div>
                                                 </td>
 
-                                                <td>
+                                                <td colspan="2">
                                                     <div class=>
                                                         <label>Father Name:</label>
                                                         <input required type="text" name="father_name"
@@ -143,6 +171,106 @@
                                                         <input required type="text" name="contact_no"
                                                             class="form-control" value="{{ old('contact_no') }}">
                                                         @error('contact_no')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+
+
+                                                <td>
+                                                    <div>
+                                                        <label>Relegion:</label>
+                                                        <select name="relegion" class="form-control">
+                                                            <option value="" selected>--select one --</option>
+                                                            <option value="Muslim"
+                                                                @if (old('relegion') == 'Muslim') selected @endif>
+                                                                Muslim
+                                                            </option>
+                                                            <option value="Christian"
+                                                                @if (old('relegion') == 'Christian') selected @endif>
+                                                                Christian
+                                                            </option>
+                                                            <option value="Hindu"
+                                                                @if (old('relegion') == 'Hindu') selected @endif>
+                                                                Hindu
+                                                            </option>
+                                                            <option value="Buddhist"
+                                                                @if (old('relegion') == 'Buddhist') selected @endif>
+                                                                Buddhist
+                                                            </option>
+                                                            <option value="other"
+                                                                @if (old('relegion') == 'other') selected @endif>
+                                                                other
+                                                            </option>
+                                                        </select>
+                                                        @error('relegion')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div>
+                                                        <label>sex:</label>
+                                                        <select required name="sex" class="form-control">
+                                                            <option value="">-- select one --</option>
+                                                            <option value="male"
+                                                                @if (old('sex') == 'male') {{ 'selected' }} @endif>
+                                                                Male
+                                                            </option>
+                                                            <option value="female"
+                                                                @if (old('sex') == 'female') {{ 'selected' }} @endif>
+                                                                Female
+                                                            </option>
+                                                        </select>
+                                                        @error('sex')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div>
+                                                        <label>place_of_birth:</label>
+                                                        <input required type="text" name="place_of_birth"
+                                                            class="form-control" value="{{ old('place_of_birth') }}">
+                                                        @error('place_of_birth')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+
+
+                                                <td>
+                                                    <div>
+                                                        <label>Date Of Birth:</label>
+                                                        <input required type="date" name="date_of_birth"
+                                                            class="form-control" value="{{ old('date_of_birth') }}">
+                                                        @error('date_of_birth')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <label>Age:</label>
+                                                        <input required type="number" name="age" class="form-control"
+                                                            readonly value="{{ old('age') }}">
+                                                        @error('age')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <label>Expiry Issued:</label>
+                                                        <input required type="date" name="expiry_issued"
+                                                            class="form-control" value="{{ old('expiry_issued') }}">
+                                                        @error('expiry_issued')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -200,88 +328,7 @@
                                                     </div>
                                                 </td>
 
-                                                <td>
-                                                    <div>
-                                                        <label>Date Of Birth:</label>
-                                                        <input required type="date" name="date_of_birth"
-                                                            class="form-control" value="{{ old('date_of_birth') }}">
-                                                        @error('date_of_birth')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
-                                            </tr>
 
-
-                                            <tr>
-                                                <td>
-                                                    <div>
-                                                        <label>Expiry Issued:</label>
-                                                        <input required type="date" name="expiry_issued"
-                                                            class="form-control" value="{{ old('expiry_issued') }}">
-                                                        @error('expiry_issued')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
-
-                                                <td>
-                                                    <div>
-                                                        <label>Age:</label>
-                                                        <input required type="number" name="age" class="form-control"
-                                                            readonly value="{{ old('age') }}">
-                                                        @error('age')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
-
-                                                <td>
-                                                    <div>
-                                                        <label>Relegion:</label>
-                                                        <select name="relegion" class="form-control">
-                                                            <option value="" selected>--select one --</option>
-                                                            <option value="Muslim"
-                                                                @if (old('relegion') == 'Muslim') selected @endif>Muslim
-                                                            </option>
-                                                            <option value="Christian"
-                                                                @if (old('relegion') == 'Christian') selected @endif>Christian
-                                                            </option>
-                                                            <option value="Hindu"
-                                                                @if (old('relegion') == 'Hindu') selected @endif>Hindu
-                                                            </option>
-                                                            <option value="Buddhist"
-                                                                @if (old('relegion') == 'Buddhist') selected @endif>Buddhist
-                                                            </option>
-                                                            <option value="other"
-                                                                @if (old('relegion') == 'other') selected @endif>other
-                                                            </option>
-                                                        </select>
-                                                        @error('relegion')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
-
-                                                <td>
-                                                    <div>
-                                                        <label>sex:</label>
-                                                        <select required name="sex" class="form-control">
-                                                            <option value="">-- select one --</option>
-                                                            <option value="male"
-                                                                @if (old('sex') == 'male') {{ 'selected' }} @endif>
-                                                                Male
-                                                            </option>
-                                                            <option value="female"
-                                                                @if (old('sex') == 'female') {{ 'selected' }} @endif>
-                                                                Female
-                                                            </option>
-                                                        </select>
-                                                        @error('sex')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
 
                                                 <td>
                                                     <div>
@@ -321,22 +368,13 @@
                                                         @enderror
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <div>
-                                                        <label>place_of_birth:</label>
-                                                        <input required type="text" name="place_of_birth"
-                                                            class="form-control" value="{{ old('place_of_birth') }}">
-                                                        @error('place_of_birth')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
+
 
                                                 <td>
                                                     <div>
                                                         <label>Employer Photo:</label>
                                                         <input type="file" required class="form-control"
-                                                            name="photo" id="photo" value="{{old('photo')}}">
+                                                            name="photo" id="photo" value="{{ old('photo') }}">
                                                         @error('weihgt')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -604,7 +642,8 @@
                                                             placeholder="Enter country" class="form-control" />
                                                     </td>
                                                     <td><button type="button" name="add" id="dynamic-edu-ar"
-                                                            class="btn btn-outline-primary btn-sm">Add</button></td>
+                                                            class="btn btn-outline-primary btn-sm">Add</button>
+                                                    </td>
                                                 </tr>
                                             </table>
                                             @error('addMoreEducationRecords')
@@ -642,7 +681,8 @@
                                                             placeholder="Enter Dseignation" class="form-control" />
                                                     </td>
                                                     <td><button type="button" name="add" id="dynamic-ar"
-                                                            class="btn btn-outline-primary btn-sm">Add</button></td>
+                                                            class="btn btn-outline-primary btn-sm">Add</button>
+                                                    </td>
                                                 </tr>
                                             </table>
                                             <div>
@@ -716,28 +756,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
-                            <label class="mb-4">Job Summery</label>
-                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Published On:
-                                {{ $job->created_at }}
-                            </p>
-                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Hours:
-                                {{ $job->working_hours }}
-                            </p>
-                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Working Days:
-                                {{ $job->working_days }}
-                            </p>
-                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Salary:
-                                {{ $job->salary . ' ( ' . $job->currency . ' )' }}
-                            </p>
-                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>OFF Day:
-                                {{ $job->off_day }}</p>
-                            <p><i class="fa &nbsp;&nbsp;fa-angle-right text-primary me-2"></i>Quantiy:
-                                {{ $job->quantity }}</p>
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -812,5 +831,10 @@
             }
             return age;
         }
+
+        $(document).ready(function()
+        {
+            $('select').addClass('text-center');
+        });
     </script>
 @endpush

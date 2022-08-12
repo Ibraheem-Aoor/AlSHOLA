@@ -35,12 +35,10 @@ class EmployerApplicationsController extends Controller
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $data['applications'] = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded' , true)
-                        ->with(['job' => function($job)
-                        {
-                            $job->select(['id' , 'post_nmber']);
+                        ->with(['job' => function($job){
                             $job->with(['subJobs.title.sector' , 'subStatus']);
                         },
-                            'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->withCount('attachments')
+                            'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus' ])->withCount('attachments')
                         ->orderByDesc('created_at')
                         ->simplePaginate(15);
             $data['sub_statuses'] =  subStatus::all();
@@ -233,7 +231,7 @@ class EmployerApplicationsController extends Controller
 
     public function getDetails($id)
     {
-        $application = Application::with(['job:id,post_number' , 'employers' , 'user' ,  'subStatus' , 'title.sector', 'attachments' ,'educations' , 'job.subStatus']   )->with('job.subJobs.title.sector')->findOrFail($id);
+        $application = Application::with(['job:id,post_number' , 'employers' , 'user' ,  'subStatus' , 'title.sector', 'attachments' ,'educations' , 'job.subStatus' , 'nationality']   )->with('job.subJobs.title.sector')->findOrFail($id);
         $totalExperince = Employer::whereApplicationId($application->id)->sum('duration');
         return view('user.employer.applications.application-details' , compact('application'  , 'totalExperince'));
     }//end

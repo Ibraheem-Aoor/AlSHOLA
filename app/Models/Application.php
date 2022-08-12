@@ -91,4 +91,9 @@ class Application extends Model
     {
         return $this->hasOne(Ticket::class);
     }
+
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class , 'nationality' , 'id');
+    }
 }

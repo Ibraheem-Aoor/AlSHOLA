@@ -108,7 +108,7 @@
                                                                         @php
                                                                             $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
                                                                         @endphp
-                                                                        <img src="{{asset('uploads/applications/' . $application->id . '/attachments' . '/' . $photo)}}"
+                                                                        <img src="{{asset(public_path('storage/uploads/applications').'/'.$application->id . '/attachments' . '/' . $photo)}}"
                                                                             width="200" height="200"
                                                                             style="margin-left:70%;border: 1px solid black;">
                                                                     </div>
@@ -144,7 +144,7 @@
                                                                                     {{ $application->passport_no }}
                                                                                 </td>
                                                                                 <th>Nationality:
-                                                                                    {{ $application->nationlaity ?? 'UNKOWN' }}
+                                                                                    {{ $application->nationality()->first()->name  }}
                                                                                 </th>
 
                                                                             </tr>
@@ -195,13 +195,13 @@
                                                                             <tr>
                                                                                 <td>sex: {{ $application->sex }}</td>
                                                                                 <td>status:
-                                                                                    {{ $application->status }}</td>
+                                                                                    {{ $application->subStatus->name }}</td>
                                                                                 <td>children:
                                                                                     {{ $application->children }}</td>
                                                                                 <td>height:
                                                                                     {{ $application->height }}</td>
                                                                                 <td>weight:
-                                                                                    {{ $application->weight }}</td>
+                                                                                    {{ $application->weihgt }}</td>
                                                                             </tr>
 
                                                                         </table>
