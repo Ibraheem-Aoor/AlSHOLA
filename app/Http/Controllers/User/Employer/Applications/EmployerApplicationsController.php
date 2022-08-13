@@ -53,13 +53,15 @@ class EmployerApplicationsController extends Controller
     {
         $job = Job::findOrFail($id);
         $user = User::findOrFail(Auth::id());
-        $applications  = Application::whereJobId($id)
+        $data['applications']  = Application::whereJobId($id)
                         ->where('forwarded' , true)
                         ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus' , 'attachments' ])
                         ->withCount('attachments')
                         ->with(['job.subJobs' , 'job.subStatus'])
                         ->simplePaginate(15);
-        return view('user.employer.applications.all-applications' , compact('applications'));
+        $data['sub_statuses'] =  subStatus::all();
+
+        return view('user.employer.applications.all-applications' , $data);
     }//end method
 
     public function allMedicalApplications()
