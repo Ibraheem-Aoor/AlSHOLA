@@ -75,7 +75,7 @@
             <td>{{ $application->job->created_at }}</td>
         </tr>
     </table> --}}
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
+    <img src="{{Storage::url('public/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo)}}" width="10%" style="margin-left:50%;">
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
         <div style="background: #f7ff9c" class="child" style="font-weight: 500;">

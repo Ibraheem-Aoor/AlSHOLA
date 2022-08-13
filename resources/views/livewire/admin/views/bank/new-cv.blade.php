@@ -8,20 +8,20 @@
             }
 
             /* .form-control {
-                display: block !important;
-                width: 90% !important;
-                padding: 0.400rem 0.80rem !important;
-                font-size: 0.6rem !important;
-                font-weight: 400 !important;
-                line-height: 1 !important;
-                color: #666565 !important;
-                background-color: #fff !important;
-                background-clip: padding-box !important;
-                border: 1px solid #ced4da !important;
-                appearance: none !important;
-                border-radius: 2px !important;
-                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
-            } */
+                    display: block !important;
+                    width: 90% !important;
+                    padding: 0.400rem 0.80rem !important;
+                    font-size: 0.6rem !important;
+                    font-weight: 400 !important;
+                    line-height: 1 !important;
+                    color: #666565 !important;
+                    background-color: #fff !important;
+                    background-clip: padding-box !important;
+                    border: 1px solid #ced4da !important;
+                    appearance: none !important;
+                    border-radius: 2px !important;
+                    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+                } */
 
             body {
                 height: 30vh !important;
@@ -124,8 +124,8 @@
                                             <td colspan="6">
                                                 <div>
                                                     <label>address:</label>
-                                                    <textarea required type="text" name="address" class="form-control"
-                                                    >{{ old('address') }}</textarea>
+                                                    <input required type="text" name="address" class="form-control"
+                                                        value="{{ old('address') }}">
                                                     @error('address')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror

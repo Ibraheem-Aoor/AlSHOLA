@@ -156,7 +156,7 @@
                                                 <td colspan="6">
                                                     <div>
                                                         <label>address:</label>
-                                                        <textarea required type="text" name="address" class="form-control">{{ old('address') }}</textarea>
+                                                        <input required type="text" name="address" class="form-control" value="{{ old('address') }}">
                                                         @error('address')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
