@@ -37,7 +37,8 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" wire:model="search" placeholder="search...">
+                                        <input type="text" class="form-control" wire:model="search"
+                                            placeholder="search...">
                                     </div>
                                 </div>
                             </div>
@@ -64,14 +65,15 @@
                                                 $i = 1;
                                             @endphp
                                             @forelse($applications as $application)
-                                                <tr>
-                                                    <td class="serial">{{ $i++ }}</td>
-                                                    <td>{{ $application->ref }}</td>
-                                                    <td>{{ $application->full_name }}</td>
-                                                    <td>{{ $application->passport_no }}</td>
-                                                    <td>{{ $application->title->name }}</td>
-                                                    <td>{{ $application->subStatus->name }}</td>
-                                                    {{-- <td>
+                                                @if ($application->user_id == Auth::id())
+                                                    <tr>
+                                                        <td class="serial">{{ $i++ }}</td>
+                                                        <td>{{ $application->ref }}</td>
+                                                        <td>{{ $application->full_name }}</td>
+                                                        <td>{{ $application->passport_no }}</td>
+                                                        <td>{{ $application->title->name }}</td>
+                                                        <td>{{ $application->subStatus->name }}</td>
+                                                        {{-- <td>
                                                         <a
                                                             href="{{ route('admin.application.attachments.all', $application->id) }}">
                                                             {{ $application->attachments_count }}
@@ -79,50 +81,50 @@
                                                     </td> --}}
 
 
-                                                    <td colspan="2">
-                                                        @switch(isset($application->job_id) &&
-                                                            $application->job->subStatus->name)
-                                                            @case('Demand Under Proccess')
-                                                                @php
-                                                                    $title[$i] = 'Upload Medical/Agreement File(s)';
-                                                                    $file_type[$i] = 'medical/agreement';
-                                                                @endphp
-                                                            @break
+                                                        <td colspan="2">
+                                                            @switch(isset($application->job_id) &&
+                                                                $application->job->subStatus->name)
+                                                                @case('Demand Under Proccess')
+                                                                    @php
+                                                                        $title[$i] = 'Upload Medical/Agreement File(s)';
+                                                                        $file_type[$i] = 'medical/agreement';
+                                                                    @endphp
+                                                                @break
 
-                                                            @default
-                                                                @php
-                                                                    $title[$i] = null;
-                                                                    $file_type[$i] = null;
-                                                                @endphp
-                                                        @endswitch
-                                                        <a href="{{ route('admin.application.details', $application->id) }}"
-                                                            style="width:15px;" title="show details">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                        <a style="width:15px;"
-                                                            title="Forward this application to Client"
-                                                            class="fa fa-location-arrow"
-                                                            href="{{ route('admin.cv.apply', $application->id) }}"></i>
-                                                        </a>
-                                                        @isset($file_type[$i])
-                                                            <a href="#exampleModal_5" data-title="{{ $title[$i] }}"
-                                                                data-toggle="modal" data-type="{{ $file_type[$i] }}"
-                                                                data-id="{{ $application->id }}">
-                                                                <i class="fa fa-upload"></i>
+                                                                @default
+                                                                    @php
+                                                                        $title[$i] = null;
+                                                                        $file_type[$i] = null;
+                                                                    @endphp
+                                                            @endswitch
+                                                            <a href="{{ route('admin.application.details', $application->id) }}"
+                                                                style="width:15px;" title="show details">
+                                                                <i class="fa fa-eye"></i>
                                                             </a>
-                                                        @endisset
-                                                        <a title="send note to agent" style="width:15px;"
-                                                            data-id="{{ $application->id }}" data-toggle="modal"
-                                                            href="#exampleModal_6"><i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </td>
+                                                            <a style="width:15px;"
+                                                                title="Forward this application to Client"
+                                                                class="fa fa-location-arrow"
+                                                                href="{{ route('admin.cv.apply', $application->id) }}"></i>
+                                                            </a>
+                                                            @isset($file_type[$i])
+                                                                <a href="#exampleModal_5" data-title="{{ $title[$i] }}"
+                                                                    data-toggle="modal" data-type="{{ $file_type[$i] }}"
+                                                                    data-id="{{ $application->id }}">
+                                                                    <i class="fa fa-upload"></i>
+                                                                </a>
+                                                            @endisset
+                                                            <a title="send note to agent" style="width:15px;"
+                                                                data-id="{{ $application->id }}" data-toggle="modal"
+                                                                href="#exampleModal_6"><i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </td>
 
 
 
 
 
-                                                </tr>
-
+                                                    </tr>
+                                                @endif
                                 </div>
                             </div>
 
