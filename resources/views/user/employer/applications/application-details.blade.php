@@ -108,7 +108,7 @@
                                                                         @php
                                                                             $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
                                                                         @endphp
-                                                                        <img src="{{asset(url('storage/uploads/applications'.'/'.$application->id . '/attachments' . '/' . $photo))}}"
+                                                                        <img src="{{ asset(url('storage/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo)) }}"
                                                                             width="200" height="200"
                                                                             style="margin-left:70%;border: 1px solid black;">
                                                                     </div>
@@ -144,7 +144,7 @@
                                                                                     {{ $application->passport_no }}
                                                                                 </td>
                                                                                 <th>Nationality:
-                                                                                    {{ $application->nationality()->first()->name  }}
+                                                                                    {{ $application->nationality()->first()->name }}
                                                                                 </th>
 
                                                                             </tr>
@@ -195,7 +195,8 @@
                                                                             <tr>
                                                                                 <td>sex: {{ $application->sex }}</td>
                                                                                 <td>status:
-                                                                                    {{ $application->subStatus->name }}</td>
+                                                                                    {{ $application->subStatus->name }}
+                                                                                </td>
                                                                                 <td>children:
                                                                                     {{ $application->children }}</td>
                                                                                 <td>height:
@@ -619,7 +620,7 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal_6" tabindex="-1" wire:ignore
+            <div class="modal fade" id="exampleModal_6" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -677,7 +678,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Refuse The Offer</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Refuse Application</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -687,8 +688,8 @@
                                 <textarea class="form-control" id="reason" name="reason" required placeholder="Tell Us The Resaon"></textarea>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
@@ -700,71 +701,70 @@
         </div>
     </div>
 
-    @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+</div>
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 
-        <script>
-            $('#exampleModal_6').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var id = button.data('id')
-                // var title = button.data('title')
-                // var number = button.data('number')
-                // var description = button.data('description')
-                var modal = $(this)
-                modal.find('.modal-body #id').val(id);
-                $('select[name="file_type"]').on('change', function() {
-                    if ($(this).val() == 'visa') {
-                        $('#vnumber').show();
-                    } else {
-                        $('#vnumber').hide();
-                        $('#vnumber').removeAttribute('name');
-                    }
+    <script>
+        $('#exampleModal_6').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            // var title = button.data('title')
+            // var number = button.data('number')
+            // var description = button.data('description')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            $('select[name="file_type"]').on('change', function() {
+                if ($(this).val() == 'visa') {
+                    $('#vnumber').show();
+                } else {
+                    $('#vnumber').hide();
+                    $('#vnumber').removeAttribute('name');
+                }
 
-                });
-                // modal.find('.modal-body #title').val(title);
-                // modal.find('.modal-body #number').val(number);
             });
-            $('#exampleModal_5').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var id = button.data('id')
-                var modal = $(this)
-                modal.find('.modal-body #id').val(id);
-            })
-        </script>
+            // modal.find('.modal-body #title').val(title);
+            // modal.find('.modal-body #number').val(number);
+        });
+        $('#exampleModal_5').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+        })
+    </script>
 
 
-        <script>
-            const ctx = document.getElementById('myChart');
-            const myChart = new Chart(ctx, {
-                type: 'doughnut',
-                const data = {
-                        labels: [
-                            'Red',
-                            'Blue',
-                            'Yellow'
+    <script>
+        const ctx = document.getElementById('myChart');
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            const data = {
+                    labels: [
+                        'Red',
+                        'Blue',
+                        'Yellow'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
                         ],
-                        datasets: [{
-                            label: 'My First Dataset',
-                            data: [300, 50, 100],
-                            backgroundColor: [
-                                'rgb(255, 99, 132)',
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
-                            ],
-                            hoverOffset: 4
-                        }]
-                    },
-            });
-        </script>
-    @endpush
+                        hoverOffset: 4
+                    }]
+                },
+        });
+    </script>
+@endpush
 
 
-</div>
-</div>
 @endsection

@@ -150,18 +150,19 @@
                                                         @enderror
                                                     </div>
                                                 </td>
-                                                <td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
                                                     <div>
                                                         <label>address:</label>
-                                                        <input required type="text" name="address" class="form-control"
-                                                            value="{{ old('address') }}">
+                                                        <textarea required type="text" name="address" class="form-control">{{ old('address') }}</textarea>
                                                         @error('address')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </td>
                                             </tr>
-
                                             <tr>
 
 
@@ -832,8 +833,7 @@
             return age;
         }
 
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
             $('select').addClass('text-center');
         });
     </script>

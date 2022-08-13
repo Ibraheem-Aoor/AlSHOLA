@@ -1,6 +1,34 @@
 <div>
     @section('title', 'ALSHOALA - Admin | AGENTS LIST')
+    @push('css')
+        <style>
+            label,
+            th {
+                font-size: 0.7rem;
+                font-weight: bolder;
+            }
 
+            .form-control {
+                display: block !important;
+                width: 90% !important;
+                padding: 0.400rem 0.80rem !important;
+                font-size: 0.6rem !important;
+                font-weight: 400 !important;
+                line-height: 1 !important;
+                color: #666565 !important;
+                background-color: #fff !important;
+                background-clip: padding-box !important;
+                border: 1px solid #ced4da !important;
+                appearance: none !important;
+                border-radius: 2px !important;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+            }
+
+            body {
+                height: 30vh !important;
+            }
+        </style>
+    @endpush
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
