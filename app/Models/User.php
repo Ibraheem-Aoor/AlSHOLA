@@ -153,4 +153,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Job::class , 'user_id');
     }
+
+
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class , 'receiver_id');
+    }
+
+    public function unReadConversations()
+    {
+        return $this->conversations()->where('reciver_viewed' , false);
+    }
 }

@@ -26,7 +26,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>Broker Name</th>
+                                                <th>Coordinator Name</th>
                                                 <th>E-mail</th>
                                                 <th>Registration No</th>
                                                 <th>Responsible Person</th>

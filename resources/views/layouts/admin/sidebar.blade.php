@@ -138,11 +138,11 @@
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
-                      <i class="menu-icon fa fa-users"></i> Broker</a>
+                      <i class="menu-icon fa fa-users"></i> Coordinator</a>
                   <ul class="sub-menu children dropdown-menu">
                       <li>
                           <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('brokers.all') }}"> All Brokers</a>
+                          <a href="{{ route('brokers.all') }}"> All Coordinators</a>
                       </li>
                       <li>
                           <i class="menu-icon fa fa-bars"></i>

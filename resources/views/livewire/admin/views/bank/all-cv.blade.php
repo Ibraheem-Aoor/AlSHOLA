@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'ALSHOALA|CV BANK')
+    @section('title', 'ALSHOALA | CV BANK')
     @push('css')
         <style>
             table tr td,
@@ -18,10 +18,28 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                @if (Session::has('success'))
-                                    <div class="alert"></div>
-                                @endif
                                 <h4 class="box-title">All CV's</h4>
+                            </div>
+                            <div class="container mb-2">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <select class="form-control" wire:model="mainStatusFilter">
+                                            @foreach ($mainStatuses as $status)
+                                                <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" wire:model="subStatusFilter">
+                                            @foreach ($subStatuses as $status)
+                                                <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" wire:model="search" placeholder="search...">
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">

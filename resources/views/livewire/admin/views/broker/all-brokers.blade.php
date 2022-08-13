@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'ALSHOALA| All Brokers')
+    @section('title', 'ALSHOALA| All Coordinators')
     @push('css')
         <style>
             table tr td,

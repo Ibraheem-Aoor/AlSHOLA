@@ -59,7 +59,7 @@
                                                 <table class="table table-striped  basicInfo">
 
                                                     <tr>
-                                                        <td>Broker No:</td>
+                                                        <td>Coordinator No:</td>
                                                         <td>{{ $broker->registration_No }}</td>
                                                     </tr>
                                                     <tr>

@@ -54,6 +54,8 @@ class LoginController extends Controller
             return 'talented/dashboard';
         elseif(Auth::user()->type == 'admin' && Auth::user()->is_admin)
             return 'admin/dashboard';
+        elseif(Auth::user()->type == 'Broker')
+            return 'broker/dashboard';
     }
 
     protected function credentials(Request $request)

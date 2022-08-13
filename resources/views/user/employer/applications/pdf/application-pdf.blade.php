@@ -42,7 +42,7 @@
 
         .parent {
             /* border: 1px solid black; */
-            margin-top:10px !important;
+            margin-top: 10px !important;
             padding: 2rem 2rem;
             text-align: center;
         }
@@ -99,19 +99,20 @@
                 Al Shoala Recruitment Service W.L.L
             </p>
             <p style="padding: 3px;">
-                Job No: {{ $application->job->post_number }}
+                DSR: {{ $application->job->post_number }}
+            </p>
+            <p style="padding: 3px;">
+                Creation Date: {{ $application->job->created_at }}
+            </p>
+            <p style="padding: 3px;">
+                &nbsp;
             </p>
         </div>
-    </div>
-    <div style="font-size: 13px;font-weight:600;">
-        <h4>Demand Information:</h4>
-        <p>DSR: {{ $application->job->post_number }}</p>
-        <p>Creation Date: {{ $application->job->created_at }}</p>
     </div>
     @php
         $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
     @endphp
-    <img src="{{Storage::url('public/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo)}}"
+    <img src="{{ Storage::url('public/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo) }}"
         width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <br>
     <table style="margin-top: -150px">

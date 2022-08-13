@@ -67,7 +67,7 @@
                                                 {{-- <option value="">Personal</option> --}}
                                                 <option value="Agent">Agent</option>
                                                 <option value="Client">Client</option>
-                                                <option value="Broker">ALSHOALA - Broker</option>
+                                                <option value="Broker">ALSHOALA - Coordinator</option>
                                                 <option value="Personal">Personal</option>
                                             </select>
                                             @error('type')
