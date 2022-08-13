@@ -73,7 +73,7 @@ class AllCv extends Component
                 $title->where('name'  , 'like' , '%'.$this->search.'%');
             });
         }//End if
-        return  $applications->where('user_id' , Auth::user())->paginate(15);
+        return  $applications->where('user_id' , Auth::id())->paginate(15);
     }//End getApplciations
 
 
