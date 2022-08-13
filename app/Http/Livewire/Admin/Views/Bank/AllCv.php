@@ -71,7 +71,7 @@ class AllCv extends Component
             })
             ->orWhereHas('title' , function($title){
                 $title->where('name'  , 'like' , '%'.$this->search.'%');
-            });
+            })->where('user_id' , Auth::user());
         }//End if
         return  $applications->paginate(15);
     }//End getApplciations
