@@ -153,7 +153,7 @@ class ApplicationController extends Controller
 
     public function storePersonalPhoto($photo , $applicationId)
     {
-        $photoName = $photo->getClientOriginalName();
+        $photoName = time().'.'.$photo->getClientOriginalExtension();
         $path = 'public/uploads/applications/'.$applicationId.'/'.'attachments'.'/';
         $photo->storeAs($path , $photoName);
         ApplicationAttachment::create(
