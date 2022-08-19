@@ -78,7 +78,7 @@
         <div iv class="col-sm-12 text-center mb-5">
             <h2 class="text-green">Latest Job Posts Recommend For You</h2>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="myTable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

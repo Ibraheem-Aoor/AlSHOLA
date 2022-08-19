@@ -40,6 +40,7 @@
     </style>
     @notifyCss
     @stack('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 </head>
 
 
@@ -75,13 +76,18 @@
         integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-   
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
     @stack('js')
     <x:notify-messages />
     @notifyJs
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/dist_1/js/main.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

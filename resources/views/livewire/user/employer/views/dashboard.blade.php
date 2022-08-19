@@ -113,7 +113,7 @@
                             </div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="myTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -169,8 +169,7 @@
                                                         href="{{ route('employer.job.notes', $job->id) }}"><i
                                                             class="fa fa-file"></i></a>
                                                     <a href="#exampleModal_5" data-toggle="modal"
-                                                        title="upload attachment"
-                                                        data-number="{{ $job->post_number }}"
+                                                        title="upload attachment" data-number="{{ $job->post_number }}"
                                                         data-id="{{ $job->id }}"><i class="fa fa-upload"></i>
                                                     </a>
 
@@ -242,6 +241,7 @@
     </div>
 </div>
 @push('js')
+    
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

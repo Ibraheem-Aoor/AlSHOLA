@@ -1,5 +1,8 @@
 <div>
     @section('title', 'ALSHOALA - Admin | DEMAND LIST')
+    @push('css')
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    @endpush
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -9,11 +12,11 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">Demand List</h4>
+                                <h4 class="box-title">Case List</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
-                                    <table class="table ">
+                                    <table class="table" id="myTable">
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
@@ -77,6 +80,7 @@
                                                     </td> --}}
                                                 </tr>
                                             @empty
+
                                                 <tr>
                                                     <td colspan="10" class="text-center alert alert-warning">No
                                                         Records
@@ -142,6 +146,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
         <script>
             $('#exampleModal_5').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget)

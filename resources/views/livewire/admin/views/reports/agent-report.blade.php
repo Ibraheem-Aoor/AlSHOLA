@@ -1,5 +1,8 @@
 <div>
     @section('title', 'ALSHOALA - Admin | AGENTS LIST')
+    @push('css')
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    @endpush
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -26,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="table-stats order-table ov-h">
-                                    <table class="table ">
+                                    <table class="table" id="myTable">
                                         @php
                                             $i = 0;
                                         @endphp
@@ -59,7 +62,7 @@
                                                     <td>{{ $agent->responsible_person }}</td>
                                                     <td>{{ $agent->mobile }}</td>
                                                 </tr>
-                                                @if (count($agent->applications) > 0 )
+                                                @if (count($agent->applications) > 0)
                                                     <tr style="background-color:lightgray">
                                                         <td>&nbsp;</td>
                                                         <td>Client</td>
@@ -113,6 +116,8 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
         <script>
             new TomSelect("#select-state", {
                 maxItems: 200

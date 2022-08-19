@@ -15,7 +15,7 @@ class Dashboard extends Component
         $jobs = Job::with(['subJobs.title' ,'subJobs.nationality' , 'subStatus' ,'applications' , 'mainStatus'])
         ->with('subJobs.title.sector')
         ->withCount('applications')
-        ->where('user_id' , Auth::id())->orderByDesc('id')->take(10)->get();
+        ->where('user_id' , Auth::id())->orderByDesc('id')->get();
 
         //Client Applications
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
@@ -27,7 +27,7 @@ class Dashboard extends Component
                         {
                             $mainStatus->where('name' , 'Active');
                         })->count();
-                        
+
         $holdApplicationsCount = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded' , true)->whereHas('mainStatus' , function($mainStatus)
                         {

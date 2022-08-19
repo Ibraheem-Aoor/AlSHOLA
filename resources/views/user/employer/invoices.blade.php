@@ -1,4 +1,4 @@
-@extends('layouts.user.employer.master')
+    @extends('layouts.user.employer.master')
 @section('title', 'ALSHOALA | ALL BILLS')
 @section('content')
     <div class="container-xxl py-5">
@@ -10,7 +10,7 @@
             <div class="row g-4">
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive" id="avilable-jobs_table">
-                        <table class="table">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -10,7 +10,7 @@
             <div class="row g-4">
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive" id="avilable-jobs_table">
-                        <table class="table">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

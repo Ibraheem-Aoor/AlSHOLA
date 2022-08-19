@@ -1,5 +1,8 @@
 <div>
-    @section('title' , 'ALSHOALA - Admin | USERS LIST')
+    @section('title', 'ALSHOALA - Admin | USERS LIST')
+    @push('css')
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    @endpush
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
@@ -34,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="table-stats order-table ov-h">
-                                    <table class="table ">
+                                    <table class="table" id="myTable">
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
@@ -84,7 +87,8 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="7" class="text-center alert alert-warning">No Records
+                                                    <td colspan="7" class="text-center alert alert-warning">No
+                                                        Records
                                                         Yet!
                                                     </td>
                                                 </tr>
@@ -101,6 +105,8 @@
             </div>
         </div>
     </div>
-
+    @push('js')
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    @endpush
 
 </div>

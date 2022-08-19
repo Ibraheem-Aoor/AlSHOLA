@@ -8,6 +8,7 @@
                 text-decoration: none !important;
             }
         </style>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     @endpush
     <div class="content">
         <!-- Animated -->
@@ -24,7 +25,7 @@
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
-                                    <table class="table ">
+                                    <table class="table" id="myTable">
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
@@ -224,6 +225,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
         </script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
 
         <script>
             $('#exampleModal_6').on('show.bs.modal', function(event) {

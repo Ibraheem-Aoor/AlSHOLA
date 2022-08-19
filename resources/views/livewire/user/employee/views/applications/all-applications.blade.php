@@ -26,7 +26,7 @@
                     </form>
                 </div>
                 <div class="col-sm-12 text-center">
-                    <div class="table-responsive" id="applications_table">
+                    <div class="table-responsive" id="myTable">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -51,12 +51,12 @@
                                     $i = 1;
                                 @endphp
                                 @forelse ($applications as $application)
-                                @if($application->user_id != Auth::id())
-                                    @continue
-                                @endif
+                                    @if ($application->user_id != Auth::id())
+                                        @continue
+                                    @endif
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $application->job->post_number?? '' }}</td>
+                                        <td>{{ $application->job->post_number ?? '' }}</td>
                                         <td>{{ $application->ref }}</td>
                                         <td>{{ $application->full_name }}</td>
                                         <td>{{ $application->passport_no }}</td>
@@ -64,9 +64,10 @@
                                         <td><a
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>
-                                        <td>{{ $application->subStatus->name ?? ''}}</td>
+                                        <td>{{ $application->subStatus->name ?? '' }}</td>
                                         <td>{{ $application->created_at }}</td>
-                                        @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
+                                        @if ($application->subStatus->name != 'Cancelled Application' &&
+                                            $application->job->subStatus->name != 'Demand Cancelled')
                                             <td>
                                                 @switch($application->job->subStatus->name)
                                                     @case('Demand Under Proccess')
@@ -127,7 +128,8 @@
                             <div class="modal-body">
                                 <label for="" style="font-weight: 600" id="title">UPLOAD</label>
 
-                                <form action="{{ route('application.file.upload') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('application.file.upload') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group col-sm-6 mb-3">
                                         <select name="file_type" class="form-control" id="">
@@ -161,10 +163,14 @@
                         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
                     </script>
                     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-
+                    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $('#myTable').DataTable();
+                        });
+                    </script>
                     <script>
                         $('#flight_ticket').hide();
-
                         $('#exampleModal_5').on('show.bs.modal', function(event) {
                             var button = $(event.relatedTarget)
                             var id = button.data('id')
@@ -202,7 +208,8 @@
                                         // dataType: "json",
                                         success: function(data) {
                                             $('#applications_table').html(data);
-                                        },error: function(data){
+                                        },
+                                        error: function(data) {
                                             console.log(data);
                                         }
                                     });
@@ -213,6 +220,7 @@
                             });
                         });
                     </script>
+
                 @endpush
             </div>
         </div>
