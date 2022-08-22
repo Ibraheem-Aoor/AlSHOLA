@@ -80,6 +80,7 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+    Route::resource('/job' , JobController::class);
 
         // Cse Attahments Routes
         Route::get('/case/download/{caseId}/{fileName}' , function($caseId , $fileName)
@@ -226,7 +227,6 @@ Route::group(['middleware' => ['auth']], function()
         }
         Route::get('dashboard' , ViewsDashboard::class)->name('employer.dashboard');
         // Jobs Routes
-        Route::resource('/job' , JobController::class);
         Route::post('/jobs/edit-1-save/{id}' , [JobController::class , 'editStep_1'])->name('jobs.edit.step-1');
         Route::post('/jobs/edit-2-save/{id}' , [JobController::class , 'updateJob'])->name('jobs.edit.step-2');
 

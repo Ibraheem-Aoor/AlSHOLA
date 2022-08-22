@@ -110,7 +110,9 @@ class JobController extends Controller
     {
         try
         {
-
+            /**
+             * Add Client Id when job is cteated by admin.
+             */
             $job = Job::create(array_merge($request->except(['title' , 'sector' , 'salary' , 'quantity' , 'gender' , 'age_limit' , 'nationality']) ,
             [
                 'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()  , 'main_status_id'=> 1 , 'sub_status_id' => 1,

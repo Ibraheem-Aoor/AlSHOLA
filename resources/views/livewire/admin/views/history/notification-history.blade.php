@@ -23,7 +23,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">Application  History</h4>
+                                <h4 class="box-title">Demand Hisotry</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -31,30 +31,26 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th>User</th>
-                                                <th>User E-mail</th>
-                                                <th>Action</th>
+                                                <th>Domain</th>
+                                                <th>Message</th>
                                                 <th>date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @phpئ
+                                            @php
                                                 $i = 1;
                                             @endphp
-                                            @forelse($histories as $history)
+                                            @forelse($notifications as $notification)
                                                 <tr>
                                                     <td class="serial">{{ $i++ }}</td>
                                                     <td>
-                                                        {{ $history->actor->name . ' (' . $history->actor->type . ' )' }}
+                                                        {{ substr($notification->type, 10) }}
                                                     </td>
                                                     <td>
-                                                        {{ $history->actor->email }}
-                                                    </td>
-                                                    <td style="text-transform:none;">
-                                                        {!! Str::lower($history->action) !!}
+                                                        {{ json_decode($notification->data , true) }}
                                                     </td>
                                                     <td>
-                                                        {{ $history->created_at }}
+                                                        {{ $notification->created_at }}
                                                     </td>
                                                 </tr>
                                             @empty
@@ -67,7 +63,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                    {{ $histories->links() }}
+                                    {{ $notifications->links() }}
                                 </div> <!-- /.table-stats -->
                             </div>
                         </div> <!-- /.card -->

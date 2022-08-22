@@ -60,6 +60,7 @@ use App\Models\Currency;
 use App\Http\Controllers\HelperControllers\AdminDemandController;
 use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
 use App\Http\Controllers\User\Employer\Cases\CaseController;
+use App\Http\Controllers\User\Employer\Jobs\JobController;
 use App\Http\Helpers\DemandHelper;
 use App\Http\Helpers\InvoiceHelper;
 use App\Http\Livewire\Aadmin\Views\History\ApplicationHistory;
@@ -90,6 +91,7 @@ use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 use App\Http\Livewire\Admin\Views\Cases\AllCases;
 use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
+use App\Http\Livewire\Admin\Views\History\NotificationHistory;
 use App\Http\Livewire\Admin\Views\Reports\AgentReport;
 use App\Http\Livewire\Admin\Views\Reports\CandidaateAgentWiseReport;
 use App\Http\Livewire\Admin\Views\Reports\CandidateStatusWiseReport;
@@ -191,10 +193,19 @@ use App\Http\Livewire\Admin\Views\Reports\CandidaateClientWiseReport;
 
 
         //History Recoreds Rotues:
-        Route::get('/history/demand' ,  DemandHistory::class)->name('admin.history.demand');
-        Route::get('/history/application' ,  HistoryApplicationHistory::class)->name('admin.history.application');
-        Route::get('/history/user' ,  UserManagementHistory::class)->name('admin.history.user');
-        Route::get('/history/auth' ,  AuthenticationHistory::class)->name('admin.history.auth');
+        Route::group(['prefix' => 'history' , 'as' => 'admin.history.'] , function()
+        {
+        Route::get('/demand' ,  DemandHistory::class)->name('demand');
+        Route::get('/application' ,  HistoryApplicationHistory::class)->name('application');
+        Route::get('/user' ,  UserManagementHistory::class)->name('user');
+        Route::get('/auth' ,  AuthenticationHistory::class)->name('auth');
+        Route::get('/auth' ,  AuthenticationHistory::class)->name('auth');
+        Route::get('/auth' ,  AuthenticationHistory::class)->name('auth');
+        Route::get('notifications' , NotificationHistory::class)->name('notifications');
+    });
+
+    Route::get('/sector/{id}' , [JobController::class , 'setSelectedSector']);
+
 
 
         // Download job attachments

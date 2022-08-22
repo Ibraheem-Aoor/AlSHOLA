@@ -14,7 +14,7 @@
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
-                                    <table class="table ">
+                                    <table class="table"  id="myTable">
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>

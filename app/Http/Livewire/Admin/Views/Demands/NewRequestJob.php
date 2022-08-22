@@ -72,19 +72,17 @@ class NewRequestJob extends Component
     public function render()
     {
         $clients = User::where('type' , 'Client')->get()->chunk(100 , function(){});
-        $categoires = Sector::all();
-        $titles = [];
-        $currencies = Currency::all();
-        if($this->category)
-            $titles = Title::where('sector_id' , $this->category)->get();
-        $nationalities = Nationality::all();
-        return view('livewire.admin.views.demands.new-request-job' , [
-            'clients' => $clients,
-            'categoires' => $categoires,
-            'titles' => $titles,
-            'nationalities' => $nationalities,
-            'currencies' => $currencies,
-        ]
+        // $categoires = Sector::all();
+        // $titles = [];
+        // $currencies = Currency::all();
+        // if($this->category)
+        //     $titles = Title::where('sector_id' , $this->category)->get();
+        $data['nationalities'] = Nationality::all();
+        $data['titles'] = Title::all();
+        $data['nationalities'] = Nationality::orderBy('name')->get()->chunk(50);
+        $data['currencies'] = Currency::all();
+        $data['sectors'] = Sector::all();
+        return view('livewire.admin.views.demands.new-request-job' , $data
         )->extends('layouts.admin.master')->section('content');
     }
 }
