@@ -10,6 +10,9 @@
                   <li class="active">
                       <a href="{{ route('broker.demands') }}"><i class="menu-icon fa fa-bullhorn"></i>Deamnds</a>
                   </li>
+                  <li class="active">
+                      <a href="{{ route('broker.demands.new')}}"><i class="menu-icon fa fa-bullhorn"></i>New Demand</a>
+                  </li>
 
                   {{-- <li class="menu-title">J Managment</li><!-- /.menu-title --> --}}
                   {{-- @can('Rise Demand')

@@ -110,15 +110,21 @@ class JobController extends Controller
     {
         try
         {
+            $user = $this->getAuthUser();
             /**
              * Add Client Id when job is cteated by admin.
              */
             $job = Job::create(array_merge($request->except(['title' , 'sector' , 'salary' , 'quantity' , 'gender' , 'age_limit' , 'nationality']) ,
             [
-                'post_number'=>$this->generatePosteNumber() , 'user_id' => Auth::id()  , 'main_status_id'=> 1 , 'sub_status_id' => 1,
+                'post_number'=>$this->generatePosteNumber() , 'user_id' => $user->id  , 'main_status_id'=> 1 , 'sub_status_id' => 1,
                 'broker_id' => null,
                 ]
             ));
+            if($request->has('client_id'))
+            {
+                $job->user_id = $request->get('client_id');
+                $job->save();
+            }
             $this->createSubJobs($request->subJob , $job->id);
             if($request->hasFile('attachments'))
                 $this->uploadAttachments($request->attachments , $job->id);
@@ -126,7 +132,14 @@ class JobController extends Controller
             $admin = User::where('type' , 'admin')->first(); //ali
             Notification::send($admin , new DemandCreated($job));
             notify()->success('Job Addeed Successfully');
-            return redirect(route('employer.dashboard'));
+            $route  = '';
+            switch($user->type)
+            {
+                case 'Admin' : $route =  'admin.dashboard'; break;
+                case 'Broker': $route = 'broker.dashboard'; break;
+                default: $route = 'employer.dashboard';
+            }//End Switch
+            return redirect(route($route));
         }catch(Throwable $e)
         {
             return dd($e);

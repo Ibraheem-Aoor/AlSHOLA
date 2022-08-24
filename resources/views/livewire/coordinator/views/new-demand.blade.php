@@ -634,7 +634,7 @@
                     var sectorName = $(this).val();
                     if (sectorName) {
                         $.ajax({
-                            url: "{{ URL::to('admin/sector') }}/" + sectorName,
+                            url: "{{ URL::to('broker/sector') }}/" + sectorName,
                             type: "GET",
                             dataType: "json",
                             success: function(data) {
