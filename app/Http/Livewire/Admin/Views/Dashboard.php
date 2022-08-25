@@ -19,7 +19,7 @@ class Dashboard extends Component
                     $demands = Job::with('subStatus')->get();
                     $users = User::all();
 
-                    $applicatios = Application::with('subStatus');
+                    $applicatios = Application::query()->with('subStatus');
 
                     Cache::rememberForever('adminData', function() use ($applicatios , $users , $demands){
                         return [
@@ -28,19 +28,19 @@ class Dashboard extends Component
                             'totalCandidates' => $applicatios->whereHas('subStatus'  , function($subStatus){
                                 $subStatus->where('name' , '!=' , 'Cancelled Application');
                             })->count(),
-                            'totalApplicationsWFvisa' => $applicatios->whereHas('subStatus'  , function($subStatus){
+                            'totalApplicationsWFvisa' => Application::whereHas('subStatus'  , function($subStatus){
                                 $subStatus->where('name' , 'waiting for visa');
                             })->count(),
-                            'totalApplicationsWFMedical' => $applicatios->whereHas('subStatus'  , function($subStatus){
+                            'totalApplicationsWFMedical' => Application::whereHas('subStatus'  , function($subStatus){
                                 $subStatus->where('name' , 'waiting for medical');
                             })->count(),
-                            'totalApplicationsWFSelection' => $applicatios->whereHas('subStatus'  , function($subStatus){
+                            'totalApplicationsWFSelection' => Application::whereHas('subStatus'  , function($subStatus){
                                 $subStatus->where('name' , 'For Selection');
                             })->count(),
-                            'totalApplicationsWFArrival' => $applicatios->whereHas('subStatus' , function($subStatus){
+                            'totalApplicationsWFArrival' => Application::whereHas('subStatus' , function($subStatus){
                                 $subStatus->where('name' ,  'To Be Arrived');
                             })->count(),
-                            'totalApplicationsWFInterview' => $applicatios->whereHas('subStatus' , function($subStatus){
+                            'totalApplicationsWFInterview' => Application::whereHas('subStatus' , function($subStatus){
                                 $subStatus->where('name' ,  'waiting for interview');
                             })->count(),
                             'totalClients' => $users->where('type' , 'Client')->count(),

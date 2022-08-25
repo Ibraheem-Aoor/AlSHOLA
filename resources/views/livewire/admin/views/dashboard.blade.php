@@ -3,17 +3,17 @@
     <div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
-            @php
-                $data = Cache::get('adminData');
-            @endphp
-            <!-- Widgets  -->
+        @php
+            $data = Cache::get('adminData');
+        @endphp
+        <!-- Widgets  -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-1">
-                                    <i class="pe-7s-cash"></i>
+                                    <i class="pe-7s-file"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -48,13 +48,12 @@
                 </div>
 
 
-
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-3">
-                                    <i class="pe-7s-browser"></i>
+                                    <i class="pe-7s-clock"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -74,7 +73,8 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-3">
-                                    <i class="pe-7s-browser"></i>
+                                    <img src="{{asset('assets/dist_3/assets/images/patient.png')}}"
+                                         class="img img-fluid" width="15%">
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -93,7 +93,9 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-3">
-                                    <i class="pe-7s-browser"></i>
+                                    <img src="{{asset('assets/dist_3/assets/images/landing-icon-17.jpg')}}"
+                                         class="img img-fluid" width="17%">
+
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -112,7 +114,7 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-3">
-                                    <i class="pe-7s-browser"></i>
+                                    <i class="pe-7s-credit"></i>
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -131,7 +133,8 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-3">
-                                    <i class="pe-7s-browser"></i>
+                                    <img src="{{asset('assets/dist_3/assets/images/job-interview-icon-8.jpg')}}"
+                                         class="img img-fluid" width="15%">
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
@@ -204,33 +207,33 @@
                                 <div class="table-stats order-table ov-h">
                                     <table class="table ">
                                         <thead>
-                                            <tr>
-                                                <th class="serial">#</th>
-                                                <th class="avatar">Demand No</th>
-                                                <th>Client Name</th>
-                                                <th>Status</th>
-                                                <th>created_at</th>
-                                            </tr>
+                                        <tr>
+                                            <th class="serial">#</th>
+                                            <th class="avatar">Demand No</th>
+                                            <th>Client Name</th>
+                                            <th>Status</th>
+                                            <th>created_at</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $latestJobs = Cache::get('adminData')['latestJobs'];
-                                                $i = 1;
-                                            @endphp
-                                            @forelse($latestJobs as $job)
-                                                <tr>
-                                                    <td class="serial">{{ $i++ }}</td>
-                                                    <td> <span class="name"><a
-                                                                href="{{ route('admin.demand.details', $job->id) }}">{{ $job->post_number }}</a></span>
-                                                    </td>
-                                                    <td> <span class="product">{{ $job->user->name }}</span> </td>
-                                                    <td>{{ $job->subStatus->name }}</td>
-                                                    <td>
-                                                        {{ $job->created_at->diffForHumans() }}
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                            @endforelse
+                                        @php
+                                            $latestJobs = Cache::get('adminData')['latestJobs'];
+                                            $i = 1;
+                                        @endphp
+                                        @forelse($latestJobs as $job)
+                                            <tr>
+                                                <td class="serial">{{ $i++ }}</td>
+                                                <td> <span class="name"><a
+                                                            href="{{ route('admin.demand.details', $job->id) }}">{{ $job->post_number }}</a></span>
+                                                </td>
+                                                <td><span class="product">{{ $job->user->name }}</span></td>
+                                                <td>{{ $job->subStatus->name }}</td>
+                                                <td>
+                                                    {{ $job->created_at->diffForHumans() }}
+                                                </td>
+                                            </tr>
+                                        @empty
+                                        @endforelse
                                         </tbody>
                                     </table>
                                 </div> <!-- /.table-stats -->
@@ -248,34 +251,34 @@
                                 <div class="table-stats order-table ov-h">
                                     <table class="table ">
                                         <thead>
-                                            <tr>
-                                                <th class="serial">#</th>
-                                                <th class="avatar">REF</th>
-                                                <th>Agent Name</th>
-                                                <th>Status</th>
-                                                <th>created_at</th>
-                                            </tr>
+                                        <tr>
+                                            <th class="serial">#</th>
+                                            <th class="avatar">REF</th>
+                                            <th>Agent Name</th>
+                                            <th>Status</th>
+                                            <th>created_at</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $latestApplications = Cache::get('adminData')['latestApplications'];
-                                                $i = 1;
-                                            @endphp
-                                            @forelse($latestApplications as $application)
-                                                <tr>
-                                                    <td class="serial">{{ $i++ }}</td>
-                                                    <td> <span class="name"><a
-                                                                href="{{ route('admin.application.details', $application->id) }}">{{ $application->ref }}</a></span>
-                                                    </td>
-                                                    <td> <span class="product">{{ $application->user->name }}</span>
-                                                    </td>
-                                                    <td>{{ $application->subStatus->name }}</td>
-                                                    <td>
-                                                        {{ $application->created_at->diffForHumans() }}
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                            @endforelse
+                                        @php
+                                            $latestApplications = Cache::get('adminData')['latestApplications'];
+                                            $i = 1;
+                                        @endphp
+                                        @forelse($latestApplications as $application)
+                                            <tr>
+                                                <td class="serial">{{ $i++ }}</td>
+                                                <td> <span class="name"><a
+                                                            href="{{ route('admin.application.details', $application->id) }}">{{ $application->ref }}</a></span>
+                                                </td>
+                                                <td><span class="product">{{ $application->user->name }}</span>
+                                                </td>
+                                                <td>{{ $application->subStatus->name }}</td>
+                                                <td>
+                                                    {{ $application->created_at->diffForHumans() }}
+                                                </td>
+                                            </tr>
+                                        @empty
+                                        @endforelse
                                         </tbody>
                                     </table>
                                 </div> <!-- /.table-stats -->
@@ -286,81 +289,81 @@
                 </div>
             </div>
             <!-- /.orders -->
-            {{-- <!-- To Do and Live Chat -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title box-title">To Do List</h4>
-                            <div class="card-content">
-                                <div class="todo-list">
-                                    <div class="tdl-holder">
-                                        <div class="tdl-content">
-                                            <ul>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox"><i
-                                                            class="check-box"></i><span>Conveniently fabricate
-                                                            interactive technology for ....</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox"><i
-                                                            class="check-box"></i><span>Creating component
-                                                            page</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i
-                                                            class="check-box"></i><span>Follow back those who
-                                                            follow you</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i
-                                                            class="check-box"></i><span>Design One page
-                                                            theme</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
+        {{-- <!-- To Do and Live Chat -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title box-title">To Do List</h4>
+                        <div class="card-content">
+                            <div class="todo-list">
+                                <div class="tdl-holder">
+                                    <div class="tdl-content">
+                                        <ul>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox"><i
+                                                        class="check-box"></i><span>Conveniently fabricate
+                                                        interactive technology for ....</span>
+                                                    <a href='#' class="fa fa-times"></a>
+                                                    <a href='#' class="fa fa-pencil"></a>
+                                                    <a href='#' class="fa fa-check"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox"><i
+                                                        class="check-box"></i><span>Creating component
+                                                        page</span>
+                                                    <a href='#' class="fa fa-times"></a>
+                                                    <a href='#' class="fa fa-pencil"></a>
+                                                    <a href='#' class="fa fa-check"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" checked><i
+                                                        class="check-box"></i><span>Follow back those who
+                                                        follow you</span>
+                                                    <a href='#' class="fa fa-times"></a>
+                                                    <a href='#' class="fa fa-pencil"></a>
+                                                    <a href='#' class="fa fa-check"></a>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" checked><i
+                                                        class="check-box"></i><span>Design One page
+                                                        theme</span>
+                                                    <a href='#' class="fa fa-times"></a>
+                                                    <a href='#' class="fa fa-pencil"></a>
+                                                    <a href='#' class="fa fa-check"></a>
+                                                </label>
+                                            </li>
 
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i
-                                                            class="check-box"></i><span>Creating component
-                                                            page</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            <li>
+                                                <label>
+                                                    <input type="checkbox" checked><i
+                                                        class="check-box"></i><span>Creating component
+                                                        page</span>
+                                                    <a href='#' class="fa fa-times"></a>
+                                                    <a href='#' class="fa fa-pencil"></a>
+                                                    <a href='#' class="fa fa-check"></a>
+                                                </label>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div> <!-- /.todo-list -->
-                            </div>
-                        </div> <!-- /.card-body -->
-                    </div><!-- /.card -->
-                </div>
-
+                                </div>
+                            </div> <!-- /.todo-list -->
+                        </div>
+                    </div> <!-- /.card-body -->
+                </div><!-- /.card -->
             </div>
-            <!-- /To Do and Live Chat --> --}}
 
-            <!-- Calender Chart Weather  -->
+        </div>
+        <!-- /To Do and Live Chat --> --}}
+
+        <!-- Calender Chart Weather  -->
             <div class="row">
                 <div class="col-lg-4 col-md-6" style="visibility: hidden">
                     <div class="card ov-h">
@@ -377,8 +380,8 @@
     </div>
 </div>
 @php
-$jobsCount = Cache::get('adminData')['jobsCount'];
-$applicationsCount = Cache::get('adminData')['applicationsCount'];
+    $jobsCount = Cache::get('adminData')['jobsCount'];
+    $applicationsCount = Cache::get('adminData')['applicationsCount'];
 @endphp
 @push('js')
     <script>

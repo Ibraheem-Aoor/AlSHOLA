@@ -140,4 +140,8 @@ class Job extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public static function getStatisticsAccordingToStatus() : array
+    {
+    }
+
 }
