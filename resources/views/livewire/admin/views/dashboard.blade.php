@@ -154,13 +154,14 @@
                         <div class="card-body">
                             <div class="stat-widget-five">
                                 <div class="stat-icon dib flat-color-4">
-                                    <i class="pe-7s-users"></i>
+                                    <img src="{{asset('assets/dist_3/assets/images/pause.png')}}"
+                                         class="img img-fluid" width="15%">
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">{{ $data['totalClients'] }}</span>
+                                        <div class="stat-text"><span class="count">{{ $data['totalApplicationsHold'] }}</span>
                                         </div>
-                                        <div class="stat-heading">Clients</div>
+                                        <div class="stat-heading">Holding</div>
                                     </div>
                                 </div>
                             </div>

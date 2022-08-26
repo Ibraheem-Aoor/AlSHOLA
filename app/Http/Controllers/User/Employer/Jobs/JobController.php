@@ -122,6 +122,7 @@ class JobController extends Controller
             ));
             if($request->has('client_id'))
             {
+                $job->broker_id = $user->type == 'Broker' ? $user->id : null;
                 $job->user_id = $request->get('client_id');
                 $job->save();
             }

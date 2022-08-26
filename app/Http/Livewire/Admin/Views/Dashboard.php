@@ -14,79 +14,81 @@ class Dashboard extends Component
 
     public function mount()
     {
-        if(!Cache::has('adminData'))
-            {
-                    $demands = Job::with('subStatus')->get();
-                    $users = User::all();
+        if (!Cache::has('adminData')) {
+            $demands = Job::with('subStatus')->get();
+            $users = User::all();
 
-                    $applicatios = Application::query()->with('subStatus');
+            $applicatios = Application::query()->with('subStatus');
 
-                    Cache::rememberForever('adminData', function() use ($applicatios , $users , $demands){
-                        return [
-                            //cards statistics
-                            'totalDemands' => Job::count(),
-                            'totalCandidates' => $applicatios->whereHas('subStatus'  , function($subStatus){
-                                $subStatus->where('name' , '!=' , 'Cancelled Application');
-                            })->count(),
-                            'totalApplicationsWFvisa' => Application::whereHas('subStatus'  , function($subStatus){
-                                $subStatus->where('name' , 'waiting for visa');
-                            })->count(),
-                            'totalApplicationsWFMedical' => Application::whereHas('subStatus'  , function($subStatus){
-                                $subStatus->where('name' , 'waiting for medical');
-                            })->count(),
-                            'totalApplicationsWFSelection' => Application::whereHas('subStatus'  , function($subStatus){
-                                $subStatus->where('name' , 'For Selection');
-                            })->count(),
-                            'totalApplicationsWFArrival' => Application::whereHas('subStatus' , function($subStatus){
-                                $subStatus->where('name' ,  'To Be Arrived');
-                            })->count(),
-                            'totalApplicationsWFInterview' => Application::whereHas('subStatus' , function($subStatus){
-                                $subStatus->where('name' ,  'waiting for interview');
-                            })->count(),
-                            'totalClients' => $users->where('type' , 'Client')->count(),
+            Cache::rememberForever('adminData', function () use ($applicatios, $users, $demands) {
+                return [
+                    //cards statistics
+                    'totalDemands' => Job::count(),
+                    'totalCandidates' => $applicatios->whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', '!=', 'Cancelled Application');
+                    })->count(),
+                    'totalApplicationsWFvisa' => Application::whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', 'waiting for visa');
+                    })->count(),
+                    'totalApplicationsWFMedical' => Application::whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', 'waiting for medical');
+                    })->count(),
+                    'totalApplicationsWFSelection' => Application::whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', 'For Selection');
+                    })->count(),
+                    'totalApplicationsWFArrival' => Application::whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', 'To Be Arrived');
+                    })->count(),
+                    'totalApplicationsWFInterview' => Application::whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', 'waiting for interview');
+                    })->count(),
+                    'totalApplicationsHold' => Application::whereHas('subStatus', function ($subStatus) {
+                        $subStatus->where('name', 'Hold');
+                    })->count(),
+                    'totalClients' => $users->where('type', 'Client')->count(),
 
-                            //charts Statistics
-                            'totalUnderProccess' => $demands->where('subStatus.name'  , 'Demand Under Process')->count(),
-                            // 'totalArrived' => Job::with('applications.subStatus' , 'applications')->where('applications' , function($q)
-                            // {
-                            //         $q->where('subStatus.name' , 'Arrived');
-                            // // })->count(),
-                            // 'totalToBeSupply' => Job::where('status' , 'pending')->count(),
-                            'allDemands' => $demands,
-                            'latestJobs' =>Job::latest()->with(['subStatus' , 'user:id,name'])->take(5)->orderByDesc('created_at')->get(),
-                            'latestApplications' => Application::latest()->with(['subStatus' , 'user:id,name'])->take(5)->orderByDesc('created_at')->get(),
+                    //charts Statistics
+                    'totalUnderProccess' => $demands->where('subStatus.name', 'Demand Under Process')->count(),
+                    // 'totalArrived' => Job::with('applications.subStatus' , 'applications')->where('applications' , function($q)
+                    // {
+                    //         $q->where('subStatus.name' , 'Arrived');
+                    // // })->count(),
+                    // 'totalToBeSupply' => Job::where('status' , 'pending')->count(),
+                    'allDemands' => $demands,
+                    'latestJobs' => Job::latest()->with(['subStatus', 'user:id,name'])->take(5)->orderByDesc('created_at')->get(),
+                    'latestApplications' => Application::latest()->with(['subStatus', 'user:id,name'])->take(5)->orderByDesc('created_at')->get(),
 
-                            'jobsCount' => Job::count(),
-                            'applicationsCount' => Application::count(),
+                    'jobsCount' => Job::count(),
+                    'applicationsCount' => Application::count(),
 
-                        ];
-                        }//end callback
-                );
-            }
+                ];
+            }//end callback
+            );
+        }
 
     }
+
     public function render()
     {
 
         $jobmcount = [];
         $jobArr = [];
-            //Group Demands By Months
-            $jobsByMonth = Job::select('id' , 'created_at')->get()->groupBy(function($date)
-            {
-                return Carbon::parse($date->created_at)->format('m');
-            });
+        //Group Demands By Months
+        $jobsByMonth = Job::select('id', 'created_at')->get()->groupBy(function ($date) {
+            return Carbon::parse($date->created_at)->format('m');
+        });
 
-            foreach ($jobsByMonth as $key => $value) {
-                $jobmcount[(int)$key] = count($value);
+        foreach ($jobsByMonth as $key => $value) {
+            $jobmcount[(int)$key] = count($value);
+        }
+
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($jobmcount[$i])) {
+                $jobArr[$i] = $jobmcount[$i];
+            } else {
+                $jobArr[$i] = 0;
             }
-
-            for($i = 1; $i <= 12; $i++){
-                if(!empty($jobmcount[$i])){
-                    $jobArr[$i] = $jobmcount[$i];
-                }else{
-                    $jobArr[$i] = 0;
-                }
-            }//End Group Demands By Month
-        return view('livewire.admin.views.dashboard' , ['jobArr' => $jobArr])->extends('layouts.admin.master')->section('content');
+        }//End Group Demands By Month
+        return view('livewire.admin.views.dashboard', ['jobArr' => $jobArr])->extends('layouts.admin.master')->section('content');
     }
 }
