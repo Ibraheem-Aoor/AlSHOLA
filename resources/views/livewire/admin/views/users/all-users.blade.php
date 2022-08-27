@@ -81,10 +81,13 @@
                                                                wire:click="blockUser('{{ $user->id }}')"><i
                                                                     class="fa fa-circle" style="color:red;"></i>
                                                                 block</a>
-                                                            <a data-toggle="modal"  data-target="exampleModal_5"  class="btn btn-sm btn-primary"><i
-                                                                    class="fa fa-envelope"></i></a>
+
                                                         @endif
                                                     @endif
+                                                    <a data-user="{{$user->name}}" data-id="{{$user->id}}"
+                                                       data-toggle="modal" href="#exampleModal_5"
+                                                       class="btn btn-sm btn-outline-primary"><i
+                                                            class="fa fa-envelope"></i></a>
                                                 </td>
                                             </tr>
                                         @empty
@@ -115,21 +118,28 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Message:</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Mail Users:</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.invoice.select-payer') }}" method="POST">
+                <form action="{{ route('admin.mail.send') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input type="text" id="job" name="job_id" hidden>
-                        <label for="">Issue To:</label>
-                        <select name="payer" class="form-control">
-                            <option value="">-- select one --</option>
-                            <option value="client">Client</option>
-                            <option value="agent">Agent</option>
-                        </select>
+                        <input type="text" id="user_id" name="user_id" hidden>
+                        <div class="form-group">
+                            <label>Subject:</label>
+                            <input type="text" name="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message:</label>
+                            <textarea class="form-control" name="message" required>
+                        </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Attachments:</label>
+                            <input class="form-control" type="file" name="attachments[]" multiple>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
@@ -146,7 +156,32 @@
 
 
     @push('js')
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+                crossorigin="anonymous">
+        </script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+        <script>
+            $('#exampleModal_5').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var user = button.data('user');
+                var user_id = button.data('id');
+                console.log(user_id);
+                // var description = button.data('description')
+                var modal = $(this)
+                modal.find('h5').text("Mail " + user);
+                modal.find('.modal-body #user_id').val(user_id);
+            });
+        </script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
     @endpush
 
 </div>

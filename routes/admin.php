@@ -293,6 +293,8 @@ Route::group(['middleware' => ['auth', 'authAdmin']], function () {
     Route::get('client/create', AddNewClientOrAgent::class)->name('client.create');
     Route::get('/agent/all', AllAgentsOrClients::class)->name('agent.list');
     Route::get('/client/all', AllAgentsOrClients::class)->name('client.list');
+    Route::post('/client/mail', [\App\Http\Controllers\HelperControllers\AdminMailController::class , 'sendMail'])->name('admin.mail.send');
+
     //Talents Routes:
 
     //Employer Routes
@@ -408,6 +410,7 @@ Route::group(['middleware' => ['auth', 'authAdmin']], function () {
             return redirect()->back();
         }
     })->name('admin.user.attachment.delete');
+
 
 
     Route::post('test', [DemandHelper::class, 'testInvoice'])->name('invoice.test');

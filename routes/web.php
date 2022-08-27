@@ -317,3 +317,8 @@ Route::get('/home' , function()
           return redirect()->back();
       }
   })->name('job.attachment.download');
+
+
+  Route::get('test-mail' , function (){
+        return view('user.mail.user_mail');
+  });
