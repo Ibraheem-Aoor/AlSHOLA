@@ -26,7 +26,7 @@
                     </form>
                 </div>
                 <div class="col-sm-12 text-center">
-                    <div class="table-responsive" id="myTable">
+                    <div class="table-responsive" >
                         <table class="table">
                             <thead>
                                 <tr>
