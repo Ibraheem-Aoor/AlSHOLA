@@ -77,7 +77,7 @@
 <body>
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
-    <h3>Demand for Recruitment</h3>
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <div class="parent">
         <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
             <p>

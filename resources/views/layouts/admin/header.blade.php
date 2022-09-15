@@ -1,3 +1,4 @@
+
 <!-- Header-->
 <header id="header" class="header">
     <div class="top-left">
@@ -87,7 +88,7 @@
                     @endif
                 </a>
 
-                <div class="user-menu dropdown-menu">
+                <div class="user-menu dropdown-menu" style="left: -60px !important;">
                     <a class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa- user"></i>My
                         Profile</a>
 

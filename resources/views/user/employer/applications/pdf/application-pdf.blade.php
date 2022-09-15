@@ -203,14 +203,15 @@
             <th>Country</th>
             <th>Year</th>
         </tr>
-        <tr>
-            @foreach ($application->educations as $education)
+        @foreach ($application->educations as $education)
+            <tr>
+
                 <td>{{ $education->degree }}</td>
                 <td>{{ $education->from }}</td>
                 <td>{{ $education->country }}</td>
                 <td>{{ $education->year }}</td>
-            @endforeach
-        </tr>
+            </tr>
+        @endforeach
     </table>
 
 
@@ -224,11 +225,13 @@
         </tr>
         <tr>
             @foreach ($application->employers as $emplyoer)
-                <td>{{ $emplyoer->name }}</td>
-                <td>{{ $emplyoer->duration }}</td>
-                <td>{{ $emplyoer->country }}</td>
-                <td>{{ $emplyoer->designation }}</td>
-            @endforeach
+        <tr>
+            <td>{{ $emplyoer->name }}</td>
+            <td>{{ $emplyoer->duration }}</td>
+            <td>{{ $emplyoer->country }}</td>
+            <td>{{ $emplyoer->designation }}</td>
+        </tr>
+        @endforeach
         </tr>
         <tr>
             <td>Total Experince: </td>

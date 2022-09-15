@@ -5,12 +5,6 @@
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
         <style>
-            .form-control {
-                /* height: 20px !important; */
-                width: 90% !important;
-            }
-        </style>
-        <style>
             table {
                 font-size: 0.8rem;
             }

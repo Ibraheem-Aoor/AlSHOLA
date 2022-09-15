@@ -93,7 +93,7 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td class="" colspan="7"
+                                                    <td class="" colspan="7" 
                                                         class="text-center alert alert-warning">No Records
                                                         Yet!
                                                     </td>
@@ -132,7 +132,7 @@
                                                     <th>Per</th>
                                                     <th>
                                                         <select name="currency" id="cs"
-                                                            class="form-control text-center" 
+                                                            class="form-control text-center"
                                                             required>
                                                             <option value=""> -- currency -- </option>
                                                             @foreach ($currencies as $currency)
