@@ -58,7 +58,7 @@
                                                     </td>
                                                     <td>{{ $application->title->name }}</td>
                                                     <td>{{ $application->user->name }}</td>
-                                                    <td>{{ $application->job->user->name }}</td>
+                                                    <td>{{ $application->job?->user?->name }}</td>
                                                     <td>&nbsp;</td>
                                                     <td>{{ $application->subStatus->name }}</td>
                                                 </tr>
