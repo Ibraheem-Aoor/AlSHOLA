@@ -19,7 +19,7 @@ class Dashboard extends Component
     {
         $this->broker = User::with(['brokerJobs.invoices'  , 'nationality' , 'country' , 'brokerSalesGoal'])->findOrFail(Auth::id());
         $this->updateBrokerSalesData();
-        $this->thisMonthGoal = $this->broker->brokerSalesGoal[$this->getCurrentMonth()]; //The current month sales goal required from broker
+        $this->thisMonthGoal = $this->broker->brokerSalesGoal[$this->getCurrentMonth()] ?? []; //The current month sales goal required from broker
         $this->comissionRate = $this->broker->commission_rate; // commission rate for all sales on all months.
         $this->thisMonthAchivedSales = $this->getBrokerJobsByMonth($this->getCurrentMonth());
         $this->thisMonthTotalIncome = $this->getThisMonthTotalIncome();
