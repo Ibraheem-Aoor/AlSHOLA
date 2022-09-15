@@ -38,7 +38,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @phpئ
+                                            @php
                                                 $i = 1;
                                             @endphp
                                             @forelse($histories as $history)
