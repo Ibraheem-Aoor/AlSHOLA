@@ -92,10 +92,13 @@ trait BrokerTrait
     public function updateBrokerSalesData()
     {
         $salesData = $this->broker->brokerSalesGoal?->getAttributes();
-        $salesData = Arr::except($salesData , ['id' , 'broker_id' , 'commission_rate' , 'created_at' , 'updated_at']);
-        $this->broker->total_required_sales = array_sum($salesData);
-        $this->broker->total_achived = $this->broker->brokerJobs()->count();
-        $this->broker->save();
+        if($salesData)
+        {
+            $salesData = Arr::except($salesData , ['id' , 'broker_id' , 'commission_rate' , 'created_at' , 'updated_at']);
+            $this->broker->total_required_sales = array_sum($salesData);
+            $this->broker->total_achived = $this->broker->brokerJobs()->count();
+            $this->broker->save();
+        }
     }//End updateBrokerSalesData
 
 
