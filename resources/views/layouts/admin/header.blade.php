@@ -92,10 +92,7 @@
                     <a class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa- user"></i>My
                         Profile</a>
 
-                    <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span
-                            class="count">13</span></a>
 
-                    <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

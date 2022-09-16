@@ -1,6 +1,6 @@
 <div>
     @section('title', 'ALSHOALA - Admin | DEMAND LIST')
-    <div class="content">
+<div class="content">
         <!-- Animated -->
         <div class="animated fadeIn">
             <div class="orders">
@@ -91,16 +91,16 @@
                                                     <td><span>{{ $job->created_at }}</span>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.demand.details', $job->id) }}">
+                                                        <a class="btn-sm btn btn-info" href="{{ route('admin.demand.details', $job->id) }}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
-                                                            <a href="{{ route('admin.send-job-to-agent', $job->id) }}"
+                                                            <a class="btn-sm btn btn-success" href="{{ route('admin.send-job-to-agent', $job->id) }}"
                                                                 title="send to agent"><i
                                                                     class="fa fa-location-arrow"></i></a>
                                                         @endif
 
-                                                        <a data-toggle="modal" data-job="{{ $job->id }}"
+                                                        <a class="btn-sm btn btn-primary" data-toggle="modal" data-job="{{ $job->id }}"
                                                             href="#exampleModal_5" title="Issue Invoice"
                                                             title="Issue Invoice">
                                                             <i class="menu-icon fa fa-money"></i></a>
@@ -126,7 +126,7 @@
                                             </tbody>
                                         </table>
                                     </div> <!-- /.table-stats -->
-                                    {{$jobs->links()}}
+                                    {{ $jobs->links() }}
                                 </div>
                             </div> <!-- /.card -->
                         </div> <!-- /.col-lg-8 -->

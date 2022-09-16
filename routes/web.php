@@ -276,6 +276,7 @@ Route::group(['middleware' => ['auth']], function()
      {
          Route::post('message/{id}' , [CaseController::class , 'sendMessage'])->name('message');
          Route::post('attach/{id}' , [CaseController::class , 'attachMoreFiles'])->name('attach');
+         Route::post('get-selected-application' , [CaseController::class  , 'getSelectedApplicationDetails'])->name('get_application');
      });
 
 

@@ -9,6 +9,7 @@
     <meta content="" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="csrf" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link href="{{ asset('assets/dist_1/img/favicon.ico') }}" rel="icon">
     <link rel="shortcut icon" href="{{ asset('assets/dist_3/assets/images/header-logo.png') }}">
@@ -88,6 +89,17 @@
     <!-- Template Javascript -->
     <script src="{{ asset('assets/dist_1/js/main.js') }}"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    {{-- Setup Ajax Headers --}}
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content'),
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -108,9 +108,9 @@
                                                                         @php
                                                                             $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
                                                                         @endphp
-                                                                        {{-- <img src="{{Storage::url('public/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo)}}"
+                                                                        <img src="{{ Storage::url('public/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo) }}"
                                                                             width="200" height="200"
-                                                                            style="margin-left:70%;border: 1px solid black;"> --}}
+                                                                            style="margin-left:70%;border: 1px solid black;">
                                                                     </div>
 
                                                                     <div class="col-sm-">
@@ -144,7 +144,7 @@
                                                                                     {{ $application->passport_no }}
                                                                                 </td>
                                                                                 <th>Nationality:
-                                                                                    {{ $application->nationality()->first()->name }}
+                                                                                    {{ $application->Nationlaity ?? 'UNKOWN' }}
                                                                                 </th>
 
                                                                             </tr>
@@ -174,35 +174,35 @@
                                                                                 <td>Date Issued:
                                                                                     {{ $application->date_issued }}
                                                                                 </td>
+                                                                                <td>Age: {{ $application->age }}</td>
+
                                                                             </tr>
 
-                                                                            <tr>
-                                                                                <td>Visa Number:
-                                                                                    {{ $application->visa_number ?? 'NONE' }}
-                                                                                </td>
-                                                                                <td>flight_ticket:
-                                                                                    {{ $application->flight_ticket ?? 'NONE' }}
-                                                                                </td>
-                                                                            </tr>
                                                                             <tr>
                                                                                 <td>Expiry Dte:
                                                                                     {{ $application->expiry_issued }}
                                                                                 </td>
-                                                                                <td>Age: {{ $application->age }}</td>
                                                                                 <td>Relegion:
                                                                                     {{ $application->relegion }}</td>
                                                                             </tr>
+
                                                                             <tr>
+
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td>flight_ticket:
+                                                                                    {{ $application->flight_ticket ?? 'NONE' }}
+                                                                                </td>
                                                                                 <td>sex: {{ $application->sex }}</td>
                                                                                 <td>status:
-                                                                                    {{ $application->subStatus->name }}
-                                                                                </td>
+                                                                                    {{ $application->status }}</td>
                                                                                 <td>children:
                                                                                     {{ $application->children }}</td>
                                                                                 <td>height:
                                                                                     {{ $application->height }}</td>
                                                                                 <td>weight:
-                                                                                    {{ $application->weihgt }}</td>
+                                                                                    {{ $application->weight }}</td>
                                                                             </tr>
 
                                                                         </table>
@@ -620,8 +620,8 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal_6" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal_6" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

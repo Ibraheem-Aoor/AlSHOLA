@@ -120,5 +120,11 @@ class CaseController extends Controller
 
 
 
+    public function getSelectedApplicationDetails(Request $request)
+    {
+        $data['application'] = Application::with(['job:id,post_number' , 'employers' , 'user' ,  'subStatus' , 'title.sector', 'attachments' ,'educations' , 'job.subStatus' , 'nationality']   )->with('job.subJobs.title.sector')->findOrFail($request->application_id);
+        $view = view('user.partials.application_details' , $data)->render();
+        return response()->json(['status' => true , 'view' => $view]);
+    }//End getSelectedApplicationDetails
 
 }

@@ -12,7 +12,8 @@
                     <div class="col-sm-2"></div>
                     <div class="col-sm-4">
                         <label for="">Choose Candidate</label>
-                        <select name="application_id" class="form-control text-center">
+                        <select name="application_id" class="form-control text-center"
+                            data-route="{{ route('employer.case.get_application') }}">
                             <option value="">-- Select One -- </option>
                             @forelse ($applications as $application)
                                 <option value="{{ $application->id }}">{{ $application->full_name }}</option>
@@ -50,13 +51,14 @@
                         <label for="">Attachment:</label>
                         <input type="file" name="attachments[]" multiple class="form-control">
                         @error('attachments')
-                            <span class="text-danger">{{$message}}</span>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <button class="btn btn-outline-success col-sm-12" type="submit">Submit</button>
                 </div>
             </form>
-
+        </div>
+        <div class="row g-4 mt-2" id="application_details">
 
         </div>
     </div>
@@ -87,36 +89,13 @@
                     }
                 });
 
-                // let form = $('#caseForm');
-                // let data = null;
-                // form.submit(function() {
-                //     event.preventDefault();
-                //     data = new FormData(this)
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                //         }
-                //     });
-                //     $.ajax({
-                //         url: "{{ route('cases.store') }}",
-                //         type: "POST",
-                //         // dataType: "json",
-                //         data: data,
-                //         success: function(data) {
-                //             console.log(data)
-                //             // location.href = "{{ route('employer.dashboard') }}";
-                //         },
-                //         error(data) {
-                //             console.log(data);
-                //             if (data.status == 422) {
-                //                 console.log(data);
-                //                 $('#applicationError').text(data.responseJSON.errors.application_id);
-                //                 $('#reasonError').text(data.responseJSON.errors.reason);
-                //             }
-                //         },
-                //     });
 
-                // });
+
+                $('select[name="application_id"]').on('change', function() {
+                    $.ajax({
+                        headers: {}
+                    });
+                });
 
 
             });
@@ -127,3 +106,6 @@
 </div>
 </div>
 @endsection
+@push('js')
+<script src="{{ asset('js/custom/employer/case.js') }}"></script>
+@endpush
