@@ -144,4 +144,8 @@ class Job extends Model
     {
     }
 
+    public function supplied()
+    {
+        return $this->applications()->whereUserId(Auth::id())->count();
+    }
 }

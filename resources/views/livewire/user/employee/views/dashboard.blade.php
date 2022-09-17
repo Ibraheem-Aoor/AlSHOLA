@@ -102,11 +102,11 @@
                                 <td>{{ $job->post_number }}</td>
                                 <td>{{ $job->qty() }}</td>
                                 <td>
-                                    {{ $job->applications->count() }}
+                                    {{  $job->supplied() }}
                                 </td>
 
                                 <td>
-                                    {{ $job->qty() - $job->applications->count() }}
+                                    {{ $job->qty() - $job->supplied() }}
                                 </td>
 
                                 <td>

@@ -339,16 +339,6 @@
                                                     @enderror
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div>
-                                                    <label>place_of_birth:</label>
-                                                    <input required type="text" name="place_of_birth"
-                                                        class="form-control" value="{{ old('place_of_birth') }}">
-                                                    @error('place_of_birth')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </td>
 
                                             <td>
                                                 <div>

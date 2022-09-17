@@ -55,34 +55,24 @@
 
                                                     <nav>
                                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-home" role="tab"
-                                                                aria-controls="custom-nav-home"
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                                                href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
                                                                 aria-selected="false">General Information</a>
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-lang" role="tab"
-                                                                aria-controls="custom-nav-home"
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                                                href="#custom-nav-lang" role="tab" aria-controls="custom-nav-home"
                                                                 aria-selected="false">Language LEVEL</a>
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-employers"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Employer Experince</a>
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                                                href="#custom-nav-employers" role="tab"
+                                                                aria-controls="custom-nav-home" aria-selected="false">Employer
+                                                                Experince</a>
 
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-education"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Education</a>
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                                                href="#custom-nav-education" role="tab"
+                                                                aria-controls="custom-nav-home" aria-selected="false">Education</a>
 
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-attachments"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Attachments</a>
-
-
-                                                            <a class="nav-item nav-link" id="custom-nav-home-actions"
-                                                                data-toggle="tab" href="#custom-nav-actions"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Actions</a>
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                                                href="#custom-nav-attachments" role="tab"
+                                                                aria-controls="custom-nav-home" aria-selected="false">Attachments</a>
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -104,11 +94,12 @@
 
                                                             <div class="contiane">
                                                                 <div class="row">
+
                                                                     <div class="text-right">
                                                                         @php
                                                                             $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
                                                                         @endphp
-                                                                        <img src="{{ Storage::url('public/uploads/applications' . '/' . $application->id . '/attachments' . '/' . $photo) }}"
+                                                                        <img src="{{ asset('storage/uploads/applications/' . $application->id . '/attachments' . '/' . $photo) }}"
                                                                             width="200" height="200"
                                                                             style="margin-left:70%;border: 1px solid black;">
                                                                     </div>
@@ -148,20 +139,8 @@
                                                                                 </th>
 
                                                                             </tr>
-                                                                            @isset($application->visa_number)
-                                                                                <tr>
-                                                                                    <td>Visa_Number</td>
-                                                                                    <td>{{ $application->visa_number }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endisset
-                                                                            @isset($application->flight_ticket)
-                                                                                <tr>
-                                                                                    <td>flight_ticket</td>
-                                                                                    <td>{{ $application->flight_ticket }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endisset
+
+
                                                                             <tr id="tt">
                                                                                 <td>Place Issued:
                                                                                     {{ $application->place_issued }}
@@ -184,19 +163,25 @@
                                                                                 </td>
                                                                                 <td>Relegion:
                                                                                     {{ $application->relegion }}</td>
-                                                                            </tr>
-
-                                                                            <tr>
-
-                                                                            </tr>
-
-                                                                            <tr>
+                                                                                <td>Visa_Number:
+                                                                                    {{ $application->visa_number ?? 'NONE' }}</td>
                                                                                 <td>flight_ticket:
                                                                                     {{ $application->flight_ticket ?? 'NONE' }}
                                                                                 </td>
-                                                                                <td>sex: {{ $application->sex }}</td>
+
+                                                                            </tr>
+
+                                                                            <tr>
+
+                                                                            </tr>
+
+                                                                            <tr>
+
                                                                                 <td>status:
                                                                                     {{ $application->status }}</td>
+                                                                                <td>sex: {{ $application->sex }}</td>
+
+
                                                                                 <td>children:
                                                                                     {{ $application->children }}</td>
                                                                                 <td>height:
@@ -210,6 +195,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
 
 
 
@@ -284,8 +270,8 @@
 
                                                         {{-- Employer Experince --}}
 
-                                                        <div class="tab-pane fade" id="custom-nav-employers"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                                                        <div class="tab-pane fade" id="custom-nav-employers" role="tabpanel"
+                                                            aria-labelledby="custom-nav-contact-tab">
                                                             <p>
                                                             <div class="col-sm-12 ">
                                                                 <div class="table-responsive">
@@ -338,8 +324,8 @@
 
 
                                                         {{-- Employer Education --}}
-                                                        <div class="tab-pane fade" id="custom-nav-education"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                                                        <div class="tab-pane fade" id="custom-nav-education" role="tabpanel"
+                                                            aria-labelledby="custom-nav-contact-tab">
                                                             <p>
                                                             <div class="col-sm-12 ">
                                                                 <div class="table-responsive">
@@ -385,8 +371,8 @@
                                                         </div>
 
                                                         {{-- Attachments --}}
-                                                        <div class="tab-pane fade" id="custom-nav-attachments"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
+                                                        <div class="tab-pane fade" id="custom-nav-attachments" role="tabpanel"
+                                                            aria-labelledby="custom-nav-contact-tab">
                                                             <p>
                                                             <div class="col-sm-12 text-center">
                                                                 <div class="table-responsive">
@@ -408,7 +394,7 @@
                                                                             @php
                                                                                 $attachments = $application
                                                                                     ->attachments()
-                                                                                    ->where('is_forwarded_employer', true)
+                                                                                    ->where('is_forwarded_talent', true)
                                                                                     ->orderByDesc('created_at')
                                                                                     ->paginate(15);
                                                                             @endphp
@@ -421,40 +407,27 @@
                                                                                     <td>{{ $file->user->name }}</td>
                                                                                     <td>{{ $file->name }}</td>
                                                                                     <td>{{ $file->created_at }}</td>
-                                                                                    @if ($application->job->subStatus->name != 'Demand Cancelled' &&
-                                                                                        $application->job->subStatus->name != 'Demand Complete')
-                                                                                        <td>
+                                                                                    <td>
 
-                                                                                            <a title="Download"
-                                                                                                href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
-                                                                                                <i
-                                                                                                    class="fa fa-download"></i>&nbsp;
-                                                                                            </a>
+                                                                                        <a title="Download"
+                                                                                            href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
+                                                                                            <i class="fa fa-download"></i>&nbsp;
+                                                                                        </a>
+                                                                                        </li>
+                                                                                        <a title="Send Note" href="#exampleModal_5"
+                                                                                            data-id="{{ $file->application->id }}"
+                                                                                            data-toggle="modal" href="#"><i
+                                                                                                class="fa fa-edit"></i></a>
 
-                                                                                            <a title="Download"
-                                                                                                href="{{ route('application.attachment.open', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
-                                                                                                <i
-                                                                                                    class="fa fa-eye"></i>&nbsp;
-                                                                                            </a>
-
-                                                                                            </li>
-                                                                                            <a title="Send Note"
-                                                                                                href="#exampleModal_5"
-                                                                                                data-id="{{ $file->application->id }}"
-                                                                                                data-toggle="modal"
-                                                                                                href="#"><i
-                                                                                                    class="fa fa-edit"></i></a>
-
-                                                                                            {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
-                                                                                                            data-id="{{ $file->application->id }}"
-                                                                                                            data-title="{{ $file->application->job->title }}"
-                                                                                                            data-number="{{ $file->application->job->post_number }}"
-                                                                                                            href="#exampleModal_6">Accept</a>
-                                                                                                    </li> --}}
+                                                                                        {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
+                                                                                                                data-id="{{ $file->application->id }}"
+                                                                                                                data-title="{{ $file->application->job->title }}"
+                                                                                                                data-number="{{ $file->application->job->post_number }}"
+                                                                                                                href="#exampleModal_6">Accept</a>
+                                                                                                        </li> --}}
 
 
-                                                                                        </td>
-                                                                                    @endif
+                                                                                    </td>
                                                                                 </tr>
                                                                             @empty
                                                                                 <tr>
@@ -477,38 +450,6 @@
 
 
 
-
-
-
-                                                        {{-- Actions --}}
-                                                        @if ($application->job->subStatus->name != 'Demand Cancelled' &&
-                                                            $application->job->subStatus->name != 'Demand Complete' &&
-                                                            $application->subStatus != 'Cancelled Application')
-                                                            <div class="tab-pane fade" id="custom-nav-actions"
-                                                                role="tabpanel"
-                                                                aria-labelledby="custom-nav-contact-tab">
-                                                                <p>
-                                                                <div class="col-sm-12 ">
-                                                                    @if (!$application->is_accepted)
-                                                                        <a class="btn btn-outline-success"
-                                                                            data-toggle="modal"
-                                                                            href="#exampleModal_6">Accept
-                                                                            Application</a>
-                                                                    @endif
-
-                                                                    @if (!$application->is_accepted)
-                                                                        <a class="btn btn-outline-info"data-toggle="modal"
-                                                                            data-target="#exampleModal_5">Send
-                                                                            Comment</a>
-                                                                        <a class="btn btn-outline-danger"
-                                                                            data-toggle="modal"
-                                                                            href="#exampleModal_1">Reject
-                                                                            Application</a>
-                                                                    @endif
-                                                                </div>
-                                                                </p>
-                                                            </div>
-                                                        @endif
 
 
                                                     </div>

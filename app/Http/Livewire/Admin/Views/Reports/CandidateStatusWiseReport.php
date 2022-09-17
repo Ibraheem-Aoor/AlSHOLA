@@ -13,7 +13,7 @@ class CandidateStatusWiseReport extends Component
 
     public function getApplications()
     {
-        $applciations = Application::query()->with(['user' , 'job.user' , 'subStatus' , 'title']);
+        $applciations = Application::query()->whereNotNull('job_id')->with(['user' , 'job.user' , 'subStatus' , 'title']);
         if($this->selectedStatus)
         {
             $applciations->whereHas('subStatus'  , function($subStatus)

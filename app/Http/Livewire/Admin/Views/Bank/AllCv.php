@@ -21,7 +21,7 @@ class AllCv extends Component
 
     public function getApplciations()
     {
-        $applications = Application::query()->where('user_id' , Auth::user())->with(['attachments' , 'notes' , 'subStatus' , 'title' ,'job.subStatus']);
+        $applications = Application::query()->where('user_id' , Auth::id())->with(['attachments' , 'notes' , 'subStatus' , 'title' ,'job.subStatus']);
         if($this->mainStatusFilter)
             $applications->where('main_status_id' , $this->mainStatusFilter);
 

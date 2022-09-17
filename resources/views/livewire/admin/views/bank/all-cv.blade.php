@@ -98,23 +98,22 @@
                                                                         $file_type[$i] = null;
                                                                     @endphp
                                                             @endswitch
-                                                            <a href="{{ route('admin.application.details', $application->id) }}"
-                                                                style="width:15px;" title="show details">
+                                                            <a class="btn-sm btn btn-info" href="{{ route('admin.application.details', $application->id) }}"
+                                                                 title="show details">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                            <a style="width:15px;"
+                                                            <a class="btn-sm btn btn-success"
                                                                 title="Forward this application to Client"
-                                                                class="fa fa-location-arrow"
-                                                                href="{{ route('admin.cv.apply', $application->id) }}"></i>
+                                                                href="{{ route('admin.cv.apply', $application->id) }}"><i class="fa fa-location-arrow""></i>
                                                             </a>
                                                             @isset($file_type[$i])
-                                                                <a href="#exampleModal_5" data-title="{{ $title[$i] }}"
+                                                                <a  class="btn-sm btn btn-primary" href="#exampleModal_5" data-title="{{ $title[$i] }}"
                                                                     data-toggle="modal" data-type="{{ $file_type[$i] }}"
                                                                     data-id="{{ $application->id }}">
                                                                     <i class="fa fa-upload"></i>
                                                                 </a>
                                                             @endisset
-                                                            <a title="send note to agent" style="width:15px;"
+                                                            <a class="btn-sm btn btn-danger" title="send note to agent"
                                                                 data-id="{{ $application->id }}" data-toggle="modal"
                                                                 href="#exampleModal_6"><i class="fa fa-trash"></i>
                                                             </a>

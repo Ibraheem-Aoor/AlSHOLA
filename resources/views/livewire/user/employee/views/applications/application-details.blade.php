@@ -143,20 +143,8 @@
                                                                                 </th>
 
                                                                             </tr>
-                                                                            @isset($application->visa_number)
-                                                                                <tr>
-                                                                                    <td>Visa_Number</td>
-                                                                                    <td>{{ $application->visa_number }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endisset
-                                                                            @isset($application->flight_ticket)
-                                                                                <tr>
-                                                                                    <td>flight_ticket</td>
-                                                                                    <td>{{ $application->flight_ticket }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endisset
+
+
                                                                             <tr id="tt">
                                                                                 <td>Place Issued:
                                                                                     {{ $application->place_issued }}
@@ -179,19 +167,26 @@
                                                                                 </td>
                                                                                 <td>Relegion:
                                                                                     {{ $application->relegion }}</td>
-                                                                            </tr>
-
-                                                                            <tr>
-
-                                                                            </tr>
-
-                                                                            <tr>
+                                                                                <td>Visa_Number:
+                                                                                    {{ $application->visa_number ?? 'NONE' }}
+                                                                                </td>
                                                                                 <td>flight_ticket:
                                                                                     {{ $application->flight_ticket ?? 'NONE' }}
                                                                                 </td>
-                                                                                <td>sex: {{ $application->sex }}</td>
+
+                                                                            </tr>
+
+                                                                            <tr>
+
+                                                                            </tr>
+
+                                                                            <tr>
+
                                                                                 <td>status:
                                                                                     {{ $application->status }}</td>
+                                                                                <td>sex: {{ $application->sex }}</td>
+
+
                                                                                 <td>children:
                                                                                     {{ $application->children }}</td>
                                                                                 <td>height:

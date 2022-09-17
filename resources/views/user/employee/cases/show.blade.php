@@ -147,8 +147,8 @@
 
                                     <div class="tab-pane fade" id="custom-nav-application" role="tabpanel">
 
-                                        <h3>Application Information</h3>
-                                        <div style="background: #f7ff9c" class="fromDiv mb-5 mt-2">
+                                        <h3 class="text-center">Application Information</h3>
+                                        <div style="background: #f7ff9c;width:100%" class="fromDiv mb-5 mt-2 text-center">
                                             <p>
                                                 From: {{ $case->application->user->name }}
                                             </p>
@@ -163,11 +163,12 @@
 
                                         <div class="contiane">
                                             <div class="row">
+
                                                 <div class="text-right">
                                                     @php
                                                         $photo = $case->application->attachments->where('type', 'Personal Photo')->first()->name;
                                                     @endphp
-                                                    <img src="{{ asset('uploads/applications/' . $case->application->id . '/attachments' . '/' . $photo) }}"
+                                                    <img src="{{ asset('storage/uploads/applications/' . $case->application->id . '/attachments' . '/' . $photo) }}"
                                                         width="200" height="200"
                                                         style="margin-left:70%;border: 1px solid black;">
                                                 </div>
@@ -202,24 +203,12 @@
                                                                 {{ $case->application->passport_no }}
                                                             </td>
                                                             <th>Nationality:
-                                                                {{ $case->application->nationlaity ?? 'UNKOWN' }}
+                                                                {{ $case->application->Nationlaity ?? 'UNKOWN' }}
                                                             </th>
 
                                                         </tr>
-                                                        @isset($case->application->visa_number)
-                                                            <tr>
-                                                                <td>Visa_Number</td>
-                                                                <td>{{ $case->application->visa_number }}
-                                                                </td>
-                                                            </tr>
-                                                        @endisset
-                                                        @isset($case->application->flight_ticket)
-                                                            <tr>
-                                                                <td>flight_ticket</td>
-                                                                <td>{{ $case->application->flight_ticket }}
-                                                                </td>
-                                                            </tr>
-                                                        @endisset
+
+
                                                         <tr id="tt">
                                                             <td>Place Issued:
                                                                 {{ $case->application->place_issued }}
@@ -232,28 +221,35 @@
                                                             <td>Date Issued:
                                                                 {{ $case->application->date_issued }}
                                                             </td>
+                                                            <td>Age: {{ $case->application->age }}</td>
+
                                                         </tr>
 
-                                                        <tr>
-                                                            <td>Visa Number:
-                                                                {{ $case->application->visa_number ?? 'NONE' }}
-                                                            </td>
-                                                            <td>flight_ticket:
-                                                                {{ $case->application->flight_ticket ?? 'NONE' }}
-                                                            </td>
-                                                        </tr>
                                                         <tr>
                                                             <td>Expiry Dte:
                                                                 {{ $case->application->expiry_issued }}
                                                             </td>
-                                                            <td>Age: {{ $case->application->age }}</td>
                                                             <td>Relegion:
                                                                 {{ $case->application->relegion }}</td>
+                                                            <td>Visa_Number:
+                                                                {{ $case->application->visa_number ?? 'NONE' }}</td>
+                                                            <td>flight_ticket:
+                                                                {{ $case->application->flight_ticket ?? 'NONE' }}
+                                                            </td>
+
                                                         </tr>
+
                                                         <tr>
-                                                            <td>sex: {{ $case->application->sex }}</td>
+
+                                                        </tr>
+
+                                                        <tr>
+
                                                             <td>status:
                                                                 {{ $case->application->status }}</td>
+                                                            <td>sex: {{ $case->application->sex }}</td>
+
+
                                                             <td>children:
                                                                 {{ $case->application->children }}</td>
                                                             <td>height:
@@ -294,7 +290,7 @@
                                                         @php
                                                             $messages = $case
                                                                 ->messages()
-                                                                ->where('is_forwarded_employee' , true)
+                                                                ->where('is_forwarded_employee', true)
                                                                 ->orderBy('created_at', 'desc')
                                                                 ->paginate(10);
                                                         @endphp
@@ -358,7 +354,7 @@
                                                         @php
                                                             $attachments = $case
                                                                 ->attachments()
-                                                                ->where('is_forwarded_employee' , true)
+                                                                ->where('is_forwarded_employee', true)
                                                                 ->orderBy('created_at', 'desc')
                                                                 ->paginate(10);
                                                         @endphp
@@ -437,9 +433,9 @@
                         </div>
 
                         <!--
-                                                                                                                    Modal_1
-                                                                                                                    This modal is for sending notes
-                                                                                                                -->
+                                                                                                                                        Modal_1
+                                                                                                                                        This modal is for sending notes
+                                                                                                                                    -->
 
 
 
@@ -470,7 +466,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('employee.case.message' , $case->id)}}" method="POST">
+                <form action="{{ route('employee.case.message', $case->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="">Message<span class="text-danger">*</span>
@@ -552,7 +548,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('employee.case.attach', $case->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('employee.case.attach', $case->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <label for="">Files</label>

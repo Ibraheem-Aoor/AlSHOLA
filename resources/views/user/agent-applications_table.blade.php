@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="#applications_table">
     <thead>
         <tr>
             <th scope="col">#</th>

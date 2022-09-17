@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive" >
-                        <table class="table">
+                        <table class="table" id="applications_table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -96,4 +96,9 @@ class Application extends Model
     {
         return $this->belongsTo(Nationality::class , 'nationality' , 'id');
     }
+
+    public function scopeForwarded($query)
+    {
+        return $query->where('forwarded' ,  true);
+    }
 }

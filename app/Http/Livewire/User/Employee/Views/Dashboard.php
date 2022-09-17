@@ -52,6 +52,7 @@ class Dashboard extends Component
                     })
                     ->count();
 
+
         //Jobs Statistics
 
         return view('livewire.user.employee.views.dashboard' , [

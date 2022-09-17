@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Job;
+use App\Models\subStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ class ApplicationSearchController extends Controller
     {
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $applications = Application::whereIn('job_id' , $jobIds)
+                        ->where('forwarded', true)
                         ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
                         ->whereHas('mainStatus' , function($q) use($status)
                         {
@@ -55,10 +57,10 @@ class ApplicationSearchController extends Controller
     {
         $search = $request->search;
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
-        $applications = Application::whereIn('job_id' , $jobIds)
-            ->where('forwarded' , true)
+        $data['applications'] = Application::whereIn('job_id' , $jobIds)
             ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])
-            ->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
+            ->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments');
+            $data['applications'] =   $data['applications']
             ->where('ref' , 'like' , '%'.$search.'%')
             ->orWhere('date' , 'like' , '%'.$search.'%')
             ->orWhere('address' , 'like' , '%'.$search.'%')
@@ -102,9 +104,11 @@ class ApplicationSearchController extends Controller
             ->orWhereHas('title' , function($title) use($search){
                 $title->where('name'  , 'like' , '%'.$search.'%');
             })
+            ->forwarded()
             ->simplePaginate(15);
+            $data['sub_statuses'] =  subStatus::all();
 
-        return view('user.employer.applications.all-applications' , compact('applications'));
+        return view('user.employer.applications.all-applications' , $data);
     }//end method.
 
 
@@ -133,12 +137,11 @@ class ApplicationSearchController extends Controller
     public function searchAgentApplications(Request $request)
     {
         $search = $request->search;
-        $applications = Application::whereBelongsTo(Auth::user());
-            $applications =   $applications->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
+        $data['applications'] = Application::whereBelongsTo(Auth::user());
+            $data['applications'] =   $data['applications']->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
             ->with(['job.user:id,name' , 'job.subStatus'])
             ->with('job.subJobs.title.sector')
             ->withCount('notes')
-            ->where('forwarded' , true)
             ->with(['job:id,post_number' , 'title' ,'user:id,name,type' , 'Job' , 'mainStatus' , 'subStatus'])
             ->with(['job.subJobs.title.sector' , 'job.subStatus'])->withCount('attachments')
             ->where('ref' , 'like' , '%'.$search.'%')
@@ -184,9 +187,10 @@ class ApplicationSearchController extends Controller
             ->orWhereHas('title' , function($title) use($search){
                 $title->where('name'  , 'like' , '%'.$search.'%');
             })
+            ->where('user_id' , Auth::id())
             ->orderByDesc('created_at')->simplePaginate(15);
 
-        return view('livewire.user.employee.views.applications.all-applications' , compact('applications'));
+        return view('livewire.user.employee.views.applications.all-applications' , $data );
 
     }
 }

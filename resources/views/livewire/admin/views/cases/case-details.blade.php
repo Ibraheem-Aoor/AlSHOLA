@@ -40,6 +40,9 @@
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-messages" role="tab"
                                             aria-controls="custom-nav-messages" aria-selected="false">Messages</a>
+                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-application" role="tab" aria-controls="custom-nav-home"
+                                            aria-selected="false">Application Information</a>~
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-attachments" role="tab"
                                             aria-controls="custom-nav-home" aria-selected="false">Attachment</a>
