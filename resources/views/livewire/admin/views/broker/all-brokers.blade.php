@@ -49,8 +49,8 @@
                                                     <td>{{ $broker->total_achived }}</td>
 
                                                     <td colspan="2">
-                                                        <a class="btn btn-outline-success" href="{{route('brokers.details' , $broker->id)}}"><i class="fa fa-eye"></i></a>
-                                                        <a class="btn btn-outline-danger" data-toggle="modal" data-id="{{$broker->id}}" href="#exampleModal_6"><i class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-success" href="{{route('brokers.details' , $broker->id)}}"><i class="fa fa-eye"></i></a>
+                                                        <a class="btn btn-danger" data-toggle="modal" data-id="{{$broker->id}}" href="#exampleModal_6"><i class="fa fa-trash"></i></a>
                                                     </td>
 
 

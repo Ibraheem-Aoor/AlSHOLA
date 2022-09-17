@@ -18,7 +18,7 @@ class BrokerDetails extends Component
     {
         $this->broker = User::whereType('Broker')->with(['brokerJobs.invoices'  , 'nationality' , 'country' , 'brokerSalesGoal'])->findOrFail($id);
         $this->updateBrokerSalesData();
-        $this->thisMonthGoal = $this->broker->brokerSalesGoal[$this->getCurrentMonth()]; //The current month sales goal required from broker
+        $this->thisMonthGoal = $this->broker?->brokerSalesGoal[$this->getCurrentMonth()] ?? 0; //The current month sales goal required from broker
         $this->comissionRate = $this->broker->commission_rate; // commission rate for all sales on all months.
         $this->thisMonthAchivedSales = $this->getBrokerJobsByMonth($this->getCurrentMonth());
         $this->thisMonthTotalIncome = $this->getThisMonthTotalIncome();

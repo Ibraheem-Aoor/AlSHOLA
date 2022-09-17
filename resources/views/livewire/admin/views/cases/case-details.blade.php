@@ -19,6 +19,15 @@
                 color: #ffff;
 
             }
+
+            .fromDiv {
+                width: 100%;
+            }
+
+            .fromDiv p {
+                display: inline-block;
+                margin: 0px 30px;
+            }
         </style>
     @endpush
     <div class="content">
@@ -38,11 +47,13 @@
                                             href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
                                             aria-selected="false">Case Information</a>
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
+                                            href="#custom-nav-application" role="tab"
+                                            aria-controls="custom-nav-home" aria-selected="false">Application
+                                            Information</a>
+                                        <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-messages" role="tab"
                                             aria-controls="custom-nav-messages" aria-selected="false">Messages</a>
-                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                            href="#custom-nav-application" role="tab" aria-controls="custom-nav-home"
-                                            aria-selected="false">Application Information</a>~
+
                                         <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
                                             href="#custom-nav-attachments" role="tab"
                                             aria-controls="custom-nav-home" aria-selected="false">Attachment</a>
@@ -74,6 +85,10 @@
                                                     <tr>
                                                         <td>Application Ref</td>
                                                         <td>{{ $case->application->ref }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Agent</td>
+                                                        <td>{{ $case->application->user->name }}</td>
                                                     </tr>
 
                                                     <tr>
@@ -108,6 +123,130 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
+                                    {{-- Start Applications Info --}}
+
+                                    <div class="tab-pane fade" id="custom-nav-application" role="tabpanel">
+
+                                        <h3 class="text-center">Application Information</h3>
+                                        <div style="background: #f7ff9c;width:100%"
+                                            class="fromDiv mb-5 mt-2 text-center">
+                                            <p>
+                                                From: {{ $case->application->user->name }}
+                                            </p>
+                                            <p>
+                                                E-mail: {{ $case->application->user->email }}
+                                            </p>
+                                            <p>
+                                                Mobile: {{ $case->application->user->mobile }}
+                                            </p>
+                                        </div>
+                                        <br>
+
+                                        <div class="contianer">
+                                            <div class="row">
+
+                                                <div class="col-sm-12 text-right">
+                                                    @php
+                                                        $photo = $case->application->attachments->where('type', 'Personal Photo')->first()->name;
+                                                    @endphp
+                                                    <img src="{{ asset('storage/uploads/applications/' . $case->application->id . '/attachments' . '/' . $photo) }}"
+                                                        width="200" height="200"
+                                                        style="margin-left:70%;border: 1px solid black;">
+                                                </div>
+
+                                                <div class="col-sm-" style="margin-top: -200px !important;">
+                                                    <table style="" class="table table-responsive">
+                                                        <tr>
+                                                            <td>Ref: {{ $case->application->ref }}</td>
+                                                            <td>Date:
+                                                                {{ $case->application->job->created_at }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr></tr>
+
+                                                        <tr>
+                                                            <td>Full_Name:
+                                                                {{ $case->application->full_name }}</td>
+                                                            <td>
+                                                                Position Applied For:
+                                                                {{ $case->application->title->name }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Address:
+                                                                {{ $case->application->address }}</td>
+                                                            <th>Contact_No:
+                                                                {{ $case->application->contact_no }}
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Passport_No:
+                                                                {{ $case->application->passport_no }}
+                                                            </td>
+                                                            <th>Nationality:
+                                                                {{ $case->application->Nationlaity ?? 'UNKOWN' }}
+                                                            </th>
+
+                                                        </tr>
+
+
+                                                        <tr id="tt">
+                                                            <td>Place Issued:
+                                                                {{ $case->application->place_issued }}
+                                                            </td>
+                                                            <td>Place Of Birth:
+                                                                {{ $case->application->place_of_birth ?? 'UNKOWN' }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Date Issued:
+                                                                {{ $case->application->date_issued }}
+                                                            </td>
+                                                            <td>Age: {{ $case->application->age }}</td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>Expiry Dte:
+                                                                {{ $case->application->expiry_issued }}
+                                                            </td>
+                                                            <td>Relegion:
+                                                                {{ $case->application->relegion }}</td>
+                                                            <td>Visa_Number:
+                                                                {{ $case->application->visa_number ?? 'NONE' }}</td>
+                                                            <td>flight_ticket:
+                                                                {{ $case->application->flight_ticket ?? 'NONE' }}
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                        <tr>
+
+                                                            <td>status:
+                                                                {{ $case->application->status }}</td>
+                                                            <td>sex: {{ $case->application->sex }}</td>
+
+
+                                                            <td>children:
+                                                                {{ $case->application->children }}</td>
+                                                            <td>height:
+                                                                {{ $case->application->height }}</td>
+                                                            <td>weight:
+                                                                {{ $case->application->weight }}</td>
+                                                        </tr>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- End Applications Info --}}
+
 
 
 
@@ -231,35 +370,38 @@
                                                                 <td>{{ $attachment->created_at }}</td>
                                                                 <td>
                                                                     @if ($attachment->is_forwarded_employee)
-                                                                        <a href="#" title="Cancel Agent"
+                                                                        <a class="btn-sm btn btn-warning"
+                                                                            href="#" title="Cancel Agent"
                                                                             wire:click.prevent="takeAttachmentFromAgent({{ $attachment->id }})">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     @else
-                                                                        <a href="#" title="To Agent"
+                                                                        <a class="btn-sm btn-success m-1"
+                                                                            href="#" title="To Agent"
                                                                             wire:click.prevent="sendAttachmentToAgent({{ $attachment->id }})">
                                                                             <i class="fa fa-location-arrow"></i>
                                                                         </a>
                                                                     @endif
-                                                                    <a class="btn btn-outline-primary"
+                                                                    <a class="btn-sm btn-primary"
                                                                         href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-download"></i></a>
-                                                                    <a class="btn btn-outline-info"
+                                                                    <a class="btn-sm btn-info"
                                                                         href="{{ route('case.file.view', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-eye"></i></a>
-                                                                    <a class="btn btn-outline-danger"
-                                                                        data-toggle="modal"
+                                                                    <a class="btn-sm btn-danger" data-toggle="modal"
                                                                         data-id="{{ $attachment->id }}"
                                                                         href="#exampleModal_6"><i
                                                                             class="fa fa-trash"></i></a>
 
                                                                     @if ($attachment->is_forwarded_employer)
-                                                                        <a href="#" title="Cancel Client"
+                                                                        <a class="btn-sm btn btn-warning"
+                                                                            href="#" title="Cancel Client"
                                                                             wire:click.prevent="takeAttachmentFromClient({{ $attachment->id }})">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     @else
-                                                                        <a href="#" title="To Client"
+                                                                        <a class="btn-sm btn-success" href="#"
+                                                                            title="To Client"
                                                                             wire:click.prevent="sendAttachmentToClient({{ $attachment->id }})">
                                                                             <i class="fa fa-location-arrow"></i>
                                                                         </a>
@@ -322,7 +464,10 @@
 
 
                                 </div>
+
+
                             </div>
+
                         </div>
 
                         <!--
@@ -416,6 +561,8 @@
                             </div>
                         </div>
                         {{-- End Delete Modal --}}
+
+
 
                         <!--ATTACH FILEs   Modal -->
                         <div class="modal fade" id="exampleModal_5" tabindex="-1" wire:ignore

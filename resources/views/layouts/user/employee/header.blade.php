@@ -1,8 +1,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-        <a href="" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-            <img src="{{ asset('assets/dist_3/assets/images/header-logo.png') }}" alt="" width="50px">
-            ALSHOALA
+        <a href="{{route('employee.dashboard')}}" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" alt="" width="50px">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

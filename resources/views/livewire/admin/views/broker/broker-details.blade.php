@@ -63,11 +63,11 @@
                                                         <td>{{ $broker->registration_No }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Broker Name:</td>
+                                                        <td>Coordinator  Name:</td>
                                                         <td>{{ $broker->name }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Broker E-mail:</td>
+                                                        <td>Coordinator  E-mail:</td>
                                                         <td>{{ $broker->email }}</td>
                                                     </tr>
                                                     <tr>
@@ -385,7 +385,7 @@
                         'October', 'November', 'December'
                     ],
                     datasets: [{
-                        label: 'Total Broker Demands',
+                        label: 'Total Coordinator  Demands',
                         data: [{{ $jobArr[1] }}, {{ $jobArr[2] }}, {{ $jobArr[3] }},
                             {{ $jobArr[4] }}, {{ $jobArr[5] }}, {{ $jobArr[6] }},
                             {{ $jobArr[7] }},

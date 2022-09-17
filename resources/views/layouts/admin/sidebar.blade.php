@@ -1,5 +1,5 @@
   <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+  <aside id="left-panel" class="left-panel" style="width:18%;">
       <nav class="navbar navbar-expand-sm navbar-default">
           <div id="main-menu" class="main-menu collapse navbar-collapse">
               <ul class="nav navbar-nav">
@@ -138,15 +138,11 @@
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
-                      <i class="menu-icon fa fa-users"></i> Coordinator</a>
+                      <i class="menu-icon fa fa-user"></i> Coordinator</a>
                   <ul class="sub-menu children dropdown-menu">
                       <li>
-                          <i class="menu-icon fa fa-plus"></i>
-                          <a href="{{ route('brokers.all') }}"> All Coordinators</a>
-                      </li>
-                      <li>
                           <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('client.list') }}"> Client Mangament</a>
+                          <a href="{{ route('brokers.all') }}"> All Coordinators</a>
                       </li>
                   </ul>
               </li>
@@ -180,7 +176,7 @@
               <li class="menu-item-has-children dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
-                      <i class="menu-icon fa fa-money"></i>Reports</a>
+                      <i class="menu-icon fa fa-file"></i>Reports</a>
                   <ul class="sub-menu children dropdown-menu">
                       <li>
                           <a href="{{ route('reports.agents') }}">Agent Reports</a>

@@ -55,7 +55,7 @@
                                                         {{ $case->created_at->diffForHumans() }}
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('admin.case.details', $case->id) }}">
+                                                        <a class="btn-sm btn btn-info" href="{{ route('admin.case.details', $case->id) }}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         {{-- @if ($case->stat->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')

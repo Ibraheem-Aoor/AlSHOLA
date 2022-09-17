@@ -16,7 +16,8 @@ class CaseDetails extends Component
 
     public function mount($id)
     {
-        $this->case = Ticket::with(['application.job:id,post_number' , 'attachments.user' , 'messages.user'])->findOrFail($id);
+        $this->case =  Ticket::with(['application.job:id,post_number' , 'attachments.user' , 'messages.user',
+        'application.attachments' , 'application.user' , 'application.title'])->findOrFail($id);;
     }//end mount
 
 
