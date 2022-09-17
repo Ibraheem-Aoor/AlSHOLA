@@ -11,6 +11,7 @@ use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PdfController extends Controller
 {
@@ -48,8 +49,11 @@ class PdfController extends Controller
     public function generateApplicationPDF($id)
     {
         $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments'])->with('job.title.sector')->findOrFail($id);
+        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
+        $photo_src = Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo);
         $data = [
             'application' => $application,
+            'photo_src' => $photo_src,
         ];
         $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf', $data);
         $pdf->setPaper('A4');

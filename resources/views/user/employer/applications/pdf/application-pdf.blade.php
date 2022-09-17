@@ -109,10 +109,7 @@
             </p>
         </div>
     </div>
-    @php
-        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
-    @endphp
-    <img src="{{ Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo) }}"
+    <img src="{{$photo_src}}"
         width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <br>
     <table style="margin-top: -150px">
