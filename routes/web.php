@@ -80,6 +80,8 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+    Route::post('/application/attach' , [ApplicationController::class , 'uploadApplicationAttachment'])->name('application.file.upload');
+
     Route::resource('/job' , JobController::class);
 
         // Cse Attahments Routes
@@ -133,7 +135,6 @@ Route::group(['middleware' => ['auth']], function()
     Route::resource('profile', ProfileController::class);
 
     Route::post('/job/attachment/upload' , [GeneralJobController::class , 'uploadJobAttachment'] )->name('job.attachment.upload');
-    Route::post('/application/attach' , [ApplicationController::class , 'uploadApplicationAttachment'])->name('application.file.upload');
     Route::get('/application/{id}/attachment/{fileName}/download' , function($id , $fileName )
     {
         $application  = Application::with('job:id')->findOrFail($id);

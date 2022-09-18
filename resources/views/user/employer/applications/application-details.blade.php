@@ -439,7 +439,7 @@
                                                                             @php
                                                                                 $attachments = $application
                                                                                     ->attachments()
-                                                                                    ->where('is_forwarded_talent', true)
+                                                                                    ->where('is_forwarded_employer', true)
                                                                                     ->orderByDesc('created_at')
                                                                                     ->paginate(15);
                                                                             @endphp
