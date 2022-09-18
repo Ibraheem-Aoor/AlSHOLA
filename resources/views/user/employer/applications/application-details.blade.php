@@ -55,24 +55,34 @@
 
                                                     <nav>
                                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                                                href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
+                                                                data-toggle="tab" href="#custom-nav-home" role="tab"
+                                                                aria-controls="custom-nav-home"
                                                                 aria-selected="false">General Information</a>
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                                                href="#custom-nav-lang" role="tab" aria-controls="custom-nav-home"
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
+                                                                data-toggle="tab" href="#custom-nav-lang" role="tab"
+                                                                aria-controls="custom-nav-home"
                                                                 aria-selected="false">Language LEVEL</a>
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                                                href="#custom-nav-employers" role="tab"
-                                                                aria-controls="custom-nav-home" aria-selected="false">Employer
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
+                                                                data-toggle="tab" href="#custom-nav-employers"
+                                                                role="tab" aria-controls="custom-nav-home"
+                                                                aria-selected="false">Employer
                                                                 Experince</a>
 
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                                                href="#custom-nav-education" role="tab"
-                                                                aria-controls="custom-nav-home" aria-selected="false">Education</a>
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
+                                                                data-toggle="tab" href="#custom-nav-education"
+                                                                role="tab" aria-controls="custom-nav-home"
+                                                                aria-selected="false">Education</a>
 
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab" data-toggle="tab"
-                                                                href="#custom-nav-attachments" role="tab"
-                                                                aria-controls="custom-nav-home" aria-selected="false">Attachments</a>
+                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
+                                                                data-toggle="tab" href="#custom-nav-attachments"
+                                                                role="tab" aria-controls="custom-nav-home"
+                                                                aria-selected="false">Attachments</a>
+
+                                                            <a class="nav-item nav-link" id="custom-nav-home-actions"
+                                                                data-toggle="tab" href="#custom-nav-actions"
+                                                                role="tab" aria-controls="custom-nav-home"
+                                                                aria-selected="false">Actions</a>
                                                         </div>
                                                     </nav>
                                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -164,7 +174,8 @@
                                                                                 <td>Relegion:
                                                                                     {{ $application->relegion }}</td>
                                                                                 <td>Visa_Number:
-                                                                                    {{ $application->visa_number ?? 'NONE' }}</td>
+                                                                                    {{ $application->visa_number ?? 'NONE' }}
+                                                                                </td>
                                                                                 <td>flight_ticket:
                                                                                     {{ $application->flight_ticket ?? 'NONE' }}
                                                                                 </td>
@@ -270,8 +281,8 @@
 
                                                         {{-- Employer Experince --}}
 
-                                                        <div class="tab-pane fade" id="custom-nav-employers" role="tabpanel"
-                                                            aria-labelledby="custom-nav-contact-tab">
+                                                        <div class="tab-pane fade" id="custom-nav-employers"
+                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
                                                             <p>
                                                             <div class="col-sm-12 ">
                                                                 <div class="table-responsive">
@@ -324,8 +335,8 @@
 
 
                                                         {{-- Employer Education --}}
-                                                        <div class="tab-pane fade" id="custom-nav-education" role="tabpanel"
-                                                            aria-labelledby="custom-nav-contact-tab">
+                                                        <div class="tab-pane fade" id="custom-nav-education"
+                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
                                                             <p>
                                                             <div class="col-sm-12 ">
                                                                 <div class="table-responsive">
@@ -370,9 +381,43 @@
                                                             </p>
                                                         </div>
 
+
+
+                                                        {{-- Actions --}}
+                                                        @if ($application->job->subStatus->name != 'Demand Cancelled' &&
+                                                            $application->job->subStatus->name != 'Demand Complete' &&
+                                                            $application->subStatus != 'Cancelled Application')
+                                                            <div class="tab-pane fade" id="custom-nav-actions"
+                                                                role="tabpanel"
+                                                                aria-labelledby="custom-nav-contact-tab">
+                                                                <p>
+                                                                <div class="col-sm-12 ">
+                                                                    @if (!$application->is_accepted)
+                                                                        <a class="btn btn-outline-success"
+                                                                            data-toggle="modal"
+                                                                            href="#exampleModal_6">Accept
+                                                                            Application</a>
+                                                                    @endif
+
+                                                                    @if (!$application->is_accepted)
+                                                                        <a class="btn btn-outline-info"data-toggle="modal"
+                                                                            data-target="#exampleModal_5">Send
+                                                                            Comment</a>
+                                                                        <a class="btn btn-outline-danger"
+                                                                            data-toggle="modal"
+                                                                            href="#exampleModal_1">Reject
+                                                                            Application</a>
+                                                                    @endif
+                                                                </div>
+                                                                </p>
+                                                            </div>
+                                                        @endif
+
+
+
                                                         {{-- Attachments --}}
-                                                        <div class="tab-pane fade" id="custom-nav-attachments" role="tabpanel"
-                                                            aria-labelledby="custom-nav-contact-tab">
+                                                        <div class="tab-pane fade" id="custom-nav-attachments"
+                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
                                                             <p>
                                                             <div class="col-sm-12 text-center">
                                                                 <div class="table-responsive">
@@ -411,12 +456,15 @@
 
                                                                                         <a title="Download"
                                                                                             href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name]) }}">
-                                                                                            <i class="fa fa-download"></i>&nbsp;
+                                                                                            <i
+                                                                                                class="fa fa-download"></i>&nbsp;
                                                                                         </a>
                                                                                         </li>
-                                                                                        <a title="Send Note" href="#exampleModal_5"
+                                                                                        <a title="Send Note"
+                                                                                            href="#exampleModal_5"
                                                                                             data-id="{{ $file->application->id }}"
-                                                                                            data-toggle="modal" href="#"><i
+                                                                                            data-toggle="modal"
+                                                                                            href="#"><i
                                                                                                 class="fa fa-edit"></i></a>
 
                                                                                         {{-- <li><a class="dropdown-item badge bg-primary" data-toggle="modal"
@@ -445,6 +493,8 @@
                                                             </div>
                                                             </p>
                                                         </div>
+
+
 
 
 
