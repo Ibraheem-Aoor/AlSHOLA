@@ -109,8 +109,8 @@
             </p>
         </div>
     </div>
-    <img src="{{$photo_src}}"
-        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
+    {{-- <img src="{{$photo_src}}"
+        width="200" height="200" style="margin-left:70%;border: 1px solid black;"> --}}
     <br>
     <table style="margin-top: -150px">
         <tr>
