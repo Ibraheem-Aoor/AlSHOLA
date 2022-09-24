@@ -8,7 +8,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">All Registerd Agnet</h4>
+                                <h4 class="box-title">Client Report</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="container mb-2">
@@ -76,15 +76,18 @@
                                                             $i = 0;
                                                         @endphp
                                                         @forelse($job->applications as $application)
+                                                        <tr>
                                                             <td>&nbsp;</td>
                                                             <td>{{ $application->user->name }}</td>
-                                                            <td>{{ $job->subJobs[$i++]?->title->name }}</td>
+                                                            <td>{{ $application->title->name }}</td>
                                                             <td>{{ $titleQty = $job->subJobs()->where('title_id', $application->title_id)->sum('quantity') }}
                                                             </td>
                                                             <td>{{ $appliedApplications = $job->applications->where('title_id', 1)->count() }}
                                                             </td>
                                                             <td>{{ $titleQty - $appliedApplications }}
                                                             </td>
+                                                        </tr>
+
                                                         @empty
                                                             <tr>
                                                                 <td>&nbsp;</td>
@@ -94,8 +97,8 @@
                                                                 </td>
                                                                 <td>0</td>
                                                                 <td>{{ $titleQty }}</td>
+                                                            </tr>
                                                         @endforelse
-                                                        </tr>
                                                     @empty
                                                     @endforelse
                                                     <tr>

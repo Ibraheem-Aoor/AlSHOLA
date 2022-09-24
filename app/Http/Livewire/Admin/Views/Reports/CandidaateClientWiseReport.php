@@ -12,7 +12,7 @@ class CandidaateClientWiseReport extends Component
 
     public function getApplications()
     {
-        $applciations = Application::query()->with(['user' , 'job.user' , 'subStatus' , 'title']);
+        $applciations = Application::query()->whereHas('job')->with(['user' , 'job.user' , 'subStatus' , 'title']);
         if($this->selectedClients)
         {
             $applciations->whereHas('job.user'  , function($user)

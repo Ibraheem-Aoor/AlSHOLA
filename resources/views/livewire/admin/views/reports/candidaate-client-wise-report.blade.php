@@ -8,7 +8,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">All Registerd Agnet</h4>
+                                <h4 class="box-title">Candidate Client Wise Report</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="container mb-2">

@@ -11,7 +11,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">All Registerd Agnet</h4>
+                                <h4 class="box-title">Agent Report</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="container mb-2">
@@ -62,7 +62,7 @@
                                                     <td>{{ $agent->responsible_person }}</td>
                                                     <td>{{ $agent->mobile }}</td>
                                                 </tr>
-                                                @if (count($agent->applications) > 0)
+                                                @if ($agent->applications_count > 0)
                                                     <tr style="background-color:lightgray">
                                                         <td>&nbsp;</td>
                                                         <td>Client</td>
@@ -72,18 +72,21 @@
                                                         <td>Balance</td>
                                                     </tr>
                                                     @php
-                                                        $i = 0;
+                                                        $j = 0;
                                                     @endphp
                                                     @forelse($agent->applications as $application)
+                                                    <tr>
                                                         <td>&nbsp;</td>
                                                         <td>{{ $application->job->user->name }}</td>
-                                                        <td>{{ $application->job->subJobs[$i++]?->title->name }}</td>
+                                                        <td>{{ $application->title->name }}</td>
                                                         <td>{{ $titleQty = $application->job->subJobs()->where('title_id', $application->title_id)->sum('quantity') }}
                                                         </td>
                                                         <td>{{ $agent->applications->where('title_id', 1)->count() }}
                                                         </td>
                                                         <td>{{ $titleQty - $agent->applications_count }}
                                                         </td>
+                                                    </tr>
+
                                                     @empty
                                                     @endforelse
                                                     <tr>

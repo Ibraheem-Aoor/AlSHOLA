@@ -22,7 +22,7 @@ class AgentReport extends Component
     public function render()
     {
         $agents = $this->getAgents();
-
+        // dd($agents);
         // return dd($agents);
         return view('livewire.admin.views.reports.agent-report' , [
             'agents' => $agents

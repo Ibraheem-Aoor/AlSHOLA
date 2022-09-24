@@ -188,6 +188,9 @@
                           <a href="{{ route('reports.applications_status') }}">Candidate Status Reports</a>
                       </li>
                       <li>
+                          <a href="{{ route('reports.applications_agent') }}">Candidate Agent Reports</a>
+                      </li>
+                      <li>
                           <a href="{{ route('reports.applications_client') }}">Candidate Client Reports</a>
                       </li>
                   </ul>
