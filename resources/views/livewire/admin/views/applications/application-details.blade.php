@@ -67,145 +67,107 @@
                                 </nav>
                                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                     <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
-                                        <div class="container">
+                                        <div class="contianer">
                                             <div class="row">
-                                                @isset($application->job_id)
-                                                    <div class="col-sm-4">
-                                                        <label for="inputEmail3" class="">Job
-                                                            Category:</label>
-                                                        <input type="text"
-                                                            value="{{ $application->job->subJobs->first()->title->sector->name ?? 'UNKOWN' }}"
-                                                            class="form-control" id="inputEmail3" readonly>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <label for="inputPassword3" class="col-form-label">Title:</label>
-                                                        <input type="text"
-                                                            value="{{ $application->job->subJobs->first()->title->name ?? 'UNKOWN' }}"
-                                                            class="form-control" id="inputPassword3" readonly>
-                                                    </div>
-                                                @endisset
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Ref:</label>
-                                                    <input type="text" value="{{ $application->ref }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Date:</label>
-                                                    <input type="text" value="{{ $application->date }}"
-                                                        class="form-control" id="inputPassword3" readonly>
+                                                <div class="col-sm-12 a">
+                                                    @php
+                                                        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
+                                                    @endphp
+                                                    <img src="{{ Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo) }}"
+                                                        width="200" height="200"
+                                                        class="float-right"
+                                                        style="border: 1px solid black;">
                                                 </div>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3"
-                                                        class="col-form-label">Address:</label>
-                                                    <input type="text" value="{{ $application->address }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Full
-                                                        Name:</label>
-                                                    <input type="text" value="{{ $application->full_name }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                <div class="col-sm-" >
+                                                    <table style="margin-top: -150px"
+                                                        class="table table-responsive">
+                                                        <tr>
+                                                            <td>Ref: {{ $application->ref }}</td>
+                                                            <td>Date:
+                                                                {{ $application->job->created_at }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr></tr>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Passport
-                                                        No:</label>
-                                                    <input type="text" value="{{ $application->passport_no }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Contact
-                                                        No:</label>
-                                                    <input type="text" value="{{ $application->contact_no }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        <tr>
+                                                            <td>Full_Name:
+                                                                {{ $application->full_name }}</td>
+                                                            <td>
+                                                                Position Applied For:
+                                                                {{ $application->title->name }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Address:
+                                                                {{ $application->address }}</td>
+                                                            <th>Contact_No:
+                                                                {{ $application->contact_no }}
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Passport_No:
+                                                                {{ $application->passport_no }}
+                                                            </td>
+                                                            <th>Nationality:
+                                                                {{ $application->Nationlaity ?? 'UNKOWN' }}
+                                                            </th>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Place Of
-                                                        Birth:</label>
-
-                                                    <input type="text"
-                                                        value="{{ $application->place_of_birth }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        </tr>
 
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Date Of
-                                                        Birth:
-                                                    </label>
-                                                    <input type="text" value="{{ $application->date_of_birth }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        <tr id="tt">
+                                                            <td>Place Issued:
+                                                                {{ $application->place_issued }}
+                                                            </td>
+                                                            <td>Place Of Birth:
+                                                                {{ $application->place_of_birth ?? 'UNKOWN' }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Date Issued:
+                                                                {{ $application->date_issued }}
+                                                            </td>
+                                                            <td>Age: {{ $application->age }}</td>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Age:</label>
-                                                    <input type="text" value="{{ $application->age }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3"
-                                                        class="col-form-label">Relegion:</label>
-                                                    <input type="text" value="{{ $application->relegion }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        </tr>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Place
-                                                        Issued:</label>
-                                                    <input type="text" value="{{ $application->place_issued }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Date
-                                                        Issued:</label>
-                                                    <input type="text" value="{{ $application->date_issued }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label class="col-form-label">Visa:</label>
-                                                    <input type="text"
-                                                        value="{{ $application->visa_number ?? 'NONE' }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label class="col-form-label">Flight Ticket:</label>
-                                                    <input type="text"
-                                                        value="{{ $application->flight_ticket ?? 'NONE' }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        <tr>
+                                                            <td>Expiry Dte:
+                                                                {{ $application->expiry_issued }}
+                                                            </td>
+                                                            <td>Relegion:
+                                                                {{ $application->relegion }}</td>
+                                                            <td>Visa_Number:
+                                                                {{ $application->visa_number ?? 'NONE' }}
+                                                            </td>
+                                                            <td>flight_ticket:
+                                                                {{ $application->flight_ticket ?? 'NONE' }}
+                                                            </td>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Expiry
-                                                        Date:</label>
-                                                    <input type="text" value="{{ $application->expiry_issued }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">Gender
-                                                        :</label>
-                                                    <input type="text" value="{{ $application->sex }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        </tr>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3"
-                                                        class="col-form-label">Children:</label>
-                                                    <input type="text" value="{{ $application->children }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">height:</label>
-                                                    <input type="text" value="{{ $application->height }}"
-                                                        class="form-control" id="inputPassword3" readonly>
-                                                </div>
+                                                        <tr>
 
-                                                <div class="col-sm-4">
-                                                    <label for="inputPassword3" class="col-form-label">weihgt:</label>
-                                                    <input type="text" value="{{ $application->weihgt }}"
-                                                        class="form-control" id="inputPassword3" readonly>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td>status:
+                                                                {{ $application->status }}</td>
+                                                            <td>sex: {{ $application->sex }}</td>
+
+
+                                                            <td>children:
+                                                                {{ $application->children }}</td>
+                                                            <td>height:
+                                                                {{ $application->height }}</td>
+                                                            <td>weight:
+                                                                {{ $application->weight }}</td>
+                                                        </tr>
+
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

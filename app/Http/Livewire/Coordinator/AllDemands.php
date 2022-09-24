@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Coordinator;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AllDemands extends Component
@@ -10,7 +11,7 @@ class AllDemands extends Component
     public $broker;
     public function getDemands()
     {
-        $this->broker = $user = $this->getAuthUser();
+        $this->broker = $user = Auth::user();
         return $user->brokerJobs()->paginate(15);
     }//End getDemands()
     public function render()

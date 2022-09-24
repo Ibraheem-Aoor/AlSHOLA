@@ -162,7 +162,7 @@
                                                     <td>{{ $job->subStatus->name }}</td>
                                                     <td>{{ $job->created_at }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.demand.details', $job->id) }}"
+                                                        <a href="{{ route('broker.demand.details', $job->id) }}"
                                                             class="btn-sm btn-outline-primary"><i
                                                                 class="fa fa-eye"></i></a>
                                                     </td>

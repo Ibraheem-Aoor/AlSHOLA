@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\Employer\Jobs\JobController;
 use App\Http\Livewire\Coordinator\AllDemands;
 use App\Http\Livewire\Coordinator\Dashboard;
+use App\Http\Livewire\Coordinator\Views\BrokerDemandDetails;
 use App\Http\Livewire\Coordinator\Views\NewDemand;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -30,6 +31,7 @@ Route::group([ 'middleware' => 'auth'  , 'as' => 'broker.'] , function()
     Route::get('/dashboard' , Dashboard::class)->name('dashboard');
     Route::get('/demands' , AllDemands::class)->name('demands');
     Route::get('/demands/new' , NewDemand::class)->name('demands.new');
+    Route::get('/demand/{id}/details' , BrokerDemandDetails::class)->name('demand.details');
     Route::get('/sector/{id}' , [JobController::class , 'setSelectedSector']);
 
 });
