@@ -40,7 +40,7 @@ class DemandHelper
                 return redirect()->back()->withErrors($validate->errors());
             }
             if(count($job->terms) > 0)
-                $this->deleteOldTerms($job);
+                $this->deleteOldTerms($job , $request->agent);
             $this->saveJobTerms($request , $job);
             $this->sendJobToAgent($request->agent , $job);
             HistoryRecordHelper::registerDemandLog('Demand Forwarded To Agent' .'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
@@ -58,9 +58,9 @@ class DemandHelper
     }//end method
 
 
-    public function deleteOldTerms($job)
+    public function deleteOldTerms($job , $agent_id)
     {
-        $job->terms()->delete();
+        $job->terms()->whereUserId($agent_id)->delete();
     }//End deleteOldTerms
 
     public function saveJobTerms($request , $job)
