@@ -657,7 +657,7 @@
                                                 Send a Note </a>
 
                                             <a href="{{ route('brokers.assign', $job->id) }}"
-                                                class="btn btn-secondary col-sm-12 mb-2">Assign To Broker</a>
+                                                class="btn btn-secondary col-sm-12 mb-2">Assign To Coordinator</a>
 
                                             <a data-toggle="modal" href="#exampleModal_8"
                                                 class="btn btn-secondary col-sm-12 mb-2">Change Demand Status</a>
