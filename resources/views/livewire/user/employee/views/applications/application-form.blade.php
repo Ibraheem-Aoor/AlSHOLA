@@ -266,28 +266,9 @@
 
 
                                             <tr>
-                                                <td>
-                                                    <div>
-                                                        <label>Expiry Issued:</label>
-                                                        <input required type="date" name="expiry_issued"
-                                                            class="form-control" value="{{ old('expiry_issued') }}">
-                                                        @error('expiry_issued')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
 
-                                                <td>
 
-                                                    <div>
-                                                        <label>Passport No:</label>
-                                                        <input required type="text" name="passport_no"
-                                                            class="form-control" value="{{ old('passport_no') }}">
-                                                        @error('passport_no')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </td>
+
 
                                                 <td>
                                                     <div>
@@ -308,6 +289,17 @@
                                                 </td>
 
                                                 <td>
+
+                                                    <div>
+                                                        <label>Passport No:</label>
+                                                        <input required type="text" name="passport_no"
+                                                            class="form-control" value="{{ old('passport_no') }}">
+                                                        @error('passport_no')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     <div>
                                                         <label>Place Issued:</label>
                                                         <input required type="text" name="place_issued"
@@ -320,7 +312,7 @@
 
                                                 <td>
                                                     <div>
-                                                        <label>date_issued:</label>
+                                                        <label>Date Issued:</label>
                                                         <input required type="date" name="date_issued"
                                                             class="form-control" value="{{ old('date_issued') }}">
                                                         @error('date_issued')
@@ -330,7 +322,28 @@
                                                 </td>
 
 
+                                                <td>
+                                                    <div>
+                                                        <label>Expiry Date:</label>
+                                                        <input required type="date" name="expiry_issued"
+                                                            class="form-control" value="{{ old('expiry_issued') }}">
+                                                        @error('expiry_issued')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </td>
 
+
+
+
+
+
+                                            </tr>
+
+
+
+
+                                            <tr>
                                                 <td>
                                                     <div>
                                                         <label>children:</label>
@@ -352,12 +365,6 @@
                                                         @enderror
                                                     </div>
                                                 </td>
-
-                                            </tr>
-
-
-
-                                            <tr>
 
                                                 <td>
                                                     <div>
