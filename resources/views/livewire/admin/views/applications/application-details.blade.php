@@ -111,7 +111,7 @@
                                                                 {{ $application->passport_no }}
                                                             </td>
                                                             <th>Nationality:
-                                                                {{ $application->Nationlaity ?? 'UNKOWN' }}
+                                                                {{ $application->nationlaity ?? 'UNKOWN' }}
                                                             </th>
 
                                                         </tr>
@@ -145,6 +145,10 @@
                                                             <td>flight_ticket:
                                                                 {{ $application->flight_ticket ?? 'NONE' }}
                                                             </td>
+                                                            <td>
+                                                                Coordinator:
+                                                                {{$application->job->broker->name}}
+                                                            </td>
 
                                                         </tr>
 
@@ -164,7 +168,7 @@
                                                             <td>height:
                                                                 {{ $application->height }}</td>
                                                             <td>weight:
-                                                                {{ $application->weight }}</td>
+                                                                {{ $application->weihgt }}</td>
                                                         </tr>
 
                                                     </table>
