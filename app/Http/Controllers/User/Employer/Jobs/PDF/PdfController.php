@@ -41,7 +41,7 @@ class PdfController extends Controller
         55, array(0,0,0),2,2,-30);
         HistoryRecordHelper::registerDemandLog('Demand PDF Printing' .'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
 
-        return $pdf->download('ALSHOALA-JOB-'.$job->post_number.'.pdf');
+        return $pdf->stream('ALSHOALA-JOB-'.$job->post_number.'.pdf');
     }//end method
 
 
