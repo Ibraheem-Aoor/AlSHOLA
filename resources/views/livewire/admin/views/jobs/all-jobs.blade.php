@@ -88,7 +88,7 @@
                                                         <span
                                                             class="badge badge-{{ $badgeColor }}">{{ $job->subStatus->name }}</span>
                                                     </td>
-                                                    <td><span>{{ $job->created_at }}</span>
+                                                    <td><span>{{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d')}}</span>
                                                     </td>
                                                     <td>
                                                         <a class="btn-sm btn btn-info" href="{{ route('admin.demand.details', $job->id) }}">

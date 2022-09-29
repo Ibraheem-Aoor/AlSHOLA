@@ -54,7 +54,7 @@
                                                         {!! Str::lower($history->action) !!}
                                                     </td>
                                                     <td>
-                                                        {{ $history->created_at }}
+                                                        {{\Carbon\Carbon::parse($history->created_at)->format('Y-M-d') }}
                                                     </td>
                                                 </tr>
                                             @empty

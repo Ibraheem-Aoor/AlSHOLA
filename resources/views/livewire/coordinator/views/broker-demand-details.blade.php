@@ -286,7 +286,7 @@
                                                     <tfoot>
                                                         <tr>
                                                             <td><span class="text-danger">Submission Date</span>:
-                                                                {{ $job->created_at }}</td>
+                                                                {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}</td>
                                                             <td><span class="text-danger">Total QTY</span>:
                                                                 {{ $job->qty() }}</td>
                                                         </tr>
@@ -336,7 +336,7 @@
                                                                 <td>{{ $attachment->type }}</td>
                                                                 <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
                                                                 </td>
-                                                                <td>{{ $attachment->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d')}}</td>
                                                                 <td>
                                                                     <a class="btn btn-outline-primary"
                                                                         href="{{ route('file.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i
@@ -399,9 +399,7 @@
                                                                 <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
                                                                 </td>
                                                                 <td>{{ Str::limit($note->message, 40, '..') }}</td>
-                                                                <td>{{ $note->created_at }}
-                                                                </td>
-                                                                <td>{{ $note->created_at }}</td>
+                                                                <td>{{\Carbon\Carbon::parse($note->created_at)->format('Y-M-d') }}</td>
                                                                 <td>
                                                                     <a class="btn btn-outline-info"
                                                                         data-message="{{ $note->message }}"
@@ -461,7 +459,7 @@
                                                                 <td>{{ $refuse->user->name }}
                                                                 </td>
                                                                 <td>{{ Str::limit($refuse->reason, 40, '...') }}</td>
-                                                                <td>{{ $refuse->created_at }}
+                                                                <td>{{ \Carbon\Carbon::parse($refuse->created_at)->format('Y-M-d') }}
                                                                 </td>
                                                                 <td>
                                                                     <a class="btn btn-outline-info"
@@ -524,7 +522,7 @@
                                                                 <td>
                                                                     {{ $application->mainStatus->name }}
                                                                 </td>
-                                                                <td>{{ $application->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}</td>
                                                                 {{-- <td>
                                                                     <a
                                                                         href="{{ route('admin.application.details', $application->id) }}">

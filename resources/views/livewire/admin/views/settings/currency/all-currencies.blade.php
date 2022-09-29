@@ -40,7 +40,7 @@
                                                     <td>
                                                         {{ $currency->value }}
                                                     </td>
-                                                    <td>{{ $currency->created_at }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($currency->created_at)->format('Y-M-d') }}</td>
                                                     <td>
                                                         <a wire:click="setCurrencyId('{{ $currency->id }}')"
                                                             data-key="{{ $currency->key }}"

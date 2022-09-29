@@ -74,21 +74,21 @@
                                                         <td>{{ $case->id }}</td>
                                                     </tr>
                                                     <tr>
+                                                        <td>Created By:</td>
+                                                        <td>{{ $case->user->name }}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>Status</td>
                                                         <td>{{ $case->status }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Created By:</td>
-                                                        <td>{{ $case->user->name }}</td>
-                                                    </tr>
-
-                                                    <tr>
                                                         <td>Application Ref</td>
                                                         <td>{{ $case->application->ref }}</td>
                                                     </tr>
+
                                                     <tr>
-                                                        <td>Agent</td>
-                                                        <td>{{ $case->application->user->name }}</td>
+                                                        <td>Full Name</td>
+                                                        <td>{{ $case->application->full_name }}</td>
                                                     </tr>
 
                                                     <tr>
@@ -107,6 +107,7 @@
                                                     </tr>
 
 
+
                                                     @isset($case->other_reason)
                                                         <tr>
                                                             <td>Orher Reason:</td>
@@ -116,6 +117,19 @@
                                                         </tr>
                                                     @endisset
 
+                                                    @isset($case->details)
+                                                        <tr>
+                                                            <td>Details:</td>
+                                                            <td>
+                                                                {{ $case->details }}
+                                                            </td>
+                                                        </tr>
+                                                    @endisset
+                                                    <tr>
+                                                        <td>Date:</td>
+                                                        <td>{{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d') }}
+                                                        </td>
+                                                    </tr>
 
                                                 </table>
 
@@ -163,7 +177,7 @@
                                                         <tr>
                                                             <td>Ref: {{ $case->application->ref }}</td>
                                                             <td>Date:
-                                                                {{ $case->application->job->created_at }}
+                                                                {{ \Carbon\Carbon::parse($case->application->job->created_at->created_at)->format('Y-M-d') }}
                                                             </td>
                                                         </tr>
                                                         <tr></tr>
@@ -283,7 +297,7 @@
                                                                 <td>{{ Str::limit($message->message, 30, '...') }}
                                                                 </td>
                                                                 </td>
-                                                                <td>{{ $message->created_at->diffForHumans() }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($message->created_at)->format('Y-M-d') }}</td>
                                                                 <td>
                                                                     {{-- <a class="btn btn-outline-primary"
                                                                         href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
@@ -367,7 +381,7 @@
                                                                 <td>{{ $attachment->name }}</td>
                                                                 <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
                                                                 </td>
-                                                                <td>{{ $attachment->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d') }}</td>
                                                                 <td>
                                                                     @if ($attachment->is_forwarded_employee)
                                                                         <a class="btn-sm btn btn-warning"

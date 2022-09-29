@@ -2,40 +2,25 @@
 @section('title', 'Dashboard | Add New Jobs')
 @section('content')
     <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             @php
                 $title = '';
             @endphp
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications For Your Job Posts</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications For Your Demands</h1>
             <div class="row g-4">
-                <div class="col-sm-4">
-                    <select name="filter" class="form-control text-center">
-                        <option value="">-- Select One -- </option>
-                        <option value="Active">Active</option>
-                        <option value="Hold">Hold</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Completed">Completed</option>
-                    </select>
-                </div>
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <form action="{{ route('application.search') }}" method="GET">
-                        @csrf
-                        <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search"
-                            aria-label="Search" name="search">
-                    </form>
-                </div>
                 <div class="col-sm-12 text-center">
-                    <div class="table-responsive" id="applications_table">
-                        <table class="table">
+                    <div class="table-responsive" >
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Case ID</th>
                                     <th scope="col">Application Ref</th>
                                     <th scope="col">Demand No.</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">status</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Actions</th>
                                     {{-- <th scope="col">Actions</th> --}}
@@ -51,7 +36,9 @@
                                         <td>{{ $case->id }}</td>
                                         <td>{{ $case->application->ref }}</td>
                                         <td>{{ $case->application->job->post_number }}</td>
-                                        <td>{{ $case->created_at->diffForHumans() }}</td>
+                                        <td>{{ $case->application->full_name}}</td>
+                                        <td>{{ $case->status }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d')}}</td>
                                         <td>
                                             <a href="{{route('cases.show' , $case->id)}}" class="btn btn-info">
                                                 <i class="fa fa-eye"></i>

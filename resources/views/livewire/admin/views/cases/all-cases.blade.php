@@ -23,12 +23,11 @@
                                                 <th>Case ID</th>
                                                 <th>Application Ref</th>
                                                 <th>Demand No.</th>
+                                                <th>Full Name</th>
                                                 <th>Created_By</th>
+                                                <th>Status</th>
                                                 <th>Date</th>
                                                 <th>Actions</th>
-                                                <th>
-                                                    Actions
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -47,15 +46,17 @@
                                                     <td>
                                                         {{ $case->application->job->post_number }}
                                                     </td>
+                                                    <td>{{$case->application->full_name}}</td>
                                                     <td>{{ $case->user->name }}</td>
                                                     <td>
                                                         {{ $case->status }}
                                                     </td>
                                                     <td>
-                                                        {{ $case->created_at->diffForHumans() }}
+                                                        {{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d')}}
                                                     </td>
                                                     <td>
-                                                        <a class="btn-sm btn btn-info" href="{{ route('admin.case.details', $case->id) }}">
+                                                        <a class="btn-sm btn btn-info"
+                                                            href="{{ route('admin.case.details', $case->id) }}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         {{-- @if ($case->stat->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')

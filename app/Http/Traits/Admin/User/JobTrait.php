@@ -16,7 +16,7 @@ trait JobTrait
 
 
 
-    //This method send the job post to talent using many to many relationship
+    //This method send the Demand to talent using many to many relationship
     public function snedJobToEmployer($id)
     {
         $employee = User::findOrFail($id);

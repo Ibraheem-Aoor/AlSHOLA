@@ -1,11 +1,11 @@
 <div>
-    @section('title', 'ALSHOALA | AVILABLE JOBS')
+    @section('title', 'ALSHOALA | AVILABLE DEMANDS')
     <div class="container-xxl py-5">
         <div class="container">
             @php
                 $title = '';
             @endphp
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Avilable Jobs Recommended For You</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Avilable Demands Recommended For You</h1>
             <div class="row g-4">
                 <div class="col-sm-4">
                     <select name="filter" class="form-control text-center">
@@ -60,7 +60,7 @@
                                         <td>
                                             {{ $job->user->name }}
                                         </td>
-                                        <td>{{ $job->created_at }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}</td>
                                         <td>{{ $job->subStatus->name }}</td>
                                         @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
                                             <td>

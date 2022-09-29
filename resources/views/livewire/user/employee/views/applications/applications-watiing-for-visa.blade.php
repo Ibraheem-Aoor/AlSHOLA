@@ -33,7 +33,7 @@
                                         <td><a
                                                 href="{{ route('employee.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>
                                         </td>
-                                        <td>{{ $application->created_at }}</td>
+                                        <td>{{\Carbon\Carbon::parse($application->created_at)->format('Y-M-d')}}</td>
                                             <td><a class="btn btn-outline-success" data-toggle="modal"
                                                     data-id="{{ $application->id }}" href="#exampleModal_5">
                                                     <i class="fa fa-upload"></i>

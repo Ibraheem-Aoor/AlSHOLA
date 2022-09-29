@@ -56,7 +56,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        @if ($user->company)
+                                        {{-- @if ($user->company) --}}
                                             <div class="form-group col-sm-6">
                                                 <label class=" form-control-label">Company:</label>
                                                 <select class="form-control" wire:model.lazy="company">
@@ -71,7 +71,7 @@
                                                 @enderror
 
                                             </div>
-                                        @endif
+                                        {{-- @endif --}}
 
                                         <button type="submit" class="btn btn-success col-sm-12">UPDATE</button>
                             </form>
@@ -110,7 +110,7 @@
                                                                 {{ $file->folder }}
                                                             </td>
                                                             <td>
-                                                                {{ $file->created_at }}
+                                                                {{ \Carbon\Carbon::parse($file->created_at)->format('Y-M-d')}}
                                                             </td>
                                                             <td>
                                                                 <a href="

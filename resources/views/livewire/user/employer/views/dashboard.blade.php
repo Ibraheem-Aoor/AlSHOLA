@@ -19,7 +19,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Job Posts</p>
+                            <p class="mb-2">Demands</p>
                             <h6 class="mb-0">34</h6>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Completed Jobs</p>
+                            <p class="mb-2">Total Completed Demands</p>
                             <h6 class="mb-0">122</h6>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Cacelled Jobs</p>
+                            <p class="mb-2">Total Cacelled Demands</p>
                             <h6 class="mb-0">122</h6>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Pedning Jobs</p>
+                            <p class="mb-2">Total Pedning Demands</p>
                             <h6 class="mb-0">122</h6>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Returned Jobs</p>
+                            <p class="mb-2">Total Returned Demands</p>
                             <h6 class="mb-0">122</h6>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Active Jobs</p>
+                            <p class="mb-2">Total Active Demands</p>
                             <h6 class="mb-0">122</h6>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
             <div iv class="col-sm-12 text-center mb-5">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="text-green">Latest Job Posts</h2>
+                        <h2 class="text-green">Latest Demands</h2>
                     </div>
                     <div class="card-body">
                         @if (Session::has('error'))
@@ -241,7 +241,7 @@
     </div>
 </div>
 @push('js')
-    
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

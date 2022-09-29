@@ -17,7 +17,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Avilable Job Posts</p>
+                            <p class="mb-2">Avilable Demands</p>
                             <h6 class="mb-0">$1234</h6>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Returned Jobs</p>
+                            <p class="mb-2">Total Returned Demands</p>
                             <h6 class="mb-0">$1234</h6>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Total Active Jobs</p>
+                            <p class="mb-2">Total Active Demands</p>
                             <h6 class="mb-0">$1234</h6>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
     <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
 
         <div iv class="col-sm-12 text-center mb-5">
-            <h2 class="text-green">Latest Job Posts Recommend For You</h2>
+            <h2 class="text-green">Latest Demands Recommend For You</h2>
             <div class="table-responsive">
                 <table class="table" id="myTable">
                     <thead>
@@ -147,7 +147,7 @@
             data: {
                 labels: ['Under Proccess', 'Cancelled', 'Completed'],
                 datasets: [{
-                    label: 'Avilable Jobs',
+                    label: 'Avilable Deamands',
                     data: [{{$underProcessJobs}}, {{$cancelledJobs}}, {{$completedJobs}}],
                     backgroundColor: [
                         'rgb(255, 205, 86)',

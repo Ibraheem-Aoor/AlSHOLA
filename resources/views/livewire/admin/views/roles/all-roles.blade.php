@@ -35,7 +35,7 @@
                                                     </td>
                                                     <td> <span class="product">{{$role->permissions->count()}}</span>
                                                     </td>
-                                                    <td><span>{{ $role->created_at }}</span>
+                                                    <td><span>{{ \Carbon\Carbon::parse($role->created_at)->format('Y-M-d') }}</span>
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-outline-primary"

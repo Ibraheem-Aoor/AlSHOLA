@@ -54,27 +54,30 @@
             vertical-align: middle;
         }
     </style>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-
 <body>
-
-
-    {{-- <table>
+    @include('application-template' , $data)
+    <table class="tableNoBorder">
         <tr>
-            <th>Demand SR</th>
-            <th>Demand Category</th>
-            <th> Title</th>
-            <th>status</th>
-            <th>Date</th>
+            <td>FOR OFFICAL ONLY</td>
+            <td>Minimum Expected Salary: {{ $data['application']->min_salary }}</td>
         </tr>
         <tr>
-            <td>{{ $application->job->post_number }}</td>
-            <td>{{ $application->title->sector->name }}</td>
-            <td>{{ $application->title->name }}</td>
-            <td>{{ $application->job->status }}</td>
-            <td>{{ $application->job->created_at }}</td>
+            Applicant Interviewed By: {{ $data['application']->applicant_interviewd_by }}
         </tr>
-    </table> --}}
+        <tr>
+            Recommendations: {{ $data['application']->recommendations }}
+        </tr>
+        <tr>
+            <td>Signature: </td>
+            <td>Date: </td>
+        </tr>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{{-- <body>
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
@@ -109,8 +112,8 @@
             </p>
         </div>
     </div>
-    {{-- <img src="{{$photo_src}}"
-        width="200" height="200" style="margin-left:70%;border: 1px solid black;"> --}}
+    <img src="{{$photo_src}}"
+        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
     <br>
     <table style="margin-top: -150px">
         <tr>
@@ -252,6 +255,10 @@
             <td>Date: </td>
         </tr>
     </table>
-</body>
+
+       <!-- JavaScript Libraries -->
+       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body> --}}
 
 </html>

@@ -57,7 +57,7 @@ trait  ApplicationAttachmentTrait
             }//end if
 
         $application->visa_number = $request->visa_number;
-        // $application->flight_ticket = $request->flight_ticket;
+        $application->flight_ticket = $request->flight_ticket;
         $application->save();
             $admin = User::where('type' , 'admin')->first();
             Notification::send($admin , new NewApplicationAttachment($application));

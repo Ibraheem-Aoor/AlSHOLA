@@ -10,14 +10,14 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="/" class="nav-item nav-link">Home</a>
-                <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
-                <a href="{{ route('categories') }}" class="nav-item nav-link">INDUSTRIES</a>
+                {{-- <a href="{{ route('about') }}" class="nav-item nav-link">About</a> --}}
+                {{-- <a href="{{ route('categories') }}" class="nav-item nav-link">INDUSTRIES</a> --}}
                 <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
                 @if (!Auth::check())
                     <a href="{{ route('login') }}" class="nav-item nav-link ">LogIn</a>
-                    <a href="{{ route('register') }}" class="nav-item nav-link ">SignUp</a>
+                    {{-- <a href="{{ route('register') }}" class="nav-item nav-link ">SignUp</a> --}}
             </div>
-            <a href="{{ route('register') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
+            <a href="{{ route('register') }}" class="btn btn-secondary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
                 Job<i class="fa fa-arrow-right ms-3"></i></a>
         @else
             @php

@@ -1,12 +1,12 @@
 @extends('layouts.user.employee.master')
-@section('title', 'ALSHOALA | AVILABLE JOBS')
+@section('title', 'ALSHOALA | AVILABLE DEMANDS')
 @section('content')
     <div class="container-xxl py-5">
         <div class="container">
             @php
                 $title = '';
             @endphp
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Avilable Jobs Recommended For You</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Avilable Demands Recommended For You</h1>
             <div class="row g-4">
                 <div class="col-sm-4">
                     <select name="filter" class="form-control text-center">

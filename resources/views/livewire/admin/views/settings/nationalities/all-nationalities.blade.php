@@ -36,7 +36,7 @@
                                                     <td>
                                                         {{ $nationality->name }}
                                                     </td>
-                                                    <td>{{ $nationality->created_at }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}</td>
                                                     <td>
                                                         <a wire:click="setTragetNationalityId('{{ $nationality->id }}')"
                                                             data-name="{{ $nationality->name }}" data-toggle="modal"

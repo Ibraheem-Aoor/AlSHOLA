@@ -43,7 +43,7 @@
                                                         <a href="{{ route('admin.job.details', $application->job->id) }}"
                                                             class="text-info">{{ $application->job->post_number }}</a>
                                                     </td>
-                                                    <td>{{ $application->created_at }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d')}}</td>
                                                     <td><a
                                                             href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
                                                     </td>

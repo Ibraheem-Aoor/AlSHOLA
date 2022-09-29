@@ -33,7 +33,7 @@
                         href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                 </td>
                 <td>{{ $application->subStatus->name }}</td>
-                <td>{{ $application->created_at }}</td>
+                <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d')}}</td>
                 @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
                     <td>
                         @switch($application->job->subStatus->name)

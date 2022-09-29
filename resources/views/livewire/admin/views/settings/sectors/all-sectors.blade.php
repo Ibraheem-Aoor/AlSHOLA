@@ -34,7 +34,7 @@
                                                     <td>
                                                         {{ $category->name }}
                                                     </td>
-                                                    <td>{{ $category->created_at }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($category->created_at)->format('Y-M-d') }}</td>
                                                     <td>
                                                         <a wire:click="setTargetSectorId('{{ $category->id }}')"
                                                             data-sector="{{ $category->name }}" data-toggle="modal"

@@ -99,13 +99,13 @@
                                                         <td>{{ $case->status }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Created By:</td>
-                                                        <td>{{ $case->user->name }}</td>
+                                                        <td>Application Ref</td>
+                                                        <td>{{ $case->application->ref }}</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>Application Ref</td>
-                                                        <td>{{ $case->application->ref }}</td>
+                                                        <td>Full Name</td>
+                                                        <td>{{ $case->application->full_name }}</td>
                                                     </tr>
 
                                                     <tr>
@@ -124,6 +124,7 @@
                                                     </tr>
 
 
+
                                                     @isset($case->other_reason)
                                                         <tr>
                                                             <td>Orher Reason:</td>
@@ -133,6 +134,19 @@
                                                         </tr>
                                                     @endisset
 
+                                                    @isset($case->details)
+                                                        <tr>
+                                                            <td>Details:</td>
+                                                            <td>
+                                                                {{ $case->details }}
+                                                            </td>
+                                                        </tr>
+                                                    @endisset
+                                                    <tr>
+                                                        <td>Date:</td>
+                                                        <td>{{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d') }}
+                                                        </td>
+                                                    </tr>
 
                                                 </table>
 
@@ -433,9 +447,9 @@
                         </div>
 
                         <!--
-                                                                                                                                Modal_1
-                                                                                                                                This modal is for sending notes
-                                                                                                                            -->
+                                                                                                                                    Modal_1
+                                                                                                                                    This modal is for sending notes
+                                                                                                                                -->
 
 
 

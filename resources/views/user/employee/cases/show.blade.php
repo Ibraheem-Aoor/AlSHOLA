@@ -94,18 +94,20 @@
                                                         <td>Case ID:</td>
                                                         <td>{{ $case->id }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Status</td>
-                                                        <td>{{ $case->status }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Created By:</td>
-                                                        <td>{{ $case->user->name }}</td>
-                                                    </tr>
 
                                                     <tr>
                                                         <td>Application Ref</td>
                                                         <td>{{ $case->application->ref }}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Full Name</td>
+                                                        <td>{{ $case->application->full_name }}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Status</td>
+                                                        <td>{{ $case->status }}</td>
                                                     </tr>
 
                                                     <tr>
@@ -133,6 +135,19 @@
                                                         </tr>
                                                     @endisset
 
+                                                    @isset($case->details)
+                                                        <tr>
+                                                            <td>Details:</td>
+                                                            <td>
+                                                                {{ $case->details }}
+                                                            </td>
+                                                        </tr>
+                                                    @endisset
+
+                                                    <tr>
+                                                        <td>Date:</td>
+                                                        <td>{{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d')}}</td>
+                                                    </tr>
 
                                                 </table>
 

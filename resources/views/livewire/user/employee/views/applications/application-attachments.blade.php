@@ -2,13 +2,13 @@
 @section('title', 'Dashboard | Add New Jobs')
 @section('content')
     <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             @php
                 $title = '';
             @endphp
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications For Your Job Posts</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Applications For Your Demands</h1>
             <div class="row g-4">
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive">
@@ -31,7 +31,7 @@
                                         <th scope="row">{{ $i++ }}</th>
                                         <td>{{ $file->user->name }}</td>
                                         <td>{{ $file->name }}</td>
-                                        <td>{{ $file->created_at }}</td>
+                                        <td>{{\Carbon\Carbon::parse($file->created_at)->format('Y-M-d')}}</td>
                                         <td>
                                             <a href="{{ route('application.attachment.download', ['id' => $file->application_id, 'fileName' => $file->name, 'userId' => $file->user->id]) }}"
                                                 class="dropdown-item badge bg-primary">

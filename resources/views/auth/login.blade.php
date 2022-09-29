@@ -47,7 +47,7 @@
                                     </a>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">LogIn</button>
+                                    <button class="btn btn-secondary w-100 py-3" type="submit">LogIn</button>
                                 </div>
                             </div>
                         </form>

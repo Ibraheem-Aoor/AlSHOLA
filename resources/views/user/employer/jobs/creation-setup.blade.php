@@ -5,7 +5,7 @@
     @push('css')
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     @endpush
-@section('title', 'Dashboard | Create Job Post')
+@section('title', 'Dashboard | Create Demand')
 <div class="container-xxl py-5">
     <div class="container">
         <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Set Up The Basic Demand Information</h1>

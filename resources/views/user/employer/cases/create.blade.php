@@ -2,15 +2,14 @@
 @section('title', 'Dashboard | NEW CASE')
 @section('content')
     <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">SEND NEW CASE</h1>
             <form action="{{ route('cases.store') }}" method="POST" enctype="multipart/form-data" id="caseForm">
                 @csrf
                 <div class="row g-4">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="">Choose Candidate</label>
                         <select name="application_id" class="form-control text-center"
                             data-route="{{ route('employer.case.get_application') }}">
@@ -24,7 +23,7 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="">Reason</label>
                         <select name="reason" class="form-control">
                             <option value="">--select one--</option>
@@ -37,26 +36,29 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-sm-3 mt-3"></div>
-                    <div class="col-sm-6" id="other_reason">
-                        <label for="">Write The Reason: </label>
-                        <textarea name="other_reason" class="form-control" autofocus="false" style="height: 130px;"></textarea>
-                    </div>
-                    <div class="col-sm-12"></div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <label for="">Contact Number:</label>
                         <input type="text" name="contact_number" class="form-control">
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <label for="">Attachment:</label>
                         <input type="file" name="attachments[]" multiple class="form-control">
                         @error('attachments')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="col-sm-6" id="other_reason">
+                        <label for="">Write The Reason: </label>
+                        <textarea name="other_reason" class="form-control" autofocus="false" style="height: 130px;"></textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Details:</label>
+                        <textarea name="details" class="form-control" autofocus="false" style="height: 130px;" ></textarea>
+                    </div>
                     <button class="btn btn-outline-success col-sm-12" type="submit">Submit</button>
                 </div>
             </form>
+
         </div>
         <div class="row g-4 mt-2" id="application_details">
 

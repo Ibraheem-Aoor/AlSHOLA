@@ -135,7 +135,7 @@
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
                                                                 </td>
-                                                                <td>{{ $note->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($note->created_at)->format('Y-M-d')}}</td>
                                                                 <td><a class="btn btn-outline-primary"
                                                                         data-message="{{ $note->message }}"
                                                                         data-toggle="modal" href="#exampleModal_5"><i
@@ -187,7 +187,7 @@
                                                                 <td>{{ $attachment->type }}</td>
                                                                 <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
                                                                 </td>
-                                                                <td>{{ $attachment->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d') }}</td>
                                                                 <td>
                                                                     <a class="btn btn-outline-primary" href="#"
                                                                         wire:click="downloadAttachment('{{ $attachment->name }}')"><i
@@ -240,7 +240,7 @@
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $application->user->name }}</td>
                                                                 <td>{{ $application->user->email }}</td>
-                                                                <td>{{ $application->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}</td>
                                                                 <td>{{ $application->cover_letter }}</td>
                                                                 <td>{{ $application->resume }}</td>
                                                                 <td>

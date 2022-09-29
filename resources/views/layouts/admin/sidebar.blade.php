@@ -22,10 +22,10 @@
                       </li>
                   @endcan
 
-                  @can('Job Posting')
+                  @can('Demanding')
                       <li class="menu-item-has-children dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Job Posting</a>
+                              aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Demanding</a>
                           <ul class="sub-menu children dropdown-menu">
                               <li><i class="fa fa-bars"></i><a href="{{ route('admin.demand.requested') }}"> New
                                       Job</a>

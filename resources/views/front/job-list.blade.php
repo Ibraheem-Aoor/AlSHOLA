@@ -179,7 +179,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                    <a class="btn btn-primary py-3 px-5" href="">Browse More Demands</a>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
                     <div class="job-item p-4 mb-4">
@@ -337,7 +337,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                    <a class="btn btn-primary py-3 px-5" href="">Browse More Demands</a>
                 </div>
                 <div id="tab-3" class="tab-pane fade show p-0">
                     <div class="job-item p-4 mb-4">
@@ -495,7 +495,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                    <a class="btn btn-primary py-3 px-5" href="">Browse More Demands</a>
                 </div>
             </div>
         </div>

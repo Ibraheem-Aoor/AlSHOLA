@@ -14,7 +14,7 @@
     @section('title', 'Dashboard | Add New Jobs')
 @section('content')
     <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             @php

@@ -14,10 +14,10 @@
                                 <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Talent That You
                                     Deserve
                                 </h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at
+                                {{-- <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at
                                     sed stet
-                                    sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                                <a href="{{ route('register') }}"
+                                    sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p> --}}
+                                <a href="{{ route('login') }}"
                                     class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
                                     Talent</a>
                             </div>
@@ -35,9 +35,9 @@
                                 <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Person That You can
                                     Relay On
                                 </h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at
+                                {{-- <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at
                                     sed stet
-                                    sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                                    sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p> --}}
                                 <a href="SignUp.html" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A
                                     Talent</a>
                             </div>
@@ -67,49 +67,49 @@
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-headset text-primary mb-4"></i>
                         <h6 class="mb-3">Customer Service</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">200 Vacancy</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
                         <h6 class="mb-3">Human Resource</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">360 Vacancy</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
                         <h6 class="mb-3">Project Management</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">180 Vacancy</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
                         <h6 class="mb-3">Business Development</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">400 Vacancy</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
                         <h6 class="mb-3">Sales & Communication</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">600 Vacancy</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
                         <h6 class="mb-3">Teaching & Education</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">207 Vacancy</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
                     <a class="cat-item rounded p-4" href="">
                         <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
                         <h6 class="mb-3">Design & Creative</h6>
-                        <p class="mb-0">123 Vacancy</p>
+                        <p class="mb-0">190 Vacancy</p>
                     </a>
                 </div>
             </div>
@@ -149,7 +149,7 @@
                     <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
                     <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
                     <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                    <a class="btn btn-primary py-3 px-5 mt-3" href="SignUp.html">Find A Talent</a>
+                    <a class="btn btn-secondary py-3 px-5 mt-3" href="{{route('login')}}">Find A Talent</a>
                 </div>
             </div>
         </div>
@@ -345,7 +345,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Demands</a>
                     </div>
                     <div id="tab-2" class="tab-pane fade show p-0">
                         <div class="job-item p-4 mb-4">
@@ -503,7 +503,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Demands</a>
                     </div>
                     <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="job-item p-4 mb-4">
@@ -661,7 +661,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        <a class="btn btn-primary py-3 px-5" href="">Browse More Demands</a>
                     </div>
                 </div>
             </div>

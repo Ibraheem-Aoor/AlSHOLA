@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Post A New Job For Your Business</h1>

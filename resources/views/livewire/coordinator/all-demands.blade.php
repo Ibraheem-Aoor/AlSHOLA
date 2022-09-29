@@ -36,7 +36,7 @@
                                             <td>{{ $job->post_number }}</td>
                                             <td>{{ $job->user->name }}</td>
                                             <td>{{ $job->subStatus->name }}</td>
-                                            <td>{{ $job->created_at }}</td>
+                                            <td>{{\Carbon\Carbon::parse($job->created_at)->format('Y-M-d')}}</td>
                                             {{-- <td>
                                                 <a href="{{ route('admin.demand.details', $job->id) }}"
                                                     class="btn-sm btn-outline-primary"><i class="fa fa-eye"></i></a>

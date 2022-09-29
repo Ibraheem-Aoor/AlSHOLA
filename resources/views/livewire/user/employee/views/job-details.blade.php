@@ -154,7 +154,7 @@
                     <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                         <h4 class="mb-4">Job Summery</h4>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Published On:
-                            {{ $job->created_at }}
+                            {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
                         </p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Working Hours:
                             {{ $job->working_hours }}
@@ -198,7 +198,7 @@
                                     <td>{{ $attachment->type }}</td>
                                     <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
                                     </td>
-                                    <td>{{ $attachment->created_at }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d') }}</td>
                                     <td>
                                         <a class="btn btn-outline-primary"
                                             href="{{ route('job.attachment.download', ['jobId' => $job->id, 'fileName' => $attachment->name]) }}"><i

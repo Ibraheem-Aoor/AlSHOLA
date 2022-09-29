@@ -1,9 +1,9 @@
 @extends('layouts.user.employer.master')
-@section('title', 'ALSHOALA | ALL JOB POSTS')
+@section('title', 'ALSHOALA | ALL DemandS')
 
 @section('content')
     <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             @php
@@ -48,7 +48,7 @@
 
                 @default
             @endswitch
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ $title }} Job Posts</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ $title }} Demands</h1>
             <div class="row g-4">
                 <div class="col-sm-4">
                     <select name="filter" class="form-control text-center">

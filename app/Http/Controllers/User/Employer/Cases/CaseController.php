@@ -27,7 +27,9 @@ class CaseController extends Controller
     public function index()
     {
         $cases = Ticket::whereUserId(Auth::id())
-                ->with(['application.job'])
+                ->with(['application' => function($application){
+                    $application->with(['job' , 'subStatus']);
+                }])
                 ->simplePaginate(15);
         return view('user.employer.cases.index' , compact('cases'));
     }

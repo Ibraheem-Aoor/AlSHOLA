@@ -18,7 +18,7 @@ class PermessionSeeder extends Seeder
     {
         $permissions = [
             'Rise Demand' ,
-            'Job Posting' ,
+            'Demanding' ,
             'Users Authorities' ,
             'Applications Mangement',
             'Agent',

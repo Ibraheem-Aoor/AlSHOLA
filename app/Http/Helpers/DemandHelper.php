@@ -86,7 +86,7 @@ class DemandHelper
     }//End saveJobTerms
 
 
-    //This method send the job post to talent using many to many relationship
+    //This method send the Demand to talent using many to many relationship
     public function sendJobToAgent($agentId , $job)
     {
         $agent = User::findOrFail($agentId);

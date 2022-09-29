@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{{ route('employer.dashboard') }}" class="nav-item nav-link">DASHBOARD</a>
-                <a href="{{ route('employer.jobs.all') }}" class="nav-item nav-link">Jobs</a>
+                <a href="{{ route('employer.jobs.all') }}" class="nav-item nav-link">DEMANDS</a>
                 <a href="{{ route('employer.applications.all') }}" class="nav-item nav-link">Applications</a>
                 <a href="{{ route('employer.invoices') }}" class="nav-item nav-link">BILLING</a>
                 {{-- <a href="{{ route('cases.index') }}" class="nav-item nav-link">Cases</a> --}}
@@ -51,9 +51,9 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('job.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
+            <a href="{{ route('job.create') }}" class="btn btn-secondary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post
                 A
-                Job<i class="fa fa-arrow-right ms-3"></i></a>
+                Demand<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->

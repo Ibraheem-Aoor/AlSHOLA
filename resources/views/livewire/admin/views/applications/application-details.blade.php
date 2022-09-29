@@ -67,164 +67,24 @@
                                 </nav>
                                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                     <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
-                                        <div class="contianer">
-                                            <div class="row">
-
-                                                <div class="col-sm-12 a">
-                                                    @php
-                                                        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
-                                                    @endphp
-                                                    <img src="{{ Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo) }}"
-                                                        width="200" height="200"
-                                                        class="float-right"
-                                                        style="border: 1px solid black;">
+                                        <div class="container">
+                                            {{-- Basic From --}}
+                                            <div class="row bg-light text-center">
+                                                <div class="col-sm-4">DSR: {{$application->job?->post_number}}</div>
+                                                <div class="col-sm-4">
+                                                    Client: {{$application->user?->name}}
                                                 </div>
-
-                                                <div class="col-sm-" >
-                                                    <table style="margin-top: -150px"
-                                                        class="table table-responsive">
-                                                        <tr>
-                                                            <td>Ref: {{ $application->ref }}</td>
-                                                            <td>Date:
-                                                                {{ $application->job->created_at }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr></tr>
-
-                                                        <tr>
-                                                            <td>Full_Name:
-                                                                {{ $application->full_name }}</td>
-                                                            <td>
-                                                                Position Applied For:
-                                                                {{ $application->title->name }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Address:
-                                                                {{ $application->address }}</td>
-                                                            <th>Contact_No:
-                                                                {{ $application->contact_no }}
-                                                            </th>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Passport_No:
-                                                                {{ $application->passport_no }}
-                                                            </td>
-                                                            <th>Nationality:
-                                                                {{ $application->nationlaity ?? 'UNKOWN' }}
-                                                            </th>
-
-                                                        </tr>
-
-
-                                                        <tr id="tt">
-                                                            <td>Place Issued:
-                                                                {{ $application->place_issued }}
-                                                            </td>
-                                                            <td>Place Of Birth:
-                                                                {{ $application->place_of_birth ?? 'UNKOWN' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Date Issued:
-                                                                {{ $application->date_issued }}
-                                                            </td>
-                                                            <td>Age: {{ $application->age }}</td>
-
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>Expiry Dte:
-                                                                {{ $application->expiry_issued }}
-                                                            </td>
-                                                            <td>Relegion:
-                                                                {{ $application->relegion }}</td>
-                                                            <td>Visa_Number:
-                                                                {{ $application->visa_number ?? 'NONE' }}
-                                                            </td>
-                                                            <td>flight_ticket:
-                                                                {{ $application->flight_ticket ?? 'NONE' }}
-                                                            </td>
-                                                            <td>
-                                                                Coordinator:
-                                                                {{$application->job->broker->name}}
-                                                            </td>
-
-                                                        </tr>
-
-                                                        <tr>
-
-                                                        </tr>
-
-                                                        <tr>
-
-                                                            <td>status:
-                                                                {{ $application->status }}</td>
-                                                            <td>sex: {{ $application->sex }}</td>
-
-
-                                                            <td>children:
-                                                                {{ $application->children }}</td>
-                                                            <td>height:
-                                                                {{ $application->height }}</td>
-                                                            <td>weight:
-                                                                {{ $application->weihgt }}</td>
-                                                        </tr>
-
-                                                    </table>
+                                                <div class="col-sm-4">
+                                                    Agent: {{$application->job?->user?->name}}
                                                 </div>
                                             </div>
+                                            @include('application-template', [
+                                                'application' => $application,
+                                            ])
                                         </div>
                                     </div>
 
-                                    {{-- Languages Levels --}}
-                                    <div class="tab-pane fade" id="custom-nav-lang" role="tabpanel"
-                                        aria-labelledby="custom-nav-contact-tab">
-                                        <p>
-                                        <div class="col-sm-12 ">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Language</th>
-                                                            <th scope="col">Speak</th>
-                                                            <th scope="col">Understand</th>
-                                                            <th scope="col">Read</th>
-                                                            <th scope="col">Write</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">{{ 1 }}</th>
-                                                            <td>Arabic</td>
-                                                            <td>{{ $application->arabic_speak }}</td>
-                                                            <td>{{ $application->arabic_understand }}</td>
-                                                            <td>{{ $application->arabic_read }}</td>
-                                                            <td>{{ $application->arabic_write }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">{{ 2 }}</th>
-                                                            <td>English</td>
-                                                            <td>{{ $application->english_speak }}</td>
-                                                            <td>{{ $application->english_understand }}</td>
-                                                            <td>{{ $application->english_read }}</td>
-                                                            <td>{{ $application->english_write }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">{{ 3 }}</th>
-                                                            <td>Hindi</td>
-                                                            <td>{{ $application->hindi_speak }}</td>
-                                                            <td>{{ $application->hindi_understand }}</td>
-                                                            <td>{{ $application->hindi_read }}</td>
-                                                            <td>{{ $application->hindi_write }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        </p>
-                                    </div>
+
 
                                     {{-- Notes --}}
                                     <div class="tab-pane fade" id="custom-nav-notes" role="tabpanel"
@@ -250,7 +110,8 @@
                                                                 <th scope="row">{{ $i++ }}</th>
                                                                 <td>{{ $note->user->name . ' ( ' . $note->user->type . ' )' }}
                                                                 </td>
-                                                                <td>{{ $note->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($note->created_at)->format('Y-M-d') }}
+                                                                </td>
                                                                 @if ($application->job->subStatus->name != 'Demand Cancelled' &&
                                                                     $application->job->subStatus->name != 'Demand Complete' &&
                                                                     $application->subStatus->name != 'Cancelled Application')
@@ -304,7 +165,8 @@
                                                                 <td>{{ $record->prev_status }}</td>
                                                                 <td>{{ $record->status }}</td>
                                                                 <td>{{ $record->user->name }}</td>
-                                                                <td>{{ $record->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($record->created_at)->format('Y-M-d') }}
+                                                                </td>
                                                             </tr>
                                                         @empty
                                                             <tr>
@@ -322,102 +184,6 @@
                                         </p>
                                     </div>
 
-
-
-                                    {{-- Employer Experince --}}
-                                    <div class="tab-pane fade" id="custom-nav-employers" role="tabpanel"
-                                        aria-labelledby="custom-nav-contact-tab">
-                                        <p>
-                                        <div class="col-sm-12 ">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Employer Name</th>
-                                                            <th scope="col">Duration</th>
-                                                            <th scope="col">Country</th>
-                                                            <th scope="col">Designation</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @php
-                                                            $i = 1;
-                                                        @endphp
-                                                        @forelse ($application->employers as $emplyoer)
-                                                            <tr>
-                                                                <th scope="row">{{ $i++ }}</th>
-                                                                <td>{{ $emplyoer->name }}</td>
-                                                                <td>{{ $emplyoer->duration }}</td>
-                                                                <td>{{ $emplyoer->country }}</td>
-                                                                <td>{{ $emplyoer->designation }}</td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="7"
-                                                                    class="alert alert-warning  bg-dark"
-                                                                    style="color:#fff">
-                                                                    No Records Yet
-                                                                </td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td>Total Experince:
-                                                                {{ \App\Models\Employer::where('application_id', $application->id)->sum('duration') }}
-                                                                Year</td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        </p>
-                                    </div>
-
-                                    {{-- Employer Education --}}
-                                    <div class="tab-pane fade" id="custom-nav-education" role="tabpanel"
-                                        aria-labelledby="custom-nav-contact-tab">
-                                        <p>
-                                        <div class="col-sm-12 ">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Degree</th>
-                                                            <th scope="col">Year</th>
-                                                            <th scope="col">Educational Body</th>
-                                                            <th scope="col">Country</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @php
-                                                            $i = 1;
-                                                        @endphp
-                                                        @forelse ($application->educations as $edu)
-                                                            <tr>
-                                                                <th scope="row">{{ $i++ }}</th>
-                                                                <td>{{ $edu->degree }}</td>
-                                                                <td>{{ $edu->year }}</td>
-                                                                <td>{{ $edu->collage }}</td>
-                                                                <td>{{ $edu->country }}</td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="7"
-                                                                    class="alert alert-warning  bg-dark"
-                                                                    style="color:#fff">
-                                                                    No Records Yet
-                                                                </td>
-                                                            </tr>
-                                                        @endforelse
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        </p>
-                                    </div>
 
 
                                     {{-- Attachments --}}
@@ -454,7 +220,8 @@
                                                                 </td>
                                                                 <td>{{ $attachment->name }}</td>
                                                                 <td>{{ $attachment->type }}</td>
-                                                                <td>{{ $attachment->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d') }}
+                                                                </td>
                                                                 @isset($application->job_id)
                                                                     @if ($application->job->subStatus->name != 'Demand Cancelled' &&
                                                                         $application->job->subStatus->name != 'Demand Complete' &&
@@ -560,7 +327,8 @@
                                                                         </td>
                                                                         <td>{{ $term->serivce_charge }}</td>
                                                                         <td>{{ $term->per }}</td>
-                                                                        <td>{{ $term->created_at }}</td>
+                                                                        <td>{{ \Carbon\Carbon::parse($term->created_at)->format('Y-M-d') }}
+                                                                        </td>
                                                                         {{-- <td>
 
                                                                  <a title="Download"
@@ -668,7 +436,8 @@
                                                                 <td>{{ $refuse->user->name }}</td>
                                                                 <td>{{ Str::limit($refuse->reason, 30, '...') }}
                                                                 </td>
-                                                                <td>{{ $refuse->created_at }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($refuse->created_at)->format('Y-M-d') }}
+                                                                </td>
                                                                 <td>
                                                                     <a class="btn btn-outline-info"
                                                                         data-message="{{ $refuse->reason }}"

@@ -28,11 +28,16 @@
             display: inline-block;
             margin: 0px 30px;
         }
+
+        caption {
+            color: red;
+            font-weight: 600;
+        }
     </style>
 @endpush
 @section('content')
     <div>
-    @section('title', 'Dashboard | Create Job Post')
+    @section('title', 'Dashboard | Create Demand')
     <div class="container-xxl py-5">
         <div class="container">
             @php
@@ -54,25 +59,11 @@
                                                 <div class="custom-tab">
 
                                                     <nav>
-                                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                        <div class="nav nav-tabs clickable" id="nav-tab" role="tablist">
                                                             <a class="nav-item nav-link" id="custom-nav-home-tab"
                                                                 data-toggle="tab" href="#custom-nav-home" role="tab"
                                                                 aria-controls="custom-nav-home"
                                                                 aria-selected="false">General Information</a>
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-lang" role="tab"
-                                                                aria-controls="custom-nav-home"
-                                                                aria-selected="false">Language LEVEL</a>
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-employers"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Employer
-                                                                Experince</a>
-
-                                                            <a class="nav-item nav-link" id="custom-nav-home-tab"
-                                                                data-toggle="tab" href="#custom-nav-education"
-                                                                role="tab" aria-controls="custom-nav-home"
-                                                                aria-selected="false">Education</a>
 
                                                             <a class="nav-item nav-link" id="custom-nav-home-tab"
                                                                 data-toggle="tab" href="#custom-nav-attachments"
@@ -88,297 +79,21 @@
                                                     <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                                                         <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
 
-                                                            <h3>Application Information</h3>
-                                                            <div style="background: #f7ff9c" class="fromDiv mb-5 mt-2">
-                                                                <p>
-                                                                    From: {{ $application->user->name }}
-                                                                </p>
-                                                                <p>
-                                                                    E-mail: {{ $application->user->email }}
-                                                                </p>
-                                                                <p>
-                                                                    Mobile: {{ $application->user->mobile }}
-                                                                </p>
-                                                            </div>
-                                                            <br>
-
-                                                            <div class="contiane">
+                                                            <div class="container">
                                                                 <div class="row">
-
-                                                                    <div class="text-right">
-                                                                        @php
-                                                                            $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
-                                                                        @endphp
-                                                                        <img src="{{ Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo) }}"
-                                                                            width="200" height="200"
-                                                                            style="margin-left:70%;border: 1px solid black;">
-                                                                    </div>
-
-                                                                    <div class="col-sm-">
-                                                                        <table style="margin-top: -150px"
-                                                                            class="table table-responsive">
-                                                                            <tr>
-                                                                                <td>Ref: {{ $application->ref }}</td>
-                                                                                <td>Date:
-                                                                                    {{ $application->job->created_at }}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr></tr>
-
-                                                                            <tr>
-                                                                                <td>Full_Name:
-                                                                                    {{ $application->full_name }}</td>
-                                                                                <td>
-                                                                                    Position Applied For:
-                                                                                    {{ $application->title->name }}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Address:
-                                                                                    {{ $application->address }}</td>
-                                                                                <th>Contact_No:
-                                                                                    {{ $application->contact_no }}
-                                                                                </th>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Passport_No:
-                                                                                    {{ $application->passport_no }}
-                                                                                </td>
-                                                                                <th>Nationality:
-                                                                                    {{ $application->Nationlaity ?? 'UNKOWN' }}
-                                                                                </th>
-
-                                                                            </tr>
-
-
-                                                                            <tr id="tt">
-                                                                                <td>Place Issued:
-                                                                                    {{ $application->place_issued }}
-                                                                                </td>
-                                                                                <td>Place Of Birth:
-                                                                                    {{ $application->place_of_birth ?? 'UNKOWN' }}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Date Issued:
-                                                                                    {{ $application->date_issued }}
-                                                                                </td>
-                                                                                <td>Age: {{ $application->age }}</td>
-
-                                                                            </tr>
-
-                                                                            <tr>
-                                                                                <td>Expiry Dte:
-                                                                                    {{ $application->expiry_issued }}
-                                                                                </td>
-                                                                                <td>Relegion:
-                                                                                    {{ $application->relegion }}</td>
-                                                                                <td>Visa_Number:
-                                                                                    {{ $application->visa_number ?? 'NONE' }}
-                                                                                </td>
-                                                                                <td>flight_ticket:
-                                                                                    {{ $application->flight_ticket ?? 'NONE' }}
-                                                                                </td>
-
-                                                                            </tr>
-
-                                                                            <tr>
-
-                                                                            </tr>
-
-                                                                            <tr>
-
-                                                                                <td>status:
-                                                                                    {{ $application->status }}</td>
-                                                                                <td>sex: {{ $application->sex }}</td>
-
-
-                                                                                <td>children:
-                                                                                    {{ $application->children }}</td>
-                                                                                <td>height:
-                                                                                    {{ $application->height }}</td>
-                                                                                <td>weight:
-                                                                                    {{ $application->weight }}</td>
-                                                                            </tr>
-
-                                                                        </table>
+                                                                    {{-- Basic From --}}
+                                                                    <div class="col-sm-12">
+                                                                        <h3>Application Information</h3>
+                                                                        <div class="bg-light text-center mt-2 fw-600">
+                                                                            On behalf Of Al Shoala Recruitment Service
+                                                                            W. L. L
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                @include('application-template', [
+                                                                    'application' => $application,
+                                                                ])
                                                             </div>
-                                                        </div>
-
-
-
-
-                                                        {{-- Languages Levels --}}
-                                                        <div class="tab-pane fade" id="custom-nav-lang" role="tabpanel"
-                                                            aria-labelledby="custom-nav-contact-tab">
-                                                            <p>
-                                                            <div class="col-sm-12 ">
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th scope="col">#</th>
-                                                                                <th scope="col">Language</th>
-                                                                                <th scope="col">Speak</th>
-                                                                                <th scope="col">Understand</th>
-                                                                                <th scope="col">Read</th>
-                                                                                <th scope="col">Write</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <th scope="row">
-                                                                                    {{ 1 }}
-                                                                                </th>
-                                                                                <td>Arabic</td>
-                                                                                <td>{{ $application->arabic_speak }}
-                                                                                </td>
-                                                                                <td>{{ $application->arabic_understand }}
-                                                                                </td>
-                                                                                <td>{{ $application->arabic_read }}
-                                                                                </td>
-                                                                                <td>{{ $application->arabic_write }}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">
-                                                                                    {{ 2 }}
-                                                                                </th>
-                                                                                <td>English</td>
-                                                                                <td>{{ $application->english_speak }}
-                                                                                </td>
-                                                                                <td>{{ $application->english_understand }}
-                                                                                </td>
-                                                                                <td>{{ $application->english_read }}
-                                                                                </td>
-                                                                                <td>{{ $application->english_write }}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">
-                                                                                    {{ 3 }}
-                                                                                </th>
-                                                                                <td>Hindi</td>
-                                                                                <td>{{ $application->hindi_speak }}
-                                                                                </td>
-                                                                                <td>{{ $application->hindi_understand }}
-                                                                                </td>
-                                                                                <td>{{ $application->hindi_read }}
-                                                                                </td>
-                                                                                <td>{{ $application->hindi_write }}
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                            </p>
-                                                        </div>
-
-
-
-                                                        {{-- Employer Experince --}}
-
-                                                        <div class="tab-pane fade" id="custom-nav-employers"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
-                                                            <p>
-                                                            <div class="col-sm-12 ">
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th scope="col">#</th>
-                                                                                <th scope="col">Employer Name
-                                                                                </th>
-                                                                                <th scope="col">Duration</th>
-                                                                                <th scope="col">Country</th>
-                                                                                <th scope="col">Designation</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            @php
-                                                                                $i = 1;
-                                                                            @endphp
-                                                                            @forelse ($application->employers as $emplyoer)
-                                                                                <tr>
-                                                                                    <th scope="row">
-                                                                                        {{ $i++ }}
-                                                                                    </th>
-                                                                                    <td>{{ $emplyoer->name }}
-                                                                                    </td>
-                                                                                    <td>{{ $emplyoer->duration }}
-                                                                                    </td>
-                                                                                    <td>{{ $emplyoer->country }}
-                                                                                    </td>
-                                                                                    <td>{{ $emplyoer->designation }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @empty
-                                                                                <tr>
-                                                                                    <td colspan="7"
-                                                                                        class="alert alert-warning  bg-dark"
-                                                                                        style="color:#fff">
-                                                                                        No Records Yet
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endforelse
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                            </p>
-                                                        </div>
-
-
-
-
-                                                        {{-- Employer Education --}}
-                                                        <div class="tab-pane fade" id="custom-nav-education"
-                                                            role="tabpanel" aria-labelledby="custom-nav-contact-tab">
-                                                            <p>
-                                                            <div class="col-sm-12 ">
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th scope="col">#</th>
-                                                                                <th scope="col">Degree</th>
-                                                                                <th scope="col">Year</th>
-                                                                                <th scope="col">Educational Body
-                                                                                </th>
-                                                                                <th scope="col">Country</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            @php
-                                                                                $i = 1;
-                                                                            @endphp
-                                                                            @forelse ($application->educations as $edu)
-                                                                                <tr>
-                                                                                    <th scope="row">
-                                                                                        {{ $i++ }}
-                                                                                    </th>
-                                                                                    <td>{{ $edu->degree }}</td>
-                                                                                    <td>{{ $edu->year }}</td>
-                                                                                    <td>{{ $edu->collage }}</td>
-                                                                                    <td>{{ $edu->country }}</td>
-                                                                                </tr>
-                                                                            @empty
-                                                                                <tr>
-                                                                                    <td colspan="7"
-                                                                                        class="alert alert-warning  bg-dark"
-                                                                                        style="color:#fff">
-                                                                                        No Records Yet
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endforelse
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                            </p>
                                                         </div>
 
 
@@ -449,9 +164,11 @@
                                                                                         {{ $i++ }}</th>
                                                                                     <td>{{ $application->job->post_number }}
                                                                                     </td>
-                                                                                    <td>{{ $file->user->name }}</td>
+                                                                                    <td>{{ $file->user->name }}
+                                                                                    </td>
                                                                                     <td>{{ $file->name }}</td>
-                                                                                    <td>{{ $file->created_at }}</td>
+                                                                                    <td>{{ $file->created_at }}
+                                                                                    </td>
                                                                                     <td>
 
                                                                                         <a title="Download"
@@ -701,7 +418,6 @@
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-
     <script>
         $('#exampleModal_6').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)

@@ -23,7 +23,8 @@ class AddNewClientOrAgent extends Component
     */
     public $name ,  $email ,  $country , $registerationNo ,
             $resposebilePerson , $titlePosition,
-            $mobile , $responseibleNationality , $type;
+            $mobile , $responseibleNationality , $type ,
+            $password , $password_confirmation;
 
     public $currentRoute , $intendedUserType;
     /*
@@ -57,7 +58,7 @@ class AddNewClientOrAgent extends Component
                 'name' => $this->name,
                 'type' => $this->type,
                 'email' => $this->email,
-                'password' => Hash::make('password'), //default password
+                'password' => Hash::make($this->password), //default password
                 'country_id' => $this->country,
                 'registration_No' => $this->registerationNo,
                 'responsible_person' => $this->resposebilePerson,
@@ -77,6 +78,7 @@ class AddNewClientOrAgent extends Component
         return [
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'country' => 'required|string',
             'registerationNo' => 'required|string|unique:users,registration_No,'.$this->id,
             'resposebilePerson' => 'required|string',

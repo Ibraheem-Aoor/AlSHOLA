@@ -50,7 +50,7 @@
                                                         {{ json_decode($notification->data , true) }}
                                                     </td>
                                                     <td>
-                                                        {{ $notification->created_at }}
+                                                        {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d')}}
                                                     </td>
                                                 </tr>
                                             @empty

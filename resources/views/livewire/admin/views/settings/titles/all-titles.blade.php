@@ -34,7 +34,7 @@
                                                     <td>
                                                         {{ $title->name }}
                                                     </td>
-                                                    <td>{{ $title->created_at }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($title->created_at)->format('Y-M-d')}}</td>
                                                     <td>
                                                         <a wire:click="setTitleId('{{ $title->id }}')"
                                                             data-name="{{ $title->name }}" data-toggle="modal"

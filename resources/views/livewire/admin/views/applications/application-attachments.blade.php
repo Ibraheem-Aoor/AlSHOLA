@@ -45,7 +45,7 @@
                                                         {{ $file->type }}
                                                     </td>
                                                     <td>
-                                                        {{ $file->created_at }}
+                                                        {{ \Carbon\Carbon::parse($file->created_at)->format('Y-M-d') }}
                                                     </td>
                                                     <td>
                                                         <a title="download"

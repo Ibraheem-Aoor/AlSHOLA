@@ -38,7 +38,7 @@
                                                     <td><span>{{ $contact->user->email }}</span>
                                                     <td>{{ Str::limit($contact->message, 40, '...') }}
                                                     </td>
-                                                    <td>{{ $contact->created_at }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($contact->created_at)->format('Y-M-d')}}</td>
                                                     <td>
                                                         <a data-toggle="modal" data-message="{{ $contact->message }}"
                                                             href="#exampleModal_5" class="text-primary"><i

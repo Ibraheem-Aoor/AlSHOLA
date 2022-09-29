@@ -80,7 +80,7 @@
                                                             {{ $application->attachments_count }}
                                                         </a>
                                                     </td> --}}
-                                                    <td>{{ $application->created_at->diffForHumans() }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}</td>
                                                     <td><a
                                                             href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
                                                     </td>

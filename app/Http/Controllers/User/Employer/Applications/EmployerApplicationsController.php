@@ -233,7 +233,7 @@ class EmployerApplicationsController extends Controller
 
     public function getDetails($id)
     {
-        $application = Application::with(['job:id,post_number' , 'employers' , 'user' ,  'subStatus' , 'title.sector', 'attachments' ,'educations' , 'job.subStatus' , 'nationality']   )->with('job.subJobs.title.sector')->findOrFail($id);
+        $application = Application::with(['job:id,post_number' , 'employers' , 'user' ,  'subStatus' , 'title.sector', 'attachments' ,'educations' , 'job.subStatus' , 'nationality' , 'job.broker']   )->with('job.subJobs.title.sector')->findOrFail($id);
         $totalExperince = Employer::whereApplicationId($application->id)->sum('duration');
         return view('user.employer.applications.application-details' , compact('application'  , 'totalExperince'));
     }//end

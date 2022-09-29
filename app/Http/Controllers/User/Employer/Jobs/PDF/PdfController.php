@@ -48,13 +48,14 @@ class PdfController extends Controller
 
     public function generateApplicationPDF($id)
     {
-        $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments'])->with('job.title.sector')->findOrFail($id);
+        $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments' , 'subStatus' , 'job.broker'])->with('job.title.sector')->findOrFail($id);
         $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
         $photo_src = Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo);
         $data = [
             'application' => $application,
             'photo_src' => $photo_src,
         ];
+        return view('user.employer.applications.pdf.application-pdf' , ['data' => $data]);
         $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf', $data);
         $pdf->setPaper('A4');
 

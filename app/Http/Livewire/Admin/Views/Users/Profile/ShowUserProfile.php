@@ -21,7 +21,7 @@ class ShowUserProfile extends Component
         $this->mobile = $this->user->mobile;
         $this->country = $this->user->country->id;
         $this->responsible_person = $this->user->responsible_person;
-        $this->company = $this->user->company->id;
+        $this->company = $this->user?->company?->id;
     }
 
     public function updateProfile()

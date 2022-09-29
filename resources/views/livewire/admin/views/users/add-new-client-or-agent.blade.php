@@ -31,6 +31,25 @@
                                         </div>
 
 
+                                        <div class="form-group col-sm-6">
+                                            <label class=" form-control-label">Password:</label>
+                                            <input type="password"  class="form-control"
+                                                wire:model.lazy="password">
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group col-sm-6">
+                                            <label class=" form-control-label">Password Confirmation:</label>
+                                            <input type="password" class="form-control"
+                                                wire:model.lazy="password_confirmation">
+                                            @error('password_confirmation')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+
 
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Registeration No:</label>

@@ -1,5 +1,5 @@
 @extends('layouts.user.employee.master')
-@section('title', 'ALSHOALA | AVILABLE JOBS')
+@section('title', 'ALSHOALA | APPLICATIONS')
 @section('content')
     <div class="container-xxl py-5">
         <div class="container">
@@ -65,7 +65,7 @@
                                                 href="{{ route('employee.application.notes', $application->id) }}">{{ $application->notes_count }}</a>
                                         </td>
                                         <td>{{ $application->subStatus->name ?? '' }}</td>
-                                        <td>{{ $application->created_at }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d')}}</td>
                                         @if ($application->subStatus->name != 'Cancelled Application' &&
                                             $application->job->subStatus->name != 'Demand Cancelled')
                                             <td>
@@ -138,7 +138,7 @@
                                             <option value="Flight Ticket">Flight Ticket</option>
                                             <option value="other">Other</option>
                                         </select>
-                                        <input type="text" id="flight_ticket" name="flight_ticket" class="form-control mt-3">
+                                        <input type="date" id="flight_ticket" name="flight_ticket" class="form-control mt-3">
                                         &nbsp; &nbsp; <input type="file" name="files[]" required multiple>
                                         <input type="text" id="id" name="id" hidden>
                                     </div>
@@ -183,6 +183,8 @@
                             $('select[name="file_type"]').on('change', function() {
                                 if ($(this).val() == 'Flight Ticket') {
                                     $('#flight_ticket').show();
+                                    $('#flight_ticket').attr('name' , 'flight_ticket');
+
                                 } else {
                                     $('#flight_ticket').hide();
                                     $('#flight_ticket').removeAttribute('name');

@@ -13,7 +13,7 @@
                 <div class="col-12">
                     <div class="row gy-4">
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.1s">
-                            <div class="d-flex align-items-center bg-light rounded p-4">
+                            <div class="d-flex align-items-center bg-light rounded p-4" style="min-height: 150px;">
                                 <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3"
                                     style="width: 45px; height: 45px;">
                                     <i class="fa fa-map-marker-alt text-primary"></i>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
-                            <div class="d-flex align-items-center bg-light rounded p-4">
+                            <div class="d-flex align-items-center bg-light rounded p-4" style="min-height: 150px;">
                                 <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3"
                                     style="width: 45px; height: 45px;">
                                     <i class="fa fa-envelope-open text-primary"></i>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
-                            <div class="d-flex align-items-center bg-light rounded p-4">
+                            <div class="d-flex align-items-center bg-light rounded p-4" style="min-height: 150px;">
                                 <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3"
                                     style="width: 45px; height: 45px;">
                                     <i class="fa fa-phone-alt text-primary"></i>
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                    <button class="btn btn-secondary w-100 py-3" type="submit">Send Message</button>
                                 </div>
                             </div>
                         </form>
