@@ -49,7 +49,7 @@
 
         .child {
             display: inline-block;
-            border: 1px solid #000;
+            /* border: 1px solid #000; */
             padding: 2rem 2rem;
             vertical-align: middle;
             min-height: 100px !important;
@@ -79,7 +79,7 @@
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
-        <div class="child" style="margin-right:40px !important;">
+        {{-- <div class="child" style="margin-right:40px !important;">
             <p style="padding: 3px;">
                 Agent Name: {{ $application->user->name }}
             </p>
@@ -94,8 +94,8 @@
             <p style="padding: 3px;">
                 E-mail: {{ $application->user->email }}
             </p>
-        </div>
-        <div class="child" style="" class="child" style="margin-left:40px !important;">
+        </div> --}}
+        <div class="child" style="" class="child" style="margin-left:10px !important;">
             <p style="padding: 3px;">
                 Al Shoala Recruitment Service W.L.L
             </p>
@@ -103,7 +103,7 @@
                 DSR: {{ $application->job->post_number }}
             </p>
             <p style="padding: 3px;">
-                Creation Date: {{ $application->job->created_at }}
+                Creation Date: {{ \Carbon\Carbon::parse($application->job->created_at )->format('Y-m-d')}}
             </p>
             <p style="padding: 3px;">
                 &nbsp;
