@@ -54,25 +54,38 @@
             vertical-align: middle;
         }
     </style>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
-    @include('application-template' , $data)
-    <table class="tableNoBorder">
-        <tr>
-            <td>FOR OFFICAL ONLY</td>
-            <td>Minimum Expected Salary: {{ $data['application']->min_salary }}</td>
-        </tr>
-        <tr>
-            Applicant Interviewed By: {{ $data['application']->applicant_interviewd_by }}
-        </tr>
-        <tr>
-            Recommendations: {{ $data['application']->recommendations }}
-        </tr>
-        <tr>
-            <td>Signature: </td>
-            <td>Date: </td>
-        </tr>
+    @include('application-template', $data)
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                FOR OFFICAL ONLY
+            </div>
+
+            <div class="col-sm-6">
+                Minimum Expected Salary: {{ $data['application']->min_salary }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                Applicant Interviewed By: {{ $data['application']->applicant_interviewd_by }}
+            </div>
+            <div class="col-sm-6">
+                Recommendations: {{ $data['application']->recommendations }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                Signature:
+            </div>
+            <div class="col-sm-4">
+                Date:
+            </div>
+        </div>
+    </div>
     </table>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
