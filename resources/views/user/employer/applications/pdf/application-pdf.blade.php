@@ -52,45 +52,32 @@
             border: 1px solid #000;
             padding: 1rem 1rem;
             vertical-align: middle;
+            min-height: 100px !important;
+            margin-left: 30px;
+            margin-right: 30px;
         }
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>
-    @include('application-template', $data)
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                FOR OFFICAL ONLY
-            </div>
 
-            <div class="col-sm-6">
-                Minimum Expected Salary: {{ $data['application']->min_salary }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                Applicant Interviewed By: {{ $data['application']->applicant_interviewd_by }}
-            </div>
-            <div class="col-sm-6">
-                Recommendations: {{ $data['application']->recommendations }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                Signature:
-            </div>
-            <div class="col-sm-4">
-                Date:
-            </div>
-        </div>
-    </div>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-{{-- <body>
+
+    {{-- <table>
+        <tr>
+            <th>Demand SR</th>
+            <th>Demand Category</th>
+            <th> Title</th>
+            <th>status</th>
+            <th>Date</th>
+        </tr>
+        <tr>
+            <td>{{ $application->job->post_number }}</td>
+            <td>{{ $application->title->sector->name }}</td>
+            <td>{{ $application->title->name }}</td>
+            <td>{{ $application->job->status }}</td>
+            <td>{{ $application->job->created_at }}</td>
+        </tr>
+    </table> --}}
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
@@ -125,8 +112,8 @@
             </p>
         </div>
     </div>
-    <img src="{{$photo_src}}"
-        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
+    {{-- <img src="{{$photo_src}}"
+        width="200" height="200" style="margin-left:70%;border: 1px solid black;"> --}}
     <br>
     <table style="margin-top: -150px">
         <tr>
@@ -268,10 +255,6 @@
             <td>Date: </td>
         </tr>
     </table>
-
-       <!-- JavaScript Libraries -->
-       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-</body> --}}
+</body>
 
 </html>
