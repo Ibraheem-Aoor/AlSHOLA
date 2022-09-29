@@ -79,7 +79,7 @@
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
-        <div class="child" style="font-weight: 500;margin-right:20px !important;">
+        <div class="child" style="margin-right:40px !important;">
             <p style="padding: 3px;">
                 Agent Name: {{ $application->user->name }}
             </p>
@@ -95,7 +95,7 @@
                 E-mail: {{ $application->user->email }}
             </p>
         </div>
-        <div class="child" style="" class="child" style="font-weight: 500;margin-left:20px !important;">
+        <div class="child" style="" class="child" style="margin-left:40px !important;">
             <p style="padding: 3px;">
                 Al Shoala Recruitment Service W.L.L
             </p>
@@ -132,9 +132,9 @@
         <tr>
             <td>Address:
                 {{ $application->address }}</td>
-            <th>Contact_No:
+            <td>Contact No:
                 {{ $application->contact_no }}
-            </th>
+            </td>
 
             <td>Passport No:
                 {{ $application->passport_no }}
@@ -154,9 +154,9 @@
             <td>Expiry Date:
                 {{ $application->expiry_issued }}
             </td>
-            <th>Nationality:
+            <td>Nationality:
                 {{ $application->nationality ?? 'UNKOWN' }}
-            </th>
+            </td>
 
             <td>Place Of Birth:
                 {{ $application->place_of_birth ?? 'UNKOWN' }}
@@ -207,7 +207,7 @@
     <table>
         <tr>
             <th>Degree</th>
-            <th>Edu-Body</th>
+            <th>Educational Body</th>
             <th>Country</th>
             <th>Year</th>
         </tr>

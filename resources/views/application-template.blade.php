@@ -29,9 +29,9 @@
             <tr>
                 <td>Address:
                     {{ $application->address }}</td>
-                <th>Contact_No:
+                <td>Contact_No:
                     {{ $application->contact_no }}
-                </th>
+                </td>
 
                 <td>Passport No:
                     {{ $application->passport_no }}
@@ -51,9 +51,9 @@
                 <td>Expiry Date:
                     {{ $application->expiry_issued }}
                 </td>
-                <th>Nationality:
+                <td>Nationality:
                     {{ $application->nationality ?? 'UNKOWN' }}
-                </th>
+                </td>
 
                 <td>Place Of Birth:
                     {{ $application->place_of_birth ?? 'UNKOWN' }}
