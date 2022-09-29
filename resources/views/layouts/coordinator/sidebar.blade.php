@@ -1,5 +1,5 @@
   <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel">
+  <aside id="left-panel" class="left-panel" style="width:18%;">
       <nav class="navbar navbar-expand-sm navbar-default">
           <div id="main-menu" class="main-menu collapse navbar-collapse">
               <ul class="nav navbar-nav">
@@ -12,6 +12,9 @@
                   </li>
                   <li class="active">
                       <a href="{{ route('broker.demands.new')}}"><i class="menu-icon fa fa-bullhorn"></i>New Demand</a>
+                  </li>
+                  <li class="active">
+                      <a href="{{ route('broker.applications.all')}}"><i class="menu-icon fa fa-file-text"></i>Applications</a>
                   </li>
 
                   {{-- <li class="menu-title">J Managment</li><!-- /.menu-title --> --}}

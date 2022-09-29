@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Applications;
+namespace App\Http\Livewire\Coordinator\Views;
 
 use App\Http\Traits\Admin\User\ApplicationTrait;
 use App\Models\Application;
-use App\Models\ApplicationNote;
-use App\Models\Note;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Route as FacadesRoute;
 use Livewire\Component;
-use Throwable;
 
-class AllAplications extends Component
+class AllApplications extends Component
 {
     use ApplicationTrait;
 
@@ -21,7 +18,7 @@ class AllAplications extends Component
 
     public function mount($id = null)
     {
-        $this->currentRouteName = Route::currentRouteName();
+        $this->currentRouteName = FacadesRoute::currentRouteName();
     }
 
 
@@ -56,7 +53,7 @@ class AllAplications extends Component
         $application->forwarded = true;
         $application->save();
         notify()->success('Application Sended Successfully');
-        return redirect(route('admin.applications.all'));
+        return redirect(route('broker.applications.all'));
     }
     public function takeApplicationFromEmployer($id)
     {
@@ -64,14 +61,15 @@ class AllAplications extends Component
         $application->forwarded = false;
         $application->save();
         notify()->success('Application Updated Successfully');
-        return redirect(route('admin.applications.all'));
+        return redirect(route('broker.applications.all'));
     }
 
     public function render()
     {
-        $user_layout = Auth::user()->type == 'Admin' ? 'layouts.admin.master' : 'layouts.coordinator.master';
-        $applications = Application::with(['user:id,name,email' , 'job.user' , 'subStatus' , 'title'] )->withCount(['notes' , 'attachments'])->orderByDesc('created_at')->simplePaginate(15);
-        return view('livewire.admin.views.applications.all-aplications' , ['applications' => $applications])
-        ->extends($user_layout)->section('content');
+        $applications = Application::whereHas('job' , function($job){
+            $job->where('broker_id' , Auth::id());
+        })->with(['user:id,name,email' , 'job.user' , 'subStatus' , 'title'] )->withCount(['notes' , 'attachments'])->orderByDesc('created_at')->simplePaginate(15);
+        return view('livewire.coordinator.views.all-applications' , ['applications' => $applications])
+        ->extends('layouts.coordinator.master')->section('content');
     }
 }

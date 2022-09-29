@@ -37,8 +37,6 @@ class PdfController extends Controller
 
         // $canvas->set_opacity(.2);
 
-        $canvas->page_text($width/5, $height/2, 'ALSHOALA.com', null,
-        55, array(0,0,0),2,2,-30);
         HistoryRecordHelper::registerDemandLog('Demand PDF Printing' .'<a href="/admin/demand/'.$job->id.'/details">'.'( '.$job->post_number.' )'.'</a>');
 
         return $pdf->stream('ALSHOALA-JOB-'.$job->post_number.'.pdf');
@@ -49,7 +47,7 @@ class PdfController extends Controller
     public function generateApplicationPDF($id)
     {
         $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments' , 'subStatus' , 'job.broker'])->with('job.title.sector')->findOrFail($id);
-        $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
+        $photo = $application->attachments->where('type', 'Personal Photo')?->first()?->name;
         $photo_src = Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo);
         $data = [
             'application' => $application,
@@ -69,8 +67,6 @@ class PdfController extends Controller
 
         // $canvas->set_opacity(.2);
 
-        $canvas->page_text($width/5, $height/2, 'ALSHOALA.com', null,
-        55, array(0,0,0),2,2,-30);
         HistoryRecordHelper::registerApplicationLog('Application PDF Printing' .'<a href="/admin/application/'.$application->id.'/details">'.'( '.$application->ref.' )'.'</a>');
         return $pdf->download('ALSHOALA-Application-'.$application->ref.'.pdf');
     }//end method

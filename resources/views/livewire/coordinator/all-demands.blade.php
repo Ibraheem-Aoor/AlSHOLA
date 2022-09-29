@@ -20,6 +20,7 @@
                                         <th scope="col">Client</th>
                                         <th scope="col">status</th>
                                         <th scope="col">creation_date</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,10 +38,17 @@
                                             <td>{{ $job->user->name }}</td>
                                             <td>{{ $job->subStatus->name }}</td>
                                             <td>{{\Carbon\Carbon::parse($job->created_at)->format('Y-M-d')}}</td>
-                                            {{-- <td>
-                                                <a href="{{ route('admin.demand.details', $job->id) }}"
-                                                    class="btn-sm btn-outline-primary"><i class="fa fa-eye"></i></a>
-                                            </td> --}}
+                                            <td>
+                                                <a class="btn-sm btn btn-info" href="{{ route('broker.demand.details', $job->id) }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                @if ($job->subStatus->name != 'Demand Cancelled' && $job->subStatus->name != 'Demand Complete')
+                                                    <a class="btn-sm btn btn-success" href="{{ route('broker.send-job-to-agent', $job->id) }}"
+                                                        title="send to agent"><i
+                                                            class="fa fa-location-arrow"></i></a>
+                                                @endif
+                                            </td>
+
                                         </tr>
                                     @empty
                                         <tr>

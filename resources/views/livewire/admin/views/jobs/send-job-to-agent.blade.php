@@ -93,7 +93,7 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td class="" colspan="7" 
+                                                    <td class="" colspan="7"
                                                         class="text-center alert alert-warning">No Records
                                                         Yet!
                                                     </td>
@@ -119,7 +119,12 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('admin.demand.set-terms', $job->id) }}" method="POST">
+                                @php
+                                    $route = route('admin.demand.set-terms', $job->id);
+                                    if(Auth::id() != 1)
+                                        $route = route('broker.demand.set-terms', $job->id);
+                                @endphp
+                                <form action="{{$route}}" method="POST">
                                     @csrf
                                     <div class="modal-body ">
                                         <input type="text" id="agent" name="agent" hidden>

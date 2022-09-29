@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Views\Applications;
+namespace App\Http\Livewire\Coordinator\Views;
 
 use App\Http\Helpers\HistoryRecordHelper;
 use App\Models\Application;
 use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationNote;
 use App\Models\ApplicationStatusHistory;
-use App\Models\Note;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route as FacadesRoute;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
-class ApplicationDetails extends Component
+class BrokerApplicationDetails extends Component
 {
+
     public $application , $note , $currentRoute , $mainStatus , $subStatus , $unreadNotes;
     public function mount($id)
     {
-        $this->currentRoute = FacadesRoute::currentRouteName();
+        $this->currentRoute = Route::currentRouteName();
         $this->application = Application::with(['user' , 'job.user' ,'job.terms' , 'job.title' , 'subStatus', 'title', 'job.broker',
                                                 'employers' , 'notes' ,
                                                 'statusHistory' , 'mainStatus' , 'subStatus' , 'educations' , 'attachments' , 'refused','job.subStatus'])
@@ -38,7 +37,7 @@ class ApplicationDetails extends Component
         $this->application->save();
         HistoryRecordHelper::registerApplicationLog('Application Sended To Employer' .'<a href="/admin/application/'.$this->application->id.'/details">'.'( '.$this->application->ref.' )'.'</a>');
         notify()->success('Application Sended Successfully');
-        return redirect(route('admin.applications.all'));
+        return redirect(route('broker.applications.all'));
     }
 
 
@@ -156,8 +155,7 @@ class ApplicationDetails extends Component
 
     public function render()
     {
-        $user_layout = Auth::user()->type == 'Admin' ? 'layouts.admin.master' : 'layouts.coordinator.master';
-        $mainStatuses = ApplicationMainStatus::all();
-        return view('livewire.admin.views.applications.application-details' , ['mainStatuses' => $mainStatuses])->extends($user_layout)->section('content');
+        $data['mainStatuses'] = ApplicationMainStatus::all();
+        return view('livewire.coordinator.views.broker-application-details' , $data)->extends('layouts.coordinator.master')->section('content');
     }
 }

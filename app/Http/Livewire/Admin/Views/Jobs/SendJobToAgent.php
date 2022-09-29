@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Views\Jobs;
 use App\Models\Currency;
 use App\Models\Job;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -15,9 +16,6 @@ class SendJobToAgent extends Component
     {
         $this->job = Job::with(['subJobs.title' , 'user:id,name'])->findOrFail($id);
     }
-
-
-
 
 
       //remove the job psot from the user by deleting the record in the pivot table.
@@ -46,11 +44,12 @@ class SendJobToAgent extends Component
     {
         $users = $this->getUsers();
         $currencies = Currency::all();
+        $user_layout = Auth::user()->type == 'Admin' ?  'layouts.admin.master' : 'layouts.coordinator.master';
         return view('livewire.admin.views.jobs.send-job-to-agent'
         , [
             'users' => $users,
             'currencies' => $currencies,
         ]
-        )->extends('layouts.admin.master')->section('content');
+        )->extends($user_layout)->section('content');
     }
 }

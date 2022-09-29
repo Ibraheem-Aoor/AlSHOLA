@@ -103,7 +103,7 @@
                 DSR: {{ $application->job->post_number }}
             </p>
             <p style="padding: 3px;">
-                Creation Date: {{ \Carbon\Carbon::parse($application->job->created_at )->format('Y-m-d')}}
+                Creation Date: {{ \Carbon\Carbon::parse($application->job->created_at )->format('Y-M-d')}}
             </p>
             <p style="padding: 3px;">
                 &nbsp;

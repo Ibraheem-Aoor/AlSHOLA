@@ -218,13 +218,13 @@
                                                                         $application->job->subStatus->name != 'Demand Complete' &&
                                                                         $application->subStatus->name != 'Cancelled Application')
                                                                         <td>
-                                                                            <a href="{{ route('admin.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                            <a href="{{ route('broker.application.attachment.download', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
                                                                                 class="text-primary">
                                                                                 <i class="fa fa-download"></i>
-                                                                                <a href="{{ route('admin.application.attachment.open', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                                <a href="{{ route('broker.application.attachment.open', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
                                                                                     class="text-primary">
                                                                                     <i class="fa fa-eye"></i>
-                                                                                    <a href="{{ route('admin.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
+                                                                                    <a href="{{ route('broker.application.attachment.delete', ['id' => $application->id, 'fileName' => $attachment->name]) }}"
                                                                                         class="text-danger">
                                                                                         <i class="fa fa-trash"></i>
                                                                                     </a>
@@ -469,7 +469,7 @@
                                                         href="#exampleModal">
                                                         Send a Note </a> --}}
                                                     <a class="btn btn-primary col-sm-12 mb-2"
-                                                        href="{{ route('admin.application.pdf.generate', $application->id) }}">
+                                                        href="{{ route('broker.application.pdf.generate', $application->id) }}">
                                                         PRINT PDF</a>
                                                     <a class="btn btn-primary col-sm-12 mb-2" data-toggle="modal"
                                                         href="#exampleModal_8">
@@ -555,7 +555,7 @@
                                         </button>
                                     </div>
                                     <form method="POST"
-                                        action="{{ route('admin.application.change-status', $application->id) }}">
+                                        action="{{ route('broker.application.change-status', $application->id) }}">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
@@ -638,7 +638,7 @@
                 });
 
                 $.ajax({
-                    url: "{{ url('/admin/application/status/change') }}",
+                    url: "{{ url('/broker/application/status/change') }}",
                     method: 'POST',
                     data: {
                         name: $('#mainStatus').val(),
@@ -660,7 +660,7 @@
                     var id = $(this).val();
                     if (id) {
                         $.ajax({
-                            url: "{{ URL::to('admin/application/substatus') }}/" + id,
+                            url: "{{ URL::to('broker/application/substatus') }}/" + id,
                             type: "GET",
                             dataType: "json",
                             success: function(data) {

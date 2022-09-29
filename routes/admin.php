@@ -332,7 +332,6 @@ Route::group(['middleware' => ['auth', 'authAdmin']], function () {
             // 'public/uploads/applications/jobs/'.$application->id.'/'.Auth::id().'/attachments'.'/';
             return Storage::download('public/uploads/applications/' . $application->id . '/' . 'attachments' . '/' . $fileName);
         } catch (Throwable $e) {
-            return dd($e->getMessage());
             return redirect()->back();
         }
     })->name('admin.application.attachment.download');
@@ -342,7 +341,6 @@ Route::group(['middleware' => ['auth', 'authAdmin']], function () {
         try {
             return response()->file(public_path('storage/uploads/applications/' . $application->id . '/attachments' . '/' . $fileName));
         } catch (Throwable $e) {
-            return dd($e->getMessage());
             return redirect()->back();
         }
     })->name('admin.application.attachment.open');
@@ -356,7 +354,6 @@ Route::group(['middleware' => ['auth', 'authAdmin']], function () {
             notify()->success('Attachment Deleted Successfully');
             return redirect()->back();
         } catch (Throwable $e) {
-            return dd($e->getMessage());
             return redirect()->back();
         }
     })->name('admin.application.attachment.delete');

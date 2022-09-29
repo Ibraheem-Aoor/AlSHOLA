@@ -88,7 +88,7 @@
                     @endif
                 </a>
 
-                <div class="user-menu dropdown-menu" style="left: -60px !important;">
+                <div class="user-menu dropdown-menu" style="left: -200px !important;">
                     <a class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa- user"></i>My
                         Profile</a>
 

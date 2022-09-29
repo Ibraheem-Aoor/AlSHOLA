@@ -1,7 +1,7 @@
 <div class="row mt-2">
     <div class="col-sm-12 items-align-center">
         @php
-            $photo = $application->attachments->where('type', 'Personal Photo')->first()->name;
+            $photo = $application->attachments->where('type', 'Personal Photo')?->first()?->name;
         @endphp
         <img src="{{ Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo) }}"
             width="200" height="200" style="margin:auto;border: 1px solid black;">
