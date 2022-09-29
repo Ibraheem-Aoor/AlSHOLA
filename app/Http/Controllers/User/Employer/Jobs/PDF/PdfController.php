@@ -55,8 +55,8 @@ class PdfController extends Controller
             'application' => $application,
             'photo_src' => $photo_src,
         ];
-        return view('user.employer.applications.pdf.application-pdf' , ['data' => $data]);
-        $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf', $data);
+        // return view('user.employer.applications.pdf.application-pdf' , );
+        $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf', ['data' => $data]);
         $pdf->setPaper('A4');
 
         $pdf->output();
