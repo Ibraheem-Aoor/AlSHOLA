@@ -48,7 +48,7 @@ class PdfController extends Controller
     {
         $application =  Application::with(['job:id,post_number' , 'employers'  , 'user', 'educations' , 'title.sector' , 'attachments' , 'subStatus' , 'job.broker'])->with('job.title.sector')->findOrFail($id);
         $photo = $application->attachments->where('type', 'Personal Photo')?->first()?->name;
-        $photo_src = Storage::url('public/uploads/applications/' . $application->id . '/attachments' . '/' . $photo);
+        $photo_src = asset('storage/uploads/applications/' . $application->id . '/attachments' . '/' . $photo);
         $data = [
             'application' => $application,
             'photo_src' => $photo_src,
