@@ -35,10 +35,6 @@
             margin: 0px 30px;
         }
 
-        body {
-            height: 3508px !important;
-            padding: 5px !important;
-        }
 
         .parent {
             /* border: 1px solid black; */
@@ -54,6 +50,30 @@
             vertical-align: middle;
             min-height: 100px !important;
         }
+
+        .tableNoBorder td {
+            border: none !important;
+        }
+
+        table tr td {
+            padding: 2px !important;
+        }
+
+        .text-left{
+            text-align: left !important;
+        }
+
+        .text-right{
+            text-align: right !important;
+        }
+
+        body {
+            height: 3508px !important;
+            padding-left: 15px !important;
+            padding-right: 5px !important;
+        }
+
+
     </style>
 </head>
 
@@ -76,7 +96,7 @@
             <td>{{ $application->job->created_at }}</td>
         </tr>
     </table> --}}
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
+    {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;"> --}}
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
         {{-- <div class="child" style="margin-right:40px !important;">
@@ -95,20 +115,20 @@
                 E-mail: {{ $application->user->email }}
             </p>
         </div> --}}
-        <div class="child" style="" class="child" style="margin-left:10px !important;">
-            <p style="padding: 3px;">
-                Al Shoala Recruitment Service W.L.L
-            </p>
-            <p style="padding: 3px;">
-                DSR: {{ $application->job->post_number }}
-            </p>
-            <p style="padding: 3px;">
-                Creation Date: {{ \Carbon\Carbon::parse($application->job->created_at )->format('Y-M-d')}}
-            </p>
-            <p style="padding: 3px;">
-                &nbsp;
-            </p>
-        </div>
+        {{-- <div class="child" style="" class="child" style="margin-left:10px !important;"> --}}
+        <p style="padding: 3px;">
+            Al Shoala Recruitment Service W.L.L
+        </p>
+        <p style="padding: 3px;">
+            DSR: {{ $application->job->post_number }}
+        </p>
+        <p style="padding: 3px;">
+            Creation Date: {{ \Carbon\Carbon::parse($application->job->created_at)->format('Y-M-d') }}
+        </p>
+        <p style="padding: 3px;">
+            &nbsp;
+        </p>
+    </div>
     </div>
     {{-- <img src="{{$photo_src}}"
         width="200" height="200" style="margin-left:70%;border: 1px solid black;"> --}}
@@ -250,18 +270,21 @@
     <br><br>
     <table class="tableNoBorder">
         <tr>
+            <td class="text-left">
+                Applicant Interviewed By: {{ $application->applicant_interviewd_by }}
+            </td>
+            <td class="text-right">
+                Recommendations: {{ $application->recommendations }}
+            </td>
+        </tr>
+        <tr></tr>
+        <tr class="text-left">
             <td>FOR OFFICAL ONLY</td>
-            <td>Minimum Expected Salary: {{ $application->min_salary }}</td>
+            <td class="text-right">Minimum Expected Salary: {{ $application->min_salary }}</td>
         </tr>
         <tr>
-            Applicant Interviewed By: {{ $application->applicant_interviewd_by }}
-        </tr>
-        <tr>
-            Recommendations: {{ $application->recommendations }}
-        </tr>
-        <tr>
-            <td>Signature: </td>
-            <td>Date: </td>
+            <td class="text-left">Signature: </td>
+            <td class="text-right">Date: </td>
         </tr>
     </table>
 </body>
