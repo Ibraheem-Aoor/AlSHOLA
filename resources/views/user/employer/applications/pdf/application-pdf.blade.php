@@ -94,7 +94,7 @@
             <td>{{ $application->job->created_at }}</td>
         </tr>
     </table> --}}
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
+    {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;"> --}}
     <h3>Application Information</h3>
     <div class="parent" style="margin-top:5%;">
         {{-- <div class="child" style="margin-right:40px !important;">
@@ -129,9 +129,8 @@
     </div>
     </div>
     <div style="width:100 !important;text-align:center !important;margin-bottom:1% !important;">
-            <img src="{{ $photo_src }}" width="200" height="200" style="border: 1px solid black;">
+        <img src="asdasdasd" width="200" height="200" style="margin-left:45% border: 1px solid black;">
     </div>
-    <br>
     <table style="margin-top: -150px">
         <tr>
             <td>Ref: {{ $application->ref }}</td>
