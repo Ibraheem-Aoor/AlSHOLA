@@ -59,11 +59,11 @@
             padding: 2px !important;
         }
 
-        .text-left{
+        .text-left {
             text-align: left !important;
         }
 
-        .text-right{
+        .text-right {
             text-align: right !important;
         }
 
@@ -72,8 +72,6 @@
             padding-left: 15px !important;
             padding-right: 5px !important;
         }
-
-
     </style>
 </head>
 
@@ -130,8 +128,9 @@
         </p>
     </div>
     </div>
-    <img src="{{$photo_src}}"
-        width="200" height="200" style="margin-left:70%;border: 1px solid black;">
+    <div style="width:100 !important;text-align:center !important;margin-bottom:1% !important;">
+            <img src="{{ $photo_src }}" width="200" height="200" style="border: 1px solid black;">
+    </div>
     <br>
     <table style="margin-top: -150px">
         <tr>
