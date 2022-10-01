@@ -129,7 +129,7 @@
     </div>
     </div>
     <div style="width:100 !important;text-align:center !important;margin-bottom:1% !important;">
-        <img src="asdasdasd" width="200" height="200" style="margin-left:45% !important; border: 1px solid black;">
+        <img src="{{$photo_src}}" width="200" height="200" style="margin-left:45% !important; border: 1px solid black;">
     </div>
     <table style="margin-top: -150px">
         <tr>
