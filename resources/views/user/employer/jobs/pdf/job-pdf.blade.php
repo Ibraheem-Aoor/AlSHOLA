@@ -20,14 +20,15 @@
 
         .parent {
             /* border: 1px solid black; */
+            /* width: 100%; */
+            text-align: center;
             margin-top: -30px;
             padding: 2rem 2rem;
-            text-align: center;
         }
 
         .child {
             display: inline-block;
-            border: 1px solid #000;
+            /* border: 1px solid #000; */
             padding: 1rem 1rem;
             vertical-align: middle;
         }
@@ -43,15 +44,18 @@
         }
 
         .titles tr {
-            background-color: #00B074;
+            background-color: rgb(69, 69, 188);
+            color: white
         }
 
         .titles th {
-            background-color: #d8e8a7;
+            background-color: red;
+            color: white;
         }
 
         .basicInfo tr td:nth-child(even) {
-            background-color: #00B074;
+            background-color: rgb(69, 69, 188);
+            color: white
         }
 
         body {
@@ -71,6 +75,17 @@
         tr {
             line-height: 1;
         }
+
+        .text-left {
+            text-align: left !important;
+        }
+        .text-right {
+            text-align: right !important;
+        }
+
+        .tableNoBorder td {
+            border: none !important;
+        }
     </style>
 </head>
 
@@ -79,23 +94,8 @@
 
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <div class="parent">
-        <div style="background: #f7ff9c" class="child" style="font-weight: 500;">
-            <p>
-                Client Name: {{ $job->user->name }}
-            </p>
-            @isset($job->user->responsible_person)
-                <p>
-                    Represntative: {{ $job->user->responsible_person }}
-                </p>
-            @endisset
-            <p>
-                Mobile: {{ $job->user->mobile }}
-            </p>
-            <p>
-                E-mail: {{ $job->user->email }}
-            </p>
-        </div>
-        <div class="child" style="background: #f7ff9c" class="child" style="font-weight: 500;">
+        <div class="child" s class="child" style="font-weight: 500;min-height:80px !important;">
+            <h3>From</h3>
             <p>
                 Al Shoala Recruitment Service W.L.L
             </p>
@@ -103,6 +103,26 @@
                 Job No: {{ $job->post_number }}
             </p>
         </div>
+        <div class="child" style="font-weight:500;min-height:80px !important;">
+            <h3>To</h3>
+            @if (Auth::user()->type == 'Admin' || 'Broker')
+                <p>
+                    {{ $job->user->name }}
+                </p>
+                <p>
+                    {{ $job->user->email }}
+                </p>
+            @else
+                <p>
+                    {{ Auth::user()->name }}
+                </p>
+                <p>
+                    {{ Auth::user()->email }}
+                </p>
+            @endif
+            </p>
+        </div>
+
     </div>
     <br>
 
@@ -272,19 +292,15 @@
                     </li>
                 </ul>
 
-                <footer style="font-size: 8 px;">
-                    <p> On behalf Of Al Shoala Recruitment Service W. L. L </p>
-                    <div class="parent">
-                        <div class="child">
-                            <p> Abdulla Ali Al Shoala</p>
-                            <p>General Manager</p>
-                        </div>
-                        <div class="child">
-                            <p>Agent Accept the demand terms</p>
-                            <p>Signature & Stamp</p>
-                        </div>
-                    </div>
-                </footer>
+                    <table class="tableNoBorder">
+                        <tr>
+                            <td class="text-left"> <p>On behalf Of Al Shoala Recruitment Service W. L. L </p>  <p>Abdulla Ali Al Shoala</p> <p>General Manager</p> </td>
+                            <td class="">&nbsp;</td>
+                            <td class="">&nbsp;</td>
+                            <td class="text-left"><p>Agent Accept the demand terms</p>
+                            <p>Signature & Stamp</p></td>
+                        </tr>
+                    </table>
             </div>
         @endif
     @endif

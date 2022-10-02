@@ -6,16 +6,17 @@
             }
 
             .titles tr {
-                background-color: #00B074;
+                background-color: rgb(69, 69, 188);
                 color: #ffff;
             }
 
             .titles th {
-                background-color: #d8e8a7;
+                background-color: red;
+                color: white;
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: #00B074;
+                background-color: rgb(69, 69, 188);
                 color: #ffff;
 
             }

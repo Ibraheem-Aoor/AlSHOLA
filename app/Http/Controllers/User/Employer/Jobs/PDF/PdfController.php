@@ -25,6 +25,7 @@ class PdfController extends Controller
             'is_agent' => $user->type == 'Agent',
             'has_terms' => $job->terms()->count() > 0,
         ];
+        return view('user.employer.jobs.pdf.job-pdf', $data);
         $pdf = FacadePdf::loadView('user.employer.jobs.pdf.job-pdf', $data);
         $pdf->setPaper('A4');
         $pdf->output();
