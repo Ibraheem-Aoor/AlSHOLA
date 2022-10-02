@@ -5,17 +5,18 @@
                 font-size: 0.8rem;
             }
 
-            .titles tr:nth-child(even) {
-                background-color: #00B074;
+            .titles tr {
+                background-color: rgb(69, 69, 188);
                 color: #ffff;
             }
 
             .titles th {
-                background-color: #d8e8a7;
+                background-color: red;
+                color: white;
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: #00B074;
+                background-color: rgb(69, 69, 188);
                 color: #ffff;
 
             }
@@ -146,7 +147,7 @@
                                     <div class="tab-pane fade" id="custom-nav-application" role="tabpanel">
 
                                         <h3 class="text-center">Application Information</h3>
-                                        <div style="background: #f7ff9c;width:100%"
+                                        <div style="background:lightblue;width:100%"
                                             class="fromDiv mb-5 mt-2 text-center">
                                             <p>
                                                 From: {{ $case->application->user->name }}
@@ -177,7 +178,7 @@
                                                         <tr>
                                                             <td>Ref: {{ $case->application->ref }}</td>
                                                             <td>Date:
-                                                                {{ \Carbon\Carbon::parse($case->application->job->created_at->created_at)->format('Y-M-d') }}
+                                                                {{ \Carbon\Carbon::parse($case->application->job->created_at)->format('Y-M-d') }}
                                                             </td>
                                                         </tr>
                                                         <tr></tr>
@@ -297,7 +298,8 @@
                                                                 <td>{{ Str::limit($message->message, 30, '...') }}
                                                                 </td>
                                                                 </td>
-                                                                <td>{{ \Carbon\Carbon::parse($message->created_at)->format('Y-M-d') }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($message->created_at)->format('Y-M-d') }}
+                                                                </td>
                                                                 <td>
                                                                     {{-- <a class="btn btn-outline-primary"
                                                                         href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
@@ -381,7 +383,8 @@
                                                                 <td>{{ $attachment->name }}</td>
                                                                 <td>{{ $attachment->user->name . ' ( ' . $attachment->user->type . ' )' }}
                                                                 </td>
-                                                                <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d') }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($attachment->created_at)->format('Y-M-d') }}
+                                                                </td>
                                                                 <td>
                                                                     @if ($attachment->is_forwarded_employee)
                                                                         <a class="btn-sm btn btn-warning"

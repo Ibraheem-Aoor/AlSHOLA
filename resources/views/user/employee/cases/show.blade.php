@@ -5,17 +5,18 @@
             font-size: 0.8rem;
         }
 
-        .titles tr:nth-child(even) {
-            background-color: #00B074;
+        .titles tr {
+            background-color: rgb(69, 69, 188);
             color: #ffff;
         }
 
         .titles th {
-            background-color: #d8e8a7;
+            background-color: red;
+            color: white;
         }
 
         .basicInfo tr td:nth-child(even) {
-            background-color: #00B074;
+            background-color: rgb(69, 69, 188);
             color: #ffff;
 
         }
@@ -146,7 +147,8 @@
 
                                                     <tr>
                                                         <td>Date:</td>
-                                                        <td>{{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d')}}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($case->created_at)->format('Y-M-d') }}
+                                                        </td>
                                                     </tr>
 
                                                 </table>
@@ -448,9 +450,9 @@
                         </div>
 
                         <!--
-                                                                                                                                        Modal_1
-                                                                                                                                        This modal is for sending notes
-                                                                                                                                    -->
+                                                                                                                                            Modal_1
+                                                                                                                                            This modal is for sending notes
+                                                                                                                                        -->
 
 
 

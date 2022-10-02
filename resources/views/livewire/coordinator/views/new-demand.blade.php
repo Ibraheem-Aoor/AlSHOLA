@@ -7,19 +7,20 @@
                     font-size: 0.8rem;
                 }
 
-                .titles tr:nth-child(even) {
-                    background-color: #00B074;
+                .titles tr {
+                    background-color: rgb(69, 69, 188);
                     color: #ffff;
                 }
 
                 .titles th {
-                    background-color: #d8e8a7;
+                    background-color: red;
+                    color: white;
                 }
 
                 .basicInfo tr td:nth-child(even) {
-                    background-color: #00B074;
+                    background-color: rgb(69, 69, 188);
                     color: #ffff;
-                    width: 50% !important;
+
                 }
 
 

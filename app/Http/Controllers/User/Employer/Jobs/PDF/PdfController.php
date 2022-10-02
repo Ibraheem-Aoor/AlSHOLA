@@ -25,7 +25,6 @@ class PdfController extends Controller
             'is_agent' => $user->type == 'Agent',
             'has_terms' => $job->terms()->count() > 0,
         ];
-        return view('user.employer.jobs.pdf.job-pdf', $data);
         $pdf = FacadePdf::loadView('user.employer.jobs.pdf.job-pdf', $data);
         $pdf->setPaper('A4');
         $pdf->output();
@@ -54,7 +53,7 @@ class PdfController extends Controller
             'application' => $application,
             'photo_src' => $photo_src,
         ];
-        return view('user.employer.applications.pdf.application-pdf' , $data);
+        // return view('user.employer.applications.pdf.application-pdf' , );
         $pdf = FacadePdf::loadView('user.employer.applications.pdf.application-pdf',  $data);
         $pdf->setPaper('A4');
 
