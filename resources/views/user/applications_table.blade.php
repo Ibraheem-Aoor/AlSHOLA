@@ -32,7 +32,7 @@
                 <td><a
                         href="{{ route('employer.application.attachments', $application->id) }}">{{ $application->attachments_count }}</a>
                 </td>
-                <td>{{ $\Carbon\Carbon::parse($application->created_at)->format('Y-M-d')</td>
+                <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d')}}</td>
                 @if ($application->subStatus->name != 'Cancelled Application' && $application->job->subStatus->name != 'Demand Cancelled')
                     <td>
                         <a href="{{ route('employer.application.details', $application->id) }}"

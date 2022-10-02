@@ -18,6 +18,7 @@ class ApplicationSearchController extends Controller
 
     public function filterApplicationsStatus(Request $request , $status)
     {
+    
         $jobIds = Job::whereBelongsTo(Auth::user())->pluck('id');
         $applications = Application::whereIn('job_id' , $jobIds)
                         ->where('forwarded', true)
