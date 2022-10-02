@@ -10,7 +10,7 @@
             }
 
             .titles tr:nth-child(even) {
-                background-color: #00B074;
+                background-color: blue;
                 color: #ffff;
             }
 
@@ -19,7 +19,7 @@
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: #00B074;
+                background-color: blue;
                 color: #ffff;
                 width: 50% !important;
             }
@@ -114,12 +114,20 @@
                                 </div>
 
                                 <div class="form-floating mb-3 col-sm-3">
-                                    <input required type="number" class="form-control" name="salary"
-                                        value="{{ old('salary') }}">
-                                    <label for="floatingPassword">&nbsp;&nbsp; Salary</label>
-                                    @error('salary')
+                                    <p>Salary Range</p>
+                                    <input type="range" required name="salary_1"  value="{{ old('salary_1') }}"
+                                        min="1" max="10000">
+                                    <span class="salary_1_value"></span>
+                                    @error('salary_1')
                                         <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    @enderror <br>
+                                    <input type="range" required name="salary_2" min="1" max="10000"
+                                        value="{{ old('salary_2') }}">
+                                    <span class="salary_2_value"></span>
+                                    @error('salary_2')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror <br>
+                                    <input type="text" name="salary" readonly>
                                 </div>
 
 
@@ -233,7 +241,8 @@
 
                                             <tr>
                                                 <td>Off Day:</td>
-                                                <td><input type="text" class="form-control" name="off_day" readonly>
+                                                <td><input type="text" class="form-control" name="off_day"
+                                                        readonly>
                                                 </td>
                                             </tr>
 
@@ -543,6 +552,22 @@
             var modal = $(this)
             modal.find('.modal-body #desc').val(desc);
         })
+    </script>
+
+    {{-- Salary Input Script --}}
+    <script>
+        var salary_1_input = $('input[name="salary_1"]');
+        var salary_2_input = $('input[name="salary_2"]');
+        $(document).on('change', salary_1_input, function() {
+            $('.salary_1_value').html(salary_1_input.val());
+        });
+        $(document).on('change', salary_2_input, function() {
+            $('.salary_2_value').html(salary_2_input.val());
+            if ((input_1 = salary_1_input.val()) == (input_2 = salary_2_input.val()))
+                $('input[name="salary"]').val(input_1);
+            else
+                $('input[name="salary"]').val(input_1 + " - " + input_2);
+        });
     </script>
 
     <script>
