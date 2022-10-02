@@ -22,7 +22,7 @@ class AddNewClientOrAgent extends Component
     * Agent/Client  Data
     */
     public $name ,  $email ,  $country , $registerationNo ,
-            $resposebilePerson , $titlePosition,
+            $resposebilePerson , $occupation,
             $mobile , $responseibleNationality , $type ,
             $password , $password_confirmation;
 
@@ -62,7 +62,7 @@ class AddNewClientOrAgent extends Component
                 'country_id' => $this->country,
                 'registration_No' => $this->registerationNo,
                 'responsible_person' => $this->resposebilePerson,
-                'title_id' => $this->titlePosition,
+                'occupation' => $this->occupation,
                 'mobile' => $this->mobile,
                 'nationality_id' => $this->responseibleNationality,
             ]
@@ -82,7 +82,7 @@ class AddNewClientOrAgent extends Component
             'country' => 'required|string',
             'registerationNo' => 'required|string|unique:users,registration_No,'.$this->id,
             'resposebilePerson' => 'required|string',
-            'titlePosition' => 'required|string',
+            'occupation' => 'required|string',
             'mobile' => 'required|numeric',
             'responseibleNationality' => 'required|string',
             'profile' => 'nullable|mimes:jpg,jpeg,png,svg,pdf|max:10024',
@@ -134,13 +134,11 @@ class AddNewClientOrAgent extends Component
     public function render()
     {
         $countries = Country::all();
-        $titles = Title::all();
         $companies = Company::all();
         $nationalities = Nationality::all();
         return view('livewire.admin.views.users.add-new-client-or-agent' , [
             'countries' => $countries,
             'nationalities' => $nationalities,
-            'titles' => $titles,
             'companies' => $companies,
         ])->extends('layouts.admin.master')->section('content');
     }

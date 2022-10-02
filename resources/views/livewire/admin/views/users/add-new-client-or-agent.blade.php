@@ -82,21 +82,16 @@
 
 
                                         <div class="form-group col-sm-6">
-                                            <label class=" form-control-label">Title Position:</label>
-                                            <select class="form-control" wire:model.lazy="titlePosition">
-                                                <option value="">-- select one --</option>
-                                                @foreach ($titles as $title)
-                                                    <option value="{{ $title->id }}">{{ $title->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('titlePosition')
+                                            <label class=" form-control-label">Occupation:</label>
+                                            <input class="form-control" wire:model.lazy="occupation">
+                                            @error('occupation')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
 
                                         <div class="form-group col-sm-6">
                                             <label class=" form-control-label">Resposible nationality:</label>
-                                            <select class="form-control" wire:model.lazy="responseibleNationality">
+                                            <select class="form-control" wire:model.lazy="responseibleNationality"> 
                                                 <option value="">-- select one --</option>
                                                 @foreach ($nationalities as $nationality)
                                                     <option value="{{ $nationality->id }}">{{ $nationality->name }}

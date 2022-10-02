@@ -72,6 +72,10 @@
             padding-left: 15px !important;
             padding-right: 5px !important;
         }
+
+        .bold {
+            font-weight: bold !important;
+        }
     </style>
 </head>
 
@@ -95,7 +99,7 @@
         </tr>
     </table> --}}
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;"> --}}
-    <h3>Application Information</h3>
+    <h3 style="margin-top:5% !important;">Application Information</h3>
     <div class="parent" style="margin-top:5%;">
         {{-- <div class="child" style="margin-right:40px !important;">
             <p style="padding: 3px;">
@@ -129,35 +133,35 @@
     </div>
     </div>
     <div style="width:100 !important;text-align:center !important;margin-bottom:1% !important;">
-        <img src="{{$photo_src}}" width="200" height="200" style="margin-left:45% !important; border: 1px solid black;">
+        <img src="{{ $photo_src }}" width="200" height="200"
+            style="margin-left:45% !important; border: 1px solid black;">
     </div>
     <table style="margin-top: -150px">
         <tr>
-            <td>Ref: {{ $application->ref }}</td>
-            <td>Date:
+            <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
+            <td><span class="bold">Date:</span>
                 {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
             </td>
 
 
-
-            <td>Full Name:
+            <td><span class="bold">Full Name: </span>
                 {{ $application->full_name }}</td>
             <td>
-                Position Applied For:
+                <span class="bold">Position Applied For: </span>
                 {{ $application->title->name }}
             </td>
         </tr>
         <tr>
-            <td>Address:
+            <td><span class="bold">Address: </span>
                 {{ $application->address }}</td>
-            <td>Contact No:
+            <td><span class="bold">Contact No:</span>
                 {{ $application->contact_no }}
             </td>
 
-            <td>Passport No:
+            <td><span class="bold">Passport No: </span>
                 {{ $application->passport_no }}
             </td>
-            <td>Place Issued:
+            <td><span class="bold">Place Issued: </span>
                 {{ $application->place_issued }}
             </td>
 
@@ -166,17 +170,17 @@
 
         <tr id="tt">
 
-            <td>Date Issued:
-                {{ $application->date_issued }}
+            <td><span class="bold">Date Issued:</span>
+                {{ \Carbon\Carbon::parse($application->date_issued)->format('Y-M-d') }}
             </td>
-            <td>Expiry Date:
-                {{ $application->expiry_issued }}
+            <td><span class="bold">Expiry Date: </span>
+                {{ \Carbon\Carbon::parse($application->expiry_issued)->format('Y-M-d') }}
             </td>
-            <td>Nationality:
+            <td><span class="bold">Nationality: </span>
                 {{ $application->nationality ?? 'UNKOWN' }}
             </td>
 
-            <td>Place Of Birth:
+            <td><span class="bold">Place Of Birth: </span>
                 {{ $application->place_of_birth ?? 'UNKOWN' }}
             </td>
 
@@ -184,36 +188,36 @@
         </tr>
 
         <tr>
-            <td>Age: {{ $application->age }}</td>
+            <td><span class="bold">Age: </span> {{ $application->age }}</td>
 
-            <td>Relegion:
+            <td><span class="bold">Relegion: </span>
                 {{ $application->relegion }}</td>
 
 
-            <td>Visa Number:
+            <td><span class="bold">Visa Number: </span>
                 {{ $application->visa_number ?? 'NONE' }}
             </td>
-            <td>Flight Ticket:
+            <td><span class="bold">Flight Ticket: </span>
                 {{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
             </td>
 
         </tr>
 
         <tr>
-            <td>status:
+            <td><span class="bold">status: </span>
                 {{ $application->subStatus->name }}</td>
-            <td>sex: {{ $application->sex }}</td>
+            <td><span class="bold">sex:</span> {{ $application->sex }}</td>
 
-            <td>children:
+            <td><span class="bold">children: </span>
                 {{ $application->children }}</td>
-            <td>height:
+            <td><span class="bold">height: </span>
                 {{ $application->height }}</td>
         </tr>
         <tr>
-            <td colspan="2">weight:
+            <td colspan="2"><span class="bold">weight:</span>
                 {{ $application->weihgt }}</td>
             <td colspan="">
-                Coordinator: {{ $application?->job?->broker?->name }}
+                <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
             </td>
         </tr>
 
@@ -238,6 +242,43 @@
                 <td>{{ $education->year }}</td>
             </tr>
         @endforeach
+    </table>
+    <br><br>
+
+    <h3>Language Level</h3>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Language</th>
+                <th scope="col">Speak</th>
+                <th scope="col">Understand</th>
+                <th scope="col">Read</th>
+                <th scope="col">Write</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Arabic</td>
+                <td>{{ $application->arabic_speak }}</td>
+                <td>{{ $application->arabic_understand }}</td>
+                <td>{{ $application->arabic_read }}</td>
+                <td>{{ $application->arabic_write }}</td>
+            </tr>
+            <tr>
+                <td>English</td>
+                <td>{{ $application->english_speak }}</td>
+                <td>{{ $application->english_understand }}</td>
+                <td>{{ $application->english_read }}</td>
+                <td>{{ $application->english_write }}</td>
+            </tr>
+            <tr>
+                <td>Hindi</td>
+                <td>{{ $application->hindi_speak }}</td>
+                <td>{{ $application->hindi_understand }}</td>
+                <td>{{ $application->hindi_read }}</td>
+                <td>{{ $application->hindi_write }}</td>
+            </tr>
+        </tbody>
     </table>
 
     <br><br>
@@ -269,20 +310,21 @@
     <table class="tableNoBorder">
         <tr>
             <td class="text-left">
-                Applicant Interviewed By: {{ $application->applicant_interviewd_by }}
+                <span class="bold">Applicant Interviewed By: </span>{{ $application->applicant_interviewd_by }}
             </td>
-            <td class="text-right">
-                Recommendations: {{ $application->recommendations }}
+            <td class="text-right" style="padding-right:15% !important;">
+                <span class="bold">Recommendations: </span> {{ $application->recommendations }}
             </td>
         </tr>
         <tr></tr>
-        <tr class="text-left">
-            <td>FOR OFFICAL ONLY</td>
-            <td class="text-right">Minimum Expected Salary: {{ $application->min_salary }}</td>
+        <tr>
+            <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
+            <td class="text-right" style="padding-right:15.5% !important;"><span class="bold">Minimum Expected Salary:</span> {{ $application->min_salary }}
+            </td>
         </tr>
         <tr>
-            <td class="text-left">Signature: </td>
-            <td class="text-right">Date: </td>
+            <td class="text-left"><span class="bold">Signature:</span> </td>
+            <td class="text-right" style="padding-right:22% !important;"><span class="bold">Date:</span> </td>
         </tr>
     </table>
 </body>
