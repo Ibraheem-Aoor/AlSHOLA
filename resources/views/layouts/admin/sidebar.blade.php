@@ -41,12 +41,35 @@
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                               aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Users Authorities </a>
                           <ul class="sub-menu children dropdown-menu">
-                              <li><i class="fa fa-bars"></i><a href="{{ route('admin.users.add') }}"> Add User</a>
+                              <li><i class="fa fa-plus"></i><a href="{{ route('admin.users.add') }}"> Add User</a>
                               </li>
                               <li><i class="fa fa-bars"></i><a href="{{ route('admin.users.all') }}"> Users
                                       management</a>
                               </li>
-                              {{-- <li><i class="fa fa-bars"></i><a href="{{ route('admin.jobs.all') }}"> Downlaod List</a> --}}
+                              <li>
+                                  <i class="menu-icon fa fa-plus"></i>
+                                  <a href="{{ route('agent.create') }}"> Add Agent</a>
+                              </li>
+                              <li>
+                                  <i class="menu-icon fa fa-bars"></i>
+                                  <a href="{{ route('agent.list') }}"> Agent Managment</a>
+                              </li>
+                              <li>
+                                  <i class="menu-icon fa fa-plus"></i>
+                                  <a href="{{ route('client.create') }}"> Add client</a>
+                              </li>
+                              <li>
+                                  <i class="menu-icon fa fa-bars"></i>
+                                  <a href="{{ route('client.list') }}"> Client Mangament</a>
+                              </li>
+                              <li>
+                                <i class="menu-icon fa fa-plus"></i>
+                                <a href="{{ route('admin.users.add' , 'broker') }}"> Add Coordinator</a>
+                            </li>
+                              <li>
+                                  <i class="menu-icon fa fa-bars"></i>
+                                  <a href="{{ route('brokers.all') }}"> All Coordinators</a>
+                              </li>
                       </li>
                   @endcan
 
@@ -92,64 +115,6 @@
                               CV's</a></li>
                   </ul>
               </li>
-
-
-
-              {{-- * Agent --}}
-              @can('Agent')
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          <i class="menu-icon fa fa-users"></i> Agent</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li>
-                              <i class="menu-icon fa fa-plus"></i>
-                              <a href="{{ route('agent.create') }}"> Add Agent</a>
-                          </li>
-                          <li>
-                              <i class="menu-icon fa fa-bars"></i>
-                              <a href="{{ route('agent.list') }}"> Agent Managment</a>
-                          </li>
-                      </ul>
-                  </li>
-              @endcan
-
-
-              {{-- * Client --}}
-              @can('Client')
-                  <li class="menu-item-has-children dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          <i class="menu-icon fa fa-users"></i> Client</a>
-                      <ul class="sub-menu children dropdown-menu">
-                          <li>
-                              <i class="menu-icon fa fa-plus"></i>
-                              <a href="{{ route('client.create') }}"> Add client</a>
-                          </li>
-                          <li>
-                              <i class="menu-icon fa fa-bars"></i>
-                              <a href="{{ route('client.list') }}"> Client Mangament</a>
-                          </li>
-                      </ul>
-                  </li>
-              @endcan
-
-              {{-- Start Broker --}}
-              <li class="menu-item-has-children dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="menu-icon fa fa-user"></i> Coordinator</a>
-                  <ul class="sub-menu children dropdown-menu">
-                      <li>
-                          <i class="menu-icon fa fa-bars"></i>
-                          <a href="{{ route('brokers.all') }}"> All Coordinators</a>
-                      </li>
-                  </ul>
-              </li>
-              {{-- End Broker --}}
-
-
-
 
 
 

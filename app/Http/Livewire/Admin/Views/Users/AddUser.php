@@ -18,6 +18,14 @@ class AddUser extends Component
             $password_confirmation , $type ,
             $mobile , $nationality , $company , $country;
 
+    public function mount($broker_flage = null)
+    {
+        if($broker_flage)
+        {
+            $this->type = 'Broker';
+        }
+    }
+
     public function addNewUser()
     {
         $this->validate($this->rules());

@@ -298,7 +298,7 @@ Route::group(['middleware' => ['auth', 'authAdmin']], function () {
     //Talents Routes:
 
     //Employer Routes
-    Route::get('/users/add', AddUser::class)->name('admin.users.add');
+    Route::get('/users/add/{broker_flage?}', AddUser::class)->name('admin.users.add');
     Route::get('/users/all', AllUsers::class)->name('admin.users.all');
     Route::get('profile/{id}', ProfileShowUserProfile::class)->name('admin.user.profile.show');
 
