@@ -21,8 +21,8 @@ class CaseController extends Controller
         $applicationIds = Application::where('user_id' , Auth::id())->pluck('id'); //brings all auth agent application id's
         $cases = Ticket::whereIn('application_id'  , $applicationIds) //brings all the tickets realted to the auth agent
                 ->with(['application' => function($application){
-                    $application->with(['job' , 'subStatus']);
-                }])
+                    $application->with(['job.broker' , 'attachments' , 'user'  , 'title' , 'subStatus' , 'employers' , 'educations']);
+                } , 'attachments.user' , 'messages.user' ])
                 ->simplePaginate(15);
         return view('user.employee.cases.index' , compact('cases'));
     }//End Index

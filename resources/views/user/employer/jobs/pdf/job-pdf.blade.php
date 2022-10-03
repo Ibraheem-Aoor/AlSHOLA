@@ -15,6 +15,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
+            text-align: center !important;
         }
 
 
@@ -44,7 +45,8 @@
         }
 
         .titles tr {
-            background-color: lightblue;
+            background-color: rgb(37, 138, 171);
+            ;
             color: white
         }
 
@@ -54,8 +56,10 @@
         }
 
         .basicInfo tr td:nth-child(even) {
-            background-color: lightblue;
-            color: white
+            background-color: rgb(37, 138, 171);
+            color: white;
+            width:60% !important;
+
         }
 
         body {
@@ -79,6 +83,7 @@
         .text-left {
             text-align: left !important;
         }
+
         .text-right {
             text-align: right !important;
         }
@@ -94,41 +99,47 @@
 
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
     <div class="parent">
-        <div class="child" s class="child" style="font-weight: 500;min-height:80px !important;">
-            <h3>From</h3>
-            <p>
-                Al Shoala Recruitment Service W.L.L
-            </p>
-            <p>
-                Job No: {{ $job->post_number }}
-            </p>
-        </div>
-        <div class="child" style="font-weight:500;min-height:80px !important;">
-            <h3>To</h3>
-            @if (Auth::user()->type == 'Admin' || 'Broker')
-                <p>
-                    {{ $job->user->name }}
-                </p>
-                <p>
-                    {{ $job->user->email }}
-                </p>
-            @else
-                <p>
-                    {{ Auth::user()->name }}
-                </p>
-                <p>
-                    {{ Auth::user()->email }}
-                </p>
-            @endif
-            </p>
-        </div>
+        <table class="tableNoBorder" style="margin-bottom:5% !important;">
 
+            <tr>
+                <td class="text-left">
+                    From
+                </td>
+                <td class="text-right" style="padding-right:15% !important;">
+                    <span class="bold">To</span>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td class="text-left"><span class="bold">Al Shoala Recruitment Service W.L.L</span></td>
+                @if (Auth::user()->type == 'Admin' || 'Broker')
+                    <td class="text-right" style="padding-right:14.5% !important;"><span class="bold">
+                            {{ $job->user->name }}</span>
+                    </td>
+                @else
+                    <td class="text-right" style="padding-right:14.5% !important;"><span class="bold">
+                            {{ Auth::user()->name }}</span>
+                    </td>
+                @endif
+            </tr>
+            <tr>
+                <td class="text-left"><span class="bold">Job No: </span> {{ $job->post_number }}</td>
+                <td class="text-right" style="padding-right:13.5% !important;"><span class="bold">
+                        @if (Auth::user()->type == 'Admin' || 'Broker')
+                            {{ $job->user->email }}
+                        @else
+                            Auth::user()->email
+                        @endif
+                    </span>
+                </td>
+            </tr>
     </div>
     <br>
 
 
     <table class="titles" style="margin-top: -15px;">
         <tr>
+            <th>#</th>
             <th>Category</th>
             <th>Title</th>
             <th>Quantity</th>
@@ -137,8 +148,12 @@
             <th>Age</th>
             <th>Nationality</th>
         </tr>
+        @php
+            $i = 1;
+        @endphp
         @forelse ($job->subJobs as $subjob)
             <tr>
+                <td>{{$i++}}</td>
                 <td>{{ $subjob->title->sector->name }}</td>
                 <td>{{ $subjob->title->name }}</td>
                 <td>{{ $subjob->quantity }}</td>
@@ -154,7 +169,7 @@
 
     <br><br>
 
-    <table class="basicInfo" style="font-size: 9px;">
+    <table class="basicInfo" style="font-size: 9px; !important; width:40% !important;margin:auto !important;">
 
         <tr>
             <td>Currency:</td>
@@ -292,15 +307,21 @@
                     </li>
                 </ul>
 
-                    <table class="tableNoBorder">
-                        <tr>
-                            <td class="text-left"> <p>On behalf Of Al Shoala Recruitment Service W. L. L </p>  <p>Abdulla Ali Al Shoala</p> <p>General Manager</p> </td>
-                            <td class="">&nbsp;</td>
-                            <td class="">&nbsp;</td>
-                            <td class="text-left"><p>Agent Accept the demand terms</p>
-                            <p>Signature & Stamp</p></td>
-                        </tr>
-                    </table>
+                <table class="tableNoBorder">
+                    <tr>
+                        <td class="text-left">
+                            <p>On behalf Of Al Shoala Recruitment Service W. L. L </p>
+                            <p>Abdulla Ali Al Shoala</p>
+                            <p>General Manager</p>
+                        </td>
+                        <td class="">&nbsp;</td>
+                        <td class="">&nbsp;</td>
+                        <td class="text-left">
+                            <p>Agent Accept the demand terms</p>
+                            <p>Signature & Stamp</p>
+                        </td>
+                    </tr>
+                </table>
             </div>
         @endif
     @endif

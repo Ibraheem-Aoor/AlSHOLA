@@ -1,24 +1,24 @@
 @extends('layouts.user.employer.master')
 @push('css')
     <style>
-         table {
-                font-size: 0.8rem;
-            }
+        table {
+            font-size: 0.8rem;
+        }
 
-            .titles tr:nth-child(even) {
-                background-color: lightblue;
-                color: #ffff;
-            }
+        .titles tr:nth-child(even) {
+            background-color: rgb(37, 138, 171);
+            color: #ffff;
+        }
 
-            .titles th {
-                background-color: red;
-            }
+        .titles th {
+            background-color: red;
+        }
 
-            .basicInfo tr td:nth-child(even) {
-                background-color: lightblue;
-                color: #ffff;
+        .basicInfo tr td:nth-child(even) {
+            background-color: rgb(37, 138, 171);
+            color: #ffff;
 
-            }
+        }
     </style>
 
     <style>
@@ -86,7 +86,6 @@
                                     {{-- Start  Case Info --}}
                                     <div class="tab-pane fade" id="custom-nav-home" role="tabpanel">
                                         <div class="container">
-
                                             <div class="row">
                                                 <table class="table table-striped  basicInfo">
 
@@ -161,120 +160,20 @@
 
                                     <div class="tab-pane fade" id="custom-nav-application" role="tabpanel">
 
-                                        <h3 class="text-center">Application Information</h3>
-                                        <div style="background: #f7ff9c;width:100%" class="fromDiv mb-5 mt-2 text-center">
-                                            <p>
-                                                From: {{ $case->application->user->name }}
-                                            </p>
-                                            <p>
-                                                E-mail: {{ $case->application->user->email }}
-                                            </p>
-                                            <p>
-                                                Mobile: {{ $case->application->user->mobile }}
-                                            </p>
-                                        </div>
-                                        <br>
-
-                                        <div class="contiane">
+                                        <div class="container">
                                             <div class="row">
-
-                                                <div class="text-right">
-                                                    @php
-                                                        $photo = $case->application->attachments->where('type', 'Personal Photo')->first()->name;
-                                                    @endphp
-                                                    <img src="{{ asset('storage/uploads/applications/' . $case->application->id . '/attachments' . '/' . $photo) }}"
-                                                        width="200" height="200"
-                                                        style="margin-left:70%;border: 1px solid black;">
-                                                </div>
-
-                                                <div class="col-sm-">
-                                                    <table style="margin-top: -150px" class="table table-responsive">
-                                                        <tr>
-                                                            <td>Ref: {{ $case->application->ref }}</td>
-                                                            <td>Date:
-                                                                {{ $case->application->job->created_at }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr></tr>
-
-                                                        <tr>
-                                                            <td>Full_Name:
-                                                                {{ $case->application->full_name }}</td>
-                                                            <td>
-                                                                Position Applied For:
-                                                                {{ $case->application->title->name }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Address:
-                                                                {{ $case->application->address }}</td>
-                                                            <th>Contact_No:
-                                                                {{ $case->application->contact_no }}
-                                                            </th>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Passport_No:
-                                                                {{ $case->application->passport_no }}
-                                                            </td>
-                                                            <th>Nationality:
-                                                                {{ $case->application->Nationlaity ?? 'UNKOWN' }}
-                                                            </th>
-
-                                                        </tr>
-
-
-                                                        <tr id="tt">
-                                                            <td>Place Issued:
-                                                                {{ $case->application->place_issued }}
-                                                            </td>
-                                                            <td>Place Of Birth:
-                                                                {{ $case->application->place_of_birth ?? 'UNKOWN' }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Date Issued:
-                                                                {{ $case->application->date_issued }}
-                                                            </td>
-                                                            <td>Age: {{ $case->application->age }}</td>
-
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>Expiry Dte:
-                                                                {{ $case->application->expiry_issued }}
-                                                            </td>
-                                                            <td>Relegion:
-                                                                {{ $case->application->relegion }}</td>
-                                                            <td>Visa_Number:
-                                                                {{ $case->application->visa_number ?? 'NONE' }}</td>
-                                                            <td>flight_ticket:
-                                                                {{ $case->application->flight_ticket ?? 'NONE' }}
-                                                            </td>
-
-                                                        </tr>
-
-                                                        <tr>
-
-                                                        </tr>
-
-                                                        <tr>
-
-                                                            <td>status:
-                                                                {{ $case->application->status }}</td>
-                                                            <td>sex: {{ $case->application->sex }}</td>
-
-
-                                                            <td>children:
-                                                                {{ $case->application->children }}</td>
-                                                            <td>height:
-                                                                {{ $case->application->height }}</td>
-                                                            <td>weight:
-                                                                {{ $case->application->weight }}</td>
-                                                        </tr>
-
-                                                    </table>
+                                                {{-- Basic From --}}
+                                                <div class="col-sm-12">
+                                                    <h3>Application Information</h3>
+                                                    <div class="bg-light text-center mt-2 fw-600">
+                                                        On behalf Of Al Shoala Recruitment Service
+                                                        W. L. L
+                                                    </div>
                                                 </div>
                                             </div>
+                                            @include('application-template', [
+                                                'application' => $case->application,
+                                            ])
                                         </div>
                                     </div>
                                     {{-- End Applications Info --}}
@@ -447,9 +346,9 @@
                         </div>
 
                         <!--
-                                                                                                                                    Modal_1
-                                                                                                                                    This modal is for sending notes
-                                                                                                                                -->
+                                                                                                                                        Modal_1
+                                                                                                                                        This modal is for sending notes
+                                                                                                                                    -->
 
 
 

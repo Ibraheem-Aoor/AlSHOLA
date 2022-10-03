@@ -80,7 +80,7 @@
 
             <tr>
                 <td>status:
-                    {{ $application->subStatus->name }}</td>
+                    {{ $application?->subStatus?->name  ?? ''}}</td>
                 <td>sex: {{ $application->sex }}</td>
 
                 <td>children:

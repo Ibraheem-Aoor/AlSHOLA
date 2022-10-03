@@ -6,7 +6,7 @@
             }
 
             .titles tr:nth-child(even) {
-                background-color: lightblue;
+                background-color: rgb(37, 138, 171);
                 color: #ffff;
             }
 
@@ -15,7 +15,7 @@
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: lightblue;
+                background-color: rgb(37, 138, 171);
                 color: #ffff;
 
             }
