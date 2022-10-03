@@ -1,25 +1,24 @@
 @extends('layouts.user.employee.master')
 @push('css')
     <style>
-        table {
-            font-size: 0.8rem;
-        }
+         table {
+                font-size: 0.8rem;
+            }
 
-        .titles tr {
-            background-color: rgb(69, 69, 188);
-            color: #ffff;
-        }
+            .titles tr:nth-child(even) {
+                background-color: lightblue;
+                color: #ffff;
+            }
 
-        .titles th {
-            background-color: red;
-            color: white;
-        }
+            .titles th {
+                background-color: red;
+            }
 
-        .basicInfo tr td:nth-child(even) {
-            background-color: rgb(69, 69, 188);
-            color: #ffff;
+            .basicInfo tr td:nth-child(even) {
+                background-color: lightblue;
+                color: #ffff;
 
-        }
+            }
     </style>
 
     <style>

@@ -1,22 +1,21 @@
 <div>
     @push('css')
         <style>
-            table {
+             table {
                 font-size: 0.8rem;
             }
 
-            .titles tr {
-                background-color: rgb(69, 69, 188);
+            .titles tr:nth-child(even) {
+                background-color: lightblue;
                 color: #ffff;
             }
 
             .titles th {
                 background-color: red;
-                color: white;
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: rgb(69, 69, 188);
+                background-color: lightblue;
                 color: #ffff;
 
             }

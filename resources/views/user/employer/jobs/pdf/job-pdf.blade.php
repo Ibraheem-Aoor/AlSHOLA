@@ -44,7 +44,7 @@
         }
 
         .titles tr {
-            background-color: rgb(69, 69, 188);
+            background-color: lightblue;
             color: white
         }
 
@@ -54,7 +54,7 @@
         }
 
         .basicInfo tr td:nth-child(even) {
-            background-color: rgb(69, 69, 188);
+            background-color: lightblue;
             color: white
         }
 

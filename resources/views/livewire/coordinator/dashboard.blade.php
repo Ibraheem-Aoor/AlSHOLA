@@ -1,24 +1,23 @@
 <div>
     @push('css')
-        <style>
-            table {
-                font-size: 0.8rem;
-            }
+        <style>  table {
+            font-size: 0.8rem;
+        }
 
-            .titles tr:nth-child(even) {
-                background-color: #00B074;
-                color: #ffff;
-            }
+        .titles tr:nth-child(even) {
+            background-color: lightblue;
+            color: #ffff;
+        }
 
-            .titles th {
-                background-color: #d8e8a7;
-            }
+        .titles th {
+            background-color: red;
+        }
 
-            .basicInfo tr td:nth-child(even) {
-                background-color: #00B074;
-                color: #ffff;
+        .basicInfo tr td:nth-child(even) {
+            background-color: lightblue;
+            color: #ffff;
 
-            }
+        }
         </style>
     @endpush
     <div class="content">

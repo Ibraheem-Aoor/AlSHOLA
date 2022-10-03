@@ -11,25 +11,24 @@
             }
         </style>
         <style>
-            table {
+             table {
                 font-size: 0.8rem;
             }
 
             .titles tr:nth-child(even) {
-                background-color: #00B074;
+                background-color: lightblue;
                 color: #ffff;
             }
 
             .titles th {
-                background-color: #d8e8a7;
+                background-color: red;
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: #00B074;
+                background-color: lightblue;
                 color: #ffff;
-                width: 50% !important;
-            }
 
+            }
 
 
             select,

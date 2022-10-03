@@ -10,18 +10,18 @@
             }
 
             .titles tr:nth-child(even) {
-                background-color: blue;
+                background-color: lightblue;
                 color: #ffff;
             }
 
             .titles th {
-                background-color: #d8e8a7;
+                background-color: red;
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: blue;
+                background-color: lightblue;
                 color: #ffff;
-                width: 50% !important;
+
             }
 
 
@@ -115,18 +115,15 @@
 
                                 <div class="form-floating mb-3 col-sm-3">
                                     <p>Salary Range</p>
-                                    <input type="range" required name="salary_1"  value="{{ old('salary_1') }}"
-                                        min="1" max="10000">
-                                    <span class="salary_1_value"></span>
-                                    @error('salary_1')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror <br>
-                                    <input type="range" required name="salary_2" min="1" max="10000"
-                                        value="{{ old('salary_2') }}">
-                                    <span class="salary_2_value"></span>
-                                    @error('salary_2')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror <br>
+                                    <span>from</span>
+                                    <input type="number" required name="salary_1" class="form-control"
+                                        style="width: 30% !important; height:15px !important;display:inline-block !important;"
+                                        value="{{ old('salary_1') }}" min="1" max="10000">
+                                    <span>-</span>
+                                    <input type="number" required name="salary_2" class="form-control"
+                                        style="width: 30% !important; height:15px !important;display:inline-block !important;"
+                                        min="1" max="10000" value="{{ old('salary_2') }}">
+                                    <span>To</span>
                                     <input type="text" name="salary" readonly>
                                 </div>
 

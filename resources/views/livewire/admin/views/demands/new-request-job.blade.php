@@ -4,23 +4,23 @@
             <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
             <style>
                 table {
-                    font-size: 0.8rem;
-                }
+                font-size: 0.8rem;
+            }
 
-                .titles tr:nth-child(even) {
-                    background-color: #00B074;
-                    color: #ffff;
-                }
+            .titles tr:nth-child(even) {
+                background-color: lightblue;
+                color: #ffff;
+            }
 
-                .titles th {
-                    background-color: #d8e8a7;
-                }
+            .titles th {
+                background-color: red;
+            }
 
-                .basicInfo tr td:nth-child(even) {
-                    background-color: #00B074;
-                    color: #ffff;
-                    width: 50% !important;
-                }
+            .basicInfo tr td:nth-child(even) {
+                background-color: lightblue;
+                color: #ffff;
+
+            }
 
 
 
