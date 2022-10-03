@@ -177,7 +177,7 @@
                 {{ \Carbon\Carbon::parse($application->expiry_issued)->format('Y-M-d') }}
             </td>
             <td><span class="bold">Nationality: </span>
-                {{ $application->nationality ?? 'UNKOWN' }}
+                {{ $application->nationality->name ?? 'UNKOWN' }}
             </td>
 
             <td><span class="bold">Place Of Birth: </span>
@@ -227,21 +227,25 @@
 
     <h3>Education</h3>
     <table>
-        <tr>
-            <th>Degree</th>
-            <th>Educational Body</th>
-            <th>Country</th>
-            <th>Year</th>
-        </tr>
-        @foreach ($application->educations as $education)
+        <thead>
             <tr>
-
-                <td>{{ $education->degree }}</td>
-                <td>{{ $education->from }}</td>
-                <td>{{ $education->country }}</td>
-                <td>{{ $education->year }}</td>
+                <th>Degree</th>
+                <th>Year</th>
+                <th>Educational Body</th>
+                <th>Country</th>
             </tr>
-        @endforeach
+        </thead>
+
+        <tbody>
+            @foreach ($application->educations as $edu)
+                <tr>
+                    <td>{{ $edu->degree }}</td>
+                    <td>{{ $edu->year }}</td>
+                    <td>{{ $edu->collage }}</td>
+                    <td>{{ $edu->country }}</td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
     <br><br>
 
@@ -303,7 +307,7 @@
         </tr>
         <tr>
             <td>Total Experince: </td>
-            <td>{{ $application->employers->count('duration') }}</td>
+            <td>{{ $application->employers->sum('duration') }}</td>
         </tr>
     </table>
     <br><br>
@@ -319,7 +323,8 @@
         <tr></tr>
         <tr>
             <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
-            <td class="text-right" style="padding-right:15.5% !important;"><span class="bold">Minimum Expected Salary:</span> {{ $application->min_salary }}
+            <td class="text-right" style="padding-right:15.5% !important;"><span class="bold">Minimum Expected
+                    Salary:</span> {{ $application->min_salary }}
             </td>
         </tr>
         <tr>
