@@ -52,7 +52,7 @@
                     {{ $application->expiry_issued }}
                 </td>
                 <td>Nationality:
-                    {{ $application->nationality ?? 'UNKOWN' }}
+                    {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name  ?? 'UNKOWN'}}
                 </td>
 
                 <td>Place Of Birth:

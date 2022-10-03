@@ -177,7 +177,8 @@
                 {{ \Carbon\Carbon::parse($application->expiry_issued)->format('Y-M-d') }}
             </td>
             <td><span class="bold">Nationality: </span>
-                {{ $application->nationality->name ?? 'UNKOWN' }}
+                {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? 'UNKOWN' }}
+
             </td>
 
             <td><span class="bold">Place Of Birth: </span>
