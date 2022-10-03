@@ -97,7 +97,7 @@
 <body>
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;">
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="30%" style="margin-left:50%;">
     <div class="parent">
         <table class="tableNoBorder" style="margin-bottom:5% !important;">
 
@@ -169,7 +169,7 @@
 
     <br><br>
 
-    <table class="basicInfo" style="font-size: 9px; !important; width:40% !important;margin:auto !important;">
+    <table class="basicInfo" style="font-size: 9px; !important; width:60% !important;margin:auto !important;">
 
         <tr>
             <td>Currency:</td>
