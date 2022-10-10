@@ -167,7 +167,7 @@
 
     <br><br>
 
-    <table class="basicInfo" style="font-size: 9px; !important; width:70% !important; !important;">
+    <table class="basicInfo" style="font-size: 9px; !important; !important;">
 
         <tr>
             <td>Currency:</td>
