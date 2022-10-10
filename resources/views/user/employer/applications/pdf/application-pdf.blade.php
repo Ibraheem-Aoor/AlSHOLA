@@ -125,9 +125,6 @@
             DSR: {{ $application->job->post_number }}
         </p>
         <p style="padding: 3px;">
-            Creation Date: {{ \Carbon\Carbon::parse($application->job->created_at)->format('Y-M-d') }}
-        </p>
-        <p style="padding: 3px;">
             &nbsp;
         </p>
     </div>
@@ -142,13 +139,44 @@
             <td><span class="bold">Date:</span>
                 {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
             </td>
-
-
-            <td><span class="bold">Full Name: </span>
-                {{ $application->full_name }}</td>
+        </tr>
+        <tr>
+            <td colspan="" style="font-size: 13px !important;">
+                <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
+            </td>
+        </tr>
+        <tr>
             <td>
                 <span class="bold">Position Applied For: </span>
                 {{ $application->title->name }}
+            </td>
+        </tr>
+        <tr>
+            <td><span class="bold">Full Name: </span>
+                {{ $application->full_name }}</td>
+        </tr>
+        <tr>
+            <td><span class="bold">Nationality: </span>
+                {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? 'UNKOWN' }}
+            </td>
+            <td><span class="bold">Passport No: </span>
+                {{ $application->passport_no }}
+            </td>
+            <td><span class="bold">Issue Place: </span>
+                {{ $application->place_issued }}
+            </td>
+
+            <td><span class="bold">Place Of Birth: </span>
+                {{ $application->place_of_birth ?? 'UNKOWN' }}
+            </td>
+
+        </tr>
+        <tr>
+            <td><span class="bold">Issue Date: </span>
+                {{ $application->date_issued }}
+            </td>
+            <td><span class="bold">Exp Date: </span>
+                {{ $application->expiry_issued }}
             </td>
         </tr>
         <tr>
@@ -158,35 +186,8 @@
                 {{ $application->contact_no }}
             </td>
 
-            <td><span class="bold">Passport No: </span>
-                {{ $application->passport_no }}
-            </td>
-            <td><span class="bold">Place Issued: </span>
-                {{ $application->place_issued }}
-            </td>
-
         </tr>
 
-
-        <tr id="tt">
-
-            <td><span class="bold">Date Issued:</span>
-                {{ \Carbon\Carbon::parse($application->date_issued)->format('Y-M-d') }}
-            </td>
-            <td><span class="bold">Expiry Date: </span>
-                {{ \Carbon\Carbon::parse($application->expiry_issued)->format('Y-M-d') }}
-            </td>
-            <td><span class="bold">Nationality: </span>
-                {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? 'UNKOWN' }}
-
-            </td>
-
-            <td><span class="bold">Place Of Birth: </span>
-                {{ $application->place_of_birth ?? 'UNKOWN' }}
-            </td>
-
-
-        </tr>
 
         <tr>
             <td><span class="bold">Age: </span> {{ $application->age }}</td>
@@ -217,37 +218,11 @@
         <tr>
             <td colspan="2"><span class="bold">weight:</span>
                 {{ $application->weihgt }}</td>
-            <td colspan="">
-                <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
-            </td>
+
         </tr>
 
     </table>
 
-    <br><br>
-
-    <h3>Education</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Degree</th>
-                <th>Year</th>
-                <th>Educational Body</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach ($application->educations as $edu)
-                <tr>
-                    <td>{{ $edu->degree }}</td>
-                    <td>{{ $edu->year }}</td>
-                    <td>{{ $edu->collage }}</td>
-                    <td>{{ $edu->country }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
     <br><br>
 
     <h3>Language Level</h3>
@@ -285,6 +260,34 @@
             </tr>
         </tbody>
     </table>
+    <br><br>
+
+
+    <h3>Education</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Degree</th>
+                <th>Year</th>
+                <th>Educational Body</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach ($application->educations as $edu)
+                <tr>
+                    <td>{{ $edu->degree }}</td>
+                    <td>{{ $edu->year }}</td>
+                    <td>{{ $edu->collage }}</td>
+                    <td>{{ $edu->country }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <br><br>
+
+
 
     <br><br>
 
@@ -308,7 +311,7 @@
         </tr>
         <tr>
             <td>Total Experince: </td>
-            <td>{{ $application->employers->sum('duration') }}</td>
+            <td>{{ @$application->employers?->sum('duration') ?? '' }}</td>
         </tr>
     </table>
     <br><br>

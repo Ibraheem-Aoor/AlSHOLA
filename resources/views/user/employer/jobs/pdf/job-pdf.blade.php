@@ -58,8 +58,6 @@
         .basicInfo tr td:nth-child(even) {
             background-color: rgb(37, 138, 171);
             color: white;
-            width:60% !important;
-
         }
 
         body {
@@ -153,7 +151,7 @@
         @endphp
         @forelse ($job->subJobs as $subjob)
             <tr>
-                <td>{{$i++}}</td>
+                <td>{{ $i++ }}</td>
                 <td>{{ $subjob->title->sector->name }}</td>
                 <td>{{ $subjob->title->name }}</td>
                 <td>{{ $subjob->quantity }}</td>
@@ -174,31 +172,46 @@
         <tr>
             <td>Currency:</td>
             <td>{{ $job->currency }}</td>
+            <td>Joining Ticket: </td>
+            <td>{{ $job->joining_ticket }}</td>
         </tr>
 
         <tr>
             <td>Working Days:</td>
             <td>{{ $job->working_days }}</td>
+            <td>Return Ticket: </td>
+            <td>{{ $job->return_ticket }}</td>
         </tr>
 
         <tr>
             <td>Off Day:</td>
             <td>{{ $job->off_day }}</td>
+            <td>Annual Leave: </td>
+            <td>{{ $job->annual_leave }}</td>
         </tr>
 
         <tr>
             <td>Working Hours:</td>
             <td>{{ $job->working_hours }}</td>
+            <td>Medical Insurance: </td>
+            <td>{{ $job->medical }}</td>
         </tr>
 
         <tr>
             <td>Overtime: </td>
             <td>As Per Labour Law</td>
+            <td>Transport</td>
+            <td>{{ $job->transport }}</td>
         </tr>
 
         <tr>
             <td>Indemnity: </td>
             <td>As Per Labour Law</td>
+            <td>Accommodation: </td>
+            <td>{{ $job->accommodation }} @if ($job->accommodation_amount)
+                    {{ ' | ' . $job->accommodation_amount }}
+                @endif
+            </td>
         </tr>
 
         <tr>
@@ -207,50 +220,6 @@
                     {{ ' | ' . $job->food_amount }}
                 @endif
             </td>
-        </tr>
-
-        <tr>
-            <td>Contract Period: </td>
-            <td>{{ $job->contract_period }}</td>
-        </tr>
-
-        <tr>
-            <td>Joining Ticket: </td>
-            <td>{{ $job->joining_ticket }}</td>
-        </tr>
-
-        <tr>
-            <td>Return Ticket: </td>
-            <td>{{ $job->return_ticket }}</td>
-        </tr>
-
-        <tr>
-            <td>Annual Leave: </td>
-            <td>{{ $job->annual_leave }}</td>
-        </tr>
-
-
-        <tr>
-            <td>Medical Insurance: </td>
-            <td>{{ $job->medical }}</td>
-        </tr>
-
-        <tr>
-            <td>Transport</td>
-            <td>{{ $job->transport }}</td>
-        </tr>
-
-
-        <tr>
-            <td>Accommodation: </td>
-            <td>{{ $job->accommodation }} @if ($job->accommodation_amount)
-                    {{ ' | ' . $job->accommodation_amount }}
-                @endif
-            </td>
-        </tr>
-
-
-        <tr>
             <td>
                 Country Entry requirements if any:
             </td>
@@ -258,8 +227,16 @@
             <td>
                 Employer is liable for any additional fees, imposed by official authorities inside employer country
             </td>
-
         </tr>
+
+        <tr>
+            <td>Contract Period: </td>
+            <td>{{ $job->contract_period }}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        {{--  --}}
+
 
     </table>
     @isset($job->description)
