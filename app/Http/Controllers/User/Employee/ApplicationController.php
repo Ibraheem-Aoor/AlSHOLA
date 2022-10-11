@@ -173,7 +173,7 @@ class ApplicationController extends Controller
     public function allApplications()
     {
         $applications = Application::where('user_id' , Auth::id())
-                        ->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus'])
+                        ->with(['job' ,  'job.title' , 'mainStatus.subStatus' , 'mainStatus'  , 'subStatus' , 'title'])
                         ->with(['job.user:id,name' , 'job.subStatus'])
                         ->with('job.subJobs.title.sector')
                         ->withCount('notes')

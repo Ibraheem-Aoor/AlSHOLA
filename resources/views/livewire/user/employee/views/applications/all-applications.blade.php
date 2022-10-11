@@ -34,6 +34,7 @@
                                     <th scope="col">Demand No</th>
                                     <th scope="col">Ref</th>
                                     <th scope="col">Full Name</th>
+                                    <th scope="col">Title</th>
                                     <th scope="col">Passport</th>
                                     <th scope="col">Client_Name</th>
                                     <th scope="col">Number_Of_Notes</th>
@@ -59,6 +60,7 @@
                                         <td>{{ $application->job->post_number ?? '' }}</td>
                                         <td>{{ $application->ref }}</td>
                                         <td>{{ $application->full_name }}</td>
+                                        <td>{{ $application?->title?->name }}</td>
                                         <td>{{ $application->passport_no }}</td>
                                         <td>{{ $application->job->user->name ?? '' }}</td>
                                         <td><a

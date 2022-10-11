@@ -1,5 +1,21 @@
 <div>
     @section('title', 'ALSHOALA | Dashboard')
+    @push('css')
+    <style>
+        @media  print{
+            nav{
+                display: none !important;
+            }
+            .back-to-top{
+                display: none !important;
+            }
+
+            #myChart_2{
+                margin: auto !important;
+            }
+        }
+    </style>
+    @endpush
     <div class="container-xxl py-5">
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ 'WELCOME BACK ' . Auth::user()->name }}

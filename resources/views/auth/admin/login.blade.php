@@ -35,7 +35,7 @@
                 <div class="login-logo">
                     <a href="#">
                         <img class="align-content" src="{{ asset('assets/dist_3/assets/images/logo.png') }}"
-                            width="30%" alt="">
+                            width="70%" alt="">
                     </a>
                 </div>
                 <div class="login-form">

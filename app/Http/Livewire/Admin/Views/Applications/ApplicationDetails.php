@@ -8,6 +8,8 @@ use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationNote;
 use App\Models\ApplicationStatusHistory;
 use App\Models\Note;
+use App\Notifications\NewApplicationActionNotficaition;
+use App\Notifications\NewDemandActionNotification;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route as FacadesRoute;
@@ -118,6 +120,8 @@ class ApplicationDetails extends Component
         $attachment = $this->application->attachments->where('id' , $id)->first();
         $attachment->is_forwarded_employer = true;
         $attachment->save();
+        $notification = new NewDemandActionNotification(['msg' => 'New Application Attachment' , 'link' => route('employer.application.details' , $this->application->id)]);
+        $this->application?->job?->user?->notify($notification);
         notify()->success('Forwarded Successfully');
         return redirect(route($this->currentRoute , $this->application));
     }
@@ -128,6 +132,8 @@ class ApplicationDetails extends Component
         $attachment = $this->application->attachments->where('id' , $id)->first();
         $attachment->is_forwarded_talent = true;
         $attachment->save();
+        $notification = new NewDemandActionNotification(['msg' => 'New Application Attachment' , 'link' => route('employee.application.details' , $this->application->id)]);
+        $this->application?->user?->notify($notification);
         notify()->success('Forwarded Successfully');
         return redirect(route($this->currentRoute , $this->application));
     }

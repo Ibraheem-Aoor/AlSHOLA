@@ -6,11 +6,15 @@ use App\Http\Traits\Admin\User\ApplicationTrait;
 use App\Models\Application;
 use App\Models\ApplicationNote;
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Throwable;
+use App\Notifications\NewApplicationActionNotficaition;
+use App\Notifications\NewDemandActionNotification;
+use Illuminate\Support\Facades\Notification;
 
 class AllAplications extends Component
 {
@@ -52,9 +56,12 @@ class AllAplications extends Component
     //Accepting the application and forward it to employer.
     public function passApplicationToEmployer($id)
     {
-        $application = Application::findOrFail($id);
+        $application = Application::with('job.user')->findOrFail($id);
         $application->forwarded = true;
         $application->save();
+        $notification = new NewDemandActionNotification(['msg' => 'New Application' , 'link' => route('employer.application.details' , $application->id)]);
+        $user = User::find($application->job->user->id);
+        Notification::send( $user , $notification);
         notify()->success('Application Sended Successfully');
         return redirect(route('admin.applications.all'));
     }

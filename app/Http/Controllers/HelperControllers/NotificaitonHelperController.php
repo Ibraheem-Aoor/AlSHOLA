@@ -32,8 +32,7 @@ class NotificaitonHelperController extends Controller
                 return redirect(route('admin.demand.details' , $notification->data['demand_id']).'#custom-nav-attachments');
             case 'App\Notifications\NewApplicationAttachment':
                     return redirect(route('admin.application.details' , $notification->data['application_id']).'#custom-nav-attachments');
-
-
+            default: return redirect($notification->data['link']); //client  - agent notification
         }
 
         return redirect(route('admin.contacts.guests'));

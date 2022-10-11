@@ -9,11 +9,13 @@ use App\Models\Job;
 use App\Models\JobSubStatus;
 use App\Models\subStatus;
 use App\Models\User;
+use App\Notifications\NewDemandActionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Facades\Invoice;
@@ -99,6 +101,9 @@ class DemandHelper
             'user_id' => $agent->id,
             'job_id' => $job->id,
         ]);
+        $notification = new NewDemandActionNotification(['msg' => 'New Avilable Demand' , 'link' => route('employee.job.details' , $job->id)]);
+        Notification::send($agent , $notification);
+
     }//end method
 
 

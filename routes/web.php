@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApplicationSearchController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\Employer\Jobs\PDF\PdfController;
+use App\Http\Controllers\HelperControllers\NotificaitonHelperController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\JobSeacrhController;
 use App\Http\Controllers\User\Employer\Jobs\EmployerJobsController;
@@ -71,7 +72,7 @@ Route::group(['middleware' => 'guestOnly'] , function()
         return view('front.category');
     })->name('categories');
 
-    Route::resource('/contact', ContactFormController::class);
+    // Route::resource('/contact', ContactFormController::class);
 });//end RouteGroup
 
 
@@ -80,6 +81,8 @@ Route::group(['middleware' => 'guestOnly'] , function()
 
 Route::group(['middleware' => ['auth']], function()
 {
+    Route::get('guests/notification/{notification}', [NotificaitonHelperController::class, 'markNotification'])->name('mark.notficiation');
+
     Route::post('/application/attach' , [ApplicationController::class , 'uploadApplicationAttachment'])->name('application.file.upload');
 
     Route::resource('/job' , JobController::class);
@@ -291,8 +294,8 @@ Route::group(['middleware' => ['auth']], function()
 
     //General Routes for All Auth User Regard their type
         //contact
-    Route::get('/a/contact' , [UserContact::class , 'index'])->name('user.contact');
-    Route::post('/a/contact' , [UserContact::class , 'store'])->name('user.contact.make');
+    // Route::get('/a/contact' , [UserContact::class , 'index'])->name('user.contact');
+    // Route::post('/a/contact' , [UserContact::class , 'store'])->name('user.contact.make');
 
 });
 

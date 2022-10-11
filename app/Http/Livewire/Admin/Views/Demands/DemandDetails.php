@@ -8,7 +8,9 @@ use App\Models\Job;
 use App\Models\JobMainStatus;
 use App\Models\Note;
 use App\Models\User;
+use App\Notifications\NewDemandActionNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class DemandDetails extends Component
@@ -42,6 +44,8 @@ class DemandDetails extends Component
             'seen' => true,
         ]);
         HistoryRecordHelper::registerDemandLog('Demand Note Sended'.'<a href="/admin/demand/'.$this->job->id.'/details">'.'( '.$this->job->post_number.' )'.'</a>');
+        $notification = new NewDemandActionNotification(['msg' => 'New Demand Note' , 'link' => route('employer.job.notes' , $this->job->id)]);
+        Notification::send($this->job->user , $notification);
         notify()->success('Note Sended Successfully');
         return redirect(route('admin.demand.details' , $this->job->id));
     }

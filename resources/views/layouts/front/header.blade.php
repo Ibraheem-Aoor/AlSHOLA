@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="/"
             class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-            <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" alt="" width="50px">
+            <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" style="width:40% !important;">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
                 <a href="/" class="nav-item nav-link">Home</a>
                 {{-- <a href="{{ route('about') }}" class="nav-item nav-link">About</a> --}}
                 {{-- <a href="{{ route('categories') }}" class="nav-item nav-link">INDUSTRIES</a> --}}
-                <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a>
+                {{-- <a href="{{ route('contact.index') }}" class="nav-item nav-link">Contact</a> --}}
                 @if (!Auth::check())
                     <a href="{{ route('login') }}" class="nav-item nav-link ">LogIn</a>
                     {{-- <a href="{{ route('register') }}" class="nav-item nav-link ">SignUp</a> --}}

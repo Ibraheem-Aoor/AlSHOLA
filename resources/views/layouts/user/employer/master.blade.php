@@ -58,7 +58,7 @@
 
         @include('layouts.user.employer.header')
         @yield('content')
-        @include('layouts.front.footer')
+        {{-- @include('layouts.front.footer') --}}
 
 
         <!-- Back to Top -->
