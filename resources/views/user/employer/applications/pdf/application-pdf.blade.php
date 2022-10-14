@@ -136,29 +136,30 @@
     </div>
     <table>
         <tr>
-            <td colspan="4" style="text-align: center;">
+            <td colspan="4" style="text-align: center;border:none !important;">
                 <img src="{{ $photo_src }}" width="200" height="200"
                     style="margin-left:45% !important; border: 1px solid black;">
                 <table style="margin-top: -150px">
             </td>
         </tr>
     </table>
+    <br> <br>
+    <table>
+        <tr>
+            <td><span class="bold">Date:</span>
+                {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
+            </td>
+            <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
 
-    <tr>
-        <td><span class="bold">Date:</span>
-            {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
-        </td>
-        <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
+            <td>
+                <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
+            </td>
 
-        <td>
-            <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
-        </td>
-
-        <td>
-            <span class="bold">Position Applied For: </span>
-            {{ $application->title->name }}
-        </td>
-    </tr>
+            <td>
+                <span class="bold">Position Applied For: </span>
+                {{ $application->title->name }}
+            </td>
+        </tr>
 
     </table>
     <br><br>
