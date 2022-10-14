@@ -136,7 +136,7 @@
     </div>
     <table>
         <tr>
-            <td colspan="3" style="text-align: right">
+            <td colspan="4" style="text-align: center;">
                 <img src="{{ $photo_src }}" width="200" height="200"
                     style="margin-left:45% !important; border: 1px solid black;">
                 <table style="margin-top: -150px">
@@ -149,19 +149,19 @@
             {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
         </td>
         <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
-    </tr>
-    <tr>
-        <td colspan="" style="font-size: 13px !important;">
+
+        <td>
             <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
         </td>
-    </tr>
-    <tr>
+
         <td>
             <span class="bold">Position Applied For: </span>
             {{ $application->title->name }}
         </td>
     </tr>
+
     </table>
+    <br><br>
     <h3>Personal Information</h3>
     <table>
         <tr>
