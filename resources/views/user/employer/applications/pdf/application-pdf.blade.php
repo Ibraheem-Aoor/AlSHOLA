@@ -341,13 +341,13 @@
         <tr></tr>
         <tr>
             <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
-            <td class="text-right" style="padding-right:15.5% !important;"><span class="bold">Minimum Expected
+            <td class="text-right" style="padding-right:13.5% !important;"><span class="bold">Minimum Expected
                     Salary:</span> {{ $application->min_salary }}
             </td>
         </tr>
         <tr>
             <td class="text-left"><span class="bold">Signature:</span> </td>
-            <td class="text-right" style="padding-right:22% !important;"><span class="bold">Date:</span> </td>
+            <td class="text-right" style="padding-right:20% !important;"><span class="bold">Date:</span> </td>
         </tr>
     </table>
 </body>
