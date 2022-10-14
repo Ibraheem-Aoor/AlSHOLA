@@ -100,8 +100,8 @@
     </table> --}}
     <table>
         <tr>
-            <td colspan="4" style="text-align:right !important;">
-                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="60%" style="margin-left:50%;">
+            <td colspan="4" style="text-align:center !important;">
+                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left:50%;">
             </td>
         </tr>
     </table>
@@ -134,39 +134,40 @@
         </p>
     </div>
     </div>
-    <div style="width:100 !important;text-align:center !important;margin-bottom:1% !important;">
-        <img src="{{ $photo_src }}" width="200" height="200"
-            style="margin-left:45% !important; border: 1px solid black;">
-    </div>
-    <table style="margin-top: -150px">
+    <table>
         <tr>
-            <td><span class="bold">Date:</span>
-                {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
-            </td>
-            <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
-        </tr>
-        <tr>
-            <td colspan="" style="font-size: 13px !important;">
-                <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
+            <td colspan="3" style="text-align: right">
+                <img src="{{ $photo_src }}" width="200" height="200"
+                    style="margin-left:45% !important; border: 1px solid black;">
+                <table style="margin-top: -150px">
             </td>
         </tr>
-        <tr>
-            <td>
-                <span class="bold">Position Applied For: </span>
-                {{ $application->title->name }}
-            </td>
-        </tr>
-        <tr style="border:none !important;">
-            <td colspan="4" class=""
-                style="font-weight:bold !imoportant;text-align:center !important;border:none !important;">
-                <h3>Personal Information</h3>
-            </td>
-        </tr>
+    </table>
+
+    <tr>
+        <td><span class="bold">Date:</span>
+            {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
+        </td>
+        <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
+    </tr>
+    <tr>
+        <td colspan="" style="font-size: 13px !important;">
+            <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span class="bold">Position Applied For: </span>
+            {{ $application->title->name }}
+        </td>
+    </tr>
+    </table>
+    <h3>Personal Information</h3>
+    <table>
         <tr>
             <td><span class="bold">Full Name: </span>
                 {{ $application->full_name }}</td>
-        </tr>
-        <tr>
+
             <td><span class="bold">Nationality: </span>
                 {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? '' }}
             </td>
@@ -182,6 +183,8 @@
             <td><span class="bold">Age: </span> {{ $application->age }}</td>
 
         </tr>
+
+
         <tr>
             <td><span class="bold">Issue Date: </span>
                 {{ $application->date_issued }}
@@ -198,14 +201,15 @@
             <td><span class="bold">Contact No:</span>
                 {{ $application->contact_no }}
             </td>
+            <td><span class="bold">Relegion: </span>
+                {{ $application->relegion }}</td>
 
         </tr>
 
 
         <tr>
 
-            <td><span class="bold">Relegion: </span>
-                {{ $application->relegion }}</td>
+
 
 
             <td><span class="bold">Visa Number: </span>
@@ -214,10 +218,6 @@
             <td><span class="bold">Flight Ticket: </span>
                 {{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
             </td>
-
-        </tr>
-
-        <tr>
             <td><span class="bold">status: </span>
                 {{ $application->subStatus->name }}</td>
             <td><span class="bold">sex:</span> {{ $application->sex }}</td>
@@ -226,14 +226,16 @@
                 {{ $application->children }}</td>
             <td><span class="bold">height: </span>
                 {{ $application->height }}</td>
-        </tr>
-        <tr>
             <td colspan="2"><span class="bold">weight:</span>
                 {{ $application->weihgt }}</td>
 
         </tr>
 
+
+
+
     </table>
+
 
     <br><br>
 
