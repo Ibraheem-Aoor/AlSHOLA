@@ -150,8 +150,8 @@
                 {{ $application->title->name }}
             </td>
         </tr>
-        <tr style="text-align:center;">
-            <td colspan="4" class="" style="font-weight:bold !imoportant;">
+        <tr>
+            <td colspan="4" class="" style="font-weight:bold !imoportant;text-align:center !important;">
                 <h3>Personal Information</h3>
             </td>
         </tr>
