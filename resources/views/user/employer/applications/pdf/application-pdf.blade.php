@@ -98,7 +98,13 @@
             <td>{{ $application->job->created_at }}</td>
         </tr>
     </table> --}}
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="60%" style="margin-left:50%;">
+    <table>
+        <tr>
+            <td colspan="4" style="text-align:right !important;">
+                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="60%" style="margin-left:50%;">
+            </td>
+        </tr>
+    </table>
     <div class="parent" style="margin-top:5%;">
         {{-- <div class="child" style="margin-right:40px !important;">
             <p style="padding: 3px;">
@@ -150,8 +156,9 @@
                 {{ $application->title->name }}
             </td>
         </tr>
-        <tr>
-            <td colspan="4" class="" style="font-weight:bold !imoportant;text-align:center !important;">
+        <tr style="border:none !important;">
+            <td colspan="4" class=""
+                style="font-weight:bold !imoportant;text-align:center !important;border:none !important;">
                 <h3>Personal Information</h3>
             </td>
         </tr>
@@ -161,18 +168,18 @@
         </tr>
         <tr>
             <td><span class="bold">Nationality: </span>
-                {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? 'UNKOWN' }}
+                {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? '' }}
             </td>
             <td><span class="bold">Passport No: </span>
                 {{ $application->passport_no }}
             </td>
-            <td><span class="bold">Issue Place: </span>
-                {{ $application->place_issued }}
-            </td>
-
             <td><span class="bold">Place Of Birth: </span>
-                {{ $application->place_of_birth ?? 'UNKOWN' }}
+                {{ $application->place_of_birth ?? '' }}
             </td>
+            <td><span class="bold">Date Of Birth: </span>
+                {{ $application->date_of_birth ?? '' }}
+            </td>
+            <td><span class="bold">Age: </span> {{ $application->age }}</td>
 
         </tr>
         <tr>
@@ -182,8 +189,10 @@
             <td><span class="bold">Exp Date: </span>
                 {{ $application->expiry_issued }}
             </td>
-        </tr>
-        <tr>
+            <td><span class="bold">Issue Place: </span>
+                {{ $application->place_issued }}
+            </td>
+
             <td><span class="bold">Address: </span>
                 {{ $application->address }}</td>
             <td><span class="bold">Contact No:</span>
@@ -194,7 +203,6 @@
 
 
         <tr>
-            <td><span class="bold">Age: </span> {{ $application->age }}</td>
 
             <td><span class="bold">Relegion: </span>
                 {{ $application->relegion }}</td>
