@@ -164,7 +164,7 @@
 
     <br><br>
 
-    <h3>Personal Information</h3>
+    <h3>Personal Information</h3> <br>
     <table>
         <tr>
             <td><span class="bold">Full Name: </span>
@@ -241,15 +241,15 @@
 
     <br><br>
 
-    <h3>Language Level</h3>
+    <h3>Language Level</h3> <br>
     <table>
         <thead>
             <tr>
-                <th style="text-algin:center !important;" scope="col">Language</th>
-                <th style="text-algin:center !important;" scope="col">Speak</th>
-                <th style="text-algin:center !important;" scope="col">Understand</th>
-                <th style="text-algin:center !important;" scope="col">Read</th>
-                <th style="text-algin:center !important;" scope="col">Write</th>
+                <th style="text-align:center !important;" scope="col">Language</th>
+                <th style="text-align:center !important;" scope="col">Speak</th>
+                <th style="text-align:center !important;" scope="col">Understand</th>
+                <th style="text-align:center !important;" scope="col">Read</th>
+                <th style="text-align:center !important;" scope="col">Write</th>
             </tr>
         </thead>
         <tbody>
@@ -279,14 +279,14 @@
     <br><br>
 
 
-    <h3>Education</h3>
+    <h3>Education</h3> <br>
     <table>
-        <th style="text-algin:center !important;"ead>
+        <th style="text-align:center !important;"ead>
             <tr>
-                <th style="text-algin:center !important;">Degree</th>
-                <th style="text-algin:center !important;">Year</th>
-                <th style="text-algin:center !important;">Educational Body</th>
-                <th style="text-algin:center !important;">Country</th>
+                <th style="text-align:center !important;">Degree</th>
+                <th style="text-align:center !important;">Year</th>
+                <th style="text-align:center !important;">Educational Body</th>
+                <th style="text-align:center !important;">Country</th>
             </tr>
         </th>
 
@@ -307,13 +307,13 @@
 
     <br><br>
 
-    <h3>Working Experince In <span style="color: red">GCC/ABROAD</span></h3>
+    <h3>Working Experince In <span style="color: red">GCC/ABROAD</span></h3> <br>
     <table>
         <tr>
-            <th style="text-algin:center !important;">Employer</th>
-            <th style="text-algin:center !important;">Duration</th>
-            <th style="text-algin:center !important;">Country</th>
-            <th style="text-algin:center !important;">Designation</th>
+            <th style="text-align:center !important;">Employer</th>
+            <th style="text-align:center !important;">Duration</th>
+            <th style="text-align:center !important;">Country</th>
+            <th style="text-align:center !important;">Designation</th>
         </tr>
         <tr>
             @foreach ($application->employers as $emplyoer)
