@@ -98,8 +98,7 @@
             <td>{{ $application->job->created_at }}</td>
         </tr>
     </table> --}}
-    {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="10%" style="margin-left:50%;"> --}}
-    <h3 style="margin-top:5% !important;">Application Information</h3>
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="60%" style="margin-left:50%;">
     <div class="parent" style="margin-top:5%;">
         {{-- <div class="child" style="margin-right:40px !important;">
             <p style="padding: 3px;">
@@ -119,7 +118,7 @@
         </div> --}}
         {{-- <div class="child" style="" class="child" style="margin-left:10px !important;"> --}}
         <p style="padding: 3px;">
-            Al Shoala Recruitment Service W.L.L
+            Application Information
         </p>
         <p style="padding: 3px;">
             DSR: {{ $application->job->post_number }}
@@ -135,10 +134,10 @@
     </div>
     <table style="margin-top: -150px">
         <tr>
-            <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
             <td><span class="bold">Date:</span>
                 {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
             </td>
+            <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
         </tr>
         <tr>
             <td colspan="" style="font-size: 13px !important;">
@@ -150,6 +149,10 @@
                 <span class="bold">Position Applied For: </span>
                 {{ $application->title->name }}
             </td>
+        </tr>
+        <tr style="text-align:center;font-weight: bold !important;">
+            <h3>Personal Information</h3>
+
         </tr>
         <tr>
             <td><span class="bold">Full Name: </span>
