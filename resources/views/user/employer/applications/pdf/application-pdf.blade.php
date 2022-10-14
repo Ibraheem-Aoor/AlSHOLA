@@ -163,7 +163,7 @@
     </table>
 
     <br><br>
-    
+
     <h3>Personal Information</h3>
     <table>
         <tr>
@@ -244,35 +244,35 @@
     <h3>Language Level</h3>
     <table>
         <thead>
-            <tr style="text-align:center !important;">
-                <th scope="col">Language</th>
-                <th scope="col">Speak</th>
-                <th scope="col">Understand</th>
-                <th scope="col">Read</th>
-                <th scope="col">Write</th>
+            <tr>
+                <th style="text-algin:center !important;" scope="col">Language</th>
+                <th style="text-algin:center !important;" scope="col">Speak</th>
+                <th style="text-algin:center !important;" scope="col">Understand</th>
+                <th style="text-algin:center !important;" scope="col">Read</th>
+                <th style="text-algin:center !important;" scope="col">Write</th>
             </tr>
         </thead>
         <tbody>
-            <tr style="text-align:center !important;">
-                <td>Arabic</td>
-                <td>{{ $application->arabic_speak }}</td>
-                <td>{{ $application->arabic_understand }}</td>
-                <td>{{ $application->arabic_read }}</td>
-                <td>{{ $application->arabic_write }}</td>
+            <tr>
+                <td style="text-align:center !important;">Arabic</td>
+                <td style="text-align:center !important;">{{ $application->arabic_speak }}</td>
+                <td style="text-align:center !important;">{{ $application->arabic_understand }}</td>
+                <td style="text-align:center !important;">{{ $application->arabic_read }}</td>
+                <td style="text-align:center !important;">{{ $application->arabic_write }}</td>
             </tr>
-            <tr style="text-align:center !important;">
-                <td>English</td>
-                <td>{{ $application->english_speak }}</td>
-                <td>{{ $application->english_understand }}</td>
-                <td>{{ $application->english_read }}</td>
-                <td>{{ $application->english_write }}</td>
+            <tr>
+                <td style="text-align:center !important;">English</td>
+                <td style="text-align:center !important;">{{ $application->english_speak }}</td>
+                <td style="text-align:center !important;">{{ $application->english_understand }}</td>
+                <td style="text-align:center !important;">{{ $application->english_read }}</td>
+                <td style="text-align:center !important;">{{ $application->english_write }}</td>
             </tr>
-            <tr style="text-align:center !important;">
-                <td>Hindi</td>
-                <td>{{ $application->hindi_speak }}</td>
-                <td>{{ $application->hindi_understand }}</td>
-                <td>{{ $application->hindi_read }}</td>
-                <td>{{ $application->hindi_write }}</td>
+            <tr>
+                <td style="text-align:center !important;">Hindi</td>
+                <td style="text-align:center !important;">{{ $application->hindi_speak }}</td>
+                <td style="text-align:center !important;">{{ $application->hindi_understand }}</td>
+                <td style="text-align:center !important;">{{ $application->hindi_read }}</td>
+                <td style="text-align:center !important;">{{ $application->hindi_write }}</td>
             </tr>
         </tbody>
     </table>
@@ -281,22 +281,22 @@
 
     <h3>Education</h3>
     <table>
-        <thead>
-            <tr style="text-align:center !important;">
-                <th>Degree</th>
-                <th>Year</th>
-                <th>Educational Body</th>
-                <th>Country</th>
+        <th style="text-algin:center !important;"ead>
+            <tr>
+                <th style="text-algin:center !important;">Degree</th>
+                <th style="text-algin:center !important;">Year</th>
+                <th style="text-algin:center !important;">Educational Body</th>
+                <th style="text-algin:center !important;">Country</th>
             </tr>
-        </thead>
+        </th>
 
         <tbody>
             @foreach ($application->educations as $edu)
-                <tr style="text-align:center !important;">
-                    <td>{{ $edu->degree }}</td>
-                    <td>{{ $edu->year }}</td>
-                    <td>{{ $edu->collage }}</td>
-                    <td>{{ $edu->country }}</td>
+                <tr>
+                    <td style="text-align:center !important;">{{ $edu->degree }}</td>
+                    <td style="text-align:center !important;">{{ $edu->year }}</td>
+                    <td style="text-align:center !important;">{{ $edu->collage }}</td>
+                    <td style="text-align:center !important;">{{ $edu->country }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -309,19 +309,19 @@
 
     <h3>Working Experince In <span style="color: red">GCC/ABROAD</span></h3>
     <table>
-        <tr style="text-align:center !important;">
-            <th>Employer</th>
-            <th>Duration</th>
-            <th>Country</th>
-            <th>Designation</th>
+        <tr>
+            <th style="text-algin:center !important;">Employer</th>
+            <th style="text-algin:center !important;">Duration</th>
+            <th style="text-algin:center !important;">Country</th>
+            <th style="text-algin:center !important;">Designation</th>
         </tr>
-        <tr style="text-align:center !important;">
+        <tr>
             @foreach ($application->employers as $emplyoer)
-        <tr style="text-align:center !important;">
-            <td>{{ $emplyoer->name }}</td>
-            <td>{{ $emplyoer->duration }}</td>
-            <td>{{ $emplyoer->country }}</td>
-            <td>{{ $emplyoer->designation }}</td>
+        <tr>
+            <td style="text-align:center !important;">{{ $emplyoer->name }}</td>
+            <td style="text-align:center !important;">{{ $emplyoer->duration }}</td>
+            <td style="text-align:center !important;">{{ $emplyoer->country }}</td>
+            <td style="text-align:center !important;">{{ $emplyoer->designation }}</td>
         </tr>
         @endforeach
         </tr>
