@@ -97,7 +97,7 @@
 
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="25%" style="margin-left:40%;">
     <div class="parent">
-        <table class="tableNoBorder" style="margin-bottom:15px !important;width:60% !important;" >
+        <table class="tableNoBorder" style="margin-bottom:15px !important;" >
 
             <tr>
                 <td class="text-left">
