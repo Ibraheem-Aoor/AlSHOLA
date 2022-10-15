@@ -55,7 +55,7 @@
             color: white;
         }
 
-        .basicInfo tr td:nth-child(even) {
+        .basicInfo tr td:nth-child(odd) {
             background-color: rgb(37, 138, 171);
             color: white;
         }
