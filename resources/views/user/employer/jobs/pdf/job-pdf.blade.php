@@ -59,6 +59,10 @@
             background-color: rgb(37, 138, 171);
             color: white;
         }
+        .basicInfo tr td{
+            padding: 2% !important;
+            /* widows: 50% !important; */
+        }
 
         body {
             font-size: 9px;
@@ -97,7 +101,7 @@
 
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="25%" style="margin-left:40%;">
     <div class="parent">
-        <table class="tableNoBorder" style="margin-bottom:15px !important;" >
+        <table class="tableNoBorder" style="margin-bottom:15px !important;">
 
             <tr>
                 <td class="text-left">
@@ -109,22 +113,28 @@
             </tr>
             <tr></tr>
             <tr>
-                @if (Auth::user()->type == 'Admin' || 'Broker')
-                    <td class="text-left" ><span class="bold">
+                @if (Auth::user()->type == 'Admin')
+                    <td class="text-left"><span class="bold">
+                            {{ $job->user->name }}</span>
+                    </td>
+                @elseif(Auth::user()->type == 'Broker')
+                    <td class="text-left"><span class="bold">
                             {{ $job->user->name }}</span>
                     </td>
                 @else
-                    <td class="text-left" ><span class="bold">
+                    <td class="text-left"><span class="bold">
                             Al Shoala Recruitment Service W.L.L</span>
                 @endif
             </tr>
             <tr>
-                <td class="text-left"><span class="bold">Job No: </span> {{ $job->post_number }}</td>
+                <td class="text-left"><span class="bold">DSR: </span> {{ $job->post_number }}</td>
                 <td class="text-right"><span class="bold">
-                        @if (Auth::user()->type == 'Admin' || 'Broker')
+                        @if (Auth::user()->type == 'Admin')
+                            Al Shoala Recruitment Service W.L.L
+                        @elseif(Auth::user()->type == 'Broker')
                             Al Shoala Recruitment Service W.L.L
                         @else
-                            Auth::user()->email
+                            {{ Auth::user()->email }}
                         @endif
                     </span>
                 </td>
