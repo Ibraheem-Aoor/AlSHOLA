@@ -129,6 +129,7 @@
                     </span>
                 </td>
             </tr>
+        </table>
     </div>
     <br>
 
