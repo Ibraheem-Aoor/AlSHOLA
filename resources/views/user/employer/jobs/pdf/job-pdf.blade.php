@@ -96,8 +96,8 @@
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="25%" style="margin-left:40%;">
-    <div class="parent" style="padding-left: 5% !important;padding-right: 5% !important;">
-        <table class="tableNoBorder" style="margin-bottom:15px !important;">
+    <div class="parent">
+        <table class="tableNoBorder" style="margin-bottom:15px !important;width:60% !important;" >
 
             <tr>
                 <td class="text-left">
@@ -110,17 +110,17 @@
             <tr></tr>
             <tr>
                 @if (Auth::user()->type == 'Admin' || 'Broker')
-                    <td class="text-left" style="padding-right:25.5% !important;"><span class="bold">
+                    <td class="text-left" ><span class="bold">
                             {{ $job->user->name }}</span>
                     </td>
                 @else
-                    <td class="text-left" style="padding-right:25.5% !important;"><span class="bold">
+                    <td class="text-left" ><span class="bold">
                             Al Shoala Recruitment Service W.L.L</span>
                 @endif
             </tr>
             <tr>
                 <td class="text-left"><span class="bold">Job No: </span> {{ $job->post_number }}</td>
-                <td class="text-right" style="padding-right:13.5% !important;"><span class="bold">
+                <td class="text-right"><span class="bold">
                         @if (Auth::user()->type == 'Admin' || 'Broker')
                             Al Shoala Recruitment Service W.L.L
                         @else
@@ -133,7 +133,7 @@
     <br>
 
 
-    <table class="titles" style="margin-top: -15px;">
+    <table class="titles" style="margin-top: -15px;" style="width: 100% !important;">
         <tr>
             <th>#</th>
             <th>Category</th>
@@ -165,7 +165,7 @@
 
     <br><br>
 
-    <table class="basicInfo" style="font-size: 9px; !important; !important;">
+    <table class="basicInfo" style="font-size: 9px; !important; !important;width: 100% !important;">
 
         <tr>
             <td>Currency:</td>
