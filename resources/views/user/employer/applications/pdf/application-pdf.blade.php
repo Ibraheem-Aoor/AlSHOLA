@@ -349,7 +349,7 @@
         </tr>
         <tr>
             <td class="text-left"><span class="bold">Signature:</span> </td>
-            <td class="text-right" style="display:flex; justify-content:center;padding-right:23% !important;"><span class="bold">Date:</span> </td>
+            <td class="text-right" style="display:flex; justify-content:center;padding-right:43% !important;"><span class="bold">Date:</span> </td>
         </tr>
     </table>
 </body>
