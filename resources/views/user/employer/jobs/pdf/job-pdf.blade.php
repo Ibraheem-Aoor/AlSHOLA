@@ -7,7 +7,7 @@
             font-family: arial, sans-serif;
             font-size: 9px;
             border-collapse: collapse;
-            width: 100%;
+            width: 100% !important;
         }
 
         td,
@@ -96,7 +96,7 @@
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
     <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="25%" style="margin-left:40%;">
-    <div class="parent">
+    <div class="parent" style="padding-left: 5% !important;padding-right: 5% !important;">
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
 
             <tr>
@@ -109,22 +109,20 @@
             </tr>
             <tr></tr>
             <tr>
-                <td class="text-left"><span class="bold">Al Shoala Recruitment Service W.L.L</span></td>
                 @if (Auth::user()->type == 'Admin' || 'Broker')
-                    <td class="text-right" style="padding-right:14.5% !important;"><span class="bold">
+                    <td class="text-left" style="padding-right:14.5% !important;"><span class="bold">
                             {{ $job->user->name }}</span>
                     </td>
                 @else
-                    <td class="text-right" style="padding-right:14.5% !important;"><span class="bold">
-                            {{ Auth::user()->name }}</span>
-                    </td>
+                    <td class="text-left" style="padding-right:14.5% !important;"><span class="bold">
+                            Al Shoala Recruitment Service W.L.L</span>
                 @endif
             </tr>
             <tr>
                 <td class="text-left"><span class="bold">Job No: </span> {{ $job->post_number }}</td>
                 <td class="text-right" style="padding-right:13.5% !important;"><span class="bold">
                         @if (Auth::user()->type == 'Admin' || 'Broker')
-                            {{ $job->user->email }}
+                            Al Shoala Recruitment Service W.L.L
                         @else
                             Auth::user()->email
                         @endif
