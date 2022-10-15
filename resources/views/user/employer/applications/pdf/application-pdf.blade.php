@@ -100,8 +100,8 @@
     </table> --}}
     <table>
         <tr>
-            <td colspan="2" style="text-align:center !important;">
-                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left:50%;">
+            <td colspan="4" >
+                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left: 25% important;">
             </td>
         </tr>
     </table>
