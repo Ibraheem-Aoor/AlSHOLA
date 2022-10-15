@@ -100,8 +100,8 @@
     </table> --}}
     <table>
         <tr>
-            <td colspan="4" >
-                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-right: 10% important;">
+            <td colspan="2" style="text-align:center !important;">
+                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left:50%;">
             </td>
         </tr>
     </table>
@@ -114,7 +114,7 @@
                 <p style="padding: 3px;">
                     Represntative: {{ $application->user->responsible_person }}
                 </p>
-            @endissetz`
+            @endisset
             <p style="padding: 3px;">
                 Mobile: {{ $application->user->mobile }}
             </p>
@@ -136,9 +136,9 @@
     </div>
     <table>
         <tr>
-            <td colspan="2" style="text-align: center !important;border:none !important;">
+            <td colspan="2" style="text-align:center !important; border:none !important;">
                 <img src="{{ $photo_src }}" width="200" height="200"
-                    style="margin-left:45% !important; border: 1px solid black;">
+                    style="border: 1px solid black;">
                 <table style="margin-top: -150px">
             </td>
         </tr>
