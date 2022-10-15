@@ -95,7 +95,7 @@
 <body>
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:40%;">
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="25%" style="margin-left:40%;">
     <div class="parent">
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
 
