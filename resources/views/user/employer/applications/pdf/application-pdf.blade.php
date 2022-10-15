@@ -136,7 +136,7 @@
     </div>
     <table>
         <tr>
-            <td colspan="4" style="text-align: center !important;border:none !important;">
+            <td colspan="2" style="text-align: center !important;border:none !important;">
                 <img src="{{ $photo_src }}" width="200" height="200"
                     style="margin-left:45% !important; border: 1px solid black;">
                 <table style="margin-top: -150px">
