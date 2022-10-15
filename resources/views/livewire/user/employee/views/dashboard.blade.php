@@ -1,34 +1,34 @@
 <div>
     @section('title', 'ALSHOALA | Dashboard')
     @push('css')
-    <style>
-        @media  print{
-            nav{
-                display: none !important;
-            }
-            .back-to-top{
-                display: none !important;
-            }
+        <style>
+            @media print {
+                nav {
+                    display: none !important;
+                }
 
-            #myChart_2{
-                margin: auto !important;
+                .back-to-top {
+                    display: none !important;
+                }
+
+                #myChart_2 {
+                    margin: auto !important;
+                }
             }
-        }
-    </style>
+        </style>
     @endpush
     <div class="container-xxl py-5">
-        <div class="container">
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ 'WELCOME BACK ' . Auth::user()->name }}
-            </h1>
-            <div class="row wow fadeInUp" data-wow-delay="0.1s">
-                <div class="col-sm-8">
-                    <canvas id="myChart" width="500" height="200"></canvas>
-                </div>
-                <div class="col-sm-4">
-                    <canvas id="myChart_2"></canvas>
-                </div>
+        <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">{{ 'WELCOME BACK ' . Auth::user()->name }}
+        </h1>
+        <div class="row wow fadeInUp" data-wow-delay="0.1s">
+            <div class="col-lg-8 col-md-12">
+                <canvas id="myChart" width="500" height="200"></canvas>
             </div>
-            {{-- <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="col-lg-4 col-md-12">
+                <canvas id="myChart_2"></canvas>
+            </div>
+        </div>
+        {{-- <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="col-sm-4 mb-2">
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
@@ -84,76 +84,74 @@
                     </div>
                 </div>
             </div> --}}
-        </div>
-
-    </div>
 
 
-    <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
 
-        <div iv class="col-sm-12 text-center mb-5">
-            <h2 class="text-green">Latest Demands Recommend For You</h2>
-            <div class="table-responsive">
-                <table class="table" id="myTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">DSR</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Supply</th>
-                            <th scope="col">Balance</th>
-                            <th scope="col">Client</th>
-                            <th scope="col">Creation_date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @forelse ($avlialbeJobs as $job)
+        <div class="row g-4 wow fadeInUp mt-5" data-wow-delay="0.1s">
+
+            <div iv class="col-lg-12  col-md-8 col-sm-12 text-center mb-5">
+                <h2 class="text-green">Latest Demands Recommend For You</h2>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
                             <tr>
-                                <th scope="row">{{ $i++ }}</th>
-                                <td>{{ $job->post_number }}</td>
-                                <td>{{ $job->qty() }}</td>
-                                <td>
-                                    {{  $job->supplied() }}
-                                </td>
-
-                                <td>
-                                    {{ $job->qty() - $job->supplied() }}
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('employer.job.applications.all', $job->id) }}">
-                                        {{ $job->user->name }}
-                                    </a>
-                                </td>
-                                <td>{{ $job->created_at }}</td>
-                                <td>{{ $job->subStatus->name }}</td>
-                                <td>
-                                    <a href="{{ route('employee.job.details', $job->id) }}"
-                                        class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>
-                                        Details</a>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">DSR</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Supply</th>
+                                <th scope="col">Balance</th>
+                                <th scope="col">Client</th>
+                                <th scope="col">Creation_date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="9" class="alert alert-warning text-center bg-dark" style="color:#fff">
-                                    No Records Yet
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @forelse ($avlialbeJobs as $job)
+                                <tr>
+                                    <th scope="row">{{ $i++ }}</th>
+                                    <td>{{ $job->post_number }}</td>
+                                    <td>{{ $job->qty() }}</td>
+                                    <td>
+                                        {{ $job->supplied() }}
+                                    </td>
+
+                                    <td>
+                                        {{ $job->qty() - $job->supplied() }}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ route('employer.job.applications.all', $job->id) }}">
+                                            {{ $job->user->name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $job->created_at }}</td>
+                                    <td>{{ $job->subStatus->name }}</td>
+                                    <td>
+                                        <a href="{{ route('employee.job.details', $job->id) }}"
+                                            class=" btn btn-outline-primary" href="#"><i class="fa fa-eye"></i>
+                                            Details</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="alert alert-warning text-center bg-dark"
+                                        style="color:#fff">
+                                        No Records Yet
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
-</div>
-</div>
 </div>
 @push('js')
     <script>
@@ -164,7 +162,7 @@
                 labels: ['Under Proccess', 'Cancelled', 'Completed'],
                 datasets: [{
                     label: 'Avilable Deamands',
-                    data: [{{$underProcessJobs}}, {{$cancelledJobs}}, {{$completedJobs}}],
+                    data: [{{ $underProcessJobs }}, {{ $cancelledJobs }}, {{ $completedJobs }}],
                     backgroundColor: [
                         'rgb(255, 205, 86)',
                         'rgb(255, 99, 132)',
@@ -183,7 +181,7 @@
                 labels: ['Applications'],
                 datasets: [{
                         label: 'Active Applications',
-                        data: [{{$acitveApplicationsCount}}],
+                        data: [{{ $acitveApplicationsCount }}],
                         backgroundColor: [
                             'rgba(96, 240, 135, 0.2)', ,
                         ],
@@ -194,7 +192,7 @@
                     },
                     {
                         label: 'Hold Applications',
-                        data: [{{$holdApplicationsCount}}],
+                        data: [{{ $holdApplicationsCount }}],
                         backgroundColor: [
                             'rgba(255, 206, 86, 0.2)',
                         ],
@@ -204,7 +202,7 @@
                         borderWidth: 1
                     }, {
                         label: 'Cancelled Applications',
-                        data: [{{$cancelledApplicationsCount}}],
+                        data: [{{ $cancelledApplicationsCount }}],
                         backgroundColor: [
                             'rgba(245, 96, 96, 0.2)',
                         ],
@@ -214,7 +212,7 @@
                         borderWidth: 1
                     }, {
                         label: 'Completed Applications',
-                        data: [{{$completedApplicationsCount}}],
+                        data: [{{ $completedApplicationsCount }}],
                         backgroundColor: [
                             'rgba(153, 102, 255, 0.2)',
                         ],
@@ -238,6 +236,5 @@
             }
         });
     </script>
-
 @endpush
 </div>

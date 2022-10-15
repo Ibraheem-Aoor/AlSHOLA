@@ -18,16 +18,16 @@
                     </select>
                 </div>
                 <div class="col-sm-4"></div>
-                <div class="col-sm-4">
+                {{-- <div class="col-sm-4">
                     <form action="{{ route('agent-application.search') }}" method="GET">
                         @csrf
                         <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search"
                             aria-label="Search" name="search">
                     </form>
-                </div>
+                </div> --}}
                 <div class="col-sm-12 text-center">
                     <div class="table-responsive" >
-                        <table class="table" id="applications_table">
+                        <table class="table" id="applications_table" >
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -168,7 +168,7 @@
                     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
                     <script>
                         $(document).ready(function() {
-                            $('#myTable').DataTable();
+                            $('table').DataTable();
                         });
                     </script>
                     <script>

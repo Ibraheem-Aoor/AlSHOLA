@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     use HasFactory;
-    public $preventsLazyLoading = true;
+    public $preventsLazyLoading = false;
 
 
     protected $fillable = [
