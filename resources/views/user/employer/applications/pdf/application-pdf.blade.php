@@ -101,7 +101,7 @@
     <table>
         <tr>
             <td colspan="4" >
-                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left: 25% important;">
+                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-right: 10% important;">
             </td>
         </tr>
     </table>
@@ -114,7 +114,7 @@
                 <p style="padding: 3px;">
                     Represntative: {{ $application->user->responsible_person }}
                 </p>
-            @endisset
+            @endissetz`
             <p style="padding: 3px;">
                 Mobile: {{ $application->user->mobile }}
             </p>
