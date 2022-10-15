@@ -100,7 +100,7 @@
     </table> --}}
     <table>
         <tr>
-            <td colspan="4" style="text-align:center !important;">
+            <td colspan="2" style="text-align:center !important;">
                 <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left:50%;">
             </td>
         </tr>
@@ -336,20 +336,20 @@
             <td class="text-left">
                 <span class="bold">Applicant Interviewed By: </span>{{ $application->applicant_interviewd_by }}
             </td>
-            <td class="text-right" style="padding-right:15% !important;">
+            <td class="text-right" style="display:flex; justify-content:center;padding-right:2% !important;">
                 <span class="bold">Recommendations: </span> {{ $application->recommendations }}
             </td>
         </tr>
         <tr></tr>
         <tr>
             <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
-            <td class="text-right" style="padding-right:13.5% !important;"><span class="bold">Minimum Expected
+            <td class="text-right" style="display:flex; justify-content:center"><span class="bold" style="padding-right:8% !important;">Minimum Expected
                     Salary:</span> {{ $application->min_salary }}
             </td>
         </tr>
         <tr>
             <td class="text-left"><span class="bold">Signature:</span> </td>
-            <td class="text-right" style="padding-right:20% !important;"><span class="bold">Date:</span> </td>
+            <td class="text-right" style="display:flex; justify-content:center;"><span class="bold" style="padding-right:24% !important;">Date:</span> </td>
         </tr>
     </table>
 </body>
