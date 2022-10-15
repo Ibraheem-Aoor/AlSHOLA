@@ -336,7 +336,7 @@
             <td class="text-left">
                 <span class="bold">Applicant Interviewed By: </span>{{ $application->applicant_interviewd_by }}
             </td>
-            <td class="text-right" style="display:flex; justify-content:center;padding-right:5% !important;">
+            <td class="text-right" style="display:flex; justify-content:center;padding-right:15% !important;">
                 <span class="bold">Recommendations: </span> {{ $application->recommendations }}
             </td>
         </tr>
@@ -349,7 +349,7 @@
         </tr>
         <tr>
             <td class="text-left"><span class="bold">Signature:</span> </td>
-            <td class="text-right" style="display:flex; justify-content:center;padding-right:13% !important;"><span class="bold">Date:</span> </td>
+            <td class="text-right" style="display:flex; justify-content:center;padding-right:23% !important;"><span class="bold">Date:</span> </td>
         </tr>
     </table>
 </body>
