@@ -103,18 +103,18 @@
                 <td class="text-left">
                     From
                 </td>
-                <td class="text-right" style="padding-right:15% !important;">
+                <td class="text-right" style="padding-right:26% !important;">
                     <span class="bold">To</span>
                 </td>
             </tr>
             <tr></tr>
             <tr>
                 @if (Auth::user()->type == 'Admin' || 'Broker')
-                    <td class="text-left" style="padding-right:14.5% !important;"><span class="bold">
+                    <td class="text-left" style="padding-right:25.5% !important;"><span class="bold">
                             {{ $job->user->name }}</span>
                     </td>
                 @else
-                    <td class="text-left" style="padding-right:14.5% !important;"><span class="bold">
+                    <td class="text-left" style="padding-right:25.5% !important;"><span class="bold">
                             Al Shoala Recruitment Service W.L.L</span>
                 @endif
             </tr>
