@@ -59,9 +59,9 @@
             background-color: rgb(37, 138, 171);
             color: white;
         }
-        .basicInfo tr{
-            padding: 2% !important;
-            /* widows: 50% !important; */
+        .basicInfo tr td{
+            /* padding: 2% !important; */
+            width: 50% !important;
         }
 
         body {
