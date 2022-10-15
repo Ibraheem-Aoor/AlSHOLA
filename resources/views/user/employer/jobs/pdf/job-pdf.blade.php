@@ -59,7 +59,7 @@
             background-color: rgb(37, 138, 171);
             color: white;
         }
-        .basicInfo tr td{
+        .basicInfo tr{
             padding: 2% !important;
             /* widows: 50% !important; */
         }
