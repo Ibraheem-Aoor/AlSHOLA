@@ -123,7 +123,7 @@ class InvoiceHelper
             ->filename('ALSHOALA-INVOICE-' . $registerdInvoice->number)
             ->addItems($items)
             // ->notes($notes)
-            ->logo(asset('assets/dist_3/assets/images/header-logo.png'))
+            ->logo(asset('assets/dist_3/assets/images/logo.png'))
             // You can additionally save generated invoice to configured disk
             ->save('public');
         $link = $invoice->url();
