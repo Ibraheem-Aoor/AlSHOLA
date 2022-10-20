@@ -125,38 +125,43 @@
             <tr>
                 <td>
                     <div class="with-border" style="min-height: 150px !important;">
-                        <li>
-                            <span class="bold">From: </span>
-                            @if (Auth::user()->type == 'Admin')
-                                {{ $job->user->name }}</span>
-                            @elseif(Auth::user()->type == 'Broker')
-                                {{ $job->user->name }}</span>
-                            @else
-                                Al Shoala Recruitment Service W.L.L</span>
-                            @endif
-                        </li>
-                        <li>
-                            <span class="bold">Date:</span>
-                            {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
-                        </li>
+                        <ul>
+
+                            <li>
+                                <span class="bold">From: </span>
+                                @if (Auth::user()->type == 'Admin')
+                                    {{ $job->user->name }}</span>
+                                @elseif(Auth::user()->type == 'Broker')
+                                    {{ $job->user->name }}</span>
+                                @else
+                                    Al Shoala Recruitment Service W.L.L</span>
+                                @endif
+                            </li>
+                            <li>
+                                <span class="bold">Date:</span>
+                                {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
+                            </li>
+                        </ul>
                     </div>
                 </td>
 
                 <td>
                     <div class="with-border" style="min-height: 150px !important;">
-                        <li>
-                            <span class="bold">To:</span>
-                            @if (Auth::user()->type == 'Admin')
-                                Al Shoala Recruitment Service W.L.L
-                            @elseif(Auth::user()->type == 'Broker')
-                                Al Shoala Recruitment Service W.L.L
-                            @else
-                                {{ Auth::user()->email }}
-                            @endif
-                        </li>
-                        <li>
-                            <span class="bold">DSR:</span> {{ $job->post_number }}
-                        </li>
+                        <ul>
+                            <li>
+                                <span class="bold">To:</span>
+                                @if (Auth::user()->type == 'Admin')
+                                    Al Shoala Recruitment Service W.L.L
+                                @elseif(Auth::user()->type == 'Broker')
+                                    Al Shoala Recruitment Service W.L.L
+                                @else
+                                    {{ Auth::user()->email }}
+                                @endif
+                            </li>
+                            <li>
+                                <span class="bold">DSR:</span> {{ $job->post_number }}
+                            </li>
+                        </ul>
                     </div>
                 </td>
             </tr>
