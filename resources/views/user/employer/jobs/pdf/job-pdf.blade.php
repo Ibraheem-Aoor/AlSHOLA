@@ -95,14 +95,14 @@
             border: none !important;
         }
 
-        .with-border{
+        td .with-border{
             border: 1px solid #000 !important;
         }
 
-        .with-left-border{
+        td .with-left-border{
             border-left: 1px solid #000 !important;
         }
-        .with-right-border{
+        td.with-right-border{
             border-right: 1px solid #000 !important;
         }
     </style>
