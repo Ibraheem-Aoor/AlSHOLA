@@ -95,7 +95,7 @@
             border: none !important;
         }
 
-        td .with-border{
+        .with-border{
             border: 1px solid #000 !important;
         }
 
