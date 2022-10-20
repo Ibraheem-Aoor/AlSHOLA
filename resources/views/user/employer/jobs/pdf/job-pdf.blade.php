@@ -98,6 +98,7 @@
         .with-border {
             border: 1px solid #000 !important;
             font-size: 18px !important;
+            text-align: justify !important;
         }
 
         td .with-left-border {
@@ -138,6 +139,7 @@
                                     Al Shoala Recruitment Service W.L.L</span>
                                 @endif
                             </li>
+                            <br> <br>
                             <li>
                                 <span class="bold">Date:</span>
                                 {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
@@ -159,6 +161,7 @@
                                     {{ Auth::user()->email }}
                                 @endif
                             </li>
+                            <br> <br>
                             <li>
                                 <span class="bold">DSR:</span> {{ $job->post_number }}
                             </li>
