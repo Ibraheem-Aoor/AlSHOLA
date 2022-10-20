@@ -96,14 +96,14 @@
         }
 
         .with-border{
-            border: 1px solid #000;
+            border: 1px solid #000 !important;
         }
 
         .with-left-border{
-            border-left: 1px solid #000;
+            border-left: 1px solid #000 !important;
         }
         .with-right-border{
-            border-right: 1px solid #000;
+            border-right: 1px solid #000 !important;
         }
     </style>
 </head>
