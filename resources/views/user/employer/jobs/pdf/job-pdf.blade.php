@@ -97,6 +97,7 @@
 
         .with-border {
             border: 1px solid #000 !important;
+            font-size: 18px !important;
         }
 
         td .with-left-border {
@@ -124,7 +125,7 @@
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
             <tr>
                 <td>
-                    <div class="with-border" style="min-height: 150px !important;">
+                    <div class="with-border" style="min-height: 80px !important;">
                         <ul>
 
                             <li>
@@ -146,7 +147,7 @@
                 </td>
 
                 <td>
-                    <div class="with-border" style="min-height: 150px !important;">
+                    <div class="with-border" style="min-height: 80px !important;">
                         <ul>
                             <li>
                                 <span class="bold">To:</span>
