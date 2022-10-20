@@ -124,7 +124,7 @@
         </div> --}}
         {{-- <div class="child" style="" class="child" style="margin-left:10px !important;"> --}}
         <p style="padding: 3px;">
-            Application Information
+            Application Form
         </p>
         <p style="padding: 3px;">
             DSR: {{ $application->job->post_number }}
@@ -228,7 +228,7 @@
                 {{ $application->children }}</td>
             <td><span class="bold">height: </span>
                 {{ $application->height }}</td>
-            <td colspan="2"><span class="bold">weight:</span>
+            <td><span class="bold">weight:</span>
                 {{ $application->weihgt }}</td>
 
         </tr>
@@ -241,7 +241,7 @@
 
     <br><br>
 
-    <h3>Language Level</h3> <br>
+    <h3>Level of Language</h3> <br>
     <table>
         <thead>
             <tr>
@@ -307,7 +307,7 @@
 
     <br><br>
 
-    <h3>Working Experince In <span style="color: red">GCC/ABROAD</span></h3> <br>
+    <h3>Working Experince</h3> <br>
     <table>
         <tr>
             <th style="text-align:center !important;">Employer</th>
@@ -326,8 +326,8 @@
         @endforeach
         </tr>
         <tr>
-            <td>Total Experince: </td>
-            <td>{{ @$application->employers?->sum('duration') ?? '' }}</td>
+            <td class="bold">Total Experince: </td>
+            <td style="text-align: center !important;">{{ @$application->employers?->sum('duration') ?? '' }}</td>
         </tr>
     </table>
     <br><br>
