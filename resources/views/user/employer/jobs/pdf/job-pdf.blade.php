@@ -124,7 +124,7 @@
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
             <tr>
                 <td>
-                    <div class="with-border" style="min-width: 80px !important;">
+                    <div class="with-border" style="min-height: 150px !important;">
                         <li>
                             <span class="bold">From: </span>
                             @if (Auth::user()->type == 'Admin')
@@ -143,7 +143,7 @@
                 </td>
 
                 <td>
-                    <div class="with-border" style="min-width: 80px !important;">
+                    <div class="with-border" style="min-height: 150px !important;">
                         <li>
                             <span class="bold">To:</span>
                             @if (Auth::user()->type == 'Admin')
