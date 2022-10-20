@@ -121,49 +121,46 @@
         <h3>Demand For Recruitment</h3>
     </div>
     <div class="parent">
-        <div class="with-border">
-            <table class="tableNoBorder" style="margin-bottom:15px !important;">
+        <table class="tableNoBorder" style="margin-bottom:15px !important;">
+            <tr>
+                <td>
+                    <div class="with-border" style="min-width: 80px !important;">
+                        <li>
+                            <span class="bold">From: </span>
+                            @if (Auth::user()->type == 'Admin')
+                                {{ $job->user->name }}</span>
+                            @elseif(Auth::user()->type == 'Broker')
+                                {{ $job->user->name }}</span>
+                            @else
+                                Al Shoala Recruitment Service W.L.L</span>
+                            @endif
+                        </li>
+                        <li>
+                            <span class="bold">Date:</span>
+                            {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
+                        </li>
+                    </div>
+                </td>
 
-                <tr>
-                    <td>
-                        <div class="with-border">
-                            <li>
-                                <span class="bold">From: </span>
-                                @if (Auth::user()->type == 'Admin')
-                                    {{ $job->user->name }}</span>
-                                @elseif(Auth::user()->type == 'Broker')
-                                    {{ $job->user->name }}</span>
-                                @else
-                                    Al Shoala Recruitment Service W.L.L</span>
-                                @endif
-                            </li>
-                            <li>
-                                <span class="bold">Date:</span>
-                                {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
-                            </li>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="with-border">
-                            <li>
-                                <span class="bold">To:</span>
-                                @if (Auth::user()->type == 'Admin')
-                                    Al Shoala Recruitment Service W.L.L
-                                @elseif(Auth::user()->type == 'Broker')
-                                    Al Shoala Recruitment Service W.L.L
-                                @else
-                                    {{ Auth::user()->email }}
-                                @endif
-                            </li>
-                            <li>
-                                <span class="bold">DSR:</span> {{ $job->post_number }}
-                            </li>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                <td>
+                    <div class="with-border" style="min-width: 80px !important;">
+                        <li>
+                            <span class="bold">To:</span>
+                            @if (Auth::user()->type == 'Admin')
+                                Al Shoala Recruitment Service W.L.L
+                            @elseif(Auth::user()->type == 'Broker')
+                                Al Shoala Recruitment Service W.L.L
+                            @else
+                                {{ Auth::user()->email }}
+                            @endif
+                        </li>
+                        <li>
+                            <span class="bold">DSR:</span> {{ $job->post_number }}
+                        </li>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
     <br>
 
