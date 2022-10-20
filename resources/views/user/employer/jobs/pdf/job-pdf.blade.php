@@ -59,7 +59,8 @@
             background-color: rgb(37, 138, 171);
             color: white;
         }
-        .basicInfo tr td{
+
+        .basicInfo tr td {
             /* padding: 2% !important; */
             width: 50% !important;
         }
@@ -99,7 +100,10 @@
 <body>
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="25%" style="margin-left:40%;">
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="35%">
+    <div style="width: 100% !important; text-align:center !important;">
+        <h3>Demand For Recruitment</h3>
+    </div>
     <div class="parent">
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
 
@@ -138,6 +142,10 @@
                         @endif
                     </span>
                 </td>
+            </tr>
+            <tr>
+
+                <td class="text-left"><span class="bold">Date: </span> {{ \Carbon\Carbon::parse($job->cteated_at)->format('Y-M-d') }}</td>
             </tr>
         </table>
     </div>
