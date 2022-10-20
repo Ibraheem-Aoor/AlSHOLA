@@ -94,6 +94,17 @@
         .tableNoBorder td {
             border: none !important;
         }
+
+        .with-border{
+            border: 1px solid #000;
+        }
+
+        .with-left-border{
+            border-left: 1px solid #000;
+        }
+        .with-right-border{
+            border-right: 1px solid #000;
+        }
     </style>
 </head>
 
@@ -105,49 +116,52 @@
         <h3>Demand For Recruitment</h3>
     </div>
     <div class="parent">
-        <table class="tableNoBorder" style="margin-bottom:15px !important;">
+        <div class="with-border">
+            <table class="tableNoBorder" style="margin-bottom:15px !important;">
 
-            <tr>
-                <td class="text-left">
-                    From
-                </td>
-                <td class="text-right" style="padding-right:26% !important;">
-                    <span class="bold">To</span>
-                </td>
-            </tr>
-            <tr></tr>
-            <tr>
-                @if (Auth::user()->type == 'Admin')
-                    <td class="text-left"><span class="bold">
-                            {{ $job->user->name }}</span>
+                <tr>
+                    <td class="text-left with-right-border">
+                        From
                     </td>
-                @elseif(Auth::user()->type == 'Broker')
-                    <td class="text-left"><span class="bold">
-                            {{ $job->user->name }}</span>
+                    <td class="text-right with-left-border" style="padding-right:26% !important;">
+                        <span class="bold">To</span>
                     </td>
-                @else
-                    <td class="text-left"><span class="bold">
-                            Al Shoala Recruitment Service W.L.L</span>
-                @endif
-            </tr>
-            <tr>
-                <td class="text-left"><span class="bold">DSR: </span> {{ $job->post_number }}</td>
-                <td class="text-right"><span class="bold">
-                        @if (Auth::user()->type == 'Admin')
-                            Al Shoala Recruitment Service W.L.L
-                        @elseif(Auth::user()->type == 'Broker')
-                            Al Shoala Recruitment Service W.L.L
-                        @else
-                            {{ Auth::user()->email }}
-                        @endif
-                    </span>
-                </td>
-            </tr>
-            <tr>
+                </tr>
+                <tr></tr>
+                <tr>
+                    @if (Auth::user()->type == 'Admin')
+                        <td class="text-left with-right-border"><span class="bold">
+                                {{ $job->user->name }}</span>
+                        </td>
+                    @elseif(Auth::user()->type == 'Broker')
+                        <td class="text-left with-right-border"><span class="bold">
+                                {{ $job->user->name }}</span>
+                        </td>
+                    @else
+                        <td class="text-left with-right-border"><span class="bold">
+                                Al Shoala Recruitment Service W.L.L</span>
+                    @endif
+                </tr>
+                <tr>
+                    <td class="text-left with-right-border"><span class="bold">DSR: </span> {{ $job->post_number }}</td>
+                    <td class="text-right with-left-border"><span class="bold">
+                            @if (Auth::user()->type == 'Admin')
+                                Al Shoala Recruitment Service W.L.L
+                            @elseif(Auth::user()->type == 'Broker')
+                                Al Shoala Recruitment Service W.L.L
+                            @else
+                                {{ Auth::user()->email }}
+                            @endif
+                        </span>
+                    </td>
+                </tr>
+                <tr>
 
-                <td class="text-left"><span class="bold">Date: </span> {{ \Carbon\Carbon::parse($job->cteated_at)->format('Y-M-d') }}</td>
-            </tr>
-        </table>
+                    <td class="text-left with-right-border"><span class="bold">Date: </span>
+                        {{ \Carbon\Carbon::parse($job->cteated_at)->format('Y-M-d') }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
     <br>
 
