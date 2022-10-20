@@ -95,15 +95,20 @@
             border: none !important;
         }
 
-        .with-border{
+        .with-border {
             border: 1px solid #000 !important;
         }
 
-        td .with-left-border{
+        td .with-left-border {
             border-left: 1px solid #000 !important;
         }
-        td.with-right-border{
+
+        td.with-right-border {
             border-right: 1px solid #000 !important;
+        }
+
+        .bold {
+            font-weight: bold !important;
         }
     </style>
 </head>
@@ -120,45 +125,42 @@
             <table class="tableNoBorder" style="margin-bottom:15px !important;">
 
                 <tr>
-                    <td class="text-left with-right-border">
-                        From
+                    <td>
+                        <div class="with-border">
+                            <li>
+                                <span class="bold">From: </span>
+                                @if (Auth::user()->type == 'Admin')
+                                    {{ $job->user->name }}</span>
+                                @elseif(Auth::user()->type == 'Broker')
+                                    {{ $job->user->name }}</span>
+                                @else
+                                    Al Shoala Recruitment Service W.L.L</span>
+                                @endif
+                            </li>
+                            <li>
+                                <span class="bold">Date:</span>
+                                {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
+                            </li>
+                        </div>
                     </td>
-                    <td class="text-right with-left-border" style="padding-right:26% !important;">
-                        <span class="bold">To</span>
-                    </td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    @if (Auth::user()->type == 'Admin')
-                        <td class="text-left with-right-border"><span class="bold">
-                                {{ $job->user->name }}</span>
-                        </td>
-                    @elseif(Auth::user()->type == 'Broker')
-                        <td class="text-left with-right-border"><span class="bold">
-                                {{ $job->user->name }}</span>
-                        </td>
-                    @else
-                        <td class="text-left with-right-border"><span class="bold">
-                                Al Shoala Recruitment Service W.L.L</span>
-                    @endif
-                </tr>
-                <tr>
-                    <td class="text-left with-right-border"><span class="bold">DSR: </span> {{ $job->post_number }}</td>
-                    <td class="text-right with-left-border"><span class="bold">
-                            @if (Auth::user()->type == 'Admin')
-                                Al Shoala Recruitment Service W.L.L
-                            @elseif(Auth::user()->type == 'Broker')
-                                Al Shoala Recruitment Service W.L.L
-                            @else
-                                {{ Auth::user()->email }}
-                            @endif
-                        </span>
-                    </td>
-                </tr>
-                <tr>
 
-                    <td class="text-left with-right-border"><span class="bold">Date: </span>
-                        {{ \Carbon\Carbon::parse($job->cteated_at)->format('Y-M-d') }}</td>
+                    <td>
+                        <div class="with-border">
+                            <li>
+                                <span class="bold">To:</span>
+                                @if (Auth::user()->type == 'Admin')
+                                    Al Shoala Recruitment Service W.L.L
+                                @elseif(Auth::user()->type == 'Broker')
+                                    Al Shoala Recruitment Service W.L.L
+                                @else
+                                    {{ Auth::user()->email }}
+                                @endif
+                            </li>
+                            <li>
+                                <span class="bold">DSR:</span> {{ $job->post_number }}
+                            </li>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
