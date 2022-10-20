@@ -125,7 +125,7 @@
     <div class="parent">
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
             <tr>
-                <td>
+                <td style="width:50% !important;">
                     <div class="with-border" style="min-height: 80px !important;">
                         <ul>
 
@@ -148,7 +148,7 @@
                     </div>
                 </td>
 
-                <td>
+                <td style="width:50% !important;">
                     <div class="with-border" style="min-height: 80px !important;">
                         <ul>
                             <li>
