@@ -137,8 +137,7 @@
     <table>
         <tr>
             <td colspan="2" style="text-align:center !important; border:none !important;">
-                <img src="{{ $photo_src }}" width="200" height="200"
-                    style="border: 1px solid black;">
+                <img src="{{ $photo_src }}" width="200" height="200" style="border: 1px solid black;">
                 <table style="margin-top: -150px">
             </td>
         </tr>
@@ -333,23 +332,21 @@
     <br><br>
     <table class="tableNoBorder">
         <tr>
+            <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
+
+
+            <td class="text-right" style="display:flex; justify-content:center"><span class="bold">Minimum Expected
+                    Salary:</span> {{ $application->min_salary }}
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
             <td class="text-left">
                 <span class="bold">Applicant Interviewed By: </span>{{ $application->applicant_interviewd_by }}
             </td>
             <td class="text-right" style="display:flex; justify-content:center;padding-right:13% !important;">
                 <span class="bold">Recommendations: </span> {{ $application->recommendations }}
             </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
-            <td class="text-right" style="display:flex; justify-content:center"><span class="bold" >Minimum Expected
-                    Salary:</span> {{ $application->min_salary }}
-            </td>
-        </tr>
-        <tr>
-            <td class="text-left"><span class="bold">Signature:</span> </td>
-            <td class="text-right" style="display:flex; justify-content:center;padding-right:30% !important;"><span class="bold">Date:</span> </td>
         </tr>
     </table>
 </body>
