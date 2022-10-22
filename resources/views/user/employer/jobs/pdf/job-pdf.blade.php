@@ -118,9 +118,9 @@
 <body>
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
-    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="35%">
+    {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="35%"> --}}
     <div style="width: 100% !important; text-align:center !important;">
-        <h3>Demand For Recruitment</h3>
+        <h1>Demand For Recruitment</h1>
     </div>
     <div class="parent">
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
@@ -128,18 +128,26 @@
                 <td style="width:50% !important;">
                     <div class="with-border" style="min-height: 80px !important;">
                         <ul>
-
                             <li>
-                                <span class="bold">From: </span>
-                                @if (Auth::user()->type == 'Admin')
-                                    {{ $job->user->name }}</span>
-                                @elseif(Auth::user()->type == 'Broker')
-                                    {{ $job->user->name }}</span>
-                                @else
-                                    Al Shoala Recruitment Service W.L.L</span>
-                                @endif
+                                <span class="bold">From: {{ $job->user->name }}</span>
                             </li>
-                            <br> <br>
+                            @if (Auth::user()->type == 'Admin')
+                                <li class="bold">
+                                    Telephone: {{ $job->user->mobile }}
+                                </li>
+                                <li class="bold">
+                                    Representative: {{ $job->user->responsible_person }}
+                                </li>
+                            @elseif(Auth::user()->type == 'Broker')
+                                <li class="bold">
+                                    Telephone: {{ $job->user->mobile }}
+                                </li>
+                                <li class="bold">
+                                    Representative: {{ $job->user->responsible_person }}
+                                </li>
+                            @else
+                                Al Shoala Recruitment Service W.L.L</span>
+                            @endif
                             <li>
                                 <span class="bold">Date:</span>
                                 {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
@@ -151,17 +159,17 @@
                 <td style="width:50% !important;">
                     <div class="with-border" style="min-height: 80px !important;">
                         <ul>
-                            <li>
-                                <span class="bold">To:</span>
-                                @if (Auth::user()->type == 'Admin')
-                                    Al Shoala Recruitment Service W.L.L
-                                @elseif(Auth::user()->type == 'Broker')
-                                    Al Shoala Recruitment Service W.L.L
-                                @else
-                                    {{ Auth::user()->email }}
-                                @endif
-                            </li>
-                            <br> <br>
+                            @if (Auth::user()->type == 'Admin')
+                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
+                                <li><span class="bold">Abdulla Ali Al Shoala</span></li>
+                                <li><span class="bold">General Manager</span></li>
+                            @elseif(Auth::user()->type == 'Broker')
+                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
+                                <li><span class="bold">Abdulla Ali Al Shoala</span></li>
+                                <li><span class="bold">General Manager</span></li>
+                            @else
+                                {{ Auth::user()->name }}
+                            @endif
                             <li>
                                 <span class="bold">DSR:</span> {{ $job->post_number }}
                             </li>
@@ -284,6 +292,17 @@
             <p>{{ $job->description }}</p>
         </div>
     @endisset
+
+    @if (Auth::user()->type == 'Admin')
+        <div style="width:50% !important; margin-left:80% !important;">
+            For <span class="bold">{{ $job->user->name }} </span> Signature:
+        </div>
+    @elseif(Auth::user()->type == 'Broker')
+        <div style="width:50% !important; margin-left:80% !important;">
+            For <span class="bold">{{ $job->user->name }} </span> Signature:
+        </div>
+    @endif
+
 
 
     @if ($is_agent)
