@@ -118,7 +118,7 @@
 <body>
     {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="15%" style="margin-left:50%;"> --}}
 
-    {{-- <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="35%"> --}}
+    <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="35%">
     <div style="width: 100% !important; text-align:center !important;">
         <h1>Demand For Recruitment</h1>
     </div>
