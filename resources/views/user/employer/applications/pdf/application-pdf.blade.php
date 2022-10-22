@@ -66,6 +66,7 @@
         .text-right {
             text-align: right !important;
         }
+
         .text-center {
             text-align: center !important;
         }
@@ -79,7 +80,6 @@
         .bold {
             font-weight: bold !important;
         }
-
     </style>
 </head>
 
@@ -135,31 +135,26 @@
         </p>
     </div>
     </div>
-    <table>
+    <table class="tableNoBorder">
         <tr>
             <td>
                 <table class="tableNoBorder">
-                    <tr>
-                        <td><span class="bold">Date:</span>
+                    <ul>
+                        <li><span class="bold">Date:</span>
                             {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
-                        </td>
-                        <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
-                        <td><span class="bold">DSR: </span> {{ $application->job->post_number }}</td>
-
-                        <td>
+                        </li>
+                        <li><span class="bold">Ref: </span> {{ $application->ref }}</li>
+                        <li><span class="bold">DSR: </span> {{ $application->job->post_number }}</li>
+                        <li>
                             <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="bold">Visa Number: </span>
-                            {{ $application->visa_number ?? 'NONE' }}
-                        </td>
-                        <td><span class="bold">Flight Ticket: </span>
-                            {{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
-                        </td>
-                        <td><span class="bold">status: </span>
-                            {{ $application->subStatus->name }}</td>
-                    </tr>
+                        </li>
+                        <li><span class="bold">Visa Number: </span>{{ $application->visa_number ?? 'NONE' }}
+                        </li>
+                        <li><span class="bold">Flight Ticket: </span>{{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
+                        </li>
+                        <li><span class="bold">status: </span>
+                            {{ $application->subStatus->name }}</li>
+                    </ul>
                 </table>
             </td>
             <td colspan="2">
@@ -186,12 +181,13 @@
                 {{ $application->passport_no }}
             </td>
             <td><span class="bold">Place Of Birth: </span>
-                {{ $application->place_of_birth ?? '' }}
+                {{ \Carbon\Carbon::parse($application->place_of_birth)->format('Y-M-d') ?? '' }}
             </td>
             <td><span class="bold">Date Of Birth: </span>
                 {{ $application->date_of_birth ?? '' }}
             </td>
             <td><span class="bold">Age: </span> {{ $application->age }}</td>
+            <td>&nbsp;</td>
 
         </tr>
 
