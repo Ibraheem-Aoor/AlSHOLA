@@ -128,30 +128,37 @@
                 <td style="width:50% !important;">
                     <div class="with-border" style="min-height: 80px !important;">
                         <ul>
-                            <li>
-                                <span class="bold">From: {{ $job->user->name }}</span>
-                            </li>
                             @if (Auth::user()->type == 'Admin')
+                                <li>
+                                    <span class="bold">From: {{ $job->user->name }}</span>
+                                </li><br>
                                 <li class="bold">
                                     Telephone: {{ $job->user->mobile }}
-                                </li>
-                                <li class="bold">
-                                    Representative: {{ $job->user->responsible_person }}
-                                </li>
+                                </li><br>
+                                @if ($job->user->responsible_person)
+                                    <li class="bold">
+                                        Representative: {{ $job->user->responsible_person }}
+                                    </li><br>
+                                @endif
                             @elseif(Auth::user()->type == 'Broker')
                                 <li class="bold">
                                     Telephone: {{ $job->user->mobile }}
-                                </li>
-                                <li class="bold">
-                                    Representative: {{ $job->user->responsible_person }}
-                                </li>
+                                </li><br>
+                                @if ($job->user->responsible_person)
+                                    <li class="bold">
+                                        Representative: {{ $job->user->responsible_person }}
+                                    </li><br>
+                                @endif
                             @else
-                                Al Shoala Recruitment Service W.L.L</span>
+                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
+                                <br>
+                                <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
+                                <li><span class="bold">General Manager</span></li><br>
                             @endif
                             <li>
                                 <span class="bold">Date:</span>
                                 {{ \Carbon\Carbon::parse($job->created_at)->format('Y-M-d') }}
-                            </li>
+                            </li><br>
                         </ul>
                     </div>
                 </td>
@@ -161,18 +168,23 @@
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
-                                <li><span class="bold">Abdulla Ali Al Shoala</span></li>
-                                <li><span class="bold">General Manager</span></li>
+                                <br>
+                                <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
+                                <li><span class="bold">General Manager</span></li><br>
                             @elseif(Auth::user()->type == 'Broker')
                                 <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
-                                <li><span class="bold">Abdulla Ali Al Shoala</span></li>
-                                <li><span class="bold">General Manager</span></li>
+                                <br>
+                                <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
+                                <li><span class="bold">General Manager</span></li><br>
                             @else
-                                {{ Auth::user()->name }}
+                                <li><span class="bold"> {{ Auth::user()->name }}</span></li><br>
+                                @if ($job->user->responsible_person)
+                                    <li><span class="bold"> {{ Auth::user()->responsible_person }}</span></li><br>
+                                @endif
                             @endif
                             <li>
                                 <span class="bold">DSR:</span> {{ $job->post_number }}
-                            </li>
+                            </li><br>
                         </ul>
                     </div>
                 </td>
