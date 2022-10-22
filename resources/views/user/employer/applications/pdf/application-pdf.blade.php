@@ -181,10 +181,10 @@
                 {{ $application->passport_no }}
             </td>
             <td><span class="bold">Place Of Birth: </span>
-                {{ \Carbon\Carbon::parse($application->place_of_birth)->format('Y-M-d') ?? '' }}
+                {{ $application->place_of_birth ?? '' }}
             </td>
             <td><span class="bold">Date Of Birth: </span>
-                {{ $application->date_of_birth ?? '' }}
+                {{ \Carbon\Carbon::parse($application->date_of_birth)->format('Y-M-d')  ?? '' }}
             </td>
             <td><span class="bold">Age: </span> {{ $application->age }}</td>
             <td>&nbsp;</td>
