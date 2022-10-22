@@ -66,16 +66,20 @@
         .text-right {
             text-align: right !important;
         }
+        .text-center {
+            text-align: center !important;
+        }
 
         body {
             height: 3508px !important;
-            padding-left: 15px !important;
-            padding-right: 5px !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
         }
 
         .bold {
             font-weight: bold !important;
         }
+
     </style>
 </head>
 
@@ -124,10 +128,7 @@
         </div> --}}
         {{-- <div class="child" style="" class="child" style="margin-left:10px !important;"> --}}
         <p style="padding: 3px;">
-            Application Form
-        </p>
-        <p style="padding: 3px;">
-            DSR: {{ $application->job->post_number }}
+        <h1>Application Form</h1>
         </p>
         <p style="padding: 3px;">
             &nbsp;
@@ -136,38 +137,47 @@
     </div>
     <table>
         <tr>
-            <td colspan="2" style="text-align:center !important; border:none !important;">
+            <td>
+                <table class="tableNoBorder">
+                    <tr>
+                        <td><span class="bold">Date:</span>
+                            {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
+                        </td>
+                        <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
+                        <td><span class="bold">DSR: </span> {{ $application->job->post_number }}</td>
+
+                        <td>
+                            <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="bold">Visa Number: </span>
+                            {{ $application->visa_number ?? 'NONE' }}
+                        </td>
+                        <td><span class="bold">Flight Ticket: </span>
+                            {{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
+                        </td>
+                        <td><span class="bold">status: </span>
+                            {{ $application->subStatus->name }}</td>
+                    </tr>
+                </table>
+            </td>
+            <td colspan="2">
+                <h3>Full Name: {{ $application->full_name }} </h3>
+                <h3>Position Applied For: {{ $application->title->name }} </h3>
+            </td>
+            <td style="border:none !important;">
                 <img src="{{ $photo_src }}" width="200" height="200" style="border: 1px solid black;">
-                <table style="margin-top: -150px">
             </td>
         </tr>
     </table>
-    <br> <br>
-    <table>
-        <tr>
-            <td><span class="bold">Date:</span>
-                {{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
-            </td>
-            <td><span class="bold">Ref: </span> {{ $application->ref }}</td>
 
-            <td>
-                <span class="bold">Coordinator: </span> {{ $application?->job?->broker?->name }}
-            </td>
-
-            <td>
-                <span class="bold">Position Applied For: </span>
-                {{ $application->title->name }}
-            </td>
-        </tr>
-    </table>
 
     <br><br>
 
     <h3>Personal Information</h3> <br>
     <table>
         <tr>
-            <td><span class="bold">Full Name: </span>
-                {{ $application->full_name }}</td>
 
             <td><span class="bold">Nationality: </span>
                 {{ \App\Models\Nationality::whereId($application->nationality)->first()?->name ?? '' }}
@@ -330,11 +340,26 @@
         </tr>
     </table>
     <br><br>
-    <table class="tableNoBorder">
+    <table class="tableNoBorder" style="width:100% !important;margin:auto !important;">
+        <tr>
+            <td style="width:50% !important;" class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
+            <td style="width:50% !important;" class="text-center"><span class="bold">Minimum Expected
+                    Salary:</span> {{ $application->min_salary }}
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50% !important;" class="text-left">
+                <span class="bold">Applicant Interviewed By: </span>{{ $application->applicant_interviewd_by }}
+            </td>
+            <td style="width:50% !important;" class="text-center">
+                <span class="bold">Recommendations: </span> {{ $application->recommendations }}
+            </td>
+        </tr>
+    </table>
+    {{-- <table class="tableNoBorder">
+
         <tr>
             <td class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>
-
-
             <td class="text-right" style="display:flex; justify-content:center"><span class="bold">Minimum Expected
                     Salary:</span> {{ $application->min_salary }}
             </td>
@@ -348,7 +373,7 @@
                 <span class="bold">Recommendations: </span> {{ $application->recommendations }}
             </td>
         </tr>
-    </table>
+    </table> --}}
 </body>
 
 </html>
