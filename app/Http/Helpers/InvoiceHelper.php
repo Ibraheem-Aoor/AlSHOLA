@@ -89,7 +89,7 @@ class InvoiceHelper
                     ->title($subInvoice->application->title->name)
                     ->description($subInvoice->description)
                     ->pricePerUnit($subInvoice->charge)
-                    ->tax($subInvoice->vat ?? 0)
+                    ->taxByPercent($subInvoice->vat ?? 0)
                     ->quantity($subInvoice->quantity));
                 }
         ;
