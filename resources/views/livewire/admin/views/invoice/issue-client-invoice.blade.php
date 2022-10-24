@@ -45,7 +45,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group col-sm-2">
-                                            <label for="name" class=" form-control-label">VAT(%):</label>
+                                            <label for="name" class=" form-control-label">VAT:</label>
                                             <input type="text" id="name" class="form-control" required
                                                 wire:model="vat">
                                             @error('vat')
