@@ -69,7 +69,7 @@ class InvoiceHelper
             'custom_fields' => [
                 // 'note'        => 'IDDQD',
                 // 'business id' => '365#GG',
-                'Address' =>  BusinessSetting::where('key', 'address')->first()->value,
+                // 'Address' =>  BusinessSetting::where('key', 'address')->first()->value,
             ],
         ]);
 

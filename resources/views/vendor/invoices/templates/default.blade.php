@@ -199,6 +199,9 @@
                         </p>
                     @endif
 
+                    <p class="seller-address">
+                        TRN: 220005194400002
+                    </p>
                     @if ($invoice->seller->address)
                         <p class="seller-address">
                             {{ __('invoices::invoice.address') }}: {{ $invoice->seller->address }}
@@ -380,9 +383,15 @@
         </tbody>
     </table>
 
+    <h3>Company's Bank Details</h3>
     @if ($invoice->notes)
         <p>
-            {{ trans('invoices::invoice.notes') }}: {!! $invoice->notes !!}
+            <p>Account Name: <strong>Alshoala Recruitment Services Co W.L.L</strong></p>
+            <p>Bank Name: <strong>Ahli United Bank</strong></p>
+            <p>Account No: <strong>0012-692990-001</strong></p>
+            <p>IBAN No: <strong>BH39AUBB00012692990001</strong></p>
+            <p>Swift Code: <strong>AUBBBHBM</strong></p>
+
         </p>
     @endif
 
