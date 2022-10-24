@@ -113,7 +113,7 @@ class IssueClientInvoice extends Component
                     'charge' => $invoice['charge'],
                     'quantity' => $invoice['quantity'],
                     'description' => $invoice['description'],
-                    'vat' => $this->vat,
+                    'vat' => $invoice['vat'],
                     'invoice_id' => $this->invoice->id,
                 ]
             );
