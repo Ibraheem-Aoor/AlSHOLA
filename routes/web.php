@@ -324,6 +324,9 @@ Route::get('/home' , function()
   })->name('job.attachment.download');
 
 
-  Route::get('test-mail' , function (){
-        return view('user.mail.user_mail');
+  Route::get('test' , function (){
+    
+        // return view('user.mail.user_mail');
   });
+
+

@@ -104,7 +104,7 @@
     </table> --}}
     <table>
         <tr>
-            <td colspan="2" style="text-align:center !important;">
+            <td colspan="2" style="text-align:center !important;border:none !important;">
                 <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" width="40%" style="margin-left:50%;">
             </td>
         </tr>
@@ -150,16 +150,17 @@
                         </li>
                         <li><span class="bold">Visa Number: </span>{{ $application->visa_number ?? 'NONE' }}
                         </li>
-                        <li><span class="bold">Flight Ticket: </span>{{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
+                        <li><span class="bold">Flight Ticket:
+                            </span>{{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
                         </li>
-                        <li><span class="bold">status: </span>
+                        <li><span class="bold">Status: </span>
                             {{ $application->subStatus->name }}</li>
                     </ul>
                 </table>
             </td>
-            <td colspan="2">
-                <h3>Full Name: {{ $application->full_name }} </h3>
-                <h3>Position Applied For: {{ $application->title->name }} </h3>
+            <td colspan="2" style="text-align: justify !important;">
+                <h3>{{ $application->full_name }} </h3>
+                <h3>{{ $application->title->name }} </h3>
             </td>
             <td style="border:none !important;">
                 <img src="{{ $photo_src }}" width="200" height="200" style="border: 1px solid black;">
@@ -168,7 +169,7 @@
     </table>
 
 
-    <br><br>
+    <br>
 
     <h3>Personal Information</h3> <br>
     <table>
@@ -184,20 +185,19 @@
                 {{ $application->place_of_birth ?? '' }}
             </td>
             <td><span class="bold">Date Of Birth: </span>
-                {{ \Carbon\Carbon::parse($application->date_of_birth)->format('Y-M-d')  ?? '' }}
+                {{ \Carbon\Carbon::parse($application->date_of_birth)->format('Y-M-d') ?? '' }}
             </td>
-            <td><span class="bold">Age: </span> {{ $application->age }}</td>
-            <td>&nbsp;</td>
+            <td colspan="2"><span class="bold">Age: </span> {{ $application->age }}</td>
 
         </tr>
 
 
         <tr>
             <td><span class="bold">Issue Date: </span>
-                {{ $application->date_issued }}
+                {{ \Carbon\Carbon::parse($application->date_issued)->format('Y-M-d') ?? '' }}
             </td>
             <td><span class="bold">Exp Date: </span>
-                {{ $application->expiry_issued }}
+                {{ \Carbon\Carbon::parse($application->expiry_issued)->format('Y-M-d') ?? '' }}
             </td>
             <td><span class="bold">Issue Place: </span>
                 {{ $application->place_issued }}
@@ -216,24 +216,13 @@
 
         <tr>
 
+            <td><span class="bold">Sex:</span> {{ $application->sex }}</td>
 
-
-
-            <td><span class="bold">Visa Number: </span>
-                {{ $application->visa_number ?? 'NONE' }}
-            </td>
-            <td><span class="bold">Flight Ticket: </span>
-                {{ \Carbon\Carbon::parse($application->flight_ticket)->format('Y-M-d') ?? 'NONE' }}
-            </td>
-            <td><span class="bold">status: </span>
-                {{ $application->subStatus->name }}</td>
-            <td><span class="bold">sex:</span> {{ $application->sex }}</td>
-
-            <td><span class="bold">children: </span>
+            <td><span class="bold">Children: </span>
                 {{ $application->children }}</td>
-            <td><span class="bold">height: </span>
+            <td><span class="bold">Height: </span>
                 {{ $application->height }}</td>
-            <td><span class="bold">weight:</span>
+            <td colspan="3"><span class="bold">Weight:</span>
                 {{ $application->weihgt }}</td>
 
         </tr>
@@ -244,7 +233,7 @@
     </table>
 
 
-    <br><br>
+    <br>
 
     <h3>Level of Language</h3> <br>
     <table>
@@ -260,28 +249,28 @@
         <tbody>
             <tr>
                 <td style="text-align:center !important;">Arabic</td>
-                <td style="text-align:center !important;">{{ $application->arabic_speak }}</td>
-                <td style="text-align:center !important;">{{ $application->arabic_understand }}</td>
-                <td style="text-align:center !important;">{{ $application->arabic_read }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->arabic_speak )}}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->arabic_understand) }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->arabic_read) }}</td>
                 <td style="text-align:center !important;">{{ $application->arabic_write }}</td>
             </tr>
             <tr>
                 <td style="text-align:center !important;">English</td>
-                <td style="text-align:center !important;">{{ $application->english_speak }}</td>
-                <td style="text-align:center !important;">{{ $application->english_understand }}</td>
-                <td style="text-align:center !important;">{{ $application->english_read }}</td>
-                <td style="text-align:center !important;">{{ $application->english_write }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->english_speak) }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->english_understand )}}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->english_read) }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->english_write) }}</td>
             </tr>
             <tr>
                 <td style="text-align:center !important;">Hindi</td>
-                <td style="text-align:center !important;">{{ $application->hindi_speak }}</td>
-                <td style="text-align:center !important;">{{ $application->hindi_understand }}</td>
-                <td style="text-align:center !important;">{{ $application->hindi_read }}</td>
-                <td style="text-align:center !important;">{{ $application->hindi_write }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->hindi_speak) }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->hindi_understand) }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->hindi_read) }}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->hindi_write) }}</td>
             </tr>
         </tbody>
     </table>
-    <br><br>
+    <br>
 
 
     <h3>Education</h3> <br>
@@ -298,19 +287,19 @@
         <tbody>
             @foreach ($application->educations as $edu)
                 <tr>
-                    <td style="text-align:center !important;">{{ $edu->degree }}</td>
-                    <td style="text-align:center !important;">{{ $edu->year }}</td>
-                    <td style="text-align:center !important;">{{ $edu->collage }}</td>
-                    <td style="text-align:center !important;">{{ $edu->country }}</td>
+                    <td style="text-align:center !important;">{{ ucfirst($edu->degree) }}</td>
+                    <td style="text-align:center !important;">{{ ucfirst($edu->year) }}</td>
+                    <td style="text-align:center !important;">{{ ucfirst($edu->collage )}}</td>
+                    <td style="text-align:center !important;">{{ ucfirst($edu->country) }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <br><br>
+    <br>
 
 
 
-    <br><br>
+    <br>
 
     <h3>Working Experince</h3> <br>
     <table>
@@ -323,19 +312,19 @@
         <tr>
             @foreach ($application->employers as $emplyoer)
         <tr>
-            <td style="text-align:center !important;">{{ $emplyoer->name }}</td>
+            <td style="text-align:center !important;">{{ ucfirst($emplyoer->name) }}</td>
             <td style="text-align:center !important;">{{ $emplyoer->duration }}</td>
-            <td style="text-align:center !important;">{{ $emplyoer->country }}</td>
-            <td style="text-align:center !important;">{{ $emplyoer->designation }}</td>
+            <td style="text-align:center !important;">{{ ucfirst($emplyoer->country )}}</td>
+            <td style="text-align:center !important;">{{ ucfirst($emplyoer->designation) }}</td>
         </tr>
         @endforeach
         </tr>
         <tr>
-            <td class="bold">Total Experince: </td>
-            <td style="text-align: center !important;">{{ @$application->employers?->sum('duration') ?? '' }}</td>
+            <td class="bold" style="text-align:center !important;">Total Experince: </td>
+            <td colspan="3" style="text-align:center !important;">{{ @$application->employers?->sum('duration') ?? '' }}</td>
         </tr>
     </table>
-    <br><br>
+    <br>
     <table class="tableNoBorder" style="width:100% !important;margin:auto !important;">
         <tr>
             <td style="width:50% !important;" class="text-left"><span class="bold">FOR OFFICAL ONLY</span></td>

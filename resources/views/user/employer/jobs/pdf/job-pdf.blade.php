@@ -126,7 +126,7 @@
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
             <tr>
                 <td style="width:50% !important;">
-                    <div class="with-border" style="min-height: 80px !important;">
+                    <div class="with-border" style="height: 100px !important;">
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li>
@@ -164,20 +164,22 @@
                 </td>
 
                 <td style="width:50% !important;">
-                    <div class="with-border" style="min-height: 80px !important;">
+                    <div class="with-border" style="height: 100px !important;">
                         <ul>
                             @if (Auth::user()->type == 'Admin')
-                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
+                                <li class="bold">To: <span class="bold">Al Shoala Recruitment Service W.L.L</span>
+                                </li>
                                 <br>
                                 <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
                                 <li><span class="bold">General Manager</span></li><br>
                             @elseif(Auth::user()->type == 'Broker')
-                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
+                                <li class="bold">To: <span class="bold">Al Shoala Recruitment Service W.L.L</span>
+                                </li>
                                 <br>
                                 <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
                                 <li><span class="bold">General Manager</span></li><br>
                             @else
-                                <li><span class="bold"> {{ Auth::user()->name }}</span></li><br>
+                                <li>To: <span class="bold"> {{ Auth::user()->name }}</span></li><br>
                                 @if ($job->user->responsible_person)
                                     <li><span class="bold"> {{ Auth::user()->responsible_person }}</span></li><br>
                                 @endif
@@ -307,11 +309,15 @@
 
     @if (Auth::user()->type == 'Admin')
         <div style="width:50% !important; margin-left:80% !important;">
-            For <span class="bold">{{ $job->user->name }} </span> Signature:
+            On behalf of<br>
+            {{ $job->user->name }}<br>
+            Signature & Stamp
         </div>
     @elseif(Auth::user()->type == 'Broker')
         <div style="width:50% !important; margin-left:80% !important;">
-            For <span class="bold">{{ $job->user->name }} </span> Signature:
+            On behalf of<br>
+            {{ $job->user->name }}<br>
+            Signature & Stamp
         </div>
     @endif
 
