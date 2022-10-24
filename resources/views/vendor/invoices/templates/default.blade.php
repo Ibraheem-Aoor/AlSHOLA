@@ -384,7 +384,6 @@
     </table>
 
     <h3>Company's Bank Details</h3>
-    @if ($invoice->notes)
         <p>
             <p>Account Name: <strong>Alshoala Recruitment Services Co W.L.L</strong></p>
             <p>Bank Name: <strong>Ahli United Bank</strong></p>
@@ -393,7 +392,6 @@
             <p>Swift Code: <strong>AUBBBHBM</strong></p>
 
         </p>
-    @endif
 
     <p>
         {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
