@@ -136,8 +136,8 @@
     </div>
     </div>
     <table class="tableNoBorder">
-        <tr style="padding: 2% !important;">
-            <td colspan="2">
+        <tr>
+            <td style="width:30% !important;margin-left:5% !important;margin-right:5% !important;">
                 <table class="tableNoBorder">
                     <ul>
                         <li><span class="bold">Date:</span>
@@ -158,7 +158,7 @@
                     </ul>
                 </table>
             </td>
-            <td style="text-align: justify !important;">
+            <td style="text-align: justify !important;width:25% !important;margin-right:5% !important;">
                 <h3>{{ $application->full_name }} </h3>
                 <h3>{{ $application->title->name }} </h3>
             </td>
