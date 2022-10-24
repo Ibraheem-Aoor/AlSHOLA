@@ -44,6 +44,14 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                        <div class="form-group col-sm-2">
+                                            <label for="name" class=" form-control-label">VAT(%):</label>
+                                            <input type="text" id="name" class="form-control" required
+                                                wire:model="vat">
+                                            @error('vat')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                         <div class="form-group col-sm-4">
                                             <label for="name" class=" form-control-label">Description:</label>
                                             <textarea type="text" id="name" wire:model="discription" class="form-control" required> </textarea>
@@ -70,6 +78,7 @@
                                                             <th>Title</th>
                                                             <th>Quantity</th>
                                                             <th>charge</th>
+                                                            <th>vat</th>
                                                             <th>Description</th>
                                                         </tr>
                                                         @forelse($subInvoices as $key => $invc)
@@ -80,6 +89,7 @@
                                                                 <td>{{ $title }}</td>
                                                                 <td>{{ $invc['quantity'] }}</td>
                                                                 <td>{{ $invc['charge'] }}</td>
+                                                                <td>{{ $invc['vat'] }}</td>
                                                                 <td>{{ Str::limit($invc['description'], 40, '...') }}
                                                                 </td>
                                                                 <td>

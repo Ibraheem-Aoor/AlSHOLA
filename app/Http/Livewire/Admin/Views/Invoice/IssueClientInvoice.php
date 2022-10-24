@@ -19,7 +19,7 @@ class IssueClientInvoice extends Component
     public $applications = null;
 
     //Form data
-    public $selectedApplicationId , $charge , $quantity , $discription , $currency;
+    public $selectedApplicationId , $charge , $quantity , $discription , $currency , $vat;
     public $subInvoices = []; // when client add new recored it will be added to this array;
     public function mount($invoiceId , $jobId)
     {
@@ -61,6 +61,7 @@ class IssueClientInvoice extends Component
             'quantity' => 'required',
             'discription' => 'required',
             'selectedApplicationId' => 'required',
+            'vat' => 'required',
         ];
     }
 
@@ -82,6 +83,7 @@ class IssueClientInvoice extends Component
             'charge' => $this->charge,
             'quantity' => $this->quantity,
             'description' => $this->discription,
+            'vat' => $this->vat,
             'invoice_id' => $this->invoice->id,
         ];
     }
@@ -92,6 +94,7 @@ class IssueClientInvoice extends Component
         $this->charge = null;
         $this->quantity = null;
         $this->discription = null;
+        $this->vat = null;
     }
 
 
@@ -110,6 +113,7 @@ class IssueClientInvoice extends Component
                     'charge' => $invoice['charge'],
                     'quantity' => $invoice['quantity'],
                     'description' => $invoice['description'],
+                    'vat' => $this->vat,
                     'invoice_id' => $this->invoice->id,
                 ]
             );

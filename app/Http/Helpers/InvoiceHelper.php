@@ -90,7 +90,7 @@ class InvoiceHelper
                     ->description($subInvoice->description)
                     ->pricePerUnit($subInvoice->charge)
                     ->quantity($subInvoice->quantity));
-                    // ->discount(10),
+                    ->tax($subInvoice->vat),
                 }
         ;
 
