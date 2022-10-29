@@ -27,25 +27,27 @@
                                     $i = 1;
                                 @endphp
                                 @forelse ($invoices as $invoice)
-                                    <tr>
-                                        <th scope="row">{{ $i++ }}</th>
-                                        <td>{{ $invoice->number }}</td>
-                                        <td>{{ $invoice->qty() }}</td>
-                                        <td class="">
-                                            {{ $invoice->totalCharge() * $invoice->qty() }}
-                                        </td>
+                                    @if ($invoice->qty() != 0)
+                                        <tr>
+                                            <th scope="row">{{ $i++ }}</th>
+                                            <td>{{ $invoice->number }}</td>
+                                            <td>{{ $invoice->qty() }}</td>
+                                            <td class="">
+                                                {{ $invoice->totalCharge() * $invoice->qty() }}
+                                            </td>
 
-                                        <td>
-                                            {{ $invoice->paid_amount }}
-                                        </td>
-                                        <td>
-                                            {{ $invoice->totalCharge() * $invoice->qty() - $invoice->paid_amount }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('invoice.print', $invoice->id) }}"><i
-                                                    class="fa fa-print"></i></a>
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                {{ $invoice->paid_amount }}
+                                            </td>
+                                            <td>
+                                                {{ $invoice->totalCharge() * $invoice->qty() - $invoice->paid_amount }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('invoice.print', $invoice->id) }}"><i
+                                                        class="fa fa-print"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @empty
                                     <tr>
                                         <td colspan="9" class="alert alert-warning text-center bg-dark"
