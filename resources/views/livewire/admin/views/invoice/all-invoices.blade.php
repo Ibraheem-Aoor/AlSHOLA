@@ -12,14 +12,6 @@
                             </div>
 
                             <div class="card-body--">
-                                <div class="container mb-2">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" placeholder="search by name..."
-                                                wire:model="nameFilter">
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="table-stats order-table ov-h">
                                     <table class="table" id="myTable">
                                         <thead>
