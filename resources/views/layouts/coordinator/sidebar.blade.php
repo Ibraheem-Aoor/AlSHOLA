@@ -11,11 +11,39 @@
                       <a href="{{ route('broker.demands') }}"><i class="menu-icon fa fa-bullhorn"></i>Deamnds</a>
                   </li>
                   <li class="active">
-                      <a href="{{ route('broker.demands.new')}}"><i class="menu-icon fa fa-bullhorn"></i>New Demand</a>
+                      <a href="{{ route('broker.demands.new') }}"><i class="menu-icon fa fa-bullhorn"></i>New Demand</a>
                   </li>
                   <li class="active">
-                      <a href="{{ route('broker.applications.all')}}"><i class="menu-icon fa fa-file-text"></i>Applications</a>
+                      <a href="{{ route('broker.applications.all') }}"><i
+                              class="menu-icon fa fa-file-text"></i>Applications</a>
                   </li>
+
+                  {{-- Start Reports --}}
+
+                  <li class="menu-item-has-children dropdown active">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          <i class="menu-icon fa fa-file"></i>Reports</a>
+                      <ul class="sub-menu children dropdown-menu">
+                          <li>
+                              <a href="{{ route('broker.reports.agents') }}">Agent Reports</a>
+                          </li>
+                          <li>
+                              <a href="{{ route('broker.reports.clients') }}">Client Reports</a>
+                          </li>
+                          <li>
+                              <a href="{{ route('broker.reports.applications_status') }}">Candidate Status Reports</a>
+                          </li>
+                          <li>
+                              <a href="{{ route('broker.reports.applications_agent') }}">Candidate Agent Reports</a>
+                          </li>
+                          <li>
+                              <a href="{{ route('broker.reports.applications_client') }}">Candidate Client Reports</a>
+                          </li>
+                      </ul>
+                  </li>
+                  {{-- End Reports --}}
+
 
                   {{-- <li class="menu-title">J Managment</li><!-- /.menu-title --> --}}
                   {{-- @can('Rise Demand')

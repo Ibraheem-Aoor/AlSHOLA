@@ -176,7 +176,7 @@
                                 <div class="form-floating mb-3 col-sm-3">
                                     <button type="button" id="add-new-title" class="btn btn-info col-sm-12"
                                         style="line-height: 30px;"><i class="fa fa-plus"></i> Add
-                                        New</button>
+                                        New Vacancy</button>
                                 </div>
 
                                 <div class="card mb-5" id="add-new-title-dev">

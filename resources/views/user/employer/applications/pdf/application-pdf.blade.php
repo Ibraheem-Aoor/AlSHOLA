@@ -305,7 +305,7 @@
     <table>
         <tr>
             <th style="text-align:center !important;">Employer</th>
-            <th style="text-align:center !important;">Duration</th>
+            <th style="text-align:center !important;">Duration (Year)</th>
             <th style="text-align:center !important;">Country</th>
             <th style="text-align:center !important;">Designation</th>
         </tr>
@@ -319,9 +319,9 @@
         </tr>
         @endforeach
         </tr>
-        <tr>
+        <tr style="text-align:center !important;">
             <td class="bold" style="text-align:center !important;">Total Experince: </td>
-            <td colspan="3" style="text-align:center !important;">{{ @$application->employers?->sum('duration') ?? '' }}</td>
+            <td colspan="2" style="text-align:center !important;">{{ @$application->employers?->sum('duration') ?? '' }}</td>
         </tr>
     </table>
     <br>

@@ -9,14 +9,20 @@ use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
 use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
 use App\Http\Livewire\Coordinator\AllDemands;
 use App\Http\Livewire\Coordinator\Dashboard;
+use App\Http\Livewire\Coordinator\Reports\BrokerAgentReport;
 use App\Http\Livewire\Coordinator\Views\BrokerDemandDetails;
 use App\Http\Livewire\Coordinator\Views\NewDemand;
+use App\Http\Livewire\Coordinator\Views\Reports\BrokerCandidaateAgentWiseReport;
+use App\Http\Livewire\Coordinator\Views\Reports\BrokerCandidaateClientWiseReport;
+use App\Http\Livewire\Coordinator\Views\Reports\BrokerCandidateStatusWiseReport;
+use App\Http\Livewire\Coordinator\Views\Reports\BrokerClientReport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Coordinator\Views\AllApplications;
 use App\Http\Livewire\Coordinator\Views\BrokerApplicationDetails;
+use App\Http\Livewire\Coordinator\Views\Reports\BrokerAgentReport as ReportsBrokerAgentReport;
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use Illuminate\Support\Facades\Storage;
@@ -53,6 +59,22 @@ Route::group([ 'middleware' => 'auth'  , 'as' => 'broker.'] , function()
     Route::post('/application/{id}/status/change', [ApplicationHelper::class, 'postChangeApplicationStatus'])->name('application.change-status');
     Route::get('/application/substatus/{id}', [ApplicationHelper::class, 'getSubStatuses']);
     Route::post('/application/{id}/status/change', [ApplicationHelper::class, 'postChangeApplicationStatus'])->name('application.change-status');
+
+
+
+
+     //Reports
+     Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
+
+        Route::get('/agents', ReportsBrokerAgentReport::class)->name('agents');
+        Route::get('/clients', BrokerClientReport::class)->name('clients');
+        //Candidate Reports "Applications"
+        Route::group(['prefix' => 'applications', 'as' => 'applications_'], function () {
+            Route::get('status', BrokerCandidateStatusWiseReport::class)->name('status');
+            Route::get('agent', BrokerCandidaateAgentWiseReport::class)->name('agent');
+            Route::get('', BrokerCandidaateClientWiseReport::class)->name('client');
+        });
+    });
 
 
 

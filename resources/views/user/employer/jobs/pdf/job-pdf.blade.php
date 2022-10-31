@@ -127,6 +127,7 @@
             <tr>
                 <td style="width:50% !important;">
                     <div class="with-border" style="height: 100px !important;">
+                        <h3>From</h3>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li>
@@ -165,6 +166,7 @@
 
                 <td style="width:50% !important;">
                     <div class="with-border" style="height: 100px !important;">
+                        <h3>To</h3>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li class="bold">To: <span class="bold">Al Shoala Recruitment Service W.L.L</span>
@@ -199,8 +201,7 @@
     <table class="titles" style="margin-top: -15px;" style="width: 100% !important;">
         <tr>
             <th>#</th>
-            <th>Category</th>
-            <th>Title</th>
+            <th>Job Title</th>
             <th>Quantity</th>
             <th>Salary</th>
             <th>Gender</th>
@@ -213,7 +214,6 @@
         @forelse ($job->subJobs as $subjob)
             <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{ $subjob->title->sector->name }}</td>
                 <td>{{ $subjob->title->name }}</td>
                 <td>{{ $subjob->quantity }}</td>
                 <td>{{ $subjob->salary }}</td>
@@ -302,7 +302,7 @@
     </table>
     @isset($job->description)
         <div style="margin-top: 20px; font-weight: 400;">
-            <label for="">Description:</label>
+            <label for="">Job Description:</label>
             <p>{{ $job->description }}</p>
         </div>
     @endisset
@@ -329,7 +329,7 @@
                 <h3>Supply Terms & Conditions:</h3>
                 <table>
                     <tr>
-                        <th>Title</th>
+                        <th>Job Title</th>
                         <th>Service_Charge</th>
                     </tr>
                     @foreach ($job->terms->where('user_id', Auth::id()) as $term)
