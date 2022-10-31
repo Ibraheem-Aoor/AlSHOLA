@@ -249,7 +249,7 @@
         <tbody>
             <tr>
                 <td style="text-align:center !important;">Arabic</td>
-                <td style="text-align:center !important;">{{ ucfirst($application->arabic_speak )}}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->arabic_speak) }}</td>
                 <td style="text-align:center !important;">{{ ucfirst($application->arabic_understand) }}</td>
                 <td style="text-align:center !important;">{{ ucfirst($application->arabic_read) }}</td>
                 <td style="text-align:center !important;">{{ $application->arabic_write }}</td>
@@ -257,7 +257,7 @@
             <tr>
                 <td style="text-align:center !important;">English</td>
                 <td style="text-align:center !important;">{{ ucfirst($application->english_speak) }}</td>
-                <td style="text-align:center !important;">{{ ucfirst($application->english_understand )}}</td>
+                <td style="text-align:center !important;">{{ ucfirst($application->english_understand) }}</td>
                 <td style="text-align:center !important;">{{ ucfirst($application->english_read) }}</td>
                 <td style="text-align:center !important;">{{ ucfirst($application->english_write) }}</td>
             </tr>
@@ -289,7 +289,7 @@
                 <tr>
                     <td style="text-align:center !important;">{{ ucfirst($edu->degree) }}</td>
                     <td style="text-align:center !important;">{{ ucfirst($edu->year) }}</td>
-                    <td style="text-align:center !important;">{{ ucfirst($edu->collage )}}</td>
+                    <td style="text-align:center !important;">{{ ucfirst($edu->collage) }}</td>
                     <td style="text-align:center !important;">{{ ucfirst($edu->country) }}</td>
                 </tr>
             @endforeach
@@ -314,14 +314,15 @@
         <tr>
             <td style="text-align:center !important;">{{ ucfirst($emplyoer->name) }}</td>
             <td style="text-align:center !important;">{{ $emplyoer->duration }}</td>
-            <td style="text-align:center !important;">{{ ucfirst($emplyoer->country )}}</td>
+            <td style="text-align:center !important;">{{ ucfirst($emplyoer->country) }}</td>
             <td style="text-align:center !important;">{{ ucfirst($emplyoer->designation) }}</td>
         </tr>
         @endforeach
         </tr>
         <tr style="text-align:center !important;">
-            <td class="bold" style="text-align:center !important;">Total Experince: </td>
-            <td colspan="2" style="text-align:center !important;">{{ @$application->employers?->sum('duration') ?? '' }}</td>
+            <td colspan="4" style="text-align:center !important;">
+                <span class="bold">Total Experince: </span>
+                {{ @$application->employers?->sum('duration') ?? '' }}</td>
         </tr>
     </table>
     <br>
