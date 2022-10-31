@@ -127,7 +127,7 @@
             <tr>
                 <td style="width:50% !important;">
                     <div class="with-border" style="height: 100px !important;">
-                        <h3>From</h3>
+                        <h5>From</h5>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li>
@@ -166,7 +166,7 @@
 
                 <td style="width:50% !important;">
                     <div class="with-border" style="height: 100px !important;">
-                        <h3>To</h3>
+                        <h5>To</h5>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li class="bold">To: <span class="bold">Al Shoala Recruitment Service W.L.L</span>
