@@ -126,7 +126,7 @@
         <table class="tableNoBorder" style="margin-bottom:15px !important;">
             <tr>
                 <td style="width:50% !important;">
-                    <div class="with-border" style="height: 100px !important;">
+                    <div class="with-border" style="height: 180px !important;">
                         <p style="text-align: center !important;">From</p>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
@@ -165,7 +165,7 @@
                 </td>
 
                 <td style="width:50% !important;">
-                    <div class="with-border" style="height: 100px !important;">
+                    <div class="with-border" style="height: 180px !important;">
                         <p style="text-align: center !important;">To</p>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
