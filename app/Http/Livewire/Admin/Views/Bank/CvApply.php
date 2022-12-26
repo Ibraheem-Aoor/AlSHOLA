@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Views\Bank;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CvApply extends Component
@@ -53,11 +54,12 @@ class CvApply extends Component
     public function render()
     {
         $jobs = $this->getJobsByStatus();
+        $user_layout = Auth::user()->type == 'Admin' ?  'layouts.admin.master' : 'layouts.coordinator.master';
         return view('livewire.admin.views.bank.cv-apply' ,
         [
             'application' => $this->application,
             'jobs' => $jobs,
         ])
-        ->extends('layouts.admin.master')->section('content');
+        ->extends($user_layout)->section('content');
     }
 }

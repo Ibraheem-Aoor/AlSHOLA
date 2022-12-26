@@ -85,6 +85,7 @@ class ApplicationController extends Controller
 
         $application = Application::create(array_merge($request->all() , ['user_id' => Auth::id() , 'job_id' => $jobId ,
                 'title_id' => $request->get('title') , 'main_status_id' => 2    , 'sub_status_id' => 6  ]));
+        $return_route =  Auth::user()->type == 'Agent' ? (route('employee.dashboard')) : (Auth::user()->type == 'Admin' ?  (route('admin.dashboard')) : route('broker.dashboard'));
         try
         {
             $this->createEducationRecords($request->addMoreEducationRecords , $application->id);
@@ -96,13 +97,11 @@ class ApplicationController extends Controller
             FacadesNotification::send($admin , new ApplicationCreated($application));
             $message = Auth::user()->type == 'Agent' ? 'Application Send Successfully' : 'Application Created Successfully';
             notify()->success($message);
-            return Auth::user()->type == 'Agent' ? redirect(route('employee.dashboard')) : redirect(route('admin.dashboard'));
-
         }catch(Throwable $e)
         {
             notify()->error('something went wrong');
-            return Auth::user()->type == 'Agent' ? redirect(route('employee.dashboard')) : redirect(route('admin.dashboard'));
         }
+        return redirect($return_route);
 
     }//end method
 

@@ -80,6 +80,7 @@ class AllCv extends Component
     public function render()
     {
         $applications = $this->getApplciations();
-        return view('livewire.admin.views.bank.all-cv' , ['applications' => $applications])->extends('layouts.admin.master')->section('content');
+        $user_layout = Auth::user()->type == 'Admin' ?  'layouts.admin.master' : 'layouts.coordinator.master';
+        return view('livewire.admin.views.bank.all-cv' , ['applications' => $applications])->extends($user_layout)->section('content');
     }
 }

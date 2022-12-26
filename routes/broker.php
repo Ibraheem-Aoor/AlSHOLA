@@ -5,6 +5,11 @@ use App\Http\Controllers\User\Employer\Jobs\PDF\PdfController;
 use App\Http\Helpers\ApplicationHelper;
 use App\Http\Helpers\DemandHelper;
 use App\Http\Livewire\Admin\Views\Applications\AllAplications;
+use App\Http\Livewire\Admin\Views\Bank\AllCv;
+use App\Http\Livewire\Admin\Views\Bank\CvApply;
+use App\Http\Livewire\Admin\Views\Bank\NewCv;
+use App\Http\Livewire\Admin\Views\Cases\AllCases;
+use App\Http\Livewire\Admin\Views\Cases\CaseDetails;
 use App\Http\Livewire\Admin\Views\Demands\DemandDetails;
 use App\Http\Livewire\Admin\Views\Jobs\SendJobToAgent;
 use App\Http\Livewire\Coordinator\AllDemands;
@@ -26,6 +31,8 @@ use App\Http\Livewire\Coordinator\Views\Reports\BrokerAgentReport as ReportsBrok
 use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\Cases\CaseController as CasesCaseController;
+
 
 Route::redirect('/' , '/broker/login')->middleware('guest');
 Route::get('login' , function()
@@ -59,6 +66,21 @@ Route::group([ 'middleware' => 'auth'  , 'as' => 'broker.'] , function()
     Route::post('/application/{id}/status/change', [ApplicationHelper::class, 'postChangeApplicationStatus'])->name('application.change-status');
     Route::get('/application/substatus/{id}', [ApplicationHelper::class, 'getSubStatuses']);
     Route::post('/application/{id}/status/change', [ApplicationHelper::class, 'postChangeApplicationStatus'])->name('application.change-status');
+
+
+     //CV Bank
+     Route::get('/bank', AllCv::class)->name('cv.all');
+     Route::get('/bank/new', NewCv::class)->name('cv.new');
+     Route::get('/bank/cv/{id}', CvApply::class)->name('cv.apply');
+
+
+
+      // Cases
+    Route::get('cases', AllCases::class)->name('cases.all');
+    Route::get('/cases/details/{id}', CaseDetails::class)->name('case.details');
+    Route::post('/cases/attach/{id}', [CasesCaseController::class, 'attachMoreFiles'])->name('case.attach');
+    Route::get('/case/{id}/delete', [CasesCaseController::class, 'destroy'])->name('case.delete');
+    Route::post('case/{id}/change-status', [CasesCaseController::class, 'changeStatus'])->name('case.chane-status');
 
 
 

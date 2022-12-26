@@ -49,11 +49,11 @@
                                     $file_type[$i] = 'asdasd';
                                 @endphp
                             @break
-
                             @php
                                 $title[$i] = null;
                                 $file_type[$i] = null;
                             @endphp
+
                         @endswitch
 
                         @isset($file_type[$i])

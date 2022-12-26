@@ -56,8 +56,8 @@
                                                 <th>Status</th>
                                                 <th colspan="2">Actions</th>
                                                 <th>
-                                                    <a href="{{ route('admin.cv.new') }}" class="btn btn-success"><i
-                                                            class="fa fa-plus"></i> NEW</a>
+                                                    <a href="{{ Auth::user()->type == 'Admin' ? route('admin.cv.new') : route('broker.cv.new') }}"
+                                                        class="btn btn-success"><i class="fa fa-plus"></i> NEW</a>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -98,17 +98,20 @@
                                                                         $file_type[$i] = null;
                                                                     @endphp
                                                             @endswitch
-                                                            <a class="btn-sm btn btn-info" href="{{ route('admin.application.details', $application->id) }}"
-                                                                 title="show details">
+                                                            <a class="btn-sm btn btn-info"
+                                                                href="{{ Auth::user()->type == 'Admin' ? route('admin.application.details', $application->id) : route('broker.application.details', $application->id) }}"
+                                                                title="show details">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
                                                             <a class="btn-sm btn btn-success"
                                                                 title="Forward this application to Client"
-                                                                href="{{ route('admin.cv.apply', $application->id) }}"><i class="fa fa-location-arrow""></i>
+                                                                href="{{ route('admin.cv.apply', $application->id) }}"><i
+                                                                    class="fa fa-location-arrow"></i>
                                                             </a>
                                                             @isset($file_type[$i])
-                                                                <a  class="btn-sm btn btn-primary" href="#exampleModal_5" data-title="{{ $title[$i] }}"
-                                                                    data-toggle="modal" data-type="{{ $file_type[$i] }}"
+                                                                <a class="btn-sm btn btn-primary" href="#exampleModal_5"
+                                                                    data-title="{{ $title[$i] }}" data-toggle="modal"
+                                                                    data-type="{{ $file_type[$i] }}"
                                                                     data-id="{{ $application->id }}">
                                                                     <i class="fa fa-upload"></i>
                                                                 </a>

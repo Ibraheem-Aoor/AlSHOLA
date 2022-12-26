@@ -131,7 +131,7 @@
                         <ul>
                             @if (Auth::user()->type == 'Admin')
                                 <li>
-                                    <span class="bold">From: {{ $job->user->name }}</span>
+                                    <span class="bold">{{ $job->user->name }}</span>
                                 </li><br>
                                 <li class="bold">
                                     Telephone: {{ $job->user->mobile }}
@@ -169,19 +169,19 @@
                         <p style="text-align: center !important;">To</p>
                         <ul>
                             @if (Auth::user()->type == 'Admin')
-                                <li class="bold">To: <span class="bold">Al Shoala Recruitment Service W.L.L</span>
+                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span>
                                 </li>
                                 <br>
                                 <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
                                 <li><span class="bold">General Manager</span></li><br>
                             @elseif(Auth::user()->type == 'Broker')
-                                <li class="bold">To: <span class="bold">Al Shoala Recruitment Service W.L.L</span>
+                                <li class="bold"> <span class="bold">Al Shoala Recruitment Service W.L.L</span>
                                 </li>
                                 <br>
                                 <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
                                 <li><span class="bold">General Manager</span></li><br>
                             @else
-                                <li>To: <span class="bold"> {{ Auth::user()->name }}</span></li><br>
+                                <li> <span class="bold"> {{ Auth::user()->name }}</span></li><br>
                                 @if ($job->user->responsible_person)
                                     <li><span class="bold"> {{ Auth::user()->responsible_person }}</span></li><br>
                                 @endif
@@ -331,6 +331,7 @@
                     <tr>
                         <th>Job Title</th>
                         <th>Service_Charge</th>
+                        <th>&nbsp;</th>
                     </tr>
                     @foreach ($job->terms->where('user_id', Auth::id()) as $term)
                         <tr>

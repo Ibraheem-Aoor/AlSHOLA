@@ -8,20 +8,20 @@
             }
 
             /* .form-control {
-                    display: block !important;
-                    width: 90% !important;
-                    padding: 0.400rem 0.80rem !important;
-                    font-size: 0.6rem !important;
-                    font-weight: 400 !important;
-                    line-height: 1 !important;
-                    color: #666565 !important;
-                    background-color: #fff !important;
-                    background-clip: padding-box !important;
-                    border: 1px solid #ced4da !important;
-                    appearance: none !important;
-                    border-radius: 2px !important;
-                    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
-                } */
+                            display: block !important;
+                            width: 90% !important;
+                            padding: 0.400rem 0.80rem !important;
+                            font-size: 0.6rem !important;
+                            font-weight: 400 !important;
+                            line-height: 1 !important;
+                            color: #666565 !important;
+                            background-color: #fff !important;
+                            background-clip: padding-box !important;
+                            border: 1px solid #ced4da !important;
+                            appearance: none !important;
+                            border-radius: 2px !important;
+                            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+                        } */
 
             body {
                 height: 30vh !important;
@@ -73,18 +73,21 @@
                                             <td>
                                                 <div class=>
                                                     <label>Date:</label>
-                                                    <input readonly required type="text" name="date"
-                                                        class="form-control" value="{{ Carbon\Carbon::now() }}">
+                                                    <input readonly required type="datetime" name="date"
+                                                        width="100%" class="form-control"
+                                                        value="{{ Carbon\Carbon::now()->toDateString() }}">
                                                     @error('date')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 <div class=>
                                                     <label>Position:</label>
                                                     <select required name="title" class="form-control">
-                                                        <option value="">-- select one -- </option>
+                                                        <option value="">-- select -- </option>
                                                         @foreach ($titles as $title)
                                                             <option value="{{ $title->id }}"
                                                                 @if (old('title') == $title->id) {{ 'selected' }} @endif>
@@ -152,7 +155,7 @@
                                                 <div>
                                                     <label>Relegion:</label>
                                                     <select name="relegion" class="form-control">
-                                                        <option value="" selected>--select one --</option>
+                                                        <option value="" selected>--select --</option>
                                                         <option value="Muslim"
                                                             @if (old('relegion') == 'Muslim') selected @endif>
                                                             Muslim
@@ -184,7 +187,7 @@
                                                 <div>
                                                     <label>sex:</label>
                                                     <select required name="sex" class="form-control">
-                                                        <option value="">-- select one --</option>
+                                                        <option value="">-- select --</option>
                                                         <option value="male"
                                                             @if (old('sex') == 'male') {{ 'selected' }} @endif>
                                                             Male
@@ -199,39 +202,40 @@
                                                     @enderror
                                                 </div>
                                             </td>
+                                        </tr>
+                                        <tr>
+                                        <td colspan="2">
+                                            <div>
+                                                <label>Place Of Birth:</label>
+                                                <input required type="text" name="place_of_birth"
+                                                    class="form-control" value="{{ old('place_of_birth') }}">
+                                                @error('place_of_birth')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </td>
 
-                                            <td colspan="2">
-                                                <div>
-                                                    <label>place_of_birth:</label>
-                                                    <input required type="text" name="place_of_birth"
-                                                        class="form-control" value="{{ old('place_of_birth') }}">
-                                                    @error('place_of_birth')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </td>
 
-
-                                            <td>
-                                                <div>
-                                                    <label>Date Of Birth:</label>
-                                                    <input required type="date" name="date_of_birth"
-                                                        class="form-control" value="{{ old('date_of_birth') }}">
-                                                    @error('date_of_birth')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label>Age:</label>
-                                                    <input required type="number" name="age" class="form-control"
-                                                        readonly value="{{ old('age') }}">
-                                                    @error('age')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </td>
+                                        <td>
+                                            <div>
+                                                <label>Date Of Birth:</label>
+                                                <input required type="date" name="date_of_birth" class="form-control"
+                                                    value="{{ old('date_of_birth') }}">
+                                                @error('date_of_birth')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <label>Age:</label>
+                                                <input required type="number" name="age" class="form-control"
+                                                    readonly value="{{ old('age') }}">
+                                                @error('age')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </td>
                                         </tr>
 
 
@@ -263,7 +267,7 @@
                                                 <div>
                                                     <label>Nationality:</label>
                                                     <select required name="nationality" class="form-control">
-                                                        <option value="">-- select one -- </option>
+                                                        <option value="">-- select -- </option>
                                                         @foreach ($nationalities as $nationality)
                                                             <option value="{{ $nationality->id }}"
                                                                 @if (old('nationality') == $nationality) {{ 'selected' }} @endif>

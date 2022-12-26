@@ -3,7 +3,7 @@
     <div class="top-left">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('broker.dashboard') }}"><img
-                    src="{{ asset('assets/dist_3/assets/images/logo.png') }}" alt="Logo" width="12%"></a>
+                    src="{{ asset('assets/dist_3/assets/images/logo.png') }}" alt="Logo" width="50%"></a>
             <a class="navbar-brand hidden" href="./"><img
                     src="{{ asset('assets/dist_3/assets/images/logo2.png') }}"></a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>

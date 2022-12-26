@@ -7,7 +7,7 @@
 
             .titles tr:nth-child(even) {
                 background-color: lightblue;
-                color: #ffff;
+                color: lightgray;
             }
 
             .titles th {
@@ -15,8 +15,8 @@
             }
 
             .basicInfo tr td:nth-child(even) {
-                background-color: lightblue;
-                color: #ffff;
+                background-color: lightgray;
+                color: black;
 
             }
 
@@ -303,26 +303,26 @@
                                                                     {{-- <a class="btn btn-outline-primary"
                                                                         href="{{ route('case.file.download', ['caseId' => $case->id, 'fileName' => $attachment->name]) }}"><i
                                                                             class="fa fa-download"></i></a> --}}
-                                                                    <a class="btn btn-outline-info" data-toggle="modal"
+                                                                    <a class="btn btn-sm btn-outline-info" data-toggle="modal"
                                                                         data-message="{{ $message->message }}"
                                                                         href="#descmodal"><i class="fa fa-eye"></i></a>
                                                                     @if ($message->is_forwarded_employer)
-                                                                        <a href="#" title="Cancel To Client"
+                                                                        <a class="btn btn-sm btn-warning" href="#" title="Cancel To Client"
                                                                             wire:click.prevent="takeMessageFromClient('{{ $message->id }}')">
                                                                             <i class="fa fa-times"></i></a>
                                                                     @else
-                                                                        <a href="#" title="Send To Client"
+                                                                        <a href="#" class="btn btn-sm btn-success" title="Send To Client"
                                                                             wire:click.prevent="sendMessageToClient('{{ $message->id }}')">
                                                                             <i class="fa fa-location-arrow"></i>
                                                                         </a>
                                                                     @endif
                                                                     @if ($message->is_forwarded_employee)
-                                                                        <a href="#" title="Cancel To Agent"
+                                                                        <a class="btn btn-sm btn-warning"  href="#" title="Cancel To Agent"
                                                                             wire:click.prevent="takeMessageFromAgent('{{ $message->id }}')">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     @else
-                                                                        <a href="#" title="Send To Agent"
+                                                                        <a href="#" class="btn btn-sm btn-success" title="Send To Agent"
                                                                             wire:click.prevent="sendMessageToAgent('{{ $message->id }}')">
                                                                             <i class="fa fa-location-arrow"></i>
                                                                         </a>
@@ -386,7 +386,7 @@
                                                                 </td>
                                                                 <td>
                                                                     @if ($attachment->is_forwarded_employee)
-                                                                        <a class="btn-sm btn btn-warning"
+                                                                        <a class="btn-sm  btn-warning"
                                                                             href="#" title="Cancel Agent"
                                                                             wire:click.prevent="takeAttachmentFromAgent({{ $attachment->id }})">
                                                                             <i class="fa fa-times"></i>
@@ -410,7 +410,7 @@
                                                                             class="fa fa-trash"></i></a>
 
                                                                     @if ($attachment->is_forwarded_employer)
-                                                                        <a class="btn-sm btn btn-warning"
+                                                                        <a class="btn-sm  btn-warning"
                                                                             href="#" title="Cancel Client"
                                                                             wire:click.prevent="takeAttachmentFromClient({{ $attachment->id }})">
                                                                             <i class="fa fa-times"></i>

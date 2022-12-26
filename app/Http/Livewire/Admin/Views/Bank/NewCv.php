@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Views\Bank;
 use App\Models\Application;
 use App\Models\Nationality;
 use App\Models\Title;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class NewCv extends Component
@@ -30,6 +31,7 @@ class NewCv extends Component
         $ref = $this->generateApplicationRef();
         $titles = Title::all();
         $nationalities = Nationality::all();
-        return view('livewire.admin.views.bank.new-cv' , ['ref'=> $ref , 'titles' => $titles , 'nationalities' => $nationalities])->extends('layouts.admin.master')->section('content');
+        $user_layout = Auth::user()->type == 'Admin' ?  'layouts.admin.master' : 'layouts.coordinator.master';
+        return view('livewire.admin.views.bank.new-cv' , ['ref'=> $ref , 'titles' => $titles , 'nationalities' => $nationalities])->extends($user_layout)->section('content');
     }
 }

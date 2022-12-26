@@ -114,7 +114,8 @@ class CaseDetails extends Component
 
     public function render()
     {
+        $user_layout = Auth::user()->type == 'Admin' ?  'layouts.admin.master' : 'layouts.coordinator.master';
         return view('livewire.admin.views.cases.case-details')
-        ->extends('layouts.admin.master')->section('content');
+        ->extends($user_layout)->section('content');
     }//end render
 }

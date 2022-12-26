@@ -1,5 +1,5 @@
   <!-- Left Panel -->
-  <aside id="left-panel" class="left-panel" style="width:18%;">
+  <aside id="left-panel" class="left-panel">
       <nav class="navbar navbar-expand-sm navbar-default">
           <div id="main-menu" class="main-menu collapse navbar-collapse">
               <ul class="nav navbar-nav">
@@ -17,6 +17,16 @@
                       <a href="{{ route('broker.applications.all') }}"><i
                               class="menu-icon fa fa-file-text"></i>Applications</a>
                   </li>
+                  <li class="active">
+                      <a href="{{ route('broker.cv.all') }}"><i
+                              class="menu-icon fa fa-file-text"></i>Cv Bank</a>
+                  </li>
+                  <li class="active">
+                      <a href="{{ route('broker.cases.all') }}"><i
+                              class="menu-icon fa fa-file-text"></i>Case</a>
+                  </li>
+
+
 
                   {{-- Start Reports --}}
 
