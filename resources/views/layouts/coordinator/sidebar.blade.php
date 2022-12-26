@@ -31,24 +31,24 @@
                   {{-- Start Reports --}}
 
                   <li class="menu-item-has-children dropdown active">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="font-size:14px !important;"
                           aria-expanded="false">
                           <i class="menu-icon fa fa-file"></i>Reports</a>
-                      <ul class="sub-menu children dropdown-menu">
+                      <ul class="sub-menu children dropdown-menu" >
                           <li>
-                              <a href="{{ route('broker.reports.agents') }}">Agent Reports</a>
+                              <a href="{{ route('broker.reports.agents') }}" style="font-size:14px !important;" >Agent Reports</a>
                           </li>
                           <li>
-                              <a href="{{ route('broker.reports.clients') }}">Client Reports</a>
+                              <a href="{{ route('broker.reports.clients') }}" style="font-size:14px !important;" >Client Reports</a>
                           </li>
                           <li>
-                              <a href="{{ route('broker.reports.applications_status') }}">Candidate Status Reports</a>
+                              <a href="{{ route('broker.reports.applications_status') }}" style="font-size:14px !important;" >Candidate Status Reports</a>
                           </li>
                           <li>
-                              <a href="{{ route('broker.reports.applications_agent') }}">Candidate Agent Reports</a>
+                              <a href="{{ route('broker.reports.applications_agent') }}" style="font-size:14px !important;" >Candidate Agent Reports</a>
                           </li>
                           <li>
-                              <a href="{{ route('broker.reports.applications_client') }}">Candidate Client Reports</a>
+                              <a href="{{ route('broker.reports.applications_client') }}" style="font-size:14px !important;" >Candidate Client Reports</a>
                           </li>
                       </ul>
                   </li>
