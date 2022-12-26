@@ -168,6 +168,8 @@
                                 <li><span class="bold">General Manager</span></li><br>
                             @else
                                 <li> <span class="bold"> {{ Auth::user()->name }}</span></li><br>
+                                <li> <span class="bold"> {{ Auth::user()->email }}</span></li><br>
+                                <li> <span class="bold"> {{ Auth::user()->mobile }}</span></li><br>
                                 @if ($job->user->responsible_person)
                                     <li><span class="bold"> {{ Auth::user()->responsible_person }}</span></li><br>
                                 @endif
