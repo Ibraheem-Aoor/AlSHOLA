@@ -129,28 +129,14 @@
                     <div class="with-border" style="height: 160px !important;">
                         <p style="text-align: center !important;">From</p>
                         <ul>
-                            @php
-                                $flag = false;
-                            @endphp
-                            @if (Auth::user()->type == 'Admin')
+                            @if (Auth::user()->type == 'Admin' || Auth::user()->type == 'Broker')
                                 <li>
                                     <span class="bold">{{ $job->user->name }}</span>
                                 </li><br>
                                 <li class="bold">
                                     Telephone: {{ $job->user->mobile }}
                                 </li><br>
-                                @php
-                                    $flag = 1;
-                                @endphp
-                            @elseif(Auth::user()->type == 'Broker')
-                                <li class="bold">
-                                    Telephone: {{ $job->user->mobile }}
-                                </li><br>
-                                @php
-                                    $flag = 1;
-                                @endphp
-                            @endif
-                            @if ($flag)
+                            @else
                                 <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
                                 <br>
                                 <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
