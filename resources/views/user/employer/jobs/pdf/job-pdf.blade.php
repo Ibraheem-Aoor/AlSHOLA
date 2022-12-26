@@ -136,26 +136,15 @@
                                 <li class="bold">
                                     Telephone: {{ $job->user->mobile }}
                                 </li><br>
-                                @if ($job->user->responsible_person)
-                                    <li class="bold">
-                                        Representative: {{ $job->user->responsible_person }}
-                                    </li><br>
-                                @endif
                             @elseif(Auth::user()->type == 'Broker')
                                 <li class="bold">
                                     Telephone: {{ $job->user->mobile }}
                                 </li><br>
-                                @if ($job->user->responsible_person)
-                                    <li class="bold">
-                                        Representative: {{ $job->user->responsible_person }}
-                                    </li><br>
-                                @endif
-                            @endif
-                            @if(Auth::user()->type != 'Broker' || Auth::user()->type != 'Admin')
-                            <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
-                            <br>
-                            <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
-                            <li><span class="bold">General Manager</span></li><br>
+                            @else
+                                <li class="bold"><span class="bold">Al Shoala Recruitment Service W.L.L</span></li>
+                                <br>
+                                <li><span class="bold">Abdulla Ali Al Shoala</span></li><br>
+                                <li><span class="bold">General Manager</span></li><br>
                             @endif
                             <li>
                                 <span class="bold">Date:</span>
