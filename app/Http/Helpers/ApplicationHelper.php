@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Request;
 use App\Models\ApplicationMainStatus;
 use App\Models\ApplicationStatusHistory;
 use App\Models\subStatus;
+use App\Models\Title;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -67,6 +68,18 @@ class ApplicationHelper
             Application::findOrFail($request->id)->delete();
             notify()->success('Application Deleted Successfully');
             return back();
+    }
+
+
+    /**
+     * Admin Edit Application
+     */
+    public function adminUpdateApplication($id , HttpFoundationRequest $request)
+    {
+        $application = Application::query()->find($id);
+        $application->update($request->toArray());
+        notify()->success('Updated Successfullly');
+        return  redirect()->route('broker.application.edit' , $id);
     }
 
 }

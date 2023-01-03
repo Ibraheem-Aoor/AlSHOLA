@@ -19,7 +19,7 @@ class Application extends Model
         'arabic_write' , 'english_speak' , 'english_understand' , 'english_read' , 'english_write',
         'hindi_speak' , 'hindi_understand' , 'hindi_read' , 'hindi_write', 'recommendations',
         'applicant_interviewd_by' , 'min_salary' , 'main_status_id' , 'sub_status_id' , 'forwarded',
-        'user_id' , 'job_id' , 'employer_photo', 'third_language', 'nationality', 'is_accepted'
+        'user_id' , 'job_id' , 'employer_photo', 'third_language', 'nationality', 'is_accepted' , 'visa_number' , 'flight_ticket'
     ];
 
     public function user()

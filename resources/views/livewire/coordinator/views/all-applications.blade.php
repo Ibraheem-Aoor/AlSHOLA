@@ -80,42 +80,50 @@
                                                             {{ $application->attachments_count }}
                                                         </a>
                                                     </td> --}}
-                                                    <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($application->created_at)->format('Y-M-d') }}
+                                                    </td>
                                                     <td><a
                                                             href="{{ route('admin.application.notes.all', $application->id) }}">{{ $application->notes_count }}</a>
                                                     </td>
                                                     <td colspan="11">
-                                                        {{-- <button class="btn btn-outline-primary " href="#"
-                                                            wire:click="downloadCv('{{ $application->resume }}' , '{{ $application->job_id }}' , '{{ $application->user->id }}')"><i
-                                                                class="fa fa-download"></i> CV</button> --}}
+                                                        <div class="d-flex">
+                                                            <a class="btn-sm btn-success" title="Edit application"
+                                                                href="{{ route('broker.application.edit', $application->id) }}"
+                                                                style=""><i class="fa fa-edit"></i>
+                                                            </a>&nbsp;
+                                                            <a class="btn-sm btn-info"
+                                                                href="{{ route('broker.application.details', $application->id) }}"
+                                                                style="" title="show details">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>&nbsp;
+                                                            <a class="btn-sm btn-primary" title="send note to agent"
+                                                                style=""
+                                                                wire:click="setCurrentApplicationId({{ $application->id }})"
+                                                                data-application="{{ $application->id }}"
+                                                                data-toggle="modal" href="#exampleModal_5"><i
+                                                                    class="fa fa-envelope"></i>
+                                                            </a>&nbsp;
+                                                            @if ($application->forwarded)
+                                                                <a class="btn-sm btn-warning" style="cursor: pointer;"
+                                                                    title="Forward this application to Client"
+                                                                    wire:click="takeApplicationFromEmployer({{ $application->id }})"><i
+                                                                        class="fa fa-times"></i>
+                                                                </a>&nbsp;
+                                                            @else
+                                                                <a class="btn-sm btn-success" style="cursor: pointer;"
+                                                                    title="Forward this application to Client"
+                                                                    wire:click="passApplicationToEmployer({{ $application->id }})"><i
+                                                                        class="fa fa-location-arrow"></i>
+                                                                </a>&nbsp;
+                                                            @endif
+                                                            <a class="btn-sm btn-danger" title="send note to agent"
+                                                                style="" data-id="{{ $application->id }}"
+                                                                data-toggle="modal" href="#exampleModal_6"><i
+                                                                    class="fa fa-trash"></i>
+                                                            </a>&nbsp;
 
-                                                        <a class="btn-sm btn btn-info" href="{{ route('broker.application.details', $application->id) }}"
-                                                            style="" title="show details">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                        <a class="btn-sm btn btn-primary" title="send note to agent" style=""
-                                                            wire:click="setCurrentApplicationId({{ $application->id }})"
-                                                            data-application="{{ $application->id }}"
-                                                            data-toggle="modal" href="#exampleModal_5"><i
-                                                                class="fa fa-envelope"></i>
-                                                        </a>
-                                                        @if ($application->forwarded)
-                                                            <a class="btn-sm btn btn-warning" style="cursor: pointer;"
-                                                                title="Forward this application to Client"
-                                                                wire:click="takeApplicationFromEmployer({{ $application->id }})"><i
-                                                                    class="fa fa-times"></i>
-                                                            </a>
-                                                        @else
-                                                            <a class="btn-sm btn btn-success" style="cursor: pointer;"
-                                                                title="Forward this application to Client"
-                                                                wire:click="passApplicationToEmployer({{ $application->id }})"><i
-                                                                    class="fa fa-location-arrow"></i>
-                                                            </a>
-                                                        @endif
-                                                        <a class="btn-sm btn btn-danger" title="send note to agent" style=""
-                                                            data-id="{{ $application->id }}" data-toggle="modal"
-                                                            href="#exampleModal_6"><i class="fa fa-trash"></i>
-                                                        </a>
+                                                        </div>
+
                                                     </td>
                                                 </tr>
 

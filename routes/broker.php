@@ -32,7 +32,7 @@ use App\Models\Application;
 use App\Models\ApplicationAttachment;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\Cases\CaseController as CasesCaseController;
-
+use App\Http\Livewire\Coordinator\Views\ApplicationEdit;
 
 Route::redirect('/' , '/broker/login')->middleware('guest');
 Route::get('login' , function()
@@ -61,6 +61,8 @@ Route::group([ 'middleware' => 'auth'  , 'as' => 'broker.'] , function()
     Route::get('job/{id}/send-to-agent', SendJobToAgent::class)->name('send-job-to-agent');
     Route::post('/demand/{id}/set-terms', [DemandHelper::class, 'setDemandTermsAndSendToAgent'])->name('demand.set-terms');
     Route::get('/application/{id}/details', BrokerApplicationDetails::class)->name('application.details');
+    Route::get('/application/{id}/edit', ApplicationEdit::class)->name('application.edit');
+    Route::post('/application/{id}/update', [ApplicationHelper::class , 'adminUpdateApplication'])->name('application.update');
     Route::post('/application/delete', [ApplicationHelper::class, 'deleteApplication'])->name('application.delete');
     Route::get('/aplication/pdf/{id}', [PdfController::class, 'generateApplicationPDF'])->name('application.pdf.generate');
     Route::post('/application/{id}/status/change', [ApplicationHelper::class, 'postChangeApplicationStatus'])->name('application.change-status');
