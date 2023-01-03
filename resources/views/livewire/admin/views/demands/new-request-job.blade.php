@@ -4,23 +4,23 @@
             <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
             <style>
                 table {
-                font-size: 0.8rem;
-            }
+                    font-size: 0.8rem;
+                }
 
-            .titles tr:nth-child(even) {
-                background-color: lightblue;
-                color: #ffff;
-            }
+                .titles tr:nth-child(even) {
+                    background-color: lightblue;
+                    color: #ffff;
+                }
 
-            .titles th {
-                background-color: red;
-            }
+                .titles th {
+                    background-color: red;
+                }
 
-            .basicInfo tr td:nth-child(even) {
-                background-color: lightblue;
-                color: #ffff;
+                .basicInfo tr td:nth-child(even) {
+                    background-color: lightblue;
+                    color: #ffff;
 
-            }
+                }
 
 
 
@@ -341,8 +341,15 @@
                                                         <td>Transport</td>
                                                         <td><input type="text" class="form-control"
                                                                 value="Provided By Employer" readonly>
+                                                            <select name="transport" class="form-control">
+                                                                <option value="">--select one--</option>
+                                                                <option value="Provided By Employer">Provided By Employer
+                                                                </option>
+                                                                <option value="Not Provided">Not Provided</option>
+                                                            </select>
                                                         </td>
                                                     </tr>
+
 
 
                                                     <tr>

@@ -340,6 +340,11 @@
                                                         <td>Transport</td>
                                                         <td><input type="text" class="form-control"
                                                                 value="Provided By Employer" readonly>
+                                                            <select name="transport" class="form-control">
+                                                                <option value="">--select one--</option>
+                                                                <option value="Provided By Employer">Provided By Employer</option>
+                                                                <option value="Not Provided">Not Provided</option>
+                                                            </select>
                                                         </td>
                                                     </tr>
 
