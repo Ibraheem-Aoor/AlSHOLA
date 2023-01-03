@@ -84,19 +84,6 @@
                                                 <span class="text-dagner">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">Category:<span class="text-danger">* </span> :</label>
-                                            <select type="text" class="form-control"
-                                                wire:model.lazy="selectedCategory">
-                                                @foreach ($categoires as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('selectedCategory')
-                                                <span class="text-dagner">{{ $message }}</span>
-                                            @enderror
-                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

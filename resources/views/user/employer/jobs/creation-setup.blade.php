@@ -20,20 +20,7 @@
                     <div class="rounded h-100 p-4">
                         <div class="container-fluid pt-4 px-4">
                             <div class="row rounded">
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select name="sector" class="form-control" required>
-                                        <option value="">--- select one ---</option>
-                                        @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->id }}"
-                                                @if (old('sector') == $sector->id) {{ 'selected' }} @endif>
-                                                {{ $sector->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingInput">&nbsp;&nbsp; Job Category</label>
-                                    @error('sector')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                            
 
                                 <div class="form-floating mb-3 col-sm-3">
                                     <select name="currency" class="form-control" required>

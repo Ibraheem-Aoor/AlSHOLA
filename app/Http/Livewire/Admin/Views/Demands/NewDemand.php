@@ -97,13 +97,11 @@ class NewDemand extends Component
 
     public function render()
     {
-        $categoires = Sector::all();
         $titles = [];
         if($this->category)
             $titles = Title::where('sector_id' , $this->category)->get();
         $nationalities = Nationality::all();
         return view('livewire.admin.views.demands.new-demand' , [
-            'categoires' => $categoires ,
             'titles' => $titles ,
             'nationalities' => $nationalities,
         ])->extends('layouts.admin.master')->section('content');

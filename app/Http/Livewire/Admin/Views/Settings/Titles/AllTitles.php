@@ -16,7 +16,7 @@ class AllTitles extends Component
      * Edit Title
      * Delete Title
      */
-    public $newTitleName , $selectedCategory , $targetTileId , $currentRoute;
+    public $newTitleName  , $targetTileId , $currentRoute;
 
     public function mount($id = null)
     {
@@ -25,17 +25,16 @@ class AllTitles extends Component
 
     public function setTitleId($id)
     {
-        $title =  Title::with('sector:id,name')->findOrFail($id);
+        $title =  Title::findOrFail($id);
         $this->targetTileId = $title->id;
-        $this->selectedCategory = $title->sector->id;
+
     }
 
     public function editTitle()
     {
-        $this->validate(['newTitleName' => 'required|string|max:255' , 'selectedCategory' =>  'required']);
+        $this->validate(['newTitleName' => 'required|string|max:255' ]);
         $title = Title::findOrFail($this->targetTileId);
         $title->name = $this->newTitleName;
-        $title->sector_id = $this->selectedCategory;
         $title->save();
         notify()->success('Title Updated Successfully');
         return redirect(route($this->currentRoute));
@@ -56,7 +55,6 @@ class AllTitles extends Component
     ,
     [
         'titles' => $titles,
-        'categoires' => Sector::all(),
     ]
     )->extends('layouts.admin.master')->section('content');
 

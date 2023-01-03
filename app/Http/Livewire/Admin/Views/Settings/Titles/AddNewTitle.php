@@ -10,7 +10,7 @@ use Livewire\Component;
 class AddNewTitle extends Component
 {
 
-    public $newTitle , $currentRoute , $sector;
+    public $newTitle , $currentRoute;
 
     public function mount($id = null)
     {
@@ -20,11 +20,9 @@ class AddNewTitle extends Component
     {
         $this->validate([
             'newTitle' => 'required|string|max:255|unique:sectors,name',
-            'sector' => 'required',
         ]);
         Title::create([
             'name' => $this->newTitle,
-            'sector_id' => $this->sector,
         ]);
         notify()->success('Title Added Successfully');
         return redirect(route($this->currentRoute));

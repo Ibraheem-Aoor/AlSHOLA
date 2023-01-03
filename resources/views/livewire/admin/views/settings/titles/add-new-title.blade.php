@@ -1,5 +1,5 @@
 <div>
-    @section('title' , 'ALSHOALA - Admin | NEW TITLE')
+    @section('title', 'ALSHOALA - Admin | NEW TITLE')
     <div class="content">
         <div class="animated fadeIn">
             <div class="row">
@@ -20,15 +20,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="name" class=" form-control-label">Category</label>
-                                            <select class="form-control" wire:model.lazy="sector">
-                                                <option value="">-- select category</option>
-                                                @foreach ($sectors as $sector)
-                                                    <option value="{{ $sector->id }}">{{ $sector->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+
                                         <div class="col-sm-6"></div>
                                     </div>
                                     <div class="col-sm-12 text-center">
@@ -45,7 +37,7 @@
 
         @push('js')
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+                integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
             </script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>

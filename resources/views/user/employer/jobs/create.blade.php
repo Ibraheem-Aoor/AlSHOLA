@@ -76,25 +76,14 @@
                         <div class="container-fluid pt-4 px-4">
 
                             <div class="row rounded">
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select name="sector" class="form-control" required>
-                                        <option>--- select one ---</option>
-                                        @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->name }}"
-                                                @if (old('sector') == $sector) selected @endif>{{ $sector->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingInput">&nbsp;&nbsp; Job Category</label>
-                                    @error('sector')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
 
                                 <div class="form-floating mb-3 col-sm-3">
                                     <select name="title" class="form-control" required>
-                                        <option value="title">--- select one ---</option>
-
+                                        <option value="">--- select one ---</option>
+                                        @foreach($titles as $title)
+                                            <option value="{{$title->name}}" @if(old('titke') == $title->name) selected @endif>{{$title->name}}</option>
+                                        @endforeach
                                     </select>
                                     <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
                                     @error('title')
@@ -183,7 +172,6 @@
                                     <div class="card-body">
                                         <table class="table table-responsive" id="newTtile">
                                             <tr>
-                                                <th>Job Category</th>
                                                 <th>Title</th>
                                                 <th>Quantity</th>
                                                 <th>salary</th>
@@ -344,8 +332,9 @@
                                             <tr>
                                                 <td>Transport</td>
                                                 <td>
-                                                    <select name="transport" id="">
-                                                        <option value="Provided By Employer">Provided By Employer</option>
+                                                    <select name="transport" id="" class="form-control">
+                                                        <option value="Provided By Employer">Provided By Employer
+                                                        </option>
                                                         <option value="Not Provided">Not Provided</option>
                                                     </select>
                                                 </td>
@@ -613,38 +602,7 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(document).ready(function() {
-            var SendInfo = {
-                SendInfo: document.getElementById("my-form").elements
-            };
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                traditional: true,
-            });
-            $('select[name="sector"]').on('change', function() {
-                var sectorName = $(this).val();
-                if (sectorName) {
-                    $.ajax({
-                        url: "{{ URL::to('employer/sector') }}/" + sectorName,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="title"]').empty();
-                            $.each(data, function(key, value) { //for each loop
-                                $('select[name="title"]').append('<option value="' +
-                                    value.name + '">' + value.name + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
-
-        });
     </script>
 
 
@@ -658,7 +616,7 @@
                 $('#add-new-title-dev').show();
                 $('#next').show();
 
-                var title, qty, salary, age, nationality, gender, sector;
+                var title, qty, salary, age, nationality, gender;
                 var elements = document.getElementById("my-form").elements;
                 elements.forEach(element => {
                     if (element.name == 'title') {
@@ -674,16 +632,11 @@
                         nationality = element.value;
                     } else if (element.name == 'gender') {
                         gender = element.value;
-                    } else if (element.name == 'sector') {
-                        sector = element.value;
                     }
                 });
                 ++i;
                 $('#newTtile').append(
-                    '<tr><td><input type="text" name="subJob[' + i +
-                    '][sector]" readonly class="form-control" value = "' +
-                    sector +
-                    ' " /></td><td><input type="text" name="subJob[' + i +
+                    '<tr></td><td><input type="text" name="subJob[' + i +
                     '][title]" placeholder="Enter Year" readonly class="form-control" value = "' +
                     title +
                     ' " /></td><td><input type="text" name="subJob[' + i +

@@ -32,7 +32,7 @@
                             <div class="row">
                                 <table class="table table-striped titles">
                                     <tr>
-                                        <th>Categorey</th>
+
                                         <th>Title</th>
                                         <th>Quantity</th>
                                         <th>Salary</th>
@@ -42,7 +42,7 @@
                                     </tr>
                                     @forelse ($job->subJobs as $subjob)
                                         <tr>
-                                            <td>{{ $subjob->title->sector->name }}</td>
+                                        
                                             <td>{{ $subjob->title->name }}</td>
                                             <td>{{ $subjob->quantity }}</td>
                                             <td>{{ $subjob->salary }}</td>

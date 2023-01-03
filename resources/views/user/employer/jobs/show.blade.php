@@ -42,7 +42,6 @@
                             <div class="row rounded">
                                 <table class="table table-striped titles">
                                     <tr>
-                                        <th>Categorey</th>
                                         <th>Title</th>
                                         <th>Salary</th>
                                         <th>Quantity</th>
@@ -50,7 +49,6 @@
                                     </tr>
                                     @forelse ($job->subJobs as $subjob)
                                         <tr>
-                                            <td>{{ $subjob->title->sector->name }}</td>
                                             <td>{{ $subjob->title->name }}</td>
                                             <td>{{ $subjob->salary }}</td>
                                             <td>{{ $subjob->quantity }}</td>

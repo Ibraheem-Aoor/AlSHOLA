@@ -27,7 +27,6 @@ class CreateJobRequest extends FormRequest
     public function rules()
     {
         return  [
-            'sector' => 'required',
             'currency' => 'required',
             'working_days' => 'required',
             'accommodation' => 'required',
@@ -48,7 +47,6 @@ class CreateJobRequest extends FormRequest
             'subJob.*.nationality' => 'required',
             'subJob.*.age' => 'required',
             'subJob.*.gender' => 'required',
-            'subJob.*.sector' => 'required',
         ];
     }
 

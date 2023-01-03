@@ -11,7 +11,7 @@ class Title extends Model
 
     use HasFactory;
     protected $fillable = [
-        'name' , 'sector_id',
+        'name' ,
     ];
 
     public function sector()

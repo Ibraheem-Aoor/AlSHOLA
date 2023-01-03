@@ -17,7 +17,6 @@ class ApplicationAllNotes extends Component
         $application = Application::with('job:id,post_number')->with('job.subJobs.title.sector')->findOrFail($this->applicationId);
         $this->jobNumber = $application->job->post_number;
         $this->jobTitle = $application->job->subJobs->first()->title->name;
-        $this->jobSector = $application->job->subJobs->first()->title->sector->name;
     }
     public function render()
     {

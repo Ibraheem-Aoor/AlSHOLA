@@ -11,7 +11,7 @@
             }
         </style>
         <style>
-             table {
+            table {
                 font-size: 0.8rem;
             }
 
@@ -82,20 +82,7 @@
                         <div class="container-fluid pt-4 px-4">
 
                             <div class="row rounded">
-                                <div class="form-floating mb-3 col-sm-3">
-                                    <select name="sector" class="form-control" required>
-                                        <option>--- select one ---</option>
-                                        @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->name }}"
-                                                @if (old('sector') == $sector) selected @endif>{{ $sector->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingInput">&nbsp;&nbsp; Job Category</label>
-                                    @error('sector')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
 
                                 <div class="form-floating mb-3 col-sm-3">
                                     <select name="title" class="form-control" required>
@@ -184,7 +171,6 @@
                                     <div class="card-body">
                                         <table class="table table-responsive" id="newTtile">
                                             <tr>
-                                                <th>Job Category</th>
                                                 <th>Title</th>
                                                 <th>Quantity</th>
                                                 <th>salary</th>
@@ -197,9 +183,7 @@
                                             @endphp
                                             @forelse($job->subJobs as $subJob)
                                                 <tr>
-                                                    <td><input type="text" readonly
-                                                            name="subJob[{{ $i }}][sector]"
-                                                            value="{{ $subJob->title->sector->name }}"></td>
+
                                                     <td><input type="text" readonly
                                                             name="subJob[{{ $i }}][title]"
                                                             value="{{ $subJob->title->name }}"></td>
@@ -621,50 +605,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $(document).ready(function() {
-            var SendInfo = {
-                SendInfo: document.getElementById("my-form").elements
-            };
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                traditional: true,
-            });
-            $('select[name="sector"]').on('change', function() {
-                var sectorName = $(this).val();
-                if (sectorName) {
-                    $.ajax({
-                        url: "{{ URL::to('employer/sector') }}/" + sectorName,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="title"]').empty();
-                            $.each(data, function(key, value) { //for each loop
-                                $('select[name="title"]').append('<option value="' +
-                                    value.name + '">' + value.name + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
-
-        });
-
-        function submitForm() {
-            const cb = document.querySelector('#accept');
-            if (cb.checked) {
-                demandForm = document.getElementById('my-form');
-                demandForm.submit();
-            } else {
-                alert('You Have To Accept Terms & Conditions')
-            }
-        }
-    </script>
 
 
 

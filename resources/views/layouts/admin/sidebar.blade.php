@@ -240,10 +240,6 @@
                       <ul class="sub-menu children dropdown-menu">
                           <li>
                               <i class="menu-icon fa fa-bars"></i>
-                              <a href="{{ route('admin.sector.all') }}"> Category Management</a>
-                          </li>
-                          <li>
-                              <i class="menu-icon fa fa-bars"></i>
                               <a href="{{ route('admin.title.all') }}"> Titles Management</a>
                           </li>
                           <li>
