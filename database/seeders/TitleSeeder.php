@@ -26,7 +26,6 @@ class TitleSeeder extends Seeder
             Title::create(
                 [
                     'name' => $title,
-                    'sector_id' => $i++,
                 ]
             );
         }
