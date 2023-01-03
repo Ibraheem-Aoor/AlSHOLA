@@ -66,7 +66,7 @@
                                                 $i = 1;
                                             @endphp
                                             @forelse($applications as $application)
-                                                @if ($application->user_id == Auth::id())
+                                              
                                                     <tr>
                                                         <td class="serial">{{ $i++ }}</td>
                                                         <td>{{ $application->ref }}</td>
@@ -127,7 +127,7 @@
 
 
                                                     </tr>
-                                                @endif
+
                                 </div>
                             </div>
 
