@@ -175,7 +175,7 @@
 
                                         <div class="row mt-4">
                                             <div class="col-sm-12">
-                                                <table>
+                                                <table style="width:100% !important;">
                                                     {{-- Arabic Language --}}
                                                     <tr>
                                                         <td>
