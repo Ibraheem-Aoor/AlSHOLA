@@ -66,9 +66,7 @@ class AllApplications extends Component
 
     public function render()
     {
-        $applications = Application::whereHas('job' , function($job){
-            $job->where('broker_id' , Auth::id());
-        })->with(['user:id,name,email' , 'job.user' , 'subStatus' , 'title'] )->withCount(['notes' , 'attachments'])->orderByDesc('created_at')->simplePaginate(15);
+        $applications = Application::whereHas('job')->with(['user:id,name,email' , 'job.user' , 'subStatus' , 'title'] )->withCount(['notes' , 'attachments'])->orderByDesc('created_at')->simplePaginate(15);
         return view('livewire.coordinator.views.all-applications' , ['applications' => $applications])
         ->extends('layouts.coordinator.master')->section('content');
     }
