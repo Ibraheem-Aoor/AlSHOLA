@@ -72,14 +72,19 @@
                                 <div class="container-fluid pt-4 px-4">
 
                                     <div class="row rounded">
-                                    
+
 
                                         <div class="form-floating mb-3 col-sm-3">
                                             <label for="floatingInput">Job Tilte</label>
                                             <select name="title" class="form-control" required>
-                                                <option value="title">--- select one ---</option>
-
+                                                <option value="">--- select one ---</option>
+                                                @foreach ($titles as $title)
+                                                    <option value="{{ $title->name }}"
+                                                        @if (old('title') == $title->name) selected @endif>
+                                                        {{ $title->name }}</option>
+                                                @endforeach
                                             </select>
+
                                             @error('title')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

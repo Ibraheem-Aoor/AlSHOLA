@@ -82,7 +82,7 @@
                                     <select name="title" class="form-control" required>
                                         <option value="">--- select one ---</option>
                                         @foreach($titles as $title)
-                                            <option value="{{$title->name}}" @if(old('titke') == $title->name) selected @endif>{{$title->name}}</option>
+                                            <option value="{{$title->name}}" @if(old('title') == $title->name) selected @endif>{{$title->name}}</option>
                                         @endforeach
                                     </select>
                                     <label for="floatingInput">&nbsp;&nbsp; Job Tilte</label>
