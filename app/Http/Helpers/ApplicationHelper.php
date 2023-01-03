@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Throwable;
 
 class ApplicationHelper
 {
@@ -76,10 +77,17 @@ class ApplicationHelper
      */
     public function adminUpdateApplication($id , HttpFoundationRequest $request)
     {
-        $application = Application::query()->find($id);
-        $application->update($request->toArray());
-        notify()->success('Updated Successfullly');
-        return  redirect()->route('broker.application.edit' , $id);
+        try{
+
+            $application = Application::query()->find($id);
+            $application->update($request->toArray());
+            notify()->success('Updated Successfullly');
+            return  redirect()->route('broker.application.edit' , $id);
+        }catch(Throwable $e)
+        {
+            notify()->error('Please Check Your Data');
+            return back();
+        }
     }
 
 }
