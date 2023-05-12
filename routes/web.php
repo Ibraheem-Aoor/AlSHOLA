@@ -60,7 +60,7 @@ Route::group(['middleware' => 'guestOnly'] , function()
                 return DB::table('business_settings')->get();
             });
         }
-        return  view('front.home');
+        return  view('auth.login');
     })->name('home');
 
 
@@ -325,7 +325,7 @@ Route::get('/home' , function()
 
 
   Route::get('test' , function (){
-    
+
         // return view('user.mail.user_mail');
   });
 

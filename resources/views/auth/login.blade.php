@@ -4,13 +4,12 @@
     @php
     $page = 'LogIn';
     @endphp
-    @include('front.header')
     <!-- Contact Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">LogIn Using E-mail</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Log In To Your Account</h1>
             <div class="row g-4">
-                <div class="col-md-12">
+                <div class="col-md-6 offset-md-3">
                     <div class="wow fadeInUp" data-wow-delay="0.5s">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
@@ -41,9 +40,14 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-md-6">
                                     <a class="text-danger col-sm-6 mr-auto" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
+                                    </a>
+                                </div>
+                                <div class="col-md-6  text-right text-success">
+                                    <a class="col-sm-6 mr-auto" href="{{ route('register') }}">
+                                        {{ __('Register') }}
                                     </a>
                                 </div>
                                 <div class="col-12">
