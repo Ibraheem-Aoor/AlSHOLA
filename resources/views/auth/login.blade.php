@@ -45,11 +45,6 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 </div>
-                                <div class="col-md-6  text-right text-success">
-                                    <a class="col-sm-6 mr-auto" href="{{ route('register') }}">
-                                        {{ __('Register') }}
-                                    </a>
-                                </div>
                                 <div class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="submit">LogIn</button>
                                 </div>
