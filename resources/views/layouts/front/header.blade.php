@@ -3,7 +3,7 @@
     <div class="row text-right w-100">
         <div class="col-sm-12">
             <a href="https://alshoala.com/" class="navbar-brand d-flex align-items-center justify-content-center py-0 px-4 px-lg-5">
-                <img src="{{ asset('assets/dist_3/assets/images/logo.png') }}" style="width:28% !important;" id="logo-header">
+                <img src="{{ asset('assets/dist_3/assets/images/logo_new.png') }}" style="width:28% !important;" id="logo-header">
             </a>
         </div>
     </div>
